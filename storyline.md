@@ -62,7 +62,7 @@ The Bet section of their Strategy Brief — what they're building, for whom, why
 
 The provocation: "Your data is not your moat. Your workflow is."
 
-Models commoditize. Features get cloned. Data gets aggregated. The only durable advantage lives in three places: proprietary data loops that compound, workflow embedding that creates switching costs, and portability architecture that lets you survive vendor shocks.
+Models get copied. Features get cloned. Data gets aggregated. The only durable advantage lives in three places: proprietary data loops that compound, workflow embedding that creates switching costs, and portability architecture that lets you survive vendor shocks.
 
 **What participants learn:**
 - Proprietary data loops: the difference between a System of Intelligence and a System of Record, and how zero-party data acquisition (correction/feedback UX) compounds over time

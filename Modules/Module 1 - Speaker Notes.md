@@ -49,7 +49,7 @@ Teaching notes for each slide. Not a script — key things to say, energy cues, 
 > "Three statements. Vote first — show of hands or Slack poll. Then I reveal. Then we argue."
 
 Reveal sequence:
-1. **"The best AI product wins" — FALSE.** "Commoditization is here. GPT wrappers with billion-dollar valuations are becoming margin-negative. If OpenAI ships your feature natively, product quality is irrelevant."
+1. **"The best AI product wins" — FALSE.** "Copycats are everywhere. GPT wrappers with billion-dollar valuations are becoming margin-negative. If OpenAI ships your feature natively, product quality is irrelevant."
 
 2. **"You can predict which AI feature will win" — FALSE.** "AI systems produce probability distributions, not guarantees. The skill is making bets under uncertainty, not pretending you have certainty."
 
@@ -125,7 +125,7 @@ Walk through each row — 1 minute per archetype:
 - **Automator:** Replaces labor. Klarna. High volume, margin pressure.
 - **Copilot:** Augments humans. GitHub Copilot. Human stays in loop.
 - **Oracle:** Predicts what humans can't see. Palantir. High WTP, high governance.
-- **Creator:** Generates content. Jasper. Commoditizing fast.
+- **Creator:** Generates content. Jasper. Getting copied fast.
 - **Orchestrator:** Multi-agent workflows. Highest complexity, highest governance.
 
 > "Which archetype is your product? That answer shapes everything in Modules 2 through 5."

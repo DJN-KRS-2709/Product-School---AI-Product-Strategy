@@ -119,7 +119,7 @@ Casual talking points for each slide. Not a script — just the key things to sa
 
 ## Slide 8 — M1: The Bet
 
-> "M1 sets the tone. Three True/False provocations: 'The best AI product wins? FALSE — commoditization is already here.' 'You can predict which AI feature wins? FALSE — AI produces probability distributions, not guarantees.' 'Your discovery process is fast enough? FALSE — traditional discovery takes 6–8 weeks, AI-powered discovery does it in days.' By the third reveal, the room knows this isn't a beginner course."
+> "M1 sets the tone. Three True/False provocations: 'The best AI product wins? FALSE — copycats are everywhere.' 'You can predict which AI feature wins? FALSE — AI produces probability distributions, not guarantees.' 'Your discovery process is fast enough? FALSE — traditional discovery takes 6–8 weeks, AI-powered discovery does it in days.' By the third reveal, the room knows this isn't a beginner course."
 
 > "Then they do a live diagnosis on a product everyone uses — Notion, Figma, Slack. Three-Axis Diagnostic: contextual moat, data advantage, platform exposure. Where does it break?"
 

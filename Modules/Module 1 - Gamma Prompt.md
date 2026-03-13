@@ -71,7 +71,7 @@ Keep it. You'll revisit this in Module 6. This is Artifact #1 of your Strategy B
 
 Vote first. Then we reveal. Then we argue.
 
-1. **"The best AI product wins."** — FALSE. Commoditization is here. GPT wrappers with $1B valuations are becoming margin-negative. The best product is irrelevant if the model provider ships your feature natively.
+1. **"The best AI product wins."** — FALSE. Copycats are everywhere. GPT wrappers with $1B valuations are becoming margin-negative. The best product is irrelevant if the model provider ships your feature natively.
 
 2. **"You can predict which AI feature will win before launch."** — FALSE. AI systems produce probability distributions, not guarantees. The skill is making bets under irreducible uncertainty.
 
@@ -141,7 +141,7 @@ Table with columns: Archetype | What It Does | Margin Profile | Governance | Exa
 | The Automator | Replaces human labor | High volume, margin pressure at scale | High when errors matter | Klarna AI support |
 | The Copilot | Augments human decisions | Scales with users, moderate cost | Medium — human in loop | GitHub Copilot |
 | The Oracle | Generates predictions humans can't see | High WTP, premium | High — drives decisions | Palantir AIP |
-| The Creator | Generates net-new content | Commoditizing fast, race to bottom | Low unless regulated | Jasper, Midjourney |
+| The Creator | Generates net-new content | Getting copied fast, race to bottom | Low unless regulated | Jasper, Midjourney |
 | The Orchestrator | Coordinates multi-agent workflows | High value, high infrastructure cost | Highest — autonomous chains | Multi-agent systems |
 
 Which archetype is your product? That answer shapes everything in M2–M5.
