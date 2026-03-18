@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 2: The Moat — Why Won't This Get Copied in 6 Months?</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { height: 100%; overflow: hidden; background: #0f0f13; }
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    color: #e8e8f0;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .slide {
+    position: absolute; inset: 0;
+    display: none; flex-direction: column;
+    justify-content: center; align-items: center;
+    padding: 60px 80px;
+    opacity: 0; transition: opacity 0.35s ease;
+  }
+  .slide.active { display: flex; opacity: 1; }
+  .slide-inner { max-width: 960px; width: 100%; }
+
+  .module-tag {
+    font-size: 12px; font-weight: 700; letter-spacing: 0.14em;
+    text-transform: uppercase; color: #3B82F6; margin-bottom: 16px;
+  }
+
+  h1 { font-size: 48px; font-weight: 900; line-height: 1.1; color: #fff; margin-bottom: 20px; }
+  h2 { font-size: 38px; font-weight: 800; line-height: 1.15; color: #fff; margin-bottom: 18px; }
+  h3 { font-size: 24px; font-weight: 700; line-height: 1.3; color: #e0e0f0; margin-bottom: 12px; }
+
+  .subtitle {
+    font-size: 18px; font-weight: 400; color: #8899bb;
+    line-height: 1.6; margin-bottom: 28px; max-width: 720px;
+  }
+
+  p, li { font-size: 18px; color: #b0b4c8; line-height: 1.7; }
+  ul { list-style: none; padding: 0; }
+  ul li { padding: 6px 0; padding-left: 24px; position: relative; }
+  ul li::before {
+    content: ''; position: absolute; left: 0; top: 14px;
+    width: 8px; height: 8px; border-radius: 2px; background: #3B82F6;
+  }
+
+  strong { color: #fff; font-weight: 700; }
+  em { color: #60a5fa; font-style: normal; font-weight: 600; }
+
+  .accent { color: #60a5fa; }
+  .warn { color: #f87171; }
+  .success { color: #34d399; }
+
+  .big-quote {
+    font-size: 28px; font-weight: 700; color: #e0e0f0;
+    line-height: 1.5; text-align: center; max-width: 700px;
+    margin: 0 auto;
+  }
+  .big-quote em { color: #60a5fa; }
+
+  .demo-tag {
+    display: inline-block; font-size: 11px; font-weight: 800;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 6px 16px; border-radius: 6px; margin-bottom: 18px;
+  }
+  .tag-provocation { background: rgba(248,113,113,0.12); color: #fca5a5; }
+  .tag-lecture { background: rgba(96,165,250,0.12); color: #93c5fd; }
+  .tag-case { background: rgba(251,191,36,0.12); color: #fde68a; }
+  .tag-exercise { background: rgba(52,211,153,0.12); color: #6ee7b7; }
+  .tag-activity { background: rgba(192,132,252,0.12); color: #d8b4fe; }
+  .tag-build { background: rgba(244,114,182,0.12); color: #f9a8d4; }
+  .tag-break { background: rgba(100,116,139,0.12); color: #94a3b8; }
+  .tag-recall { background: rgba(59,130,246,0.12); color: #93c5fd; }
+  .tag-framework { background: rgba(251,191,36,0.12); color: #fde68a; }
+
+  .waypoints { display: flex; flex-direction: column; gap: 14px; margin: 24px 0; }
+  .waypoint {
+    display: flex; align-items: flex-start; gap: 18px;
+    background: rgba(59,130,246,0.06); border: 1px solid rgba(59,130,246,0.15);
+    border-radius: 12px; padding: 20px 24px;
+  }
+  .waypoint-num {
+    width: 36px; height: 36px; border-radius: 8px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; font-weight: 800; color: #fff; background: #3B82F6;
+  }
+  .waypoint-text { flex: 1; }
+  .waypoint-text .wt-title { font-size: 17px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+  .waypoint-text .wt-desc { font-size: 14px; color: #8899bb; line-height: 1.5; }
+
+  .tf-grid { display: flex; flex-direction: column; gap: 10px; margin: 20px 0; }
+  .tf-item {
+    display: flex; align-items: flex-start; gap: 16px;
+    padding: 16px 20px; border-radius: 10px;
+  }
+  .tf-item.tf-false { background: rgba(248,113,113,0.06); border: 1px solid rgba(248,113,113,0.15); }
+  .tf-item.tf-true { background: rgba(52,211,153,0.06); border: 1px solid rgba(52,211,153,0.15); }
+  .tf-verdict {
+    font-size: 13px; font-weight: 900; min-width: 56px; padding-top: 2px;
+    letter-spacing: 0.05em;
+  }
+  .tf-false .tf-verdict { color: #f87171; }
+  .tf-true .tf-verdict { color: #34d399; }
+  .tf-body .tf-claim { font-size: 16px; font-weight: 700; color: #e0e0f0; margin-bottom: 4px; }
+  .tf-body .tf-why { font-size: 13px; color: #8899bb; line-height: 1.5; }
+
+  .arc-flow {
+    display: flex; gap: 6px; align-items: center;
+    margin: 28px 0; flex-wrap: wrap; justify-content: center;
+  }
+  .arc-node {
+    padding: 10px 14px; border-radius: 8px; text-align: center;
+    font-size: 13px; font-weight: 700; color: #fff; min-width: 100px;
+  }
+  .arc-node.active-node { transform: scale(1.08); box-shadow: 0 0 20px rgba(59,130,246,0.3); }
+  .arc-arrow { color: #333; font-size: 18px; }
+
+  .arch-table { width: 100%; margin: 16px 0; border-collapse: collapse; }
+  .arch-table th {
+    text-align: left; padding: 10px 12px; font-size: 11px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.08em; color: #555;
+    border-bottom: 1px solid #252840;
+  }
+  .arch-table td {
+    padding: 12px; border-bottom: 1px solid #1e1e30;
+    font-size: 14px; color: #b0b4c8; line-height: 1.4;
+  }
+  .arch-table td:first-child { font-weight: 700; color: #e0e0f0; white-space: nowrap; }
+  .arch-table tr:hover td { background: rgba(59,130,246,0.04); }
+
+  .evidence-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 20px 0; }
+  .evidence-card {
+    background: #161822; border: 1px solid #252840; border-radius: 10px;
+    padding: 20px;
+  }
+  .evidence-card .ec-label {
+    font-size: 11px; font-weight: 800; text-transform: uppercase;
+    letter-spacing: 0.08em; color: #3B82F6; margin-bottom: 8px;
+  }
+  .evidence-card .ec-company { font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+  .evidence-card .ec-text { font-size: 13px; color: #8899bb; line-height: 1.5; }
+
+  .artifact-preview {
+    background: rgba(59,130,246,0.06); border: 1px solid rgba(59,130,246,0.2);
+    border-radius: 14px; padding: 28px; margin: 20px 0;
+  }
+  .artifact-preview .ap-title {
+    font-size: 14px; font-weight: 800; color: #3B82F6; text-transform: uppercase;
+    letter-spacing: 0.1em; margin-bottom: 14px;
+  }
+
+  .agenda { display: flex; flex-direction: column; gap: 6px; margin: 16px 0; }
+  .agenda-item {
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px 16px; background: #161822; border-radius: 8px;
+  }
+  .agenda-time {
+    font-size: 12px; font-weight: 700; color: #3B82F6;
+    min-width: 50px; font-family: 'JetBrains Mono', monospace;
+  }
+  .agenda-text { font-size: 14px; color: #b0b4c8; }
+  .agenda-text strong { color: #e0e0f0; }
+
+  .case-acts { display: flex; gap: 14px; margin: 20px 0; }
+  .case-act { flex: 1; border-radius: 12px; padding: 20px; }
+  .case-act .ca-label {
+    font-size: 11px; font-weight: 800; text-transform: uppercase;
+    letter-spacing: 0.08em; margin-bottom: 8px;
+  }
+  .case-act .ca-text { font-size: 14px; color: #b0b4c8; line-height: 1.5; }
+  .act-bet { background: rgba(96,165,250,0.06); border: 1px solid rgba(96,165,250,0.15); }
+  .act-bet .ca-label { color: #60a5fa; }
+  .act-crack { background: rgba(251,191,36,0.06); border: 1px solid rgba(251,191,36,0.15); }
+  .act-crack .ca-label { color: #fbbf24; }
+  .act-correct { background: rgba(52,211,153,0.06); border: 1px solid rgba(52,211,153,0.15); }
+  .act-correct .ca-label { color: #34d399; }
+
+  .flow-line { font-size: 16px; color: #555d6e; margin-top: 20px; }
+
+  /* Flywheel */
+  .flywheel { position: relative; width: 340px; height: 340px; margin: 20px auto; }
+  .fw-node {
+    position: absolute; width: 140px; padding: 14px; border-radius: 10px;
+    background: #161822; border: 1px solid #252840; text-align: center;
+    font-size: 13px; font-weight: 600; color: #e0e0f0; line-height: 1.3;
+  }
+  .fw-node .fw-icon { font-size: 20px; margin-bottom: 4px; }
+  .fw-arrow {
+    position: absolute; color: #3B82F6; font-size: 24px; font-weight: 700;
+  }
+
+  /* Scoring table */
+  .score-table { width: 100%; margin: 16px 0; border-collapse: collapse; }
+  .score-table th {
+    text-align: left; padding: 10px 12px; font-size: 11px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.08em; color: #555;
+    border-bottom: 1px solid #252840;
+  }
+  .score-table td {
+    padding: 14px 12px; border-bottom: 1px solid #1e1e30;
+    font-size: 14px; color: #b0b4c8; line-height: 1.4;
+  }
+  .score-table td:first-child { font-weight: 700; color: #e0e0f0; }
+  .score-table td:last-child { font-weight: 800; color: #60a5fa; text-align: center; min-width: 70px; }
+  .score-table tr:hover td { background: rgba(59,130,246,0.04); }
+
+  /* Kill switch layers */
+  .ks-layers { display: flex; flex-direction: column; gap: 10px; margin: 20px 0; }
+  .ks-layer {
+    display: flex; align-items: center; gap: 18px;
+    padding: 18px 22px; border-radius: 10px;
+  }
+  .ks-num {
+    width: 40px; height: 40px; border-radius: 10px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; font-weight: 900; color: #fff;
+  }
+  .ks-text { flex: 1; }
+  .ks-text .ks-title { font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+  .ks-text .ks-desc { font-size: 13px; color: #8899bb; line-height: 1.5; }
+
+  /* Audit checklist */
+  .audit-section { margin: 16px 0; }
+  .audit-label {
+    font-size: 12px; font-weight: 800; text-transform: uppercase;
+    letter-spacing: 0.1em; margin-bottom: 10px;
+  }
+  .audit-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px 16px; background: #161822; border-radius: 8px; margin-bottom: 6px;
+  }
+  .audit-dot {
+    width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0;
+  }
+  .audit-row-text { font-size: 14px; color: #b0b4c8; flex: 1; }
+  .audit-blank {
+    font-size: 14px; color: #555; font-family: 'JetBrains Mono', monospace;
+    min-width: 80px; text-align: right;
+  }
+
+  /* Threat cards */
+  .threat-cards { display: flex; flex-direction: column; gap: 12px; margin: 20px 0; }
+  .threat-card {
+    display: flex; align-items: flex-start; gap: 18px;
+    padding: 18px 22px; border-radius: 12px;
+  }
+  .threat-icon {
+    width: 40px; height: 40px; border-radius: 10px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+  }
+  .threat-text { flex: 1; }
+  .threat-text .tt-title { font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+  .threat-text .tt-desc { font-size: 13px; color: #8899bb; line-height: 1.5; }
+
+  /* Nav */
+  .nav {
+    position: fixed; bottom: 20px; right: 24px;
+    display: flex; gap: 8px; z-index: 100;
+  }
+  .nav-btn {
+    width: 42px; height: 42px; border-radius: 8px;
+    background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+    color: #888; font-size: 18px; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s; font-family: 'Inter', sans-serif;
+  }
+  .nav-btn:hover { background: rgba(255,255,255,0.1); color: #fff; }
+  .progress {
+    position: fixed; bottom: 0; left: 0; right: 0; height: 3px;
+    background: rgba(255,255,255,0.05); z-index: 100;
+  }
+  .progress-bar { height: 100%; background: #3B82F6; transition: width 0.35s ease; }
+  .slide-counter {
+    position: fixed; bottom: 26px; left: 24px;
+    font-size: 13px; font-weight: 600; color: #444; z-index: 100;
+  }
+  .help-hint {
+    position: fixed; top: 16px; right: 24px;
+    font-size: 11px; color: #333; z-index: 100;
+  }
+  .speaker-notes {
+    display: none; position: fixed; bottom: 0; left: 0; right: 0;
+    background: #1a1a24; border-top: 2px solid #3B82F6;
+    padding: 16px 32px; max-height: 200px; overflow-y: auto;
+    font-size: 14px; color: #8899bb; line-height: 1.6; z-index: 200;
+  }
+  .speaker-notes.visible { display: block; }
+  .speaker-notes strong { color: #b0b4c8; }
+  .notes-tag {
+    font-size: 10px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.1em; color: #3B82F6; margin-bottom: 6px;
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== SLIDE 1: Title ===== -->
+<div class="slide active" data-notes="No warm-up — they know the format from M1. Jump in. 'Last session you diagnosed where your strategy breaks. Today we find out if anyone can copy what you're building in 6 months — and what you do about it. By the end of today you'll have a scored data flywheel, a vendor portability plan, and the second component of your living strategy.' Point to the three waypoints: Map, Stress-test, Protect.">
+  <div class="slide-inner">
+    <div class="module-tag">Module 2 | AI Product Strategy Certification</div>
+    <h1>The Moat</h1>
+    <h2 style="font-size:30px; font-weight:600; color:#8899bb; margin-bottom:28px;">Why Won't This Get Copied in 6 Months?</h2>
+    <div class="waypoints">
+      <div class="waypoint">
+        <div class="waypoint-num">1</div>
+        <div class="waypoint-text">
+          <div class="wt-title">Map</div>
+          <div class="wt-desc">Where your product's defensibility actually lives — and where it doesn't</div>
+        </div>
+      </div>
+      <div class="waypoint">
+        <div class="waypoint-num">2</div>
+        <div class="waypoint-text">
+          <div class="wt-title">Stress-test</div>
+          <div class="wt-desc">Who attacks you, from where, and how fast</div>
+        </div>
+      </div>
+      <div class="waypoint">
+        <div class="waypoint-num">3</div>
+        <div class="waypoint-text">
+          <div class="wt-title">Protect</div>
+          <div class="wt-desc">The Kill Switch — swap any AI vendor in under 48 hours</div>
+        </div>
+      </div>
+    </div>
+    <div class="flow-line">You leave today with: Component 2 of your living strategy + a vendor portability plan.</div>
+  </div>
+</div>
+
+<!-- ===== SLIDE 2: Agenda ===== -->
+<div class="slide" data-notes="Quick flyover. Don't read every line — hit highlights: 'Heavy applied work again. Peer challenge is the centerpiece — your partner tries to kill your product. The Kill Switch at the end is the wow moment.' Move fast.">
+  <div class="slide-inner">
+    <div class="module-tag">Today's Session · 2 Hours</div>
+    <h2>What We're Doing Today</h2>
+    <div class="agenda">
+      <div class="agenda-item"><div class="agenda-time">3 min</div><div class="agenda-text"><strong>Recall:</strong> What you brought from M1</div></div>
+      <div class="agenda-item"><div class="agenda-time">8 min</div><div class="agenda-text"><strong>Provocation:</strong> "Your data is not your moat. Your workflow is."</div></div>
+      <div class="agenda-item"><div class="agenda-time">15 min</div><div class="agenda-text"><strong>Lecture:</strong> Data flywheels, contextual moats, and cold-start survival</div></div>
+      <div class="agenda-item"><div class="agenda-time">7 min</div><div class="agenda-text"><strong>Case Study:</strong> The $1.5B wrapper that got eaten alive</div></div>
+      <div class="agenda-item"><div class="agenda-time">5 min</div><div class="agenda-text"><strong>Framework:</strong> Data Flywheel Scoring — four loops, scored 1–5</div></div>
+      <div class="agenda-item"><div class="agenda-time">5 min</div><div class="agenda-text" style="color:#94a3b8;">☕ Break</div></div>
+      <div class="agenda-item"><div class="agenda-time">15 min</div><div class="agenda-text"><strong>Applied Work:</strong> Map and score your product's data flywheel</div></div>
+      <div class="agenda-item"><div class="agenda-time">10 min</div><div class="agenda-text"><strong>Applied Work:</strong> Encroachment threat assessment</div></div>
+      <div class="agenda-item"><div class="agenda-time">13 min</div><div class="agenda-text"><strong>Peer Challenge:</strong> "Here's exactly how I kill your product"</div></div>
+      <div class="agenda-item"><div class="agenda-time">15 min</div><div class="agenda-text"><strong>Build Moment:</strong> The Kill Switch — vendor portability audit</div></div>
+      <div class="agenda-item"><div class="agenda-time">5 min</div><div class="agenda-text"><strong>Synthesis + Bridge:</strong> Component 2 of your living strategy + what's coming in M3</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SLIDE 3: Recall from M1 ===== -->
+<div class="slide" data-notes="'Quick check-in. Show of hands: who updated their living strategy Component 1 after last session?' You brought three things: scorecard, Component 1, and prototype. Today we go deeper on Contextual Moat and Data Advantage — those were diagnostic numbers in M1, today we make them real. If many didn't update: 'That's fine. Today's exercises force the update.'">
+  <div class="slide-inner">
+    <div class="demo-tag tag-recall">Recall from M1 · 3 Minutes</div>
+    <h2>What You Brought</h2>
+    <div class="subtitle">Three artifacts from Module 1. Today we stress-test all of them.</div>
+    <div style="display:flex; gap:16px; margin:24px 0;">
+      <div style="flex:1; background:#161822; border:1px solid #252840; border-radius:12px; padding:22px; text-align:center;">
+        <div style="font-size:28px; margin-bottom:8px;">📊</div>
+        <div style="font-size:15px; font-weight:700; color:#fff; margin-bottom:6px;">Three-Axis Scorecard</div>
+        <div style="font-size:13px; color:#8899bb; line-height:1.4;">Contextual Moat · Data Advantage · Platform Exposure — scored 1–5 each.</div>
+      </div>
+      <div style="flex:1; background:#161822; border:1px solid #252840; border-radius:12px; padding:22px; text-align:center;">
+        <div style="font-size:28px; margin-bottom:8px;">📋</div>
+        <div style="font-size:15px; font-weight:700; color:#fff; margin-bottom:6px;">Component 1: The Bet</div>
+        <div style="font-size:13px; color:#8899bb; line-height:1.4;">What you're building · For whom · Why now · Archetype · Confidence level.</div>
+      </div>
+      <div style="flex:1; background:#161822; border:1px solid #252840; border-radius:12px; padding:22px; text-align:center;">
+        <div style="font-size:28px; margin-bottom:8px;">🔗</div>
+        <div style="font-size:15px; font-weight:700; color:#fff; margin-bottom:6px;">Your Prototype</div>
+        <div style="font-size:13px; color:#8899bb; line-height:1.4;">The thing you built in 15 minutes. Proof that AI-era speed is real.</div>
+      </div>
+    </div>
+    <p style="font-size:16px; color:#f87171; font-weight:600; text-align:center; margin-top:12px;">If your moat scores were generous in M1, today is when you find out.</p>
+  </div>
+</div>
+
+<!-- ===== SLIDE 4: Provocation ===== -->
+<div class="slide" data-notes="Same mechanic as M1's True/False. Vote first, reveal, argue. Push on #3: 'How many of you could swap your AI provider in 48 hours?' Very few hands. That's the setup for the Kill Switch later. The energy should be more intense than M1 — they've been through one session, they can handle it.">
+  <div class="slide-inner">
+    <div class="demo-tag tag-provocation">Provocation · 8 Minutes</div>
+    <h2>Your Data Is Not Your Moat.<br>Your Workflow Is.</h2>
+    <div class="subtitle">Vote first. Then we reveal. Then we argue.</div>
+    <div class="tf-grid">
+      <div class="tf-item tf-false">
+        <div class="tf-verdict">FALSE</div>
+        <div class="tf-body">
+          <div class="tf-claim">"Having the most data wins."</div>
+          <div class="tf-why">OpenAI has more data than you. Google has more than them. Data volume is a commodity. What compounds is <em>proprietary</em> data — corrections, preferences, feedback loops that only your product generates.</div>
+        </div>
+      </div>
+      <div class="tf-item tf-false">
+        <div class="tf-verdict">FALSE</div>
+        <div class="tf-body">
+          <div class="tf-claim">"If we build a better product, users won't switch."</div>
+          <div class="tf-why">Brand is <em>not</em> a moat anymore. Switching costs are heading to zero — agents enable data portability, UX can be cloned pixel by pixel. The only barrier is workflow embedding so deep that leaving is more painful than staying.</div>
+        </div>
+      </div>
+      <div class="tf-item tf-false">
+        <div class="tf-verdict">FALSE</div>
+        <div class="tf-body">
+          <div class="tf-claim">"We can always switch AI providers if we need to."</div>
+          <div class="tf-why">The average AI product is hard-wired to one model provider. When that provider changes pricing, ToS, or capability — you're a hostage, not a customer. How many of you could swap in 48 hours?</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SLIDE 5: Systems of Intelligence vs. Systems of Record ===== -->
+<div class="slide" data-notes="Draw the distinction crisply: Record = stores, Intelligence = learns. 'Your moat lives in the delta between what a foundation model knows out of the box and what your system has learned from your specific users. If that delta is zero, you don't have a moat.' Ask: 'Is your product a System of Record or a System of Intelligence?'">
+  <div class="slide-inner">
+    <div class="demo-tag tag-lecture">Lecture · Point 1 of 4</div>
+    <h2>Not All Data Is a Moat</h2>
+    <div class="subtitle">The difference between storing data and generating defensible signal.</div>
+    <div style="display:flex; gap:20px; margin:24px 0;">
+      <div style="flex:1; background:rgba(100,116,139,0.06); border:1px solid rgba(100,116,139,0.15); border-radius:12px; padding:24px;">
+        <div style="font-size:13px; font-weight:800; color:#64748b; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:10px;">System of Record</div>
+        <div style="font-size:16px; font-weight:700; color:#94a3b8; margin-bottom:8px;">Stores what happened</div>
+        <div style="font-size:14px; color:#64748b; line-height:1.5;">CRM logs, analytics dashboards, event tables. Everyone can replicate this. It's infrastructure, not advantage.</div>
+      </div>
+      <div style="flex:1; background:rgba(59,130,246,0.08); border:1px solid rgba(59,130,246,0.25); border-radius:12px; padding:24px;">
+        <div style="font-size:13px; font-weight:800; color:#3B82F6; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:10px;">System of Intelligence</div>
+        <div style="font-size:16px; font-weight:700; color:#fff; margin-bottom:8px;">Learns from what happened</div>
+        <div style="font-size:14px; color:#8899bb; line-height:1.5;">Correction patterns, user preferences, domain-specific feedback that rewires model behavior. This is what compounds.</div>
+      </div>
+    </div>
+    <p style="font-size:16px; color:#60a5fa; font-weight:600; margin-top:12px;">Your moat lives in the delta between what a foundation model knows and what your system has learned from your users. If the delta is zero, you don't have a moat.</p>
+  </div>
+</div>
+
+<!-- ===== SLIDE 5b: The 8 Moats Landscape ===== -->
+<div class="slide" data-notes="Gokul Rajaram scored 700+ companies. Eight moats: Data, Workflow, Regulatory, Distribution, Ecosystem, Network, Physical, Scale. Score any company — 4+ is secure, 2-3 is weak, 0-1 is in trouble. Don't get bogged down explaining all 8. The zoom-in: for AI product builders, data and workflow are the two that matter. Ecosystem/distribution are too early for most AI products. Physical and scale don't apply to pure software. That's why our Three-Axis Diagnostic focuses where it does.">
+  <div class="slide-inner">
+    <div class="demo-tag tag-lecture">Lecture · The Full Map</div>
+    <h2>The 8 Moats Landscape</h2>
+    <div class="subtitle">Gokul Rajaram's framework for scoring any company's defensibility. Score 4+ = secure. 0-1 = in trouble.</div>
+    <div style="display:flex; flex-wrap:wrap; gap:8px; margin:18px 0;">
+      <div style="background:rgba(59,130,246,0.1); border:1px solid rgba(59,130,246,0.25); border-radius:8px; padding:10px 16px; font-size:13px; font-weight:700; color:#60a5fa;">Data</div>
+      <div style="background:rgba(59,130,246,0.1); border:1px solid rgba(59,130,246,0.25); border-radius:8px; padding:10px 16px; font-size:13px; font-weight:700; color:#60a5fa;">Workflow</div>
+      <div style="background:rgba(100,116,139,0.08); border:1px solid rgba(100,116,139,0.15); border-radius:8px; padding:10px 16px; font-size:13px; font-weight:600; color:#94a3b8;">Regulatory</div>
+      <div style="background:rgba(100,116,139,0.08); border:1px solid rgba(100,116,139,0.15); border-radius:8px; padding:10px 16px; font-size:13px; font-weight:600; color:#94a3b8;">Distribution</div>
+      <div style="background:rgba(100,116,139,0.08); border:1px solid rgba(100,116,139,0.15); border-radius:8px; padding:10px 16px; font-size:13px; font-weight:600; color:#94a3b8;">Ecosystem</div>
+      <div style="background:rgba(100,116,139,0.08); border:1px solid rgba(100,116,139,0.15); border-radius:8px; padding:10px 16px; font-size:13px; font-weight:600; color:#94a3b8;">Network</div>
+      <div style="background:rgba(100,116,139,0.08); border:1px solid rgba(100,116,139,0.15); border-radius:8px; padding:10px 16px; font-size:13px; font-weight:600; color:#94a3b8;">Physical</div>
+      <div style="background:rgba(100,116,139,0.08); border:1px solid rgba(100,116,139,0.15); border-radius:8px; padding:10px 16px; font-size:13px; font-weight:600; color:#94a3b8;">Scale</div>
+    </div>
+    <div style="display:flex; gap:16px; margin:16px 0;">
+      <div style="flex:1; background:rgba(52,211,153,0.06); border:1px solid rgba(52,211,153,0.15); border-radius:10px; padding:18px;">
+        <div style="font-size:13px; font-weight:800; color:#34d399; margin-bottom:6px;">ATLASSIAN — Score ~3</div>
+        <div style="font-size:13px; color:#8899bb; line-height:1.5;">Data (code checked in), Workflow (deep), Ecosystem (third-party apps). Down 75% — arguably oversold.</div>
+      </div>
+      <div style="flex:1; background:rgba(248,113,113,0.06); border:1px solid rgba(248,113,113,0.15); border-radius:10px; padding:18px;">
+        <div style="font-size:13px; font-weight:800; color:#f87171; margin-bottom:6px;">MONDAY — Score ~1</div>
+        <div style="font-size:13px; color:#8899bb; line-height:1.5;">Workflow (light). No data moat, no ecosystem. Down 75% — may be rightly priced.</div>
+      </div>
+    </div>
+    <p style="font-size:15px; color:#60a5fa; font-weight:600; text-align:center; margin-top:10px;">For AI product builders: <strong style="color:#fff;">Data</strong> and <strong style="color:#fff;">Workflow</strong> are the two moats you're hanging your hat on. That's why our Three-Axis Diagnostic focuses where it does.</p>
+  </div>
+</div>
+
+<!-- ===== SLIDE 6: The Data Flywheel ===== -->
+<div class="slide" data-notes="Three types of data that compound: corrections, preferences, domain context. Point to the flywheel cycle: interact → capture → improve → better outputs → more interaction. Pause on 'throw them away' — most products do exactly this. 'If your AI outputs get corrected and nobody records the correction, you're burning your own moat.'">
+  <div class="slide-inner">
+    <div class="demo-tag tag-lecture">Lecture · Point 2 of 4</div>
+    <h2>The Data Flywheel</h2>
+    <div class="subtitle">Zero-party data and compounding loops — the engine of AI defensibility.</div>
+    <div style="display:flex; gap:20px; margin:20px 0; align-items:center;">
+      <div style="flex:1;">
+        <div style="background:rgba(59,130,246,0.06); border:1px solid rgba(59,130,246,0.15); border-radius:14px; padding:20px; text-align:center; margin-bottom:8px;">
+          <div style="font-size:14px; color:#60a5fa; font-weight:700;">Users interact</div>
+        </div>
+        <div style="text-align:center; color:#3B82F6; font-size:20px; font-weight:700;">↓</div>
+        <div style="background:rgba(59,130,246,0.06); border:1px solid rgba(59,130,246,0.15); border-radius:14px; padding:20px; text-align:center; margin:8px 0;">
+          <div style="font-size:14px; color:#60a5fa; font-weight:700;">System captures signal</div>
+        </div>
+        <div style="text-align:center; color:#3B82F6; font-size:20px; font-weight:700;">↓</div>
+        <div style="background:rgba(59,130,246,0.06); border:1px solid rgba(59,130,246,0.15); border-radius:14px; padding:20px; text-align:center; margin:8px 0;">
+          <div style="font-size:14px; color:#60a5fa; font-weight:700;">Model improves</div>
+        </div>
+        <div style="text-align:center; color:#3B82F6; font-size:20px; font-weight:700;">↓ ↻</div>
+        <div style="background:rgba(59,130,246,0.06); border:1px solid rgba(59,130,246,0.15); border-radius:14px; padding:20px; text-align:center; margin-top:8px;">
+          <div style="font-size:14px; color:#60a5fa; font-weight:700;">Better outputs → more usage</div>
+        </div>
+      </div>
+      <div style="flex:1.3;">
+        <div style="font-size:14px; font-weight:800; color:#fff; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:14px;">Three types of data that compound:</div>
+        <div style="margin-bottom:14px;">
+          <div style="font-size:15px; font-weight:700; color:#fff;">1. Corrections</div>
+          <div style="font-size:13px; color:#8899bb; line-height:1.5;">When users fix an AI output, that correction is proprietary training signal no one else has.</div>
+        </div>
+        <div style="margin-bottom:14px;">
+          <div style="font-size:15px; font-weight:700; color:#fff;">2. Preferences</div>
+          <div style="font-size:13px; color:#8899bb; line-height:1.5;">Every thumbs-up/down, every edit, every "show me something different" builds a taste profile unique to your users.</div>
+        </div>
+        <div>
+          <div style="font-size:15px; font-weight:700; color:#fff;">3. Domain context</div>
+          <div style="font-size:13px; color:#8899bb; line-height:1.5;">Accumulated knowledge of how this workflow works in this industry. Generic models start from zero here.</div>
+        </div>
+      </div>
+    </div>
+    <p style="font-size:16px; color:#f87171; font-weight:600; text-align:center; margin-top:8px;">Does your product capture these — or throw them away?</p>
+  </div>
+</div>
+
+<!-- ===== SLIDE 7: Contextual Moats ===== -->
+<div class="slide" data-notes="Key insight: switching costs come from workflow depth, not feature quality. GitHub Copilot example: doesn't just suggest code — it's embedded in the editor, the PR flow, the review process. Moving away means changing how the team writes software, not just picking a new autocomplete. Ask: 'How deep is your product in the workflow? Could your users switch in a weekend?'">
+  <div class="slide-inner">
+    <div class="demo-tag tag-lecture">Lecture · Point 3 of 4</div>
+    <h2>Vertical Depth Beats Horizontal Features</h2>
+    <div class="subtitle">Switching costs come from workflow depth, not feature quality.</div>
+    <div style="display:flex; gap:20px; margin:24px 0;">
+      <div style="flex:1; background:rgba(248,113,113,0.04); border:1px solid rgba(248,113,113,0.12); border-radius:12px; padding:24px;">
+        <div style="font-size:13px; font-weight:800; color:#f87171; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:10px;">Horizontal AI Feature</div>
+        <div style="font-size:16px; font-weight:700; color:#fca5a5; margin-bottom:8px;">Weak Moat</div>
+        <div style="font-size:14px; color:#8899bb; line-height:1.5;">Smart assistant bolted onto an existing product. Nice to have. Easy for the platform to replicate. Users can switch in a weekend.</div>
+      </div>
+      <div style="flex:1; background:rgba(52,211,153,0.06); border:1px solid rgba(52,211,153,0.2); border-radius:12px; padding:24px;">
+        <div style="font-size:13px; font-weight:800; color:#34d399; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:10px;">Vertical AI Workflow</div>
+        <div style="font-size:16px; font-weight:700; color:#6ee7b7; margin-bottom:8px;">Strong Moat</div>
+        <div style="font-size:14px; color:#8899bb; line-height:1.5;">AI embedded so deeply into a specific workflow that the product <em>is</em> the workflow. Ripping it out means rebuilding the process from scratch.</div>
+      </div>
+    </div>
+    <div style="background:#161822; border:1px solid #252840; border-radius:10px; padding:18px; margin-top:12px;">
+      <p style="font-size:14px; color:#8899bb;"><strong style="color:#e0e0f0;">GitHub Copilot</strong> doesn't just suggest code — it's embedded in the editor, the PR flow, the review process, the CI pipeline. Moving away doesn't mean picking a new autocomplete — it means changing how the entire team writes software.</p>
+    </div>
+    <div style="background:rgba(251,191,36,0.06); border:1px solid rgba(251,191,36,0.12); border-radius:10px; padding:18px; margin-top:10px;">
+      <p style="font-size:14px; color:#8899bb;"><strong style="color:#fde68a;">Workflow depth is a spectrum:</strong> NetSuite runs your business (score 1.0 — deep moat). Zendesk handles tickets (score 0.5 — light moat). The question isn't whether you have workflow embedding — it's <em>how deep</em>.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SLIDE 8: Cold-Start Survival ===== -->
+<div class="slide" data-notes="Move through quickly — this is a reference frame, not a deep dive. Four strategies: synthetic seeding, transfer learning, partnership data, HITL bootstrapping. For the room: 'Who here is in a cold-start situation? No shame. Half of all AI products are.' The cold-start isn't fatal — it's temporary. The question is whether your product architecture is designed to escape it.">
+  <div class="slide-inner">
+    <div class="demo-tag tag-lecture">Lecture · Point 4 of 4</div>
+    <h2>When You Have No Data Yet</h2>
+    <div class="subtitle">Four strategies for escaping the cold-start problem.</div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:20px 0;">
+      <div style="background:#161822; border:1px solid #252840; border-radius:10px; padding:20px;">
+        <div style="font-size:13px; font-weight:800; color:#60a5fa; margin-bottom:6px;">1. Synthetic Seeding</div>
+        <div style="font-size:13px; color:#8899bb; line-height:1.5;">Use foundation models to generate a bootstrap dataset. Not production-quality, but enough to prove the loop works.</div>
+      </div>
+      <div style="background:#161822; border:1px solid #252840; border-radius:10px; padding:20px;">
+        <div style="font-size:13px; font-weight:800; color:#60a5fa; margin-bottom:6px;">2. Transfer Learning</div>
+        <div style="font-size:13px; color:#8899bb; line-height:1.5;">Start with a pre-trained model on adjacent domain data. Fine-tune as your own signal arrives.</div>
+      </div>
+      <div style="background:#161822; border:1px solid #252840; border-radius:10px; padding:20px;">
+        <div style="font-size:13px; font-weight:800; color:#60a5fa; margin-bottom:6px;">3. Partnership Data</div>
+        <div style="font-size:13px; color:#8899bb; line-height:1.5;">License or partner for domain-specific datasets. Buys time until your own flywheel spins.</div>
+      </div>
+      <div style="background:#161822; border:1px solid #252840; border-radius:10px; padding:20px;">
+        <div style="font-size:13px; font-weight:800; color:#60a5fa; margin-bottom:6px;">4. Human-in-the-Loop Bootstrap</div>
+        <div style="font-size:13px; color:#8899bb; line-height:1.5;">Use human reviewers to generate the first wave of corrections. Every correction becomes training data.</div>
+      </div>
+    </div>
+    <p style="font-size:16px; color:#60a5fa; font-weight:600; text-align:center; margin-top:8px;">The cold-start isn't fatal — it's temporary. Is your architecture designed to escape it?</p>
+  </div>
+</div>
+
+<!-- ===== SLIDE 9: Case Study — Jasper vs. ChatGPT ===== -->
+<div class="slide" data-notes="7 minutes. Walk through each act. The Bet: Jasper raised $125M at $1.5B, 70K customers, fastest-growing AI startup. The Crack: ChatGPT launches, OpenAI adds plugins/custom GPTs, Google ships Gemini into Workspace. AI writing is now free and native. The Correction: Jasper pivots to enterprise marketing workflows — brand voice, campaigns, compliance. Features get eaten. Workflows survive. Discussion: 'Where is your product a wrapper — and where is it a workflow? Be specific.' 2–3 responses. This should create genuine anxiety. That's productive.">
+  <div class="slide-inner">
+    <div class="demo-tag tag-case">Case Study · 7 Minutes</div>
+    <h2>The $1.5B Wrapper That Got Eaten Alive</h2>
+    <div class="case-acts">
+      <div class="case-act act-bet">
+        <div class="ca-label">The Bet</div>
+        <div class="ca-text"><strong>Jasper</strong> raised $125M at a $1.5B valuation. AI-powered content creation. 70,000+ customers. Fastest-growing AI startup in 2022. The thesis: own the AI writing workflow.</div>
+      </div>
+      <div class="case-act act-crack">
+        <div class="ca-label">The Crack</div>
+        <div class="ca-text">ChatGPT launched November 2022. Then OpenAI added browsing, plugins, custom GPTs. Google shipped Gemini into Docs, Sheets, Gmail. AI writing became <strong>free, native, everywhere</strong>.</div>
+      </div>
+      <div class="case-act act-correct">
+        <div class="ca-label">The Correction</div>
+        <div class="ca-text">Jasper "went from 1 to 100 and 100 to 40 within very quick time frames" (Gokul Rajaram). Pivoted to enterprise marketing — brand voice, compliance. The lesson: <strong>features get eaten. Workflows survive.</strong> Bolt-on AI doesn't change your defensibility score.</div>
+      </div>
+    </div>
+    <div style="background:rgba(59,130,246,0.06); border:1px solid rgba(59,130,246,0.15); border-radius:10px; padding:18px; margin-top:16px;">
+      <p style="font-size:16px; font-weight:700; color:#fff;">Strategic question for the room:</p>
+      <p style="font-size:15px; color:#8899bb;">Where is your product a wrapper — and where is it a workflow?</p>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SLIDE 10: Data Flywheel Scoring Framework ===== -->
+<div class="slide" data-notes="Walk through the scoring scale for one loop as an example: 'Correction loop: 1 means you don't capture corrections at all. 3 means you capture them but don't retrain. 5 means corrections automatically flow into your fine-tuning pipeline.' Your weakest loop is your biggest vulnerability — that's where competitors attack first. This framework is used in the next exercise. Make sure they internalize it.">
+  <div class="slide-inner">
+    <div class="demo-tag tag-framework">Framework · 5 Minutes</div>
+    <h2>Data Flywheel Scoring</h2>
+    <div class="subtitle">Four loops. Score each 1–5. Your weakest loop is where competitors attack.</div>
+    <table class="score-table">
+      <thead><tr><th>Loop</th><th>What It Measures</th><th>Score 1</th><th>Score 5</th><th>__/5</th></tr></thead>
+      <tbody>
+        <tr>
+          <td style="color:#f87171;">Correction</td>
+          <td>Do users fix AI outputs? Is that signal captured and reused?</td>
+          <td style="font-size:12px;">No capture</td>
+          <td style="font-size:12px;">Automated retraining</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td style="color:#fbbf24;">Preference</td>
+          <td>Does the product learn individual/team preferences over time?</td>
+          <td style="font-size:12px;">Stateless</td>
+          <td style="font-size:12px;">Deep personalization</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td style="color:#34d399;">Domain Context</td>
+          <td>Does usage in one area improve quality in adjacent areas?</td>
+          <td style="font-size:12px;">Siloed</td>
+          <td style="font-size:12px;">Cross-domain transfer</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td style="color:#c084fc;">Network</td>
+          <td>Does each new user/team make the product better for everyone?</td>
+          <td style="font-size:12px;">Isolated</td>
+          <td style="font-size:12px;">Strong network effects</td>
+          <td>—</td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="font-size:15px; color:#f87171; font-weight:600; text-align:center; margin-top:12px;">Your weakest loop is your biggest vulnerability. That's where competitors attack.</p>
+  </div>
+</div>
+
+<!-- ===== SLIDE 11: Break ===== -->
+<div class="slide" data-notes="5 minutes. When they come back: applied work for the rest of the session. They'll map their flywheel, face an attacker, and build their escape plan.">
+  <div class="slide-inner" style="text-align:center;">
+    <div class="demo-tag tag-break">Break · 5 Minutes</div>
+    <h1 style="font-size:64px; color:#333; margin-top:40px;">☕</h1>
+    <p style="font-size:20px; color:#555; margin-top:24px;">When you come back: you map your flywheel,<br>face an attacker, and build your escape plan.</p>
+  </div>
+</div>
+
+<!-- ===== SLIDE 12: Map Your Data Flywheel ===== -->
+<div class="slide" data-notes="15 minutes individual work. 'Four loops, scored 1–5. For each, write what data you actually capture today and how it compounds. If a loop doesn't exist, score it 1 and write what would need to be true for it to exist.' Walk the room. Common trap: people score preferences high because 'we have analytics.' Analytics is a System of Record. Do they use preference data to personalize model behavior? If not, it's a 1 or 2. Prompt the stuck: 'Start with the correction loop. When your AI gets something wrong, what happens to that correction?'">
+  <div class="slide-inner">
+    <div class="demo-tag tag-exercise">Individual Work · 15 Minutes</div>
+    <h2>Map Your Data Flywheel</h2>
+    <div class="subtitle">Four loops. Score each 1–5. Be honest — "we plan to build this" is a 1, not a 3.</div>
+    <table class="score-table">
+      <thead><tr><th>Loop</th><th>What data is captured?</th><th>How does it compound?</th><th>Score</th></tr></thead>
+      <tbody>
+        <tr><td style="color:#f87171;">Correction</td><td style="color:#555;">_______________</td><td style="color:#555;">_______________</td><td>__/5</td></tr>
+        <tr><td style="color:#fbbf24;">Preference</td><td style="color:#555;">_______________</td><td style="color:#555;">_______________</td><td>__/5</td></tr>
+        <tr><td style="color:#34d399;">Domain Context</td><td style="color:#555;">_______________</td><td style="color:#555;">_______________</td><td>__/5</td></tr>
+        <tr><td style="color:#c084fc;">Network</td><td style="color:#555;">_______________</td><td style="color:#555;">_______________</td><td>__/5</td></tr>
+      </tbody>
+    </table>
+    <div style="background:rgba(248,113,113,0.06); border:1px solid rgba(248,113,113,0.15); border-radius:10px; padding:18px; margin-top:16px; text-align:center;">
+      <p style="font-size:16px; font-weight:700; color:#fca5a5;">Weakest loop: ____________</p>
+      <p style="font-size:13px; color:#8899bb; margin-top:6px;">This is where you invest — or where you die.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SLIDE 13: Encroachment Threat Assessment ===== -->
+<div class="slide" data-notes="10 minutes. Three threat vectors. This should feel concrete — not 'maybe someday' but 'who, when, how.' If someone says 'nobody can compete with us,' push back: 'That's what Jasper said 18 months before ChatGPT launched.' Connect to M1: 'Remember your Platform Exposure score? This is where that score becomes a plan.'">
+  <div class="slide-inner">
+    <div class="demo-tag tag-exercise">Individual Work · 10 Minutes</div>
+    <h2>Who Attacks You, From Where, With What?</h2>
+    <div class="subtitle">Three threat vectors. Name the attacker. Estimate the timeline. Quantify the damage.</div>
+    <div class="threat-cards">
+      <div class="threat-card" style="background:rgba(248,113,113,0.04); border:1px solid rgba(248,113,113,0.12);">
+        <div class="threat-icon" style="background:rgba(248,113,113,0.12);"><span style="color:#f87171;">⚡</span></div>
+        <div class="threat-text">
+          <div class="tt-title">1. Platform Encroachment</div>
+          <div class="tt-desc">Which platform (OpenAI, Google, Apple, Microsoft) could ship your core feature natively? How long would it take? What % of your value disappears?</div>
+        </div>
+      </div>
+      <div class="threat-card" style="background:rgba(251,191,36,0.04); border:1px solid rgba(251,191,36,0.12);">
+        <div class="threat-icon" style="background:rgba(251,191,36,0.12);"><span style="color:#fbbf24;">🎯</span></div>
+        <div class="threat-text">
+          <div class="tt-title">2. Vertical Competitor</div>
+          <div class="tt-desc">Which startup is building the same thing but deeper in one niche? What data do they have that you don't?</div>
+        </div>
+      </div>
+      <div class="threat-card" style="background:rgba(192,132,252,0.04); border:1px solid rgba(192,132,252,0.12);">
+        <div class="threat-icon" style="background:rgba(192,132,252,0.12);"><span style="color:#c084fc;">↗</span></div>
+        <div class="threat-text">
+          <div class="tt-title">3. Adjacent Expansion</div>
+          <div class="tt-desc">Which company next door could add your feature as "one more thing"? What's their distribution advantage?</div>
+        </div>
+      </div>
+    </div>
+    <p style="font-size:14px; color:#555; text-align:center; margin-top:12px;">Fill in: <strong style="color:#8899bb;">Attacker · Vector · Time-to-threat · % of value at risk</strong></p>
+  </div>
+</div>
+
+<!-- ===== SLIDE 14: Peer Challenge — Big Tech Attacker ===== -->
+<div class="slide" data-notes="13 minutes. 6 per person. This is the emotional peak of the module. 'The defender presents their flywheel and encroachment assessment. The attacker responds with a 90-day plan to kill the product. Not hypothetical — specific.' If pairs are being too polite: 'You're not being helpful by being nice. The market won't be nice.' After both rounds: 'Write down the single most dangerous attack you heard. You're designing against it next.'">
+  <div class="slide-inner">
+    <div class="demo-tag tag-activity">Pair Work · 13 Minutes</div>
+    <h2>"Here's Exactly How<br>I Kill Your Product"</h2>
+    <div class="subtitle">6 minutes per person. Two roles.</div>
+    <div style="display:flex; gap:20px; margin:20px 0;">
+      <div style="flex:1; background:rgba(59,130,246,0.06); border:1px solid rgba(59,130,246,0.2); border-radius:14px; padding:24px;">
+        <div style="font-size:13px; font-weight:800; color:#3B82F6; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:12px;">The Defender</div>
+        <ul>
+          <li style="font-size:14px;">Present your data flywheel (4 loops, scored)</li>
+          <li style="font-size:14px;">Present your top encroachment threat</li>
+        </ul>
+      </div>
+      <div style="flex:1; background:rgba(248,113,113,0.06); border:1px solid rgba(248,113,113,0.2); border-radius:14px; padding:24px;">
+        <div style="font-size:13px; font-weight:800; color:#f87171; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:12px;">The Attacker</div>
+        <ul>
+          <li style="font-size:14px;">"I'm the Head of Product at [Google/OpenAI/Microsoft]."</li>
+          <li style="font-size:14px;">Name the feature you ship, the channel you use, why users switch in under a month</li>
+          <li style="font-size:14px;">Target the <strong>weakest flywheel loop</strong> and explain how you exploit it</li>
+        </ul>
+      </div>
+    </div>
+    <div style="background:#161822; border:1px solid rgba(248,113,113,0.2); border-radius:10px; padding:16px; margin-top:12px; text-align:center;">
+      <p style="font-size:15px; font-weight:700; color:#fca5a5;">After both rounds: write down the single most dangerous attack you heard.</p>
+      <p style="font-size:13px; color:#8899bb; margin-top:4px;">You'll design against it in the next exercise.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SLIDE 15: The Kill Switch Framework ===== -->
+<div class="slide" data-notes="3 minutes. Gokul reinforcement: 'Switching costs are heading to zero. Agents can read and write data across tools. UX can be cloned pixel by pixel. Companies without abstraction layers are more exposed than they think.' Three layers — keep it crisp, they'll apply it immediately. The '48 hours' anchor should feel ambitious but necessary.">
+  <div class="slide-inner">
+    <div class="demo-tag tag-lecture">Framework · 3 Minutes</div>
+    <h2>The Kill Switch</h2>
+    <div class="subtitle">A portability architecture that lets you swap AI providers in under 48 hours.</div>
+    <div class="ks-layers">
+      <div class="ks-layer" style="background:rgba(59,130,246,0.06); border:1px solid rgba(59,130,246,0.2);">
+        <div class="ks-num" style="background:#3B82F6;">1</div>
+        <div class="ks-text">
+          <div class="ks-title">Abstraction Layer</div>
+          <div class="ks-desc">A unified API between your product and your AI provider(s). No direct calls to OpenAI/Anthropic/Google in product code. Everything goes through your abstraction.</div>
+        </div>
+      </div>
+      <div class="ks-layer" style="background:rgba(96,165,250,0.06); border:1px solid rgba(96,165,250,0.15);">
+        <div class="ks-num" style="background:#2563eb;">2</div>
+        <div class="ks-text">
+          <div class="ks-title">Multi-Model Routing</div>
+          <div class="ks-desc">Different tasks route to different models based on cost, latency, and quality. If one provider fails or reprices, traffic shifts automatically.</div>
+        </div>
+      </div>
+      <div class="ks-layer" style="background:rgba(139,92,246,0.06); border:1px solid rgba(139,92,246,0.15);">
+        <div class="ks-num" style="background:#7c3aed;">3</div>
+        <div class="ks-text">
+          <div class="ks-title">Evaluation Harness</div>
+          <div class="ks-desc">Automated tests that validate a new provider meets your quality bar before you switch. No manual QA. Switch with confidence.</div>
+        </div>
+      </div>
+    </div>
+    <div style="background:rgba(248,113,113,0.06); border:1px solid rgba(248,113,113,0.12); border-radius:10px; padding:14px; margin-top:12px;">
+      <p style="font-size:13px; color:#fca5a5;">Switching costs are heading to zero — agents enable data portability, UX can be cloned pixel by pixel. The 48-hour swap test isn't paranoia. It's a survival skill.</p>
+    </div>
+    <p style="font-size:16px; color:#f87171; font-weight:600; text-align:center; margin-top:10px;">If you can't swap providers in 48 hours, you don't have a strategy — you have a dependency.</p>
+  </div>
+</div>
+
+<!-- ===== SLIDE 16: Your Portability Audit ===== -->
+<div class="slide" data-notes="15 minutes — this is the build moment. Walk the room. Help people who don't know their architecture: 'If you're not sure, write unknown — that's a finding in itself.' Push for specific action items: not 'build abstraction layer' but 'abstract the embedding call in the search pipeline by Friday.' Name that this checklist travels to M3: 'Your portability plan affects your cost model. If you're locked to one provider, you can't optimize costs.'">
+  <div class="slide-inner">
+    <div class="demo-tag tag-build">Build Moment · 15 Minutes</div>
+    <h2>The Kill Switch: Your Product</h2>
+    <div class="subtitle">Audit your current vendor dependency. This becomes part of your living strategy.</div>
+    <div style="display:flex; gap:16px; margin:16px 0;">
+      <div style="flex:1;">
+        <div class="audit-section">
+          <div class="audit-label" style="color:#3B82F6;">Current State</div>
+          <div class="audit-row"><div class="audit-dot" style="background:#3B82F6;"></div><div class="audit-row-text">Primary AI provider</div><div class="audit-blank">_______</div></div>
+          <div class="audit-row"><div class="audit-dot" style="background:#3B82F6;"></div><div class="audit-row-text">Direct API calls in product code?</div><div class="audit-blank">Y / N</div></div>
+          <div class="audit-row"><div class="audit-dot" style="background:#3B82F6;"></div><div class="audit-row-text">Abstraction layer exists?</div><div class="audit-blank">Y / N / Partial</div></div>
+          <div class="audit-row"><div class="audit-dot" style="background:#3B82F6;"></div><div class="audit-row-text">Multi-model routing?</div><div class="audit-blank">Y / N</div></div>
+          <div class="audit-row"><div class="audit-dot" style="background:#3B82F6;"></div><div class="audit-row-text">Automated eval harness?</div><div class="audit-blank">Y / N</div></div>
+        </div>
+      </div>
+      <div style="flex:1;">
+        <div class="audit-section">
+          <div class="audit-label" style="color:#f87171;">48-Hour Swap Readiness</div>
+          <div class="audit-row"><div class="audit-dot" style="background:#f87171;"></div><div class="audit-row-text">Provider doubles pricing — how long to switch?</div><div class="audit-blank">_______</div></div>
+          <div class="audit-row"><div class="audit-dot" style="background:#f87171;"></div><div class="audit-row-text">Provider changes ToS — what breaks?</div><div class="audit-blank">_______</div></div>
+          <div class="audit-row"><div class="audit-dot" style="background:#f87171;"></div><div class="audit-row-text">Single biggest migration blocker?</div><div class="audit-blank">_______</div></div>
+        </div>
+        <div class="audit-section" style="margin-top:16px;">
+          <div class="audit-label" style="color:#34d399;">Action Plan</div>
+          <div class="audit-row"><div class="audit-dot" style="background:#34d399;"></div><div class="audit-row-text">This week:</div><div class="audit-blank">_______</div></div>
+          <div class="audit-row"><div class="audit-dot" style="background:#34d399;"></div><div class="audit-row-text">This month:</div><div class="audit-blank">_______</div></div>
+          <div class="audit-row"><div class="audit-dot" style="background:#34d399;"></div><div class="audit-row-text">This quarter:</div><div class="audit-blank">_______</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SLIDE 17: Synthesis ===== -->
+<div class="slide" data-notes="3 minutes. Tie everything back: 'Your data isn't your moat — your workflow is. Your flywheel scores tell you whether your workflow is actually compounding. Your portability audit tells you whether you survive if the ground shifts.' Name every field for Component 2. This is the artifact moment — don't rush it.">
+  <div class="slide-inner">
+    <div class="module-tag">Synthesis</div>
+    <h2>What You Did Today</h2>
+    <div class="waypoints">
+      <div class="waypoint">
+        <div class="waypoint-num" style="background:#059669;">✓</div>
+        <div class="waypoint-text">
+          <div class="wt-title">Mapped your data flywheel</div>
+          <div class="wt-desc">Four loops, scored. Weakest link identified. You know where to invest — and where competitors attack.</div>
+        </div>
+      </div>
+      <div class="waypoint">
+        <div class="waypoint-num" style="background:#059669;">✓</div>
+        <div class="waypoint-text">
+          <div class="wt-title">Faced the attacker</div>
+          <div class="wt-desc">Your partner's 90-day kill plan exposed vulnerabilities self-assessment always misses.</div>
+        </div>
+      </div>
+      <div class="waypoint">
+        <div class="waypoint-num" style="background:#059669;">✓</div>
+        <div class="waypoint-text">
+          <div class="wt-title">Built the Kill Switch</div>
+          <div class="wt-desc">Vendor portability audit with a concrete action plan. 48-hour swap readiness — measured, not assumed.</div>
+        </div>
+      </div>
+    </div>
+    <div class="artifact-preview" style="margin-top:20px;">
+      <div class="ap-title">Living Strategy — Component 2: The Moat</div>
+      <p style="font-size:15px; color:#8899bb; line-height:1.7;"><strong>Fill in now:</strong> Data flywheel map (4 loops scored) · Weakest loop · Top encroachment threat · Portability readiness · 48-hour swap plan · Three action items</p>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SLIDE 18: Bridge to M3 ===== -->
+<div class="slide" data-notes="2 minutes. Clean bridge. 'You know what's defensible. M3 answers: will the economics actually work?' Tease the margin compression — 80% to 40%. Name what they bring. End with energy: 'Today you mapped the moat. Starting next session, we find out if it makes money.'">
+  <div class="slide-inner" style="text-align:center;">
+    <div class="module-tag">Bridge to Module 3</div>
+    <h2>You Know What's Defensible.<br>Will the Economics Actually Work?</h2>
+    <p style="font-size:18px; color:#8899bb; max-width:640px; margin:24px auto; line-height:1.7;">M3 is about the money. AI inference costs are compressing margins from <strong style="color:#f87171;">80% to 40%</strong> — and most product leaders don't see it coming until the P&L lands.</p>
+    <div style="background:#161822; border:1px solid #252840; border-radius:12px; padding:24px; margin:32px auto; max-width:500px; text-align:left;">
+      <p style="font-size:15px; font-weight:700; color:#fff; margin-bottom:10px;">Bring to M3:</p>
+      <ul>
+        <li>Your Data Flywheel Map</li>
+        <li>Encroachment Threat Assessment</li>
+        <li>Kill Switch Audit</li>
+        <li>Living Strategy — Components 1 + 2</li>
+      </ul>
+    </div>
+    <div class="arc-flow" style="margin-top:28px;">
+      <div class="arc-node" style="background:rgba(59,130,246,0.12); border:1px solid rgba(59,130,246,0.25); opacity:0.5;">
+        <div style="font-size:10px;">M1</div>The Bet ✓
+      </div>
+      <div class="arc-arrow">→</div>
+      <div class="arc-node" style="background:rgba(52,211,153,0.12); border:1px solid rgba(52,211,153,0.25); opacity:0.5;">
+        <div style="font-size:10px;">M2</div>The Moat ✓
+      </div>
+      <div class="arc-arrow">→</div>
+      <div class="arc-node active-node" style="background:rgba(251,191,36,0.15); border:2px solid #fbbf24;">
+        <div style="font-size:10px;">M3</div>The Margin
+      </div>
+      <div class="arc-arrow" style="opacity:0.3;">→</div>
+      <div class="arc-node" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.06); opacity:0.3;">M4</div>
+      <div class="arc-arrow" style="opacity:0.3;">→</div>
+      <div class="arc-node" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.06); opacity:0.3;">M5</div>
+      <div class="arc-arrow" style="opacity:0.3;">→</div>
+      <div class="arc-node" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.06); opacity:0.3;">M6</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SLIDE 19: Survey ===== -->
+<div class="slide" data-notes="">
+  <div class="slide-inner" style="text-align:center;">
+    <div class="module-tag">Module 2 Complete</div>
+    <h1>Your Opinion Matters</h1>
+    <div class="subtitle" style="margin:20px auto;">Scan the QR code or use the link to share your feedback.<br>Your insights shape every future cohort.</div>
+    <div style="width:180px; height:180px; background:#1a1a2e; border:2px solid #252840; border-radius:16px; margin:32px auto; display:flex; align-items:center; justify-content:center; color:#444; font-size:14px; font-weight:600;">QR Code</div>
+  </div>
+</div>
+
+<!-- ===== UI CHROME ===== -->
+<div class="nav">
+  <button class="nav-btn" onclick="prev()" title="Previous (←)">‹</button>
+  <button class="nav-btn" onclick="next()" title="Next (→)">›</button>
+</div>
+<div class="slide-counter"><span id="current">1</span> / <span id="total">19</span></div>
+<div class="progress"><div class="progress-bar" id="progress-bar"></div></div>
+<div class="help-hint">← → navigate · S speaker notes · F fullscreen</div>
+<div class="speaker-notes" id="speaker-notes">
+  <div class="notes-tag">Speaker Notes</div>
+  <div id="notes-content"></div>
+</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const total = slides.length;
+  let current = 0;
+  let notesVisible = false;
+
+  function show(idx) {
+    slides.forEach((s, i) => { s.classList.toggle('active', i === idx); });
+    current = idx;
+    document.getElementById('current').textContent = idx + 1;
+    document.getElementById('progress-bar').style.width = ((idx + 1) / total * 100) + '%';
+    const notes = slides[idx].getAttribute('data-notes') || '';
+    document.getElementById('notes-content').innerHTML = notes || '<em style="color:#444;">No notes for this slide.</em>';
+  }
+
+  function next() { if (current < total - 1) show(current + 1); }
+  function prev() { if (current > 0) show(current - 1); }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); next(); }
+    else if (e.key === 'ArrowLeft') { e.preventDefault(); prev(); }
+    else if (e.key === 's' || e.key === 'S') {
+      notesVisible = !notesVisible;
+      document.getElementById('speaker-notes').classList.toggle('visible', notesVisible);
+    }
+    else if (e.key === 'f' || e.key === 'F') {
+      if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+      else document.exitFullscreen();
+    }
+  });
+
+  let touchStartX = 0;
+  document.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; });
+  document.addEventListener('touchend', e => {
+    const diff = touchStartX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 60) { diff > 0 ? next() : prev(); }
+  });
+
+  show(0);
+</script>
+
+</body>
+</html>
