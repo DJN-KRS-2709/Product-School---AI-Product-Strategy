@@ -521,28 +521,33 @@
   </div>
 </div>
 
-<!-- ===== SLIDE 9: Case Study — Jasper vs. ChatGPT ===== -->
-<div class="slide" data-notes="7 minutes. Walk through each act. The Bet: Jasper raised $125M at $1.5B, 70K customers, fastest-growing AI startup. The Crack: ChatGPT launches, OpenAI adds plugins/custom GPTs, Google ships Gemini into Workspace. AI writing is now free and native. The Correction: Jasper pivots to enterprise marketing workflows — brand voice, campaigns, compliance. Features get eaten. Workflows survive. Discussion: 'Where is your product a wrapper — and where is it a workflow? Be specific.' 2–3 responses. This should create genuine anxiety. That's productive.">
+<!-- ===== SLIDE 7: Case Study — Jasper vs. ChatGPT ===== -->
+<div class="slide" data-notes="7 min. Walk the three acts fast — let the numbers speak. Pause on the Gokul quote. Then ask the room: 'wrapper or workflow?' Get 2-3 answers. This should sting.">
   <div class="slide-inner">
     <div class="demo-tag tag-case">Case Study · 7 Minutes</div>
-    <h2>The $1.5B Wrapper That Got Eaten Alive</h2>
-    <div class="case-acts">
-      <div class="case-act act-bet">
-        <div class="ca-label">The Bet</div>
-        <div class="ca-text"><strong>Jasper</strong> raised $125M at a $1.5B valuation. AI-powered content creation. 70,000+ customers. Fastest-growing AI startup in 2022. The thesis: own the AI writing workflow.</div>
+    <h2>The $1.5B Wrapper</h2>
+    <div style="display:flex; gap:12px; margin:24px 0;">
+      <div style="flex:1; background:rgba(96,165,250,0.06); border:1px solid rgba(96,165,250,0.15); border-radius:12px; padding:20px;">
+        <div style="font-size:11px; font-weight:800; color:#60a5fa; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:10px;">The Bet</div>
+        <div style="font-size:28px; font-weight:900; color:#fff; margin-bottom:4px;">$1.5B</div>
+        <div style="font-size:13px; color:#8899bb;">70K customers. Fastest AI startup 2022.</div>
       </div>
-      <div class="case-act act-crack">
-        <div class="ca-label">The Crack</div>
-        <div class="ca-text">ChatGPT launched November 2022. Then OpenAI added browsing, plugins, custom GPTs. Google shipped Gemini into Docs, Sheets, Gmail. AI writing became <strong>free, native, everywhere</strong>.</div>
+      <div style="flex:1; background:rgba(251,191,36,0.06); border:1px solid rgba(251,191,36,0.15); border-radius:12px; padding:20px;">
+        <div style="font-size:11px; font-weight:800; color:#fbbf24; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:10px;">The Crack</div>
+        <div style="font-size:28px; font-weight:900; color:#fff; margin-bottom:4px;">ChatGPT</div>
+        <div style="font-size:13px; color:#8899bb;">AI writing became free, native, everywhere.</div>
       </div>
-      <div class="case-act act-correct">
-        <div class="ca-label">The Correction</div>
-        <div class="ca-text">Jasper "went from 1 to 100 and 100 to 40 within very quick time frames" (Gokul Rajaram). Pivoted to enterprise marketing — brand voice, compliance. The lesson: <strong>features get eaten. Workflows survive.</strong> Bolt-on AI doesn't change your defensibility score.</div>
+      <div style="flex:1; background:rgba(248,113,113,0.06); border:1px solid rgba(248,113,113,0.15); border-radius:12px; padding:20px;">
+        <div style="font-size:11px; font-weight:800; color:#f87171; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:10px;">The Fall</div>
+        <div style="font-size:28px; font-weight:900; color:#fff; margin-bottom:4px;">1→100→40</div>
+        <div style="font-size:13px; color:#8899bb;">"Very quick time frames" — Gokul Rajaram</div>
       </div>
     </div>
-    <div style="background:rgba(59,130,246,0.06); border:1px solid rgba(59,130,246,0.15); border-radius:10px; padding:18px; margin-top:16px;">
-      <p style="font-size:16px; font-weight:700; color:#fff;">Strategic question for the room:</p>
-      <p style="font-size:15px; color:#8899bb;">Where is your product a wrapper — and where is it a workflow?</p>
+    <div style="text-align:center; margin:16px 0;">
+      <p style="font-size:20px; font-weight:800; color:#fff;">Features get eaten. Workflows survive.</p>
+    </div>
+    <div style="background:rgba(59,130,246,0.06); border:1px solid rgba(59,130,246,0.15); border-radius:10px; padding:16px; text-align:center;">
+      <p style="font-size:16px; font-weight:700; color:#60a5fa;">Your product: wrapper or workflow?</p>
     </div>
   </div>
 </div>
@@ -717,35 +722,53 @@
   </div>
 </div>
 
-<!-- ===== SLIDE 16: Your Portability Audit ===== -->
-<div class="slide" data-notes="15 minutes — this is the build moment. Walk the room. Help people who don't know their architecture: 'If you're not sure, write unknown — that's a finding in itself.' Push for specific action items: not 'build abstraction layer' but 'abstract the embedding call in the search pipeline by Friday.' Name that this checklist travels to M3: 'Your portability plan affects your cost model. If you're locked to one provider, you can't optimize costs.'">
+<!-- ===== SLIDE 14: Your Portability Audit ===== -->
+<div class="slide" data-notes="15 minutes. This is the build moment. Walk the room. 'If you don't know, write unknown — that's a finding.' Push for specific action items. This checklist travels to M3 — portability affects cost.">
   <div class="slide-inner">
     <div class="demo-tag tag-build">Build Moment · 15 Minutes</div>
     <h2>The Kill Switch: Your Product</h2>
-    <div class="subtitle">Audit your current vendor dependency. This becomes part of your living strategy.</div>
-    <div style="display:flex; gap:16px; margin:16px 0;">
-      <div style="flex:1;">
-        <div class="audit-section">
-          <div class="audit-label" style="color:#3B82F6;">Current State</div>
-          <div class="audit-row"><div class="audit-dot" style="background:#3B82F6;"></div><div class="audit-row-text">Primary AI provider</div><div class="audit-blank">_______</div></div>
-          <div class="audit-row"><div class="audit-dot" style="background:#3B82F6;"></div><div class="audit-row-text">Direct API calls in product code?</div><div class="audit-blank">Y / N</div></div>
-          <div class="audit-row"><div class="audit-dot" style="background:#3B82F6;"></div><div class="audit-row-text">Abstraction layer exists?</div><div class="audit-blank">Y / N / Partial</div></div>
-          <div class="audit-row"><div class="audit-dot" style="background:#3B82F6;"></div><div class="audit-row-text">Multi-model routing?</div><div class="audit-blank">Y / N</div></div>
-          <div class="audit-row"><div class="audit-dot" style="background:#3B82F6;"></div><div class="audit-row-text">Automated eval harness?</div><div class="audit-blank">Y / N</div></div>
+    <div style="display:flex; gap:14px; margin:20px 0;">
+      <div style="flex:1; background:rgba(59,130,246,0.06); border:1px solid rgba(59,130,246,0.2); border-radius:14px; padding:22px;">
+        <div style="font-size:12px; font-weight:800; color:#3B82F6; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:14px;">1. What's your setup?</div>
+        <div style="font-size:15px; color:#e0e0f0; margin-bottom:10px;">Provider: <span style="color:#555; font-family:'JetBrains Mono',monospace;">_________</span></div>
+        <div style="display:flex; gap:12px; margin-bottom:8px;">
+          <div style="flex:1; background:#161822; border-radius:8px; padding:10px; text-align:center;">
+            <div style="font-size:11px; color:#64748b;">Abstraction</div>
+            <div style="font-size:16px; font-weight:800; color:#60a5fa; margin-top:4px;">Y / N</div>
+          </div>
+          <div style="flex:1; background:#161822; border-radius:8px; padding:10px; text-align:center;">
+            <div style="font-size:11px; color:#64748b;">Multi-model</div>
+            <div style="font-size:16px; font-weight:800; color:#60a5fa; margin-top:4px;">Y / N</div>
+          </div>
+          <div style="flex:1; background:#161822; border-radius:8px; padding:10px; text-align:center;">
+            <div style="font-size:11px; color:#64748b;">Eval harness</div>
+            <div style="font-size:16px; font-weight:800; color:#60a5fa; margin-top:4px;">Y / N</div>
+          </div>
         </div>
       </div>
-      <div style="flex:1;">
-        <div class="audit-section">
-          <div class="audit-label" style="color:#f87171;">48-Hour Swap Readiness</div>
-          <div class="audit-row"><div class="audit-dot" style="background:#f87171;"></div><div class="audit-row-text">Provider doubles pricing — how long to switch?</div><div class="audit-blank">_______</div></div>
-          <div class="audit-row"><div class="audit-dot" style="background:#f87171;"></div><div class="audit-row-text">Provider changes ToS — what breaks?</div><div class="audit-blank">_______</div></div>
-          <div class="audit-row"><div class="audit-dot" style="background:#f87171;"></div><div class="audit-row-text">Single biggest migration blocker?</div><div class="audit-blank">_______</div></div>
+      <div style="flex:1; background:rgba(248,113,113,0.06); border:1px solid rgba(248,113,113,0.2); border-radius:14px; padding:22px;">
+        <div style="font-size:12px; font-weight:800; color:#f87171; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:14px;">2. Stress test</div>
+        <div style="font-size:14px; color:#e0e0f0; line-height:2.2;">
+          Provider doubles pricing → <span style="color:#555; font-family:'JetBrains Mono',monospace;">____ days</span> to switch<br>
+          Provider restricts your use case → what breaks? <span style="color:#555; font-family:'JetBrains Mono',monospace;">________</span><br>
+          Biggest blocker → <span style="color:#555; font-family:'JetBrains Mono',monospace;">________</span>
         </div>
-        <div class="audit-section" style="margin-top:16px;">
-          <div class="audit-label" style="color:#34d399;">Action Plan</div>
-          <div class="audit-row"><div class="audit-dot" style="background:#34d399;"></div><div class="audit-row-text">This week:</div><div class="audit-blank">_______</div></div>
-          <div class="audit-row"><div class="audit-dot" style="background:#34d399;"></div><div class="audit-row-text">This month:</div><div class="audit-blank">_______</div></div>
-          <div class="audit-row"><div class="audit-dot" style="background:#34d399;"></div><div class="audit-row-text">This quarter:</div><div class="audit-blank">_______</div></div>
+      </div>
+    </div>
+    <div style="background:rgba(52,211,153,0.06); border:1px solid rgba(52,211,153,0.2); border-radius:14px; padding:20px;">
+      <div style="font-size:12px; font-weight:800; color:#34d399; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:12px;">3. Three actions — be specific</div>
+      <div style="display:flex; gap:12px;">
+        <div style="flex:1; background:#161822; border-radius:8px; padding:14px; text-align:center;">
+          <div style="font-size:11px; color:#64748b; margin-bottom:6px;">This week</div>
+          <div style="font-size:14px; color:#555; font-family:'JetBrains Mono',monospace;">_______________</div>
+        </div>
+        <div style="flex:1; background:#161822; border-radius:8px; padding:14px; text-align:center;">
+          <div style="font-size:11px; color:#64748b; margin-bottom:6px;">This month</div>
+          <div style="font-size:14px; color:#555; font-family:'JetBrains Mono',monospace;">_______________</div>
+        </div>
+        <div style="flex:1; background:#161822; border-radius:8px; padding:14px; text-align:center;">
+          <div style="font-size:11px; color:#64748b; margin-bottom:6px;">This quarter</div>
+          <div style="font-size:14px; color:#555; font-family:'JetBrains Mono',monospace;">_______________</div>
         </div>
       </div>
     </div>
