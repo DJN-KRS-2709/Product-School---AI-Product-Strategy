@@ -1,85 +1,88 @@
 # Module 6 — The Pitch
 
 ## Slide 1 — Title
-- The capstone — everything comes together
-- They present their complete living strategy, room plays the board
+- Capstone energy: five components → one story → they pitch, room = board
+- Why: stakes and clarity beat another framework slide
+- Optional wow: "In ~2 hours you'll have said this out loud to peers playing your board"
 
 ## Slide 2 — Agenda
-- Shorter lecture than usual — roadmaps, metrics, storytelling, GTM
-- One case study
-- 15 min to finalize, 10 min to build roadmap, 35 min board simulation
-- The simulation is over a third of the session — that's the point
+- Why: >⅓ on capstone = rehearsal, not consumption
+- Fast lecture block; Duolingo case; moat card; then work + sim
 
 ## Slide 3 — The Full Arc
-- Quick callback to all six modules and what they built in each
-- Five components from M1-M5 become one narrative today
+- Why: closure — they built a system, not slide decks
+- Three bundles (C1–2, C3–4, C5) keep the wall of text off the screen
+- Adobe Firefly example: bet / workflow moat / bundle margin / IP + opt-in contract — walk it in 30 sec if time
 
 ## Slide 4 — Provocation
-- "Our roadmap is our strategy" — nope, the roadmap is the output. The six questions are the strategy
-- "AI metrics are the same as product metrics" — nope, they also need hallucination rate, drift velocity, confidence distribution, HITL rate, inference ROI
-- "Good product sells itself" — nope, AI has unique GTM frictions: can't demo deterministic results, users fear AI errors more than human errors, enterprise buyers need governance proof first
+- Why: roadmap-as-strategy is the #1 anti-pattern for PMs under OKR pressure
+- Poll each FALSE claim (thumbs, stand/sit, or Zoom reactions)
+- Stripe angle: public writing + principles → bets → *then* epics; roadmap follows
+- Partner flash: which claim did they believe? 20 sec — surfaces assumptions
 
 ## Slide 5 — Multi-Horizon Roadmaps
-- H1 (0-3 months): quick wins — build credibility, fund the bigger bets
-- H2 (3-12 months): strategic bets — the core AI strategy, where the living strategy lives
-- H3 (12+ months): moonshots — non-consumption markets, new behaviors
-- Board wants all three. Most roadmaps are missing H3
+- Why: boards fund portfolios across time, not one backlog
+- Shopify-style story: H1 core polish, H2 AI in workflow (e.g. Sidekick), H3 platform ambition — same narrative spine
+- "Point to H1 / H2 / H3" — where is their real weight?
 
-## Slide 6 — AI Metrics Boards Care About
-- Six: hallucination rate, drift velocity, confidence distribution, HITL rate, inference ROI, eval regression frequency
-- Gokul: revenue durability matters more than growth rate. These metrics tell the durability story
+## Slide 6 — AI Metrics
+- Why: without AI-quality + cost signals, execs default to "black box + liability"
+- Microsoft Copilot / Datadog flavor: pair usage story with guardrails + degradation visibility
+- Gokul hook: durability > vanity growth; retention as quality signal
+- Quick poll: "#1 AI metric you'd put on a board slide tomorrow?" — go round-robin
 
-## Slide 7 — Board-Ready Storytelling
-- Boards want four answers: why invest? (bet), why won't it be copied? (moat), what's the model? (margin), what could go wrong? (contract + guardrails)
-- Anti-pattern: leading with "we built a transformer with RAG." Lead with the investment thesis
+## Slide 7 — Four Board Questions (3 buckets)
+- Why: exec working memory is buckets, not your stack trace
+- Notion: AI as workflow wedge + distribution, not model trivia first
+- Stripe: money movement + risk, not "LLM inside"
+- 60 sec pair practice: case (bet+moat), model (margin), risks (contract+guardrails)
 
 ## Slide 8 — AI GTM Frictions
-- Demo problem: AI is probabilistic, can't guarantee what it shows
-- Error asymmetry: AI mistakes feel worse than human mistakes
-- Governance gate: no docs, no demo meeting
-- Adoption: first experience has to be high-confidence, high-value, low-risk
+- Why: primes the objections they'll get in capstone
+- Salesforce / Intercom-style: scripted demos, governance packs, containment metrics
+- Pair: which friction is scariest for *their* buyer? 45 sec each
 
-## Slide 9 — Case Study: Duolingo
-- Bet: GPT-4 in core learning — roleplay, explanations. 500M+ users
-- Crack: some users loved it, others found it weird. Investor questions shifted to "does AI actually improve learning?"
-- Correction: reframed from technology to outcomes. Published learning gains. Led investor decks with retention, not tech
-- Ask: "is your AI narrative built on technology or outcomes?"
+## Slide 9 — Case: Duolingo
+- Why: narrative repair under scrutiny = same muscle as board Q&A
+- Bet → crack ("does it teach?") → fix (outcomes > tech)
+- Poll or hand-raise: is their story mostly tech or mostly outcomes?
 
-## Slide 10 — The Moat Scorecard
-- Gokul's 8 Moats — score each 0-1. 4+ = defensible, 2-3 = vulnerable, 0-1 = trouble
-- 2 min to fill it in — becomes part of their presentation
-- An inflated scorecard loses credibility faster than a low one
+## Slide 10 — Moat Scorecard
+- Why: gives vocabulary + self-defense for "why not copied?"
+- Snowflake vs Nvidia: different moat *shapes*, same scorecard
+- 2 min solo scores → 2 min partner compare: where did you disagree? (forces evidence)
 
 ## Slide 11 — Break
-- 5 min — last one before the capstone
+- Why: reset before integrate + sim
+- Tease: back → 15 finalize · 10 roadmap · 35 board
 
-## Slide 12 — Finalize Your Living Strategy
-- 15 min — review all five components, fill gaps, sharpen the story
-- Not new content — just making M1-M5 work as one coherent narrative
+## Slide 12 — Finalize Living Strategy
+- Why: integration skill > starting over; panic rewrite wastes the cohort's work
+- Three rows only on slide — details live in their docs
+- Optional: 90 sec elevator to partner, then silent work
 
 ## Slide 13 — Build the Roadmap
-- 10 min — three horizons
-- H1: what ships in 90 days? H2: the 3-12 month bet with evidence? H3: what new market?
-- Every H2 bet needs kill criteria
+- Why: roadmap proves strategy moves through time (not a wishlist)
+- Amazon/AWS pattern: near-term cash/ops fund platform bets; force an H3 line
+- Stripe-style check: every H2 bet has a kill line / falsifiable signal
 
-## Slide 14 — Capstone: Board Simulation
-- 35 min — 5 min to present, 3 min of challenges, ~4 people go
-- Presenters answer: bet, moat, margin, contract, guardrails, roadmap
-- Board asks: "why fund this?" "what's your moat score?" "show me margin under stress" "biggest governance gap?"
-- Mix of company sizes and archetypes
+## Slide 14 — Board Simulation
+- Why: single best bang-for-minute in the whole certification
+- Mix company size + archetype; volunteers first
+- If room is quiet, seed Stripe-style $ + risk questions
+- Debrief: decks that landed led thesis first, stack second
 
-## Slide 15 — Revisit Your Baseline
-- Pull out their M1 answer to "what's our AI strategy?"
-- Write a new 3-sentence answer
-- The gap between the two is the evidence of growth. Keep it private
+## Slide 15 — M1 → Now
+- Why: emotional proof of growth without forcing vulnerability
+- Same CEO prompt as Module 1; delta = progress; keep sharing optional
 
 ## Slide 16 — What You Leave With
-- Five components, board-ready, tested by peers
-- Three-horizon roadmap, AI metrics, moat scorecard
-- A real strategy on a real product — not a certificate
+- Why: artifact > attendance; name components once, let pride land
+- Figma/Notion energy: toolkit they can reuse Monday
 
 ## Slide 17 — Certification
-- All six modules, living strategy complete, capstone delivered
+- Why: formal close after emotion on 15–16
+- Done = 6 modules · living strategy · capstone delivered
 
 ## Slide 18 — Survey
-- Final survey — QR code / link
+- Why: Product School loop; ~2 min, high response if you ask in-room

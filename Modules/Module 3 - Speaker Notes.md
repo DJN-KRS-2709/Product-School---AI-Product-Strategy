@@ -1,84 +1,86 @@
 # Module 3 — The Margin
 
 ## Slide 1 — Title
-- The "will this actually make money?" session
-- They'll build a cost model, a pricing strategy, and a board-ready P&L comparison
+- **Why:** Frame this as the money module — calmer than M1/M2, sharper pain when the math lands
+- Economics reality check; point at waypoints 1→2→3
+- They leave with Component 3 + cost model + pricing (say it once, they’ll hear it again)
 
 ## Slide 2 — Agenda
-- Two applied work blocks (cost model + pricing), peer stress-test, then a board-ready comparison as the build moment
+- **Why:** 60-second arc so nobody feels lost before the builds
+- Two applied blocks, peer break, board one-pager at the end — move fast
 
 ## Slide 3 — Recall from M2
-- They brought their flywheel map, Kill Switch audit, Components 1-2
-- The flywheel is great — but if every spin costs more than it earns, it's a liability
+- **Why:** Moat/flywheel without unit economics is incomplete — today adds the P&L layer
+- Flywheel + Components 1–2 + Kill Switch — short labels on slide, you unpack
+- **Interactive:** Partner 20s — one AI call path that could spike cost
+- Punch: pretty flywheel + ugly COGS = liability
 
 ## Slide 4 — Provocation
-- "AI will lower our costs" — eventually, but not yet. Margins drop from 80% to 40-60% and most leaders don't see it until the P&L lands
-- "We should price per seat" — nope, seat-based works for tools humans use. AI does work. Pricing per seat for a system that does the work is like a flat taxi fare regardless of distance
-- "Scale will fix the economics" — nope, Gokul killed this one. Scaling a money-losing AI product just scales the losses. The fix is architectural (cascading, caching) and strategic (pricing)
+- **Why:** Discomfort opens the Margin Calculator; “I don’t know $/user” is the win
+- **Interactive:** Hands — who knows inference cost per user per month?
+- Three beliefs: costs “eventually” down (not yet), seat pricing (often wrong for work), scale fixes (doesn’t if unit econ is negative)
 
 ## Slide 5 — The Margin War
-- Traditional SaaS: 80% margins, ~$5-8/seat COGS
-- Add AI: 1,000 calls/user/month at GPT-4 rates = $15-60/user/month in COGS. 80% margin becomes 40%
-- The trap: leaders plan AI features with SaaS margin assumptions and ignore the cost side
+- **Why:** Kills “we’ll keep SaaS margins” — variable tokens vs fixed SaaS COGS
+- **Interactive:** Quick poll — gross margin band (&lt;50 / 50–70 / 70+)
+- **Companies:** OpenAI + Anthropic public $/1M tokens; mini/Haiku vs frontier ≈ order-of-magnitude gap (have a pricing page open)
+- Napkin: calls × tokens/call × blended $/1M → COGS/user/mo
 
 ## Slide 6 — Model Cascading
-- A classifier routes requests: 80% go to cheap models, 20% go to frontier
-- Blended cost drops ~70% — that's the difference between 40% margin and 65%
-- Other levers: quantization, semantic caching, prompt optimization
-- The classifier has to be accurate or UX breaks
+- **Why:** Routing *is* the margin product — not “which model is smartest”
+- **Interactive:** Thumbs — is prod default 100% frontier?
+- **Companies:** Same vendors’ tiering (e.g. mini vs 4o-class; Haiku vs Sonnet) — diagram + quant/cache/prompt chips
 
-## Slide 7 — Access Products vs. Work Products
-- Access product = tool humans use (Figma, Notion). Per-seat makes sense
-- Work product = AI does the work (Klarna tickets, Harvey legal docs). Price per outcome
-- Most heading toward hybrid: base fee + usage tiers
-- Gokul's big insight: labor budget is the new TAM, not software budget. If your AI replaces $150K/year in labor and you charge $50/month, that's a 99% discount
+## Slide 7 — Two Pricing Worlds
+- **Why:** PMs SKU like SaaS; AI often delivers *work* and needs metered or hybrid pricing
+- **Interactive:** Pair 45s — hero SKU closer to access (left) or work (right)?
+- **Companies:** Figma / Slack / Notion vs Harvey / Jasper / Klarna narrative; labor budget vs SaaS budget, ~99% “discount” story
 
 ## Slide 8 — Commoditize the Complement
-- Where does the profit pool live — data or workflow?
-- Option 1: own the data, commoditize the workflow
-- Option 2: own the workflow, commoditize the data
-- Gokul's margin advice: price increases beat cost decreases. And not every AI feature needs to be a profit center — some exist for retention (Square model)
+- **Why:** Clarifies where you intentionally let the complement go cheap
+- **Interactive:** Point — are we A (data) or B (workflow)?
+- **Companies:** Snowflake / Databricks (data gravity) vs Block / Square (workflow, portfolio of profit vs retention)
+- Gokul beat: raise price on proven value, don’t only shave tokens
 
-## Slide 9 — Case Study: Klarna
-- Bet: AI support handled 2/3 of chats in month one, equivalent to 700 agents
-- Crack: inference costs scaled with volume, complex cases still needed humans, P&L got less predictable
-- Correction: moved to cascading, shifted narrative from cost-cutting to value (speed, 24/7, multilingual)
-- Ask: "pricing for the headline or the P&L?"
+## Slide 9 — Case: Klarna
+- **Why:** Real headline (“700 FTE”) vs variable COGS + ops reality
+- Three beats: bet / crack / correction — keep moving
+- **Interactive:** 1 min debate each side — headline pricing vs P&L pricing
 
-## Slide 10 — The Margin Calculator
-- Six inputs: requests/user/month, cost/request, COGS/user, revenue/user, margin/user, margin %
-- Stress tests: costs 3x, heaviest segment doubles usage, provider raises prices 50%
-- Below 40% in the stress test = needs architectural intervention
+## Slide 10 — Margin Calculator
+- **Why:** Makes stress math legible before the exercises
+- **Interactive:** Sticky note gross margin % — hold up (anonymous energy)
+- Live example in voice: 1k req × $0.03 → $30 COGS; $80 price ok; 3× COGS → broke
+- **Companies:** OpenAI (and peers) have cut list prices over time — still stress 3× and +50%
 
 ## Slide 11 — Break
-- 5 min
+- **Why:** Reset before hands-on; optional homework = pull provider pricing on phone
 
-## Slide 12 — Build Your Cost Curve
-- 15 min — map every AI feature by complexity, assign model tiers, estimate volume, get blended cost
-- Don't forget embedding calls. Don't assign everything to GPT-4
+## Slide 12 — Build Cost Curve
+- **Why:** Forces honest tiering — stops “everything on frontier”
+- **Interactive:** 2-min checkpoint — shout highest-volume AI feature (or round-robin)
+- Roam: embeddings, volume underestimation
 
-## Slide 13 — Design Your Pricing Strategy
-- 10 min — base fee + what AI work gets charged separately
-- The labor test: if AI replaces $100/hour human work and you charge $50/month, you're leaving 95%+ on the table
+## Slide 13 — Design Pricing
+- **Why:** Revenue model must match work delivered + Kill Switch enables routing on usage SKUs
+- **Interactive:** Point — one unit of work to meter
+- Labor test: $100/hr work vs $50/mo all-you-can-eat = giveaway (say it sharp)
 
-## Slide 14 — Peer Challenge: Stress-Test
-- 6 min per person
-- Triple the inference costs — does the model still work?
-- Double the heaviest user segment — power users now cost 5x what they pay
-- Write down the biggest economic vulnerability
+## Slide 14 — Peer Stress-Test
+- **Why:** CFO scenario planning — gentle partners help nobody
+- 6 min each: 3× cost, 2× heavy-user usage; one vulnerability on paper
 
-## Slide 15 — Build Moment: Value Capture Comparison
-- 15 min — one-page before/after their board can read in 2 minutes
-- Before: SaaS model. After: AI model. Revenue, COGS, margin, narrative
-- The hard part is the narrative: lower margins on higher value capture
-- This goes to M6 for the board presentation
+## Slide 15 — Build Moment (Board)
+- **Why:** Execs need the *story* when margin % moves — NRR / gross $ can improve even if % drops
+- Before/after boxes + narrative line (hedge, 12-mo band)
 
 ## Slide 16 — Synthesis
-- Fill in Component 3 — cost curve, blended COGS, pricing model, margin % (current + stressed), board comparison, top vulnerability
+- **Why:** Tie back to Slide 4 — compression is default; they now have levers + artifacts
+- Component 3 checklist — short on slide, you enumerate if needed
 
 ## Slide 17 — Bridge to M4
-- M4 is about trust — 95% accuracy with no audit trail loses to 85% with one
-- Bring everything
+- **Why:** Economics without trust doesn’t convert — M4 is reliability / contract / eval
+- Bring cost curve, pricing, value capture, Components 1–3
 
 ## Slide 18 — Survey
-- QR code / link
+- **Why:** Close loop for cohort quality — 30s, genuine thanks
