@@ -340,8 +340,9 @@
     <div class="agenda">
       <div class="agenda-item"><div class="agenda-time">2 min</div><div class="agenda-text" style="color:#94a3b8;">Housekeeping: cameras, tools, ground rules</div></div>
       <div class="agenda-item"><div class="agenda-time">5 min</div><div class="agenda-text"><strong>Moat Stress Test:</strong> Pull out your M1 scorecard — find the crack</div></div>
-      <div class="agenda-item"><div class="agenda-time">12 min</div><div class="agenda-text"><strong>Lecture:</strong> 8 Moats, data flywheels, and contextual depth</div></div>
+      <div class="agenda-item"><div class="agenda-time">5 min</div><div class="agenda-text"><strong>Lecture:</strong> 8 Moats — which one is yours?</div></div>
       <div class="agenda-item"><div class="agenda-time">7 min</div><div class="agenda-text"><strong>Case Study:</strong> The $1.5B wrapper that got eaten alive</div></div>
+      <div class="agenda-item"><div class="agenda-time">7 min</div><div class="agenda-text"><strong>Lecture:</strong> Depth spectrum, data loops, and the flywheel engine</div></div>
       <div class="agenda-item"><div class="agenda-time">5 min</div><div class="agenda-text"><strong>Framework:</strong> Data Flywheel Scoring — four loops, scored 1–5</div></div>
       <div class="agenda-item"><div class="agenda-time">5 min</div><div class="agenda-text" style="color:#94a3b8;">☕ Break</div></div>
       <div class="agenda-item"><div class="agenda-time">15 min</div><div class="agenda-text"><strong>Applied Work:</strong> Map and score your product's data flywheel</div></div>
@@ -435,52 +436,39 @@
   </div>
 </div>
 
-<!-- ===== SLIDE 5: The Data Flywheel ===== -->
-<div class="slide" data-notes="Point at the circle: 'This is the engine. It only works if every step feeds the next.' Three data types: corrections, preferences, domain context. Pause on the red question. Most products throw this data away. 'When your AI gets corrected and nobody records it, you're burning your own moat.'">
+<!-- ===== SLIDE 7: Case Study — Jasper vs. ChatGPT ===== -->
+<div class="slide" data-notes="7 min. 'You just named your moat. Here's what happens when it isn't real.' Walk the three acts — let the numbers speak. Jasper had 70K customers, $1.5B valuation, still got eaten. They were a feature, not a workflow. Pause on the Gokul quote. 'Where is YOUR product — wrapper or workflow?' Get 2-3 answers. This sets up the depth spectrum next.">
   <div class="slide-inner">
-    <div class="demo-tag tag-lecture">Lecture · The Engine</div>
-    <h2>The Data Flywheel</h2>
-    <div style="display:flex; gap:32px; margin:20px 0; align-items:center;">
-      <div style="flex:1; position:relative; min-height:280px;">
-        <div style="position:absolute; top:0; left:50%; transform:translateX(-50%); background:rgba(59,130,246,0.1); border:1px solid rgba(59,130,246,0.25); border-radius:12px; padding:14px 24px; text-align:center;">
-          <div style="font-size:14px; font-weight:700; color:#60a5fa;">Users interact</div>
-        </div>
-        <div style="position:absolute; top:80px; right:0; background:rgba(59,130,246,0.1); border:1px solid rgba(59,130,246,0.25); border-radius:12px; padding:14px 20px; text-align:center;">
-          <div style="font-size:14px; font-weight:700; color:#60a5fa;">Capture signal</div>
-        </div>
-        <div style="position:absolute; bottom:20px; right:10px; background:rgba(59,130,246,0.1); border:1px solid rgba(59,130,246,0.25); border-radius:12px; padding:14px 20px; text-align:center;">
-          <div style="font-size:14px; font-weight:700; color:#60a5fa;">Model improves</div>
-        </div>
-        <div style="position:absolute; bottom:20px; left:10px; background:rgba(59,130,246,0.1); border:1px solid rgba(59,130,246,0.25); border-radius:12px; padding:14px 20px; text-align:center;">
-          <div style="font-size:14px; font-weight:700; color:#60a5fa;">Better outputs</div>
-        </div>
-        <div style="position:absolute; top:80px; left:0; background:rgba(59,130,246,0.1); border:1px solid rgba(59,130,246,0.25); border-radius:12px; padding:14px 20px; text-align:center;">
-          <div style="font-size:14px; font-weight:700; color:#60a5fa;">More usage</div>
-        </div>
-        <div style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); font-size:36px; color:#3B82F6; font-weight:900;">↻</div>
+    <div class="demo-tag tag-case">Case Study · 7 Minutes</div>
+    <h2>The $1.5B Wrapper</h2>
+    <div style="display:flex; gap:12px; margin:24px 0;">
+      <div style="flex:1; background:rgba(96,165,250,0.06); border:1px solid rgba(96,165,250,0.15); border-radius:12px; padding:20px;">
+        <div style="font-size:11px; font-weight:800; color:#60a5fa; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:10px;">The Bet</div>
+        <div style="font-size:28px; font-weight:900; color:#fff; margin-bottom:4px;">$1.5B</div>
+        <div style="font-size:13px; color:#8899bb;">70K customers. Fastest AI startup 2022.</div>
       </div>
-      <div style="flex:1;">
-        <div style="font-size:13px; font-weight:800; color:#fff; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:16px;">Three data types that compound:</div>
-        <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px;">
-          <div style="width:36px; height:36px; border-radius:8px; background:rgba(248,113,113,0.12); display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:16px;">✏️</div>
-          <div><div style="font-size:15px; font-weight:700; color:#fff;">Corrections</div><div style="font-size:12px; color:#8899bb;">User fixes AI output = proprietary training data</div></div>
-        </div>
-        <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px;">
-          <div style="width:36px; height:36px; border-radius:8px; background:rgba(251,191,36,0.12); display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:16px;">👍</div>
-          <div><div style="font-size:15px; font-weight:700; color:#fff;">Preferences</div><div style="font-size:12px; color:#8899bb;">Every edit builds a unique taste profile</div></div>
-        </div>
-        <div style="display:flex; align-items:center; gap:12px;">
-          <div style="width:36px; height:36px; border-radius:8px; background:rgba(52,211,153,0.12); display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:16px;">🏭</div>
-          <div><div style="font-size:15px; font-weight:700; color:#fff;">Domain context</div><div style="font-size:12px; color:#8899bb;">Industry-specific knowledge generic models lack</div></div>
-        </div>
+      <div style="flex:1; background:rgba(251,191,36,0.06); border:1px solid rgba(251,191,36,0.15); border-radius:12px; padding:20px;">
+        <div style="font-size:11px; font-weight:800; color:#fbbf24; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:10px;">The Crack</div>
+        <div style="font-size:28px; font-weight:900; color:#fff; margin-bottom:4px;">ChatGPT</div>
+        <div style="font-size:13px; color:#8899bb;">AI writing became free, native, everywhere.</div>
+      </div>
+      <div style="flex:1; background:rgba(248,113,113,0.06); border:1px solid rgba(248,113,113,0.15); border-radius:12px; padding:20px;">
+        <div style="font-size:11px; font-weight:800; color:#f87171; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:10px;">The Fall</div>
+        <div style="font-size:28px; font-weight:900; color:#fff; margin-bottom:4px;">1→100→40</div>
+        <div style="font-size:13px; color:#8899bb;">"Very quick time frames" — Gokul Rajaram</div>
       </div>
     </div>
-    <p style="font-size:17px; color:#f87171; font-weight:700; text-align:center; margin-top:8px;">Does your product capture these — or throw them away?</p>
+    <div style="text-align:center; margin:16px 0;">
+      <p style="font-size:20px; font-weight:800; color:#fff;">Features get eaten. Workflows survive.</p>
+    </div>
+    <div style="background:rgba(59,130,246,0.06); border:1px solid rgba(59,130,246,0.15); border-radius:10px; padding:16px; text-align:center;">
+      <p style="font-size:16px; font-weight:700; color:#60a5fa;">Your product: wrapper or workflow?</p>
+    </div>
   </div>
 </div>
 
 <!-- ===== SLIDE 6: Depth Spectrum ===== -->
-<div class="slide" data-notes="Visual slide — let the spectrum speak. Point at each company and ask: 'Where does YOUR product sit on this line?' Get 2-3 answers. Then: 'Could your users switch in a weekend? If yes, you're on the left.'">
+<div class="slide" data-notes="Visual slide — let the spectrum speak. 'Jasper sat here' — point at the chatbot end. 'NetSuite sits here' — point at the OS end. 'Where does YOUR product sit?' Get 2-3 answers. 'Could your users switch in a weekend? If yes, you're Jasper.' Depth buys time — but what compounds it? That's next.">
   <div class="slide-inner">
     <div class="demo-tag tag-lecture">Lecture · The Spectrum</div>
     <h2>How Deep Is Your Workflow?</h2>
@@ -521,34 +509,62 @@
   </div>
 </div>
 
-<!-- ===== SLIDE 7: Case Study — Jasper vs. ChatGPT ===== -->
-<div class="slide" data-notes="7 min. Walk the three acts fast — let the numbers speak. Pause on the Gokul quote. Then ask the room: 'wrapper or workflow?' Get 2-3 answers. This should sting.">
+<!-- ===== SLIDE 7: Building the Defense ===== -->
+<div class="slide" data-notes="30 seconds. Narrative pivot. 'Everyone claims a data advantage. But data in a database isn't a moat — it's a cost center. The moat is whether your product gets smarter every time someone uses it. That's a loop, not a stockpile.' Pause on the red question. Move to the flywheel.">
+  <div class="slide-inner" style="text-align:center;">
+    <div class="demo-tag tag-lecture">Lecture · The Defense</div>
+    <h1 style="font-size:44px; line-height:1.2;">The Moat Isn't Your Data.<br><span style="color:#60a5fa;">It's Your Loops.</span></h1>
+    <p style="font-size:20px; color:#8899bb; max-width:640px; margin:28px auto; line-height:1.7;">
+      Every AI company claims a data advantage.<br>
+      Few have a mechanism that makes it <em>compound</em>.
+    </p>
+    <div style="background:rgba(248,113,113,0.06); border:1px solid rgba(248,113,113,0.15); border-radius:10px; padding:20px; max-width:580px; margin:28px auto;">
+      <p style="font-size:18px; font-weight:700; color:#fca5a5;">When your users correct your AI,<br>does that signal disappear — or compound?</p>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SLIDE 5: The Data Flywheel ===== -->
+<div class="slide" data-notes="'This is the engine that turns depth into distance. Jasper never built it.' Point at the circle — every step feeds the next. Three data types: corrections, preferences, domain context. Pause on the red question. Most products throw this data away. 'When your AI gets corrected and nobody records it, you're burning your own moat. That's what killed Jasper — zero compounding loops.'">
   <div class="slide-inner">
-    <div class="demo-tag tag-case">Case Study · 7 Minutes</div>
-    <h2>The $1.5B Wrapper</h2>
-    <div style="display:flex; gap:12px; margin:24px 0;">
-      <div style="flex:1; background:rgba(96,165,250,0.06); border:1px solid rgba(96,165,250,0.15); border-radius:12px; padding:20px;">
-        <div style="font-size:11px; font-weight:800; color:#60a5fa; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:10px;">The Bet</div>
-        <div style="font-size:28px; font-weight:900; color:#fff; margin-bottom:4px;">$1.5B</div>
-        <div style="font-size:13px; color:#8899bb;">70K customers. Fastest AI startup 2022.</div>
+    <div class="demo-tag tag-lecture">Lecture · The Engine</div>
+    <h2>The Data Flywheel</h2>
+    <div style="display:flex; gap:32px; margin:20px 0; align-items:center;">
+      <div style="flex:1; position:relative; min-height:280px;">
+        <div style="position:absolute; top:0; left:50%; transform:translateX(-50%); background:rgba(59,130,246,0.1); border:1px solid rgba(59,130,246,0.25); border-radius:12px; padding:14px 24px; text-align:center;">
+          <div style="font-size:14px; font-weight:700; color:#60a5fa;">Users interact</div>
+        </div>
+        <div style="position:absolute; top:80px; right:0; background:rgba(59,130,246,0.1); border:1px solid rgba(59,130,246,0.25); border-radius:12px; padding:14px 20px; text-align:center;">
+          <div style="font-size:14px; font-weight:700; color:#60a5fa;">Capture signal</div>
+        </div>
+        <div style="position:absolute; bottom:20px; right:10px; background:rgba(59,130,246,0.1); border:1px solid rgba(59,130,246,0.25); border-radius:12px; padding:14px 20px; text-align:center;">
+          <div style="font-size:14px; font-weight:700; color:#60a5fa;">Model improves</div>
+        </div>
+        <div style="position:absolute; bottom:20px; left:10px; background:rgba(59,130,246,0.1); border:1px solid rgba(59,130,246,0.25); border-radius:12px; padding:14px 20px; text-align:center;">
+          <div style="font-size:14px; font-weight:700; color:#60a5fa;">Better outputs</div>
+        </div>
+        <div style="position:absolute; top:80px; left:0; background:rgba(59,130,246,0.1); border:1px solid rgba(59,130,246,0.25); border-radius:12px; padding:14px 20px; text-align:center;">
+          <div style="font-size:14px; font-weight:700; color:#60a5fa;">More usage</div>
+        </div>
+        <div style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); font-size:36px; color:#3B82F6; font-weight:900;">↻</div>
       </div>
-      <div style="flex:1; background:rgba(251,191,36,0.06); border:1px solid rgba(251,191,36,0.15); border-radius:12px; padding:20px;">
-        <div style="font-size:11px; font-weight:800; color:#fbbf24; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:10px;">The Crack</div>
-        <div style="font-size:28px; font-weight:900; color:#fff; margin-bottom:4px;">ChatGPT</div>
-        <div style="font-size:13px; color:#8899bb;">AI writing became free, native, everywhere.</div>
-      </div>
-      <div style="flex:1; background:rgba(248,113,113,0.06); border:1px solid rgba(248,113,113,0.15); border-radius:12px; padding:20px;">
-        <div style="font-size:11px; font-weight:800; color:#f87171; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:10px;">The Fall</div>
-        <div style="font-size:28px; font-weight:900; color:#fff; margin-bottom:4px;">1→100→40</div>
-        <div style="font-size:13px; color:#8899bb;">"Very quick time frames" — Gokul Rajaram</div>
+      <div style="flex:1;">
+        <div style="font-size:13px; font-weight:800; color:#fff; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:16px;">Three data types that compound:</div>
+        <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px;">
+          <div style="width:36px; height:36px; border-radius:8px; background:rgba(248,113,113,0.12); display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:16px;">✏️</div>
+          <div><div style="font-size:15px; font-weight:700; color:#fff;">Corrections</div><div style="font-size:12px; color:#8899bb;">User fixes AI output = proprietary training data</div></div>
+        </div>
+        <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px;">
+          <div style="width:36px; height:36px; border-radius:8px; background:rgba(251,191,36,0.12); display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:16px;">👍</div>
+          <div><div style="font-size:15px; font-weight:700; color:#fff;">Preferences</div><div style="font-size:12px; color:#8899bb;">Every edit builds a unique taste profile</div></div>
+        </div>
+        <div style="display:flex; align-items:center; gap:12px;">
+          <div style="width:36px; height:36px; border-radius:8px; background:rgba(52,211,153,0.12); display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:16px;">🏭</div>
+          <div><div style="font-size:15px; font-weight:700; color:#fff;">Domain context</div><div style="font-size:12px; color:#8899bb;">Industry-specific knowledge generic models lack</div></div>
+        </div>
       </div>
     </div>
-    <div style="text-align:center; margin:16px 0;">
-      <p style="font-size:20px; font-weight:800; color:#fff;">Features get eaten. Workflows survive.</p>
-    </div>
-    <div style="background:rgba(59,130,246,0.06); border:1px solid rgba(59,130,246,0.15); border-radius:10px; padding:16px; text-align:center;">
-      <p style="font-size:16px; font-weight:700; color:#60a5fa;">Your product: wrapper or workflow?</p>
-    </div>
+    <p style="font-size:17px; color:#f87171; font-weight:700; text-align:center; margin-top:8px;">Does your product capture these — or throw them away?</p>
   </div>
 </div>
 
@@ -862,7 +878,7 @@
   <button class="nav-btn" onclick="prev()" title="Previous (←)">‹</button>
   <button class="nav-btn" onclick="next()" title="Next (→)">›</button>
 </div>
-<div class="slide-counter"><span id="current">1</span> / <span id="total">17</span></div>
+<div class="slide-counter"><span id="current">1</span> / <span id="total">18</span></div>
 <div class="progress"><div class="progress-bar" id="progress-bar"></div></div>
 <div class="help-hint">← → navigate · S speaker notes · F fullscreen</div>
 <div class="speaker-notes" id="speaker-notes">
