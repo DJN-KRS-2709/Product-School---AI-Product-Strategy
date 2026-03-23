@@ -1,0 +1,25 @@
+---
+description: Speaker notes format and tone for Carlos
+globs: Modules/*Speaker Notes*.md
+alwaysApply: false
+---
+
+# Speaker Notes Standards
+
+Module 2 Speaker Notes is the reference. Match this format across all modules.
+
+## Tone
+- Casual conversation, like briefing Carlos in bullet points
+- No long sentences, no scripts, no stage directions
+- Written as "here's what we're teaching and why" — not "say this word for word"
+
+## Structure Per Slide
+- Slide number + title as H2 heading
+- 2-5 bullet points covering: what's on the slide, what to say, key example
+- A "Why" line explaining the pedagogical reasoning (why this exercise, what insight should land, what changes if we skip it)
+
+## Content Rules
+- Name real companies as examples, matching the slide
+- Include interactive cues: "ask the room", "get 2-3 answers", "show of hands"
+- Spell out acronyms on first use (ToS = Terms of Service, HITL = Human-in-the-Loop)
+- If a slide has a fill-in exercise, note what "good" vs "bad" answers look like so Carlos can coach

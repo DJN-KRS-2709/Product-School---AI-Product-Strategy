@@ -1,0 +1,40 @@
+---
+description: Slide deck design standards for HTML presentation modules
+globs: Modules/*Slides*.html
+alwaysApply: false
+---
+
+# Slide Design Standards
+
+Module 2 is the reference deck. Match its density and structure across all modules.
+
+## Text Density
+- Lecture slides: max 3 short lines of body text per concept. No paragraphs.
+- Subtitles: 1 short line, never 2-3.
+- If you can't scan a slide in 5 seconds, it has too much text.
+
+## Visual Structure
+- Use big numbers, icons, and visual spectrums instead of text explanations.
+- Case studies: lead with the big number (e.g. "$1.5B"), one-line context below. Three cards side by side (Bet / Crack / Fall). No paragraph descriptions.
+- Frameworks: use tile grids (Y/N boxes, score boxes) not row-based checklists.
+- Comparisons: use a visual spectrum (gradient bar with labeled endpoints) and named companies along it — not two-column text blocks.
+- Flywheels: circular layout with a center symbol, not sequential vertical lists.
+
+## Company Examples
+- Every concept needs a real company name. No abstract-only slides.
+- Use the company as the proof, not the explanation. "Bloomberg" next to "Data" > a paragraph about data moats.
+
+## Interactive Moments
+- Every 2-3 slides needs an interaction: poll, show-of-hands, pair prompt, point-to-answer, or quick write.
+- Put the prompt on-slide (in a colored box), not just in speaker notes.
+
+## Build Moments / Exercises
+- Use card-based layouts with labeled panels (e.g. "1. What's your setup?" / "2. Stress test" / "3. Three actions").
+- Fill-in blanks use JetBrains Mono font, underscore placeholders.
+- Avoid long vertical checklists with dots — use horizontal tile grids instead.
+
+## Reference
+- Slide 7 (Jasper case study): big-number cards, minimal text
+- Slide 6 (Depth spectrum): gradient bar with company examples
+- Slide 4 (8 Moats): grid with one company per moat
+- Slide 14 (Kill Switch audit): three-panel card layout
