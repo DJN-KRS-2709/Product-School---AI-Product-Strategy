@@ -64,12 +64,14 @@
 - Scope / sources / maintenance + sales-test one-liner
 - Optional: teams like Notion/Linear treat eval sets like versioned product assets
 - **Interactive:** Stand if at least one adversarial row is in (or planned)
+- **🔧 Tool:** "Open the Golden Dataset Builder — it structures your test cases by category, lets you tag adversarial rows, and exports a clean spec you can hand to your eng team Monday."
 
 ## Slide 13 — Confidence UX (applied)
 - **Why:** One-mode UI = Air Canada energy; three modes = legible system
 - Tiers >90 / 50–90 / <50 — force color + copy
 - **Companies:** Grammarly depth of rewrite; Copilot citations + softer tone when unsure
 - **Interactive:** Point at screen — which tier is live product closest to?
+- **🔧 Tool:** "Open the Confidence UX Checklist — it's a 16-point checklist across confidence display, fallback design, HITL triggers, and transparency. Check off what you have, see your coverage score, and spot the gaps."
 
 ## Slide 14 — Red-team
 - **Why:** Cheapest place to fail; builds shared language on risk

@@ -65,6 +65,7 @@
 - Stress column: always model 3× cost AND +50% usage from power users
 - Note: OpenAI and peers have cut list prices repeatedly — but your stress model must survive both directions (price cuts = good, but provider lock-in risk if you assumed cheap forever)
 - Why: abstract margin talk doesn't change behavior. Seeing YOUR number on a sticky note does
+- **🔧 Tool:** "Open the Margin Calculator — plug in your numbers and it auto-calculates your margin, runs the 3× stress test and 2× heavy-user scenario, and tells you if you're healthy, warning, or danger. Way faster than the sticky — and you can export it."
 
 ## Slide 11 — Break
 - Optional homework during break: pull your provider's pricing page on your phone
@@ -84,6 +85,7 @@
 - Madhavan's WTP method to share: ask customers three questions — acceptable price, expensive price, prohibitively expensive price. Between expensive and prohibitive is a cliff — that's your psychological threshold
 - **Labor test:** $100/hr human work vs $50/mo all-you-can-eat AI = you're giving away 99% of the value you create
 - Why: most PMs price by looking at competitors. Madhavan's point is that 72% of innovations fail because they never checked willingness to pay. The exercise forces them to design around the price, not slap one on at the end
+- **🔧 Tool:** "Open the Pricing Strategy Designer — it walks you through picking your strategy, naming the unit, setting the structure, and checking your bundling with the Leaders/Fillers/Killers framework. Everything auto-saves and exports to markdown."
 
 ## Slide 14 — Peer Stress-Test
 - 6 minutes each, partner breaks your model

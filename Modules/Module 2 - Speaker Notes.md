@@ -67,6 +67,7 @@
 - 15 min individual — score four loops, write what they actually capture today
 - "We plan to build this" is a 1, not a 3
 - Why 15 min not 10: this is the core artifact. If they rush, they'll score generously and the peer challenge won't bite. Walk the room and push back — analytics ≠ preferences. Do they personalize model behavior? If not, it's a 1
+- **🔧 Tool:** "Open the Flywheel Scorer — it gives you a visual flywheel, scores each loop, and flags the weakest one. It also pulls in your M1 vulnerability data if you saved it."
 
 ## Slide 12 — Encroachment Threat Assessment
 - Three vectors: platform encroachment, vertical competitor, adjacent expansion
@@ -90,6 +91,7 @@
 - Stress tests: provider doubles pricing, provider restricts your use case
 - Walk out with three action items: this week, this month, this quarter
 - Why concrete actions: the Kill Switch is useless without a plan. Push for specifics — not "build abstraction layer" but "abstract the embedding call in search by Friday." This checklist travels to M3 — portability affects costs
+- **🔧 Tool:** "Open the Kill Switch Audit — it walks you through each dependency layer, stress-tests swap time, and gives you a concrete this-week / this-month / this-quarter action plan. Export it — you'll need it in M3."
 
 ## Slide 16 — Synthesis
 - Fill in Component 2: flywheel scores, weakest loop, top threat, portability plan, swap readiness, three actions

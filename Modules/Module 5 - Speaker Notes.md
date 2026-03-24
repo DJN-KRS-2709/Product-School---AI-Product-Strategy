@@ -65,6 +65,7 @@
 - **Why:** If they can’t one-pager it, execs know they don’t own the stance.
 - Push nouns: owners, data classes, auto-approved actions.
 - **Prompt if stuck:** “What’s blank when Samsung or Air Canada happens?”
+- **🔧 Tool:** "Open the AI Maturity Scorer — it scores five dimensions of your responsible AI practice and shows you exactly where you are on the compliance → sellable trust ladder. Export and share with your leadership."
 
 ## Slide 14 — Peer Challenge
 - **Why:** Peer red-team beats polite feedback; 6 min each side.
@@ -75,6 +76,7 @@
 - **Why:** Highest immediate org ROI in the module.
 - Permission: messy list is fine; finish with IT/Finance this week.
 - Cheer “villain tools” named out loud.
+- **🔧 Tool:** "Open the Shadow AI Audit — it walks you through discovering, risk-scoring, and triaging every unsanctioned AI tool in your org. The export is what you hand to IT and Finance this week."
 
 ## Slide 16 — Synthesis
 - **Why:** Lock Component 5 emotionally—all five components done.

@@ -60,6 +60,7 @@
 - Why: integration skill > starting over; panic rewrite wastes the cohort's work
 - Three rows only on slide — details live in their docs
 - Optional: 90 sec elevator to partner, then silent work
+- **🔧 Tool:** "Open the Pitch Assembler — it pulls all five strategy components from your previous tools into one pitch outline. If you saved your work in M1–M5, most of the fields are already there. Fill gaps, export, and that's your board deck skeleton."
 
 ## Slide 13 — Build the Roadmap
 - Why: roadmap proves strategy moves through time (not a wishlist)

@@ -76,6 +76,7 @@
 - **Why:** Abstract framework → their product; scorecard is what M2 pressure-tests.
 - 10 min individual — scores + one vulnerability written down.
 - Ruthless honesty; all 5s = red flag. Roam — they should be writing.
+- **🔧 Tool:** "Open the Vulnerability Scorecard — it auto-calculates your composite score and highlights your weakest axis. When you're done, hit Export — that markdown travels to M2."
 
 ## Slide 16 — Pair Challenge
 - **Why:** Social proof + discomfort beat solo rationalization; surfaces real competitors.
