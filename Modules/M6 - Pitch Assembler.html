@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>M6 — Pitch Assembler</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+  :root {
+    --bg: #0b0b10;
+    --surface: #13131a;
+    --surface2: #1a1a24;
+    --border: #252535;
+    --border-hi: #35354a;
+    --text: #e0e0f0;
+    --text-dim: #7a7a9a;
+    --text-muted: #55556a;
+    --blue: #5b8def;
+    --green: #3dd68c;
+    --yellow: #f0c040;
+    --red: #ef5b5b;
+    --purple: #a07be8;
+    --blue-bg: rgba(91,141,239,0.08);
+    --green-bg: rgba(61,214,140,0.08);
+    --radius: 10px;
+    --radius-lg: 14px;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 40px 20px 100px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page { max-width: 720px; margin: 0 auto; }
+
+  .header { text-align: center; margin-bottom: 36px; }
+  .badge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--blue);
+    background: var(--blue-bg);
+    border: 1px solid rgba(91,141,239,0.2);
+    padding: 5px 14px;
+    border-radius: 20px;
+    margin-bottom: 14px;
+  }
+  .header h1 {
+    font-size: 30px;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 8px;
+    letter-spacing: -0.02em;
+  }
+  .header p {
+    font-size: 14px;
+    color: var(--text-dim);
+    line-height: 1.6;
+    max-width: 540px;
+    margin: 0 auto;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    margin-bottom: 20px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .card:hover { border-color: var(--border-hi); }
+
+  .card-head {
+    padding: 18px 24px;
+    border-bottom: 1px solid var(--border);
+  }
+  .card-title { font-size: 16px; font-weight: 700; color: #fff; }
+  .card-sub { font-size: 12px; color: var(--text-dim); margin-top: 4px; line-height: 1.5; }
+  .card-body { padding: 20px 24px 24px; }
+
+  .summary-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 16px;
+    align-items: baseline;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  .summary-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .summary-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--blue);
+    min-width: 32px;
+  }
+  .summary-mono { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--text); }
+  .summary-miss { color: var(--text-muted); font-size: 13px; }
+  .summary-note { font-size: 11px; color: var(--text-muted); margin-top: 4px; width: 100%; }
+
+  .field label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-dim);
+    margin-bottom: 8px;
+  }
+  .field label span { color: var(--text-muted); font-weight: 500; }
+  textarea {
+    width: 100%;
+    min-height: 88px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    font-weight: 500;
+    color: #fff;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 14px;
+    resize: vertical;
+    outline: none;
+    line-height: 1.5;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  textarea:focus {
+    border-color: var(--blue);
+    box-shadow: 0 0 0 3px rgba(91,141,239,0.12);
+  }
+  textarea.narrative { min-height: 200px; }
+  textarea::placeholder { color: var(--text-muted); }
+
+  .word-count {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 8px;
+  }
+  .tip {
+    margin-top: 14px;
+    padding: 12px 16px;
+    background: var(--blue-bg);
+    border: 1px solid rgba(91,141,239,0.12);
+    border-radius: var(--radius);
+    font-size: 12px;
+    color: var(--text-dim);
+    line-height: 1.55;
+  }
+  .tip strong { color: var(--blue); }
+
+  .readiness-grid { display: grid; gap: 10px; }
+  .readiness-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 13px;
+  }
+  .readiness-icon {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    font-size: 14px;
+    width: 24px;
+    text-align: center;
+  }
+  .readiness-icon.ok { color: var(--green); }
+  .readiness-icon.no { color: var(--red); }
+  .readiness-overall {
+    margin-top: 16px;
+    padding: 14px 16px;
+    border-radius: var(--radius);
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.5;
+  }
+  .readiness-overall.done {
+    background: var(--green-bg);
+    border: 1px solid rgba(61,214,140,0.2);
+    color: var(--green);
+  }
+  .readiness-overall.pending {
+    background: rgba(240,192,64,0.08);
+    border: 1px solid rgba(240,192,64,0.15);
+    color: var(--yellow);
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 24px;
+    justify-content: center;
+  }
+  .btn {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--surface2);
+    color: var(--text);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn:hover { border-color: var(--blue); color: #fff; }
+  .btn.primary { background: var(--blue); border-color: var(--blue); color: #fff; }
+  .btn.primary:hover { background: #4a7de0; }
+
+  .saved-toast {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(60px);
+    background: var(--green);
+    color: #000;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 10px 24px;
+    border-radius: 8px;
+    opacity: 0;
+    transition: all 0.3s;
+    pointer-events: none;
+    z-index: 100;
+    max-width: 90vw;
+    text-align: center;
+  }
+  .saved-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+</style>
+</head>
+<body>
+
+<div class="page">
+  <div class="header">
+    <div class="badge">Module 6 — The Pitch</div>
+    <h1>Pitch Assembler</h1>
+    <p>Pull together all five components of your living strategy into a structured pitch.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-title">Your Strategy at a Glance</div>
+      <div class="card-sub">Synced from module tools saved in this browser (localStorage).</div>
+    </div>
+    <div class="card-body" id="glanceBody"></div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-title">The Pitch Structure</div>
+      <div class="card-sub">Five sections — refine each, then weave them in the narrative below.</div>
+    </div>
+    <div class="card-body">
+      <div class="field" style="margin-bottom:20px">
+        <label>1. The Bet <span>— What's your AI product bet in one sentence?</span></label>
+        <textarea id="pitchBet" placeholder="What's your AI product bet in one sentence?"></textarea>
+      </div>
+      <div class="field" style="margin-bottom:20px">
+        <label>2. The Moat <span>— What makes you defensible? Name your strongest flywheel loop.</span></label>
+        <textarea id="pitchMoat" placeholder="What makes you defensible? Name your strongest flywheel loop."></textarea>
+      </div>
+      <div class="field" style="margin-bottom:20px">
+        <label>3. The Margin <span>— How do you make money? Revenue model + unit economics.</span></label>
+        <textarea id="pitchMargin" placeholder="How do you make money? Revenue model + unit economics."></textarea>
+      </div>
+      <div class="field" style="margin-bottom:20px">
+        <label>4. The Contract <span>— How do you guarantee quality? Eval approach + confidence design.</span></label>
+        <textarea id="pitchContract" placeholder="How do you guarantee quality? Eval approach + confidence design."></textarea>
+      </div>
+      <div class="field">
+        <label>5. The Guardrails <span>— How do you govern AI responsibly? Maturity level + key policies.</span></label>
+        <textarea id="pitchGuardrails" placeholder="How do you govern AI responsibly? Maturity level + key policies."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-title">Pitch Narrative</div>
+      <div class="card-sub">Combine the five components into one cohesive story (~200 words).</div>
+    </div>
+    <div class="card-body">
+      <textarea id="pitchNarrative" class="narrative" placeholder="Write your full pitch here…"></textarea>
+      <div class="word-count" id="wordCount">0 words</div>
+      <div class="tip">
+        <strong>Tip:</strong> Your pitch should answer: Why this bet? Why now? Why us? And why will it last?
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-title">Readiness Check</div>
+      <div class="card-sub">Module data detected in localStorage — use this as a prep checklist.</div>
+    </div>
+    <div class="card-body">
+      <div class="readiness-grid" id="readinessGrid"></div>
+      <div class="readiness-overall" id="readinessOverall"></div>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button type="button" class="btn" onclick="resetAll()">Reset</button>
+    <button type="button" class="btn" onclick="copyToClipboard()">Copy as Text</button>
+    <button type="button" class="btn primary" onclick="exportMarkdown()">Export Markdown</button>
+  </div>
+</div>
+
+<div class="saved-toast" id="toast">Saved</div>
+
+<script>
+const KEY = 'aps-m6-pitch';
+const $ = id => document.getElementById(id);
+
+const M1_AXES = [
+  { k: 'contextualMoat', label: 'Contextual Moat' },
+  { k: 'dataAdvantage', label: 'Data Advantage' },
+  { k: 'platformExposure', label: 'Platform Exposure' }
+];
+
+const FW_LOOPS = [
+  { key: 'corrections', title: 'Corrections Loop' },
+  { key: 'preferences', title: 'Preferences Loop' },
+  { key: 'domainContext', title: 'Domain Context Loop' },
+  { key: 'network', title: 'Network Loop' }
+];
+
+const KILL_INTEGRATION_LABEL = {
+  direct: 'Direct API calls',
+  thin: 'Thin wrapper',
+  abstract: 'Abstraction layer',
+  multi: 'Multi-provider routing'
+};
+
+const STRATEGY_LABEL = { skim: 'Skim', penetrate: 'Penetrate', maximize: 'Maximize' };
+const MODEL_LABEL = { seat: 'Seat / Access', hybrid: 'Hybrid (base + usage)', outcome: 'Outcome / Resolution' };
+
+function safeJSON(key) {
+  try {
+    const s = localStorage.getItem(key);
+    return s ? JSON.parse(s) : null;
+  } catch (e) { return null; }
+}
+
+function num(v, d = null) {
+  const n = parseFloat(v);
+  return Number.isFinite(n) ? n : d;
+}
+
+function str(v, fb = '') {
+  if (v == null || v === '') return fb;
+  return String(v);
+}
+
+function computeMarginPct(d) {
+  if (!d) return null;
+  const requests = num(d.requests, 0);
+  const costPerReq = num(d.costPerReq, 0);
+  const revenue = num(d.revenue, 0);
+  const otherCogs = num(d.otherCogs, 0);
+  if (revenue <= 0) return null;
+  const aiCogs = requests * costPerReq;
+  const gp = revenue - aiCogs - otherCogs;
+  return (gp / revenue) * 100;
+}
+
+function parseM1() {
+  const d = safeJSON('aps-m1-vulnerability');
+  if (!d) return { ok: false };
+  const scored = M1_AXES.map(({ k, label }) => ({
+    label,
+    v: d[k] >= 1 && d[k] <= 5 ? d[k] : null
+  }));
+  const all = scored.every(x => x.v != null);
+  const sum = all ? scored.reduce((s, x) => s + x.v, 0) : null;
+  let weakest = '—';
+  if (all) {
+    const min = Math.min(...scored.map(x => x.v));
+    weakest = scored.filter(x => x.v === min).map(x => x.label).join(' · ');
+  }
+  const competitor = str(d.weakestCompetitor, '');
+  return { ok: true, score: sum, max: 15, weakest, competitor };
+}
+
+function parseM2Fly() {
+  const d = safeJSON('aps-m2-flywheel');
+  if (!d) return { ok: false };
+  const loops = FW_LOOPS.map(L => ({
+    title: L.title,
+    v: d[L.key] >= 1 && d[L.key] <= 5 ? d[L.key] : null
+  }));
+  const all = loops.every(x => x.v != null);
+  const total = all ? loops.reduce((s, x) => s + x.v, 0) : null;
+  let strongest = '';
+  if (all) {
+    const mx = Math.max(...loops.map(x => x.v));
+    strongest = loops.filter(x => x.v === mx).map(x => x.title).join(' · ');
+  }
+  return { ok: true, score: total, max: 20, strongest };
+}
+
+function parseM2Kill() {
+  const d = safeJSON('aps-m2-killswitch');
+  if (!d) return { ok: false };
+  const depth = d.integration ? str(KILL_INTEGRATION_LABEL[d.integration] || d.integration, '') : '';
+  return { ok: true, depth };
+}
+
+function parseM3Margin() {
+  const d = safeJSON('aps-m3-margin');
+  if (!d) return { ok: false };
+  const pct = computeMarginPct(d);
+  const revenue = num(d.revenue, null);
+  return { ok: true, marginPct: pct, revenue };
+}
+
+function parseM3Pricing() {
+  const d = safeJSON('aps-m3-pricing');
+  if (!d) return { ok: false };
+  const strat = d.strategy ? STRATEGY_LABEL[d.strategy] || d.strategy : '';
+  const model = d.model ? MODEL_LABEL[d.model] || d.model : '';
+  return { ok: true, strategy: strat, model };
+}
+
+function parseM4() {
+  const d = safeJSON('aps-m4-golden-dataset');
+  if (!d) return { ok: false };
+  const cases = num(d.testCases, num(d.count, num(d.size, num(d.cases, null))));
+  const evalM = str(d.evalMethod || d.eval || d.method || d.approach, '');
+  return { ok: true, cases, evalMethod: evalM };
+}
+
+function parseM5() {
+  const d = safeJSON('aps-m5-ai-maturity');
+  if (!d) return { ok: false };
+  let score = num(d.totalScore, num(d.total, num(d.score, num(d.maturityScore, null))));
+  if (score == null && d.dimensions && typeof d.dimensions === 'object') {
+    score = Object.values(d.dimensions).reduce((s, v) => s + num(v, 0), 0);
+  }
+  const shadows = num(
+    d.shadowTools,
+    num(d.shadowCount, num(d.toolsCount, Array.isArray(d.tools) ? d.tools.length : null))
+  );
+  return { ok: true, score, max: 25, shadows };
+}
+
+function moduleAvailability() {
+  return {
+    m1: !!safeJSON('aps-m1-vulnerability'),
+    m2a: !!safeJSON('aps-m2-flywheel'),
+    m2b: !!safeJSON('aps-m2-killswitch'),
+    m3a: !!safeJSON('aps-m3-margin'),
+    m3b: !!safeJSON('aps-m3-pricing'),
+    m4: !!safeJSON('aps-m4-golden-dataset'),
+    m5: !!safeJSON('aps-m5-ai-maturity')
+  };
+}
+
+function escapeHtml(s) {
+  return String(s)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+function renderGlance() {
+  const el = $('glanceBody');
+  const m1 = parseM1();
+  const m2f = parseM2Fly();
+  const m2k = parseM2Kill();
+  const m3m = parseM3Margin();
+  const m3p = parseM3Pricing();
+  const m4 = parseM4();
+  const m5 = parseM5();
+  const rows = [];
+
+  if (m1.ok) {
+    const sc = m1.score != null ? `${m1.score}/${m1.max}` : 'in progress';
+    rows.push(`<div class="summary-row"><span class="summary-label">M1</span><span class="summary-mono">Vulnerability score ${sc}</span><span>| Weakest: ${escapeHtml(m1.weakest)}</span></div>`);
+  } else {
+    rows.push(`<div class="summary-row"><span class="summary-label">M1</span><span class="summary-miss">Not completed yet</span><div class="summary-note">Complete the M1 Vulnerability Scorecard tool and save in this browser.</div></div>`);
+  }
+
+  if (m2f.ok || m2k.ok) {
+    const sc = m2f.ok && m2f.score != null ? `${m2f.score}/${m2f.max}` : '—';
+    const ks = m2k.ok && m2k.depth ? escapeHtml(m2k.depth) : '—';
+    rows.push(`<div class="summary-row"><span class="summary-label">M2</span><span class="summary-mono">Flywheel score ${sc}</span><span>| Kill switch: ${ks}</span></div>`);
+  } else {
+    rows.push(`<div class="summary-row"><span class="summary-label">M2</span><span class="summary-miss">Not completed yet</span><div class="summary-note">Complete the M2 flywheel and kill switch tools.</div></div>`);
+  }
+
+  if (m3m.ok || m3p.ok) {
+    const marg = m3m.ok && m3m.marginPct != null ? `${m3m.marginPct.toFixed(1)}%` : '—';
+    const strat = m3p.ok ? escapeHtml([m3p.strategy, m3p.model].filter(Boolean).join(' / ') || '—') : '—';
+    rows.push(`<div class="summary-row"><span class="summary-label">M3</span><span class="summary-mono">Margin ${marg}</span><span>| Pricing: ${strat}</span></div>`);
+  } else {
+    rows.push(`<div class="summary-row"><span class="summary-label">M3</span><span class="summary-miss">Not completed yet</span><div class="summary-note">Complete the M3 margin and pricing tools.</div></div>`);
+  }
+
+  if (m4.ok) {
+    const c = m4.cases != null ? String(m4.cases) : '—';
+    const ev = m4.evalMethod ? escapeHtml(m4.evalMethod) : '—';
+    rows.push(`<div class="summary-row"><span class="summary-label">M4</span><span class="summary-mono">Golden dataset: ${c} test cases</span><span>| Eval: ${ev}</span></div>`);
+  } else {
+    rows.push(`<div class="summary-row"><span class="summary-label">M4</span><span class="summary-miss">Not completed yet</span><div class="summary-note">Complete the M4 golden dataset tool.</div></div>`);
+  }
+
+  if (m5.ok) {
+    const sc = m5.score != null ? `${m5.score}/${m5.max}` : '—';
+    const sh = m5.shadows != null ? String(m5.shadows) : '—';
+    rows.push(`<div class="summary-row"><span class="summary-label">M5</span><span class="summary-mono">AI maturity: ${sc}</span><span>| Shadow tools: ${sh}</span></div>`);
+  } else {
+    rows.push(`<div class="summary-row"><span class="summary-label">M5</span><span class="summary-miss">Not completed yet</span><div class="summary-note">Complete the M5 AI maturity tool.</div></div>`);
+  }
+
+  el.innerHTML = rows.join('');
+}
+
+function renderReadiness() {
+  const a = moduleAvailability();
+  const m2ok = a.m2a || a.m2b;
+  const m3ok = a.m3a || a.m3b;
+  const items = [
+    { label: 'M1 — Vulnerability (aps-m1-vulnerability)', ok: a.m1 },
+    { label: 'M2 — Flywheel / Kill switch', ok: m2ok },
+    { label: 'M3 — Margin / Pricing', ok: m3ok },
+    { label: 'M4 — Golden dataset', ok: a.m4 },
+    { label: 'M5 — AI maturity', ok: a.m5 }
+  ];
+  let n = 0;
+  $('readinessGrid').innerHTML = items
+    .map(it => {
+      if (it.ok) n++;
+      return `<div class="readiness-item"><span class="readiness-icon ${it.ok ? 'ok' : 'no'}">${it.ok ? '✓' : '✗'}</span><span>${escapeHtml(it.label)}</span></div>`;
+    })
+    .join('');
+
+  const overall = $('readinessOverall');
+  if (n === 5) {
+    overall.className = 'readiness-overall done';
+    overall.textContent = 'Overall readiness: 5/5 components complete. Your strategy is complete. Present with confidence.';
+  } else {
+    overall.className = 'readiness-overall pending';
+    overall.textContent = `Overall readiness: ${n}/5 components complete. Complete the missing modules to strengthen your pitch.`;
+  }
+}
+
+function seedFromModulesIfEmpty() {
+  const m1 = parseM1();
+  const m2f = parseM2Fly();
+  const m2k = parseM2Kill();
+  const m3m = parseM3Margin();
+  const m3p = parseM3Pricing();
+  const m4 = parseM4();
+  const m5 = parseM5();
+
+  if (!$('pitchBet').value.trim() && m1.ok) {
+    const parts = [];
+    if (m1.score != null) parts.push(`Vulnerability ${m1.score}/15; weakest axis: ${m1.weakest}.`);
+    if (m1.competitor) parts.push(`Primary competitive pressure: ${m1.competitor}.`);
+    if (parts.length) $('pitchBet').value = parts.join(' ');
+  }
+
+  if (!$('pitchMoat').value.trim()) {
+    const parts = [];
+    if (m2f.strongest) parts.push(`Strongest flywheel loop: ${m2f.strongest}.`);
+    if (m2f.score != null) parts.push(`Flywheel score: ${m2f.score}/20.`);
+    if (m2k.depth) parts.push(`Provider integration depth: ${m2k.depth}.`);
+    if (parts.length) $('pitchMoat').value = parts.join(' ');
+  }
+
+  if (!$('pitchMargin').value.trim()) {
+    const bits = [];
+    if (m3p.strategy) bits.push(`Pricing strategy: ${m3p.strategy}.`);
+    if (m3p.model) bits.push(`Pricing model: ${m3p.model}.`);
+    if (m3m.marginPct != null) bits.push(`Gross margin (from Margin Calculator inputs): ~${m3m.marginPct.toFixed(1)}%.`);
+    if (m3m.revenue != null) bits.push(`Revenue per user (monthly, calculator): $${m3m.revenue}.`);
+    if (bits.length) $('pitchMargin').value = bits.join(' ');
+  }
+
+  if (!$('pitchContract').value.trim()) {
+    const bits = [];
+    if (m4.cases != null) bits.push(`Golden dataset: ${m4.cases} test cases.`);
+    if (m4.evalMethod) bits.push(`Eval approach: ${m4.evalMethod}.`);
+    if (bits.length) $('pitchContract').value = bits.join(' ');
+  }
+
+  if (!$('pitchGuardrails').value.trim()) {
+    const bits = [];
+    if (m5.score != null) bits.push(`AI maturity score: ${m5.score}/25.`);
+    if (m5.shadows != null) bits.push(`Shadow AI tools found: ${m5.shadows}.`);
+    if (bits.length) $('pitchGuardrails').value = bits.join(' ');
+  }
+}
+
+function getState() {
+  return {
+    pitchBet: $('pitchBet').value,
+    pitchMoat: $('pitchMoat').value,
+    pitchMargin: $('pitchMargin').value,
+    pitchContract: $('pitchContract').value,
+    pitchGuardrails: $('pitchGuardrails').value,
+    pitchNarrative: $('pitchNarrative').value
+  };
+}
+
+function setState(s) {
+  if (!s) return;
+  ['pitchBet', 'pitchMoat', 'pitchMargin', 'pitchContract', 'pitchGuardrails', 'pitchNarrative'].forEach(k => {
+    if (s[k] !== undefined) $(k).value = s[k];
+  });
+}
+
+let saveTimer;
+function scheduleSave() {
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(() => {
+    localStorage.setItem(KEY, JSON.stringify(getState()));
+    showToast('Auto-saved');
+  }, 400);
+}
+
+function updateWordCount() {
+  const t = $('pitchNarrative').value.trim();
+  const w = t ? t.split(/\s+/).length : 0;
+  $('wordCount').textContent = w + ' word' + (w === 1 ? '' : 's');
+}
+
+function glancePlainText() {
+  const tmp = document.createElement('div');
+  tmp.innerHTML = $('glanceBody').innerHTML;
+  return tmp.textContent.replace(/\s+/g, ' ').trim();
+}
+
+function load() {
+  try {
+    const raw = localStorage.getItem(KEY);
+    if (raw) setState(JSON.parse(raw));
+  } catch (e) {}
+  const s = getState();
+  const allEmpty =
+    !s.pitchBet.trim() &&
+    !s.pitchMoat.trim() &&
+    !s.pitchMargin.trim() &&
+    !s.pitchContract.trim() &&
+    !s.pitchGuardrails.trim() &&
+    !s.pitchNarrative.trim();
+  if (allEmpty) seedFromModulesIfEmpty();
+  renderGlance();
+  renderReadiness();
+  updateWordCount();
+}
+
+function resetAll() {
+  localStorage.removeItem(KEY);
+  ['pitchBet', 'pitchMoat', 'pitchMargin', 'pitchContract', 'pitchGuardrails', 'pitchNarrative'].forEach(k => { $(k).value = ''; });
+  seedFromModulesIfEmpty();
+  renderGlance();
+  renderReadiness();
+  updateWordCount();
+  showToast('Reset');
+}
+
+function getExportText() {
+  const s = getState();
+  return `Pitch Assembler — Module 6
+
+## Strategy at a glance
+${glancePlainText()}
+
+## The Bet
+${s.pitchBet}
+
+## The Moat
+${s.pitchMoat}
+
+## The Margin
+${s.pitchMargin}
+
+## The Contract
+${s.pitchContract}
+
+## The Guardrails
+${s.pitchGuardrails}
+
+## Pitch narrative
+${s.pitchNarrative}
+`;
+}
+
+function copyToClipboard() {
+  navigator.clipboard.writeText(getExportText()).then(() => showToast('Copied to clipboard'));
+}
+
+function exportMarkdown() {
+  const blob = new Blob([getExportText()], { type: 'text/markdown' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'pitch-assembler.md';
+  a.click();
+  URL.revokeObjectURL(a.href);
+  showToast('Downloaded');
+}
+
+function showToast(msg) {
+  const t = $('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 1800);
+}
+
+['pitchBet', 'pitchMoat', 'pitchMargin', 'pitchContract', 'pitchGuardrails', 'pitchNarrative'].forEach(id => {
+  $(id).addEventListener('input', () => {
+    scheduleSave();
+    if (id === 'pitchNarrative') updateWordCount();
+  });
+});
+
+load();
+</script>
+</body>
+</html>

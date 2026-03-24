@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>M3 — Margin Calculator</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+  :root {
+    --bg: #0b0b10; --surface: #13131a; --surface2: #1a1a24;
+    --border: #252535; --border-hi: #35354a;
+    --text: #e0e0f0; --text-dim: #7a7a9a; --text-muted: #55556a;
+    --blue: #5b8def; --green: #3dd68c; --yellow: #f0c040; --red: #ef5b5b; --purple: #a07be8;
+    --blue-bg: rgba(91,141,239,0.08); --green-bg: rgba(61,214,140,0.08);
+    --yellow-bg: rgba(240,192,64,0.08); --red-bg: rgba(239,91,91,0.08);
+    --radius: 10px; --radius-lg: 14px;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', -apple-system, sans-serif;
+    background: var(--bg); color: var(--text);
+    min-height: 100vh; padding: 40px 20px 80px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page { max-width: 720px; margin: 0 auto; }
+
+  .header { text-align: center; margin-bottom: 36px; }
+  .badge {
+    display: inline-block; font-size: 10px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.12em;
+    color: var(--green); background: var(--green-bg);
+    border: 1px solid rgba(61,214,140,0.15);
+    padding: 5px 14px; border-radius: 20px; margin-bottom: 14px;
+  }
+  .header h1 {
+    font-size: 30px; font-weight: 800; color: #fff;
+    margin-bottom: 8px; letter-spacing: -0.02em;
+  }
+  .header p { font-size: 14px; color: var(--text-dim); line-height: 1.6; max-width: 540px; margin: 0 auto; }
+
+  .card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-lg); margin-bottom: 20px;
+    overflow: hidden; transition: border-color 0.2s;
+  }
+  .card:hover { border-color: var(--border-hi); }
+
+  .card-head {
+    padding: 18px 24px; display: flex; align-items: center; gap: 14px;
+    border-bottom: 1px solid var(--border);
+  }
+  .card-icon {
+    width: 32px; height: 32px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 800; color: #fff; flex-shrink: 0;
+  }
+  .card-title { font-size: 16px; font-weight: 700; color: #fff; }
+  .card-sub { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+  .card-body { padding: 20px 24px 24px; }
+
+  .input-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .input-grid.three { grid-template-columns: 1fr 1fr 1fr; }
+
+  .field label {
+    display: block; font-size: 11px; font-weight: 600;
+    color: var(--text-dim); text-transform: uppercase;
+    letter-spacing: 0.06em; margin-bottom: 6px;
+  }
+  .field input, .field select {
+    width: 100%; font-family: 'JetBrains Mono', monospace;
+    font-size: 15px; font-weight: 500; color: #fff;
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 8px; padding: 10px 14px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+  }
+  .field input:focus, .field select:focus {
+    border-color: var(--blue); box-shadow: 0 0 0 3px rgba(91,141,239,0.12);
+  }
+  .field input::placeholder { color: var(--text-muted); }
+  .field .unit { font-size: 11px; color: var(--text-muted); margin-top: 4px; }
+
+  .results {
+    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px;
+    margin-top: 20px;
+  }
+  .result-box {
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 16px; text-align: center;
+    transition: border-color 0.3s, background 0.3s;
+  }
+  .result-box .rb-label {
+    font-size: 10px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.08em; color: var(--text-muted); margin-bottom: 6px;
+  }
+  .result-box .rb-value {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 26px; font-weight: 700; color: #fff;
+    transition: color 0.3s;
+  }
+  .result-box .rb-sub {
+    font-size: 11px; color: var(--text-dim); margin-top: 4px;
+  }
+
+  .result-box.healthy { border-color: rgba(61,214,140,0.25); background: var(--green-bg); }
+  .result-box.healthy .rb-value { color: var(--green); }
+  .result-box.warning { border-color: rgba(240,192,64,0.25); background: var(--yellow-bg); }
+  .result-box.warning .rb-value { color: var(--yellow); }
+  .result-box.danger { border-color: rgba(239,91,91,0.25); background: var(--red-bg); }
+  .result-box.danger .rb-value { color: var(--red); }
+
+  .stress-header {
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 16px;
+  }
+  .stress-header h3 { font-size: 14px; font-weight: 700; color: var(--red); }
+  .stress-header .line { flex: 1; height: 1px; background: rgba(239,91,91,0.2); }
+
+  .stress-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .stress-card {
+    background: var(--red-bg); border: 1px solid rgba(239,91,91,0.15);
+    border-radius: var(--radius); padding: 16px;
+  }
+  .stress-card .sc-label {
+    font-size: 11px; font-weight: 700; color: var(--red);
+    text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px;
+  }
+  .stress-card .sc-value {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 22px; font-weight: 700; color: #fff;
+  }
+  .stress-card .sc-sub { font-size: 11px; color: var(--text-dim); margin-top: 4px; }
+
+  .verdict {
+    margin-top: 20px; padding: 16px 20px;
+    border-radius: var(--radius); text-align: center;
+    font-size: 14px; font-weight: 600;
+    transition: all 0.3s;
+  }
+  .verdict.healthy { background: var(--green-bg); border: 1px solid rgba(61,214,140,0.2); color: var(--green); }
+  .verdict.warning { background: var(--yellow-bg); border: 1px solid rgba(240,192,64,0.2); color: var(--yellow); }
+  .verdict.danger { background: var(--red-bg); border: 1px solid rgba(239,91,91,0.2); color: var(--red); }
+
+  .actions {
+    display: flex; gap: 10px; margin-top: 24px; justify-content: center;
+  }
+  .btn {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px; font-weight: 600;
+    padding: 10px 20px; border-radius: 8px;
+    border: 1px solid var(--border); background: var(--surface2);
+    color: var(--text); cursor: pointer;
+    transition: all 0.2s; display: flex; align-items: center; gap: 6px;
+  }
+  .btn:hover { border-color: var(--blue); color: #fff; }
+  .btn.primary { background: var(--blue); border-color: var(--blue); color: #fff; }
+  .btn.primary:hover { background: #4a7de0; }
+
+  .tip {
+    margin-top: 14px; padding: 12px 16px;
+    background: var(--blue-bg); border: 1px solid rgba(91,141,239,0.12);
+    border-radius: var(--radius); font-size: 12px; color: var(--text-dim); line-height: 1.5;
+  }
+  .tip strong { color: var(--blue); }
+
+  .saved-toast {
+    position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(60px);
+    background: var(--green); color: #000; font-size: 13px; font-weight: 600;
+    padding: 10px 24px; border-radius: 8px;
+    opacity: 0; transition: all 0.3s; pointer-events: none; z-index: 100;
+  }
+  .saved-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  .benchmark-row {
+    display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap;
+  }
+  .benchmark-chip {
+    font-size: 11px; font-weight: 600; padding: 5px 12px;
+    border-radius: 6px; cursor: pointer; transition: all 0.2s;
+    border: 1px solid var(--border); background: var(--surface2); color: var(--text-dim);
+  }
+  .benchmark-chip:hover { border-color: var(--blue); color: var(--blue); }
+
+  @media (max-width: 600px) {
+    .input-grid, .input-grid.three, .results, .stress-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+  <div class="header">
+    <div class="badge">Module 3 — The Margin</div>
+    <h1>Margin Calculator</h1>
+    <p>Know your AI unit economics before the CFO does. Input your numbers, stress-test at 3x, and export your margin model.</p>
+  </div>
+
+  <!-- INPUTS -->
+  <div class="card">
+    <div class="card-head">
+      <div class="card-icon" style="background:var(--blue);">1</div>
+      <div><div class="card-title">Your Numbers</div><div class="card-sub">Current AI product economics</div></div>
+    </div>
+    <div class="card-body">
+      <div class="input-grid">
+        <div class="field">
+          <label>Avg AI requests / user / month</label>
+          <input type="number" id="requests" placeholder="e.g. 500" min="0">
+        </div>
+        <div class="field">
+          <label>Blended cost per request</label>
+          <input type="number" id="costPerReq" placeholder="e.g. 0.03" min="0" step="0.001">
+          <div class="unit">$ — include tokens + infra overhead</div>
+        </div>
+        <div class="field">
+          <label>Revenue per user / month</label>
+          <input type="number" id="revenue" placeholder="e.g. 80" min="0" step="0.01">
+          <div class="unit">$ — what you charge today</div>
+        </div>
+        <div class="field">
+          <label>Non-AI COGS / user / month</label>
+          <input type="number" id="otherCogs" placeholder="e.g. 5" min="0" step="0.01">
+          <div class="unit">$ — hosting, support, etc.</div>
+        </div>
+      </div>
+      <div class="benchmark-row">
+        <span style="font-size:11px;color:var(--text-muted);line-height:28px;">Quick fill:</span>
+        <div class="benchmark-chip" onclick="fillBenchmark('saas')">Typical SaaS + AI</div>
+        <div class="benchmark-chip" onclick="fillBenchmark('heavy')">Heavy AI Product</div>
+        <div class="benchmark-chip" onclick="fillBenchmark('copilot')">Copilot-Style</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="card" id="resultsCard" style="display:none;">
+    <div class="card-head">
+      <div class="card-icon" style="background:var(--green);">2</div>
+      <div><div class="card-title">Current Margin</div><div class="card-sub">Based on your inputs</div></div>
+    </div>
+    <div class="card-body">
+      <div class="results">
+        <div class="result-box" id="rbCogs">
+          <div class="rb-label">AI COGS / user</div>
+          <div class="rb-value" id="valCogs">—</div>
+          <div class="rb-sub">per month</div>
+        </div>
+        <div class="result-box" id="rbTotalCogs">
+          <div class="rb-label">Total COGS / user</div>
+          <div class="rb-value" id="valTotalCogs">—</div>
+          <div class="rb-sub">AI + other</div>
+        </div>
+        <div class="result-box" id="rbMargin">
+          <div class="rb-label">Gross Margin</div>
+          <div class="rb-value" id="valMargin">—</div>
+          <div class="rb-sub" id="valMarginAbs"></div>
+        </div>
+      </div>
+      <div class="verdict" id="verdict"></div>
+    </div>
+  </div>
+
+  <!-- STRESS TEST -->
+  <div class="card" id="stressCard" style="display:none;">
+    <div class="card-head">
+      <div class="card-icon" style="background:var(--red);">3</div>
+      <div><div class="card-title">Stress Test</div><div class="card-sub">What if costs spike or power users surge?</div></div>
+    </div>
+    <div class="card-body">
+      <div class="stress-grid">
+        <div>
+          <div class="stress-header"><h3>3x Cost Shock</h3><div class="line"></div></div>
+          <div class="stress-card">
+            <div class="sc-label">AI COGS / user</div>
+            <div class="sc-value" id="stress3xCogs">—</div>
+          </div>
+          <div class="stress-card" style="margin-top:10px;">
+            <div class="sc-label">Gross Margin</div>
+            <div class="sc-value" id="stress3xMargin">—</div>
+            <div class="sc-sub" id="stress3xAbs"></div>
+          </div>
+        </div>
+        <div>
+          <div class="stress-header"><h3>2x Heavy Users</h3><div class="line"></div></div>
+          <div class="stress-card">
+            <div class="sc-label">AI COGS / user</div>
+            <div class="sc-value" id="stress2xCogs">—</div>
+          </div>
+          <div class="stress-card" style="margin-top:10px;">
+            <div class="sc-label">Gross Margin</div>
+            <div class="sc-value" id="stress2xMargin">—</div>
+            <div class="sc-sub" id="stress2xAbs"></div>
+          </div>
+        </div>
+      </div>
+      <div class="verdict" id="stressVerdict" style="margin-top:16px;"></div>
+      <div class="tip">
+        <strong>Why stress-test?</strong> OpenAI has cut prices repeatedly — but providers can also raise them. Your model must survive both directions. If 3x breaks you, that's a finding, not a failure.
+      </div>
+    </div>
+  </div>
+
+  <!-- ACTIONS -->
+  <div class="actions">
+    <button class="btn" onclick="resetAll()">Reset</button>
+    <button class="btn" onclick="copyToClipboard()">Copy as Text</button>
+    <button class="btn primary" onclick="exportMarkdown()">Export Markdown</button>
+  </div>
+</div>
+
+<div class="saved-toast" id="toast">Saved</div>
+
+<script>
+const KEY = 'aps-m3-margin';
+const $ = id => document.getElementById(id);
+const inputs = ['requests','costPerReq','revenue','otherCogs'];
+
+function getVals() {
+  return {
+    requests: parseFloat($('requests').value) || 0,
+    costPerReq: parseFloat($('costPerReq').value) || 0,
+    revenue: parseFloat($('revenue').value) || 0,
+    otherCogs: parseFloat($('otherCogs').value) || 0
+  };
+}
+
+function calc() {
+  const v = getVals();
+  const hasInput = v.requests > 0 && v.costPerReq > 0 && v.revenue > 0;
+  $('resultsCard').style.display = hasInput ? '' : 'none';
+  $('stressCard').style.display = hasInput ? '' : 'none';
+  if (!hasInput) return;
+
+  const aiCogs = v.requests * v.costPerReq;
+  const totalCogs = aiCogs + v.otherCogs;
+  const grossProfit = v.revenue - totalCogs;
+  const margin = (grossProfit / v.revenue) * 100;
+
+  $('valCogs').textContent = '$' + aiCogs.toFixed(2);
+  $('valTotalCogs').textContent = '$' + totalCogs.toFixed(2);
+  $('valMargin').textContent = margin.toFixed(1) + '%';
+  $('valMarginAbs').textContent = '$' + grossProfit.toFixed(2) + '/user';
+
+  const cls = margin >= 60 ? 'healthy' : margin >= 40 ? 'warning' : 'danger';
+  ['rbCogs','rbTotalCogs','rbMargin'].forEach(id => {
+    $(id).className = 'result-box ' + (id === 'rbMargin' ? cls : '');
+  });
+
+  const msgs = {
+    healthy: 'Healthy margins. You have room to invest in model quality and still stay profitable.',
+    warning: 'Caution zone. Workable, but one cost spike and you are underwater. Build routing + cascading.',
+    danger: 'Danger. You are burning cash on every user. Fix architecture or pricing before you scale.'
+  };
+  $('verdict').className = 'verdict ' + cls;
+  $('verdict').textContent = msgs[cls];
+
+  // Stress: 3x cost
+  const ai3x = aiCogs * 3;
+  const total3x = ai3x + v.otherCogs;
+  const gp3x = v.revenue - total3x;
+  const m3x = (gp3x / v.revenue) * 100;
+  $('stress3xCogs').textContent = '$' + ai3x.toFixed(2);
+  $('stress3xMargin').textContent = m3x.toFixed(1) + '%';
+  $('stress3xAbs').textContent = '$' + gp3x.toFixed(2) + '/user';
+
+  // Stress: 2x usage
+  const ai2x = aiCogs * 2;
+  const total2x = ai2x + v.otherCogs;
+  const gp2x = v.revenue - total2x;
+  const m2x = (gp2x / v.revenue) * 100;
+  $('stress2xCogs').textContent = '$' + ai2x.toFixed(2);
+  $('stress2xMargin').textContent = m2x.toFixed(1) + '%';
+  $('stress2xAbs').textContent = '$' + gp2x.toFixed(2) + '/user';
+
+  const worst = Math.min(m3x, m2x);
+  const scls = worst >= 40 ? 'warning' : 'danger';
+  const smsgs = {
+    warning: 'You survive the stress test, but margins are thin. Prioritize model cascading.',
+    danger: 'You go negative under stress. This is a board-level risk. Act this quarter.'
+  };
+  if (worst >= 60) {
+    $('stressVerdict').className = 'verdict healthy';
+    $('stressVerdict').textContent = 'You survive both stress scenarios with healthy margins.';
+  } else {
+    $('stressVerdict').className = 'verdict ' + scls;
+    $('stressVerdict').textContent = smsgs[scls];
+  }
+
+  save();
+}
+
+function save() {
+  const v = getVals();
+  localStorage.setItem(KEY, JSON.stringify(v));
+  showToast('Auto-saved');
+}
+
+function load() {
+  try {
+    const d = JSON.parse(localStorage.getItem(KEY));
+    if (d) {
+      inputs.forEach(k => { if (d[k] !== undefined) $(k).value = d[k] || ''; });
+      calc();
+    }
+  } catch(e) {}
+}
+
+function fillBenchmark(type) {
+  const benchmarks = {
+    saas:   { requests: 500,  costPerReq: 0.02,  revenue: 80,  otherCogs: 5 },
+    heavy:  { requests: 2000, costPerReq: 0.04,  revenue: 120, otherCogs: 8 },
+    copilot:{ requests: 3000, costPerReq: 0.015, revenue: 19,  otherCogs: 2 }
+  };
+  const b = benchmarks[type];
+  inputs.forEach(k => $(k).value = b[k]);
+  calc();
+}
+
+function resetAll() {
+  inputs.forEach(k => $(k).value = '');
+  $('resultsCard').style.display = 'none';
+  $('stressCard').style.display = 'none';
+  localStorage.removeItem(KEY);
+  showToast('Reset');
+}
+
+function getExportText() {
+  const v = getVals();
+  const aiCogs = v.requests * v.costPerReq;
+  const totalCogs = aiCogs + v.otherCogs;
+  const gp = v.revenue - totalCogs;
+  const margin = v.revenue > 0 ? ((gp / v.revenue) * 100).toFixed(1) : '0';
+  const ai3x = aiCogs * 3; const t3x = ai3x + v.otherCogs; const gp3x = v.revenue - t3x;
+  const m3x = v.revenue > 0 ? ((gp3x / v.revenue) * 100).toFixed(1) : '0';
+  const ai2x = aiCogs * 2; const t2x = ai2x + v.otherCogs; const gp2x = v.revenue - t2x;
+  const m2x = v.revenue > 0 ? ((gp2x / v.revenue) * 100).toFixed(1) : '0';
+
+  return `# Margin Calculator — Module 3
+
+## Inputs
+- Avg requests/user/month: ${v.requests}
+- Blended cost/request: $${v.costPerReq}
+- Revenue/user/month: $${v.revenue}
+- Non-AI COGS/user/month: $${v.otherCogs}
+
+## Current Margin
+- AI COGS/user: $${aiCogs.toFixed(2)}
+- Total COGS/user: $${totalCogs.toFixed(2)}
+- Gross margin: ${margin}% ($${gp.toFixed(2)}/user)
+
+## Stress Test
+| Scenario | AI COGS | Margin |
+|----------|---------|--------|
+| 3x Cost  | $${ai3x.toFixed(2)} | ${m3x}% ($${gp3x.toFixed(2)}) |
+| 2x Usage | $${ai2x.toFixed(2)} | ${m2x}% ($${gp2x.toFixed(2)}) |
+`;
+}
+
+function copyToClipboard() {
+  navigator.clipboard.writeText(getExportText()).then(() => showToast('Copied to clipboard'));
+}
+
+function exportMarkdown() {
+  const blob = new Blob([getExportText()], { type: 'text/markdown' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'margin-calculator.md';
+  a.click();
+  showToast('Downloaded');
+}
+
+function showToast(msg) {
+  const t = $('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 1800);
+}
+
+inputs.forEach(k => $(k).addEventListener('input', calc));
+load();
+</script>
+</body>
+</html>

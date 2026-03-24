@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>M2 — Kill Switch Audit</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+  :root {
+    --bg: #0b0b10; --surface: #13131a; --surface2: #1a1a24;
+    --border: #252535; --border-hi: #35354a;
+    --text: #e0e0f0; --text-dim: #7a7a9a; --text-muted: #55556a;
+    --blue: #5b8def; --green: #3dd68c; --yellow: #f0c040; --red: #ef5b5b; --purple: #a07be8;
+    --blue-bg: rgba(91,141,239,0.08); --green-bg: rgba(61,214,140,0.08);
+    --yellow-bg: rgba(240,192,64,0.08); --red-bg: rgba(239,91,91,0.08);
+    --orange: #e8944a;
+    --orange-bg: rgba(232,148,74,0.1);
+    --radius: 10px; --radius-lg: 14px;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', -apple-system, sans-serif;
+    background: var(--bg); color: var(--text);
+    min-height: 100vh; padding: 40px 20px 80px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page { max-width: 720px; margin: 0 auto; }
+
+  .header { text-align: center; margin-bottom: 36px; }
+  .badge {
+    display: inline-block; font-size: 10px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.12em;
+    color: var(--green); background: var(--green-bg);
+    border: 1px solid rgba(61,214,140,0.15);
+    padding: 5px 14px; border-radius: 20px; margin-bottom: 14px;
+  }
+  .header h1 {
+    font-size: 30px; font-weight: 800; color: #fff;
+    margin-bottom: 8px; letter-spacing: -0.02em;
+  }
+  .header p { font-size: 14px; color: var(--text-dim); line-height: 1.6; max-width: 540px; margin: 0 auto; }
+
+  .panels { display: flex; flex-direction: column; gap: 20px; }
+
+  .card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden; transition: border-color 0.2s;
+  }
+  .card:hover { border-color: var(--border-hi); }
+
+  .card-head {
+    padding: 18px 24px; display: flex; align-items: center; gap: 14px;
+    border-bottom: 1px solid var(--border);
+  }
+  .card-icon {
+    width: 32px; height: 32px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 800; color: #fff; flex-shrink: 0;
+  }
+  .card-title { font-size: 16px; font-weight: 700; color: #fff; }
+  .card-sub { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+  .card-body { padding: 20px 24px 24px; }
+
+  .field { margin-bottom: 16px; }
+  .field:last-child { margin-bottom: 0; }
+  .field label {
+    display: block; font-size: 11px; font-weight: 600;
+    color: var(--text-dim); text-transform: uppercase;
+    letter-spacing: 0.06em; margin-bottom: 6px;
+  }
+  .field input, .field select, .field textarea {
+    width: 100%; font-family: 'JetBrains Mono', monospace;
+    font-size: 14px; font-weight: 500; color: #fff;
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 8px; padding: 10px 14px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+  }
+  .field textarea {
+    min-height: 100px; resize: vertical; line-height: 1.5;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+  }
+  .field input:focus, .field select:focus, .field textarea:focus {
+    border-color: var(--blue); box-shadow: 0 0 0 3px rgba(91,141,239,0.12);
+  }
+  .field input::placeholder, .field textarea::placeholder { color: var(--text-muted); }
+
+  .q-label {
+    font-size: 13px; font-weight: 600; color: #fff;
+    margin-bottom: 8px; line-height: 1.45;
+  }
+
+  .risk-row {
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    flex-wrap: wrap; margin-top: 18px; padding-top: 18px;
+    border-top: 1px solid var(--border);
+  }
+  .risk-row .rl { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); }
+  .risk-pill {
+    font-size: 12px; font-weight: 700; padding: 8px 14px; border-radius: 8px;
+    border: 1px solid transparent; font-family: 'JetBrains Mono', monospace;
+  }
+  .risk-pill.high { background: var(--red-bg); border-color: rgba(239,91,91,0.3); color: var(--red); }
+  .risk-pill.medhi { background: linear-gradient(135deg, var(--red-bg), var(--yellow-bg)); border-color: rgba(240,192,64,0.25); color: var(--orange); }
+  .risk-pill.med { background: var(--yellow-bg); border-color: rgba(240,192,64,0.25); color: var(--yellow); }
+  .risk-pill.low { background: var(--green-bg); border-color: rgba(61,214,140,0.25); color: var(--green); }
+  .risk-pill.neutral { background: var(--surface2); border-color: var(--border); color: var(--text-muted); }
+
+  .carry-forward {
+    margin-top: 24px; padding: 14px 18px;
+    background: var(--blue-bg); border: 1px solid rgba(91,141,239,0.12);
+    border-radius: var(--radius); font-size: 13px; color: var(--text-dim); line-height: 1.55; text-align: center;
+  }
+  .carry-forward strong { color: var(--blue); }
+
+  .actions {
+    display: flex; gap: 10px; margin-top: 24px; justify-content: center; flex-wrap: wrap;
+  }
+  .btn {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px; font-weight: 600;
+    padding: 10px 20px; border-radius: 8px;
+    border: 1px solid var(--border); background: var(--surface2);
+    color: var(--text); cursor: pointer;
+    transition: all 0.2s; display: flex; align-items: center; gap: 6px;
+  }
+  .btn:hover { border-color: var(--blue); color: #fff; }
+  .btn.primary { background: var(--blue); border-color: var(--blue); color: #fff; }
+  .btn.primary:hover { background: #4a7de0; }
+
+  .saved-toast {
+    position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(60px);
+    background: var(--green); color: #000; font-size: 13px; font-weight: 600;
+    padding: 10px 24px; border-radius: 8px;
+    opacity: 0; transition: all 0.3s; pointer-events: none; z-index: 100;
+  }
+  .saved-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+</style>
+</head>
+<body>
+
+<div class="page">
+  <div class="header">
+    <div class="badge">Module 2 — The Moat</div>
+    <h1>Kill Switch Audit</h1>
+    <p>Can you swap AI providers in 48 hours? Audit your vendor dependency.</p>
+  </div>
+
+  <div class="panels">
+    <div class="card">
+      <div class="card-head">
+        <div class="card-icon" style="background:var(--blue);">1</div>
+        <div>
+          <div class="card-title">Current Setup</div>
+          <div class="card-sub">Baseline your integration and realistic switch time</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="field">
+          <label for="provider">Primary AI provider</label>
+          <select id="provider">
+            <option value="">— Select —</option>
+            <option>OpenAI</option>
+            <option>Anthropic</option>
+            <option>Google</option>
+            <option>AWS Bedrock</option>
+            <option>Azure</option>
+            <option>Cohere</option>
+            <option>Open Source</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="integration">Integration depth</label>
+          <select id="integration">
+            <option value="">— Select —</option>
+            <option value="direct">Direct API calls</option>
+            <option value="thin">Thin wrapper</option>
+            <option value="abstract">Abstraction layer</option>
+            <option value="multi">Multi-provider routing</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="switchTime">How long to switch providers today?</label>
+          <input type="text" id="switchTime" placeholder="e.g. 3 months" autocomplete="off">
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <div class="card-icon" style="background:var(--red);">2</div>
+        <div>
+          <div class="card-title">Stress Test</div>
+          <div class="card-sub">Price and policy shocks</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="field">
+          <div class="q-label">If your provider doubles pricing tomorrow, what breaks?</div>
+          <textarea id="pricingStress" placeholder="e.g. Our margin on power users goes negative; we'd need to cap usage or raise prices within 30 days."></textarea>
+        </div>
+        <div class="field">
+          <div class="q-label">If your provider changes ToS to restrict your use case, what's your plan?</div>
+          <textarea id="tosStress" placeholder="e.g. Fallback to on-prem open weights + legal review of training data lineage; 6-week runway to migrate prompts."></textarea>
+        </div>
+        <div class="risk-row">
+          <span class="rl">Auto-assessment (from integration depth)</span>
+          <span class="risk-pill med" id="riskPill">—</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <div class="card-icon" style="background:var(--green);">3</div>
+        <div>
+          <div class="card-title">Three Actions</div>
+          <div class="card-sub">Commit to de-risking steps</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="field">
+          <label for="actWeek">This week:</label>
+          <input type="text" id="actWeek" placeholder="e.g. Document all direct SDK calls and secret rotation steps" autocomplete="off">
+        </div>
+        <div class="field">
+          <label for="actMonth">This month:</label>
+          <input type="text" id="actMonth" placeholder="e.g. Spike a second provider behind the same interface" autocomplete="off">
+        </div>
+        <div class="field">
+          <label for="actQuarter">This quarter:</label>
+          <input type="text" id="actQuarter" placeholder="e.g. Run a full provider failover drill in staging" autocomplete="off">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p class="carry-forward">This carries forward to <strong>M3 (Margin Calculator)</strong> and <strong>M4 (Contract evaluation)</strong>.</p>
+
+  <div class="actions">
+    <button type="button" class="btn" onclick="resetAll()">Reset</button>
+    <button type="button" class="btn" onclick="copyToClipboard()">Copy as Text</button>
+    <button type="button" class="btn primary" onclick="exportMarkdown()">Export Markdown</button>
+  </div>
+</div>
+
+<div class="saved-toast" id="toast">Saved</div>
+
+<script>
+const KEY = 'aps-m2-killswitch';
+const $ = id => document.getElementById(id);
+
+const FIELDS = ['provider','integration','switchTime','pricingStress','tosStress','actWeek','actMonth','actQuarter'];
+
+function getData() {
+  return {
+    provider: $('provider').value,
+    integration: $('integration').value,
+    switchTime: $('switchTime').value.trim(),
+    pricingStress: $('pricingStress').value.trim(),
+    tosStress: $('tosStress').value.trim(),
+    actWeek: $('actWeek').value.trim(),
+    actMonth: $('actMonth').value.trim(),
+    actQuarter: $('actQuarter').value.trim()
+  };
+}
+
+const RISK_MAP = {
+  direct: { cls: 'high', label: 'High risk' },
+  thin: { cls: 'medhi', label: 'Medium-high risk' },
+  abstract: { cls: 'med', label: 'Medium risk' },
+  multi: { cls: 'low', label: 'Low risk' }
+};
+
+function updateRisk() {
+  const v = $('integration').value;
+  const pill = $('riskPill');
+  if (!v || !RISK_MAP[v]) {
+    pill.className = 'risk-pill neutral';
+    pill.textContent = '—';
+    return;
+  }
+  const r = RISK_MAP[v];
+  pill.className = 'risk-pill ' + r.cls;
+  pill.textContent = r.label;
+}
+
+function save() {
+  localStorage.setItem(KEY, JSON.stringify(getData()));
+  showToast('Auto-saved');
+}
+
+function load() {
+  try {
+    const d = JSON.parse(localStorage.getItem(KEY));
+    if (!d) return;
+    FIELDS.forEach(k => {
+      const el = $(k);
+      if (el && d[k] !== undefined && d[k] !== null) el.value = d[k];
+    });
+    updateRisk();
+  } catch (e) {}
+}
+
+function resetAll() {
+  FIELDS.forEach(k => { const el = $(k); if (el) el.value = ''; });
+  localStorage.removeItem(KEY);
+  updateRisk();
+  showToast('Reset');
+}
+
+function integrationLabel(val) {
+  const labels = {
+    direct: 'Direct API calls',
+    thin: 'Thin wrapper',
+    abstract: 'Abstraction layer',
+    multi: 'Multi-provider routing'
+  };
+  return labels[val] || val || '—';
+}
+
+function getExportText(asMarkdown) {
+  const d = getData();
+  const risk = d.integration && RISK_MAP[d.integration] ? RISK_MAP[d.integration].label : '—';
+  const lines = [];
+  if (asMarkdown) {
+    lines.push('# Kill Switch Audit — Module 2');
+    lines.push('');
+    lines.push('## Current setup');
+    lines.push(`- Primary provider: ${d.provider || '—'}`);
+    lines.push(`- Integration depth: ${integrationLabel(d.integration)}`);
+    lines.push(`- Time to switch today: ${d.switchTime || '—'}`);
+    lines.push('');
+    lines.push('## Stress test');
+    lines.push(`- If pricing doubles: ${d.pricingStress || '—'}`);
+    lines.push(`- If ToS restricts use case: ${d.tosStress || '—'}`);
+    lines.push(`- **Risk level:** ${risk}`);
+    lines.push('');
+    lines.push('## Three actions');
+    lines.push(`- This week: ${d.actWeek || '—'}`);
+    lines.push(`- This month: ${d.actMonth || '—'}`);
+    lines.push(`- This quarter: ${d.actQuarter || '—'}`);
+  } else {
+    lines.push('Kill Switch Audit — Module 2');
+    lines.push('');
+    lines.push('CURRENT SETUP');
+    lines.push(`Primary provider: ${d.provider || '—'}`);
+    lines.push(`Integration depth: ${integrationLabel(d.integration)}`);
+    lines.push(`Time to switch today: ${d.switchTime || '—'}`);
+    lines.push('');
+    lines.push('STRESS TEST');
+    lines.push(`If pricing doubles: ${d.pricingStress || '—'}`);
+    lines.push(`If ToS restricts use case: ${d.tosStress || '—'}`);
+    lines.push(`Risk level (from integration): ${risk}`);
+    lines.push('');
+    lines.push('THREE ACTIONS');
+    lines.push(`This week: ${d.actWeek || '—'}`);
+    lines.push(`This month: ${d.actMonth || '—'}`);
+    lines.push(`This quarter: ${d.actQuarter || '—'}`);
+  }
+  return lines.join('\n');
+}
+
+function copyToClipboard() {
+  navigator.clipboard.writeText(getExportText(false)).then(() => showToast('Copied to clipboard'));
+}
+
+function exportMarkdown() {
+  const blob = new Blob([getExportText(true)], { type: 'text/markdown' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'kill-switch-audit.md';
+  a.click();
+  showToast('Downloaded');
+}
+
+function showToast(msg) {
+  const t = $('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 1800);
+}
+
+['provider', 'integration'].forEach(k => {
+  const el = $(k);
+  if (el) el.addEventListener('change', () => { updateRisk(); save(); });
+});
+['switchTime', 'pricingStress', 'tosStress', 'actWeek', 'actMonth', 'actQuarter'].forEach(k => {
+  const el = $(k);
+  if (el) el.addEventListener('input', save);
+});
+
+load();
+updateRisk();
+</script>
+</body>
+</html>

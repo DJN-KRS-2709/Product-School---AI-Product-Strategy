@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>M3 — Pricing Strategy Designer</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+  :root {
+    --bg: #0b0b10; --surface: #13131a; --surface2: #1a1a24;
+    --border: #252535; --border-hi: #35354a;
+    --text: #e0e0f0; --text-dim: #7a7a9a; --text-muted: #55556a;
+    --blue: #5b8def; --green: #3dd68c; --yellow: #f0c040; --red: #ef5b5b; --purple: #a07be8;
+    --blue-bg: rgba(91,141,239,0.08); --green-bg: rgba(61,214,140,0.08);
+    --yellow-bg: rgba(240,192,64,0.08); --red-bg: rgba(239,91,91,0.08);
+    --radius: 10px; --radius-lg: 14px;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', -apple-system, sans-serif;
+    background: var(--bg); color: var(--text);
+    min-height: 100vh; padding: 40px 20px 80px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page { max-width: 720px; margin: 0 auto; }
+
+  .header { text-align: center; margin-bottom: 36px; }
+  .badge {
+    display: inline-block; font-size: 10px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.12em;
+    color: var(--green); background: var(--green-bg);
+    border: 1px solid rgba(61,214,140,0.15);
+    padding: 5px 14px; border-radius: 20px; margin-bottom: 14px;
+  }
+  .header h1 {
+    font-size: 30px; font-weight: 800; color: #fff;
+    margin-bottom: 8px; letter-spacing: -0.02em;
+  }
+  .header p { font-size: 14px; color: var(--text-dim); line-height: 1.6; max-width: 540px; margin: 0 auto; }
+
+  .card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-lg); margin-bottom: 20px;
+    overflow: hidden; transition: border-color 0.2s;
+  }
+  .card:hover { border-color: var(--border-hi); }
+
+  .card-head {
+    padding: 18px 24px; display: flex; align-items: center; gap: 14px;
+    border-bottom: 1px solid var(--border);
+  }
+  .card-icon {
+    width: 32px; height: 32px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 800; color: #fff; flex-shrink: 0;
+  }
+  .card-title { font-size: 16px; font-weight: 700; color: #fff; }
+  .card-sub { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+  .card-body { padding: 20px 24px 24px; }
+
+  .pick-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
+  }
+  .pick-card {
+    background: var(--surface2); border: 2px solid var(--border);
+    border-radius: var(--radius); padding: 14px 12px;
+    cursor: pointer; text-align: left;
+    transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+  }
+  .pick-card:hover { border-color: var(--border-hi); }
+  .pick-card.selected {
+    border-color: var(--blue);
+    background: var(--blue-bg);
+    box-shadow: 0 0 0 1px rgba(91,141,239,0.15);
+  }
+  .pick-card .emoji { font-size: 22px; line-height: 1; margin-bottom: 8px; }
+  .pick-card .name { font-size: 13px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+  .pick-card .desc { font-size: 11px; color: var(--text-dim); line-height: 1.45; margin-bottom: 8px; }
+  .pick-card .ex { font-size: 10px; color: var(--text-muted); font-style: italic; line-height: 1.4; }
+
+  .callout {
+    margin-top: 16px; padding: 12px 16px;
+    background: linear-gradient(135deg, rgba(160,123,232,0.12), rgba(91,141,239,0.08));
+    border: 1px solid rgba(160,123,232,0.2);
+    border-radius: var(--radius); font-size: 12px; color: var(--text-dim); line-height: 1.55;
+  }
+  .callout strong { color: var(--purple); }
+
+  .input-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .input-grid.single { grid-template-columns: 1fr; }
+
+  .field label {
+    display: block; font-size: 11px; font-weight: 600;
+    color: var(--text-dim); text-transform: uppercase;
+    letter-spacing: 0.06em; margin-bottom: 6px;
+  }
+  .field input {
+    width: 100%; font-family: 'JetBrains Mono', monospace;
+    font-size: 14px; font-weight: 500; color: #fff;
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 8px; padding: 10px 14px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+  }
+  .field input#leader, .field input#filler, .field input#killer {
+    font-family: 'DM Sans', sans-serif; font-size: 13px;
+  }
+  .field input:focus {
+    border-color: var(--blue); box-shadow: 0 0 0 3px rgba(91,141,239,0.12);
+  }
+  .field input::placeholder { color: var(--text-muted); }
+  .field .hint { font-size: 11px; color: var(--text-muted); margin-top: 4px; line-height: 1.4; }
+
+  .calc-row {
+    margin-top: 18px; padding: 16px 18px;
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: var(--radius);
+  }
+  .calc-row .label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin-bottom: 6px; }
+  .calc-row .value {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 24px; font-weight: 700; color: var(--green);
+  }
+  .calc-row .margin-note {
+    margin-top: 12px; font-size: 13px; color: var(--text-dim); line-height: 1.5;
+    padding-top: 12px; border-top: 1px solid var(--border);
+  }
+  .calc-row .margin-note strong { color: var(--blue); }
+
+  .tip {
+    margin-top: 14px; padding: 12px 16px;
+    background: var(--blue-bg); border: 1px solid rgba(91,141,239,0.12);
+    border-radius: var(--radius); font-size: 12px; color: var(--text-dim); line-height: 1.5;
+  }
+  .tip strong { color: var(--blue); }
+
+  .wtp-legend {
+    display: flex; flex-wrap: wrap; gap: 14px; margin-top: 14px; font-size: 11px; color: var(--text-dim);
+  }
+  .wtp-legend span { display: flex; align-items: center; gap: 6px; }
+  .wtp-legend i {
+    width: 12px; height: 12px; border-radius: 3px; display: inline-block;
+  }
+  .wtp-legend .lg { background: rgba(61,214,140,0.45); border: 1px solid var(--green); }
+  .wtp-legend .ly { background: rgba(240,192,64,0.35); border: 1px solid var(--yellow); }
+  .wtp-legend .lr { background: rgba(239,91,91,0.35); border: 1px solid var(--red); }
+  .wtp-legend .ln { background: var(--surface2); border: 1px solid var(--border); }
+
+  .spectrum-wrap { margin-top: 16px; }
+  .spectrum-svg {
+    width: 100%; height: 56px; display: block;
+    border-radius: 8px; overflow: hidden;
+    border: 1px solid var(--border);
+    background: var(--surface2);
+  }
+  .spectrum-labels {
+    display: flex; justify-content: space-between; flex-wrap: wrap;
+    gap: 8px; margin-top: 8px; font-size: 10px; color: var(--text-muted);
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .spectrum-placeholder {
+    font-size: 12px; color: var(--text-muted); text-align: center;
+    padding: 20px; border: 1px dashed var(--border); border-radius: var(--radius);
+  }
+
+  .footer-note {
+    text-align: center; font-size: 12px; color: var(--text-muted);
+    line-height: 1.6; max-width: 560px; margin: 28px auto 0;
+    padding: 0 8px;
+  }
+
+  .actions {
+    display: flex; gap: 10px; margin-top: 24px; justify-content: center; flex-wrap: wrap;
+  }
+  .btn {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px; font-weight: 600;
+    padding: 10px 20px; border-radius: 8px;
+    border: 1px solid var(--border); background: var(--surface2);
+    color: var(--text); cursor: pointer;
+    transition: all 0.2s; display: flex; align-items: center; gap: 6px;
+  }
+  .btn:hover { border-color: var(--blue); color: #fff; }
+  .btn.primary { background: var(--blue); border-color: var(--blue); color: #fff; }
+  .btn.primary:hover { background: #4a7de0; }
+
+  .saved-toast {
+    position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(60px);
+    background: var(--green); color: #000; font-size: 13px; font-weight: 600;
+    padding: 10px 24px; border-radius: 8px;
+    opacity: 0; transition: all 0.3s; pointer-events: none; z-index: 100;
+  }
+  .saved-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  @media (max-width: 640px) {
+    .pick-grid { grid-template-columns: 1fr; }
+    .input-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+  <div class="header">
+    <div class="badge">Module 3 — The Margin</div>
+    <h1>Pricing Strategy Designer</h1>
+    <p>Choose how you compete, how you charge, what you bundle — then sanity-check revenue against willingness to pay and your margin model.</p>
+  </div>
+
+  <!-- Card 1 -->
+  <div class="card">
+    <div class="card-head">
+      <div class="card-icon" style="background:var(--blue);">1</div>
+      <div><div class="card-title">Pick Your Strategy</div><div class="card-sub">One primary posture</div></div>
+    </div>
+    <div class="card-body">
+      <div class="pick-grid" id="strategyGrid">
+        <div class="pick-card" data-strategy="skim" role="button" tabindex="0">
+          <div class="emoji" aria-hidden="true">🍎</div>
+          <div class="name">Skim</div>
+          <div class="desc">Launch premium, lower over time. Signal quality.</div>
+          <div class="ex">e.g. Apple iPhone, Porsche Cayenne</div>
+        </div>
+        <div class="pick-card" data-strategy="penetrate" role="button" tabindex="0">
+          <div class="emoji" aria-hidden="true">🛒</div>
+          <div class="name">Penetrate</div>
+          <div class="desc">Price low, win volume, optimize costs relentlessly.</div>
+          <div class="ex">e.g. Amazon, AWS</div>
+        </div>
+        <div class="pick-card" data-strategy="maximize" role="button" tabindex="0">
+          <div class="emoji" aria-hidden="true">🪟</div>
+          <div class="name">Maximize</div>
+          <div class="desc">Neither extreme. Optimize revenue in your current position.</div>
+          <div class="ex">e.g. Microsoft, HubSpot</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card 2 -->
+  <div class="card">
+    <div class="card-head">
+      <div class="card-icon" style="background:var(--purple);">2</div>
+      <div><div class="card-title">How You Charge</div><div class="card-sub">Madhavan Ramanujam · Lenny's Podcast</div></div>
+    </div>
+    <div class="card-body">
+      <div class="pick-grid" id="modelGrid">
+        <div class="pick-card" data-model="seat" role="button" tabindex="0">
+          <div class="emoji" aria-hidden="true">👤</div>
+          <div class="name">Seat / Access</div>
+          <div class="desc">Per user, flat monthly. Human drives the tool.</div>
+          <div class="ex">e.g. Figma, Slack, Notion</div>
+        </div>
+        <div class="pick-card" data-model="hybrid" role="button" tabindex="0">
+          <div class="emoji" aria-hidden="true">⚡</div>
+          <div class="name">Hybrid (base + usage)</div>
+          <div class="desc">Platform fee + metered AI work.</div>
+          <div class="ex">e.g. HubSpot, Canva AI, Grammarly</div>
+        </div>
+        <div class="pick-card" data-model="outcome" role="button" tabindex="0">
+          <div class="emoji" aria-hidden="true">🎯</div>
+          <div class="name">Outcome / Resolution</div>
+          <div class="desc">Pay only when AI delivers the result.</div>
+          <div class="ex">e.g. Intercom Fin, Harvey</div>
+        </div>
+      </div>
+      <div class="callout">
+        <strong>Data callout:</strong> 59% of AI companies bundle into existing plan, 23% sell as add-on, 18% standalone — Palle Broe, 44 companies analyzed
+      </div>
+    </div>
+  </div>
+
+  <!-- Card 3 -->
+  <div class="card">
+    <div class="card-head">
+      <div class="card-icon" style="background:var(--yellow); color:#111;">3</div>
+      <div><div class="card-title">Leaders, Fillers &amp; Killers</div><div class="card-sub">Bundling logic</div></div>
+    </div>
+    <div class="card-body">
+      <div class="input-grid single">
+        <div class="field">
+          <label>Leader</label>
+          <textarea id="leader" placeholder="e.g. AI code completion" rows="2"></textarea>
+          <div class="hint">What's the must-have AI feature users come for?</div>
+        </div>
+        <div class="field" style="margin-top:4px;">
+          <label>Filler</label>
+          <textarea id="filler" placeholder="e.g. AI summaries, translations" rows="2"></textarea>
+          <div class="hint">What AI feature bumps ARPU with marginal cost?</div>
+        </div>
+        <div class="field" style="margin-top:4px;">
+          <label>Killer</label>
+          <textarea id="killer" placeholder="e.g. AI image generation" rows="2"></textarea>
+          <div class="hint">What would kill the bundle if included? → Sell as add-on</div>
+        </div>
+      </div>
+      <div class="tip">
+        <strong>70% rule:</strong> If &gt;70% of users use the AI feature, bundle it. &lt;70% but high-value → add-on.
+      </div>
+    </div>
+  </div>
+
+  <!-- Card 4 -->
+  <div class="card">
+    <div class="card-head">
+      <div class="card-icon" style="background:var(--green);">4</div>
+      <div><div class="card-title">Price Your Product</div><div class="card-sub">Estimated revenue per user</div></div>
+    </div>
+    <div class="card-body">
+      <div class="input-grid">
+        <div class="field">
+          <label>Base fee ($/month)</label>
+          <input type="number" id="baseFee" placeholder="e.g. 29" min="0" step="0.01">
+        </div>
+        <div class="field">
+          <label>Price per unit ($)</label>
+          <input type="number" id="pricePerUnit" placeholder="e.g. 0.50" min="0" step="0.001">
+        </div>
+        <div class="field" style="grid-column:1/-1;">
+          <label>Unit of work you're metering</label>
+          <input type="text" id="unitLabel" placeholder="e.g. resolved conversations, documents processed">
+        </div>
+        <div class="field">
+          <label>Estimated units per user / month</label>
+          <input type="number" id="unitsPerUser" placeholder="e.g. 120" min="0" step="1">
+        </div>
+      </div>
+      <div class="calc-row">
+        <div class="label">Estimated revenue per user / month</div>
+        <div class="value" id="revPerUser">$0.00</div>
+        <div class="margin-note" id="marginCompare" style="display:none;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card 5 -->
+  <div class="card">
+    <div class="card-head">
+      <div class="card-icon" style="background:var(--red);">5</div>
+      <div><div class="card-title">WTP Quick-Check</div><div class="card-sub">Willingness to pay (Madhavan)</div></div>
+    </div>
+    <div class="card-body">
+      <div class="input-grid">
+        <div class="field">
+          <label>Acceptable price</label>
+          <input type="number" id="wtpOk" placeholder="$ feels fair" min="0" step="0.01">
+          <div class="hint">What price would customers consider acceptable?</div>
+        </div>
+        <div class="field">
+          <label>Expensive but they'd pay</label>
+          <input type="number" id="wtpHigh" placeholder="$ stretch" min="0" step="0.01">
+          <div class="hint">What price would feel expensive but they'd still pay?</div>
+        </div>
+        <div class="field" style="grid-column:1/-1;">
+          <label>Prohibitively expensive</label>
+          <input type="number" id="wtpNo" placeholder="$ no deal" min="0" step="0.01">
+          <div class="hint">What price is prohibitively expensive?</div>
+        </div>
+      </div>
+      <div class="wtp-legend">
+        <span><i class="lg"></i> Sweet spot (acceptable → expensive)</span>
+        <span><i class="ly"></i> Premium territory (expensive → prohibitive)</span>
+        <span><i class="lr"></i> Rejection zone (above prohibitive)</span>
+        <span><i class="ln"></i> Below acceptable</span>
+        <span style="color:var(--blue);"><span style="display:inline-block;width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-bottom:7px solid var(--blue);vertical-align:middle;margin-right:4px;"></span> Current price (Card 4)</span>
+      </div>
+      <div class="spectrum-wrap" id="spectrumWrap">
+        <div class="spectrum-placeholder" id="spectrumPh">Enter all three WTP prices to see the spectrum and your current price marker.</div>
+        <svg class="spectrum-svg" id="spectrumSvg" style="display:none;" viewBox="0 0 400 48" preserveAspectRatio="none" aria-hidden="true"></svg>
+        <div class="spectrum-labels" id="spectrumLabels" style="display:none;"></div>
+        <div class="tip" id="wtpOrderNote" style="display:none;margin-top:10px;padding:10px 14px;font-size:11px;">
+          <strong>Note:</strong> For the legend to match the bar, use <strong>acceptable ≤ expensive ≤ prohibitive</strong>. Showing four bands by sorted price until then.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p class="footer-note">Your pricing strategy feeds into the <strong style="color:var(--text-dim);">Living Strategy Builder (Component 3)</strong> and the <strong style="color:var(--text-dim);">M6 Pitch</strong>.</p>
+
+  <div class="actions">
+    <button type="button" class="btn" onclick="resetAll()">Reset</button>
+    <button type="button" class="btn" onclick="copyToClipboard()">Copy as Text</button>
+    <button type="button" class="btn primary" onclick="exportMarkdown()">Export Markdown</button>
+  </div>
+</div>
+
+<div class="saved-toast" id="toast">Saved</div>
+
+<script>
+const KEY = 'aps-m3-pricing';
+const MARGIN_KEY = 'aps-m3-margin';
+const $ = id => document.getElementById(id);
+
+let strategy = null;
+let model = null;
+
+function getState() {
+  return {
+    strategy,
+    model,
+    leader: $('leader').value,
+    filler: $('filler').value,
+    killer: $('killer').value,
+    baseFee: $('baseFee').value,
+    unitLabel: $('unitLabel').value,
+    pricePerUnit: $('pricePerUnit').value,
+    unitsPerUser: $('unitsPerUser').value,
+    wtpOk: $('wtpOk').value,
+    wtpHigh: $('wtpHigh').value,
+    wtpNo: $('wtpNo').value
+  };
+}
+
+function applySelections() {
+  document.querySelectorAll('#strategyGrid .pick-card').forEach(el => {
+    el.classList.toggle('selected', el.dataset.strategy === strategy);
+  });
+  document.querySelectorAll('#modelGrid .pick-card').forEach(el => {
+    el.classList.toggle('selected', el.dataset.model === model);
+  });
+}
+
+function selectStrategy(key) {
+  strategy = key;
+  applySelections();
+  save();
+}
+
+function selectModel(key) {
+  model = key;
+  applySelections();
+  save();
+}
+
+function wirePickCards() {
+  document.querySelectorAll('#strategyGrid .pick-card').forEach(el => {
+    const go = () => selectStrategy(el.dataset.strategy);
+    el.addEventListener('click', go);
+    el.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); }
+    });
+  });
+  document.querySelectorAll('#modelGrid .pick-card').forEach(el => {
+    const go = () => selectModel(el.dataset.model);
+    el.addEventListener('click', go);
+    el.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); }
+    });
+  });
+}
+
+function parseMarginStorage() {
+  try {
+    const m = JSON.parse(localStorage.getItem(MARGIN_KEY));
+    if (!m) return null;
+    const req = parseFloat(m.requests) || 0;
+    const cpr = parseFloat(m.costPerReq) || 0;
+    const other = parseFloat(m.otherCogs) || 0;
+    const aiCogs = req * cpr;
+    const totalCogs = aiCogs + other;
+    if (req <= 0 && cpr <= 0 && other <= 0) return null;
+    return { aiCogs, totalCogs };
+  } catch (e) { return null; }
+}
+
+function revenuePerUser() {
+  const base = parseFloat($('baseFee').value) || 0;
+  const ppu = parseFloat($('pricePerUnit').value) || 0;
+  const u = parseFloat($('unitsPerUser').value) || 0;
+  return base + ppu * u;
+}
+
+function updatePricingOutputs() {
+  const rev = revenuePerUser();
+  $('revPerUser').textContent = '$' + rev.toFixed(2);
+
+  const mc = parseMarginStorage();
+  const el = $('marginCompare');
+  if (mc && rev > 0) {
+    const marginPct = ((rev - mc.totalCogs) / rev) * 100;
+    el.style.display = '';
+    el.innerHTML = 'From your <strong>Margin Calculator</strong>: COGS/user = <strong>$' + mc.totalCogs.toFixed(2) +
+      '</strong>. Your revenue/user here = <strong>$' + rev.toFixed(2) +
+      '</strong>. Margin = <strong>' + marginPct.toFixed(1) + '%</strong>.';
+  } else if (mc && rev <= 0) {
+    el.style.display = '';
+    el.innerHTML = 'From your <strong>Margin Calculator</strong>: COGS/user = <strong>$' + mc.totalCogs.toFixed(2) +
+      '</strong>. Add pricing inputs to compare margin.';
+  } else {
+    el.style.display = 'none';
+  }
+
+  updateSpectrum();
+}
+
+function updateSpectrum() {
+  const A = parseFloat($('wtpOk').value);
+  const E = parseFloat($('wtpHigh').value);
+  const P = parseFloat($('wtpNo').value);
+  const rev = revenuePerUser();
+
+  const ph = $('spectrumPh');
+  const svg = $('spectrumSvg');
+  const labels = $('spectrumLabels');
+  const orderNote = $('wtpOrderNote');
+
+  if (![A, E, P].every(n => typeof n === 'number' && n > 0 && isFinite(n))) {
+    ph.style.display = '';
+    ph.textContent = 'Enter all three WTP prices to see the spectrum and your current price marker.';
+    svg.style.display = 'none';
+    labels.style.display = 'none';
+    orderNote.style.display = 'none';
+    return;
+  }
+
+  ph.style.display = 'none';
+  svg.style.display = '';
+  labels.style.display = '';
+
+  const barMax = Math.max(A, E, P, rev) * 1.12 || 1;
+  const W = 400;
+  const x = v => (W * v) / barMax;
+
+  const ordered = A <= E && E <= P;
+  orderNote.style.display = ordered ? 'none' : '';
+
+  let inner = '';
+  if (ordered) {
+    inner += '<rect x="0" y="6" width="' + x(A) + '" height="28" fill="rgba(85,85,106,0.35)"/>';
+    const wG = Math.max(0, x(E) - x(A));
+    inner += '<rect x="' + x(A) + '" y="6" width="' + wG + '" height="28" fill="rgba(61,214,140,0.5)"/>';
+    const wY = Math.max(0, x(P) - x(E));
+    inner += '<rect x="' + x(E) + '" y="6" width="' + wY + '" height="28" fill="rgba(240,192,64,0.45)"/>';
+    inner += '<rect x="' + x(P) + '" y="6" width="' + (W - x(P)) + '" height="28" fill="rgba(239,91,91,0.45)"/>';
+  } else {
+    const s = [A, E, P].slice().sort((a, b) => a - b);
+    inner += '<rect x="0" y="6" width="' + x(s[0]) + '" height="28" fill="rgba(85,85,106,0.35)"/>';
+    inner += '<rect x="' + x(s[0]) + '" y="6" width="' + Math.max(0, x(s[1]) - x(s[0])) + '" height="28" fill="rgba(61,214,140,0.45)"/>';
+    inner += '<rect x="' + x(s[1]) + '" y="6" width="' + Math.max(0, x(s[2]) - x(s[1])) + '" height="28" fill="rgba(240,192,64,0.4)"/>';
+    inner += '<rect x="' + x(s[2]) + '" y="6" width="' + (W - x(s[2])) + '" height="28" fill="rgba(239,91,91,0.42)"/>';
+  }
+
+  inner += '<line x1="0" y1="40" x2="400" y2="40" stroke="#252535" stroke-width="1"/>';
+
+  const tick = (val, col) => {
+    const xi = x(val);
+    inner += '<line x1="' + xi + '" y1="34" x2="' + xi + '" y2="40" stroke="' + col + '" stroke-width="2"/>';
+  };
+  tick(A, '#3dd68c');
+  tick(E, '#f0c040');
+  tick(P, '#ef5b5b');
+
+  if (rev > 0 && isFinite(rev)) {
+    const xr = x(rev);
+    inner += '<line x1="' + xr + '" y1="2" x2="' + xr + '" y2="38" stroke="#5b8def" stroke-width="2.5"/>';
+    inner += '<polygon points="' + (xr - 5) + ',2 ' + (xr + 5) + ',2 ' + xr + ',10" fill="#5b8def"/>';
+  }
+
+  svg.innerHTML = inner;
+
+  const fmt = v => '$' + (Math.round(v * 100) / 100).toLocaleString();
+  labels.innerHTML =
+    '<span>0</span><span style="color:var(--green)">' + fmt(A) + ' acceptable</span>' +
+    '<span style="color:var(--yellow)">' + fmt(E) + ' expensive</span>' +
+    '<span style="color:var(--red)">' + fmt(P) + ' prohibitive</span>' +
+    '<span>' + fmt(barMax) + '</span>';
+}
+
+function save() {
+  localStorage.setItem(KEY, JSON.stringify(getState()));
+  showToast('Auto-saved');
+}
+
+function load() {
+  try {
+    const d = JSON.parse(localStorage.getItem(KEY));
+    if (!d) return;
+    strategy = d.strategy || null;
+    model = d.model || null;
+    ['leader','filler','killer','baseFee','unitLabel','pricePerUnit','unitsPerUser','wtpOk','wtpHigh','wtpNo'].forEach(k => {
+      if (d[k] !== undefined && $(k)) $(k).value = d[k] || '';
+    });
+    applySelections();
+    updatePricingOutputs();
+  } catch (e) {}
+}
+
+function resetAll() {
+  strategy = null;
+  model = null;
+  ['leader','filler','killer','baseFee','unitLabel','pricePerUnit','unitsPerUser','wtpOk','wtpHigh','wtpNo'].forEach(k => { $(k).value = ''; });
+  applySelections();
+  localStorage.removeItem(KEY);
+  updatePricingOutputs();
+  showToast('Reset');
+}
+
+function strategyLabel(k) {
+  return { skim: 'Skim', penetrate: 'Penetrate', maximize: 'Maximize' }[k] || '—';
+}
+function modelLabel(k) {
+  return { seat: 'Seat / Access', hybrid: 'Hybrid (base + usage)', outcome: 'Outcome / Resolution' }[k] || '—';
+}
+
+function getExportText(md) {
+  const s = getState();
+  const rev = revenuePerUser();
+  const A = parseFloat(s.wtpOk) || 0, E = parseFloat(s.wtpHigh) || 0, P = parseFloat(s.wtpNo) || 0;
+  const mc = parseMarginStorage();
+  let marginLine = '';
+  if (mc && rev > 0) {
+    marginLine = 'Margin vs Margin Calculator: COGS/user $' + mc.totalCogs.toFixed(2) + ' → margin ' +
+      (((rev - mc.totalCogs) / rev) * 100).toFixed(1) + '%\n';
+  }
+
+  const head = md ? '# ' : '';
+  const h2 = md ? '## ' : '';
+  const h3 = md ? '### ' : '';
+  const b = md ? '**' : '';
+
+  let out = head + 'Pricing Strategy Designer — Module 3\n\n';
+  out += h2 + 'Pick Your Strategy\n';
+  out += '- Selected: ' + b + strategyLabel(s.strategy) + (md ? '**' : '') + '\n\n';
+  out += h2 + 'How You Charge\n';
+  out += '- Model: ' + b + modelLabel(s.model) + (md ? '**' : '') + '\n';
+  out += '- Note: 59% bundle / 23% add-on / 18% standalone (Palle Broe, n=44)\n\n';
+  out += h2 + 'Leaders, Fillers & Killers\n';
+  out += '- Leader: ' + (s.leader || '—') + '\n';
+  out += '- Filler: ' + (s.filler || '—') + '\n';
+  out += '- Killer: ' + (s.killer || '—') + '\n\n';
+  out += h2 + 'Price Your Product\n';
+  out += '- Base fee ($/mo): ' + (s.baseFee || '0') + '\n';
+  out += '- Unit: ' + (s.unitLabel || '—') + '\n';
+  out += '- Price per unit: $' + (s.pricePerUnit || '0') + '\n';
+  out += '- Est. units/user/mo: ' + (s.unitsPerUser || '0') + '\n';
+  out += '- ' + b + 'Est. revenue/user/mo: $' + rev.toFixed(2) + (md ? '**' : '') + '\n';
+  if (marginLine) out += '- ' + marginLine;
+  out += '\n' + h2 + 'WTP Quick-Check\n';
+  out += '- Acceptable: $' + A + '\n';
+  out += '- Expensive but pay: $' + E + '\n';
+  out += '- Prohibitive: $' + P + '\n';
+  out += '- Current price (from calc): $' + rev.toFixed(2) + '\n\n';
+  out += h2 + 'Next\n';
+  out += 'Feeds Living Strategy Builder (Component 3) and M6 Pitch.\n';
+  return out;
+}
+
+function copyToClipboard() {
+  navigator.clipboard.writeText(getExportText(false)).then(() => showToast('Copied to clipboard'));
+}
+
+function exportMarkdown() {
+  const blob = new Blob([getExportText(true)], { type: 'text/markdown' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'pricing-strategy.md';
+  a.click();
+  URL.revokeObjectURL(a.href);
+  showToast('Downloaded');
+}
+
+function showToast(msg) {
+  const t = $('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 1800);
+}
+
+function onInput() {
+  updatePricingOutputs();
+  save();
+}
+
+wirePickCards();
+['leader','filler','killer','baseFee','unitLabel','pricePerUnit','unitsPerUser','wtpOk','wtpHigh','wtpNo'].forEach(k => {
+  $(k).addEventListener('input', onInput);
+});
+
+load();
+if (!localStorage.getItem(KEY)) updatePricingOutputs();
+</script>
+</body>
+</html>

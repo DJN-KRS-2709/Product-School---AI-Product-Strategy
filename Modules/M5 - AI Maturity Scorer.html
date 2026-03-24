@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Responsible AI Maturity Scorer — Module 5</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+  :root {
+    --bg: #0b0b10; --surface: #13131a; --surface2: #1a1a24; --border: #252535;
+    --border-hi: #35354a;
+    --text: #e0e0f0; --text-dim: #7a7a9a; --text-muted: #55556a;
+    --blue: #5b8def; --green: #3dd68c; --yellow: #f0c040; --red: #ef5b5b; --purple: #a07be8;
+    --blue-bg: rgba(91,141,239,0.08); --green-bg: rgba(61,214,140,0.08);
+    --yellow-bg: rgba(240,192,64,0.08); --red-bg: rgba(239,91,91,0.08);
+    --purple-bg: rgba(160,123,232,0.1);
+    --radius: 10px; --radius-lg: 14px;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: 'DM Sans', -apple-system, sans-serif;
+    background: var(--bg); color: var(--text);
+    min-height: 100vh; padding: 40px 20px 80px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page { max-width: 720px; margin: 0 auto; }
+
+  .header { text-align: center; margin-bottom: 36px; }
+  .badge {
+    display: inline-block; font-size: 10px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.12em;
+    color: var(--purple); background: var(--purple-bg);
+    border: 1px solid rgba(160,123,232,0.25);
+    padding: 5px 14px; border-radius: 20px; margin-bottom: 14px;
+  }
+  .header h1 { font-size: 28px; font-weight: 800; color: #fff; margin-bottom: 8px; letter-spacing: -0.02em; }
+  .header p { font-size: 14px; color: var(--text-dim); line-height: 1.6; max-width: 560px; margin: 0 auto; }
+
+  .card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-lg); margin-bottom: 20px; overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .card:hover { border-color: var(--border-hi); }
+
+  .card-head {
+    padding: 18px 24px; display: flex; align-items: center; gap: 14px;
+    border-bottom: 1px solid var(--border);
+  }
+  .card-icon {
+    width: 32px; height: 32px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 800; color: #fff; flex-shrink: 0;
+  }
+  .card-title { font-size: 16px; font-weight: 700; color: #fff; }
+  .card-sub { font-size: 11px; color: var(--text-muted); margin-top: 2px; line-height: 1.4; }
+  .card-body { padding: 20px 24px 24px; }
+
+  .dim-block {
+    border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 16px; margin-bottom: 14px; background: var(--surface2);
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .dim-block:last-child { margin-bottom: 0; }
+  .dim-block.weakest {
+    border-color: var(--red); box-shadow: 0 0 0 1px rgba(239,91,91,0.2);
+  }
+  .dim-head { font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+  .dim-scale { font-size: 11px; color: var(--text-dim); line-height: 1.45; margin-bottom: 12px; }
+
+  .score-row { display: flex; gap: 8px; flex-wrap: wrap; }
+  .score-btn {
+    font-family: 'JetBrains Mono', monospace; font-size: 15px; font-weight: 700;
+    width: 40px; height: 40px; border-radius: 8px; border: 1px solid var(--border);
+    background: var(--surface); color: var(--text-dim); cursor: pointer; transition: all 0.15s;
+  }
+  .score-btn:hover { border-color: var(--purple); color: #fff; }
+  .score-btn.selected {
+    background: var(--purple-bg); border-color: var(--purple); color: var(--purple);
+  }
+
+  .radar-wrap {
+    display: flex; flex-direction: column; align-items: center; gap: 20px;
+  }
+  .radar-svg { max-width: 100%; height: auto; }
+  .radar-labels { font-size: 9px; fill: var(--text-dim); font-family: 'DM Sans', sans-serif; font-weight: 600; }
+
+  .result-panel {
+    text-align: center; padding: 18px; border-radius: var(--radius);
+    border: 1px solid var(--border); background: var(--surface2);
+  }
+  .result-total {
+    font-family: 'JetBrains Mono', monospace; font-size: 36px; font-weight: 800; color: #fff;
+  }
+  .result-label { font-size: 13px; font-weight: 700; margin-top: 8px; }
+  .result-desc { font-size: 13px; color: var(--text-dim); line-height: 1.5; margin-top: 10px; max-width: 480px; margin-left: auto; margin-right: auto; }
+
+  .weakest-note {
+    margin-top: 14px; font-size: 12px; color: var(--red); font-weight: 600;
+  }
+
+  .actions { display: flex; gap: 10px; margin-top: 24px; justify-content: center; flex-wrap: wrap; }
+  .btn {
+    font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600;
+    padding: 10px 18px; border-radius: 8px; border: 1px solid var(--border);
+    background: var(--surface2); color: var(--text); cursor: pointer; transition: all 0.2s;
+  }
+  .btn:hover { border-color: var(--purple); color: #fff; }
+  .btn.primary { background: var(--purple); border-color: var(--purple); color: #fff; }
+
+  .saved-toast {
+    position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(60px);
+    background: var(--green); color: #000; font-size: 13px; font-weight: 600;
+    padding: 10px 24px; border-radius: 8px; opacity: 0; transition: all 0.3s;
+    pointer-events: none; z-index: 100;
+  }
+  .saved-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+</style>
+</head>
+<body>
+
+<div class="page">
+  <div class="header">
+    <div class="badge">Module 5 — The Guardrails</div>
+    <h1>Responsible AI Maturity Scorer</h1>
+    <p>Score your organization across five dimensions of responsible AI practice.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-icon" style="background:var(--purple);">★</div>
+      <div><div class="card-title">Dimensions (1–5 each)</div><div class="card-sub">1 = weakest posture · 5 = strongest</div></div>
+    </div>
+    <div class="card-body" id="dimsContainer"></div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-icon" style="background:var(--blue);">◎</div>
+      <div><div class="card-title">Radar View</div><div class="card-sub">Five-axis snapshot of your posture</div></div>
+    </div>
+    <div class="card-body">
+      <div class="radar-wrap">
+        <svg class="radar-svg" viewBox="0 0 200 200" width="280" height="280" aria-label="Maturity radar chart">
+          <g opacity="0.35">
+            <polygon points="100,22 166,62 142,142 58,142 34,62" fill="none" stroke="var(--border)" stroke-width="1"/>
+            <polygon points="100,40 152,70 134,130 66,130 48,70" fill="none" stroke="var(--border)" stroke-width="1"/>
+            <polygon points="100,58 138,78 126,118 74,118 62,78" fill="none" stroke="var(--border)" stroke-width="1"/>
+            <polygon points="100,76 124,86 118,106 82,106 76,86" fill="none" stroke="var(--border)" stroke-width="1"/>
+            <line x1="100" y1="100" x2="100" y2="22" stroke="var(--border)" stroke-width="1"/>
+            <line x1="100" y1="100" x2="166" y2="62" stroke="var(--border)" stroke-width="1"/>
+            <line x1="100" y1="100" x2="142" y2="142" stroke="var(--border)" stroke-width="1"/>
+            <line x1="100" y1="100" x2="58" y2="142" stroke="var(--border)" stroke-width="1"/>
+            <line x1="100" y1="100" x2="34" y2="62" stroke="var(--border)" stroke-width="1"/>
+          </g>
+          <polygon id="radarFill" fill="rgba(160,123,232,0.25)" stroke="var(--purple)" stroke-width="2" points="100,100 100,100 100,100 100,100 100,100"/>
+          <text x="100" y="14" text-anchor="middle" class="radar-labels" id="lbl0">Compliance</text>
+          <text x="172" y="58" text-anchor="start" class="radar-labels" id="lbl1">Transparency</text>
+          <text x="150" y="158" text-anchor="middle" class="radar-labels" id="lbl2">Fairness</text>
+          <text x="50" y="158" text-anchor="middle" class="radar-labels" id="lbl3">Privacy</text>
+          <text x="28" y="58" text-anchor="end" class="radar-labels" id="lbl4">Accountability</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-icon" style="background:var(--green);">∑</div>
+      <div><div class="card-title">Results</div><div class="card-sub">Total score and narrative band</div></div>
+    </div>
+    <div class="card-body">
+      <div class="result-panel">
+        <div class="result-total" id="totalScore">15</div>
+        <div class="result-label" id="bandTitle">Developing</div>
+        <p class="result-desc" id="bandDesc">Some practices in place. Gaps will surface under scrutiny.</p>
+        <div class="weakest-note" id="weakestNote">Weakest dimension: Compliance</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button type="button" class="btn" onclick="resetAll()">Reset</button>
+    <button type="button" class="btn" onclick="copyToClipboard()">Copy as Text</button>
+    <button type="button" class="btn primary" onclick="exportMarkdown()">Export Markdown</button>
+  </div>
+</div>
+
+<div class="saved-toast" id="toast">Saved</div>
+
+<script>
+const KEY = 'aps-m5-ai-maturity';
+const $ = id => document.getElementById(id);
+
+const DIMENSIONS = [
+  {
+    key: 'compliance',
+    title: 'Compliance',
+    desc: 'Meeting legal/regulatory requirements',
+    scale: '1 = no formal compliance, 5 = certified and audited'
+  },
+  {
+    key: 'transparency',
+    title: 'Transparency',
+    desc: 'Users understand how AI makes decisions',
+    scale: '1 = black box, 5 = full explainability + audit trails'
+  },
+  {
+    key: 'fairness',
+    title: 'Fairness',
+    desc: 'Bias detection and mitigation',
+    scale: '1 = no bias testing, 5 = continuous monitoring + remediation'
+  },
+  {
+    key: 'privacy',
+    title: 'Privacy',
+    desc: 'Data protection and consent',
+    scale: '1 = minimal consent, 5 = privacy-by-design + user controls'
+  },
+  {
+    key: 'accountability',
+    title: 'Accountability',
+    desc: 'Clear ownership and incident response',
+    scale: '1 = no owner, 5 = RACI defined + incident playbooks'
+  }
+];
+
+let scores = [3, 3, 3, 3, 3];
+
+const CX = 100, CY = 100;
+const R = 78;
+const angles = [-Math.PI / 2, -Math.PI / 2 + (2 * Math.PI) / 5, -Math.PI / 2 + (4 * Math.PI) / 5, -Math.PI / 2 + (6 * Math.PI) / 5, -Math.PI / 2 + (8 * Math.PI) / 5];
+
+function pointFor(i, value) {
+  const t = value / 5;
+  const x = CX + R * t * Math.cos(angles[i]);
+  const y = CY + R * t * Math.sin(angles[i]);
+  return [x, y];
+}
+
+function updateRadar() {
+  const pts = scores.map((v, i) => pointFor(i, v));
+  $('radarFill').setAttribute('points', pts.map(p => p.join(',')).join(' '));
+}
+
+function weakestIndices() {
+  const min = Math.min(...scores);
+  return scores.map((s, i) => (s === min ? i : -1)).filter(i => i >= 0);
+}
+
+function renderDims() {
+  const weak = new Set(weakestIndices());
+  $('dimsContainer').innerHTML = DIMENSIONS.map((d, di) => `
+    <div class="dim-block${weak.has(di) ? ' weakest' : ''}" data-dim="${di}">
+      <div class="dim-head">${d.title} — ${d.desc}</div>
+      <div class="dim-scale">${d.scale}</div>
+      <div class="score-row">
+        ${[1,2,3,4,5].map(n => `
+          <button type="button" class="score-btn${scores[di] === n ? ' selected' : ''}" data-dim="${di}" data-val="${n}">${n}</button>
+        `).join('')}
+      </div>
+    </div>
+  `).join('');
+
+  $('dimsContainer').querySelectorAll('.score-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const di = +btn.dataset.dim;
+      const val = +btn.dataset.val;
+      scores[di] = val;
+      save();
+      renderDims();
+      updateRadar();
+      updateResults();
+    });
+  });
+}
+
+function bandFor(total) {
+  if (total <= 10) {
+    return {
+      title: 'Reactive',
+      desc: "You're firefighting. Build foundations before scaling AI.",
+      color: 'var(--red)'
+    };
+  }
+  if (total <= 15) {
+    return {
+      title: 'Developing',
+      desc: 'Some practices in place. Gaps will surface under scrutiny.',
+      color: 'var(--yellow)'
+    };
+  }
+  if (total <= 20) {
+    return {
+      title: 'Proactive',
+      desc: 'Solid foundation. Now make governance a competitive advantage.',
+      color: 'var(--blue)'
+    };
+  }
+  return {
+    title: 'Leading',
+    desc: 'Governance is a sales asset. Showcase it.',
+    color: 'var(--green)'
+  };
+}
+
+function updateResults() {
+  const total = scores.reduce((a, b) => a + b, 0);
+  $('totalScore').textContent = String(total);
+  const b = bandFor(total);
+  $('bandTitle').textContent = b.title;
+  $('bandTitle').style.color = b.color;
+  $('bandDesc').textContent = b.desc;
+  const w = weakestIndices().map(i => DIMENSIONS[i].title);
+  $('weakestNote').textContent = w.length === 5
+    ? 'All dimensions tied — push every axis forward together.'
+    : `Weakest dimension${w.length > 1 ? 's' : ''}: ${w.join(', ')}`;
+}
+
+function save() {
+  localStorage.setItem(KEY, JSON.stringify({ scores }));
+  showToast('Auto-saved');
+}
+
+function load() {
+  try {
+    const d = JSON.parse(localStorage.getItem(KEY));
+    if (d && Array.isArray(d.scores) && d.scores.length === 5) {
+      scores = d.scores.map((n, i) => {
+        const v = parseInt(n, 10);
+        return v >= 1 && v <= 5 ? v : 3;
+      });
+    }
+  } catch (e) {}
+  renderDims();
+  updateRadar();
+  updateResults();
+}
+
+function resetAll() {
+  scores = [3, 3, 3, 3, 3];
+  localStorage.removeItem(KEY);
+  renderDims();
+  updateRadar();
+  updateResults();
+  showToast('Reset');
+}
+
+function buildExportText(md) {
+  const total = scores.reduce((a, b) => a + b, 0);
+  const b = bandFor(total);
+  const w = weakestIndices().map(i => DIMENSIONS[i].title).join(', ');
+  let out = md ? '# Responsible AI Maturity Scorer — Module 5\n\n' : 'Responsible AI Maturity Scorer — Module 5\n\n';
+  out += `Total: ${total}/25 — ${b.title}\n${b.desc}\n`;
+  out += `Weakest: ${w}\n\n`;
+  DIMENSIONS.forEach((d, i) => {
+    out += (md ? '## ' : '') + `${d.title}: ${scores[i]}/5\n${d.scale}\n\n`;
+  });
+  return out.trim() + '\n';
+}
+
+function copyToClipboard() {
+  navigator.clipboard.writeText(buildExportText(false)).then(() => showToast('Copied to clipboard'));
+}
+
+function exportMarkdown() {
+  const blob = new Blob([buildExportText(true)], { type: 'text/markdown' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'ai-maturity-scorer.md';
+  a.click();
+  URL.revokeObjectURL(a.href);
+  showToast('Downloaded');
+}
+
+function showToast(msg) {
+  const t = $('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 1800);
+}
+
+load();
+</script>
+</body>
+</html>

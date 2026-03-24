@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Product Strategy — Tools Overview</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+  :root {
+    --bg: #0b0b10; --surface: #13131a; --surface2: #1a1a24;
+    --border: #252535; --border-hi: #35354a;
+    --text: #e0e0f0; --text-dim: #7a7a9a; --text-muted: #55556a;
+    --blue: #5b8def; --green: #3dd68c; --yellow: #f0c040; --red: #ef5b5b; --purple: #a07be8;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: 'DM Sans', -apple-system, sans-serif;
+    background: var(--bg); color: var(--text);
+    min-height: 100vh; padding: 40px 20px 80px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page { max-width: 800px; margin: 0 auto; }
+
+  .hero { text-align: center; margin-bottom: 48px; }
+  .hero-badge {
+    display: inline-block; font-size: 10px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.14em;
+    color: var(--purple); background: rgba(160,123,232,0.08);
+    border: 1px solid rgba(160,123,232,0.15);
+    padding: 6px 16px; border-radius: 20px; margin-bottom: 16px;
+  }
+  .hero h1 {
+    font-size: 36px; font-weight: 800; color: #fff;
+    letter-spacing: -0.03em; margin-bottom: 10px;
+  }
+  .hero p {
+    font-size: 15px; color: var(--text-dim); line-height: 1.6;
+    max-width: 560px; margin: 0 auto;
+  }
+
+  .stats {
+    display: flex; justify-content: center; gap: 32px;
+    margin: 28px 0 44px; flex-wrap: wrap;
+  }
+  .stat { text-align: center; }
+  .stat-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 28px; font-weight: 700; color: #fff;
+  }
+  .stat-label { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+
+  .progression {
+    display: flex; align-items: center; justify-content: center;
+    gap: 6px; margin-bottom: 44px; flex-wrap: wrap;
+  }
+  .prog-step {
+    font-size: 11px; font-weight: 700; padding: 6px 14px;
+    border-radius: 6px; border: 1px solid var(--border);
+    background: var(--surface); color: var(--text-dim);
+    text-decoration: none; transition: all 0.2s; cursor: pointer;
+  }
+  .prog-step:hover { border-color: var(--blue); color: var(--blue); }
+  .prog-arrow { color: var(--text-muted); font-size: 14px; }
+  .prog-step.cross {
+    background: rgba(160,123,232,0.08); border-color: rgba(160,123,232,0.2);
+    color: var(--purple);
+  }
+
+  .module-section { margin-bottom: 36px; }
+  .module-header {
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 14px; padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+  .module-dot {
+    width: 28px; height: 28px; border-radius: 7px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 800; color: #fff; flex-shrink: 0;
+  }
+  .module-name { font-size: 16px; font-weight: 700; color: #fff; }
+  .module-sub { font-size: 12px; color: var(--text-muted); }
+
+  .tool-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+  .tool-card {
+    display: block; text-decoration: none;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 10px; padding: 18px 20px;
+    transition: all 0.2s;
+  }
+  .tool-card:hover {
+    border-color: var(--blue); background: var(--surface2);
+    transform: translateY(-2px);
+  }
+  .tool-card .tc-tag {
+    display: inline-block; font-size: 9px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    padding: 3px 8px; border-radius: 4px; margin-bottom: 8px;
+  }
+  .tag-tool { background: rgba(91,141,239,0.1); color: var(--blue); }
+  .tag-slide { background: rgba(61,214,140,0.1); color: var(--green); }
+  .tag-cross { background: rgba(160,123,232,0.1); color: var(--purple); }
+
+  .tool-card .tc-name { font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+  .tool-card .tc-desc { font-size: 12px; color: var(--text-dim); line-height: 1.4; }
+
+  .persistent {
+    margin-top: 40px; padding: 24px;
+    background: rgba(160,123,232,0.04);
+    border: 1px solid rgba(160,123,232,0.12);
+    border-radius: 12px;
+  }
+  .persistent h3 {
+    font-size: 14px; font-weight: 700; color: var(--purple); margin-bottom: 10px;
+  }
+  .persistent p { font-size: 13px; color: var(--text-dim); line-height: 1.5; }
+  .persistent a { color: var(--purple); text-decoration: underline; }
+
+  @media (max-width: 600px) { .tool-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<div class="page">
+  <div class="hero">
+    <div class="hero-badge">AI Product Strategy</div>
+    <h1>Tools Overview</h1>
+    <p>Interactive tools for every module. Score, calculate, design, audit, and build your living strategy — all in your browser.</p>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="stat-num">11</div><div class="stat-label">Interactive Tools</div></div>
+    <div class="stat"><div class="stat-num">6</div><div class="stat-label">Modules</div></div>
+    <div class="stat"><div class="stat-num">2</div><div class="stat-label">Persistent Tools</div></div>
+    <div class="stat"><div class="stat-num">5</div><div class="stat-label">Components Built</div></div>
+  </div>
+
+  <div class="progression">
+    <a class="prog-step" href="#m1">M1</a><span class="prog-arrow">&rarr;</span>
+    <a class="prog-step" href="#m2">M2</a><span class="prog-arrow">&rarr;</span>
+    <a class="prog-step" href="#m3">M3</a><span class="prog-arrow">&rarr;</span>
+    <a class="prog-step" href="#m4">M4</a><span class="prog-arrow">&rarr;</span>
+    <a class="prog-step" href="#m5">M5</a><span class="prog-arrow">&rarr;</span>
+    <a class="prog-step" href="#m6">M6</a><span class="prog-arrow">&rarr;</span>
+    <a class="prog-step cross" href="#cross">Strategy</a>
+  </div>
+
+  <!-- M1 -->
+  <div class="module-section" id="m1">
+    <div class="module-header">
+      <div class="module-dot" style="background:var(--blue);">1</div>
+      <div><div class="module-name">The Bet</div><div class="module-sub">Is this a product or a feature?</div></div>
+    </div>
+    <div class="tool-grid">
+      <a class="tool-card" href="Modules/M1 - Vulnerability Scorecard.html">
+        <div class="tc-tag tag-tool">Interactive Tool</div>
+        <div class="tc-name">Vulnerability Scorecard</div>
+        <div class="tc-desc">Three-Axis Diagnostic: Contextual Moat, Data Advantage, Platform Exposure. Score 1-5 per axis.</div>
+      </a>
+      <a class="tool-card" href="Modules/Module 1 - Slides.html">
+        <div class="tc-tag tag-slide">Slide Deck</div>
+        <div class="tc-name">Module 1 Slides</div>
+        <div class="tc-desc">The Bet — full presentation deck with speaker notes.</div>
+      </a>
+    </div>
+  </div>
+
+  <!-- M2 -->
+  <div class="module-section" id="m2">
+    <div class="module-header">
+      <div class="module-dot" style="background:var(--green);">2</div>
+      <div><div class="module-name">The Moat</div><div class="module-sub">Can anyone copy you in six months?</div></div>
+    </div>
+    <div class="tool-grid">
+      <a class="tool-card" href="Modules/M2 - Flywheel Scorer.html">
+        <div class="tc-tag tag-tool">Interactive Tool</div>
+        <div class="tc-name">Data Flywheel Scorer</div>
+        <div class="tc-desc">Score four data loops (corrections, preferences, domain context, network). Visual flywheel.</div>
+      </a>
+      <a class="tool-card" href="Modules/M2 - Kill Switch Audit.html">
+        <div class="tc-tag tag-tool">Interactive Tool</div>
+        <div class="tc-name">Kill Switch Audit</div>
+        <div class="tc-desc">Audit vendor dependency. Three panels: setup, stress test, action plan.</div>
+      </a>
+      <a class="tool-card" href="Modules/Module 2 - Slides.html">
+        <div class="tc-tag tag-slide">Slide Deck</div>
+        <div class="tc-name">Module 2 Slides</div>
+        <div class="tc-desc">The Moat — full presentation deck with speaker notes.</div>
+      </a>
+    </div>
+  </div>
+
+  <!-- M3 -->
+  <div class="module-section" id="m3">
+    <div class="module-header">
+      <div class="module-dot" style="background:var(--yellow);">3</div>
+      <div><div class="module-name">The Margin</div><div class="module-sub">Will this make money or bleed it?</div></div>
+    </div>
+    <div class="tool-grid">
+      <a class="tool-card" href="Modules/M3 - Margin Calculator.html">
+        <div class="tc-tag tag-tool">Interactive Tool</div>
+        <div class="tc-name">Margin Calculator</div>
+        <div class="tc-desc">AI unit economics: input your numbers, auto-calculate margin, stress-test at 3x.</div>
+      </a>
+      <a class="tool-card" href="Modules/M3 - Pricing Strategy Designer.html">
+        <div class="tc-tag tag-tool">Interactive Tool</div>
+        <div class="tc-name">Pricing Strategy Designer</div>
+        <div class="tc-desc">Pick strategy (Skim/Penetrate/Maximize), pricing model, bundling, and WTP check.</div>
+      </a>
+      <a class="tool-card" href="Modules/Module 3 - Slides.html">
+        <div class="tc-tag tag-slide">Slide Deck</div>
+        <div class="tc-name">Module 3 Slides</div>
+        <div class="tc-desc">The Margin — full presentation deck with speaker notes.</div>
+      </a>
+    </div>
+  </div>
+
+  <!-- M4 -->
+  <div class="module-section" id="m4">
+    <div class="module-header">
+      <div class="module-dot" style="background:var(--red);">4</div>
+      <div><div class="module-name">The Contract</div><div class="module-sub">How do you guarantee quality?</div></div>
+    </div>
+    <div class="tool-grid">
+      <a class="tool-card" href="Modules/M4 - Golden Dataset Builder.html">
+        <div class="tc-tag tag-tool">Interactive Tool</div>
+        <div class="tc-name">Golden Dataset Builder</div>
+        <div class="tc-desc">Build your evaluation dataset: curated inputs, expected outputs, edge cases.</div>
+      </a>
+      <a class="tool-card" href="Modules/M4 - Confidence UX Checklist.html">
+        <div class="tc-tag tag-tool">Interactive Tool</div>
+        <div class="tc-name">Confidence UX Checklist</div>
+        <div class="tc-desc">16-point checklist: uncertainty display, HITL design, graceful degradation, trust signals.</div>
+      </a>
+      <a class="tool-card" href="Modules/Module 4 - Slides.html">
+        <div class="tc-tag tag-slide">Slide Deck</div>
+        <div class="tc-name">Module 4 Slides</div>
+        <div class="tc-desc">The Contract — full presentation deck with speaker notes.</div>
+      </a>
+    </div>
+  </div>
+
+  <!-- M5 -->
+  <div class="module-section" id="m5">
+    <div class="module-header">
+      <div class="module-dot" style="background:var(--purple);">5</div>
+      <div><div class="module-name">The Guardrails</div><div class="module-sub">What could go wrong — and who owns it?</div></div>
+    </div>
+    <div class="tool-grid">
+      <a class="tool-card" href="Modules/M5 - AI Maturity Scorer.html">
+        <div class="tc-tag tag-tool">Interactive Tool</div>
+        <div class="tc-name">Responsible AI Maturity Scorer</div>
+        <div class="tc-desc">Score five dimensions: compliance, transparency, fairness, privacy, accountability.</div>
+      </a>
+      <a class="tool-card" href="Modules/M5 - Shadow AI Audit.html">
+        <div class="tc-tag tag-tool">Interactive Tool</div>
+        <div class="tc-name">Shadow AI Audit</div>
+        <div class="tc-desc">Discover, risk-assess, and consolidate unsanctioned AI tools.</div>
+      </a>
+      <a class="tool-card" href="Modules/Module 5 - Slides.html">
+        <div class="tc-tag tag-slide">Slide Deck</div>
+        <div class="tc-name">Module 5 Slides</div>
+        <div class="tc-desc">The Guardrails — full presentation deck with speaker notes.</div>
+      </a>
+    </div>
+  </div>
+
+  <!-- M6 -->
+  <div class="module-section" id="m6">
+    <div class="module-header">
+      <div class="module-dot" style="background:var(--blue);">6</div>
+      <div><div class="module-name">The Pitch</div><div class="module-sub">Sell the strategy you built.</div></div>
+    </div>
+    <div class="tool-grid">
+      <a class="tool-card" href="Modules/M6 - Pitch Assembler.html">
+        <div class="tc-tag tag-tool">Interactive Tool</div>
+        <div class="tc-name">Pitch Assembler</div>
+        <div class="tc-desc">Pull all five components into a structured pitch. Auto-imports from M1-M5 tools.</div>
+      </a>
+      <a class="tool-card" href="Modules/Module 6 - Slides.html">
+        <div class="tc-tag tag-slide">Slide Deck</div>
+        <div class="tc-name">Module 6 Slides</div>
+        <div class="tc-desc">The Pitch — full presentation deck with speaker notes.</div>
+      </a>
+    </div>
+  </div>
+
+  <!-- CROSS-MODULE -->
+  <div class="module-section" id="cross">
+    <div class="module-header">
+      <div class="module-dot" style="background:var(--purple);">&#9733;</div>
+      <div><div class="module-name">Cross-Module</div><div class="module-sub">Persistent tools that compound across all sessions</div></div>
+    </div>
+    <div class="tool-grid">
+      <a class="tool-card" href="Modules/Living Strategy Builder.html" style="grid-column: 1 / -1;">
+        <div class="tc-tag tag-cross">Persistent Tool</div>
+        <div class="tc-name">Living Strategy Builder</div>
+        <div class="tc-desc">Your compounding strategy artifact. Built across M1-M5, integrated in M6. Imports from all module tools, exports your complete strategy.</div>
+      </a>
+    </div>
+  </div>
+
+  <div class="persistent">
+    <h3>How tools connect</h3>
+    <p>Each module's tool saves to your browser (localStorage). Later tools import earlier data automatically. The <a href="Modules/Living Strategy Builder.html">Living Strategy Builder</a> pulls from all modules, and the <a href="Modules/M6 - Pitch Assembler.html">Pitch Assembler</a> uses your complete strategy for the final presentation. Complete tools in order for the best experience.</p>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>M2 — Data Flywheel Scorer</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+  :root {
+    --bg: #0b0b10; --surface: #13131a; --surface2: #1a1a24;
+    --border: #252535; --border-hi: #35354a;
+    --text: #e0e0f0; --text-dim: #7a7a9a; --text-muted: #55556a;
+    --blue: #5b8def; --green: #3dd68c; --yellow: #f0c040; --red: #ef5b5b; --purple: #a07be8;
+    --blue-bg: rgba(91,141,239,0.08); --green-bg: rgba(61,214,140,0.08);
+    --yellow-bg: rgba(240,192,64,0.08); --red-bg: rgba(239,91,91,0.08);
+    --purple-bg: rgba(160,123,232,0.08);
+    --radius: 10px; --radius-lg: 14px;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', -apple-system, sans-serif;
+    background: var(--bg); color: var(--text);
+    min-height: 100vh; padding: 40px 20px 80px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page { max-width: 720px; margin: 0 auto; }
+
+  .m1-banner {
+    display: none; margin-bottom: 20px; padding: 12px 16px;
+    background: var(--purple-bg); border: 1px solid rgba(160,123,232,0.2);
+    border-radius: var(--radius); font-size: 13px; color: var(--text-dim); line-height: 1.5;
+  }
+  .m1-banner.show { display: block; }
+  .m1-banner strong { color: var(--purple); }
+
+  .header { text-align: center; margin-bottom: 36px; }
+  .badge {
+    display: inline-block; font-size: 10px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.12em;
+    color: var(--green); background: var(--green-bg);
+    border: 1px solid rgba(61,214,140,0.15);
+    padding: 5px 14px; border-radius: 20px; margin-bottom: 14px;
+  }
+  .header h1 {
+    font-size: 30px; font-weight: 800; color: #fff;
+    margin-bottom: 8px; letter-spacing: -0.02em;
+  }
+  .header p { font-size: 14px; color: var(--text-dim); line-height: 1.6; max-width: 540px; margin: 0 auto; }
+
+  .card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-lg); margin-bottom: 20px;
+    overflow: hidden; transition: border-color 0.2s;
+  }
+  .card:hover { border-color: var(--border-hi); }
+
+  .card-head {
+    padding: 18px 24px; display: flex; align-items: flex-start; gap: 14px;
+    border-bottom: 1px solid var(--border);
+  }
+  .card-icon {
+    width: 32px; height: 32px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 800; color: #fff; flex-shrink: 0;
+  }
+  .card-title { font-size: 16px; font-weight: 700; color: #fff; }
+  .card-sub { font-size: 12px; color: var(--text-dim); margin-top: 6px; line-height: 1.5; }
+  .scale-hint {
+    font-size: 11px; color: var(--text-muted); margin-top: 10px;
+    padding: 10px 12px; background: var(--surface2); border-radius: 8px;
+    border: 1px solid var(--border); line-height: 1.45;
+  }
+  .scale-hint span { color: var(--text-dim); }
+  .card-body { padding: 20px 24px 24px; }
+
+  .loop-label {
+    font-size: 11px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.06em; color: var(--text-dim); margin-bottom: 10px;
+  }
+
+  .radio-row { display: flex; gap: 8px; }
+  .rb-item { flex: 1; min-width: 0; }
+  .rb-item input {
+    position: absolute; opacity: 0; width: 0; height: 0; pointer-events: none;
+  }
+  .rb-item label {
+    display: block; text-align: center; font-family: 'JetBrains Mono', monospace;
+    font-size: 14px; font-weight: 600; color: var(--text-dim);
+    padding: 10px 6px; border: 1px solid var(--border); border-radius: 8px;
+    cursor: pointer; background: var(--surface2);
+    transition: border-color 0.2s, box-shadow 0.2s, color 0.2s, background 0.2s;
+  }
+  .rb-item label:hover { border-color: var(--border-hi); color: #fff; }
+  .rb-item input:focus + label {
+    border-color: var(--blue); box-shadow: 0 0 0 3px rgba(91,141,239,0.12);
+  }
+  .rb-item input:checked + label {
+    background: var(--blue-bg); border-color: var(--blue); color: var(--blue);
+  }
+
+  .flywheel-wrap {
+    display: flex; flex-direction: column; align-items: center; gap: 24px;
+    margin-top: 8px;
+  }
+  .fw-visual {
+    position: relative; width: min(280px, 85vw); height: min(280px, 85vw);
+  }
+  .fw-ring {
+    position: absolute; inset: 0; border-radius: 50%;
+    border: 2px solid var(--border);
+    transition: background 0.35s ease;
+  }
+  .fw-inner {
+    position: absolute; inset: 22%; border-radius: 50%;
+    background: var(--bg); border: 1px solid var(--border);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; padding: 12px; z-index: 2;
+  }
+  .fw-inner .total-num {
+    font-family: 'JetBrains Mono', monospace; font-size: 28px; font-weight: 700; color: #fff;
+  }
+  .fw-inner .total-lbl {
+    font-size: 10px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.08em; color: var(--text-muted); margin-top: 4px;
+  }
+  .fw-arrows {
+    position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none;
+  }
+  .fw-legend {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px 16px; width: 100%; max-width: 400px;
+  }
+  .fw-leg-item {
+    display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text-dim);
+  }
+  .fw-dot {
+    width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+  .fw-leg-item strong { color: #fff; font-weight: 600; }
+
+  .verdict {
+    margin-top: 8px; padding: 16px 20px;
+    border-radius: var(--radius); text-align: center;
+    font-size: 14px; font-weight: 600; line-height: 1.5;
+    transition: all 0.3s;
+  }
+  .verdict.d1 { background: var(--red-bg); border: 1px solid rgba(239,91,91,0.2); color: var(--red); }
+  .verdict.d2 { background: var(--yellow-bg); border: 1px solid rgba(240,192,64,0.2); color: var(--yellow); }
+  .verdict.d3 { background: var(--green-bg); border: 1px solid rgba(61,214,140,0.15); color: var(--green); }
+  .verdict.d4 { background: var(--green-bg); border: 1px solid rgba(61,214,140,0.35); color: var(--green); }
+
+  .weakest-callout {
+    margin-top: 16px; padding: 14px 18px;
+    background: var(--red-bg); border: 1px solid rgba(239,91,91,0.25);
+    border-radius: var(--radius); font-size: 13px; line-height: 1.55; color: var(--text-dim);
+  }
+  .weakest-callout strong { color: var(--red); }
+  .weakest-callout .wc-title {
+    font-size: 11px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.06em; color: var(--red); margin-bottom: 6px;
+  }
+
+  .actions {
+    display: flex; gap: 10px; margin-top: 24px; justify-content: center; flex-wrap: wrap;
+  }
+  .btn {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px; font-weight: 600;
+    padding: 10px 20px; border-radius: 8px;
+    border: 1px solid var(--border); background: var(--surface2);
+    color: var(--text); cursor: pointer;
+    transition: all 0.2s; display: flex; align-items: center; gap: 6px;
+  }
+  .btn:hover { border-color: var(--blue); color: #fff; }
+  .btn.primary { background: var(--blue); border-color: var(--blue); color: #fff; }
+  .btn.primary:hover { background: #4a7de0; }
+
+  .saved-toast {
+    position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(60px);
+    background: var(--green); color: #000; font-size: 13px; font-weight: 600;
+    padding: 10px 24px; border-radius: 8px;
+    opacity: 0; transition: all 0.3s; pointer-events: none; z-index: 100;
+  }
+  .saved-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  .placeholder-hint {
+    text-align: center; font-size: 13px; color: var(--text-muted); padding: 24px 16px;
+  }
+
+  @media (max-width: 520px) {
+    .fw-legend { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+  <div class="m1-banner" id="m1Banner" role="status"></div>
+
+  <div class="header">
+    <div class="badge">Module 2 — The Moat</div>
+    <h1>Data Flywheel Scorer</h1>
+    <p>Score your four data loops. The weakest loop is where competitors attack first.</p>
+  </div>
+
+  <!-- Loop cards -->
+  <div class="card" data-loop="corrections">
+    <div class="card-head">
+      <div class="card-icon" style="background:var(--blue);">1</div>
+      <div>
+        <div class="card-title">Corrections Loop</div>
+        <div class="card-sub">Do users correct AI outputs? Do corrections improve the model?</div>
+        <div class="scale-hint"><span>1</span> = no correction capture · <span>5</span> = every correction trains the model</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="loop-label">Score (1–5)</div>
+      <div class="radio-row" id="row-corrections"></div>
+    </div>
+  </div>
+
+  <div class="card" data-loop="preferences">
+    <div class="card-head">
+      <div class="card-icon" style="background:var(--purple);">2</div>
+      <div>
+        <div class="card-title">Preferences Loop</div>
+        <div class="card-sub">Do you capture and act on user preferences?</div>
+        <div class="scale-hint"><span>1</span> = generic for all users · <span>5</span> = deeply personalized from preference data</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="loop-label">Score (1–5)</div>
+      <div class="radio-row" id="row-preferences"></div>
+    </div>
+  </div>
+
+  <div class="card" data-loop="domainContext">
+    <div class="card-head">
+      <div class="card-icon" style="background:var(--yellow);color:#000;">3</div>
+      <div>
+        <div class="card-title">Domain Context Loop</div>
+        <div class="card-sub">How much proprietary domain knowledge feeds your AI?</div>
+        <div class="scale-hint"><span>1</span> = uses only public data · <span>5</span> = proprietary corpus competitors can't access</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="loop-label">Score (1–5)</div>
+      <div class="radio-row" id="row-domainContext"></div>
+    </div>
+  </div>
+
+  <div class="card" data-loop="network">
+    <div class="card-head">
+      <div class="card-icon" style="background:var(--green);">4</div>
+      <div>
+        <div class="card-title">Network Loop</div>
+        <div class="card-sub">Does usage by one user improve the product for others?</div>
+        <div class="scale-hint"><span>1</span> = isolated users · <span>5</span> = strong network intelligence effects</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="loop-label">Score (1–5)</div>
+      <div class="radio-row" id="row-network"></div>
+    </div>
+  </div>
+
+  <!-- Results -->
+  <div class="card" id="resultsCard">
+    <div class="card-head">
+      <div class="card-icon" style="background:var(--green);">✓</div>
+      <div>
+        <div class="card-title">Flywheel Readout</div>
+        <div class="card-sub">Visual = loop strength. Arrows show compounding direction.</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div id="resultsPlaceholder" class="placeholder-hint">Select a score for each loop to see your flywheel.</div>
+      <div id="resultsContent" style="display:none;">
+        <div class="flywheel-wrap">
+          <div class="fw-visual">
+            <div class="fw-ring" id="fwRing"></div>
+            <svg class="fw-arrows" viewBox="0 0 100 100" aria-hidden="true">
+              <defs>
+                <marker id="arr" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+                  <path d="M0,0 L0,6 L6,3 z" fill="rgba(224,224,240,0.45)"/>
+                </marker>
+              </defs>
+              <!-- Clockwise flow between segment mids: corrections(0° top) → preferences → domain → network -->
+              <path d="M 50 8 A 42 42 0 0 1 78 22" fill="none" stroke="rgba(224,224,240,0.35)" stroke-width="1.2" marker-end="url(#arr)"/>
+              <path d="M 88 50 A 42 42 0 0 1 78 78" fill="none" stroke="rgba(224,224,240,0.35)" stroke-width="1.2" marker-end="url(#arr)"/>
+              <path d="M 50 92 A 42 42 0 0 1 22 78" fill="none" stroke="rgba(224,224,240,0.35)" stroke-width="1.2" marker-end="url(#arr)"/>
+              <path d="M 12 50 A 42 42 0 0 1 22 22" fill="none" stroke="rgba(224,224,240,0.35)" stroke-width="1.2" marker-end="url(#arr)"/>
+            </svg>
+            <div class="fw-inner">
+              <div class="total-num" id="totalNum">—</div>
+              <div class="total-lbl">Total (4–20)</div>
+            </div>
+          </div>
+          <div class="fw-legend" id="fwLegend"></div>
+        </div>
+        <div class="verdict" id="verdict"></div>
+        <div class="weakest-callout" id="weakestBox" style="display:none;">
+          <div class="wc-title">Weakest loop</div>
+          <div id="weakestText"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button type="button" class="btn" onclick="resetAll()">Reset</button>
+    <button type="button" class="btn" onclick="copyToClipboard()">Copy as Text</button>
+    <button type="button" class="btn primary" onclick="exportMarkdown()">Export Markdown</button>
+  </div>
+</div>
+
+<div class="saved-toast" id="toast">Saved</div>
+
+<script>
+const KEY = 'aps-m2-flywheel';
+const M1_KEY = 'aps-m1-vulnerability';
+const $ = id => document.getElementById(id);
+
+const LOOPS = [
+  { key: 'corrections', title: 'Corrections Loop' },
+  { key: 'preferences', title: 'Preferences Loop' },
+  { key: 'domainContext', title: 'Domain Context Loop' },
+  { key: 'network', title: 'Network Loop' }
+];
+
+function hexColor(n) {
+  if (n <= 2) return '#ef5b5b';
+  if (n === 3) return '#f0c040';
+  return '#3dd68c';
+}
+
+function buildRadioRows() {
+  LOOPS.forEach(({ key }) => {
+    const row = $('row-' + key);
+    for (let v = 1; v <= 5; v++) {
+      const id = key + '-' + v;
+      const wrap = document.createElement('div');
+      wrap.className = 'rb-item';
+      wrap.innerHTML = `<input type="radio" name="${key}" id="${id}" value="${v}"><label for="${id}">${v}</label>`;
+      row.appendChild(wrap);
+    }
+    row.querySelectorAll('input').forEach(inp => {
+      inp.addEventListener('change', () => { update(); save(); });
+    });
+  });
+}
+
+function getScores() {
+  const out = {};
+  LOOPS.forEach(({ key }) => {
+    const sel = document.querySelector(`input[name="${key}"]:checked`);
+    out[key] = sel ? parseInt(sel.value, 10) : null;
+  });
+  return out;
+}
+
+function allSelected(s) {
+  return LOOPS.every(({ key }) => s[key] != null);
+}
+
+function update() {
+  const s = getScores();
+  const complete = allSelected(s);
+
+  $('resultsPlaceholder').style.display = complete ? 'none' : '';
+  $('resultsContent').style.display = complete ? '' : 'none';
+  if (!complete) return;
+
+  const vals = LOOPS.map(({ key }) => s[key]);
+  const total = vals.reduce((a, b) => a + b, 0);
+  $('totalNum').textContent = total;
+
+  const c = vals.map(hexColor);
+  $('fwRing').style.background =
+    `conic-gradient(from -90deg at 50% 50%, ${c[0]} 0deg 90deg, ${c[1]} 90deg 180deg, ${c[2]} 180deg 270deg, ${c[3]} 270deg 360deg)`;
+
+  const legend = $('fwLegend');
+  legend.innerHTML = LOOPS.map(({ key, title }, i) =>
+    `<div class="fw-leg-item"><div class="fw-dot" style="background:${c[i]}"></div><div><strong>${title}</strong> — ${s[key]}/5</div></div>`
+  ).join('');
+
+  let verdictCls = 'd1', verdictText = '';
+  if (total <= 8) {
+    verdictCls = 'd1';
+    verdictText = 'No flywheel. Data goes in and gets thrown away.';
+  } else if (total <= 12) {
+    verdictCls = 'd2';
+    verdictText = 'Partial flywheel. Some loops work, others are broken.';
+  } else if (total <= 16) {
+    verdictCls = 'd3';
+    verdictText = 'Working flywheel. Now stress-test the weakest loop.';
+  } else {
+    verdictCls = 'd4';
+    verdictText = 'Strong flywheel. Focus on compounding speed.';
+  }
+  $('verdict').className = 'verdict ' + verdictCls;
+  $('verdict').textContent = verdictText;
+
+  let minVal = 6;
+  let weakestKeys = [];
+  LOOPS.forEach(({ key, title }) => {
+    if (s[key] < minVal) {
+      minVal = s[key];
+      weakestKeys = [title];
+    } else if (s[key] === minVal) {
+      weakestKeys.push(title);
+    }
+  });
+  const wTitle = weakestKeys[0];
+  $('weakestBox').style.display = '';
+  const wLabel = weakestKeys.length > 1 ? weakestKeys.join(' · ') : wTitle;
+  const tieNote = weakestKeys.length > 1 ? ' (tied for weakest)' : '';
+  $('weakestText').innerHTML =
+    `<strong>${wLabel}</strong>${tieNote} scored lowest (${minVal}/5). That is where a competitor will probe first — shore up capture, feedback, or proprietary data there before you scale distribution.`;
+}
+
+function save() {
+  const s = getScores();
+  localStorage.setItem(KEY, JSON.stringify({
+    corrections: s.corrections,
+    preferences: s.preferences,
+    domainContext: s.domainContext,
+    network: s.network
+  }));
+  showToast('Auto-saved');
+}
+
+function load() {
+  try {
+    const d = JSON.parse(localStorage.getItem(KEY));
+    if (!d) return;
+    LOOPS.forEach(({ key }) => {
+      const v = d[key];
+      if (v >= 1 && v <= 5) {
+        const inp = document.querySelector(`input[name="${key}"][value="${v}"]`);
+        if (inp) inp.checked = true;
+      }
+    });
+    update();
+  } catch (e) {}
+}
+
+function resetAll() {
+  LOOPS.forEach(({ key }) => {
+    document.querySelectorAll(`input[name="${key}"]`).forEach(i => { i.checked = false; });
+  });
+  localStorage.removeItem(KEY);
+  update();
+  showToast('Reset');
+}
+
+function parseM1() {
+  try {
+    const raw = localStorage.getItem(M1_KEY);
+    if (!raw) return null;
+    const d = JSON.parse(raw);
+    const score = d.score ?? d.totalScore ?? d.vulnerabilityScore ?? d.total ?? d.vulnerability;
+    const axis = d.weakestAxis ?? d.weakest ?? d.weakest_axis ?? d.weakestAxisName ?? '';
+    if (score === undefined || score === null || score === '') return null;
+    return { score, axis: String(axis || '—') };
+  } catch (e) {
+    return null;
+  }
+}
+
+function renderM1Banner() {
+  const m = parseM1();
+  const el = $('m1Banner');
+  if (!m) {
+    el.classList.remove('show');
+    return;
+  }
+  el.classList.add('show');
+  el.innerHTML = `From M1: Your vulnerability score was <strong>${m.score}/15</strong>. Weakest axis: <strong>${escapeHtml(m.axis)}</strong>.`;
+}
+
+function escapeHtml(s) {
+  const div = document.createElement('div');
+  div.textContent = s;
+  return div.innerHTML;
+}
+
+function getExportText(md) {
+  const s = getScores();
+  const complete = allSelected(s);
+  const lines = [];
+  const h = md ? '#' : '';
+  lines.push(`${h}${md ? ' ' : ''}Data Flywheel Scorer — Module 2`);
+  lines.push('');
+  if (!complete) {
+    lines.push('(Incomplete — not all loops scored)');
+    LOOPS.forEach(({ key, title }) => {
+      lines.push(`- ${title}: ${s[key] != null ? s[key] + '/5' : '—'}`);
+    });
+    return lines.join('\n');
+  }
+  const total = LOOPS.reduce((acc, { key }) => acc + s[key], 0);
+  if (md) {
+    lines.push('## Scores');
+  } else {
+    lines.push('SCORES');
+  }
+  lines.push(`- Corrections Loop: ${s.corrections}/5`);
+  lines.push(`- Preferences Loop: ${s.preferences}/5`);
+  lines.push(`- Domain Context Loop: ${s.domainContext}/5`);
+  lines.push(`- Network Loop: ${s.network}/5`);
+  lines.push('');
+  lines.push(md ? `**Total:** ${total}/20` : `Total: ${total}/20`);
+  lines.push('');
+  let band = '';
+  if (total <= 8) band = 'No flywheel. Data goes in and gets thrown away.';
+  else if (total <= 12) band = 'Partial flywheel. Some loops work, others are broken.';
+  else if (total <= 16) band = 'Working flywheel. Now stress-test the weakest loop.';
+  else band = 'Strong flywheel. Focus on compounding speed.';
+  lines.push(md ? `**Readout:** ${band}` : `Readout: ${band}`);
+  const min = Math.min(s.corrections, s.preferences, s.domainContext, s.network);
+  const w = LOOPS.filter(({ key }) => s[key] === min).map(l => l.title);
+  lines.push('');
+  lines.push(md ? `**Weakest loop:** ${w.join(', ')} (${min}/5)` : `Weakest loop: ${w.join(', ')} (${min}/5)`);
+  return lines.join('\n');
+}
+
+function copyToClipboard() {
+  navigator.clipboard.writeText(getExportText(false)).then(() => showToast('Copied to clipboard'));
+}
+
+function exportMarkdown() {
+  const blob = new Blob([getExportText(true)], { type: 'text/markdown' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'flywheel-scorer.md';
+  a.click();
+  showToast('Downloaded');
+}
+
+function showToast(msg) {
+  const t = $('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 1800);
+}
+
+buildRadioRows();
+renderM1Banner();
+load();
+// Initial UI state
+update();
+</script>
+</body>
+</html>
