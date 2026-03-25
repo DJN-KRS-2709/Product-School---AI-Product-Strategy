@@ -6,20 +6,29 @@ alwaysApply: false
 
 # Speaker Notes Standards
 
-Module 2 Speaker Notes is the reference. Match this format across all modules.
+Module 3 Speaker Notes is the reference. Match this format across all modules.
 
 ## Tone
-- Casual conversation, like briefing Carlos in bullet points
-- No long sentences, no scripts, no stage directions
-- Written as "here's what we're teaching and why" — not "say this word for word"
+- Briefing memo for Carlos — like walking him through the plan over coffee
+- Explain the thinking and intent behind each slide, not what's on the slide (he can see that himself)
+- Written as "here's why this slide exists and what you should accomplish with it"
+- Conversational paragraphs, not bullet-point lists
+
+## Document Structure
+- Open with `# Module N — Title` and `## Speaker Briefing for Carlos`
+- Preamble section `### What this module is about` — emotional arc, what students leave with, how it connects to prior modules
+- Preamble section `### The flow and why it's structured this way` — rationale for the slide ordering, where the energy shifts happen
+- Horizontal rule (`---`) before slide-by-slide notes
 
 ## Structure Per Slide
-- Slide number + title as H2 heading
-- 2-5 bullet points covering: what's on the slide, what to say, key example
-- A "Why" line explaining the pedagogical reasoning (why this exercise, what insight should land, what changes if we skip it)
+- `### Slide N — Title` as H3 heading
+- 1-3 paragraphs covering: why this slide exists here, what should happen in the room, how it connects to what came before and what follows
+- If a slide has an interactive tool, mention it naturally: "The interactive tool link is on this slide — students can open the [Tool Name]..."
+- If a slide was repositioned based on feedback, explain why (e.g. "We moved this here based on Daria's feedback")
 
 ## Content Rules
 - Name real companies as examples, matching the slide
-- Include interactive cues: "ask the room", "get 2-3 answers", "show of hands"
+- Reference source material where relevant (e.g. "Madhavan Ramanujam's work", "Palle Broe's data")
 - Spell out acronyms on first use (ToS = Terms of Service, HITL = Human-in-the-Loop)
 - If a slide has a fill-in exercise, note what "good" vs "bad" answers look like so Carlos can coach
+- For activity slides, explain the pedagogical reasoning: why it's standalone, what the follow-up question should surface
