@@ -215,12 +215,12 @@
 </div>
 
 <!-- ===== SLIDE 6: Golden Datasets ===== -->
-<div class="slide" data-notes="Why: without gold labels you're guessing in prod. Grammarly/Adobe ship internal benchmark suites for tone, layout, safety — not for Kaggle, for release gates. 100–500 examples, adversarial rows, git-style versioning.">
+<div class="slide" data-notes="Without gold labels you're guessing in prod. Grammarly ships internal benchmarks for correctness/tone. OpenAI's Karina Nguyen: PMs create spreadsheets — current behavior vs ideal behavior, pass/fail. Hamel &amp; Shreya (Maven #1 course): don't jump to generic 'hallucination' scores — ground evals in YOUR failure modes. 100–500 examples, adversarial rows, version like code.">
   <div class="slide-inner">
     <div class="demo-tag tag-lecture">Lecture · Point 2 of 4</div>
     <h2>Golden Datasets</h2>
     <div class="subtitle">Labeled truth as ship-blocking infrastructure.</div>
-    <p style="font-size:13px; color:#8899bb; margin-bottom:14px; text-align:center;"><strong style="color:#e0e0f0;">Example:</strong> Grammarly’s tiers benchmark suggestions against curated correctness + tone labels.</p>
+    <p style="font-size:13px; color:#8899bb; margin-bottom:14px; text-align:center;"><strong style="color:#e0e0f0;">Grammarly:</strong> correctness + tone benchmarks gate releases · <strong style="color:#e0e0f0;">OpenAI:</strong> PMs build current-vs-ideal-behavior sheets as ground truth</p>
     <div style="display:flex; flex-direction:column; gap:12px; margin:16px 0;">
       <div style="display:flex; align-items:flex-start; gap:16px; background:#161822; border:1px solid #252840; border-radius:10px; padding:18px;">
         <div style="width:36px; height:36px; border-radius:8px; background:#3B82F6; display:flex; align-items:center; justify-content:center; font-size:16px; font-weight:800; color:#fff; flex-shrink:0;">1</div>
