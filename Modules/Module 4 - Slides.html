@@ -106,7 +106,7 @@
       <div class="waypoint"><div class="waypoint-num">3</div><div class="waypoint-text"><div class="wt-title">Design</div><div class="wt-desc">Confidence UX — show doubt, don't fake certainty</div></div></div>
     </div>
     <div class="flow-line">Out: Living strategy Component 4 · eval dashboard spec · reliability contract</div>
-    <p style="font-size:15px; color:#60a5fa; font-weight:600; text-align:center; margin-top:20px;">Point to the waypoint that’s the biggest gap for you today.</p>
+
   </div>
 </div>
 
@@ -118,15 +118,16 @@
     <div class="agenda">
       <div class="agenda-item"><div class="agenda-time">3 min</div><div class="agenda-text"><strong>Recall:</strong> What you brought from M3</div></div>
       <div class="agenda-item"><div class="agenda-time">8 min</div><div class="agenda-text"><strong>Provocation:</strong> "95% accuracy with no audit trail loses to 85% with one"</div></div>
-      <div class="agenda-item"><div class="agenda-time">16 min</div><div class="agenda-text"><strong>Lecture:</strong> Trust ≠ accuracy, golden datasets, HITL, LLM-as-Judge</div></div>
-      <div class="agenda-item"><div class="agenda-time">7 min</div><div class="agenda-text"><strong>Case Study:</strong> Air Canada — when AI made promises the company had to honor</div></div>
-      <div class="agenda-item"><div class="agenda-time">5 min</div><div class="agenda-text"><strong>Framework:</strong> The Eval Dashboard Spec</div></div>
+      <div class="agenda-item"><div class="agenda-time">8 min</div><div class="agenda-text"><strong>Lecture:</strong> Trust ≠ accuracy + golden datasets</div></div>
+      <div class="agenda-item"><div class="agenda-time">15 min</div><div class="agenda-text"><strong>Applied Work:</strong> Build your golden dataset spec</div></div>
       <div class="agenda-item"><div class="agenda-time">5 min</div><div class="agenda-text" style="color:#94a3b8;">☕ Break</div></div>
-      <div class="agenda-item"><div class="agenda-time">15 min</div><div class="agenda-text"><strong>Applied Work:</strong> Define your golden dataset and ground truth strategy</div></div>
+      <div class="agenda-item"><div class="agenda-time">4 min</div><div class="agenda-text"><strong>Lecture:</strong> Human-in-the-loop design</div></div>
+      <div class="agenda-item"><div class="agenda-time">7 min</div><div class="agenda-text"><strong>Case Study:</strong> Air Canada — when AI made promises the company had to honor</div></div>
       <div class="agenda-item"><div class="agenda-time">10 min</div><div class="agenda-text"><strong>Applied Work:</strong> Design your confidence UX</div></div>
+      <div class="agenda-item"><div class="agenda-time">9 min</div><div class="agenda-text"><strong>Lecture:</strong> LLM-as-Judge + Eval Dashboard Spec</div></div>
       <div class="agenda-item"><div class="agenda-time">13 min</div><div class="agenda-text"><strong>Peer Challenge:</strong> Red-team the eval spec</div></div>
       <div class="agenda-item"><div class="agenda-time">15 min</div><div class="agenda-text"><strong>Build Moment:</strong> Draft your reliability contract</div></div>
-      <div class="agenda-item"><div class="agenda-time">5 min</div><div class="agenda-text"><strong>Synthesis + Bridge:</strong> Component 4 of your living strategy + what's coming in M5</div></div>
+      <div class="agenda-item"><div class="agenda-time">5 min</div><div class="agenda-text"><strong>Synthesis + Bridge:</strong> Component 4 + what's coming in M5</div></div>
     </div>
   </div>
 </div>
@@ -240,10 +241,49 @@
   </div>
 </div>
 
-<!-- ===== SLIDE 7: Human-in-the-Loop Design ===== -->
+<!-- ===== SLIDE 7: Define Your Golden Dataset (Applied) ===== -->
+<div class="slide" data-notes="They just learned what golden datasets are — now they build one. Writing beats listening. Prompt stuck folks: start with 5 failures. Notion/Linear teams version eval rows like code.">
+  <div class="slide-inner">
+    <div class="demo-tag tag-exercise">Applied Work · 15 Minutes</div>
+    <h2>Define Your Golden Dataset</h2>
+    <div class="subtitle">Your ground-truth spec — ship-blocking, not side project.</div>
+    <div style="display:flex; gap:16px; margin:20px 0;">
+      <div style="flex:1; background:#161822; border:1px solid #252840; border-radius:10px; padding:20px;">
+        <div style="font-size:13px; font-weight:800; color:#60a5fa; margin-bottom:10px;">Scope</div>
+        <div style="font-size:13px; color:#8899bb; line-height:2;">Domain: <span style="color:#555;">_____</span><br>Input/output types: <span style="color:#555;">_____</span><br>Target examples: <span style="color:#555;">_____ (100–500)</span></div>
+      </div>
+      <div style="flex:1; background:#161822; border:1px solid #252840; border-radius:10px; padding:20px;">
+        <div style="font-size:13px; font-weight:800; color:#fbbf24; margin-bottom:10px;">Sources</div>
+        <div style="font-size:13px; color:#8899bb; line-height:2;">Real user interactions: <span style="color:#555;">Y / N</span><br>Expert curated: <span style="color:#555;">Y / N</span><br>Adversarial / edge cases: <span style="color:#555;">Y / N</span></div>
+      </div>
+      <div style="flex:1; background:#161822; border:1px solid #252840; border-radius:10px; padding:20px;">
+        <div style="font-size:13px; font-weight:800; color:#34d399; margin-bottom:10px;">Maintenance</div>
+        <div style="font-size:13px; color:#8899bb; line-height:2;">Owner: <span style="color:#555;">_____</span><br>Update frequency: <span style="color:#555;">_____</span><br>Versioning: <span style="color:#555;">_____</span></div>
+      </div>
+    </div>
+    <p style="font-size:14px; color:#fbbf24; font-weight:600; text-align:center; margin-top:8px;">Sales test: one sentence — “Here’s how we test our AI.”</p>
+    <p style="font-size:13px; color:#60a5fa; font-weight:600; text-align:center; margin-top:6px;">Stand up if your set includes at least one adversarial row.</p>
+    <a href="M4 - Golden Dataset Builder.html" style="display:block; margin-top:14px; padding:10px 18px; background:rgba(91,141,239,0.08); border:1px solid rgba(91,141,239,0.2); border-radius:8px; text-decoration:none; text-align:center; transition:all 0.2s;">
+      <span style="font-size:12px; font-weight:700; color:#5b8def;">Open Golden Dataset Builder →</span>
+      <span style="display:block; font-size:11px; color:#7a7a9a; margin-top:2px;">Build your eval dataset with structured test cases</span>
+    </a>
+  </div>
+</div>
+
+<!-- ===== SLIDE 8: Break ===== -->
+<div class="slide" data-notes="Why: Reset after intensive golden-dataset writing. Tease Air Canada case + more building coming. Frame red-team as sport, not judgment.">
+  <div class="slide-inner" style="text-align:center;">
+    <div class="demo-tag tag-break">Break · 5 Minutes</div>
+    <h1>☕</h1>
+    <div class="subtitle" style="margin:16px auto;">Back for: Air Canada scare story · confidence UX · partner red-team.</div>
+    <p style="font-size:16px; color:#555;">Bring your trust issues.</p>
+  </div>
+</div>
+
+<!-- ===== SLIDE 9: Human-in-the-Loop Design ===== -->
 <div class="slide" data-notes="Why: regulated stacks normalize expert review — FDA workflows for radiology AI, clinical documentation vendors route low-confidence charting to clinicians. Crutch = infinite queue; feature = shrinking queue via captured fixes + clear escalation UX.">
   <div class="slide-inner">
-    <div class="demo-tag tag-lecture">Lecture · Point 3 of 4</div>
+    <div class="demo-tag tag-lecture">Lecture · Human-in-the-Loop</div>
     <h2>Human-in-the-Loop Design</h2>
     <div class="subtitle">HITL as a shrinking queue — not permanent babysitting.</div>
     <p style="font-size:13px; color:#8899bb; margin-bottom:14px; text-align:center;"><strong style="color:#e0e0f0;">Example:</strong> Medical imaging + ambient scribes — clinician sign-off on high-risk outputs.</p>
@@ -275,33 +315,7 @@
   </div>
 </div>
 
-<!-- ===== SLIDE 8: LLM-as-a-Judge ===== -->
-<div class="slide" data-notes="Why: manual rubrics don't scale to every completion. OpenAI/Anthropic-style orgs pair auto-graders with human spot checks — you mimic that with product thresholds. Judge is cheap; gold set is sacred — calibrate judge vs labeled rows constantly.">
-  <div class="slide-inner">
-    <div class="demo-tag tag-lecture">Lecture · Point 4 of 4</div>
-    <h2>LLM-as-a-Judge</h2>
-    <div class="subtitle">Automated scoring — calibrated against your gold set.</div>
-    <p style="font-size:13px; color:#8899bb; margin-bottom:14px; text-align:center;"><strong style="color:#e0e0f0;">Pattern:</strong> Vendors (LangSmith, Braintrust, etc.) = judges + traces; you still own labels.</p>
-    <div style="display:flex; flex-direction:column; gap:12px; margin:16px 0;">
-      <div style="display:flex; align-items:center; gap:16px; background:rgba(59,130,246,0.06); border:1px solid rgba(59,130,246,0.15); border-radius:10px; padding:18px;">
-        <div style="font-size:24px;">🔄</div>
-        <div><div style="font-size:15px; font-weight:700; color:#fff;">Regression</div><div style="font-size:13px; color:#8899bb;">Judge vs golden rows — continuous, high volume.</div></div>
-      </div>
-      <div style="display:flex; align-items:center; gap:16px; background:rgba(251,191,36,0.06); border:1px solid rgba(251,191,36,0.15); border-radius:10px; padding:18px;">
-        <div style="font-size:24px;">📉</div>
-        <div><div style="font-size:15px; font-weight:700; color:#fff;">Drift</div><div style="font-size:13px; color:#8899bb;">Trend alerts before NPS craters.</div></div>
-      </div>
-      <div style="display:flex; align-items:center; gap:16px; background:rgba(52,211,153,0.06); border:1px solid rgba(52,211,153,0.15); border-radius:10px; padding:18px;">
-        <div style="font-size:24px;">🚦</div>
-        <div><div style="font-size:15px; font-weight:700; color:#fff;">Quality gates</div><div style="font-size:13px; color:#8899bb;">Live route: auto vs human vs block.</div></div>
-      </div>
-    </div>
-    <p style="font-size:14px; color:#60a5fa; font-weight:600; text-align:center; margin-top:8px;">Who judges the judge? <strong>Your golden dataset.</strong></p>
-    <p style="font-size:14px; color:#fbbf24; font-weight:600; text-align:center; margin-top:10px;">Quick poll: thumbs up if a model already grades your outputs somewhere.</p>
-  </div>
-</div>
-
-<!-- ===== SLIDE 9: Case Study — Air Canada Chatbot ===== -->
+<!-- ===== SLIDE 10: Case Study — Air Canada Chatbot ===== -->
 <div class="slide" data-notes="Why: legal reality > model spec. Air Canada 2024 — chatbot invented bereavement policy; tribunal said bot = airline voice. Use for 'contract' metaphor. Pairs 60s: worst confident wrong answer in your domain?">
   <div class="slide-inner">
     <div class="demo-tag tag-case">Case Study · 7 Minutes</div>
@@ -327,77 +341,8 @@
   </div>
 </div>
 
-<!-- ===== SLIDE 10: Eval Dashboard Spec ===== -->
-<div class="slide" data-notes="Why: evals are the Stripe status page for AI — internal SRE + external proof. Datadog parallel: charts that force action. Thumbs: would you screen-share this next Tuesday?">
-  <div class="slide-inner">
-    <div class="demo-tag tag-framework">Framework · 5 Minutes</div>
-    <h2>The Eval Dashboard Spec</h2>
-    <div class="subtitle">Measure · display · act — like an SRE dashboard for your model.</div>
-    <p style="font-size:13px; color:#8899bb; margin:-6px 0 12px; text-align:center;">Think <strong style="color:#e0e0f0;">Datadog / Stripe status-page</strong> energy for AI quality</p>
-    <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:20px 0;">
-      <div style="background:#161822; border:1px solid #252840; border-radius:10px; padding:20px;">
-        <div style="font-size:13px; font-weight:800; color:#60a5fa; margin-bottom:8px;">Metrics</div>
-        <div style="font-size:13px; color:#8899bb; line-height:1.45;">Quality · latency · confidence spread · HITL% · overrides</div>
-      </div>
-      <div style="background:#161822; border:1px solid #252840; border-radius:10px; padding:20px;">
-        <div style="font-size:13px; font-weight:800; color:#fbbf24; margin-bottom:8px;">Judge setup</div>
-        <div style="font-size:13px; color:#8899bb; line-height:1.45;">Model · rubric · gold set · thresholds</div>
-      </div>
-      <div style="background:#161822; border:1px solid #252840; border-radius:10px; padding:20px;">
-        <div style="font-size:13px; font-weight:800; color:#f87171; margin-bottom:8px;">Drift alerts</div>
-        <div style="font-size:13px; color:#8899bb; line-height:1.45;">Auto ping when trends cross the line</div>
-      </div>
-      <div style="background:#161822; border:1px solid #252840; border-radius:10px; padding:20px;">
-        <div style="font-size:13px; font-weight:800; color:#34d399; margin-bottom:8px;">UX hooks</div>
-        <div style="font-size:13px; color:#8899bb; line-height:1.45;">Scores in UI · citations · thumbs-up loops</div>
-      </div>
-    </div>
-    <p style="font-size:14px; color:#f87171; font-weight:600; text-align:center;">Can't screen-share this in a sales call? Not product-grade.</p>
-    <p style="font-size:14px; color:#60a5fa; font-weight:600; text-align:center; margin-top:8px;">Thumbs: ready to show this to a buyer next week?</p>
-  </div>
-</div>
-
-<!-- ===== SLIDE 11: Break ===== -->
-<div class="slide" data-notes="Why: brains need reset before heavy writing. Tease partner red-team as sport, not judgment.">
-  <div class="slide-inner" style="text-align:center;">
-    <div class="demo-tag tag-break">Break · 5 Minutes</div>
-    <h1>☕</h1>
-    <div class="subtitle" style="margin:16px auto;">Back for: gold set · confidence UX · partner red-team.</div>
-    <p style="font-size:16px; color:#555;">Bring your trust issues.</p>
-  </div>
-</div>
-
-<!-- ===== SLIDE 12: Define Your Golden Dataset ===== -->
-<div class="slide" data-notes="Why: writing beats listening — they leave with a spec. Prompt stuck folks: 5 failures first. Notion/Linear teams version eval rows like code — optional name-drop.">
-  <div class="slide-inner">
-    <div class="demo-tag tag-exercise">Applied Work · 15 Minutes</div>
-    <h2>Define Your Golden Dataset</h2>
-    <div class="subtitle">Your ground-truth spec — ship-blocking, not side project.</div>
-    <div style="display:flex; gap:16px; margin:20px 0;">
-      <div style="flex:1; background:#161822; border:1px solid #252840; border-radius:10px; padding:20px;">
-        <div style="font-size:13px; font-weight:800; color:#60a5fa; margin-bottom:10px;">Scope</div>
-        <div style="font-size:13px; color:#8899bb; line-height:2;">Domain: <span style="color:#555;">_____</span><br>Input/output types: <span style="color:#555;">_____</span><br>Target examples: <span style="color:#555;">_____ (100–500)</span></div>
-      </div>
-      <div style="flex:1; background:#161822; border:1px solid #252840; border-radius:10px; padding:20px;">
-        <div style="font-size:13px; font-weight:800; color:#fbbf24; margin-bottom:10px;">Sources</div>
-        <div style="font-size:13px; color:#8899bb; line-height:2;">Real user interactions: <span style="color:#555;">Y / N</span><br>Expert curated: <span style="color:#555;">Y / N</span><br>Adversarial / edge cases: <span style="color:#555;">Y / N</span></div>
-      </div>
-      <div style="flex:1; background:#161822; border:1px solid #252840; border-radius:10px; padding:20px;">
-        <div style="font-size:13px; font-weight:800; color:#34d399; margin-bottom:10px;">Maintenance</div>
-        <div style="font-size:13px; color:#8899bb; line-height:2;">Owner: <span style="color:#555;">_____</span><br>Update frequency: <span style="color:#555;">_____</span><br>Versioning: <span style="color:#555;">_____</span></div>
-      </div>
-    </div>
-    <p style="font-size:14px; color:#fbbf24; font-weight:600; text-align:center; margin-top:8px;">Sales test: one sentence — “Here’s how we test our AI.”</p>
-    <p style="font-size:13px; color:#60a5fa; font-weight:600; text-align:center; margin-top:6px;">Stand up if your set includes at least one adversarial row.</p>
-    <a href="M4 - Golden Dataset Builder.html" style="display:block; margin-top:14px; padding:10px 18px; background:rgba(91,141,239,0.08); border:1px solid rgba(91,141,239,0.2); border-radius:8px; text-decoration:none; text-align:center; transition:all 0.2s;">
-      <span style="font-size:12px; font-weight:700; color:#5b8def;">Open Golden Dataset Builder →</span>
-      <span style="display:block; font-size:11px; color:#7a7a9a; margin-top:2px;">Build your eval dataset with structured test cases</span>
-    </a>
-  </div>
-</div>
-
-<!-- ===== SLIDE 13: Design Your Confidence UX ===== -->
-<div class="slide" data-notes="Why: one-mode UIs create Air Canada energy. Grammarly tiers / Copilot cues = reference. Force color + copy choices. Corrections = M2 flywheel — say it once.">
+<!-- ===== SLIDE 11: Design Your Confidence UX (Applied) ===== -->
+<div class="slide" data-notes="They just saw HITL + Air Canada — now design what their product does at different confidence levels. One-mode UIs create Air Canada energy. Grammarly tiers / Copilot cues = reference. Corrections = M2 flywheel.">
   <div class="slide-inner">
     <div class="demo-tag tag-exercise">Applied Work · 10 Minutes</div>
     <h2>Design Your Confidence UX</h2>
@@ -428,6 +373,62 @@
       <span style="font-size:12px; font-weight:700; color:#5b8def;">Open Confidence UX Checklist →</span>
       <span style="display:block; font-size:11px; color:#7a7a9a; margin-top:2px;">16-point checklist for designing AI uncertainty</span>
     </a>
+  </div>
+</div>
+
+<!-- ===== SLIDE 12: LLM-as-a-Judge ===== -->
+<div class="slide" data-notes="Why: manual rubrics don't scale to every completion. OpenAI/Anthropic-style orgs pair auto-graders with human spot checks — you mimic that with product thresholds. Judge is cheap; gold set is sacred — calibrate judge vs labeled rows constantly.">
+  <div class="slide-inner">
+    <div class="demo-tag tag-lecture">Lecture · LLM-as-a-Judge</div>
+    <h2>LLM-as-a-Judge</h2>
+    <div class="subtitle">Automated scoring — calibrated against your gold set.</div>
+    <p style="font-size:13px; color:#8899bb; margin-bottom:14px; text-align:center;"><strong style="color:#e0e0f0;">Pattern:</strong> Vendors (LangSmith, Braintrust, etc.) = judges + traces; you still own labels.</p>
+    <div style="display:flex; flex-direction:column; gap:12px; margin:16px 0;">
+      <div style="display:flex; align-items:center; gap:16px; background:rgba(59,130,246,0.06); border:1px solid rgba(59,130,246,0.15); border-radius:10px; padding:18px;">
+        <div style="font-size:24px;">🔄</div>
+        <div><div style="font-size:15px; font-weight:700; color:#fff;">Regression</div><div style="font-size:13px; color:#8899bb;">Judge vs golden rows — continuous, high volume.</div></div>
+      </div>
+      <div style="display:flex; align-items:center; gap:16px; background:rgba(251,191,36,0.06); border:1px solid rgba(251,191,36,0.15); border-radius:10px; padding:18px;">
+        <div style="font-size:24px;">📉</div>
+        <div><div style="font-size:15px; font-weight:700; color:#fff;">Drift</div><div style="font-size:13px; color:#8899bb;">Trend alerts before NPS craters.</div></div>
+      </div>
+      <div style="display:flex; align-items:center; gap:16px; background:rgba(52,211,153,0.06); border:1px solid rgba(52,211,153,0.15); border-radius:10px; padding:18px;">
+        <div style="font-size:24px;">🚦</div>
+        <div><div style="font-size:15px; font-weight:700; color:#fff;">Quality gates</div><div style="font-size:13px; color:#8899bb;">Live route: auto vs human vs block.</div></div>
+      </div>
+    </div>
+    <p style="font-size:14px; color:#60a5fa; font-weight:600; text-align:center; margin-top:8px;">Who judges the judge? <strong>Your golden dataset.</strong></p>
+    <p style="font-size:14px; color:#fbbf24; font-weight:600; text-align:center; margin-top:10px;">Quick poll: thumbs up if a model already grades your outputs somewhere.</p>
+  </div>
+</div>
+
+<!-- ===== SLIDE 13: Eval Dashboard Spec ===== -->
+<div class="slide" data-notes="Why: evals are the Stripe status page for AI — internal SRE + external proof. Datadog parallel: charts that force action. Thumbs: would you screen-share this next Tuesday?">
+  <div class="slide-inner">
+    <div class="demo-tag tag-framework">Framework · 5 Minutes</div>
+    <h2>The Eval Dashboard Spec</h2>
+    <div class="subtitle">Measure · display · act — like an SRE dashboard for your model.</div>
+    <p style="font-size:13px; color:#8899bb; margin:-6px 0 12px; text-align:center;">Think <strong style="color:#e0e0f0;">Datadog / Stripe status-page</strong> energy for AI quality</p>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:20px 0;">
+      <div style="background:#161822; border:1px solid #252840; border-radius:10px; padding:20px;">
+        <div style="font-size:13px; font-weight:800; color:#60a5fa; margin-bottom:8px;">Metrics</div>
+        <div style="font-size:13px; color:#8899bb; line-height:1.45;">Quality · latency · confidence spread · HITL% · overrides</div>
+      </div>
+      <div style="background:#161822; border:1px solid #252840; border-radius:10px; padding:20px;">
+        <div style="font-size:13px; font-weight:800; color:#fbbf24; margin-bottom:8px;">Judge setup</div>
+        <div style="font-size:13px; color:#8899bb; line-height:1.45;">Model · rubric · gold set · thresholds</div>
+      </div>
+      <div style="background:#161822; border:1px solid #252840; border-radius:10px; padding:20px;">
+        <div style="font-size:13px; font-weight:800; color:#f87171; margin-bottom:8px;">Drift alerts</div>
+        <div style="font-size:13px; color:#8899bb; line-height:1.45;">Auto ping when trends cross the line</div>
+      </div>
+      <div style="background:#161822; border:1px solid #252840; border-radius:10px; padding:20px;">
+        <div style="font-size:13px; font-weight:800; color:#34d399; margin-bottom:8px;">UX hooks</div>
+        <div style="font-size:13px; color:#8899bb; line-height:1.45;">Scores in UI · citations · thumbs-up loops</div>
+      </div>
+    </div>
+    <p style="font-size:14px; color:#f87171; font-weight:600; text-align:center;">Can't screen-share this in a sales call? Not product-grade.</p>
+    <p style="font-size:14px; color:#60a5fa; font-weight:600; text-align:center; margin-top:8px;">Thumbs: ready to show this to a buyer next week?</p>
   </div>
 </div>
 
