@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Bet Evaluator — Evaluate Your Strategy With AI</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+  :root {
+    --bg: #0b0b10;
+    --surface: #13131a;
+    --surface2: #1a1a24;
+    --border: #252535;
+    --border-hi: #35354a;
+    --text: #e0e0f0;
+    --text-dim: #7a7a9a;
+    --text-muted: #55556a;
+    --blue: #5b8def;
+    --green: #3dd68c;
+    --yellow: #f0c040;
+    --red: #ef5b5b;
+    --purple: #a07be8;
+    --blue-bg: rgba(91,141,239,0.08);
+    --green-bg: rgba(61,214,140,0.08);
+    --radius: 10px;
+    --radius-lg: 14px;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 40px 20px 100px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page { max-width: 760px; margin: 0 auto; }
+
+  .header { text-align: center; margin-bottom: 36px; }
+  .badge {
+    display: inline-block; font-size: 10px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.12em;
+    color: var(--purple); background: rgba(160,123,232,0.08);
+    border: 1px solid rgba(160,123,232,0.2);
+    padding: 5px 14px; border-radius: 20px; margin-bottom: 14px;
+  }
+  .header h1 {
+    font-size: 30px; font-weight: 800; color: #fff;
+    margin-bottom: 8px; letter-spacing: -0.02em;
+  }
+  .header p {
+    font-size: 14px; color: var(--text-dim);
+    line-height: 1.6; max-width: 580px; margin: 0 auto;
+  }
+
+  .card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-lg); margin-bottom: 20px;
+    overflow: hidden; transition: border-color 0.2s;
+  }
+  .card:hover { border-color: var(--border-hi); }
+  .card-head {
+    padding: 18px 24px; border-bottom: 1px solid var(--border);
+  }
+  .card-title { font-size: 16px; font-weight: 700; color: #fff; }
+  .card-sub { font-size: 12px; color: var(--text-dim); margin-top: 4px; line-height: 1.5; }
+  .card-body { padding: 20px 24px 24px; }
+
+  .field { margin-bottom: 18px; }
+  .field:last-child { margin-bottom: 0; }
+  .field label {
+    display: block; font-size: 12px; font-weight: 600;
+    color: var(--text-dim); margin-bottom: 8px;
+  }
+  .field label span { color: var(--text-muted); font-weight: 500; }
+  textarea {
+    width: 100%; min-height: 80px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px; font-weight: 500; color: #fff;
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 8px; padding: 12px 14px; resize: vertical;
+    outline: none; line-height: 1.5; transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  textarea:focus {
+    border-color: var(--blue);
+    box-shadow: 0 0 0 3px rgba(91,141,239,0.12);
+  }
+  textarea::placeholder { color: var(--text-muted); }
+
+  .dim-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 16px 0; }
+  .dim-item {
+    display: flex; align-items: flex-start; gap: 10px;
+    padding: 12px 14px; background: var(--surface2);
+    border: 1px solid var(--border); border-radius: 8px;
+    cursor: pointer; transition: all 0.2s; user-select: none;
+  }
+  .dim-item:hover { border-color: var(--border-hi); }
+  .dim-item.active { border-color: var(--purple); background: rgba(160,123,232,0.06); }
+  .dim-item input[type="checkbox"] { display: none; }
+  .dim-check {
+    width: 18px; height: 18px; border-radius: 4px; flex-shrink: 0;
+    border: 2px solid var(--border-hi); display: flex;
+    align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 700; color: transparent;
+    transition: all 0.2s; margin-top: 1px;
+  }
+  .dim-item.active .dim-check {
+    background: var(--purple); border-color: var(--purple); color: #fff;
+  }
+  .dim-label { font-size: 13px; font-weight: 600; color: var(--text); }
+  .dim-desc { font-size: 11px; color: var(--text-muted); margin-top: 2px; line-height: 1.4; }
+
+  .prompt-output {
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 20px; margin-top: 16px;
+    font-family: 'JetBrains Mono', monospace; font-size: 12px;
+    color: var(--text-dim); line-height: 1.7; white-space: pre-wrap;
+    max-height: 500px; overflow-y: auto; display: none;
+  }
+  .prompt-output.visible { display: block; }
+
+  .actions {
+    display: flex; flex-wrap: wrap; gap: 10px;
+    margin-top: 20px; justify-content: center;
+  }
+  .btn {
+    font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600;
+    padding: 10px 20px; border-radius: 8px;
+    border: 1px solid var(--border); background: var(--surface2);
+    color: var(--text); cursor: pointer; transition: all 0.2s;
+  }
+  .btn:hover { border-color: var(--blue); color: #fff; }
+  .btn.primary { background: var(--purple); border-color: var(--purple); color: #fff; }
+  .btn.primary:hover { background: #8a65d8; }
+
+  .tip {
+    margin-top: 14px; padding: 12px 16px;
+    background: var(--blue-bg); border: 1px solid rgba(91,141,239,0.12);
+    border-radius: var(--radius); font-size: 12px;
+    color: var(--text-dim); line-height: 1.55;
+  }
+  .tip strong { color: var(--blue); }
+
+  .how-section { margin-top: 12px; }
+  .how-step {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 14px 0; border-bottom: 1px solid var(--border);
+  }
+  .how-step:last-child { border-bottom: none; }
+  .how-num {
+    width: 28px; height: 28px; border-radius: 6px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 800; color: #fff;
+    background: var(--purple);
+  }
+  .how-text { font-size: 13px; color: var(--text-dim); line-height: 1.5; }
+  .how-text strong { color: var(--text); }
+
+  .saved-toast {
+    position: fixed; bottom: 24px; left: 50%;
+    transform: translateX(-50%) translateY(60px);
+    background: var(--green); color: #000;
+    font-size: 13px; font-weight: 600;
+    padding: 10px 24px; border-radius: 8px;
+    opacity: 0; transition: all 0.3s; pointer-events: none; z-index: 100;
+  }
+  .saved-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+</style>
+</head>
+<body>
+
+<div class="page">
+  <div class="header">
+    <div class="badge">Course Tool — Use After Any Module</div>
+    <h1>AI Bet Evaluator</h1>
+    <p>Use AI to systematically evaluate your product bets against the strategy frameworks you've learned. Generates a structured prompt you paste into ChatGPT, Claude, or any AI.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-title">How It Works</div>
+    </div>
+    <div class="card-body">
+      <div class="how-section">
+        <div class="how-step">
+          <div class="how-num">1</div>
+          <div class="how-text"><strong>Describe your bet</strong> — paste your strategy components below (as much or as little as you have)</div>
+        </div>
+        <div class="how-step">
+          <div class="how-num">2</div>
+          <div class="how-text"><strong>Choose evaluation dimensions</strong> — select which lenses to evaluate against</div>
+        </div>
+        <div class="how-step">
+          <div class="how-num">3</div>
+          <div class="how-text"><strong>Generate &amp; copy the prompt</strong> — paste into any AI tool for a structured critique</div>
+        </div>
+        <div class="how-step">
+          <div class="how-num">4</div>
+          <div class="how-text"><strong>Iterate</strong> — refine your strategy based on the evaluation, then re-evaluate</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-title">Your Strategy Inputs</div>
+      <div class="card-sub">Paste from your living strategy components. Leave blank any you haven't built yet.</div>
+    </div>
+    <div class="card-body">
+      <div class="field">
+        <label>The Bet (M1) <span>— What you're building, for whom, why now</span></label>
+        <textarea id="inputBet" placeholder="e.g. AI-powered contract review for mid-market legal teams. Replaces 4-hour manual review with 15-minute AI triage + human sign-off on flagged clauses."></textarea>
+      </div>
+      <div class="field">
+        <label>The Moat (M2) <span>— Defensibility, flywheel, vendor portability</span></label>
+        <textarea id="inputMoat" placeholder="e.g. Proprietary clause library from 50K reviewed contracts. Each correction trains the model. Switching cost: 6 months of accumulated firm-specific precedent."></textarea>
+      </div>
+      <div class="field">
+        <label>The Margin (M3) <span>— Cost model, pricing strategy, unit economics</span></label>
+        <textarea id="inputMargin" placeholder="e.g. Cascading: GPT-4o-mini for 80% of clauses, GPT-4o for flagged ones. $0.12/contract avg cost. Pricing: $500/mo base + $2/contract. Gross margin: ~72%."></textarea>
+      </div>
+      <div class="field">
+        <label>The Contract (M4) <span>— Trust, evals, reliability, confidence UX</span></label>
+        <textarea id="inputContract" placeholder="e.g. Golden dataset: 500 labeled contracts with known issues. LLM judge for regression. Confidence UX: green/yellow/red per clause. Human review required for red."></textarea>
+      </div>
+      <div class="field">
+        <label>The Guardrails (M5) <span>— Governance, scaling, compounding systems</span></label>
+        <textarea id="inputGuardrails" placeholder="e.g. Governance: legal review of model changes quarterly. Shadow AI audit completed — 3 unsanctioned tools consolidated. Agent boundary: no auto-approval above $50K contract value."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-title">Evaluation Dimensions</div>
+      <div class="card-sub">Select which lenses to evaluate. More dimensions = deeper analysis.</div>
+    </div>
+    <div class="card-body">
+      <div class="dim-grid" id="dimGrid">
+        <div class="dim-item active" onclick="toggleDim(this)" data-dim="validation">
+          <input type="checkbox" checked>
+          <div class="dim-check">✓</div>
+          <div>
+            <div class="dim-label">Bet Validation</div>
+            <div class="dim-desc">Is the bet backed by evidence or just conviction?</div>
+          </div>
+        </div>
+        <div class="dim-item active" onclick="toggleDim(this)" data-dim="capabilities">
+          <input type="checkbox" checked>
+          <div class="dim-check">✓</div>
+          <div>
+            <div class="dim-label">Capability Assessment</div>
+            <div class="dim-desc">What needs to be built? Is it realistic?</div>
+          </div>
+        </div>
+        <div class="dim-item active" onclick="toggleDim(this)" data-dim="impact">
+          <input type="checkbox" checked>
+          <div class="dim-check">✓</div>
+          <div>
+            <div class="dim-label">Impact Analysis</div>
+            <div class="dim-desc">What business impact does this drive?</div>
+          </div>
+        </div>
+        <div class="dim-item active" onclick="toggleDim(this)" data-dim="defensibility">
+          <input type="checkbox" checked>
+          <div class="dim-check">✓</div>
+          <div>
+            <div class="dim-label">Defensibility Check</div>
+            <div class="dim-desc">Can this be copied by platforms or competitors?</div>
+          </div>
+        </div>
+        <div class="dim-item active" onclick="toggleDim(this)" data-dim="pricing">
+          <input type="checkbox" checked>
+          <div class="dim-check">✓</div>
+          <div>
+            <div class="dim-label">Pricing Alignment</div>
+            <div class="dim-desc">Do economics and pricing strategy hold?</div>
+          </div>
+        </div>
+        <div class="dim-item active" onclick="toggleDim(this)" data-dim="trust">
+          <input type="checkbox" checked>
+          <div class="dim-check">✓</div>
+          <div>
+            <div class="dim-label">Trust &amp; Reliability</div>
+            <div class="dim-desc">Is the trust contract explicit and measurable?</div>
+          </div>
+        </div>
+        <div class="dim-item active" onclick="toggleDim(this)" data-dim="governance">
+          <input type="checkbox" checked>
+          <div class="dim-check">✓</div>
+          <div>
+            <div class="dim-label">Governance &amp; Scale</div>
+            <div class="dim-desc">Can this scale without breaking?</div>
+          </div>
+        </div>
+        <div class="dim-item active" onclick="toggleDim(this)" data-dim="gaps">
+          <input type="checkbox" checked>
+          <div class="dim-check">✓</div>
+          <div>
+            <div class="dim-label">Gap Identification</div>
+            <div class="dim-desc">What's missing or underspecified?</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button class="btn primary" onclick="generatePrompt()">Generate Evaluation Prompt</button>
+    <button class="btn" onclick="copyPrompt()">Copy to Clipboard</button>
+    <button class="btn" onclick="saveInputs()">Save Progress</button>
+  </div>
+
+  <div class="prompt-output" id="promptOutput"></div>
+
+  <div class="tip" style="margin-top:20px;">
+    <strong>After the course:</strong> Use this tool whenever you're evaluating a new AI product bet. Paste your strategy, generate the prompt, and get a structured critique from AI. The frameworks become a permanent analytical lens — not a classroom exercise.
+  </div>
+</div>
+
+<div class="saved-toast" id="toast">Saved</div>
+
+<script>
+const STORAGE_KEY = 'ai-bet-evaluator';
+
+const dimQuestions = {
+  validation: {
+    title: 'Bet Validation',
+    questions: [
+      'Is the bet backed by user evidence (interviews, usage data, market signals) or primarily by conviction/intuition?',
+      'What falsifiable hypothesis underlies this bet? What would prove it wrong?',
+      'How quickly can you validate the core assumption — days, weeks, or months?',
+      'What is the kill criteria? At what point do you walk away?'
+    ]
+  },
+  capabilities: {
+    title: 'Capability Assessment',
+    questions: [
+      'What technical capabilities need to be developed vs. what exists today?',
+      'What organizational capabilities (data pipelines, ML ops, domain expertise) are required?',
+      'Is the capability gap realistic to close in the planned timeframe?',
+      'What dependencies (third-party models, data sources, regulatory approvals) could block progress?'
+    ]
+  },
+  impact: {
+    title: 'Impact Analysis',
+    questions: [
+      'What specific business metric does this bet move (revenue, cost reduction, retention, expansion)?',
+      'What is the magnitude of impact — incremental improvement or step-change?',
+      'How does impact compound over time, or does it plateau?',
+      'What is the opportunity cost of pursuing this bet vs. alternatives?'
+    ]
+  },
+  defensibility: {
+    title: 'Defensibility Check',
+    questions: [
+      'Could a platform (Google, Microsoft, Apple, OpenAI) ship this as a native feature within 12 months?',
+      'What data flywheel exists that gets stronger with usage?',
+      'What switching costs exist for users who adopt this?',
+      'Is there workflow depth (deeply embedded in user processes) or is this a surface-level feature?'
+    ]
+  },
+  pricing: {
+    title: 'Pricing Alignment',
+    questions: [
+      'Does the pricing model align with how value is delivered (per seat, per task, per outcome)?',
+      'What happens to unit economics when a power user does 10x the average volume?',
+      'Can the product sustain its current pricing if inference costs increase 2-3x?',
+      'Is there a clear willingness-to-pay signal from the target buyer?'
+    ]
+  },
+  trust: {
+    title: 'Trust & Reliability',
+    questions: [
+      'Is there a golden dataset that defines "good" output for this specific product?',
+      'What does the user see when the AI is uncertain — is confidence visible or hidden?',
+      'Is there a human-in-the-loop path for high-stakes or low-confidence outputs?',
+      'What is the explicit reliability promise to users — accuracy %, latency, uptime?'
+    ]
+  },
+  governance: {
+    title: 'Governance & Scale',
+    questions: [
+      'What breaks when this scales 10x — cost, quality, latency, or trust?',
+      'Is there a governance framework for model changes, data handling, and compliance?',
+      'How are corrections and feedback captured and fed back into improvement?',
+      'Has a shadow AI audit been conducted — are there unsanctioned tools doing similar work?'
+    ]
+  },
+  gaps: {
+    title: 'Gap Identification',
+    questions: [
+      'Which of the five strategy components (Bet, Moat, Margin, Contract, Guardrails) is weakest or missing?',
+      'What assumptions are untested?',
+      'What question would a skeptical board member or CPO ask that you cannot answer today?',
+      'What is the single biggest risk that could kill this bet in the next 6 months?'
+    ]
+  }
+};
+
+function toggleDim(el) {
+  el.classList.toggle('active');
+  const cb = el.querySelector('input[type="checkbox"]');
+  cb.checked = !cb.checked;
+}
+
+function getActiveDims() {
+  return Array.from(document.querySelectorAll('.dim-item.active'))
+    .map(el => el.dataset.dim);
+}
+
+function getInputs() {
+  return {
+    bet: document.getElementById('inputBet').value.trim(),
+    moat: document.getElementById('inputMoat').value.trim(),
+    margin: document.getElementById('inputMargin').value.trim(),
+    contract: document.getElementById('inputContract').value.trim(),
+    guardrails: document.getElementById('inputGuardrails').value.trim()
+  };
+}
+
+function generatePrompt() {
+  const inputs = getInputs();
+  const dims = getActiveDims();
+
+  if (!inputs.bet && !inputs.moat && !inputs.margin && !inputs.contract && !inputs.guardrails) {
+    showToast('Add at least one strategy input first');
+    return;
+  }
+  if (dims.length === 0) {
+    showToast('Select at least one evaluation dimension');
+    return;
+  }
+
+  let prompt = `You are an experienced AI product strategist and board advisor. Evaluate the following AI product strategy using the evaluation dimensions specified below.
+
+Be direct, specific, and constructively critical. For each dimension:
+- Score 1-5 (1 = critical gap, 5 = strong)
+- State what's working
+- State what's weak or missing
+- Give one specific recommendation
+
+At the end, provide:
+- An overall strategy strength score (1-5)
+- The single biggest risk
+- The three most important actions to take next
+
+---
+
+## STRATEGY INPUTS
+
+`;
+
+  const labels = {
+    bet: 'THE BET (What we\'re building)',
+    moat: 'THE MOAT (Defensibility)',
+    margin: 'THE MARGIN (Economics & Pricing)',
+    contract: 'THE CONTRACT (Trust & Reliability)',
+    guardrails: 'THE GUARDRAILS (Governance & Scale)'
+  };
+
+  for (const [key, label] of Object.entries(labels)) {
+    if (inputs[key]) {
+      prompt += `### ${label}\n${inputs[key]}\n\n`;
+    } else {
+      prompt += `### ${label}\n[Not yet defined]\n\n`;
+    }
+  }
+
+  prompt += `---
+
+## EVALUATION DIMENSIONS
+
+Evaluate this strategy against the following dimensions:\n\n`;
+
+  for (const dim of dims) {
+    const d = dimQuestions[dim];
+    prompt += `### ${d.title}\n`;
+    d.questions.forEach(q => {
+      prompt += `- ${q}\n`;
+    });
+    prompt += '\n';
+  }
+
+  prompt += `---
+
+## FORMAT
+
+For each dimension, respond with:
+
+**[Dimension Name]** — Score: X/5
+- Strengths: ...
+- Gaps: ...
+- Recommendation: ...
+
+Then close with:
+- **Overall Score:** X/5
+- **Biggest Risk:** ...
+- **Top 3 Actions:** ...`;
+
+  const output = document.getElementById('promptOutput');
+  output.textContent = prompt;
+  output.classList.add('visible');
+  output.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function copyPrompt() {
+  const output = document.getElementById('promptOutput');
+  if (!output.textContent) {
+    showToast('Generate a prompt first');
+    return;
+  }
+  navigator.clipboard.writeText(output.textContent).then(() => {
+    showToast('Prompt copied to clipboard');
+  });
+}
+
+function saveInputs() {
+  const data = getInputs();
+  data.dims = getActiveDims();
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  showToast('Progress saved');
+}
+
+function loadInputs() {
+  try {
+    const data = JSON.parse(localStorage.getItem(STORAGE_KEY));
+    if (!data) return;
+    if (data.bet) document.getElementById('inputBet').value = data.bet;
+    if (data.moat) document.getElementById('inputMoat').value = data.moat;
+    if (data.margin) document.getElementById('inputMargin').value = data.margin;
+    if (data.contract) document.getElementById('inputContract').value = data.contract;
+    if (data.guardrails) document.getElementById('inputGuardrails').value = data.guardrails;
+  } catch(e) {}
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2000);
+}
+
+loadInputs();
+</script>
+
+</body>
+</html>

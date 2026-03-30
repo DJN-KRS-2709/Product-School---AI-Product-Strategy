@@ -25,6 +25,7 @@
 - Interactive moment: "Which moat is yours? Name it in one word." Then: "What other company masters one of these?" — get 2-3 from the room
 - Why the reframe: Carlos's point is right — telling people they need 4+ moats is overwhelming and unrealistic. Most startups have one, maybe two. The goal is to be excellent at that one, then build a second as you scale
 - If someone can't name their moat in one word, that's a finding
+- **Mental model:** Most products need only one or two genuine moats, not all eight. The grid is vocabulary for naming what's defensible — not a checklist to complete.
 
 ## Slide 5 — Case Study: Jasper vs. ChatGPT
 - "You just named your moat. Here's what happens when it isn't real."
@@ -58,6 +59,7 @@
 ## Slide 9 — Data Flywheel Scoring
 - Four loops: Correction, Preference, Domain Context, Network
 - Score each 1-5. Weakest loop = where competitors attack first
+- **Mental model:** Scoring forces specificity, but the loop set is theirs to adapt — their flywheel might have two loops or six; the framework isn't a fixed template.
 - Why a scoring tool: abstract concepts don't change behavior, numbers do. Once they see a 1 or 2 staring back at them, the priority becomes obvious. This is the last thing before the break — it should leave them uncomfortable
 
 ## Slide 10 — Break
@@ -85,6 +87,7 @@
 - Three layers: abstraction (no direct provider calls), multi-model routing (tasks go by cost/quality/latency), eval harness (automated quality check)
 - Ask: "How many of you could swap providers in 48 hours?" Almost nobody raises their hand
 - Why this is the wow moment: most products are hard-wired to one provider. The Kill Switch turns dependency into optionality. 48 hours is deliberately aggressive — it should make them uncomfortable
+- **Mental model:** Vendor portability looks different in every domain. Treat the 48-hour bar as a way to think about dependency and swap readiness, not a literal SLA.
 
 ## Slide 15 — Your Portability Audit
 - 15 min build moment — audit vendor dependency

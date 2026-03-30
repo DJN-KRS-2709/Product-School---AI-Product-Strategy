@@ -50,6 +50,7 @@
 ## Slide 10 — Shadow AI Audit
 - **Why:** Repeatable org exercise—this is what they take to IT/Finance.
 - Spotify = govern, don’t pretend zero AI. Air Canada on Policy = customer bots need rails + escalation.
+- **Mental model:** Treat any audit checklist as a diagnostic lens, not an exhaustive survey — categories and depth will shift with org size and industry.
 - **Do:** Write guessed # of paid AI tools—then reality-check in the audit.
 
 ## Slide 11 — Break
@@ -59,10 +60,12 @@
 ## Slide 12 — Design Compounding System
 - **Why:** Surfaces “theater” loops that never ship to learning infra.
 - Roam—force one aspirational vs shipped callout per table.
+- **Mental model:** The compounding-vs.-volume distinction is the core idea; not every product needs every system component on the slide — they adapt the diagram to what actually ships and learns.
 - **Do:** Neighbor—which loop is theater on your roadmap?
 
 ## Slide 13 — Draft Governance Policy
 - **Why:** If they can’t one-pager it, execs know they don’t own the stance.
+- **Mental model:** The governance framework here is starter vocabulary for conversations with legal, security, and compliance — they’ll need to map it onto their org’s existing policies and committees, not replace them wholesale.
 - Push nouns: owners, data classes, auto-approved actions.
 - **Prompt if stuck:** “What’s blank when Samsung or Air Canada happens?”
 - **🔧 Tool:** "Open the AI Maturity Scorer — it scores five dimensions of your responsible AI practice and shows you exactly where you are on the compliance → sellable trust ladder. Export and share with your leadership."

@@ -39,9 +39,21 @@ Each module answers one question a CPO or board member actually asks. The arc is
 | M5 | **The Guardrails** | What breaks when this scales? |
 | M6 | **The Pitch** | How do you get this funded, shipped, and adopted? |
 
-### The underlying shifts (implicit, not named to participants)
+### Why AI strategy is different (explicit — name it in M1, reinforce every module)
 
-These evolutions still happen — they're just the byproduct, not the headline.
+Traditional product strategy assumes deterministic outputs, fixed infrastructure costs, clear competitive boundaries, trust by default, and annual planning cycles. AI product strategy breaks all five:
+
+| Traditional | AI |
+|------------|-----|
+| Feature works or it doesn't | Outputs are probabilistic — accuracy, hallucination, drift |
+| Infra scales predictably | Inference costs scale with usage, not users |
+| Your product vs. theirs | Your feature becomes a platform's checkbox overnight |
+| Software does what it says | Users must be convinced to trust uncertain outputs |
+| Annual planning cycles | Capabilities change weekly — bets, not plans |
+
+This isn't a footnote. It's the reason the course exists. M1 should open with this table before any framework. Each module should tie back to the specific assumption it breaks.
+
+### The underlying shifts (per module)
 
 - M1: Certainty → Probabilistic thinking
 - M2: Features → Defensible systems
@@ -74,7 +86,7 @@ Each component connects to the others — they're pillars of one strategy, not s
 
 ---
 
-## Five Design Principles
+## Eight Design Principles
 
 ### 1. Build in every session
 
@@ -142,6 +154,48 @@ Per Carlos's directive: every module question is about the product, not the PM. 
 | "Build a governance framework" | "Ship a governance posture that accelerates enterprise deals" |
 | "Design a production-grade eval system" | "Make reliability a product feature your users can see" |
 | "Model the real economics of your AI product" | "Build a cost curve you can defend to your board" |
+
+### 6. Frameworks are mental models, not templates
+
+Every framework in this course (5 archetypes, 8 moats, cost curve, eval dashboard, reliability contract, governance policy) is a thinking tool participants adapt to their context — not a form to fill in. The on-slide structure gives them a starting shape. The instructor's job is to push them to break it for their own product.
+
+Coaching pattern per framework:
+1. Present the framework with a concrete example (someone else's product)
+2. Show where the framework *doesn't* perfectly fit that example — name what was adapted
+3. Participants apply to their own product and identify which parts they'd change, drop, or add
+4. Peer challenge tests whether the adapted version holds up
+
+If someone's artifact looks exactly like the template, that's a smell. The goal is that they leave with a customized mental model for their product — not a filled-in worksheet.
+
+### 7. AI strategy is different — say it explicitly
+
+The course opens (M1) with an explicit comparison of traditional vs. AI product strategy. This isn't subtext — it's the headline. Each module reinforces one specific assumption it breaks:
+
+| Module | Traditional assumption it breaks |
+|--------|----------------------------------|
+| M1 | "We can plan with certainty" → Outputs are probabilistic |
+| M2 | "Our product boundary is clear" → Platforms encroach overnight |
+| M3 | "Margins are stable at scale" → Inference costs are variable and usage-driven |
+| M4 | "Users trust software by default" → Trust must be designed into uncertain outputs |
+| M5 | "Compliance is a one-time checklist" → AI systems compound or degrade silently |
+| M6 | "The roadmap speaks for itself" → Boards need a new vocabulary for AI risk/reward |
+
+Name the broken assumption in the first 2 minutes of each module. It connects the provocation to the rest of the session.
+
+### 8. Use AI to evaluate your own strategy
+
+The ultimate proof that participants internalized the frameworks: they can use AI to systematically evaluate any bet against all five components. This is a progressive thread that culminates in M6:
+
+- **After each module:** Participants can optionally feed their latest component into a structured AI prompt for self-assessment
+- **M6 capstone exercise:** Before the board simulation, participants run their complete strategy through an AI evaluation workflow that checks:
+  - Is the bet validated with evidence, or just conviction?
+  - What capabilities need to be developed, and are they realistic?
+  - Does the moat hold under platform encroachment pressure?
+  - Are the economics viable under 2-3x cost stress?
+  - Is the trust/reliability contract explicit and measurable?
+  - Can governance scale without breaking the product?
+
+This creates a reusable tool: after the course, they can evaluate any future bet against the same dimensions. The frameworks become a permanent analytical lens, not a classroom exercise.
 
 ---
 

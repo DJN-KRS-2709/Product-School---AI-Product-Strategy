@@ -60,30 +60,38 @@
 - Why: integration skill > starting over; panic rewrite wastes the cohort's work
 - Three rows only on slide — details live in their docs
 - Optional: 90 sec elevator to partner, then silent work
-- **🔧 Tool:** "Open the Pitch Assembler — it pulls all five strategy components from your previous tools into one pitch outline. If you saved your work in M1–M5, most of the fields are already there. Fill gaps, export, and that's your board deck skeleton."
+- **Tool:** "Open the Pitch Assembler — it pulls all five strategy components from your previous tools into one pitch outline. If you saved your work in M1–M5, most of the fields are already there. Fill gaps, export, and that's your board deck skeleton."
 
-## Slide 13 — Build the Roadmap
+## Slide 13 — AI Bet Evaluator
+- Why: this is the meta-move — using AI to evaluate their own AI strategy. The prompt is structured around the same five dimensions they've been learning all course: bet validation, defensibility, pricing alignment, trust/reliability, and governance. This creates a reusable workflow they take back to work.
+- **Mental model framing:** The evaluation dimensions aren't a fixed rubric — they're the same lenses from M1-M5 turned into a systematic AI query. After the course, they can adapt the dimensions for any new bet: add domain-specific criteria, change the scoring scale, or focus on the 2-3 dimensions most relevant to their current decision.
+- How it works: participants open the AI Bet Evaluator tool, paste their strategy components, select which dimensions to evaluate, and generate a structured prompt. They paste the prompt into ChatGPT or Claude and get a scored, specific critique.
+- Give them ~5 min to generate and run the prompt, ~3 min to review the AI's output. The critique surfaces gaps they should address before the board simulation.
+- If time is tight, this can be done after the session — the tool and prompt are permanent.
+- **Tool:** "Open the AI Bet Evaluator — paste your strategy, pick your evaluation lenses, and get a structured prompt you can run in any AI tool."
+
+## Slide 14 — Build the Roadmap
 - Why: roadmap proves strategy moves through time (not a wishlist)
 - Amazon/AWS pattern: near-term cash/ops fund platform bets; force an H3 line
 - Stripe-style check: every H2 bet has a kill line / falsifiable signal
 
-## Slide 14 — Board Simulation
+## Slide 15 — Board Simulation
 - Why: single best bang-for-minute in the whole certification
 - Mix company size + archetype; volunteers first
 - If room is quiet, seed Stripe-style $ + risk questions
 - Debrief: decks that landed led thesis first, stack second
 
-## Slide 15 — M1 → Now
+## Slide 16 — M1 → Now
 - Why: emotional proof of growth without forcing vulnerability
 - Same CEO prompt as Module 1; delta = progress; keep sharing optional
 
-## Slide 16 — What You Leave With
+## Slide 17 — What You Leave With
 - Why: artifact > attendance; name components once, let pride land
 - Figma/Notion energy: toolkit they can reuse Monday
 
-## Slide 17 — Certification
+## Slide 18 — Certification
 - Why: formal close after emotion on 15–16
 - Done = 6 modules · living strategy · capstone delivered
 
-## Slide 18 — Survey
+## Slide 19 — Survey
 - Why: Product School loop; ~2 min, high response if you ask in-room

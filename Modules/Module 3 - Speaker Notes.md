@@ -37,7 +37,7 @@ This is the core economic argument of the module. Traditional SaaS runs at 80%+ 
 
 ### Slide 6 — Model Cascading
 
-This is the answer to slide 5's problem. If the margin war is the disease, routing is the cure. The 80/20 split (80% cheap model, 20% frontier) is the single highest-leverage thing most AI products can do for their margins. Cursor and GitHub Copilot both do this. The three levers at the bottom (quantization, caching, prompt optimization) are there as a quick reference but don't need deep explanation — just name them so people know the toolkit exists.
+This is the answer to slide 5's problem. If the margin war is the disease, routing is the cure. The 80/20 split (80% cheap model, 20% frontier) is the single highest-leverage thing most AI products can do for their margins. Cursor and GitHub Copilot both do this. The three levers at the bottom (quantization, caching, prompt optimization) are there as a quick reference but don't need deep explanation — just name them so people know the toolkit exists. **Mental model:** That cheap/frontier ratio is a starting scaffold — in practice it might be 95/5 or 60/40 depending on domain and quality bar; they should tune the split to their context, not treat 80/20 as mandatory.
 
 ### Slide 7 — Case: Klarna
 
@@ -53,7 +53,7 @@ This is a dedicated activity slide. The theory from slide 8 is useless if they d
 
 ### Slide 10 — Leaders, Fillers & Killers
 
-This is Madhavan's bundling framework. The Big Mac analogy makes it stick: burger is the leader (what you come for), fries and Coke are fillers (bumps the average order), coffee would kill the bundle (too different, sell separately). Applied to AI: your core intelligence is the leader, lightweight features like summaries are fillers, and heavy inference stuff like image gen or agent workflows are killers that should be priced as add-ons. The 70% rule from Palle Broe gives them a concrete decision threshold. Again, the pair activity is on its own slide next.
+This is Madhavan's bundling framework. The Big Mac analogy makes it stick: burger is the leader (what you come for), fries and Coke are fillers (bumps the average order), coffee would kill the bundle (too different, sell separately). Applied to AI: your core intelligence is the leader, lightweight features like summaries are fillers, and heavy inference stuff like image gen or agent workflows are killers that should be priced as add-ons. The 70% rule from Palle Broe gives them a concrete decision threshold. Again, the pair activity is on its own slide next. **Mental model:** Leaders/Fillers/Killers is a lens for thinking about value capture, not a prescription — they should pick the framing that matches how their buyer thinks about the product.
 
 ### Slide 11 — Activity: Name Your Leader, Filler & Killer
 
@@ -73,7 +73,7 @@ This is 15 minutes of solo work where they map every AI feature in their product
 
 ### Slide 15 — Design Your Pricing
 
-This is where Madhavan's "Product-Market-Pricing Fit" concept lands. The exercise walks them through three steps: pick a strategy (skim like Apple, penetrate like Amazon, maximize like Microsoft), name the unit of work they'd meter, and set the structure (base + usage). The GitHub Copilot proof point on the slide is powerful: $19/user is 4.75× a typical SaaS seat, justified because developers complete tasks 55% faster. The Pricing Strategy Designer tool is linked here for anyone who wants the full guided experience.
+This is where Madhavan's "Product-Market-Pricing Fit" concept lands. The exercise walks them through three steps: pick a strategy (skim like Apple, penetrate like Amazon, maximize like Microsoft), name the unit of work they'd meter, and set the structure (base + usage). The GitHub Copilot proof point on the slide is powerful: $19/user is 4.75× a typical SaaS seat, justified because developers complete tasks 55% faster. The Pricing Strategy Designer tool is linked here for anyone who wants the full guided experience. **Mental model:** Hybrid and strategy archetypes are lenses, not playbooks — the right structure is the one that fits the buyer's mental model and how value shows up in their world.
 
 ### Slide 16 — Peer Stress-Test
 

@@ -12,11 +12,29 @@ Every senior PM in the room already knows AI is changing the game. They've taken
 
 Not because they don't know AI. Because the strategic playbook they were trained on doesn't work anymore.
 
-- **Moats collapse.** GPT wrappers with $1B valuations become margin-negative overnight.
-- **Margins compress.** 80% SaaS gross margins fall to 40% before you find the right architecture.
-- **Accuracy doesn't equal trust.** 95% accuracy with no audit trail loses to 85% with one.
-- **Governance isn't overhead.** It's the thing that closes the enterprise deal.
-- **The roadmap isn't the job.** Operating a continuously learning system is.
+### Why AI strategy is different from standard strategy
+
+The course opens with this thesis and reinforces it every session. Traditional product strategy assumes five things that AI breaks:
+
+| Traditional assumption | AI reality |
+|----------------------|------------|
+| Feature works or it doesn't | Outputs are probabilistic — accuracy, hallucination, drift |
+| Infra scales predictably | Inference costs scale with usage, not users |
+| Your product vs. theirs | Your feature becomes a platform's checkbox overnight |
+| Software does what it says | Users must be convinced to trust uncertain outputs |
+| Annual planning cycles | Capabilities change weekly — bets, not plans |
+
+Each module breaks one assumption. This isn't subtext — it's the headline that opens M1 and gets reinforced throughout.
+
+### Three course-level principles
+
+1. **AI strategy ≠ traditional strategy** — say it explicitly. M1 opens with the comparison table. Each module names which assumption it breaks in the first two minutes.
+
+2. **Frameworks are mental models, not templates** — every framework (5 archetypes, 8 moats, cost curve, eval dashboard, reliability contract, governance policy) is a thinking tool participants adapt to their context. If someone's artifact looks exactly like the template, that's a smell. The goal is a customized mental model for their product.
+
+3. **Use AI to evaluate your own strategy** — once participants have the full framework stack, they can use AI itself to systematically evaluate any bet across all dimensions: validation, capabilities, impact, defensibility, pricing alignment, trust, and governance. The AI Bet Evaluator tool makes this a reusable workflow they take back to work.
+
+### Why this course over alternatives
 
 This course exists because nobody is teaching the full strategic stack — bet, moat, margin, trust, guardrails, pitch — as one coherent arc. Reforge fragments it across 6 separate courses. Maven stays tactical. This program threads it all together and makes you build it on your real product.
 
@@ -182,11 +200,14 @@ The complete living strategy, integrated and stress-tested:
 - Data moat + encroachment/portability plan
 - Compounding system design + governance framework
 
-**The capstone (60-75 min):**
+**The AI Bet Evaluator (new in M6):**
+Before the board simulation, participants use the AI Bet Evaluator tool to run their complete strategy through a structured AI evaluation. The tool generates a prompt that evaluates their bet across all dimensions learned in M1-M5: validation, capabilities, impact, defensibility, pricing alignment, trust, and governance. This is the meta-move — using AI to evaluate their own AI strategy. It also creates a reusable workflow: after the course, they can evaluate any future bet against the same dimensions.
+
+**The capstone (~35 min):**
 Present the full strategy to the room. The room plays the board. Challenges are real: "Why should we fund this? What's the risk you haven't addressed? What happens when OpenAI ships this natively?"
 
 **What they leave with:**
-A living strategy they can present Monday morning. Built on their real product. Challenged by peers who understand the domain. Not a certificate — a weapon.
+A living strategy they can present Monday morning. Built on their real product. Challenged by peers who understand the domain. A reusable AI evaluation workflow for any future bet. Not a certificate — a weapon.
 
 ---
 
