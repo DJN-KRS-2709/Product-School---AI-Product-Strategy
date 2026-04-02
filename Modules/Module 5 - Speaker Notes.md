@@ -1,93 +1,122 @@
-# Module 5 — The Guardrails (Carlos / Daria)
+# Module 5 — The Guardrails
+## Speaker Briefing for Carlos
 
-## Slide 1 — Title
-- **Why:** Shift from “my product” to “my org”—governance is where AI bets survive scale.
-- Waypoints are short on purpose: feel the three jobs (compound, govern, audit); you unpack orally.
-- Tease Monday-ready output (audit starter), not abstract theory.
+### What this module is about
 
-## Slide 2 — Agenda
-- **Why:** Shadow AI audit = peak “holy crap” utility—name it early so people stay for the payoff.
-- Keep tempo: promise hands-on blocks, not slide marathons.
+This is where we zoom out from "my product" to "my org." M4 was about trust at the product level — evals, confidence UX, reliability contracts. M5 asks: what happens when that product scales across teams, agents start choosing their own actions, and employees are pasting company data into tools nobody approved? The emotional arc is different from M4. M4's tension was craft — can you build something trustworthy? M5's tension is exposure — what's already happening that you don't know about?
 
-## Slide 3 — Recall from M4
-- **Why:** Same trust muscle as M4, bigger perimeter (org-wide tools + agents).
-- **Do:** Verbal poll—published AI use policy? yes / no / sort of. Primes shadow AI.
-- Expand cards live: eval hooks, Components 1→4 arc, reliability contract as promise/measure/escalate/learn.
+The traditional assumption this module breaks: "Compliance is a one-time checklist." In AI, systems either compound or degrade silently — there's no steady state. That's the AI strategy difference you should name early: traditional products don't get worse when you're not looking. AI products do.
 
-## Slide 4 — Provocation
-- **Why:** Kill three lazy excuses, then anchor with names they’ve seen in the news.
-- **Flow:** Thumb vote each claim → Salesforce (Einstein Trust Layer) → Spotify (1k→15) → Air Canada (chatbot liability).
-- **Do:** Hands up—shadow AI nobody approved? (expensed tools, rogue extensions). Builds shared guilt/urgency.
+They leave with three artifacts: a compounding system architecture (loops that actually learn), a governance one-pager (agent autonomy, data classes, accountability), and a shadow AI audit starter they can hand to IT/Finance the same week. The shadow AI audit is the one people talk about after class.
 
-## Slide 5 — Systems That Compound
-- **Why:** Volume without learning = commodity; compounding is the strategy story under “guardrails.”
-- **Anchors:** Duolingo (usage sharpens lessons), ServiceTitan (vertical depth / stack—Gokul thread).
-- **Do:** Pair 30s—one product behavior that compounds vs. one that only scales.
+### The flow and why it's structured this way
 
-## Slide 6 — Responsible AI Maturity
-- **Why:** PMs need a ladder: compliance isn’t the ceiling; sellable trust is.
-- L1 regs, L2 M4 trust stack, L3 GTM (model cards, bias posture, Salesforce story).
-- **Wow:** Google Gemini image gen paused for remediation—velocity vs. safety as a public product call.
-- **Do:** Fingers 1–2–3 honest self-rating; cold-call one example from a “2.”
+We moved the compounding system exercise before the break so it follows its lecture immediately — same learn-then-do rhythm we established in M4. Parking it after 30 minutes of governance theory would bury the concept. So the first half is "what compounds" (concept + build), and the second half is "what breaks" (governance cluster + Samsung scare story + policy writing + peer audit + shadow AI build). The break sits at the natural seam between those two themes.
 
-## Slide 7 — Agent Governance
-- **Why:** Multi-agent = authz + memory + liability in series—different from “a chatbot.”
-- Four cells = design-review prompts for Monday.
-- **Anchor:** Microsoft Copilot + Graph/plugins = real orchestration—log and whitelist like prod.
-- **Do:** Point to one tool call that would scare Legal if unlogged.
+---
 
-## Slide 8 — Agentic vs Traditional ROI
-- **Why:** Execs will compare to RPA; you need different economics + audit story.
-- **Anchor:** UiPath-style RPA vs frontier LLM agents—same budget conversation, different P&L + trail.
-- **Do:** Thumbs—would you tie a bonus to agent output with zero human gate? Surfaces error tolerance.
-- **Frame:** Denominator = labor replaced (Gokul), not SaaS seat cost.
+### Slide 1 — Title
 
-## Slide 9 — Case: Samsung
-- **Why:** Shadow AI + no policy = headline risk; makes the abstract concrete.
-- Verbal detail: code, notes, fab data, vendor pipeline—then ban + internal rebuild.
-- **Do:** Pair 60s—ban one tool Monday vs. standardize one with logging.
+The shift from M4 to M5 is product → org. Three waypoints frame the session: Compound, Govern, Audit. They're short on purpose — you unpack them orally. Tease the Monday-ready output: "You'll leave with an audit you can actually hand to someone." That's what separates this from abstract governance talk.
 
-## Slide 10 — Shadow AI Audit
-- **Why:** Repeatable org exercise—this is what they take to IT/Finance.
-- Spotify = govern, don’t pretend zero AI. Air Canada on Policy = customer bots need rails + escalation.
-- **Mental model:** Treat any audit checklist as a diagnostic lens, not an exhaustive survey — categories and depth will shift with org size and industry.
-- **Do:** Write guessed # of paid AI tools—then reality-check in the audit.
+### Slide 2 — Agenda
 
-## Slide 11 — Break
-- **Why:** Reset before the heaviest applied chunk.
-- One line back: loops, policy, audit.
+Just orientation. The agenda shows the interleaved flow so people know they won't sit through 40 minutes of lecture. Name the Shadow AI Audit early — it's the "holy crap" moment and people stay more engaged through governance theory if they know the payoff is coming.
 
-## Slide 12 — Design Compounding System
-- **Why:** Surfaces “theater” loops that never ship to learning infra.
-- Roam—force one aspirational vs shipped callout per table.
-- **Mental model:** The compounding-vs.-volume distinction is the core idea; not every product needs every system component on the slide — they adapt the diagram to what actually ships and learns.
-- **Do:** Neighbor—which loop is theater on your roadmap?
+### Slide 3 — Recall from M4
 
-## Slide 13 — Draft Governance Policy
-- **Why:** If they can’t one-pager it, execs know they don’t own the stance.
-- **Mental model:** The governance framework here is starter vocabulary for conversations with legal, security, and compliance — they’ll need to map it onto their org’s existing policies and committees, not replace them wholesale.
-- Push nouns: owners, data classes, auto-approved actions.
-- **Prompt if stuck:** “What’s blank when Samsung or Air Canada happens?”
-- **🔧 Tool:** "Open the AI Maturity Scorer — it scores five dimensions of your responsible AI practice and shows you exactly where you are on the compliance → sellable trust ladder. Export and share with your leadership."
+Connecting M4 to M5. They brought their eval dashboard spec, Components 1–4, and their reliability contract. The bridge: M4 was product-level trust — today we apply the same muscle at org scale. Ask the room: "Published AI use policy at your company? Point: yes / no / sort of." Most rooms will be heavy on "sort of." That shared guilt sets up the provocation and makes the shadow AI audit feel urgent, not academic.
 
-## Slide 14 — Peer Challenge
-- **Why:** Peer red-team beats polite feedback; 6 min each side.
-- Insist on one sticky: single biggest gap, no hedging.
-- Name Samsung-path (paste/leak) and Air Canada-path (customer-facing bot).
+### Slide 4 — Provocation
 
-## Slide 15 — Build: Shadow AI Audit
-- **Why:** Highest immediate org ROI in the module.
-- Permission: messy list is fine; finish with IT/Finance this week.
-- Cheer “villain tools” named out loud.
-- **🔧 Tool:** "Open the Shadow AI Audit — it walks you through discovering, risk-scoring, and triaging every unsanctioned AI tool in your org. The export is what you hand to IT and Finance this week."
+Three claims, all FALSE. "Governance slows us down" — false because Salesforce literally sells the Einstein Trust Layer as a product feature. "We can manage AI tools organically" — false because Spotify discovered ~1,000 AI tools and consolidated to 15. "Agents are just automation with better UX" — false because agents choose actions and chain tools — Air Canada's chatbot invented policy and the court held the company liable. That third claim plants the seed for agent governance later.
 
-## Slide 16 — Synthesis
-- **Why:** Lock Component 5 emotionally—all five components done.
-- Short slide copy; you add what “good” looks like for loops / policy / rogue list.
+After all three, ask for a show of hands: "Shadow AI — expensed tools, rogue browser extensions — that nobody approved?" Builds shared guilt and urgency. The Air Canada mention here is a deliberate forward reference — it pays off again in Samsung and the governance policy exercise.
 
-## Slide 17 — Bridge to M6
-- **Why:** Next session is performance under questions, not more building.
-- Board sim framing: narrative + metrics + thick skin.
+### Slide 5 — Systems That Compound
 
-## Slide 18 — Survey
-- **Why:** Two-minute feedback tightens future cohorts—genuine thanks.
+This is the conceptual foundation of the first half. The slide contrasts "scales" (volume up, quality flat, linear cost) against "compounds" (each interaction makes the next one smarter). Three mechanisms: recursive learning, cross-domain transfer, network intelligence. Duolingo is the anchor — every learner interaction sharpens lesson difficulty for the next learner. ServiceTitan is the vertical depth example from Gokul Rajaram's thread — 32 products, one stack, each feeding context to the others.
+
+Why should they care: most AI products scale without compounding, which means they're commodities with variable costs. If your system doesn't get smarter with use, someone else's will.
+
+Close with a 30-second pair prompt: "One thing in your product that compounds vs. one that only scales." This primes the design exercise that follows immediately.
+
+### Slide 6 — Design Your Compounding System
+
+They just learned compounding vs. volume — now they sketch their own system while it's fresh. Three panels: Recursive Learning, Cross-Domain Transfer, Network Intelligence. The forcing function is the freeze test: "Freeze 12 months — still win? If yes, you're not compounding." Good answers name specific data flows ("support ticket corrections feed our fine-tuning pipeline weekly"). Bad answers are vague aspiration ("we'll use the data to improve").
+
+**Mental model:** The three-panel structure is a thinking scaffold — not every product needs all three mechanisms. They should adapt what actually ships and learns, not force-fit a template.
+
+Roam the room — force one honest "aspirational vs. shipped" callout per table. The neighbor prompt ("which loop is theater on your roadmap?") surfaces the gap between what's planned and what's real. Then break.
+
+### Slide 7 — Break
+
+Reset after the compounding sprint. Tease what's coming: "After break — responsible AI ladder, how to govern agents, a Samsung scare story, then you're writing policy and your partner is going to audit everything."
+
+### Slide 8 — Responsible AI Maturity
+
+A three-level ladder. Level 1: Compliance — EU AI Act, GDPR/CCPA — minimum bar. Level 2: Trust Architecture — what they built in M4. Level 3: Governance = GTM — model cards, bias posture, Salesforce's Einstein Trust Layer in the actual sales pitch. The point: most orgs plateau at Level 1 or 2 and miss the revenue opportunity. Governance done well accelerates enterprise deals because buyers ask for it.
+
+Google Gemini is the anchor — image generation paused publicly for remediation, a velocity vs. safety decision made onstage. Then quick self-rating: "Fingers — 1, 2, or 3 for your org?" Cold-call someone who held up a "2."
+
+### Slide 9 — Agent Governance
+
+Multi-agent systems are fundamentally different from chatbots — authorization, memory, liability, and tool-calling in series. Four governance knobs: Autonomy (draft ≠ send, read ≠ write), Tool Calls (whitelist, rate-limit, log — each call is a potential exfiltration risk), Memory (what persists, TTL, who reads), Chain (when agent B fails on agent A's output — named owner per handoff). Microsoft Copilot + Graph/plugins is the real-world example — log and whitelist like any production system. Gokul's point: design around principles, not model names, because specific models churn every ~6 months.
+
+Close with: "Point to one tool call that would scare Legal if unlogged." This surfaces the real risks before they write governance policy later.
+
+### Slide 10 — Agentic vs. Traditional ROI
+
+Execs will compare agent investments to RPA — same budget conversation, completely different economics. Traditional automation: fixed paths, linear ROI, breaks on edge cases. Agentic automation: token costs swing, quality is fuzzy, eats exceptions — if governed. Three decision levers: Complexity (simple → scripts, messy → agents), Error Cost (low tolerance → review tax kills ROI), Learning (agents pay off if feedback loops from slide 5 actually ship). UiPath-style RPA vs. frontier LLM agents — same slide deck for the CFO, different P&L shape. Gokul's framing: the denominator is labor replaced, not SaaS seat cost.
+
+Provocative poll: "Thumbs — would you stake a bonus on agent output with zero human gate?" Surfaces real error tolerance and connects back to M4's HITL design.
+
+### Slide 11 — Case: Samsung
+
+Samsung employees used ChatGPT for code review, meeting notes, and process optimization. Within about a month, three data leaks — source code, meeting content, fab data entered vendor training pipelines. No AI use policy, no audit trail. Samsung banned external AI tools entirely, then rebuilt internally. The lesson: absence of governance isn't a compliance gap — it's a strategy failure. Standard 3-act format: Bet (fast wins, no guardrails), Crack (3 leaks, no trail), Correction (ban + rebuild).
+
+Pair exercise: "One AI tool you'd ban Monday vs. one you'd standardize — with logging." Push for specifics. This is the emotional fuel for the governance policy exercise that follows.
+
+### Slide 12 — The Shadow AI Audit
+
+Four steps that turn the Samsung scare into a repeatable org exercise: Discovery (surveys, expenses, extensions, API keys), Risk (data path, DPA, regulatory exposure — score L/M/H/Critical), Consolidate (Spotify's 1,000 → 15 — the goal is governed AI, not zero AI), Policy (allow-list, data classes, review cadence — Air Canada's lesson: customer-facing bots need explicit bounds).
+
+**Mental model:** This is a diagnostic lens, not an exhaustive survey. A 50-person startup and a 50,000-person enterprise will run this differently — the categories and depth shift with org size and industry.
+
+Quick poll: "How many distinct AI tools do you think your company pays for? Write a number." They'll reality-check during the build later — the gap between guess and reality is always the best moment.
+
+### Slide 13 — Draft Your Governance Policy
+
+With responsible AI maturity, agent governance knobs, Samsung, and the audit framework all fresh, they write a one-page governance policy. Four quadrants: Agent Autonomy (OK solo vs. needs human gate), Data (what goes external, classification — Public/Internal/Confidential/Restricted), Compliance (which regs, what artifacts), Accountability (who owns agent outputs, escalation path). The forcing function: "One page your CISO wouldn't redline on sight."
+
+Good answers have specific nouns — named owners, explicit data classes, concrete auto-approved actions. Bad answers say "the team reviews things." If stuck, prompt: "What's blank when Samsung or Air Canada happens to you?"
+
+**Mental model:** This governance framework is starter vocabulary for conversations with legal, security, and compliance — they'll need to map it onto their org's existing policies and committees, not replace them wholesale.
+
+The AI Maturity Scorer tool is linked on this slide — it scores five dimensions of responsible AI practice and shows where they fall on the compliance → sellable trust ladder.
+
+### Slide 14 — Peer Challenge
+
+Partners audit each other across two lenses: Loops (broken handoff? theoretical learning? corrections trashed?) and Governance (unapproved agent action? missing data class? Samsung-style paste path? Air Canada-style customer bot?). Six minutes each direction, then debrief. Insist on one sticky: single biggest gap, no hedging. Name both attack paths explicitly — "Find one Samsung-path risk and one Air Canada-path risk." If the stickies aren't uncomfortable, the audit was too polite.
+
+### Slide 15 — Shadow AI Audit (Build Moment)
+
+Highest immediate org ROI exercise in the course. Three panels: Discovery (known tools, suspected tools, expense-report tools), Risk (tool, data it touches, tier L/M/H/C), Decide (keep, replace, ban — pick one villain tool now). They won't finish in 15 minutes and that's fine. A messy list shipped to yourself before leaving beats a perfect spreadsheet that never starts.
+
+The Shadow AI Audit tool is linked on-slide — walks through discovery, risk-scoring, and triage with exportable results. Celebrate "villain tools" named out loud — the more embarrassing, the more useful.
+
+### Slide 16 — Synthesis
+
+Close the loop to the three waypoints. They walked in with abstract concepts — they're leaving with a compounding sketch, a governance one-pager, and a shadow AI audit starter. Component 5 is done. All five components are complete heading into M6. Add what "good" looks like verbally: "Good loops have named data flows. Good policy has named owners. Good audit lists have at least one tool that made you wince."
+
+### Slide 17 — Bridge to M6
+
+M5 closes the building phase. M6 is about selling it — the board simulation. Everything from M1–M5 gets assembled into one narrative and stress-tested by the room. Frame it as performance: "Next session, the room is the board. Metrics, roadmap, story — under fire."
+
+### Slide 17.5 — Module Tools
+
+Three interactive tools: AI Maturity Scorer, Shadow AI Audit, and Living Strategy Builder (to add Component 5). Quick pointer — data saves to the browser and carries forward to M6.
+
+### Slide 18 — Survey
+
+Quick close. Genuine thanks — this was the densest module in the course.
