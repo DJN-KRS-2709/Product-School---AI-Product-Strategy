@@ -81,6 +81,8 @@ The Flywheel Scorer tool is linked on-slide — it gives a visual flywheel, scor
 
 Three vectors: platform encroachment, vertical competitor, adjacent expansion. Name the attacker, vector, time-to-threat, percentage of value at risk. We use three vectors because most people only think about direct competitors. Platform and adjacent are the two that blindside you — and they're the ones that actually kill products.
 
+For a live example of adjacent expansion: when Anthropic cracked down on third-party agent harnesses using Claude subscriptions in early 2026, OpenAI treated it as a customer acquisition channel. They hired OpenClaw's creator in February, publicly endorsed third-party harness use with Codex subscriptions, and positioned openness as a differentiator while Anthropic was locking down. One provider's governance decision became another provider's growth lever — that's encroachment through policy, not features.
+
 ### Slide 13 — The 90-Day Encroachment Plan (Peer Challenge)
 
 Six minutes per person. Defender presents flywheel plus threats. Encroacher builds a concrete 90-day plan: weeks 1–4 what they ship, weeks 5–8 how they poach users, weeks 9–12 why users don't come back. Target the weakest flywheel loop — that's the entry point.
@@ -96,6 +98,8 @@ Three layers: abstraction (no direct provider calls), multi-model routing (tasks
 ### Slide 15 — Your Portability Audit
 
 Fifteen minutes build moment — audit vendor dependency. Stress tests: provider doubles pricing, provider restricts your use case. Walk out with three action items: this week, this month, this quarter. Push for specifics — not "build abstraction layer" but "abstract the embedding call in search by Friday." This checklist travels to M3 — portability affects costs.
+
+When someone says "restricts your use case" feels hypothetical, you have a dated example: Anthropic and OpenClaw. January 2026 — quietly blocked subscription OAuth tokens from working outside Claude Code. February — rewrote the legal terms. March — shipped Claude Code Channels to replace the core reason people used third-party harnesses. April — cut the cord entirely. Four months from passive enforcement to full cutoff. If your product depends on a provider's subscription tier for cost arbitrage, that timeline is your portability risk made real.
 
 The Kill Switch Audit tool is linked on-slide — it walks through each dependency layer, stress-tests swap time, and gives a concrete this-week / this-month / this-quarter action plan. Export it — they'll need it in M3.
 
