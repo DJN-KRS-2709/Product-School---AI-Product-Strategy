@@ -5,13 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Module 1: The Bet — What Should We Build, and How Do We Know Fast?</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
-  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap');
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  html, body { height: 100%; overflow: hidden; background: #0f0f13; }
+  html, body { height: 100%; overflow: hidden; background: #07162C; }
   body {
-    font-family: 'Inter', -apple-system, sans-serif;
+    font-family: 'Lato', -apple-system, sans-serif;
     color: #e8e8f0;
     -webkit-font-smoothing: antialiased;
   }
@@ -28,9 +29,10 @@
 
   .module-tag {
     font-size: 12px; font-weight: 700; letter-spacing: 0.14em;
-    text-transform: uppercase; color: #3B82F6; margin-bottom: 16px;
+    text-transform: uppercase; color: #1241B0; margin-bottom: 16px;
   }
 
+  h1, h2 { font-family: 'Poppins', sans-serif; }
   h1 { font-size: 48px; font-weight: 900; line-height: 1.1; color: #fff; margin-bottom: 20px; }
   h2 { font-size: 38px; font-weight: 800; line-height: 1.15; color: #fff; margin-bottom: 18px; }
   h3 { font-size: 24px; font-weight: 700; line-height: 1.3; color: #e0e0f0; margin-bottom: 12px; }
@@ -45,7 +47,7 @@
   ul li { padding: 6px 0; padding-left: 24px; position: relative; }
   ul li::before {
     content: ''; position: absolute; left: 0; top: 14px;
-    width: 8px; height: 8px; border-radius: 2px; background: #3B82F6;
+    width: 8px; height: 8px; border-radius: 2px; background: #1241B0;
   }
 
   strong { color: #fff; font-weight: 700; }
@@ -86,7 +88,7 @@
   .waypoint-num {
     width: 36px; height: 36px; border-radius: 8px; flex-shrink: 0;
     display: flex; align-items: center; justify-content: center;
-    font-size: 16px; font-weight: 800; color: #fff; background: #3B82F6;
+    font-size: 16px; font-weight: 800; color: #fff; background: #1241B0;
   }
   .waypoint-text { flex: 1; }
   .waypoint-text .wt-title { font-size: 17px; font-weight: 700; color: #fff; margin-bottom: 4px; }
@@ -126,7 +128,7 @@
   .arch-table th {
     text-align: left; padding: 10px 12px; font-size: 11px; font-weight: 700;
     text-transform: uppercase; letter-spacing: 0.08em; color: #555;
-    border-bottom: 1px solid #252840;
+    border-bottom: 1px solid #1a3a5c;
   }
   .arch-table td {
     padding: 12px; border-bottom: 1px solid #1e1e30;
@@ -138,7 +140,7 @@
   /* Diagnostic axes */
   .diag-axes { display: flex; gap: 16px; margin: 20px 0; }
   .diag-axis {
-    flex: 1; background: #161822; border: 1px solid #252840;
+    flex: 1; background: #0c2340; border: 1px solid #1a3a5c;
     border-radius: 12px; padding: 22px; text-align: center;
   }
   .diag-axis .da-num { font-size: 28px; font-weight: 900; margin-bottom: 6px; }
@@ -148,12 +150,12 @@
   /* Evidence cards */
   .evidence-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 20px 0; }
   .evidence-card {
-    background: #161822; border: 1px solid #252840; border-radius: 10px;
+    background: #0c2340; border: 1px solid #1a3a5c; border-radius: 10px;
     padding: 20px;
   }
   .evidence-card .ec-label {
     font-size: 11px; font-weight: 800; text-transform: uppercase;
-    letter-spacing: 0.08em; color: #3B82F6; margin-bottom: 8px;
+    letter-spacing: 0.08em; color: #1241B0; margin-bottom: 8px;
   }
   .evidence-card .ec-company { font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 4px; }
   .evidence-card .ec-text { font-size: 13px; color: #8899bb; line-height: 1.5; }
@@ -164,7 +166,7 @@
     border-radius: 14px; padding: 28px; margin: 20px 0;
   }
   .artifact-preview .ap-title {
-    font-size: 14px; font-weight: 800; color: #3B82F6; text-transform: uppercase;
+    font-size: 14px; font-weight: 800; color: #1241B0; text-transform: uppercase;
     letter-spacing: 0.1em; margin-bottom: 14px;
   }
 
@@ -172,11 +174,11 @@
   .agenda { display: flex; flex-direction: column; gap: 6px; margin: 16px 0; }
   .agenda-item {
     display: flex; align-items: center; gap: 12px;
-    padding: 10px 16px; background: #161822; border-radius: 8px;
+    padding: 10px 16px; background: #0c2340; border-radius: 8px;
   }
   .agenda-time {
-    font-size: 12px; font-weight: 700; color: #3B82F6;
-    min-width: 50px; font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; font-weight: 700; color: #1241B0;
+    min-width: 50px; font-family: 'IBM Plex Mono', monospace;
   }
   .agenda-text { font-size: 14px; color: #b0b4c8; }
   .agenda-text strong { color: #e0e0f0; }
@@ -210,14 +212,14 @@
     background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
     color: #888; font-size: 18px; cursor: pointer;
     display: flex; align-items: center; justify-content: center;
-    transition: all 0.2s; font-family: 'Inter', sans-serif;
+    transition: all 0.2s; font-family: 'Lato', sans-serif;
   }
   .nav-btn:hover { background: rgba(255,255,255,0.1); color: #fff; }
   .progress {
     position: fixed; bottom: 0; left: 0; right: 0; height: 3px;
     background: rgba(255,255,255,0.05); z-index: 100;
   }
-  .progress-bar { height: 100%; background: #3B82F6; transition: width 0.35s ease; }
+  .progress-bar { height: 100%; background: #1241B0; transition: width 0.35s ease; }
   .slide-counter {
     position: fixed; bottom: 26px; left: 24px;
     font-size: 13px; font-weight: 600; color: #444; z-index: 100;
@@ -228,7 +230,7 @@
   }
   .speaker-notes {
     display: none; position: fixed; bottom: 0; left: 0; right: 0;
-    background: #1a1a24; border-top: 2px solid #3B82F6;
+    background: #1a1a24; border-top: 2px solid #1241B0;
     padding: 16px 32px; max-height: 200px; overflow-y: auto;
     font-size: 14px; color: #8899bb; line-height: 1.6; z-index: 200;
   }
@@ -236,20 +238,20 @@
   .speaker-notes strong { color: #b0b4c8; }
   .notes-tag {
     font-size: 10px; font-weight: 700; text-transform: uppercase;
-    letter-spacing: 0.1em; color: #3B82F6; margin-bottom: 6px;
+    letter-spacing: 0.1em; color: #1241B0; margin-bottom: 6px;
   }
 
   /* === Vibe Coding structural slides === */
   .expect-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin: 24px 0; }
-  .expect-card { background: #161822; border: 1px solid #252840; border-radius: 10px; padding: 18px; text-align: center; }
+  .expect-card { background: #0c2340; border: 1px solid #1a3a5c; border-radius: 10px; padding: 18px; text-align: center; }
   .expect-icon { font-size: 24px; margin-bottom: 8px; }
   .expect-title { font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 4px; }
   .expect-desc { font-size: 12px; color: #8899bb; line-height: 1.4; }
   .syllabus-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 20px 0; }
-  .syllabus-card { background: #161822; border: 1px solid #252840; border-radius: 10px; padding: 16px; display: flex; align-items: flex-start; gap: 14px; }
+  .syllabus-card { background: #0c2340; border: 1px solid #1a3a5c; border-radius: 10px; padding: 16px; display: flex; align-items: flex-start; gap: 14px; }
   .syllabus-card.syl-active { background: rgba(59,130,246,0.08); border-color: rgba(59,130,246,0.3); }
-  .syllabus-num { width: 32px; height: 32px; border-radius: 8px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 800; color: #fff; background: #252840; }
-  .syllabus-card.syl-active .syllabus-num { background: #3B82F6; }
+  .syllabus-num { width: 32px; height: 32px; border-radius: 8px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 800; color: #fff; background: #1a3a5c; }
+  .syllabus-card.syl-active .syllabus-num { background: #1241B0; }
   .syllabus-body .syl-title { font-size: 14px; font-weight: 700; color: #e0e0f0; margin-bottom: 2px; }
   .syllabus-card.syl-active .syl-title { color: #fff; }
   .syllabus-body .syl-desc { font-size: 11px; color: #64748b; line-height: 1.4; }
@@ -258,28 +260,140 @@
   .debrief-prompt { font-size: 22px; font-weight: 700; color: #fff; line-height: 1.4; margin-bottom: 12px; }
   .debrief-sub { font-size: 14px; color: #8899bb; }
   .complete-stats { display: flex; gap: 20px; margin: 24px 0; }
-  .complete-stat { flex: 1; background: #161822; border: 1px solid #252840; border-radius: 12px; padding: 20px; text-align: center; }
-  .complete-num { font-size: 36px; font-weight: 900; color: #3B82F6; margin-bottom: 4px; }
+  .complete-stat { flex: 1; background: #0c2340; border: 1px solid #1a3a5c; border-radius: 12px; padding: 20px; text-align: center; }
+  .complete-num { font-size: 36px; font-weight: 900; color: #1241B0; margin-bottom: 4px; }
   .complete-label { font-size: 13px; color: #8899bb; }
   .complete-shifts { display: flex; flex-direction: column; gap: 12px; margin: 20px 0; }
   .complete-shift { background: rgba(52,211,153,0.06); border: 1px solid rgba(52,211,153,0.12); border-radius: 10px; padding: 16px 20px; }
   .shift-title { font-size: 15px; font-weight: 700; color: #34d399; margin-bottom: 4px; }
   .shift-desc { font-size: 13px; color: #8899bb; line-height: 1.5; }
   .takeaway-list { display: flex; flex-direction: column; gap: 14px; margin: 24px 0; }
-  .takeaway-item { background: #161822; border: 1px solid #252840; border-radius: 10px; padding: 18px 22px; }
+  .takeaway-item { background: #0c2340; border: 1px solid #1a3a5c; border-radius: 10px; padding: 18px 22px; }
   .takeaway-item p { font-size: 15px; color: #b0b4c8; line-height: 1.6; }
   .cameras-box { background: rgba(251,191,36,0.06); border: 1px solid rgba(251,191,36,0.15); border-radius: 14px; padding: 28px; text-align: center; max-width: 500px; margin: 32px auto; }
   .tag-debrief { background: rgba(192,132,252,0.12); color: #d8b4fe; }
   .tag-complete { background: rgba(52,211,153,0.12); color: #6ee7b7; }
   .tag-recall { background: rgba(59,130,246,0.12); color: #93c5fd; }
 
+  /* === Split-panel layout (PPT-style exercise slides) === */
+  .split-slide {
+    display: flex; width: 100%; height: 100%; align-items: stretch;
+  }
+  .split-left {
+    flex: 0 0 45%; display: flex; flex-direction: column; justify-content: center;
+    padding: 60px 48px 60px 80px;
+  }
+  .split-right {
+    flex: 0 0 55%; display: flex; flex-direction: column; justify-content: center;
+    padding: 48px 60px;
+    background: #0c2340; border-radius: 24px 0 0 24px;
+    margin: 32px 0 32px 0;
+  }
+  .split-right.panel-light {
+    background: #f0f4f8; color: #1a1a2e;
+  }
+  .split-right.panel-light h3, .split-right.panel-light strong { color: #07162C; }
+  .split-right.panel-light p, .split-right.panel-light .lab-step-text { color: #334155; }
+
+  .slide-tag {
+    font-size: 15px; font-weight: 700; color: #60a5fa;
+    margin-bottom: 16px; letter-spacing: 0.02em;
+  }
+  .slide-tag.tag-green { color: #6ee7b7; }
+  .slide-tag.tag-pink { color: #f9a8d4; }
+
+  .lab-badge-row {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 24px;
+  }
+  .lab-badge {
+    display: inline-block; font-size: 11px; font-weight: 800; letter-spacing: 0.12em;
+    text-transform: uppercase; padding: 8px 18px; border-radius: 6px;
+    background: #1241B0; color: #fff;
+  }
+  .lab-timer {
+    font-size: 14px; font-weight: 600; color: #8899bb;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .lab-timer::before { content: '⏱'; font-size: 16px; }
+
+  .split-right .steps-heading {
+    font-family: 'Poppins', sans-serif; font-size: 18px; font-weight: 700;
+    color: #fff; margin-bottom: 18px;
+  }
+  .split-right .lab-step { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); }
+
+  .split-left .lab-goal { margin: 20px 0 16px 0; background: transparent; border: none; padding: 0; }
+  .split-left .lab-goal-label { display: none; }
+  .split-left .lab-goal-text { font-size: 16px; color: #b0b4c8; line-height: 1.65; }
+  .split-left .lab-goal-text::before {
+    content: '→'; color: #60a5fa; font-weight: 700; margin-right: 10px;
+  }
+  .split-left .lab-tip { background: transparent; border: none; padding: 0; margin: 12px 0 0 0; }
+  .split-left .lab-tip-label { display: none; }
+  .split-left .lab-tip-text { font-size: 15px; color: #b0b4c8; line-height: 1.6; }
+  .split-left .lab-tip-text::before {
+    content: '→'; color: #60a5fa; font-weight: 700; margin-right: 10px;
+  }
+  .split-left .lab-tip-text strong:first-child,
+  .split-left .lab-goal-text strong:first-child { color: #fff; }
+
+  .bottom-cta {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    background: rgba(251,191,36,0.12); border-top: 1px solid rgba(251,191,36,0.25);
+    padding: 14px 32px; text-align: center;
+    font-size: 14px; font-weight: 600; color: #fde68a;
+  }
+  .bottom-cta a { color: #fde68a; text-decoration: underline; }
+
+  /* === Section break / lab header (gradient) === */
+  .slide.section-break { padding: 0; }
+  .slide.section-break .section-break-inner {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 50% 20%, rgba(42,70,180,0.45) 0%, rgba(18,65,176,0.2) 35%, #07162C 75%);
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 80px;
+  }
+  .section-break-inner .lab-title {
+    font-size: 13px; font-weight: 800; text-transform: uppercase;
+    letter-spacing: 0.16em; color: rgba(255,255,255,0.5); margin-bottom: 16px;
+  }
+  .section-break-inner .lab-name {
+    font-family: 'Poppins', sans-serif; font-size: 52px; font-weight: 900;
+    color: #fff; line-height: 1.1; max-width: 600px;
+  }
+  .section-break-inner .lab-desc {
+    font-size: 18px; color: rgba(255,255,255,0.5); line-height: 1.6;
+    margin-top: 16px; max-width: 500px;
+  }
+
+  /* === Cameras On (gradient + outline) === */
+  .slide.cameras-slide { padding: 0; }
+  .slide.cameras-slide .cameras-inner {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, #07162C 0%, #0f2d5a 50%, #1241B0 100%);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .cameras-card {
+    border: 1.5px solid rgba(255,255,255,0.15); border-radius: 20px;
+    padding: 48px 64px; max-width: 560px; text-align: left;
+  }
+  .cameras-card h2 {
+    font-size: 32px; margin-bottom: 8px;
+  }
+  .cameras-card .cameras-arrow {
+    font-size: 18px; font-weight: 700; color: #60a5fa; margin-bottom: 4px;
+  }
+  .cameras-card p { font-size: 16px; color: rgba(255,255,255,0.65); line-height: 1.6; }
+
+  /* === Original lab styles (for non-split slides) === */
   .lab-header { background: linear-gradient(135deg, rgba(244,114,182,0.08), rgba(59,130,246,0.08)); border: 1px solid rgba(244,114,182,0.2); border-radius: 16px; padding: 40px; text-align: center; max-width: 640px; margin: 0 auto; }
   .lab-title { font-size: 14px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.14em; color: #f9a8d4; margin-bottom: 12px; }
   .lab-name { font-size: 32px; font-weight: 900; color: #fff; margin-bottom: 8px; }
   .lab-desc { font-size: 16px; color: #8899bb; line-height: 1.6; }
   .lab-steps { display: flex; flex-direction: column; gap: 12px; margin: 20px 0; text-align: left; }
-  .lab-step { display: flex; align-items: flex-start; gap: 14px; background: #161822; border: 1px solid #252840; border-radius: 10px; padding: 16px 18px; }
-  .lab-step-num { width: 28px; height: 28px; border-radius: 7px; background: #3B82F6; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; color: #fff; flex-shrink: 0; }
+  .lab-step { display: flex; align-items: flex-start; gap: 14px; background: #0c2340; border: 1px solid #1a3a5c; border-radius: 10px; padding: 16px 18px; }
+  .lab-step-num { width: 28px; height: 28px; border-radius: 7px; background: #1241B0; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; color: #fff; flex-shrink: 0; }
   .lab-step-text { font-size: 14px; color: #b0b4c8; line-height: 1.5; }
   .lab-goal { background: rgba(52,211,153,0.06); border: 1px solid rgba(52,211,153,0.12); border-radius: 10px; padding: 16px 20px; margin: 16px 0; }
   .lab-goal-label { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: #34d399; margin-bottom: 6px; }
@@ -415,7 +529,6 @@
       </div>
     </div>
     <p style="font-size:16px; color:#60a5fa; font-weight:600; text-align:center; margin-top:8px;">Each module breaks one of these assumptions.</p>
-    <p style="font-size:14px; color:#fbbf24; font-weight:600; text-align:center; margin-top:8px;">Which shift have you felt most in your product?</p>
   </div>
 </div>
 
@@ -503,7 +616,6 @@
         </div>
       </div>
     </div>
-    <p style="margin-top:14px; font-size:14px; color:#60a5fa; font-weight:600; text-align:center;">Interactive: vote on each line before the next slide.</p>
   </div>
 </div>
 
@@ -513,7 +625,7 @@
     <div class="module-tag">The Course Arc</div>
     <h2>Six Questions. One Living Strategy.</h2>
     <div class="arc-flow">
-      <div class="arc-node active-node" style="background:rgba(59,130,246,0.2); border:2px solid #3B82F6;">
+      <div class="arc-node active-node" style="background:rgba(59,130,246,0.2); border:2px solid #1241B0;">
         <div style="font-size:10px; opacity:0.6;">M1</div>The Bet
       </div>
       <div class="arc-arrow">→</div>
@@ -550,12 +662,11 @@
     <div class="demo-tag tag-lecture">Lecture · Point 1 of 3</div>
     <h2>Annual Planning Cycles Are Obsolete</h2>
     <p style="margin-bottom:20px;">Model curves ≠ fiscal years → <strong>weekly / monthly AI bets</strong>, not one Q3 promise.</p>
-    <div style="background:#161822; border:1px solid #252840; border-radius:12px; padding:24px; margin:18px 0;">
+    <div style="background:#0c2340; border:1px solid #1a3a5c; border-radius:12px; padding:24px; margin:18px 0;">
       <p style="font-size:16px; color:#8899bb; line-height:1.6; font-style:italic;">"With AI, outcomes are influenced by data variability, algorithm behavior, and probabilistic models."</p>
       <p style="font-size:13px; color:#555; margin-top:10px;">— Jeetu Patel, CPO, <strong>Cisco</strong> · The Product Podcast</p>
     </div>
     <p style="font-size:15px; color:#60a5fa; font-weight:600; margin-top:12px;">Shift: promised outcomes → <strong>bets + learning cadence</strong> under uncertainty.</p>
-    <p style="margin-top:12px; font-size:14px; color:#94a3b8; text-align:center;">Show of hands: still annual-only AI roadmap?</p>
   </div>
 </div>
 
@@ -577,7 +688,6 @@
         <div class="ec-text">Synthetic users, auto-coded interviews, segment sims — speed without skipping rigor.</div>
       </div>
     </div>
-    <p style="margin-top:14px; font-size:14px; color:#60a5fa; font-weight:600; text-align:center;">Quick poll: &lt;2 wks · 2–6 wks · 6+ wks discovery?</p>
   </div>
 </div>
 
@@ -597,11 +707,10 @@
         <div style="font-size:15px; color:#b0b4c8;">"70% this hits Y — here's how we'll know + when we stop."</div>
       </div>
     </div>
-    <div style="background:#161822; border:1px solid #252840; border-radius:10px; padding:16px;">
+    <div style="background:#0c2340; border:1px solid #1a3a5c; border-radius:10px; padding:16px;">
       <p style="font-size:14px; color:#8899bb;"><strong style="color:#e0e0f0;">Google</strong> Bard → Gemini — reframe for variable quality, not apology tour.</p>
     </div>
     <p style="margin-top:12px; font-size:14px; color:#34d399; font-weight:600;">Non-consumption wins: <strong>Shopify · Gamma · Granola</strong> — new behaviors &gt; old category labels.</p>
-    <p style="margin-top:12px; font-size:14px; color:#94a3b8; text-align:center;">Pairs — 30 sec: one outcome your execs still want guaranteed?</p>
   </div>
 </div>
 
@@ -647,7 +756,6 @@
         <tr><td style="color:#34d399;">Orchestrator</td><td>Chains agents/tools</td><td>High value, infra spend</td><td>Autonomy risk</td><td><strong>Zapier AI</strong></td></tr>
       </tbody>
     </table>
-    <p style="margin-top:12px; font-size:14px; color:#60a5fa; font-weight:700; text-align:center;">Quick poll: which archetype is <em>your</em> product? Point or type it.</p>
   </div>
 </div>
 
@@ -661,38 +769,46 @@
 </div>
 
 <!-- ===== SLIDE: Cameras On ===== -->
-<div class="slide" data-notes="Quick energy reset. Keep it to 15 seconds.">
-  <div class="slide-inner" style="text-align:center;">
-    <div class="cameras-box">
-      <div style="font-size:48px; margin-bottom:16px;">📹</div>
-      <h2 style="font-size:28px; margin-bottom:12px;">Cameras On</h2>
-      <p style="font-size:16px; color:#8899bb;">Welcome back! Stay present and visible to keep the energy up.</p>
+<div class="slide cameras-slide" data-notes="Quick energy reset. Keep it to 15 seconds.">
+  <div class="cameras-inner">
+    <div class="cameras-card">
+      <h2>Reminder!</h2>
+      <div class="cameras-arrow">→ Cameras On</div>
+      <p>It's always better to see your smiling face! Be present and visible to stay engaged and keep interactions valuable.</p>
     </div>
   </div>
 </div>
 
 <!-- ===== SLIDE: Fork Your Strategy Repo ===== -->
 <div class="slide" data-notes="5 min max. This is the 'set up your workspace' moment. Template repo has folder structure + placeholder files for all 6 modules. They fork it, open in Cursor or VS Code or GitHub web. If someone doesn't have GitHub: pair them, they can create after class. The repo is the anchor artifact — everything from now on goes here.">
-  <div class="slide-inner">
-    <div class="demo-tag tag-build">Lab Exercise · 5 Minutes</div>
-    <h2>Fork Your Living Strategy Repo</h2>
-    <div class="lab-goal">
-      <div class="lab-goal-label">Your Goal</div>
-      <div class="lab-goal-text">Set up the repository that becomes your strategy. Every artifact you build in this course — diagnostic, prototype, cost model, governance policy — lives here. By M6, the repo IS your board-ready strategy.</div>
+  <div class="split-slide">
+    <div class="split-left">
+      <div class="slide-tag tag-pink">Lab Exercise</div>
+      <h2>Fork Your Living Strategy Repo</h2>
+      <div class="lab-goal">
+        <div class="lab-goal-label">Your Goal</div>
+        <div class="lab-goal-text"><strong>Your goal is</strong> to set up the repository that becomes your strategy. Every artifact you build in this course — diagnostic, prototype, cost model, governance policy — lives here.</div>
+      </div>
+      <div class="lab-tip">
+        <div class="lab-tip-label">Keep in Mind</div>
+        <div class="lab-tip-text"><strong>Keep in mind:</strong> This is a <strong>solo setup</strong>. The repo travels with you after the course — version-controlled, portable, shareable.</div>
+      </div>
     </div>
-    <div class="lab-steps">
-      <div class="lab-step"><div class="lab-step-num">1</div><div class="lab-step-text"><strong>Open the template repo</strong> link (posted in Slack). Click <strong>"Use this template"</strong> → Create a new repository.</div></div>
-      <div class="lab-step"><div class="lab-step-num">2</div><div class="lab-step-text"><strong>Name it</strong> something like <code>ai-product-strategy</code>. Public or private — your call.</div></div>
-      <div class="lab-step"><div class="lab-step-num">3</div><div class="lab-step-text"><strong>Open it</strong> in Cursor, VS Code, or GitHub's web editor. You'll be writing to <code>01-the-bet/</code> in a few minutes.</div></div>
+    <div class="split-right">
+      <div class="lab-badge-row">
+        <span class="lab-badge">Lab Exercise</span>
+        <span class="lab-timer">5 minutes</span>
+      </div>
+      <div class="steps-heading">Steps to follow:</div>
+      <div class="lab-steps">
+        <div class="lab-step"><div class="lab-step-num">1</div><div class="lab-step-text"><strong>Open the template repo</strong> link (posted in Slack). Click <strong>"Use this template"</strong> → Create a new repository.</div></div>
+        <div class="lab-step"><div class="lab-step-num">2</div><div class="lab-step-text"><strong>Name it</strong> something like <code>ai-product-strategy</code>. Public or private — your call.</div></div>
+        <div class="lab-step"><div class="lab-step-num">3</div><div class="lab-step-text"><strong>Open it</strong> in Cursor, VS Code, or GitHub's web editor. You'll be writing to <code>01-the-bet/</code> in a few minutes.</div></div>
+      </div>
     </div>
-    <div class="lab-tip">
-      <div class="lab-tip-label">Keep in Mind</div>
-      <div class="lab-tip-text">This isn't busywork. The repo is your living strategy — version-controlled, portable, shareable. When you present to your board in M6, you'll present from this repo. It travels with you after the course.</div>
-    </div>
-    <a href="Strategy Repo Template.html" style="display:block; margin-top:14px; padding:10px 18px; background:rgba(52,211,153,0.08); border:1px solid rgba(52,211,153,0.2); border-radius:8px; text-decoration:none; text-align:center; transition:all 0.2s;">
-      <span style="font-size:12px; font-weight:700; color:#34d399;">Browse the Template Structure →</span>
-      <span style="display:block; font-size:11px; color:#7a7a9a; margin-top:2px;">See all folders, files, and what you'll fill in each module</span>
-    </a>
+  </div>
+  <div class="bottom-cta">
+    <a href="Strategy Repo Template.html">Browse the Template Structure →</a> See all folders, files, and what you'll fill in each module
   </div>
 </div>
 
@@ -753,7 +869,7 @@
         </div>
       </div>
     </div>
-    <p style="margin-top:12px; font-size:13px; color:#555;">Pick: <strong>Notion · Figma · Linear · Slack</strong> — room votes if split.</p>
+    <p style="margin-top:12px; font-size:13px; color:#555;">Pick: <strong>Notion · Figma · Linear · Slack</strong>.</p>
   </div>
 </div>
 
@@ -795,21 +911,30 @@
 
 <!-- ===== SLIDE 16: Pair Challenge ===== -->
 <div class="slide" data-notes="10 min · 5 each. If pairs are too polite: 'You’re not being helpful by being nice. The market won’t be nice.'">
-  <div class="slide-inner">
-    <div class="demo-tag tag-activity">Breakout Exercise · 10 Minutes</div>
-    <h2>Defend Your Scores.<br>Name the Attacker.</h2>
-    <div class="lab-goal">
-      <div class="lab-goal-label">Your Goal</div>
-      <div class="lab-goal-text">Lower at least one of your partner’s scores and name the specific competitor that exploits that axis.</div>
+  <div class="split-slide">
+    <div class="split-left">
+      <div class="slide-tag">Breakout Exercise</div>
+      <h2>Defend Your Scores. Name the Attacker.</h2>
+      <div class="lab-goal">
+        <div class="lab-goal-label">Your Goal</div>
+        <div class="lab-goal-text"><strong>Your goal is</strong> to lower at least one of your partner’s scores and name the specific competitor that exploits that axis.</div>
+      </div>
+      <div class="lab-tip">
+        <div class="lab-tip-label">Keep in Mind</div>
+        <div class="lab-tip-text"><strong>Keep in mind:</strong> Polite agreement = failing your partner. The discomfort is the insight.</div>
+      </div>
     </div>
-    <div class="lab-steps">
-      <div class="lab-step"><div class="lab-step-num">1</div><div class="lab-step-text"><strong>Swap scorecards</strong> with your partner. Read their three axes silently for 60 seconds.</div></div>
-      <div class="lab-step"><div class="lab-step-num">2</div><div class="lab-step-text"><strong>Challenge one score.</strong> Which axis is too generous? Name a live competitor on that axis. <em>Ex: “Your moat is a 4 but Cursor would eat GitHub Copilot’s code workflow in 6 months.”</em></div></div>
-      <div class="lab-step"><div class="lab-step-num">3</div><div class="lab-step-text"><strong>Swap roles</strong> after 5 minutes. Same rules — be specific, not polite.</div></div>
-    </div>
-    <div class="lab-tip">
-      <div class="lab-tip-label">Keep in Mind</div>
-      <div class="lab-tip-text">Polite agreement = failing your partner. The discomfort is the insight — that’s what self-assessment always misses.</div>
+    <div class="split-right">
+      <div class="lab-badge-row">
+        <span class="lab-badge">Breakout Exercise</span>
+        <span class="lab-timer">10 minutes</span>
+      </div>
+      <div class="steps-heading">Steps to follow:</div>
+      <div class="lab-steps">
+        <div class="lab-step"><div class="lab-step-num">1</div><div class="lab-step-text"><strong>Swap scorecards</strong> with your partner. Read their three axes silently for 60 seconds.</div></div>
+        <div class="lab-step"><div class="lab-step-num">2</div><div class="lab-step-text"><strong>Challenge one score.</strong> Which axis is too generous? Name a live competitor on that axis.</div></div>
+        <div class="lab-step"><div class="lab-step-num">3</div><div class="lab-step-text"><strong>Swap roles</strong> after 5 minutes. Same rules — be specific, not polite.</div></div>
+      </div>
     </div>
   </div>
 </div>
@@ -836,7 +961,7 @@
     <div class="big-quote" style="margin:28px auto; font-size:21px;">
       You run AI at <strong>OpenAI / Google / Apple</strong><br>Your OKR: make their product irrelevant.
     </div>
-    <div style="background:#161822; border:1px solid rgba(248,113,113,0.2); border-radius:12px; padding:20px; margin:20px 0;">
+    <div style="background:#0c2340; border:1px solid rgba(248,113,113,0.2); border-radius:12px; padding:20px; margin:20px 0;">
       <p style="font-size:15px; color:#b0b4c8;">CEO memo — <strong>3 sentences</strong> · attack · wedge · why users switch</p>
     </div>
     <p style="font-size:13px; color:#8899bb; text-align:center;">Self-scores miss what a platform PM would do Monday morning.</p>
@@ -844,34 +969,41 @@
 </div>
 
 <!-- ===== SLIDE: Hands-On Lab Header ===== -->
-<div class="slide" data-notes="Section break — energy shift. They're building now, not discussing.">
-  <div class="slide-inner" style="text-align:center;">
-    <div class="lab-header">
-      <div class="lab-title">Hands-On Lab</div>
-      <div class="lab-name">The Prototype Bet</div>
-      <div class="lab-desc">Turn your diagnosis into something clickable. 15 minutes. Rough beats perfect.</div>
-    </div>
+<div class="slide section-break" data-notes="Section break — energy shift. They're building now, not discussing.">
+  <div class="section-break-inner">
+    <div class="lab-title">Hands-On Lab</div>
+    <div class="lab-name">The Prototype Bet</div>
+    <div class="lab-desc">Turn your diagnosis into something clickable. 15 minutes. Rough beats perfect.</div>
   </div>
 </div>
 
 <!-- ===== SLIDE 18: The Prototype Bet ===== -->
 <div class="slide" data-notes="15 min build window — wow moment. Pair if no account. Bar = shareable URL, not pretty UI. Walk the room — if someone is stuck at prompting, pair them.">
-  <div class="slide-inner">
-    <div class="demo-tag tag-build">Lab Exercise · 15 Minutes</div>
-    <h2>Build One Idea. Right Now.</h2>
-    <div class="lab-goal">
-      <div class="lab-goal-label">Your Goal</div>
-      <div class="lab-goal-text">Produce a <strong>shareable link</strong> to a clickable prototype that demonstrates your product bet — not slides <em>about</em> the product, the actual thing.</div>
+  <div class="split-slide">
+    <div class="split-left">
+      <div class="slide-tag tag-pink">Individual Exercise</div>
+      <h2>Build One Idea. Right Now.</h2>
+      <div class="lab-goal">
+        <div class="lab-goal-label">Your Goal</div>
+        <div class="lab-goal-text"><strong>Your goal is</strong> to produce a shareable link to a clickable prototype that demonstrates your product bet — not slides about the product, the actual thing.</div>
+      </div>
+      <div class="lab-tip">
+        <div class="lab-tip-label">Keep in Mind</div>
+        <div class="lab-tip-text"><strong>Keep in mind:</strong> This is a <strong>solo build</strong>. Instagram's first version was built in 8 weeks by 2 people. It did one thing.</div>
+      </div>
     </div>
-    <div class="lab-steps">
-      <div class="lab-step"><div class="lab-step-num">1</div><div class="lab-step-text"><strong>Pick your tool:</strong> v0, Cursor, or Lovable. If you don't have an account, pair with someone who does.</div></div>
-      <div class="lab-step"><div class="lab-step-num">2</div><div class="lab-step-text"><strong>Write a plain-English prompt</strong> describing what your user sees first. One screen, one flow. Don't over-specify — let the tool surprise you.</div></div>
-      <div class="lab-step"><div class="lab-step-num">3</div><div class="lab-step-text"><strong>Iterate once</strong> if time allows. Fix the biggest gap. Don't start over — steer.</div></div>
-      <div class="lab-step"><div class="lab-step-num">4</div><div class="lab-step-text"><strong>Push to your repo:</strong> paste the prototype link in <a href="Strategy Repo Template.html#prototype" style="color:#34d399; text-decoration:underline;"><code>01-the-bet/prototype.md</code></a>, commit, and share the link in Slack.</div></div>
-    </div>
-    <div class="lab-tip">
-      <div class="lab-tip-label">Keep in Mind</div>
-      <div class="lab-tip-text">Instagram's first version was built in 8 weeks by 2 people. It did one thing. That's the energy here — what's the simplest version that proves your bet works?</div>
+    <div class="split-right">
+      <div class="lab-badge-row">
+        <span class="lab-badge">Lab Exercise</span>
+        <span class="lab-timer">15 minutes</span>
+      </div>
+      <div class="steps-heading">Steps to follow:</div>
+      <div class="lab-steps">
+        <div class="lab-step"><div class="lab-step-num">1</div><div class="lab-step-text"><strong>Pick your tool:</strong> v0, Cursor, or Lovable. If you don't have an account, pair with someone who does.</div></div>
+        <div class="lab-step"><div class="lab-step-num">2</div><div class="lab-step-text"><strong>Write a plain-English prompt</strong> describing what your user sees first. One screen, one flow. Don't over-specify — let the tool surprise you.</div></div>
+        <div class="lab-step"><div class="lab-step-num">3</div><div class="lab-step-text"><strong>Iterate once</strong> if time allows. Fix the biggest gap. Don't start over — steer.</div></div>
+        <div class="lab-step"><div class="lab-step-num">4</div><div class="lab-step-text"><strong>Push to your repo:</strong> paste the prototype link in <a href="Strategy Repo Template.html#prototype" style="color:#34d399; text-decoration:underline;"><code>01-the-bet/prototype.md</code></a>, commit, and share the link in Slack.</div></div>
+      </div>
     </div>
   </div>
 </div>
@@ -917,7 +1049,7 @@
     <div class="module-tag">Bridge to Module 2</div>
     <h2>You Know What You're Betting On.<br>Can Anyone Copy It in 6 Months?</h2>
     <p style="font-size:17px; color:#8899bb; max-width:560px; margin:20px auto; line-height:1.5;">M2 = <strong>data flywheels</strong> + what to do when <strong>OpenAI / Azure / Bedrock</strong> terms shift.</p>
-    <div style="background:#161822; border:1px solid #252840; border-radius:12px; padding:24px; margin:32px auto; max-width:500px; text-align:left;">
+    <div style="background:#0c2340; border:1px solid #1a3a5c; border-radius:12px; padding:24px; margin:32px auto; max-width:500px; text-align:left;">
       <p style="font-size:15px; font-weight:700; color:#fff; margin-bottom:10px;">Bring to M2:</p>
       <ul>
         <li>Your strategy repo with <code>01-the-bet/</code> committed</li>
@@ -1022,14 +1154,14 @@
     <div class="module-tag">Module 1 Complete</div>
     <h1>Your Opinion Matters</h1>
     <div class="subtitle" style="margin:18px auto;">Scan QR / link — quick feedback shapes the next cohort.</div>
-    <div style="width:180px; height:180px; background:#1a1a2e; border:2px solid #252840; border-radius:16px; margin:32px auto; display:flex; align-items:center; justify-content:center; color:#444; font-size:14px; font-weight:600;">QR Code</div>
+    <div style="width:180px; height:180px; background:#0f2d4a; border:2px solid #1a3a5c; border-radius:16px; margin:32px auto; display:flex; align-items:center; justify-content:center; color:#444; font-size:14px; font-weight:600;">QR Code</div>
   </div>
 </div>
 
 <!-- ===== SLIDE: Q&A ===== -->
 <div class="slide" data-notes="Open floor for questions. Check Slack for written questions.">
   <div class="slide-inner" style="text-align:center;">
-    <h1 style="font-size:64px; color:#3B82F6; margin-bottom:24px;">Q&amp;A</h1>
+    <h1 style="font-size:64px; color:#1241B0; margin-bottom:24px;">Q&amp;A</h1>
     <p style="font-size:20px; color:#8899bb;">Any questions before we close?</p>
     <p style="font-size:14px; color:#555; margin-top:20px;">Drop questions in Slack if something comes up later.</p>
   </div>

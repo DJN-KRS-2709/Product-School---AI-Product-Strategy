@@ -1,0 +1,1419 @@
+﻿M1: Activate Vibe Coding Speed
+
+
+ Slide 1 — Title
+
+
+Welcome to Vibe coding. I hope you are excited about Whats to come? I certainly am, so lets get this going.
+
+
+Slide 2 — Class Expectations
+Before we dive in, lets set our ground rules. Cameras on — it makes a huge difference in how we connect and learn together. Be present, arrive on time, and I really encourage you to participate actively during exercises. Use Slack for all communication so nothing gets lost. And save deeper questions for after class or post them in slack so we dont interrupt the flow — but dont worry, there will be plenty of time to ask everything.
+
+
+Slide 3 — Introductions
+I think by now, a lot of you folks, could do the introduction for me. So I will keep it short.  Hey everybody, Im Dejan. Im a father of two boys — six and eight. I like to say I buy Lego for them… but lets be honest, Im really buying it for myself. I am a coffee nerd tracking beans, extraction times, and grinder settings in spreadsheets.  Ive been in product for more than 16 years. Back in the day, product management meant writing huge specifications and then praying for six months that the features would be delivered as expected. What should I say? They never did and we had to change our approach. 
+Before Spotify, I worked at SoundCloud, where we built an insights an analytics platform from scratch. I also launched Fan-Powered Royalties — a completely new way of paying artists on a streaming service. Ive been at Spotify for about 4 years now.To help with the mission to unlock human creativity by giving a million artists the opportunity to live off the art and a billion fans to be inspired by it. But enough about me — Id love to get to know you. Drop your name, role, and at least one fun fact in Slack or the chat. The more we know about each other, the better we can learn together.
+
+
+Slide 4 — Syllabus
+Heres the full outline of the course. Six modules across three weeks — each one building on the last.
+Module 1 is where we are today — speed. Youll build your first functional prototype from scratch.
+Module 2 is about sharpening your intent — making sure youre building the right thing, not just building fast. Think of it like this: Airbnbs first prototype was three air mattresses on a floor. The idea wasnt the mattresses — it was testing whether strangers would pay to stay in someones home. Thats Module 2 thinking.
+Module 3 is precision — using context engineering to get exactly what you describe. No more "build me something" — it becomes "build me exactly this."
+Module 4 translates your prototype into production specs — Living PRDs, GitHub. This is where Instagram went from a photo filter app called Burbn to a focused product.
+Module 5 makes it real — databases, auth, APIs, and you deploy it to a Live URL with Real users. Your prototype becomes a real working product.
+And Module 6 — you measure, learn, and iterate. Analytics, AI-powered analysis, and a data-driven improvement cycle. You close the loop from idea to evidence.
+
+
+Slide 5 — Final Project Explanation
+At the end of our three weeks you will present your final project. Let me play the video for you.
+
+
+Slide 6 — Final Project Deliverables
+Here are the key deliverables for your final project. Youll submit individually — no group dependencies.
+Six things in your deck: your live deployed link, your validation brief, your Living PRD, your prompt library, your engineering handoff, and your personal insights into the build process.
+Think of this as your product portfolio — not a homework assignment. When Dropbox launched, Drew Houston didnt have a working product. He had a demo video that proved the concept. Your deliverable is even better — youll have a live, working product with evidence behind it.
+
+
+Slide 7 — Agenda
+Heres what were covering today. Well start with a live demo — Ill build three completely different prototypes from one messy problem in 15 minutes. Then youll do the same in your first hands-on lab. After that, well level up your prototype with design systems and interactivity. And well wrap by naming the framework you just lived through.
+
+
+
+
+Slide 8 — The High-Velocity Prototyping Cycle
+This kicks off the first major section — the high-velocity prototyping cycle. This is the core of vibe coding: build fast, show fast, learn fast. Lets dig in.
+
+
+
+
+Slide 9 — Instructor-Led Demo: The Triple-Threat Build
+Heres the scenario. Enterprise customers are churning 30 days after onboarding. The VP of Customer Success thinks its a UX issue. The Head of Product thinks you need better feature discovery. The CEO thinks we should add a self-serve analytics dashboard. Nobody has data. Everybody has opinions.
+Sound familiar? This is the reality of product work. Im going to build three completely different prototypes from this one problem — Preparation & Setup
+1. Open Lovable in a new browser tab.
+2. Have the "Enterprise Churn" Problem Statement ready to share.
+3. Pre-select a high-quality SaaS dashboard screenshot from Mobbin for Prototype 3
+
+
+1. 4 MINUTES: Prototype 1: The Quick Exploration (The Customer "Vibe")
+* Prompt: "Build me an enterprise customer onboarding dashboard that helps users discover key features in their first 30 days. Include a progress tracker, recommended actions, and a help section."
+
+   2. 4 MINUTES: Prototype 2: The Reframe (The Internal "Vibe")
+   * Prompt: "Build me a churn early warning system for enterprise accounts. Show a list of accounts with risk scores, last login dates, feature adoption percentages, and a reach out action button. Make it feel like an internal operations tool, not a customer facing product.”
+   * Ensure you highlight the pivot. Same problem, but a completely different solution direction. Explain that in 4 minutes, youve moved from a B2C user view to a B2B operations view.
+
+      3. 7 MINUTES: Prototype 3: The Design Match (The "Production" Vibe)
+      * Show the Mobbin screenshot to the class.
+      * Prompt: "Build me a customer health analytics dashboard that matches this design system. Use the same color palette, sidebar navigation style, and card layout. The dashboard should show account health score, feature adoption by module, last 7 days activity trend, and a list of at risk accounts." 
+      * This is the "Level Up". See how the tool clones a professional design system instantly, moving the prototype from a toy to a tool that a VP would actually Understand.
+
+
+With that, we have successfully visualized three competing executive opinions. WE arent debating requirements anymore; we are managing outcomes. While others are still debating, you are now a builder. You will be able to showcase that skill very, very soon
+
+
+
+
+Slide 10 — Your Vibe Coding Tool Stack
+Were using the best tool with the biggest hype in the market right now: Lovable. Partnership with Product School means you get Pro access for free throughout this course. Why Lovable? Its visual-first and has the lowest barrier for non-technical PMs. You dont need to understand code to build functional prototypes. Figma revolutionized design by making it accessible — Lovable does the same for building. Your Pro package includes about 100 credits per month — not unlimited. Tip: do your prompt planning in Gemini or ChatGPT first. Also, throughout the course, I have built some tools which can help you with the prompting, so stay tuned to that. Paste the polished prompt into Lovable when its time to build. That alone will save you from running out of credits mid-module.
+
+
+
+
+Slide 11 — Skill Markdowns
+This is a superpower most people dont know about yet. AI tools like Cursor, Claude, and Lovable can import skills — pre-made instruction sets that give the AI specialized capabilities.
+Think of it like installing an app on your phone. Someone else figured out how to make the AI great at building dashboards, and you can import their skill in one click. Shopifys AI, for example, uses specialized instruction sets for different merchant tasks, inventory management gets different rules than marketing.
+By Module 3, youll build your own skills in your Living Prompt Pack. For now, just know they exist. Its a superpower you can acquire without writing a single line of code.
+
+
+Slide 12 — Bridging Design and Build
+Modern vibe coding tools are multimodal — they can ingest your existing assets and match your companys design system instantly. There are three main entry points. Text-to-App — you describe what you want in natural language. Best for completely new concepts where no design exists yet. Screenshot-to-App — you upload a screenshot of an existing product as I did with my third example in my demo. This is how teams at companies like Notion, rapidly prototype variations — screenshot the current UI, describe whats different. And Design-to-Code — you import Figma files or design system docs. Best for on-brand prototypes when you already have a design system.
+The key takeaway: you dont start from a blank canvas. You start from what already exists.
+
+
+
+
+Slide 13 — Vibe Coding Credit Efficiency
+Credit efficiency is like fuel management. Tesla doesnt waste battery on unnecessary acceleration — and you shouldnt waste Lovable credits on half-baked prompts.
+Three steps to Consider. First, plan in a sandbox — do 60% of your refinement work in ChatGPT or Gemini. Get the prompt tight before you touch Lovable. Second, paste into Lovable when its polished — aim for one generation, not five. Third, for minor fixes like colors or typos, adjust the code directly instead of burning a credit.
+And heres the eject rule: if a prompt fails twice, stop. Export the code, debug it externally, and paste the fix back. Never enter a "credit death spiral" by re-prompting the same broken logic again And again.
+
+
+Slide 14 — Your First Vibe Build in Lovable
+Time to get our hands dirty! Youre moving from watching to building. In this lab, youll build your very first functional prototype from scratch.
+
+
+Slide 15 — Lab 1: Your First Vibe Build
+Open Lovable and choose one of the four scenarios from the lab guide. Youve got two approaches if youre staring at a blank prompt box.
+Option 1 — Copy and Customize: grab the starter prompt from the lab guide and replace the brackets with your specifics.
+Option 2 — First Screen Method: visualize the very first thing your user would see and prompt Lovable to build exactly that.
+I want you to Build on instinct. No methodology, no framework — just speed and immediate execution. If the output isnt right, prompt again or prompt differently. Aim for "clickable" over "perfect."
+Instagrams first version was built in eight weeks by two people. It did one thing: let you take a photo, apply a filter, and share it. Thats the energy here — whats the simplest version that proves your idea works?
+
+
+Slide 16 — Show and Swap: Breakout Exercise
+Hope you had fun. Now lets Pair up with someone. Swap prototype links in the chat. Now heres the key rule — explore your partners build silently for 3 minutes. No verbal context. No explaining.
+This mirrors real user behavior. When Stripe puts a new feature in front of users, they dont explain how it works. They watch where people click, where they hesitate, where they get confused. Thats exactly what youre doing now.
+After 3 minutes of silent exploration, discuss: what you understood immediately, what confused you, and what assumption you think this prototype was testing.
+
+
+
+
+Slide 17 — Quick Debrief
+In one sentence, share in Slack: what was something surprising you learned from watching someone use your prototype?
+This is the power of rapid feedback. You just compressed weeks of assumption-testing into 30 minutes. Most product teams spend months debating features in conference rooms. You just built, tested, and learned in the time it takes to have one meeting.
+
+
+Slide 18 — break: 5 Minutes
+Amazing. You deserved a break. Take 5-minute to Grab some water, stretch, and well be right back.
+
+
+Slide 19 — Cameras On
+Welcome back! Quick reminder — its always better to see your smiling face. Be present and visible to stay engaged and keep interactions valuable.
+
+
+
+
+Slide 20 — Instructor-Led Demo: Moving From Basic to Pro
+I showed three working prototypes, but they all look like "vibe" sketches. Your VP of Design wont look at them because they dont match the brand, and your Engineering Lead says theyre too generic to be useful.
+Speed got you the idea. Now, strategic iteration must get you the buy-in.
+This is exactly what happened at Spotify when we prototyped new features — the first version always looks generic. What convinces stakeholders isnt more features, its making it look and feel like it already belongs in the product. Lets take a look at how we can transform this with a few prompts.
+
+
+      1. 5 MINUTES: Step 1: Design System Matching (The "Visual" Upgrade): Upload the Mobbin screenshot or design tokens you intend to clone.
+      * Prompt: "Full Design System Transformation: Completely redesign this onboarding dashboard to match the design system in the attached screenshot. Transform every visual element: Layout: Add a dark sidebar on the left with icon + label navigation items. The main content area should be a clean white/light gray background with generous padding and clear visual hierarchy. Cards and containers: Rebuild every section — progress tracker, recommended actions, and help — as modern cards with rounded corners (8px), subtle borders (e5e7eb), light drop shadows, and consistent 24px internal padding. Cards should have clear separation with white backgrounds that float above the page background. Color palette: Dark sidebar (1e1e2d), light content area (f9fafb), blue primary accent (3b82f6) for buttons and active states, green (22c55e) for completed/success states, gray (6b7280) for secondary text. Typography: Use a clean sans-serif. Page title 24px bold. Section headings 18px semibold. Body text 14px regular. Secondary/helper text 13px in 9ca3af. Progress tracker: Redesign as a horizontal step indicator with connected dots/circles across the top of the main area — not a vertical list. Completed steps are filled green, current step pulses blue, upcoming steps are hollow gray. Add a progress bar line connecting the steps. Recommended actions: Display as a grid of 2x2 cards, each with an icon on the left, a title, a one-line description, and a subtle arrow or "Start" button on the right. Use hover-ready card styling. Overall polish: Add smooth spacing between sections (32px gaps). Make the whole page feel like a premium SaaS product — the kind of dashboard youd see at Linear, Notion, or Stripe. Keep all existing content and functionality. Transform the design completely."
+
+         2. 5 MINUTES: Step 2: Add Interactivity (The "Functional" Upgrade): Demonstrate making the app actually work rather than just looking good.
+         * Rapidly add a functional filter, a detail view that opens upon clicking, or a loading skeleton animation to simulate real data fetching.
+         * Prompts: 2A — Interactive Progress Tracker: 5 onboarding steps with completed/current/locked states. Clickable. Green checkmarks, blue progress indicator, grayed-out locked steps.
+         * 2B — Actionable Recommendation Cards: Hover states, "Start" expands inline instructions, "Mark Complete" collapses with checkmark. 4 real actions (invite teammates, create project, connect Slack, set up digest).
+         * 2C — Loading Skeleton: 1.5-second skeleton animation on page load. Perceived quality. Quick win.
+         * Emphasize that real products require interactivity that validates the users intent. Your prototype isnt just pictures, but a clickable tool.
+
+            3. 5 MINUTES: Step 3: Multi-Prompt Refinement (The "Surgical" Upgrade): Pick one specific, weak section of the UI (e.g., a header or a single card).
+            * Use a focused, small prompt to fix just that section without rebuilding the entire page. 
+            * Prompt1: ""Fix only the top header bar — dont touch anything else. Add a personalized greeting on the left: Good morning, Sarah with a subtle wave emoji and her role underneath in lighter text (Product Lead · Acme Corp). On the right side, add a row of icon buttons: a notification bell with a red dot badge showing 3, a settings gear, and a circular avatar with initials SK on a blue background. Add a thin 1px bottom border (e5e7eb) to visually separate the header from the content below. Keep everything else exactly as it is."
+            * Prompt 2: "Fix only the help section at the bottom — dont change anything else. Replace the plain text with a compact card that has a soft blue gradient background (eff6ff to dbeafe), a chat bubble icon on the left, the heading Need help getting started?, a one-line subtext Our team typically responds in under 2 minutes, and a white Chat with us button. Add a small or browse docs → text link below the button."
+            * Stress that the key to pro-level vibe coding is steering through small, compounding improvements rather than starting over every time the AI misses a detail.
+
+
+We have just transformed a rough idea into a production-grade prototype through strategic iteration. While youre still building fast, you are doing so with direction and quality. In the next lab, you will apply these same "Level Up" techniques to your own builds.
+
+
+Slide 21 — Strategically Refine Your Build in Lovable
+Time for round two. Youre heading back into the lab to take your rough prototype and make it look like something youd show your VP.
+
+
+Slide 22 — Lab 2: Strategically Refine Your Build
+Return to your Lab 1 prototype and identify the weakest section.Make a screenshot so that you can see how it looks before you apply the changes.  Select at least two upgrades:
+Maybe Design Match — use a Mobbin screenshot to clone professional colors, layouts, and navigation. This is what Airbnb does when they prototype new features — they start from their existing design system, not from scratch.
+And Add Interactivity — make a filter work, or a detail view expand. Static screenshots dont validate anything.
+Refine Without Rebuilding — use a focused prompt to surgically fix one specific section. The key skill here is steering, not starting over. Generate your upgraded link and prepare to share the before-and-after transformation in Slack. Remember: plan your prompts outside of Lovable to save credits.
+
+
+
+
+Slide 23 — Swap and Review: Breakout Exercise
+New pairs this time. Swap prototype links again. Explore silently for 3 minutes, then discuss:
+Does this feel like a "real" product or just a visual mockup? Where did the interactivity fail to meet your expectations as a user? And the big question: would you show this to your VP as a credible representation of a solution?
+When Notion tests new features internally, the bar isnt "does it work?" — its "would you use this yourself every day?" Thats the standard were aiming for.
+
+
+Slide 24 — Quick Debrief: Prototype-Readiness Score
+You know the drill by now so Share screenshots of your before and after prototypes in Slack. Then score your refined prototype from 1 to 5: 1 means "just a sketch — it exists but its not ready for eyes." 3 means "getting there — recognizable but not functional." 5 means "VP ready — Id show this to leadership tomorrow."
+Be honest. The gap between where you are and where you want to be — thats exactly what the rest of this course closes.
+
+
+Slide 25 — From Prompt to Functional Strategy
+Lets wrap up with moving from building to naming. Everything you just experienced — the building, the testing, the iteration — follows a pattern. Lets name it.
+
+
+
+
+Slide 26 — The Confidence Line
+Its the confidence line.This is the framework that runs through the entire course.
+On the top, you start in ambiguity. You dont know what to build. Thats where you were 90 minutes ago. Modules 1 and 2 live here. You build fast, you test assumptions, you figure out whats worth pursuing. In the middle, you gain clarity. Modules 3 and 4 will help you with that. — you get precise with your prompting and start structuring for real teams. This is where Slack went from "chat tool for a video game company" to "enterprise communication platform." They didnt start with that clarity — they built their way to it.
+On the bottom, youre confident. Module 5 — real integrations, real deployment, real users. Youll have a live URL that anyone on the internet can use. And Module 6 closes the loop — you measure whats happening, use AI to analyze it, and iterate based on evidence. Thats the full product lifecycle.
+One Important note.The tool doesnt matter. The progression does. Even if every AI tool changes next month, this framework stays the same.
+
+
+Slide 27 — From Toy to Tool
+Heres the most important distinction in this module. A toy looks impressive but proves nothing. It generates applause, not insights. No logic behind the screen. Dies after the demo.
+A tool proves something works. It validates an assumption with clickable evidence. Handles at least one real user flow end-to-end. Survives when someone else uses it.
+Think about the score you just gave your prototype — was it a toy or a tool? Dropboxs famous demo video wasnt pretty. It was a 3-minute screencast showing a folder syncing. But it proved the core concept worked. Thats a tool. That gap is what the rest of this course closes.
+
+
+
+
+Slide 28 — Accountability Statement
+In one sentence, post on Slack: what is one thing you learned about your product idea that you didnt know 60 minutes ago?
+Then reply to 2 other learning sentences from your peers. This is your cohort — support each other. The best products are built by people who learn from each others mistakes, not just their own. I love the concept of failing gloriously
+
+
+Slide 29 — Module 1 Complete
+Look at what you accomplished today. Two prototypes built — from scratch to shareable in under 60 minutes. Two feedback loops — real users testing your assumptions, not your opinions. And 67% hands-on time — more time building than me talking. 
+Heres the shift that happened: the mental barrier is removed. You built functional software without writing a single line of code. The wall between thinking and building is gone. Youre no longer waiting on engineering to validate your product instincts — you validated them yourself, today, in real time.
+And most importantly you learned the tool vs. toy distinction. If your prototype helped you decide something, its a tool. If it only looked cool, its a toy. You built tools today.
+
+
+Slide 30 — Key Takeaways
+Let me bring this home with a story youve already been hearing today. Remember when I told you about Slack at the beginning of class? Stewart Butterfield wasnt building a chat product. He was building a game called Glitch — and his team needed an internal tool to talk to each other. So they built one. Fast. No spec, no PRD, no design review. Just "we need a way to communicate" and a rough prototype that worked. Thats takeaway one — they built to think. The prototype wasnt a deliverable. It was how they figured 
+
+
+out what they actually needed.The game flopped. But the chat tool? People wouldnt stop using it. So Butterfields team started layering. First it was just messages. Then they added channels. Then search. Then file sharing. Then integrations.
+Each layer wasnt a redesign — it was a precise addition that made the tool more functional without breaking what already worked. Sound familiar? Thats exactly what you did today. You started with a vibe, layered on a design system, added interactivity, then 
+
+
+surgically refined one section. Each pass compounded. Thats takeaway two — vibes become tools through intentional, incremental layers, not through starting over.But heres the part that changed everything.
+Butterfields team discovered a number: 2,000. Teams that sent 2,000 messages almost never churned. Teams that didnt, disappeared. That wasnt an opinion. That wasnt a gut feeling. That was evidence — generated by a working product that people could actually use. And that single data point gave them the confidence to pivot an entire company from gaming to enterprise communication. Thats takeaway three — every build must move the Confidence Line by answering a real question. A prototype is a tool only when it generates evidence, not applause.Thats the arc of what we covered today. Build fast to think. Layer intentionally to make it real. And always — always — build to answer a question, not to impress a room.
+
+
+
+
+Slide 31 — Extra Practice and Next Session
+If you want to dig deeper, we have two optional exercises for you:
+First — pick an alternative scenario and try your vibe build again. Pick one youre less familiar with to challenge your newly acquired speed skill.
+Second — try another tool like Bolt or Cursor and compare the outputs. Which one was easier? Which gave you the best V1? The methodology works across all of them.
+Next session — Module 2: we Sharpen our Intent with Strategic Prototypes. You can build fast. Now: are you building the right thing? Well apply the validation framework and make sure youre choosing the right fidelity for your build intent.
+
+
+Slide 32 — Survey
+At the end of each session, please scan the QR code or use the link to share your feedback. Your insights help us improve and make each class better than the last. Wed love to hear about your experience!
+
+
+
+
+Slide 33 — Resources and Templates
+Here youll find all the resources for this module — the final project brief, the Module 1 Lab Guide, and the final project deliverables template. Make sure to bookmark these for reference as you continue your journey through the course.
+
+
+
+
+ lide 34 — Q&A
+Alright, before we close — any final questions? This is your time to ask anything about what we covered today. Feel free to unmute or drop your question in the chat. Or share questions in Slack if something pops up later. See you on…!
+
+
+
+
+M2:Sharpen Prototyping Intent
+Slide 1 — Title
+Welcome back to Module 2 — Validate Product Hypotheses via Risk-Based Prototyping
+And before we start I want to acknowledge something. I know some of you might feel theres a lot going on and not quite enough time. Thats intentional.
+Real learning happens when youre pushed a bit out of your comfort zone, when things feel slightly uncomfortable, even a little overwhelming. Thats the space where you actually grow. My goal is to create an environment where you feel both safe and challenged at the same time, because thats where high performance happens.
+Similar to the confidence line we talked about, you start in ambiguity and move toward clarity. This course follows the same pattern. Its completely normal to feel uncertain at the beginning and dont be afraid to show something you feel like its unfinished. This is the purpose of the phase we are currently in. Ill guide you through it. And if you stay with it, by the end of these three weeks, youll be surprised by what youve built and the skills youve developed. So dont be afraid of that feeling. Its part of the process. Here is a great article about the Fearless organization quadrant by Amy Edmondson. Hope you like it. 
+
+
+Now back to the course. Last session you built functional prototypes from scratch, got feedback, refined them, and saw how fast you can go from idea to working software. That was Module 1. Speed. Today the question changes. You can build fast — however are you building the right thing? Speed without direction is a liability. Today we add the direction.
+
+
+
+
+ Slide 2 — Class Expectations
+Same ground rules as Module 1. Cameras on — I know, I know, but it genuinely makes a difference and One thing Ill add for today: youre going to be doing more individual work than M1. When I say "dont open Lovable yet" — trust the process. The preparation is what makes the build dramatically better. Youll see.
+
+
+
+
+ Slide 3 — Syllabus
+Alright quick look into the course. As Mentioned Module 1 was speed  today its about sharpening your intent. Youre going to learn to build prototypes that prove something, not just look like something. Think about how Airbnb started: their first prototype was literally three air mattresses on a floor and a basic website. The idea wasnt the mattresses — it was testing whether strangers would actually pay to sleep in someone elses home. Thats a hypothesis-driven prototype. Thats Module 2 thinking. 
+
+
+ Slide 4 — Agenda
+Three things today.First — how to build smarter, not just faster. Ill show you what happens when you add real context to your builds. Second — the Prototype Validation Lens. A simple framework that turns every prototype into a hypothesis test instead of a demo. Third — hands-on lab. Youll start your final project. Not a throwaway exercise — the prototype you build today is the one youll carry through Modules 3, 4, 5, and 6 all the way to deployment. Choose wisely.
+
+
+ Slide 5 — Chapter Break: How to Build Smarter, Not Just Faster
+This kicks off the first major block. Lets talk about what separates a demo from a decision tool.
+
+
+
+
+ Slide 6 — Instructor-Led Demo: What You Can Prove with Context Injection
+Click on pre_m2  prototype on screen share. 
+"This is the prototype from Module 1. Clean design, Mobbin-matched, interactive components — it looks like a real product. Pretty impressive for 15 minutes work."
+But "What assumption is this testing?"
+Pause. Let the silence land. Wait 5-10 seconds.
+"If your VP asked what did you learn from this? — what would you say? It looks nice? Thats not a product insight. Thats interior design. This prototype looks like a product. however it proves nothing."
+"Im going to rebuild this with three ingredients: a hypothesis, real data, and real user voice. Watch what changes."
+
+
+Open Lovable (either in the same project or a new one). Paste this prompt:
+
+
+ "Build a 3-screen onboarding flow for a B2B project management SaaS that prominently surfaces team invitations within the first 3 steps.
+
+
+ Context: Company is 18 months old, Series A, 5,000 paying teams, 4.2M ARR. 30 percent of new customers churn within 90 days. The board requires measurable improvement this quarter.
+
+
+ Data shows: Users who invite a teammate within the first 3 days retain at 68 percent. Users who do not invite retain at only 22 percent. Only 12 percent of new users send an invite in the first 3 days. The invite button is currently buried in Settings  Team  Members. 60 percent of new users never create their first task.
+
+
+ Constraint: No engineering resources for 6 weeks. Prototype only. Must work within the existing product surface.
+
+
+ Hypothesis: If we surface team invites prominently during first-run onboarding, day-3 invite rate increases from 12 percent to 25 percent.
+
+
+ User insight: Retained user: When I invited my co-founder on Day 2, thats when it clicked. Its a team tool. At-risk user: I tried to invite my team but it asked for role and department. I dont know that. I just want to add them.
+
+
+ Instructions: Design a 3-screen onboarding flow with the goal of increasing early team invites.
+
+
+ Screen 1: Reframe the product as a team tool. Make the value of collaboration explicit.
+ Screen 2: Make inviting teammates the primary call to action. Remove friction such as role and department requirements.
+ Screen 3: Reinforce activation by showing how collaboration unlocks value — shared tasks, comments, progress visibility.
+
+
+ Design principles: Make the invite action feel lightweight and immediate. Do not add new backend functionality. Assume the invite system already exists. Reduce cognitive load. Make the team invite feel like the default next step.
+
+
+ Include: Clear headline and microcopy. Primary and secondary CTAs. Minimal UI elements. Simple visual hierarchy.
+
+
+ Display these metrics visually within the prototype to anchor urgency: Day-3 invite rate: 12 percent. 90-day retention with invite: 68 percent. 90-day retention without invite: 22 percent. 90-day churn overall: 30 percent. Target: reduce churn to 15 percent.
+
+
+ After the 3 screens, include: The single riskiest assumption behind this intervention. A lightweight experiment plan to validate it within 2 weeks. Success criteria and leading indicator metrics.
+
+
+"Watch the difference. Same tool. Same time. But this prompt has a hypothesis, real retention data, a named constraint, and actual user quotes baked in."
+
+
+ "The first one generates applause. The second one generates evidence. Thats the shift were making today. Youre going to do exactly this to your own build — with your own scenario, your own data, and your own hypothesis."
+"But before you build, I want you to feel the gap in your own work. Open your M1 prototype right now. Lets see where it stands."
+
+
+
+
+ Slide 7 — Reflection Moment: What Does Your M1 Build Prove?
+Now Open up your prototype from Module 1. Take a real look. I want you to answer three questions — and be honest with yourself:
+One — what assumption were you actually testing? Not what you think it was retroactively. What was it when you built it?
+Two — if your VP asked "what did you learn from this?" — what would you say?
+Three — where is the real user data? Where are the metrics? Wheres the user language?
+Post your answers in Slack or unmute and share. you will realize your M1 build doesnt test anything specific. Thats not a failure — thats M1s job. M1 proved you can build. M2 proves you can build something that matters.
+
+
+
+
+Slide 8 — Chapter Break: The Prototype Validation Lens
+Now lets give you the framework that makes this repeatable. The Validation Lens.
+
+
+
+
+ Slide 9 — The Validation Lens Loop
+Four steps. This is the cycle youll run in every lab from now on.
+Step 1 — Identify the Hypothesis. The "why" behind every prompt you write. Before you build anything, name the test. If you cant complete the sentence "Im testing whether [X]," you arent ready to build.
+Step 2 — Define the Constraints. These are your guardrails. Whats the risk type? What fidelity level do you need? What are the technical limits?
+Step 3 — Build and Stress-Test. This is the key shift from M1. Youre not building to see it work. Youre building to see where it breaks. Netflix tested their DVD-by-mail hypothesis by literally mailing themselves DVDs before building any infrastructure. They were looking for what would fail, not what would succeed.
+Step 4 — Synthesize and Pivot. What did you learn? Update your hypothesis. Continue or change direction.
+Each revolution sharpens your hypothesis and tightens constraints. This compresses weeks of traditional development into a single session.
+
+
+Slide 10 — Whats Your Kill Switch?
+Your hypothesis should identify the riskiest part of the product concept. Your kill switch forces clarity about what to build and test first.
+Ask yourself: "Which assumption, if wrong, kills the whole thing?"
+For 0-to-1 new products — your kill switch is usually desirability. Nobody wants it yet, so prove they will. Youre testing whether the problem is real. Dropbox did this perfectly — Drew Houston didnt build the product first. He made a 3-minute demo video showing how it would work. The waitlist hit 75,000 overnight. Desirability validated before a single line of code.
+For 1-to-N existing products — your kill switch is usually adoption or flow. People have it; now prove theyll use it. You already have users, data, and a product. Screenshot what exists and build on top.
+
+
+
+
+ Slide 11 — Choose Your Scenario
+This is your commitment moment. The scenario you pick today is the one youll carry through Modules 2 through 6. This becomes your final project. No switching after today. Take your time.
+Four options plus Bring Your Own:
+Scenario 1 — The Retention Engine.
+Scenario 2 — The Internal Tool Nobody Uses.
+Scenario 3 — The Marketplace Trust Problem.
+Scenario 4 — The Dashboard Nobody Reads.
+And you can Bring Your Own — use a real problem from your company. 
+
+
+Slide 12 — The Problem Framework
+Before you open any tool, you frame the problem. Six elements — and Im going to explain it with an example rather than lecture the theory.
+Heres the Retention Engine scenario — the one I just demoed:
+Goal — reduce 90-day churn from 30% to 15%. Problem — solo users churn at 3x the rate of team users, and only 12% of new users send an invite in the first 3 days. Context — B2B PM tool, Series A, 5,000 paying teams, 4.2M ARR (Annual Recurring Revenue). The board requires measurable improvement this quarter. Constraints — no engineering resources for 6 weeks, must work within the existing product surface. Success Criteria — Day-3 invite rate increases from 12% to 25%. And the last one — Explore — is the blocker discoverability (the invite button is buried in Settings) or motivation (users dont understand why inviting teammates matters)?
+That last element is the one most people skip. Most frameworks stop at "what are we building." This one asks "what are we learning by building this?" Thats the difference between a demo and a decision tool.
+
+
+Here is the  Problem Framework Validation brief
+
+
+
+
+Slide 13 — Individual Exercise: Frame Before You Build
+Alright This is an individual exercise So you will be alone in your breakout rooms.. And please Do NOT open Lovable yet.
+Before you build, you prepare. This exercise is your pre-work — gathering the real-world data, user voice, and visual anchors that will make your build fundamentally different from M1.Three steps and I will show them in the tool iteslve:
+Step 1 — Complete your Validation Brief. Define your hypothesis, risk type, kill switch, and success criteria. Use the Validation Brief — I shared. 
+Step 2 — Execute context injection using the Context Data Pack you can click directly from the validation brief to the context data pack and it will prefil data based on your brief. Each pack has three things: 8-12 user and stakeholder quotes from interviews and support tickets, a CSV with 15-20 rows of realistic quantitative data, and a full problem brief. Highlight 2-3 user quotes that directly relate to your hypothesis. Circle 3-5 metrics you want your prototype to display.
+Step 3 — Secure a visual reference. Go to Mobbin or take a screenshot of your existing product. Focus on the functional pattern — like "team invite flow" or "analytics dashboard" — not the product name. The Visual Reference Guide has instructions.
+ACTION
+Please dont skip the data pack and just write a generic brief — "Open the feedback file. Which quotes relate to your hypothesis?"
+Also dont include everything from the data pack — "Pick the 3-5 data points that matter most for your specific hypothesis."
+If youre stuck on the hypothesis, ask: what would kill this idea if we learned it was wrong?"
+
+
+Slide 14 — Timer: 5 Minutes
+Amazing. You deserved a break. Take 5-minute to Grab some water, stretch, and well be right back.
+
+
+Slide 15 — Cameras On
+Welcome back! Quick reminder — cameras on for this next section. Were about to connect all the pieces.
+
+
+Slide 16 — Chapter Break: Start Your Final Project
+This is the main event. Everything before this was setup. Now you build.
+
+
+Slide 17 — Hands-On Lab: Start Your Final Project and Build With Confidence
+This is the core lab. You have everything you need — Validation Brief, Context Data Pack, Visual Reference Heres the workflow:
+Step 1 — Open the Structured Prompt Builder. This is where you assemble your mega-prompt — NOT in Lovable directly. Paste your scenario brief, user quotes, and metrics into Block 1 (Context).
+Step 2 — Drop your screenshot into Block 2 (Visual Reference) and specify whether the AI should match the layout, density, or visual style. Also attach the design reference in Lovable as well. 
+Step 3 — Translate your Validation Brief into Block 3 (Constraints). Paste your hypothesis and kill switch to set the functional guardrails.
+Step 4 — Define your output screens in Block 4. Then click "Copy Prompt." Use an LLM — ChatGPT or Claude — to refine your mega-prompt and find any logic holes before you spend Lovable credits.
+Step 5 — When your prompt is tight, take it into Lovable and trigger the build.
+Your goal is NOT to build something pretty. Your goal is to build something that shows real data, tests your specific hypothesis, and looks like it belongs in your products domain — because of the screenshot reference, the metrics, and the user voice you injected.
+This is exactly why we use the Structured Prompt Builder first. One well-assembled prompt instead of five trial-and-error prompts which burn credits in Lovable.
+
+
+Slide 18 — Breakout: Show and Swap Your Prototype
+I will now create Create breakout pairs. Same as for M1.
+Swap prototype links in the chat. Explore your partners build silently for 3 minutes — no verbal context, no explaining. Like a real user.
+Again The question isnt "is this cool?" Its "does this test what they said they were testing?" If you have to explain the UI, the intent isnt sharp enough.
+
+
+
+
+Slide 19 — Quick Debrief: Prototype-Readiness Score
+Anybody wanna share their prototype? Post on Slack: your score from 1 to 5, one sentence explaining why, and — if you can— add screenshots of your M1 prototype vs. your M2 prototype side by side. 1 means "just a sketch." 3 means "getting there — recognizable but not functional." 5 means "VP ready — Id show this to leadership tomorrow."
+The score might not have jumped much from M1. But the reason should be different. In M1, the score was about looks. In M2, it should be about what the prototype tests.
+
+
+
+
+Slide 20 — Module 2 Complete: What You Accomplished Today
+Look at what happened in this session. You built a targeted prototype designed to surface evidence, not just look finished.
+You moved past simply asking for screens. You fed the AI business logic through user quotes and metrics, turning a generic vibe into a specialized tool that acts as a strategic product partner. You eliminated the placeholder trap by testing specific hypotheses with real-world data. Your mockup went from hollow to something capable of driving real go/no-go decisions with stakeholders.Your Peer review proved that if you have to explain the UI, the intent isnt sharp enough. Your partners fresh eyes caught what you couldnt see and Every prompt you wrote was anchored by a formal hypothesis, risk type, kill switch, and measurable success criteria.
+Next up — Module 3. Same product, better execution.
+
+
+ Slide 21 — Key Takeaways
+Let me bring this home with another story.
+In 2007, Brian Chesky and Joe Gebbia couldnt make rent. They had air mattresses, a conference was coming to San Francisco, and every hotel was booked. So they threw up a basic website — AirBed & Breakfast — with photos of their apartment and a PayPal button. That first prototype tested one thing: will strangers pay to sleep in someone elses home? Three people booked. Hypothesis validated. Thats takeaway one — every prototype starts with a named assumption. The problem framework, the kill switch, the "Im testing whether [X]" sentence. If you cant name it, youre building a demo, not running an experiment.
+
+
+But heres what most people dont know. After those first three guests, Chesky didnt scale the website. He flew to New York and stayed with early hosts. He photographed their apartments himself. He interviewed guests over breakfast. He injected real user voice — actual quotes, actual complaints, actual metrics — back into the next version of the product. The listings with his professional photos booked 3x more than the ones without. That data point didnt come from a survey. It came from a working prototype that real people could use. Thats takeaway two — context injection turns prototypes into decision tools. Real user quotes, real metrics, real problem briefs fed into the builder. The difference between your M1 and M2 prototypes isnt visual quality — its what they prove.
+
+
+And takeaway three — the validation loop compresses months into minutes. Chesky ran dozens of small experiments in weeks, not quarters. Each one had a hypothesis, constraints, and evidence. By the time Airbnb raised their seed round, they didnt have a pitch deck full of assumptions — they had a pitch deck full of answers. "We tested X. Heres what happened. Heres what were testing next." Thats the loop you ran today — hypothesis, constraints, build, synthesize. Keep running it.
+From this point forward, every prototype gets judged by what it validates — not how it looks.
+
+
+Slide 22 — Extra Practice and Next Session
+Two optional exercises if you want to dig deeper:
+First — Stress-Test Your Kill Switch. Pick a second high-priority risk from your Validation Brief and build a completely different prototype to test it. If your first build was a landing page for value risk, try a functional app for feasibility. Which one would you actually move forward with?
+Second — Perform a Data Swap. Take your existing prompt but replace the Context Data Pack with completely different user quotes or market metrics. Observe how the product changes when you inject different context into the same functional frame. Does the AI adapt the copy and flow to match the new user friction?
+Next session — Module 3: Architect Precise Prototypes with Context Engineering. Youll move from mega-prompts to prompt chaining — isolating business logic, user flow, and visual design into distinct stages to prevent AI drift. Same product, sharper execution. 
+
+
+Slide 23 — Survey
+At the end of each session, please scan the QR code or use the link to share your feedback. You know I am a huge fan of radical candor. Your insights help us improve and make each cohort better than the last. 
+
+
+Slide 24 — Resources
+Here youll find all the resources for this module — the Module 2 Lab Guide walkthrough and the Vibe Coding Validation Brief template. Bookmark these. The Validation Brief in particular is something youll use in every module going forward — its not a one-time exercise.
+
+
+
+
+ Slide 25 — Q&A
+Alright, before we close — any final questions? This is your time to ask anything about what we covered today, the tools, your scenario selection, or the final project. Feel free to unmute or drop your question in the chat. And as always, share questions in Slack if something comes up later. See you next session!
+
+
+
+
+
+
+M3: Ensure Complex
+Slide 1 — Title
+Welcome to Module 3 — Ensure Complex System Stability with Prompt Chaining.
+Before we start.I just wanted to let you know that we are storing the recordings of our sessions in the LMS portal. The beauty is they are trimmed to remove all of the waiting time. For all of your recordings going forward, dont wait for me to Slack it. Go to the LMS 1-2 days after our sessions to access them.
+
+
+Back to the session. you proved you can build. you proved you can build the right thing. now Youre going to learn to direct the AI like youd direct an engineer — expand here, add states there, refine this one screen, By the end of today, your M2 prototype wont just test a hypothesis — itll look like something your VP thinks engineering built.
+
+
+Slide 2 — Class Expectations
+Same ground rules. Cameras on, be present, and One new thing for M3: tool readiness matters more today than any previous session. Youll be executing prompts in a specific sequence — if yur Lovable account isnt working or your M2 prototype isnt accessible, youll fall behind. Check now.
+
+
+Slide 3 — Syllabus
+As mentioned, today — is stability. Youll master prompt chaining to build multi-screen architectures that dont break when you add complexity.
+
+
+Slide 4 — Agenda
+Three things today. First — how to prove your prototype is resilient. Ill show you what happens when you chain prompts instead of throwing one big mega-prompt at the AI. then a PMs precision prompting toolkit. The techniques that separate exploration prompts from execution prompts. And we goona end with the  hands-on lab. Youll execute your own 3-step prompt chain against your M2 build. By the end, youll have a multi-screen, multi-state product — not a mockup.
+
+
+Slide 5 — Chapter Break: How to Prove Your Prototype is Resilient
+Lets start with whats missing from your M2 build — and how we fix it.
+
+
+Slide 6 — Reflection Moment: Whats Missing From Your M2?
+And before we do this I want you to Open up your prototype from Module 2. Take a real look. I want you to answer three questions:
+One — how many screens does it have? Can you navigate between them? Most of you have 2-3 screens. A real product has a complete journey. Two — what happens while data is loading? What if theres an error or no data?
+Three — if you had to pass this to a teammate today, could they reproduce this exact result using your current prompt? Post your answers in Slack or unmute and share.
+
+
+Slide 7 — Instructor-Led Demo: The Precision Prompt Chain
+"This is our M2 build. Real data — 68% retain when the invite teammates 22% retain when going solo. Real user quotes. A named hypothesis. Design-matched to Asana. Your VP looks at this and says Great. Wheres the full flow? What happens when something goes wrong? What does the PM dashboard look like? And you have nothing to show." we have three screens. No loading states — what does the user see while data loads? No error handling — what if the invite fails? No secondary views — where does the user go after inviting? Where does the PM track if this is working? And if I asked your teammate to reproduce this, they couldnt — because it was built with one big prompt."
+
+
+Now lets transform this into "Three prompts and take a look what happens."To remove waiting time, I have created a recording.
+
+
+ Prompt 1 — Expand (~90 sec)
+
+
+Paste this prompt:
+
+
+ "Build the next phase of this app in a strict sequence: 1. Add a 4th screen: Team Workspace — the screen users see after completing the invite flow. Show invited teammates, their status (pending/accepted), and a quick-start project template. Match the layout and spacing of the existing screens. 2. Add a 5th screen: PM Dashboard — an internal analytics view showing Day-3 invite rate, retention comparison (with invite vs without), onboarding completion rate, and a list of users who havent invited yet. Match the data-heavy density of the attached reference. 3. Navigation: Write the logic so the onboarding flow leads to Team Workspace, and the PM Dashboard is accessible from a nav menu. Build these in order so the Team Workspace serves as the mandatory anchor for the PM Dashboard."
+While it generates: "Watch — Im not rebuilding the 3 screens I already have. Im expanding from them. The AI builds Screen 4 first, then Screen 5, in sequence. Each one depends on the last."
+"3 screens became 5. Complete user journey — from onboarding through team setup to PM tracking. Navigation works. And I didnt touch the original 3 screens."
+
+
+ Prompt 2 — Behavior (~90 sec)
+
+
+Paste this prompt:
+
+
+ "Apply the following logic constraints to the entire app: 1. Loading states: Add skeleton screens to the Team Workspace and PM Dashboard while data loads. 2. Empty state: If no teammates have been invited yet, the Team Workspace shows Your team is waiting — invite your first teammate to get started with the invite button prominent. 3. Error state: If the invite fails, show Invite couldnt be sent — check the email and try again with a retry button. If the PM Dashboard cant fetch data, show Connection lost. Please refresh the dashboard. 4. Maintain the same design language throughout and tether all behavior strictly to these rules."
+
+
+While it generates: "This is Beat 1 — the moment the prototype starts behaving like real software."
+
+
+When its done: "Same screens. But now they have loading states, empty states, and error handling. Before this prompt, it was a mockup. Now it behaves like a shipped product. Your VP doesnt know the difference."
+
+
+And now the last  Prompt 3 — Refine (~60 sec)
+
+
+Paste this prompt:
+
+
+ "The PM Dashboard needs a more actionable layout. Start by listing the 3 biggest gaps in the current PM Dashboard compared to a professional analytics tool. Then: add a Nudge button next to each user who hasnt invited — clicking it simulates sending a reminder. Make the retention comparison chart interactive — hover shows exact numbers. Add a This Week / This Month / All Time toggle for the invite rate metric. Dont change anything else in the project or touch the underlying logic of the other screens."
+
+
+ Im refining ONE screen without rebuilding anything else. Surgical steering." "I changed one screen. The other four are untouched. Thats the shift. Youre not starting over. Youre directing — expand here, add states there, refine this. Like giving sprint tickets to an engineer."
+
+
+ "3 prompts. 5 connected screens. Loading states, error handling, empty states. An interactive PM dashboard with a nudge button. And I didnt rebuild anything — I expanded what I had. Youll do this to your own build in 30 minutes."
+
+
+
+
+Slide 8 — Chapter Break: A PMs Precision Prompting Toolkit
+Now lets give you the system that makes this work every time.
+
+
+Slide 9 — The Prompting Maturity Curve
+This is the key mental model for M3. Your prompt style should match your confidence level.
+Exploration prompts are open-ended and flexible. "Build me a dashboard for tracking retention." Youre defining the what — letting the AI suggest the interaction pattern. That was M1 and early M2. You had uncertainty, so your prompts were loose.
+Execution prompts are rigid and constrained. "Add a loading skeleton to the Team Workspace. If no teammates exist, show this exact empty state message. Dont change anything else." Youre defining the how — dictating exact business rules and edge cases.
+As you learn more about what youre building, your prompts must get more specific. You earned that specificity through M1 and M2. Now you cash it in.
+Think of it like this: Spotifys Discover Weekly started as an exploration — "Can we recommend music based on listening habits?" That was the M1 prompt. But by the time it shipped, every rule was precise — what counts as a listen, how to weigh recency vs. frequency, what to exclude. Thats M3-level prompting.
+
+
+Slide 10 — Three Common Prompting Traps
+Three traps to avoid now that youre doing execution prompting.
+The Mega Prompt — dont try to build a database, API, and UI in one massive prompt. Thats like giving an engineer a 47-page spec and saying "build all of it by Friday."Thats the waterfall principle I talked about when I introduced myself.  Use prompt chaining — build logic first, then apply the design, so if something fails, you know exactly where.
+The Vague Request — asking for a feature without defining the user state creates hollow shells. "Add a team page" gives you a page. "Add a team page that shows pending invites, accepted members, and an empty state when nobodys been invited yet" gives you a product. Define the functionality AND the specific user path.
+The Micromanager — wasting credits on text-based pixel tweaks is inefficient. "Make the button 2 pixels bigger and change the hex to 3b82f6" — the AI will do it, but youll burn 5 credits on what should be 1. Instead, upload a screenshot of the exact style you want and let the AI match it in one shot. Multimodal prompting beats micromanagement every time.
+
+
+Slide 11 — The Execution Toolkit
+This is the core framework for M3. Three stages, three different prompting techniques layered in sequence.
+Step 1 — Expand: Build the Logic. Use Chain-of-Thought (COT) prompting. Force the AI to build in a strict, dependent order — Screen A, then Screen B, then Screen C. Attach visual references for every new screen. The prompt anchors the logic, the screenshot anchors the layout.
+Step 2 — Behavior: Define the Flow. Use Constraint Grounding. Hard-code if/then triggers for the unhappy path — loading, empty, and error states. Ground the AI in specific rules so it behaves like real software, not a static mockup.
+Step 3 — Refine: Polish the Design. Use Reflection Prompting. Isolate a specific screen, force the AI to audit the UI and list gaps before editing. This ensures precision and prevents the AI from restarting or changing your core logic.
+The takeaway: you arent just splitting one big prompt into three parts. Youre layering different cognitive strategies in sequence so precision accumulates without breaking the foundation. Thats why its called chaining — each link depends on the one before it.
+Here is the Prompt Techniques Template link Vibe Coding Certification: Prompting Template or HTML 
+
+
+Slide 12 — Prompt Chaining in Action
+Heres what the three prompts actually look like — concrete examples for each stage.
+Expand (chain of thought): "Build the next phase of this app in a strict sequence: 1. Add a 2nd screen: User Settings. Match the layout of the attached Asana reference. 2. Add a 3rd screen: Account Activity. Match the data-heavy density of the attached Intercom reference. 3. Navigation: Write the logic so Settings links to Activity. Build in order."
+Behavior (Constraint Grounding): "Apply these logic constraints to Account Activity: Skeleton screens for loading. Empty state: No activity yet. Start your first project to see data here. Error state: Connection lost. Please refresh. Maintain the same design language."
+Refine (Reflection): "The User Settings screen needs professional polish. Start by listing the 3 biggest gaps in typography and spacing compared to Asana. Then fix those gaps. Dont change anything else."
+Notice the pattern: Expand builds structure, Behavior adds resilience, Refine adds polish. Each one is targeted. Each one is safe — it doesnt undo the previous work.
+
+
+Slide 13 — Individual Exercise: Plan Your Prompt Chain
+Alight you time to shine. Please DO NOT open Lovable yet. Before you build, you plan. This is the same discipline from M2 — preparation is what makes the build dramatically better.
+Four steps:
+Step 1 — Audit your M2 prototype. Open it and identify 3-5 flow gaps (missing screens, dead ends), 3 specific friction points (no loading states, no error handling), and 1 targeted UI element you want to refine.
+Step 2 — Draft your 3-step chain. Write your Expand, Behavior, and Refine prompts. If you get stuck, use the Prompt Chain Planner — A simple tool that helps you structure each prompt.
+Step 3 — Gather your references. For the COT expansion, get screenshots of the layouts you want to match for your new screens. Same Mobbin workflow from M2.
+Step 4 — Copy your finalized prompts into your exercise document or prompt chain planner tool and create a Markdown file. Youll need them for peer review and the lab. This documentation becomes part of your Living Prompt Pack — a final project deliverable.
+
+
+Slide 14 — Breakout: Show and Swap Your Prompt Chain
+ACTION: Create breakout pairs — random assignment.
+Swap your Prompt Chain Plan — your three drafted prompts — in the chat. Read your partners prompts silently for 3 minutes. No verbal context, no explanations. This mirrors a professional handoff. If your partner cant understand the chain without you explaining it, its not portable. Thats the test.
+After 3 minutes, discuss: Did you notice any confusion or sudden jumps in the screen sequence? Is there a specific piece of logic for error handling or loading states that might have been missed? Whats the strongest part of this chain — the part that makes it reusable for other projects?
+
+
+Slide 15 — Break
+You deserved a break. Take 5-minute to Grab some water, stretch, and well be right back.
+
+
+Slide 16 — Cameras On
+Welcome back! Cameras on for the main event.
+
+
+
+
+Slide 17 — Chapter Break: Execute Your Prompt Chain and Extend Your Build
+This is the main event. Everything before this was the setup. Now you execute.
+
+
+Slide 18 — Hands-On Lab: Execute Your Prompt Chain
+You have your 3-step chain planned. Now execute it against your M2 prototype. Heres the workflow:
+Step 1 — Open your M2 prototype in Lovable.
+Step 2 — Execute Prompt 1: Expand. Copy your Expand prompt from the Planner, attach your visual references, and build your new screens. Fix any layout issues that appear, then document what was produced in your Planner.
+Step 3 — Execute Prompt 2: Behavior. Paste your logic for loading, error, and empty states. Verify at least one "unhappy path" works in the prototype — test the loading skeleton, trigger the empty state, check the error message. Record the result.
+Step 4 — Execute Prompt 3: Refine. Use surgical steering to polish one specific element. Check that the change is localized — the other screens should be untouched. Document the final output.
+And lastly Finalize your Prompt Chain Planner. Make sure all "What did this produce?" sections are filled. This becomes the raw data for your Living Prompt Pack — a final project deliverable which I will talk about very soon.
+
+
+
+
+Slide 19 — Prompt Chain Debugging
+alright , so When a chain goes off-rails, diagnose before re-prompting. Throwing more prompts at a broken chain just compounds the error. Lets take a look At the Four steps and work them in order:
+Step 1 — Read the Chain. Go back to your Planner. Read each prompt in sequence. Does the logic flow?
+Step 2 — Compare the Output. Look at what the AI actually built vs. what you asked for. Where did it diverge?
+Step 3 — Diagnose. Find the specific prompt where the break happened. Was it ambiguous? Did it conflict with a previous instruction?
+Step 4 — Fix It. Fix ONE prompt. Not three. Not the whole chain. The smallest possible intervention.
+If youre more than 5 prompts deep on the same issue, the problem isnt the tool — its your framing. Step back. Re-read your chain. The fix is almost always in the prompt, not in adding more prompts.
+
+
+Slide 20 — Living Prompt Packs
+This is where your work today becomes a permanent asset. A Living Prompt Pack is a tool that lets you save and load markdown file that encodes your products DNA into four reusable blocks:
+Product Context — your source of truth for every new session. Company, users, hypothesis, constraints.
+Design Reference — your visual DNA. The screenshots and design system tokens that keep every screen consistent.
+Constraint Templates — your "always/never" logic. Loading states always show skeletons. Error states always show retry. Empty states always show a clear next action.
+Output Templates — blueprints for components and navigation flows. The structural patterns that repeat across screens.
+The ROI is threefold. Cross-tool portability — move between Lovable, Bolt, Cursor, microsoft co-pilot without losing your core logic. Guaranteed reproducibility — anyone can run your pack and get the same result. Cumulative precision — every constraint you refine becomes permanent.
+In Module 1, you learned that AI Skills exist. Now youre architecting them yourself. Youre not shopping for solutions — youre building the execution framework from scratch. This pack grows through M4, M5, and M6. It becomes a final project deliverable. Here is the link.
+
+
+Slide 21 — Module 3 Complete: What You Accomplished Today
+Look at what happened. You replaced AI guessing with a 3-step sequence: Expand, Behavior, Refine. You scaled your build without starting over.
+You eliminated happy-path traps. Loading skeletons, error handling, empty states. Your mockup became a resilient machine that anticipates failure. You also proved your intent was sharp enough for a partner to read and understand your logic without a walkthrough.
+Youve started your living library, a collection of high-performance prompt structures that port into any future project.
+3 Chained Prompts. Thats all it took to go from a 3-screen mockup to a multi-screen product with interactive states.
+And dont forget to copy your successful "gold standard" prompts from today into the Prompt Library section of your final project deck. Do this today while its fresh.
+Next up — Module 4. Make the jump from prototype to production.
+
+
+Slide 24 — Key Takeaways
+Let me bring this home with a story about building with precision.
+In 2009, Kevin Systrom was working on an app called Burbn — check-ins, photo sharing, gaming mechanics, meetup planning. A dozen features competing for attention. But when he looked at the data, one behavior towered above everything else: people loved sharing photos. So Systrom killed every feature except photos. He went from "build me everything" to "build me exactly this." Thats takeaway one — prompts must evolve as your confidence grows. Now you have a working prototype with real data and a validated hypothesis. Your prompts need to match that certainty. The maturity curve isnt optional — its how you prevent the AI from hallucinating as complexity scales.
+
+
+Once Systrom had that clarity, he and Mike Krieger built Instagram in strict sequence. First: the camera and filters. Then: the social feed. Then: cross-platform sharing. Each layer depended on the one before it. They didnt build sharing before the feed existed. They didnt build the feed before the camera worked. Thats takeaway two — prompt chaining is how PMs master multi-screen builds. Expand, Behavior, Refine — three stages that layer, layout, logic, and polish in sequence. Each uses a different cognitive strategy, and because each prompt is isolated, when something breaks, you know exactly where.
+
+
+Then came launch day. Twenty-five thousand signups in hours. The servers buckled. Systrom and Krieger didnt panic and rebuild. They traced the problem to one bottleneck — the database wasnt configured for that volume of concurrent writes. They fixed that one thing. By the end of the day, the system stabilized. Thats takeaway three — when a chain fails, diagnose before re-prompting. If youre 5 prompts deep on the same issue, the problem isnt the tool — its your framing. Read the chain, find the divergence, fix one prompt. Discipline over volume.
+Thats the arc. Get precise when youve earned certainty. Layer complexity in sequence. And when something breaks, find the one link that failed.
+
+
+Slide 25 — Extra Practice and Next Session
+Two optional exercises:
+First — Execute a Partners Chain. Swap finalized prompt chains with a peer and try to build their project from scratch in a new Lovable tab. Does their logic hold up without extra prompts? Or does the chain break when they arent there to steer it? This is the ultimate portability test.
+Second — The 10-Prompt Stress Test. Take your finished M3 build and add three more complex features using only surgical refinement. See how many layers of logic you can add before the foundation cracks or the AI loses track of your system rules.
+Next session — Module 4: Transition From Prototypes to Production Specs. Youll enforce technical rigor by extracting Living PRDs, connecting GitHub, and generating professional handoff documentation. Same product — now it graduates.
+
+
+Slide 26 — Survey
+At the end of each session, please scan the QR code or use the link to share your feedback. Your insights help us improve and make each cohort better than the last. Wed love to hear about your experience!
+
+
+
+
+Slide 27 — Bonus Resources
+Here youll find the Module 3 Lab Guide walkthrough and the Vibe Coding Prompt Techniques Template. 
+
+
+Slide 28 — Q&A
+Alright, before we close lets continue with our ritual. Its demo time. Who wants to demo? — any final questions? This is your time to ask about prompt chaining, debugging, your Living Prompt Pack, or anything else from today. Feel free to unmute or drop your question in the chat. See you next session!
+
+
+
+
+M4: Transition From Prototypes to Production Specs
+Slide 1 — Title
+Welcome to Module 4 — Transition From Prototypes to Production Specs.
+before we jump in — thank you. The feedback youre sharing after each session genuinely helps shape how we run this course, so keep it coming.
+One thing that came through clearly: you want to stay in the flow. Questions are always welcome — I never want you to hold back — and heres how well handle them so everyone gets the most out of our time together:
+1. Raise your hand if you want to ask something live. Ill give you your turn — I just might not take it immediately if were mid-exercise, so bear with me.
+2. Drop it in the chat. I see everything, and Ill address it when the moment is right. Bonus: other participants often jump in with great answers too. We want that network to thrive.
+3. Slack me anytime. Before, during, after — Ill get back to you.
+This way nothing gets lost, and we keep the momentum going.
+
+
+Now, Module 3 was precision — you proved you can orchestrate complex multi-screen systems with prompt chaining.
+but heres the question nobodys asked yet: what happens when you hand this to someone else? Today we answer that. By the end of this session, your prototype wont just look like a product — itll be documented, version-controlled, and engineered for handoff.
+
+
+Slide 2 — Class Expectations
+Same ground rules. Cameras on — I know, I know, but it genuinely makes a difference. Continue using Slack for all communication. Its great to see what is happening in the channel. Keep going. One addition for today: make sure all your tools and accounts are active and you have Go mark down file ready. Make sure GitHub and lovable cloud with Supabase accounts are set up. 
+
+
+Slide 3 — Syllabus
+today — is where we enforce technical rigor.This is where you stop being the only person who understands your product.And it will set you up for Module 5 where you go live — real databases, secure APIs, live URL, real users. 
+
+
+Slide 4 — Agenda
+Four things today. First — The Black Box Gap. Well look at whats actually under the hood of your M3 prototype. Spoiler: its not pretty.
+Second — How to Move From Prototype to Production. The theory behind the transition. Third our beloved Hands-on lab part 1: Refactor your prototype code and generate your engineering handoff. And Hands-on lab part 2: Connect your infrastructure with GitHub and Lovable cloud. One-click connections that move your prototype from a local preview to version-controlled code with a real database.
+
+
+Slide 5 — The Black Box Gap of AI-Generated Code
+This kicks off the first major section. Your M3 prototype looks incredible from the outside. But the code? Its a black box. Lets open it up.
+
+
+ Slide 6 — Reflection Moment: Whats Under the Hood?
+So please Open up your prototype from Module 3. Switch to the code view. Answer honestly:
+One — could an engineer understand what each component does from its name alone? Or is it all `Component1` and `handleClick2`?
+Two — is data logic separated from display logic? Or is everything tangled in one file?
+Three — do you have any documentation? A README? Comments? Anything at all?
+Feel free to unmute and share, or post your thoughts in the chat.
+
+
+Slide 7 — Instructor-Led Demo: Comparing the Exterior With Whats Under the Hood
+Heres the problem were solving. Your prototype looks like a finished product — high-fidelity visuals, solid hypothesis, interactive states, but if an engineer asked "How does the data flow?" or "Where is the logic for this screen?" — youd be stuck digging through a messy file tree.
+lets Switch to Lovables code view. look at the code. `screen five`. `handleClick2`. All logic in one file. No README. No documentation. This is what the engineer who inherits your prototype actually sees. This is the black box. I will now runThree prompts, two clicks — watch."
+
+
+ Prompt 1 — Refactor the Code (~60 sec)
+
+
+ "Refactor the codebase. Rename all components to be descriptive (e.g., TeamValueScreen, InviteFlow, CollaborationPayoff, RetentionDashboard, ExperimentSummary). Separate data logic from display components. Group files by feature, not by type. Add a README.md that explains the project structure."
+
+
+"`Component1` is now `TeamValueScreen`. `Component3` is now `InviteFlow`. Theres a `/services` folder for data logic. Theres a README. An engineer can read this on day one. Same product — readable code."
+
+
+
+
+Prompt 2 — Extract the Living PRD (~60 sec)
+
+
+ "Look at this entire prototype. Write a product requirements document that covers: what this product does, who its for, the problem it solves, the screens and their purpose, the user flow from first screen to last, the hypothesis it tests, the key metrics, whats currently mocked vs. what would need real data, and recommended next steps for engineering."Create me a livingprd.md that stores this info. 
+
+
+"I didnt write this. The prototype wrote its own spec.
+
+
+
+
+Prompt 3 — Engineering Handoff (~40 sec)
+
+
+ "Generate an engineering handoff document: list every component and what it does, describe the data model (whats real vs. mocked), identify the 3 biggest technical decisions an engineer would need to make, and write a start here guide." Create me a engineeringhandoff.md that stores this info. 
+
+
+When its done: Read the "start here" section and one technical decision aloud.
+
+
+ "If A new engineer joins the team Monday. They open this document. In 5 minutes, they know what the onboarding flow does, whats real, whats mocked, and where to start. Thats the handoff."
+
+
+
+
+ STEP 5: Connect GitHub (~30 sec)
+
+
+Lets connect github with "One click. Your code is now in a real GitHub repo. An engineer can clone this right now. Its not trapped in Lovable anymore — its real version control."
+
+
+Now push all the changes to github
+
+
+ STEP 6: Connect the Backend (~30 sec)
+
+
+I want you to create me a database for this prototype with real database, real authentication, real storage.
+
+
+Your prototype has a real database, real auth, and real storage. This isnt a toy anymore. This is real infrastructure."
+
+
+
+
+"Same prototype. Same onboarding flow. Same screens testing the team invite hypothesis. But now it has:
+
+
+- A Living PRD — complete spec, extracted from the build
+- Clean code — `TeamValueScreen`, `InviteFlow`, not `Component1`
+- An engineering handoff — component map, data model, start-here guide
+- A GitHub repo — real version control
+- A real backend — database, auth, and storage
+
+
+Youll do all of this to your own build in the labs. But first — lets talk about when to make this transition and how the Living PRD works."
+
+
+ Slide 8 — The New Operating Model: Vibe Coding Workflow
+This is a fundamental Shift in how we do product management.
+How many of you have written a PRD, waited weeks for engineering to build it, reviewed the result, and thought thats not what I meant. Right. That loop — idea, spec, wait, feedback, wait, iterate — its the PM hamster wheel. You spend more time describing what you want than testing whether it works."
+Now look at what youve already been doing for three modules. You built first. You tested live. Today youll extract the spec and connect the infrastructure. The documentation is the output, not the starting point. Remember the story from M2 "Kevin Systrom didnt sit in a conference room writing requirements for a photo-sharing app. He built Burbn — a messy, overloaded check-in app with a dozen features. Then he watched what users actually did. One feature kept winning: photos. The product spec wasnt written — it was discovered inside a working build. Thats the vibe loop. Thats what youre doing today This is what modern product management looks like.
+
+
+Slide 9 — How to Move From Prototype to Production
+Here  Well cover when to transition, how to pay off comprehension debt, and the building blocks of a Living PRD.
+
+
+Slide 10 — The Production Threshold
+"Heres a question I want you to sit with: could you explain what your prototype does, how the data flows, and what its testing — without opening Lovable? If the answer is yes, youre probably ready to transition. If you need the demo to explain your own product, thats a signal to keep iterating."
+"Proven hypothesis" means your M2 kill switch has a clear answer. "Stakeholders approved" means someone outside your build team has seen it and said go. 
+However If youre still debating whether this is a dashboard product or a workflow product, dont lock it down yet. Premature structure is just as dangerous as no structure. WhatsApp is the perfect cautionary tale in reverse. Jan Koums first version was a status-update tool — "Jan is at the gym." When users started sending messages through the status feature, that was the signal. He didnt add production infrastructure to the status app. He waited until the product proved what it wanted to be — then he structured that. If hed locked down the status tool with GitHub and docs, hed have over-invested in the wrong product.
+But there is also real danger of waiting too long? Your AI-generated codebase becomes so tangled that even the AI cant maintain it. Thats the ceiling. So when you experience prompts Suddenly break things that used to work Thats your signal.
+
+
+Slide 11 — Paying Off Your Comprehension Debt
+"Think back to the reflection exercise. Most of you opened your code view and went I have no idea what half of this does. That feeling? Thats comprehension debt. You traded understanding for speed — and that was the right trade at the time. Modules 1 through 3 were about momentum, not legibility. But debt has interest. The longer you wait, the harder it is to explain your own product."
+Heres how to make this concrete: "Imagine your VP pings you on Slack and says walk me through the technical architecture of your prototype. Right now, youd probably open Lovable and click through screens. Thats a demo, not an explanation. The Living PRD is the difference — it forces the AI to articulate the logic thats buried in the code. Think of it as the AI writing the technical memoir of your build."
+Remember this: a working prototype plus documented evidence equals something an engineer can actually run with. Without both halves, youve got either a spec nobody believes or a build nobody can maintain.
+
+
+Slide 12 — The Eight Building Blocks of a Living PRD
+Eight blocks sounds like a lot. Its not. The AI populates most of this from your existing build. But there are three blocks that consistently reveal things you didnt know about your own prototype."
+Technical Reality — "This is where the AI tells you whats real and whats smoke and mirrors. Every one of you has mocked data in your prototype. This block makes you face it. You cant hand off a product to engineering and then say oh, that data is fake after theyve built on top of it."
+Assumptions & Risks — "This one is uncomfortable. The AI will surface assumptions you didnt even know you were making. Kill switch triggers, technical failure points, confidence levels. Most of you will read this block and go huh, I never thought about that. Thats the point." and then 
+Engineering Recommendation — "This is the start here guide. Build order, open questions, effort levels. An engineer reads this block first. If its vague, everything else is wasted."
+The other five blocks — Product Overview, Problem & Hypothesis, User Flow, Success Metrics, Scope — tend to populate cleanly because they mirror what youve already built and tested. 
+"Ill drop the Living PRD Extractor link in Slack and in the chat. Youll use it to generate all eight — the tool walks you through each one."
+
+
+Slide 13 — Living PRD Example Snapshot
+"This is a completed Living PRD for a sample product. Scroll through it and notice the difference from a traditional spec — every section is grounded in what the prototype actually does, not what someone hoped it would do. Yours will look like this in about 20 minutes. Link is on screen.Vibe Coding: Living PRD Template"
+
+
+
+
+Slide 14 — From Prompt Pack to Product Spec
+"How many of you have written a PRD before starting a project? Okay. And how many of those PRDs actually matched the shipped product? Exactly. Traditional specs are predictions. Theyre written before you know anything. The Living PRD is different because its written after you know everything — the build already exists."
+look, youre not starting from zero here. Your hypothesis? You defined it in M2. Your screens? You built them across M2 and M3. Your user flows? They live in Lovable right now. The Living PRD just formalizes what youve already created. Its more like an audit than a writing exercise."
+"Your Prompt Pack from M3 — the one that maintained your design system, your data model, your component names — thats your evidence trail. It feeds directly into the spec. The prompts are the breadcrumbs that explain how you got here."
+
+
+Slide 15 — Individual Exercise: Extract Your Living PRD
+Heres what matters most — this is an audit, not an aspiration exercise. Youre documenting what your prototype actually does right now, not what you wish it did. If the AI says a feature is mocked, dont fix it — write it down. Honesty now saves you a painful conversation with engineering later."
+Open the Extractor tool —  Pick your scenario, customize the extraction prompt with your screen count and hypothesis, paste it into Lovable, and let the AI generate your spec. Then move the output back into the Extractor to populate all eight sections."
+ "Youve got about 15 minutes. Dont try to perfect every section. Get the extraction done, read through it, and flag anything that feels wrong. Well clean it up later."
+
+
+
+
+Slide 16 — The Three Pillars of an Engineering-Ready System
+"Youve got three problems right now. First — your code is unreadable. You saw that in my demo. Thats what refactoring solves. Second — your code lives inside Lovable. If Lovable goes down, your work vanishes. Thats what GitHub solves. Third — every piece of data in your prototype is fake. Hardcoded names, dummy metrics, simulated flows. Thats what lovable cloud solves."
+"None of this requires you to become a developer. You already did the hard part — you built the product. These three steps are about making the build portable. Think of refactoring as giving your code a proper filing system. GitHub is like saving your work to the cloud instead of a USB drive. And Supabase swaps out the cardboard props for real furniture."
+"Youll do all three in the labs. Each one is a click or a prompt. Lovable handles the wiring. Your job is to decide what gets structured, not how — and thats a product decision, not an engineering one."
+
+
+Slide 17 — Break
+Quick 5-minute break. Grab some water, stretch, and well be right back.
+
+
+Slide 18 — Cameras On
+Welcome back! Quick reminder — its always better to see your smiling face. Be present and visible to stay engaged and keep interactions valuable.
+
+
+Slide 19 — Refactor Your Prototype Code and Generate Your Eng Handoff
+Youre about to clean up the black box and produce a document that makes your code legit to anyone.
+
+
+
+
+Slide 20 — Hands-On Lab: Refactor & Generate Handoff
+Before you dive in — two things. First, start by opening Code View and looking at your file tree. Notice how messy it is. Thats your before picture. Second, after you paste the refactor prompt, switch back to Code View immediately and watch the file names change in real time. 
+"Refactor first, then handoff. The refactor prompt cleans up names and file structure. The handoff prompt generates your Start Here guide. Both outputs go back into your Living PRD Extractor — thats your single source of truth now."
+"The clean code is satisfying, I know. Dont spend to much time making it perfect. the handoff document matters more. An engineer can rename a file in 10 seconds. They cant guess your data model or your intended build order."
+
+
+
+
+Slide 21 — Breakout: Show and Swap Your Spec Handoff Package
+"Heres the test. Youre going to share your Living PRD and Engineering Handoff with a partner. They read it as usual in silence for 3 minutes — no questions, no verbal walkthrough, no oh let me explain this part. Just the document. If they can understand your product from the docs alone, your handoff works. If they cant, youve got more work to do."
+This is what happens when an engineer inherits your product on a Monday morning. They dont get a demo. They get a repo and a doc. So try to answer ths: Can you identify what the product does and who its for in under a minute? Is it clear which parts are real and which are mocked? And does the handoff point to a specific starting place — or is it good luck, figure it out?
+
+
+Slide 22 — Connect Your Infrastructure with GitHub and Supabase
+
+
+The final lab. This is where your prototype graduates and moves from a local preview to a real engineering environment.
+
+
+
+
+Slide 23 — Hands-On Lab: Connect GitHub and Supabase
+This is the fastest lab of the day — most of you will finish in under 3 minutes. Start with GitHub: hit the icon in the Lovable sidebar, follow the prompts, and check your GitHub account for the initial commit. Once thats confirmed, prompt Lovable to add a database feature, and watch the backend spin up."
+Open that repo — look at the README, the refactored components. Thats yours. An engineer could clone it right now and start building." Dont forget updating your Living PRD with the new repo and database URLs. Remember the PRD is the single source of truth, and it needs to reflect the infrastructure you just connected.
+
+
+Slide 24 — Module 4 Complete: What You Accomplished Today
+At the start of this session, you had a polished prototype with unreadable code, no documentation, and no way for anyone else to work on it. Now look at where you are." "Youve got a Living PRD — eight sections that describe exactly what your product does,. You didnt write that from a template. You extracted it from something that already works. Thats fundamentally different."
+"Your code has real names. An engineer can open your file tree and immediately understand the structure. And youve got a handoff document that tells them where to start. "And your prototype finally lives outside of Lovable. Its in GitHub with version history. Its backed by a real database. You can link it to any tool out there, and it will reproduce the same thing.
+
+
+
+
+Slide 25 — Key Takeaways
+Let me again close with a story. In 2007, Justin Kan strapped a camera to his head and launched Justin.tv — a platform where anyone could livestream anything. General purpose. No focus. Lifecasting, cooking shows, people filming their cats. It had users, it had investors, and it had no identity. The platform was a black box of content with no clear product thesis."
+"But the data told a different story. One category kept growing while everything else flatlined: gaming. Gamers were streaming themselves playing, watching each other play, building communities around specific games. The Justin.tv team didnt plan for this. They discovered it by looking at what users were actually doing — not what the team hoped theyd do. So they extracted the spec from the evidence: gaming livestreaming is the product. Thats the first takeaway — extract instead of predict. Your Living PRD does the same thing. It pulls the product definition from a working build, not from a brainstorm."
+"Then came the hard part. Justin.tvs codebase was built for general-purpose streaming. To turn the gaming category into a real product, they had to refactor everything — new component names that reflected gaming, separate data models for channels and viewers, documentation that any new engineer could follow. They didnt rebuild from zero. They restructured what already worked. That refactoring is what allowed them to go from a small team to a platform that could onboard hundreds of engineers. Thats the second takeaway — document as a byproduct of building. When you refactored your code and generated the handoff today, you werent doing extra work. You were making the build transferable."
+"In 2011, The team at Justin.TV spun the gaming product out as its own thing — Twitch. Its own repo, its own infrastructure, its own database, its own brand. Justin.tv eventually shut down. Twitch didnt just survive — Amazon acquired it for nearly a billion dollars. It outlived the platform it was born inside because it had independent infrastructure. Thats the third takeaway — make the infrastructure real before you hand it off. Your prototype just got a GitHub repo and a live database. It exists outside of Lovable now. It can survive without the tool that built it — and without you in the room."
+
+
+ Slide 26 — Extra Practice and Next Session
+"Two optional exercises for anyone who wants to push further 
+The first one is fun and a little scary. Youre going to intentionally break your prototype with a reckless prompt — then use your shiny new GitHub history to roll back to the last stable version. Its the best way to prove to yourself that version control actually protects you. If the rollback works, youll never be afraid of a bold prompt again."
+"The second one tests whether your prototype can handle reality. Open your Supabase dashboard, manually insert some garbage data — a negative price, a blank required field — and see what happens. Does your UI handle it gracefully, or does everything fall apart? This is the kind of thing that happens the moment real users touch a live product."
+Module 5 is where your prototype goes live. Real URL. Real users. Real database with security rules. Everything we set up today — GitHub, Supabase, the Living PRD — becomes the foundation for shipping.
+
+
+Slide 27 — Survey
+At the end of each session, please scan the QR code or use the link to share your feedback. Your insights help us improve and make each cohort better than the last. Wed love to hear about your experience!
+
+
+Slide 28 — Bonus Resources
+"All the links for today are on this slide — lab guide, Living PRD template, everything. Bookmark the PRD template in particular. Youll keep updating it through Module 5 and 6 as your prototype evolves. Its a living document, not a one-time assignment."
+
+
+
+
+ Slide 29 — Q&A
+Alright, before we close — its demo time. Okay, what is the aha moment for module three, and what is the interactivity? By the way, I dont know if you have access to this repo. 
+M5: Ship Live Products with Full-Stack Logic
+Slide 1 — Title
+Welcome to Module 5 — Ship Live Products with Full-Stack Logic.
+It’s been a journey so far. Module 1 was speed — you proved you can build. Module 2 was validation — you proved you can build the right thing. Module 3 was precision — you orchestrated complex multi-screen systems and Module 4 was structure and graduation — you cleaned the code, extracted the spec, and connected infrastructure.
+But here's the truth nobody wants to hear: your infrastructure is connected, but your product isn't secured, and isn't resilient. Your database is live — but most of your UI still shows hardcoded values. Today, we close those gaps — and then we ship it -  live.
+
+
+
+
+Slide 2 — Class Expectations
+Same ground rules. You know the drill by now
+
+
+Slide 3 — Syllabus
+today — is where you secure your build, engineer for failure, and deploy to a live URL. 
+
+
+Slide 4 — Presentation Reminder
+"Were almost at the end! Next class is your opportunity to volunteer and present your final presentation. I highly recommend this because you get live, actionable feedback from the group.Please volunteer in slack today — first come, first serve. Trust me, the people who present always walk away with the sharpest feedback."
+
+
+Slide 5 — Agenda
+Four things today.
+First — Moving from Connected Infrastructure to a Secured Product. Well look at what your M4 prototype has versus what it still needs to survive real users.
+Second — How to Secure and Extend Your Integration. The schema expansion, Row-Level Security, and edge case.
+Third — Hands-on lab: Expand Your Schema and Add RLS Authentication. You'll wire all your data to the database, add logins, and handle edge cases.
+And finish with the second part of the Hands-on lab: Rapid-Fire Stress Test and Deploy Your Product Live. 
+
+
+Slide 6 — Moving from Connected Infrastructure to a Secured Product
+This kicks off the first major section. Your M4 prototype has structure, documentation, clean code, and live infrastructure — GitHub, Lovable Cloud. But the product isnt fully built on top of it yet. Most data is still hardcoded, theres no user isolation, and nothing handles failure gracefully. Lets fix that.
+
+
+
+
+Slide 7 — Instructor-Led Demo: From Connected Infrastructure to Secured Product
+Let’s take a look at our  M4 build. Clean code, Living PRD, GitHub repo, Lovable Cloud connected. The infrastructure is real — we proved that in Module 4. But look at the product sitting on top of it. The Day-3 invite rate? Hardcoded at 38% day 3 invite rate. no matter what happens. Login users act the same.We see them in the backend stored. They all have the same experience.
+
+
+Prompt 1 — Wire All Data to the Database (~90 sec)
+
+
+Paste this prompt:
+
+
+"Extend the database schema. Create an invites table to store team invites with the inviters email, the invitees email, and a timestamp. When a user completes the onboarding flow and invites a teammate, store the invite in this table. Replace the hardcoded Day-3 invite rate on the retention dashboard with a real calculation — query the invites table and compute the actual percentage. Replace all hardcoded metrics on the dashboard with real aggregations from the database. Track onboarding completion in the users table — store which screen the user reached and whether they completed all 3 steps."
+
+
+When its done: Go through the onboarding flow. Invite a teammate. Go to the retention dashboard — the Day-3 invite rate has updated from real data.
+
+
+"The dashboard is now calculating real numbers from real data — not hardcoded values. That percentage isnt a placeholder anymore. Its a live calculation from the invites table."
+
+
+Optional power move: Open the Lovable Cloud dashboard in a new tab. Show the data sitting in the invites table. "Theres your data. In the database you connected in Module 4. You told the AI what to store and when — it wrote the integration."
+
+
+
+
+Prompt 2 — Auth UI + Row-Level Security (~90 sec)
+
+
+ "Add a login and signup screen before the onboarding flow using Lovable Cloud auth. New users sign up with email and password. After login, the app checks if this user has completed onboarding — if not, show the 3-screen onboarding flow. If yes, go straight to the retention dashboard. Add Row-Level Security so each user can only see and modify their own invites and onboarding data. The retention dashboard should show aggregate data across all users — total invites sent, Day-3 invite rate, retention comparison. Show the logged-in users name in the header. Add a logout button."
+
+
+Auth is enabled from Module 4. But theres no login screen and no data isolation. Watch — this is where users become real."
+
+
+When its done: Log out. Sign up as a new user (e.g., "sarah@acme.com"). See the onboarding flow. Complete it, invite a teammate. Log out. Sign up as a different user (e.g., "mike@acme.com"). See a fresh onboarding flow — Mikes own experience, not Sarahs.
+
+
+"Different user, different experience. I completed onboarding and invited a teammate.  just signed up with my new email — I sees the onboarding flow fresh. I cant see previous data. Thats Row-Level Security — the database enforces who sees what. The retention dashboard shows aggregate data from both. This isnt a prototype anymore — its a multi-user product."
+
+
+
+
+ STEP 4: Prompt 3 — Edge Cases (~60 sec)
+
+
+ "Handle these failure modes: If the database connection fails, show Connection error — please try again instead of a blank screen. If a user tries to invite someone whos already been invited, show This teammate has already been invited — theyll get a notification instead of creating a duplicate. If the invite submission fails, show Couldnt send invite — check your connection and try again with a retry button. If no invites have been sent yet, the retention dashboard should show No invites tracked yet — data will appear as users complete onboarding instead of empty charts. Add a loading skeleton while data is being fetched from the database."
+
+
+
+
+Now Press ⌘ + Option + I (opens DevTools)
+Go to the “Network” tab
+At the top, find “No throttling” dropdown
+Select “Offline”
+
+
+"I just killed the connection. Instead of silence, your user sees an error message with a retry option. Thats the difference between connected infrastructure and a resilient product. Real products break — yours should break gracefully."
+
+
+"Same prototype. Same onboarding flow. Same hypothesis. The infrastructure was already connected from Module 4. But now the product actually uses it:
+
+
+- All data is real, Users are isolated,  The retention dashboard shows real aggregations — computed from actual invite data across all users. and Failures are handled — connection errors, empty states, loading skeletons, retry logic.
+Thats the line between having a backend and having a product. And I crossed it with 3 prompts only.
+You’ll do this to your own build in the labs.
+
+
+Slide 8 — How to Secure and Extend Your Integration
+"Before you start building, let's talk about what's actually happening under the hood 
+
+
+Slide 9 — How to Prompt for Integration
+"You've got the infrastructure from Module 4. Now you're moving from 'database is connected' to 'product is built on the database.' That's a shift in how you communicate with the AI. You're no longer prompting for visual elements or one-off features. You're prompting for complete data flows, ownership rules, and failure handling. "let’s Walk through the three pillars:
+Define Your Schema Structure — "Your database is live from Module 4, but most of your data is still hardcoded in the UI. You need to extend the schema to cover all the data your product displays. Be specific. 'Create a table for Invites with fields for sender_email, recipient_email, and a status timestamp. Replace the hardcoded dashboard metrics with real queries.' That precision is what makes the difference between a connected database and a database-driven product."
+Script Ownership Permissions — "In a live environment, the most critical layer of logic is identity. A prototype is identity-blind — it treats every visitor the same. A real product must be identity-aware. You define the rules of ownership by implementing Row-Level Security. Think of it as the bouncer at the door: 'Ensure users can only see records where the user_id matches their authenticated session ID.' That's the line between a shared demo and a secure, multi-tenant platform."
+Orchestrate External APIs — "This is how you add superpowers without writing the code. Payments through Stripe, emails through SendGrid, AI through OpenAI. Your job is to provide the API documentation and clearly define the trigger and the action. 
+
+
+Slide 10 — Resistance Engineering for Errors & Failures
+"Most prototypes are designed for the happy path — the path where everything works perfectly. Real products handle the unhappy paths too. If you can describe these failure modes to the AI, it can build the safety nets."
+Empty States — "Every user starts at zero. If that experience is a blank box with no instructions, the system has failed the user on day one. Replace blank screens with active empty states — a 'Get Started' CTA rather than a dead end."
+Loading States — "In a live environment, data takes time to travel, and silence in the UI leads to churn. Don't just show a spinner — implement skeleton screens that show the structure of the data before it arrives."
+Error States — "APIs and databases are external dependencies that will eventually fail. Every failed transaction must trigger an inline error with a 'Retry' button to keep the session alive. Shift from crashes to graceful recoveries."
+Load Bearing States — "This is where vibe coding usually breaks. A prototype works with 5 rows of data, but a real product must remain stable with 50,000. If you don't tell the AI how to handle 50,000 items, it will try to load them all at once and crash the browser. Use pagination for large datasets and 'Last-Write-Wins' logic for simultaneous edits." (LWW is When multiple updates happen to the same piece of data and conflict with each other, the system keeps the value with the most recent timestamp and discards the others.)
+
+
+Slide 11 — Add data schema and RLS authentication to your prototype.
+All right, let's kick off our first hands-on.
+
+
+Slide 12 — Individual Exercise: Generate Your Integration Plan and Build
+"Your infrastructure is live from Module 4. You're going to let the AI audit your prototype, create your game plan, and then execute it  all in one exercise.See lab guide hereVibe Coding M5: Lab Guide and Walkthrough
+"Open Lovable with your prototype. Paste the prompt. It will scan your entire project and generate a personalized Integration Plan — a markdown file with your actual hardcoded values, your real tables, and three customized prompts. Before you run those prompts, review the plan through three lenses."
+"First — audit your Data Status.
+"Second — define your User Status. Are the roles correct? Do different users need different permissions? 
+"Third — map your Error and Data Handling Status. Which screens would freeze or go blank"
+Once you've reviewed the plan, start executing it. Run the three prompts from your plan in order — each one builds on the last."
+"Prompt 1 — Schema expansion. This extends your database and wires your UI to real queries. 
+"Prompt 2 — Auth and Row-Level Security. This adds a login/signup screen & partitions your data by user. 
+"Prompt 3 — Edge cases. This adds loading skeletons, error messages, empty states, and retry logic. 
+
+
+"When you're done, push all your changes and integration plan to GitHub. It lives in your repo alongside your Living PRD and engineering handoff."
+
+
+Slide 13 — Break
+
+
+Quick 5-minute break. You've earned it — that was the hardest lab of the course. Grab some water, stretch, and we'll be right back.
+
+
+Slide 14 — Cameras On
+Welcome back! Quick reminder — it's always better to see your smiling face. Be present and visible to stay engaged and keep interactions valuable.
+
+
+
+
+Slide 15 — Rapid-Fire Stress Test and Deploy Your Product Live
+All right."We're in the final stage. You've built the backend. Now you stress-test it, and then you ship it live."
+
+
+Slide 16 — Chaos Round: Pick Your Stress Test
+Who wants to run this with me?
+"In a real product cycle, you never ship 'perfect' code — you ship code with known risks. If your stress test reveals a flaw, you have two choices: fix it now with one final prompt, or document it as a 'Known Issue' in your Handoff Note and deploy anyway. Both are valid PM moves. Ignoring the flaw is the only mistake."
+
+
+So who wants to do this with me? All right, then let's do the following stress test: open your prototype and then do the network kill switch for a mac it’s Press ⌘ + Option + I (opens DevTools)
+Go to the “Network” tab
+At the top, find “No throttling” dropdown
+Select “Offline”
+PC Ctrl + Shift + I
+The Kill Switch — "Open DevTools, go to Network, and set to 'Offline.' Does your UI acknowledge the disconnection, or does it simply hang? If it hangs, that's a P0."
+
+
+Okay. Successfully stress test now. Click 'Publish' in Lovable and generate your live URL. 
+
+
+"That URL is live. Right now. On the internet." let me pull out my phone. Open the URL. "I just signed up on my phone. Went through onboarding. "One click. Thirty seconds. Your onboarding flow is live on the internet. Anyone with this URL can open it, sign up, and use it. That's not a prototype. That's a product. 
+
+
+Slide 17 — Your Evolved Engineering Handoff
+"In Module 4, your engineering handoff was a technical inventory — a catalog of components, notes on what's mocked versus real, and a 'Start Here' guide for an engineer. The infrastructure was connected but the handoff documented what could be built."
+"Now, your handoff has evolved into a deployed system blueprint. You've expanded the database schema and added Row-Level Security rules. You've mapped how live data flows from the database to the UI. And most importantly, you have an edge case log — the specific results of your stress test, showing what's handled versus what's a known gap."
+"This evolved handoff is arguably the most important artifact for engineering you've produced. It proves you've stress-tested the build and are proactively flagging known gaps so the engineering team isn't surprised by a crash later. High-fidelity UI is great, but high-fidelity logic is what actually ships."
+"Your Living PRD from Module 4 says what the product does and why. Your new handoff note says what's technically real. Together, an engineer can inherit your project without reverse-engineering anything."
+
+
+
+
+Slide 18 — Future-Proofing Your Product with APIs
+And "A product is only as real as its ability to handle live, dynamic data. Your next level of growth comes from moving beyond your internal database and plugging into the global API economy." and you can do this the following ways. 
+Personalization — "Use the User ID as a parameter in an API GET request to fetch a unique profile rather than a generic one. Think Spotify's 'Discover Weekly' — your ID tells the API to ignore the global top 40 and fetch your unique playlist data."For example.
+Continuity — "Use PUT/POST requests to sync timestamps or state changes to a cloud API so it's accessible on any device. Think Netflix's 'Continue Watching' — your phone sends a timestamp API update so your TV can later fetch exactly where you left off."
+Real-Time Utility — "Replace static database rows with live API feeds that refresh dynamic, external data every few seconds. Think Uber's driver tracking — the app doesn't guess where the car is; it constantly calls a GPS API to update the coordinates on your screen."
+"You don't need to write the integration — you can ask your AI for that. But you do need to define the data contract. You must know what parameters your app needs to send and what specific fields it needs back. This is what turns your live product into a dynamic one that reacts to the world in real-time."
+
+
+Slide 19 — Module 5 Complete: What You Accomplished Today
+Let's think back to Module 1, when this was nothing more than a few sentences in a prompt. You have taken that raw strategic intent and transformed it into a 100% live production environment."
+"You executed a stress test audit "And "You have turned your Module 4 infrastructure into a version-controlled, publicly-accessible, and fully-deployed product."
+"Before you close out — update the 'Integrations & Data Model' and 'Edge Cases & Known Gaps' sections on Slide 9 of your final project deck And of course, push everything to github.. Ensure your Live URL is saved and your Handoff Note is exported. Do it today while it's fresh."
+
+
+
+
+Slide 20 — Key Takeaways
+
+
+"Quick story. When Jason Citron launched Discord in 2015, it was just a voice channel with a text sidebar for gamers. Nothing fancy. But from day one, they got the data architecture right — servers, channels, users, roles, permissions. Every message tied to a specific user in a specific channel. You can't have User A hearing User B's private conversation. That's the first takeaway — PMs orchestrate integrations by defining the schema, ownership rules, and data contracts. You define the blueprint. 
+"Voice chat over the internet is unforgiving. Connections drop. Servers overload during game launches. Discord engineered for all of it — a 'Reconnecting...' indicator instead of dead silence, empty states with invite links instead of blank screens, rate limiting instead of browser crashes. The second takeaway — PMs must enforce technical resilience by accounting for empty, loading, and error states. Anyone can build a voice channel. Shipping means it recovers when things break."
+"As Discord scaled, their docs evolved from 'here's how voice works' to a full system blueprint — every error code, every reconnection sequence stress-tested and documented. The third takeaway — the Engineering Handoff evolves from a static list to a system blueprint, Similar to your living PRD.
+"And the move that turned it into a billion-dollar platform? They launched a bot API. Developers built entire products inside Discord — Midjourney ran its whole experience through Discord channels. That's the fourth takeaway — PMs future-proof their products by identifying API connections that scale utility beyond the internal database."
+You did all of this today. That's the shift from prototype to production."
+
+
+
+
+Slide 21 — Extra Practice and Next Session
+"Two optional exercises for anyone who wants to push further 
+"The first one — The API Value Expansion. Select a static data point in your product and identify a public API that could provide it live. Use prompts to integrate the API and replace your stored data with a dynamic feed. The question to answer: does the shift to a live feed fundamentally evolve your product utility, or is the change merely cosmetic?"
+"The second  The Multi-Device Continuity Test. Open your live URL on both your laptop and your phone simultaneously. Perform an action on one device and refresh the other to see if the change is reflected instantly via your database. Does your infrastructure provide a seamless experience across devices, or does your product feel like a disconnected local session?"
+"Module 6 is where we transition from a finished product to a continuous cycle of improvement. You'll analyze live user interactions against your original hypothesis, leverage AI-driven analytics to identify high-impact friction points, and redeploy targeted updates that secure the confidence line of your product. If Module 5 made your product real, Module 6 makes it better."
+
+
+Slide 22 — Survey
+I really want to pause here and encourage you to use this link or scan this QR to send feedback. It Takes you one or two minutes max but helps us tremendously to improve. Thank you
+
+
+Slide 23 — Bonus Resources
+You can see the lab guide 
+
+
+Slide 26 — Q&A
+Alright, before we close Let's run another demo
+
+
+
+
+
+
+
+
+Module 6: Measure Product Performance
+ Module 6: Measure Product Performance for AI-Driven Iteration — Speaker Notes
+
+
+Slide 1 — Title
+Welcome to Module 6. I want to take a second to recognize where you are. You've shipped a live product. It has a real URL. Real people have been clicking around in it. That's not nothing. Most PMs spend months in planning and never get to this point.
+Today we close the loop. The question we've been building toward since Module 2 — "is my product actually solving the problem?" — we answer it with data today. Not a gut feeling. Not a stakeholder's opinion. Data from real user behavior on your real deployed product.
+Let's go.
+
+
+
+
+ Slide 2 — Class Expectations
+you know the drill by now.
+
+
+
+
+ Slide 3 — Syllabus
+As mentioned, today we close the loop. You measure what your product is actually doing, use AI to analyze the data against your original problem statement, make one evidence-based improvement, and present the full journey. This is the final stage of the product lifecycle.
+
+
+
+
+ Slide 4 — Agenda
+Four things today.
+First — Shift From Shipping to Proving With Data. We'll look at why the moment your product goes live, the game changes completely.
+Second — Read your Lovable Insights. Your product has been collecting data since you deployed in M5 — you're going to open it and understand what it's telling you.
+Third — AI-Driven Product Iteration. You'll use AI to analyze your data against your problem statement and identify the highest-impact improvement.and then in the hand-on lab action improving your product
+And Lastly the final stretch. Presenting
+
+
+Slide 5 —Shift From Shipping to Proving With Data
+In Module 5, shipping was the win. You got the live URL, you tested it on your phone, you posted it in Slack. That felt like the finish line. It wasn't. That was the starting gun for a different race. Today you run that race.
+
+
+Slide 6 — Rapid-Fire Feedback Loop
+Before we get into the weeds, I want you to collect one more layer of input — human feedback from your peers. Not a survey. Not a form. Real usage.
+Go to the cohort Slack channel. Find at least four classmates' deployed product links. Open each one as a real user — sign up with your email, test the core flow, try to break things. Then leave one piece of specific feedback for each product in the same thread as the link, tagged to the builder.
+Specific is kind. "I was confused when I clicked Submit and nothing happened on the confirm screen" is useful. "Looks good" is not. You can leave a bug, flag friction, pay a compliment, or pitch a feature idea — but make it specific enough that the person can actually do something with it.
+
+
+Slide 7 — The Iteration Mindset
+Most PMs are taught to build, launch, and move on to the next thing. There's always another feature waiting. But that instinct — as natural as it feels — means you never actually find out if what you built worked. You just keep stacking new things on top of something that might be broken.
+Every V1 has ghost features. Things you were completely convinced were going to be the core of the product — and nobody touches them. The data tells you which 20% is driving 80% of the value so you can stop wasting time on the rest.
+And here's the uncomfortable truth: you are the worst person to spot the friction in your own product. You built it, it's your baby. You know exactly how it works. Real users don't have that context — and their confusion is the most valuable signal you have.
+But the most important shift is this one. You defined a hypothesis in Module 2. You built something to test it. You shipped it. Now you find out if you were right. Not with a feeling. Not with a stakeholder's opinion. With data. That's the only objective verdict that matters.
+From this point forward, your job is to replace "I think" with "the data shows." That's not a small shift. But that's the role of a real product builder.
+
+
+
+
+ Slide 8 — Metrics That Matter
+You don't need 50 metrics to evaluate a V1. You need 3–5 specific signals that map directly to your problem statement. Analysis paralysis is the biggest killer of V2. If you track everything, you'll understand nothing.
+Engagement isn't just "how many logins." It's the core flow. If you built a task manager, are users actually creating tasks — or are they clicking Settings and leaving? You need to know which features are anchors and which are ghosts.
+Retention is your honesty metric. One-time usage is a fluke. A second session is a signal. If users don't come back, your value proposition didn't stick — or the friction of using the app outweighed the benefit. Be honest with yourself about which one it is.
+Quality is where technical friction lives. If your page takes 5 seconds to load, the user is gone before they even see your value. Look for dead ends — places where the user expected a result and got nothing.
+And impact circles back to your hypothesis. If you predicted users would do X weekly and the data shows they do it once a month, your impact isn't matching your intent. That's the "so what" of your data.
+The question that overrides everything else: does user behavior confirm or contradict your original problem statement? If it contradicts, your next move isn't a tweak — it might be a pivot.
+
+
+
+
+Slide 9 — Three Layers of Analytics
+There are three layers of analytics available to you as a PM, and I want you to know all three exist — but today we're working with the one you already have.
+The first layer is built right into Lovable. No setup. It's been collecting data since you deployed in M5. Active users, page views, feature clicks, return sessions. For a V1 analysis, it's enough.
+The second layer is external tools — things like Mixpanel — that give you deeper funnel signal: where users are dropping off, where they came from, conversion paths. We're not doing this today, but it's a one-prompt add in Lovable when you're ready for it.
+The third layer is custom — feedback collection you build directly into your product and pipe into your own Supabase tables. A "Report Issue" button. A star rating. Data you fully own. That's for when you're running a real pilot.
+Today is layer one. You already have the data. Let's go look at it.
+
+
+
+
+Slide 10 — Lab Section Header
+Your product has been collecting data since you deployed in Module 5. We're not adding a new tool. We're opening what's already there. Let's go look at your numbers.
+
+
+
+
+ Slide 11 — Lab: Read Your Lovable Insights
+I want one volunteer to share their screen and walk through their Insights panel live — and everyone else opens their own at the same time. You're all doing this together. Here is also the walkthrough guide
+Open your Lovable Insights panel on your deployed project and give it a second to load. The first thing Will do from now on— this is your baseline, the starting point you'll compare any future iteration against it.
+Then find three specific numbers: your total sessions or unique visitors, your most-clicked feature or screen, and your lowest-engagement screen or feature. Write them down.
+
+
+These three are what you're feeding into the AI in the next lab.
+Now ask yourself the honest question: is that what you expected? Did your users do what you predicted — or did they do something completely different? Hold that thought. It's the most important thing you're bringing into the analysis sprint.
+
+
+
+
+Slide 12 — Section Header: AI-Driven Product Iteration
+You've got data. Now we figure out what it means. And this is where M6 gets really interesting — because the way you analyze data is about to change completely.
+
+
+
+
+Slide 13 — AI-Powered Analysis: The PM's New Superpower
+Think about the old way. You export CSVs. You build a pivot table. You spend half a day writing a "product insights" document with 14 charts and a seven-page executive summary. By the time you're done, the engineering team has already moved on. You spent the whole sprint producing a document that was out of date before anyone read it.
+Now you feed your metrics, your problem statement, and your hypothesis directly into an AI. You get a coherent evaluation in two minutes. Not 50 bullet points — a ranked, prioritized analysis of whether your product is working and what to fix first.
+Here's the exact prompt you're going to use:
+"I built a product to solve this problem: [Problem Statement]. My hypothesis was: [Hypothesis]. Here are the metrics from my live product after 3 days: [Paste Lovable Insights Data]. Evaluate: Is this product solving the problem? What does the data suggest? What are the top 3 things I should improve, ranked by likely impact?"
+And here's the thing I need you to remember: the AI doesn't make the decision — you do. The AI provides the synthesis. You provide the conviction. Your job is to read that analysis and choose the one specific improvement that you believe will move the needle most for your users. That's a judgment call. And judgment is a PM, not an AI skill.
+
+
+
+
+Slide 14 — From Data Signal to Technical Fix
+Your AI analysis gives you a diagnosis. It doesn't give you a prescription. That's your job. And there are three types of fixes — each one maps to a different kind of signal.
+The first is Persona Refinement.. When users tell you the AI output feels vague, or unhelpful, you don't just ask it to "write less." You change the brain. The prompt looks like this: "Based on this data, update the System Persona to 'Efficiency Expert.' Enforce a max 3 sentences rule per response and strictly prioritize quantitative data over prose." You're hardcoding a constraint, not tweaking a copy.
+The second is Visual Branching.. When your Lovable Insights shows users bouncing or stalling on a complex screen, the mental model might be wrong. You're not moving buttons. You're swapping the entire component. "Based on this data, user behavior shows high friction on the Table component. Replace it with a Kanban Board layout to help users visualize workflow status at a glance." The data proved the current pattern failed — so you replace the pattern entirely.
+The third is Logic Guardrails. When Lovable Insights shows users are clicking Submit but the database entry is missing a required field, that's a logic failure, not a UI problem. You write a hard rule: "Based on this data, there is a logic failure in the submission flow. Inject a hard logic guardrail: IF field A is empty, THEN prevent submission and trigger an error toast. Do not attempt to guess the value." You're making the failure impossible, not just harder.
+Every prompt you write in this phase starts with "Based on the data..." That's what keeps you honest. You're not feature creeping. You're surgically repairing the exact friction points the data identified.
+
+
+Slide 15 AI-Driven Sprint.
+All right, let's do those surgical reorgs in our own products.
+
+
+Slide 16 — Lab 2: AI Analysis Sprint
+Open your Lovable Insights panel — Copy your key numbers: sessions, user counts, which features got clicks, which screens got ignored. A paragraph of plain numbers is enough. You don't need a spreadsheet.
+Then find your problem statement and your Module 2 hypothesis. It's in your Living PRD from Module 4. If you can't find it, write a one-sentence problem statement from memory — you know what your product was trying to solve. Open ChatGPT or Gemini. Use the prompt from the previous slide."I built a product to solve this problem: [Problem Statement]. My hypothesis was: [Hypothesis]. Here are the metrics from my live product after 3 days: [Paste Lovable Insights Data]. Evaluate: Is this product solving the problem? What does the data suggest? What are the top 3 things I should improve, ranked by likely impact?" Paste in your metrics, your problem statement, your hypothesis. Hit send. Read the full response.
+Here's the hardest instruction I'm going to give you today: pick one thing. Not three. Not a small refactor plus a design tweak plus a new feature. One. The data told you what's broken. Your AI analysis ranked it. Pick the top one. Build it and Ship it.
+Use this prompt pattern: "Based on user data showing [specific finding], update [specific part] to [specific change]. Keep all existing functionality working." That last line matters — it's your safety net. You're improving, not rebuilding.
+Paste it into Lovable. Review the change. Does it fix what the data flagged? Does anything else break? Test the core flow before you do anything else. Then redeploy. Your live URL now reflects a data-driven decision. That's not a prototype update. That's a V2. push all the changes to your github repo. 
+
+
+
+
+Slide 17 — Prepare Your Final Project Deliverables
+You've got 15 minutes to finalize your final project deliverables deck.
+Your deck needs to tell the full story: the problem you set out to solve and the hypothesis you tested, the key elements of your Living PRD, two or three prompts from your prompt library that were pivotal, a snippet from your engineering handoff, your Lovable Insights screenshot and what the AI analysis told you, and your individual reflection on the build — what surprised you, what you'd do differently.
+You're not submitting perfection. You're submitting strategic logic and evidence of learning. Those are two very different things and I want you to focus on the last.
+
+
+
+
+Slide 18 — Learner Journey
+Let's look at what you actually built across six modules.
+Module 1 — one prompt, a working prototype in minutes. Speed you'd never experienced before.
+Module 2 — you added aim. Risk-based prototyping. A real hypothesis you were willing to be wrong about.
+Module 3 — precision. Multi-screen systems with prompt chaining. Consistency at scale. Things stopped breaking.
+Module 4 — structure. Your build became something someone else could actually work with.and the best part Living PRD, engineering handoff for free.
+Module 5 — We went Live. Real database, real auth, real URL. Your prototype became a product.
+Module 6 — today. Measure, analyze, improve. Your product became something that learns.
+And that my friends is the confidence line in action
+
+
+
+
+Slide 21 — Break
+Five minutes. You've earned it. Grab some water, come back ready — the best part of the whole course is coming up next.
+
+
+
+
+Slide 22 — Cameras On
+Welcome back. Cameras on — I want to see your faces for the final stretch. This is the good part.
+
+
+
+
+Slide 23 — Final Project Showcase
+Presentation time
+
+
+
+
+Slide 24 — LMS Submission Reminder
+Quick one — to qualify for certification, you need to upload your final project deliverables into the LMS. You have seven days from today. Everything you need is already built. Don't let the deadline sneak up on you.
+
+
+
+
+Slide 27 — Key Takeaways
+Quick story. In 2014, Spotify had over 50 million users and the biggest music library on the planet — but they had a discovery problem. Users were drowning in 30 million songs and defaulting to the same playlist on repeat. Spotify had already shipped Browse pages, editorial playlists, and Related Artists — all designed to help users find new music. All shipped. All had middling engagement. Then a small team at a Spotify hack week built a prototype: a single playlist of 30 songs, personalized to each user, refreshed every Monday. They called it Discover Weekly and shipped it in July 2015. Within weeks, users had streamed over a billion tracks through it. But here's what the team didn't expect: users weren't just listening — they were saving songs to their own libraries at a rate no other feature had ever produced. The editorial playlists Spotify had spent years curating couldn't touch it. Shipping wasn't the win. Shipping was the moment they could finally see what users actually wanted — and it wasn't what Spotify had been building for years. That's the first takeaway — **shipping is the start of the feedback loop, not the finish line.** The moment your product went live in M5, the real learning started. Everything you built before that was a hypothesis. The data is the verdict.
+
+
+The Discover Weekly team wasn't a hundred-person data science initiative. It started as a hack week project — a handful of engineers who had their listening data, their skip rates, and their save rates. They had their problem statement about music discovery. And they had collaborative filtering to connect the dots. They didn't commission a six-month research study. They didn't build a new analytics platform. They used the signals their product was already collecting and let the patterns speak. The insight came in days, not quarters. The hard part wasn't the analysis. It was the conviction to bet on a machine-generated playlist over the hand-curated editorial strategy Spotify had invested years in. That's the second takeaway — **you don't need a data team to analyze your product.** You need your metrics, your problem statement, and an AI. That combination gives you a product evaluation in minutes that used to take weeks. The analysis isn't the hard part anymore. The decision is.
+
+
+And then came the discipline. After launch, the data surfaced dozens of potential improvements — adjust the playlist length, change the refresh cadence, add social sharing, tweak genre diversity, send push notifications. They didn't chase all of them. They focused on one signal: which songs users saved versus which songs users skipped. A saved song meant the recommendation changed someone's library. A skipped song meant it missed. They tuned the algorithm around that single metric — not total listens, not completion rate, saves. One finding, one change. And every Monday, Discover Weekly got sharper. That's the third takeaway — **data-driven iteration isn't about fixing everything at once. It's one finding, one change, one redeploy.** The discipline of picking the highest-impact improvement — and only that one — is the actual PM skill. Anyone can generate a list of fixes. Knowing which one to do first is judgment. That's yours now.
+
+
+Slide 28 — Survey
+Two minutes to fill out the Day 6 survey. QR code is on screen, link is in Slack. This isn't a formality — your feedback directly shapes how we run the next cohort. Tell us what landed, what didn't, and what you wish we'd spent more time on.
+
+
+
+
+Slide 29 — Bonus Resources
+Lab guide and all additional resources are on this slide. If you want to go back and run any of the analytics or iteration steps again on your own, it's all there. Bookmark it.
+
+
+
+
+Slide 30 — Q&A
+Open floor. Anything about the data analysis, the iteration process, the presentations, certifications, or anything from the last six modules. Drop it in chat or unmute. And hit me up in Slack anytime after we close.
+
+
+
+
+
+
+Before you leave. Congratulations — you made it.
+
+
+For me, this has been an incredible ride. You showed up with curiosity, you pushed through the uncomfortable parts, and you kept building when things broke. That takes courage. And now you're walking out with a new superpower: the ability to identify a real problem, prototype at speed, ship it live, measure whether it works, and improve it with evidence. That's how products get built in this new age.
+
+
+You didn't just finish a course. Now you have a deployed URL, a Living PRD, a prompt library, an engineering handoff, and a data-driven V2. That arc is yours.
+
+
+Look around — you now have peers across different companies and industries, all thinking about the same challenges. Don't let that go quiet after today. And you can always reach out to me — whether you're stuck on an idea, want feedback on a prototype, or just want to share something you shipped. I'm here. This is just the beginning.
+
+
+Be bold, stay curious, stay playful. The world needs people who build with intention and aren't afraid to ship something imperfect and make it better with data. That's you now.
+
+
+Huge congratulations. You earned this. Now go build something that matters.

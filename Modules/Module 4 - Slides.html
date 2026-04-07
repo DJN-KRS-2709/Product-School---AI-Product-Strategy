@@ -5,18 +5,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Module 4: The Contract — Why Will Users Trust a Probabilistic System?</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
-  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap');
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  html, body { height: 100%; overflow: hidden; background: #0f0f13; }
-  body { font-family: 'Inter', -apple-system, sans-serif; color: #e8e8f0; -webkit-font-smoothing: antialiased; }
+  html, body { height: 100%; overflow: hidden; background: #07162C; }
+  body { font-family: 'Lato', -apple-system, sans-serif; color: #e8e8f0; -webkit-font-smoothing: antialiased; }
+  h1, h2 { font-family: 'Poppins', sans-serif; }
 
   .slide { position: absolute; inset: 0; display: none; flex-direction: column; justify-content: center; align-items: center; padding: 60px 80px; opacity: 0; transition: opacity 0.35s ease; }
   .slide.active { display: flex; opacity: 1; }
   .slide-inner { max-width: 960px; width: 100%; }
 
-  .module-tag { font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #3B82F6; margin-bottom: 16px; }
+  .module-tag { font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #1241B0; margin-bottom: 16px; }
   h1 { font-size: 48px; font-weight: 900; line-height: 1.1; color: #fff; margin-bottom: 20px; }
   h2 { font-size: 38px; font-weight: 800; line-height: 1.15; color: #fff; margin-bottom: 18px; }
   h3 { font-size: 24px; font-weight: 700; line-height: 1.3; color: #e0e0f0; margin-bottom: 12px; }
@@ -38,7 +40,7 @@
 
   .waypoints { display: flex; flex-direction: column; gap: 14px; margin: 24px 0; }
   .waypoint { display: flex; align-items: flex-start; gap: 18px; background: rgba(59,130,246,0.06); border: 1px solid rgba(59,130,246,0.15); border-radius: 12px; padding: 20px 24px; }
-  .waypoint-num { width: 36px; height: 36px; border-radius: 8px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 800; color: #fff; background: #3B82F6; }
+  .waypoint-num { width: 36px; height: 36px; border-radius: 8px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 800; color: #fff; background: #1241B0; }
   .waypoint-text { flex: 1; }
   .waypoint-text .wt-title { font-size: 17px; font-weight: 700; color: #fff; margin-bottom: 4px; }
   .waypoint-text .wt-desc { font-size: 14px; color: #8899bb; line-height: 1.5; }
@@ -56,8 +58,8 @@
   .arc-arrow { color: #333; font-size: 18px; }
 
   .agenda { display: flex; flex-direction: column; gap: 6px; margin: 16px 0; }
-  .agenda-item { display: flex; align-items: center; gap: 12px; padding: 10px 16px; background: #161822; border-radius: 8px; }
-  .agenda-time { font-size: 12px; font-weight: 700; color: #3B82F6; min-width: 50px; font-family: 'JetBrains Mono', monospace; }
+  .agenda-item { display: flex; align-items: center; gap: 12px; padding: 10px 16px; background: #0c2340; border-radius: 8px; }
+  .agenda-time { font-size: 12px; font-weight: 700; color: #1241B0; min-width: 50px; font-family: 'IBM Plex Mono', monospace; }
   .agenda-text { font-size: 14px; color: #b0b4c8; }
   .agenda-text strong { color: #e0e0f0; }
 
@@ -75,33 +77,33 @@
   .flow-line { font-size: 16px; color: #555d6e; margin-top: 20px; }
 
   .score-table { width: 100%; margin: 16px 0; border-collapse: collapse; }
-  .score-table th { text-align: left; padding: 10px 12px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #555; border-bottom: 1px solid #252840; }
+  .score-table th { text-align: left; padding: 10px 12px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #555; border-bottom: 1px solid #1a3a5c; }
   .score-table td { padding: 14px 12px; border-bottom: 1px solid #1e1e30; font-size: 14px; color: #b0b4c8; line-height: 1.4; }
   .score-table td:first-child { font-weight: 700; color: #e0e0f0; }
 
   .nav { position: fixed; bottom: 20px; right: 24px; display: flex; gap: 8px; z-index: 100; }
-  .nav-btn { width: 42px; height: 42px; border-radius: 8px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); color: #888; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; font-family: 'Inter', sans-serif; }
+  .nav-btn { width: 42px; height: 42px; border-radius: 8px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); color: #888; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; font-family: 'Lato', sans-serif; }
   .nav-btn:hover { background: rgba(255,255,255,0.1); color: #fff; }
   .progress { position: fixed; bottom: 0; left: 0; right: 0; height: 3px; background: rgba(255,255,255,0.05); z-index: 100; }
-  .progress-bar { height: 100%; background: #3B82F6; transition: width 0.35s ease; }
+  .progress-bar { height: 100%; background: #1241B0; transition: width 0.35s ease; }
   .slide-counter { position: fixed; bottom: 26px; left: 24px; font-size: 13px; font-weight: 600; color: #444; z-index: 100; }
   .help-hint { position: fixed; top: 16px; right: 24px; font-size: 11px; color: #333; z-index: 100; }
-  .speaker-notes { display: none; position: fixed; bottom: 0; left: 0; right: 0; background: #1a1a24; border-top: 2px solid #3B82F6; padding: 16px 32px; max-height: 200px; overflow-y: auto; font-size: 14px; color: #8899bb; line-height: 1.6; z-index: 200; }
+  .speaker-notes { display: none; position: fixed; bottom: 0; left: 0; right: 0; background: #1a1a24; border-top: 2px solid #1241B0; padding: 16px 32px; max-height: 200px; overflow-y: auto; font-size: 14px; color: #8899bb; line-height: 1.6; z-index: 200; }
   .speaker-notes.visible { display: block; }
   .speaker-notes strong { color: #b0b4c8; }
-  .notes-tag { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #3B82F6; margin-bottom: 6px; }
+  .notes-tag { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #1241B0; margin-bottom: 6px; }
 
   /* === Vibe Coding structural slides === */
   .expect-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin: 24px 0; }
-  .expect-card { background: #161822; border: 1px solid #252840; border-radius: 10px; padding: 18px; text-align: center; }
+  .expect-card { background: #0c2340; border: 1px solid #1a3a5c; border-radius: 10px; padding: 18px; text-align: center; }
   .expect-icon { font-size: 24px; margin-bottom: 8px; }
   .expect-title { font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 4px; }
   .expect-desc { font-size: 12px; color: #8899bb; line-height: 1.4; }
   .syllabus-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 20px 0; }
-  .syllabus-card { background: #161822; border: 1px solid #252840; border-radius: 10px; padding: 16px; display: flex; align-items: flex-start; gap: 14px; }
+  .syllabus-card { background: #0c2340; border: 1px solid #1a3a5c; border-radius: 10px; padding: 16px; display: flex; align-items: flex-start; gap: 14px; }
   .syllabus-card.syl-active { background: rgba(59,130,246,0.08); border-color: rgba(59,130,246,0.3); }
-  .syllabus-num { width: 32px; height: 32px; border-radius: 8px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 800; color: #fff; background: #252840; }
-  .syllabus-card.syl-active .syllabus-num { background: #3B82F6; }
+  .syllabus-num { width: 32px; height: 32px; border-radius: 8px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 800; color: #fff; background: #1a3a5c; }
+  .syllabus-card.syl-active .syllabus-num { background: #1241B0; }
   .syllabus-body .syl-title { font-size: 14px; font-weight: 700; color: #e0e0f0; margin-bottom: 2px; }
   .syllabus-card.syl-active .syl-title { color: #fff; }
   .syllabus-body .syl-desc { font-size: 11px; color: #64748b; line-height: 1.4; }
@@ -110,15 +112,15 @@
   .debrief-prompt { font-size: 22px; font-weight: 700; color: #fff; line-height: 1.4; margin-bottom: 12px; }
   .debrief-sub { font-size: 14px; color: #8899bb; }
   .complete-stats { display: flex; gap: 20px; margin: 24px 0; }
-  .complete-stat { flex: 1; background: #161822; border: 1px solid #252840; border-radius: 12px; padding: 20px; text-align: center; }
-  .complete-num { font-size: 36px; font-weight: 900; color: #3B82F6; margin-bottom: 4px; }
+  .complete-stat { flex: 1; background: #0c2340; border: 1px solid #1a3a5c; border-radius: 12px; padding: 20px; text-align: center; }
+  .complete-num { font-size: 36px; font-weight: 900; color: #1241B0; margin-bottom: 4px; }
   .complete-label { font-size: 13px; color: #8899bb; }
   .complete-shifts { display: flex; flex-direction: column; gap: 12px; margin: 20px 0; }
   .complete-shift { background: rgba(52,211,153,0.06); border: 1px solid rgba(52,211,153,0.12); border-radius: 10px; padding: 16px 20px; }
   .shift-title { font-size: 15px; font-weight: 700; color: #34d399; margin-bottom: 4px; }
   .shift-desc { font-size: 13px; color: #8899bb; line-height: 1.5; }
   .takeaway-list { display: flex; flex-direction: column; gap: 14px; margin: 24px 0; }
-  .takeaway-item { background: #161822; border: 1px solid #252840; border-radius: 10px; padding: 18px 22px; }
+  .takeaway-item { background: #0c2340; border: 1px solid #1a3a5c; border-radius: 10px; padding: 18px 22px; }
   .takeaway-item p { font-size: 15px; color: #b0b4c8; line-height: 1.6; }
   .cameras-box { background: rgba(251,191,36,0.06); border: 1px solid rgba(251,191,36,0.15); border-radius: 14px; padding: 28px; text-align: center; max-width: 500px; margin: 32px auto; }
   .tag-debrief { background: rgba(192,132,252,0.12); color: #d8b4fe; }
@@ -129,8 +131,8 @@
   .lab-name { font-size: 32px; font-weight: 900; color: #fff; margin-bottom: 8px; }
   .lab-desc { font-size: 16px; color: #8899bb; line-height: 1.6; }
   .lab-steps { display: flex; flex-direction: column; gap: 12px; margin: 20px 0; text-align: left; }
-  .lab-step { display: flex; align-items: flex-start; gap: 14px; background: #161822; border: 1px solid #252840; border-radius: 10px; padding: 16px 18px; }
-  .lab-step-num { width: 28px; height: 28px; border-radius: 7px; background: #3B82F6; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; color: #fff; flex-shrink: 0; }
+  .lab-step { display: flex; align-items: flex-start; gap: 14px; background: #0c2340; border: 1px solid #1a3a5c; border-radius: 10px; padding: 16px 18px; }
+  .lab-step-num { width: 28px; height: 28px; border-radius: 7px; background: #1241B0; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; color: #fff; flex-shrink: 0; }
   .lab-step-text { font-size: 14px; color: #b0b4c8; line-height: 1.5; }
   .lab-goal { background: rgba(52,211,153,0.06); border: 1px solid rgba(52,211,153,0.12); border-radius: 10px; padding: 16px 20px; margin: 16px 0; }
   .lab-goal-label { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: #34d399; margin-bottom: 6px; }
@@ -138,6 +140,117 @@
   .lab-tip { background: rgba(251,191,36,0.06); border: 1px solid rgba(251,191,36,0.12); border-radius: 10px; padding: 14px 18px; margin: 12px 0; }
   .lab-tip-label { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: #fbbf24; margin-bottom: 4px; }
   .lab-tip-text { font-size: 13px; color: #8899bb; line-height: 1.5; }
+
+  /* === Split-panel layout (PPT-style exercise slides) === */
+  .split-slide {
+    display: flex; width: 100%; height: 100%; align-items: stretch;
+  }
+  .split-left {
+    flex: 0 0 45%; display: flex; flex-direction: column; justify-content: center;
+    padding: 60px 48px 60px 80px;
+  }
+  .split-right {
+    flex: 0 0 55%; display: flex; flex-direction: column; justify-content: center;
+    padding: 48px 60px;
+    background: #0c2340; border-radius: 24px 0 0 24px;
+    margin: 32px 0 32px 0;
+  }
+  .split-right.panel-light {
+    background: #f0f4f8; color: #1a1a2e;
+  }
+  .split-right.panel-light h3, .split-right.panel-light strong { color: #07162C; }
+  .split-right.panel-light p, .split-right.panel-light .lab-step-text { color: #334155; }
+
+  .slide-tag {
+    font-size: 15px; font-weight: 700; color: #60a5fa;
+    margin-bottom: 16px; letter-spacing: 0.02em;
+  }
+  .slide-tag.tag-green { color: #6ee7b7; }
+  .slide-tag.tag-pink { color: #f9a8d4; }
+
+  .lab-badge-row {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 24px;
+  }
+  .lab-badge {
+    display: inline-block; font-size: 11px; font-weight: 800; letter-spacing: 0.12em;
+    text-transform: uppercase; padding: 8px 18px; border-radius: 6px;
+    background: #1241B0; color: #fff;
+  }
+  .lab-timer {
+    font-size: 14px; font-weight: 600; color: #8899bb;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .lab-timer::before { content: '⏱'; font-size: 16px; }
+
+  .split-right .steps-heading {
+    font-family: 'Poppins', sans-serif; font-size: 18px; font-weight: 700;
+    color: #fff; margin-bottom: 18px;
+  }
+  .split-right .lab-step { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); }
+
+  .split-left .lab-goal { margin: 20px 0 16px 0; background: transparent; border: none; padding: 0; }
+  .split-left .lab-goal-label { display: none; }
+  .split-left .lab-goal-text { font-size: 16px; color: #b0b4c8; line-height: 1.65; }
+  .split-left .lab-goal-text::before {
+    content: '→'; color: #60a5fa; font-weight: 700; margin-right: 10px;
+  }
+  .split-left .lab-tip { background: transparent; border: none; padding: 0; margin: 12px 0 0 0; }
+  .split-left .lab-tip-label { display: none; }
+  .split-left .lab-tip-text { font-size: 15px; color: #b0b4c8; line-height: 1.6; }
+  .split-left .lab-tip-text::before {
+    content: '→'; color: #60a5fa; font-weight: 700; margin-right: 10px;
+  }
+  .split-left .lab-tip-text strong:first-child,
+  .split-left .lab-goal-text strong:first-child { color: #fff; }
+
+  .bottom-cta {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    background: rgba(251,191,36,0.12); border-top: 1px solid rgba(251,191,36,0.25);
+    padding: 14px 32px; text-align: center;
+    font-size: 14px; font-weight: 600; color: #fde68a;
+  }
+  .bottom-cta a { color: #fde68a; text-decoration: underline; }
+
+  /* === Section break / lab header (gradient) === */
+  .slide.section-break { padding: 0; }
+  .slide.section-break .section-break-inner {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 50% 20%, rgba(42,70,180,0.45) 0%, rgba(18,65,176,0.2) 35%, #07162C 75%);
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 80px;
+  }
+  .section-break-inner .lab-title {
+    font-size: 13px; font-weight: 800; text-transform: uppercase;
+    letter-spacing: 0.16em; color: rgba(255,255,255,0.5); margin-bottom: 16px;
+  }
+  .section-break-inner .lab-name {
+    font-family: 'Poppins', sans-serif; font-size: 52px; font-weight: 900;
+    color: #fff; line-height: 1.1; max-width: 600px;
+  }
+  .section-break-inner .lab-desc {
+    font-size: 18px; color: rgba(255,255,255,0.5); line-height: 1.6;
+    margin-top: 16px; max-width: 500px;
+  }
+
+  /* === Cameras On (gradient + outline) === */
+  .slide.cameras-slide { padding: 0; }
+  .slide.cameras-slide .cameras-inner {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, #07162C 0%, #0f2d5a 50%, #1241B0 100%);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .cameras-card {
+    border: 1.5px solid rgba(255,255,255,0.15); border-radius: 20px;
+    padding: 48px 64px; max-width: 560px; text-align: left;
+  }
+  .cameras-card h2 {
+    font-size: 32px; margin-bottom: 8px;
+  }
+  .cameras-card .cameras-arrow {
+    font-size: 18px; font-weight: 700; color: #60a5fa; margin-bottom: 4px;
+  }
+  .cameras-card p { font-size: 16px; color: rgba(255,255,255,0.65); line-height: 1.6; }
 </style>
 </head>
 <body>
@@ -280,7 +393,6 @@
     </div>
     <p style="font-size:13px; color:#8899bb; text-align:center; margin-bottom:10px;"><strong style="color:#e0e0f0;">Real world:</strong> Tesla/ADAS-style UIs force handoffs · Perplexity / AI Overviews lead with sources</p>
     <p style="font-size:16px; color:#60a5fa; font-weight:600; text-align:center;">Understandable + controllable wins — even at a lower benchmark %.</p>
-    <p style="font-size:14px; color:#fbbf24; font-weight:600; text-align:center; margin-top:10px;">Quick: failure users only discover after they trusted you?</p>
   </div>
 </div>
 
@@ -292,32 +404,29 @@
     <div class="subtitle">Labeled truth as ship-blocking infrastructure.</div>
     <p style="font-size:13px; color:#8899bb; margin-bottom:14px; text-align:center;"><strong style="color:#e0e0f0;">Grammarly:</strong> correctness + tone benchmarks gate releases · <strong style="color:#e0e0f0;">OpenAI:</strong> PMs build current-vs-ideal-behavior sheets as ground truth</p>
     <div style="display:flex; flex-direction:column; gap:12px; margin:16px 0;">
-      <div style="display:flex; align-items:flex-start; gap:16px; background:#161822; border:1px solid #252840; border-radius:10px; padding:18px;">
-        <div style="width:36px; height:36px; border-radius:8px; background:#3B82F6; display:flex; align-items:center; justify-content:center; font-size:16px; font-weight:800; color:#fff; flex-shrink:0;">1</div>
+      <div style="display:flex; align-items:flex-start; gap:16px; background:#0c2340; border:1px solid #1a3a5c; border-radius:10px; padding:18px;">
+        <div style="width:36px; height:36px; border-radius:8px; background:#1241B0; display:flex; align-items:center; justify-content:center; font-size:16px; font-weight:800; color:#fff; flex-shrink:0;">1</div>
         <div><div style="font-size:15px; font-weight:700; color:#fff; margin-bottom:4px;">Regression</div><div style="font-size:13px; color:#8899bb; line-height:1.45;">Every prompt/model change — scores dip before users feel it.</div></div>
       </div>
-      <div style="display:flex; align-items:flex-start; gap:16px; background:#161822; border:1px solid #252840; border-radius:10px; padding:18px;">
+      <div style="display:flex; align-items:flex-start; gap:16px; background:#0c2340; border:1px solid #1a3a5c; border-radius:10px; padding:18px;">
         <div style="width:36px; height:36px; border-radius:8px; background:#2563eb; display:flex; align-items:center; justify-content:center; font-size:16px; font-weight:800; color:#fff; flex-shrink:0;">2</div>
         <div><div style="font-size:15px; font-weight:700; color:#fff; margin-bottom:4px;">Domain anchor</div><div style="font-size:13px; color:#8899bb; line-height:1.45;">Your definition of “good” — not a public leaderboard.</div></div>
       </div>
-      <div style="display:flex; align-items:flex-start; gap:16px; background:#161822; border:1px solid #252840; border-radius:10px; padding:18px;">
+      <div style="display:flex; align-items:flex-start; gap:16px; background:#0c2340; border:1px solid #1a3a5c; border-radius:10px; padding:18px;">
         <div style="width:36px; height:36px; border-radius:8px; background:#7c3aed; display:flex; align-items:center; justify-content:center; font-size:16px; font-weight:800; color:#fff; flex-shrink:0;">3</div>
         <div><div style="font-size:15px; font-weight:700; color:#fff; margin-bottom:4px;">Proof for buyers</div><div style="font-size:13px; color:#8899bb; line-height:1.45;">Enterprise question: “Show me how you test.” <em>This is the demo.</em></div></div>
       </div>
     </div>
     <p style="font-size:14px; color:#8899bb; text-align:center;">100–500 rows · edge cases · version like code</p>
-    <p style="font-size:14px; color:#60a5fa; font-weight:600; text-align:center; margin-top:10px;">Pairs (45s): one nasty input your gold set must include — share with partner.</p>
   </div>
 </div>
 
 <!-- ===== SLIDE: Hands-On Lab Header ===== -->
-<div class="slide" data-notes="Section break — entering the trust-building exercises.">
-  <div class="slide-inner" style="text-align:center;">
-    <div class="lab-header">
-      <div class="lab-title">Hands-On Lab</div>
-      <div class="lab-name">Trust Infrastructure</div>
-      <div class="lab-desc">Build golden datasets, red-team your eval spec, and draft a reliability contract. Three exercises, 40 minutes total.</div>
-    </div>
+<div class="slide section-break" data-notes="Section break — entering the trust-building exercises.">
+  <div class="section-break-inner">
+    <div class="lab-title">Hands-On Lab</div>
+    <div class="lab-name">Trust Infrastructure</div>
+    <div class="lab-desc">Build golden datasets, red-team your eval spec, and draft a reliability contract. Three exercises, 40 minutes total.</div>
   </div>
 </div>
 
@@ -332,21 +441,20 @@
     </div>
     <div class="subtitle">Your ground-truth spec — ship-blocking, not side project.</div>
     <div style="display:flex; gap:16px; margin:20px 0;">
-      <div style="flex:1; background:#161822; border:1px solid #252840; border-radius:10px; padding:20px;">
+      <div style="flex:1; background:#0c2340; border:1px solid #1a3a5c; border-radius:10px; padding:20px;">
         <div style="font-size:13px; font-weight:800; color:#60a5fa; margin-bottom:10px;">Scope</div>
         <div style="font-size:13px; color:#8899bb; line-height:2;">Domain: <span style="color:#555;">_____</span><br>Input/output types: <span style="color:#555;">_____</span><br>Target examples: <span style="color:#555;">_____ (100–500)</span></div>
       </div>
-      <div style="flex:1; background:#161822; border:1px solid #252840; border-radius:10px; padding:20px;">
+      <div style="flex:1; background:#0c2340; border:1px solid #1a3a5c; border-radius:10px; padding:20px;">
         <div style="font-size:13px; font-weight:800; color:#fbbf24; margin-bottom:10px;">Sources</div>
         <div style="font-size:13px; color:#8899bb; line-height:2;">Real user interactions: <span style="color:#555;">Y / N</span><br>Expert curated: <span style="color:#555;">Y / N</span><br>Adversarial / edge cases: <span style="color:#555;">Y / N</span></div>
       </div>
-      <div style="flex:1; background:#161822; border:1px solid #252840; border-radius:10px; padding:20px;">
+      <div style="flex:1; background:#0c2340; border:1px solid #1a3a5c; border-radius:10px; padding:20px;">
         <div style="font-size:13px; font-weight:800; color:#34d399; margin-bottom:10px;">Maintenance</div>
         <div style="font-size:13px; color:#8899bb; line-height:2;">Owner: <span style="color:#555;">_____</span><br>Update frequency: <span style="color:#555;">_____</span><br>Versioning: <span style="color:#555;">_____</span></div>
       </div>
     </div>
     <p style="font-size:14px; color:#fbbf24; font-weight:600; text-align:center; margin-top:8px;">Sales test: one sentence — “Here’s how we test our AI.”</p>
-    <p style="font-size:13px; color:#60a5fa; font-weight:600; text-align:center; margin-top:6px;">Stand up if your set includes at least one adversarial row.</p>
     <a href="Strategy Repo Template.html#golden-dataset" style="display:block; margin-top:14px; padding:10px 18px; background:rgba(52,211,153,0.08); border:1px solid rgba(52,211,153,0.2); border-radius:8px; text-align:center; text-decoration:none; transition:all 0.2s;"><span style="font-size:12px; font-weight:700; color:#34d399;">Open <code style="color:#6ee7b7;">04-the-contract/golden-dataset.md</code> template → fill in and commit to your repo</span></a>
   </div>
 </div>
@@ -362,12 +470,12 @@
 </div>
 
 <!-- ===== SLIDE: Cameras On ===== -->
-<div class="slide" data-notes="Quick energy reset.">
-  <div class="slide-inner" style="text-align:center;">
-    <div class="cameras-box">
-      <div style="font-size:48px; margin-bottom:16px;">📹</div>
-      <h2 style="font-size:28px; margin-bottom:12px;">Cameras On</h2>
-      <p style="font-size:16px; color:#8899bb;">Welcome back! Stay present and visible to keep the energy up.</p>
+<div class="slide cameras-slide" data-notes="Quick energy reset.">
+  <div class="cameras-inner">
+    <div class="cameras-card">
+      <h2>Reminder!</h2>
+      <div class="cameras-arrow">→ Cameras On</div>
+      <p>It’s always better to see your smiling face! Be present and visible to stay engaged and keep interactions valuable.</p>
     </div>
   </div>
 </div>
@@ -390,20 +498,19 @@
       </div>
     </div>
     <div style="display:flex; gap:10px; margin-top:8px;">
-      <div style="flex:1; background:#161822; border:1px solid #252840; border-radius:8px; padding:14px;">
+      <div style="flex:1; background:#0c2340; border:1px solid #1a3a5c; border-radius:8px; padding:14px;">
         <div style="font-size:12px; font-weight:700; color:#60a5fa; margin-bottom:4px;">Threshold</div>
         <div style="font-size:12px; color:#666;">Low score → human · High → auto</div>
       </div>
-      <div style="flex:1; background:#161822; border:1px solid #252840; border-radius:8px; padding:14px;">
+      <div style="flex:1; background:#0c2340; border:1px solid #1a3a5c; border-radius:8px; padding:14px;">
         <div style="font-size:12px; font-weight:700; color:#60a5fa; margin-bottom:4px;">Capture fixes</div>
         <div style="font-size:12px; color:#666;">Each edit = fuel · ties to M2 flywheel</div>
       </div>
-      <div style="flex:1; background:#161822; border:1px solid #252840; border-radius:8px; padding:14px;">
+      <div style="flex:1; background:#0c2340; border:1px solid #1a3a5c; border-radius:8px; padding:14px;">
         <div style="font-size:12px; font-weight:700; color:#60a5fa; margin-bottom:4px;">Escalation UX</div>
         <div style="font-size:12px; color:#666;">Visible uncertainty · User opts in</div>
       </div>
     </div>
-    <p style="font-size:14px; color:#fbbf24; font-weight:600; text-align:center; margin-top:14px;">Point to your answer: where would a human catch a catastrophic miss first?</p>
   </div>
 </div>
 
@@ -455,12 +562,11 @@
       </div>
     </div>
     <div style="display:flex; gap:10px; margin-top:8px;">
-      <div style="flex:1; background:#161822; border:1px solid #252840; border-radius:8px; padding:12px; font-size:12px; color:#8899bb; text-align:center;">Users adjust threshold? <span style="color:#555;">Y/N</span></div>
-      <div style="flex:1; background:#161822; border:1px solid #252840; border-radius:8px; padding:12px; font-size:12px; color:#8899bb; text-align:center;">See AI reasoning? <span style="color:#555;">Y/N</span></div>
-      <div style="flex:1; background:#161822; border:1px solid #252840; border-radius:8px; padding:12px; font-size:12px; color:#8899bb; text-align:center;">Correct & override? <span style="color:#555;">Y/N</span></div>
-      <div style="flex:1; background:#161822; border:1px solid #252840; border-radius:8px; padding:12px; font-size:12px; color:#8899bb; text-align:center;">Corrections → model? <span style="color:#555;">Y/N</span></div>
+      <div style="flex:1; background:#0c2340; border:1px solid #1a3a5c; border-radius:8px; padding:12px; font-size:12px; color:#8899bb; text-align:center;">Users adjust threshold? <span style="color:#555;">Y/N</span></div>
+      <div style="flex:1; background:#0c2340; border:1px solid #1a3a5c; border-radius:8px; padding:12px; font-size:12px; color:#8899bb; text-align:center;">See AI reasoning? <span style="color:#555;">Y/N</span></div>
+      <div style="flex:1; background:#0c2340; border:1px solid #1a3a5c; border-radius:8px; padding:12px; font-size:12px; color:#8899bb; text-align:center;">Correct & override? <span style="color:#555;">Y/N</span></div>
+      <div style="flex:1; background:#0c2340; border:1px solid #1a3a5c; border-radius:8px; padding:12px; font-size:12px; color:#8899bb; text-align:center;">Corrections → model? <span style="color:#555;">Y/N</span></div>
     </div>
-    <p style="font-size:13px; color:#60a5fa; font-weight:600; text-align:center; margin-top:12px;">Point to your screen: which tier is your live product closest to?</p>
     <a href="Strategy Repo Template.html#golden-dataset" style="display:block; margin-top:14px; padding:10px 18px; background:rgba(52,211,153,0.08); border:1px solid rgba(52,211,153,0.2); border-radius:8px; text-align:center; text-decoration:none; transition:all 0.2s;"><span style="font-size:12px; font-weight:700; color:#34d399;">Open <code style="color:#6ee7b7;">04-the-contract/golden-dataset.md</code> template → fill in and commit to your repo</span></a>
   </div>
 </div>
@@ -487,7 +593,6 @@
       </div>
     </div>
     <p style="font-size:14px; color:#60a5fa; font-weight:600; text-align:center; margin-top:8px;">Who judges the judge? <strong>Your golden dataset.</strong></p>
-    <p style="font-size:14px; color:#fbbf24; font-weight:600; text-align:center; margin-top:10px;">Quick poll: thumbs up if a model already grades your outputs somewhere.</p>
   </div>
 </div>
 
@@ -499,25 +604,24 @@
     <div class="subtitle">Measure · display · act — like an SRE dashboard for your model.</div>
     <p style="font-size:13px; color:#8899bb; margin:-6px 0 12px; text-align:center;">Think <strong style="color:#e0e0f0;">Datadog / Stripe status-page</strong> energy for AI quality</p>
     <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:20px 0;">
-      <div style="background:#161822; border:1px solid #252840; border-radius:10px; padding:20px;">
+      <div style="background:#0c2340; border:1px solid #1a3a5c; border-radius:10px; padding:20px;">
         <div style="font-size:13px; font-weight:800; color:#60a5fa; margin-bottom:8px;">Metrics</div>
         <div style="font-size:13px; color:#8899bb; line-height:1.45;">Quality · latency · confidence spread · HITL% · overrides</div>
       </div>
-      <div style="background:#161822; border:1px solid #252840; border-radius:10px; padding:20px;">
+      <div style="background:#0c2340; border:1px solid #1a3a5c; border-radius:10px; padding:20px;">
         <div style="font-size:13px; font-weight:800; color:#fbbf24; margin-bottom:8px;">Judge setup</div>
         <div style="font-size:13px; color:#8899bb; line-height:1.45;">Model · rubric · gold set · thresholds</div>
       </div>
-      <div style="background:#161822; border:1px solid #252840; border-radius:10px; padding:20px;">
+      <div style="background:#0c2340; border:1px solid #1a3a5c; border-radius:10px; padding:20px;">
         <div style="font-size:13px; font-weight:800; color:#f87171; margin-bottom:8px;">Drift alerts</div>
         <div style="font-size:13px; color:#8899bb; line-height:1.45;">Auto ping when trends cross the line</div>
       </div>
-      <div style="background:#161822; border:1px solid #252840; border-radius:10px; padding:20px;">
+      <div style="background:#0c2340; border:1px solid #1a3a5c; border-radius:10px; padding:20px;">
         <div style="font-size:13px; font-weight:800; color:#34d399; margin-bottom:8px;">UX hooks</div>
         <div style="font-size:13px; color:#8899bb; line-height:1.45;">Scores in UI · citations · thumbs-up loops</div>
       </div>
     </div>
     <p style="font-size:14px; color:#f87171; font-weight:600; text-align:center;">Can't screen-share this in a sales call? Not product-grade.</p>
-    <p style="font-size:14px; color:#60a5fa; font-weight:600; text-align:center; margin-top:8px;">Thumbs: ready to show this to a buyer next week?</p>
   </div>
 </div>
 
@@ -554,7 +658,6 @@
       </div>
     </div>
     <p style="font-size:16px; color:#f87171; font-weight:600; text-align:center; margin-top:12px;">After both: one line — worst miss your partner found.</p>
-    <p style="font-size:13px; color:#fbbf24; font-weight:600; text-align:center; margin-top:8px;">Pairs: point at the attack card that scares you most.</p>
   </div>
 </div>
 
@@ -573,45 +676,54 @@
 </div>
 
 <!-- ===== SLIDE: Hands-On Lab Header ===== -->
-<div class="slide" data-notes="Final build of the module.">
-  <div class="slide-inner" style="text-align:center;">
-    <div class="lab-header">
-      <div class="lab-title">Hands-On Lab</div>
-      <div class="lab-name">Reliability Contract</div>
-      <div class="lab-desc">Draft the contract between your AI and your users. What you promise, how you measure, what happens when it breaks.</div>
-    </div>
+<div class="slide section-break" data-notes="Final build of the module.">
+  <div class="section-break-inner">
+    <div class="lab-title">Hands-On Lab</div>
+    <div class="lab-name">Reliability Contract</div>
+    <div class="lab-desc">Draft the contract between your AI and your users. What you promise, how you measure, what happens when it breaks.</div>
   </div>
 </div>
 
 <!-- ===== SLIDE 15: Build Moment — Reliability Contract ===== -->
 <div class="slide" data-notes="Why: execs buy explicit promises. Push real numbers — even wrong numbers get corrected faster than mush. This is M6 board slide fodder. AWS/Azure SLAs as analogy.">
-  <div class="slide-inner">
-    <div class="demo-tag tag-build">Build Moment · 15 Minutes</div>
-    <h2>Your Reliability Contract</h2>
-    <div class="lab-goal">
-      <div class="lab-goal-label">Your Goal</div>
-      <div class="lab-goal-text">Draft a reliability contract with four sections: <strong>promises</strong> (what AI will/won't do), <strong>measurements</strong> (how you know), <strong>escalation</strong> (what happens on failure), and <strong>feedback loops</strong> (how it improves).</div>
-    </div>
-    <div class="subtitle">Promise · measure · escalate — in writing.</div>
-    <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:20px 0;">
-      <div style="background:rgba(59,130,246,0.06); border:1px solid rgba(59,130,246,0.15); border-radius:10px; padding:20px;">
-        <div style="font-size:13px; font-weight:800; color:#60a5fa; margin-bottom:8px;">The Promise</div>
-        <div style="font-size:13px; color:#8899bb; line-height:2;">Accuracy: <span style="color:#555;">_____%</span><br>Response time: <span style="color:#555;">_____</span><br>Uptime: <span style="color:#555;">_____</span></div>
+  <div class="split-slide">
+    <div class="split-left">
+      <div class="slide-tag tag-pink">Build Moment</div>
+      <h2>Your Reliability Contract</h2>
+      <div class="lab-goal">
+        <div class="lab-goal-label">Your Goal</div>
+        <div class="lab-goal-text"><strong>Your goal is</strong> to draft a reliability contract: promises, measurements, escalation, and feedback loops.</div>
       </div>
-      <div style="background:rgba(251,191,36,0.06); border:1px solid rgba(251,191,36,0.15); border-radius:10px; padding:20px;">
-        <div style="font-size:13px; font-weight:800; color:#fbbf24; margin-bottom:8px;">The Measurement</div>
-        <div style="font-size:13px; color:#8899bb; line-height:2;">Metrics: <span style="color:#555;">_____</span><br>Method: <span style="color:#555;">_____</span><br>Reporting: <span style="color:#555;">_____</span></div>
-      </div>
-      <div style="background:rgba(248,113,113,0.06); border:1px solid rgba(248,113,113,0.15); border-radius:10px; padding:20px;">
-        <div style="font-size:13px; font-weight:800; color:#f87171; margin-bottom:8px;">The Escalation</div>
-        <div style="font-size:13px; color:#8899bb; line-height:2;">Below threshold: <span style="color:#555;">_____</span><br>Who's notified: <span style="color:#555;">_____</span><br>Users see: <span style="color:#555;">_____</span></div>
-      </div>
-      <div style="background:rgba(52,211,153,0.06); border:1px solid rgba(52,211,153,0.15); border-radius:10px; padding:20px;">
-        <div style="font-size:13px; font-weight:800; color:#34d399; margin-bottom:8px;">The Feedback Loop</div>
-        <div style="font-size:13px; color:#8899bb; line-height:2;">Corrections → model: <span style="color:#555;">_____</span><br>Dataset updates: <span style="color:#555;">_____</span><br>Cadence: <span style="color:#555;">_____</span></div>
+      <div class="lab-tip">
+        <div class="lab-tip-label">Keep in Mind</div>
+        <div class="lab-tip-text"><strong>Keep in mind:</strong> Even wrong numbers get corrected faster than mush. This is M6 board slide fodder.</div>
       </div>
     </div>
-    <p style="font-size:13px; color:#60a5fa; font-weight:600; text-align:center; margin-top:14px;">Share with partner: one promise you’d sign today vs one you’d redline.</p>
+    <div class="split-right">
+      <div class="lab-badge-row">
+        <span class="lab-badge">Lab Exercise</span>
+        <span class="lab-timer">15 minutes</span>
+      </div>
+      <div class="steps-heading">Fill in your contract:</div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+        <div style="background:rgba(59,130,246,0.08); border:1px solid rgba(59,130,246,0.15); border-radius:10px; padding:16px;">
+          <div style="font-size:12px; font-weight:800; color:#60a5fa; margin-bottom:6px;">The Promise</div>
+          <div style="font-size:12px; color:#8899bb; line-height:1.9;">Accuracy: <span style="color:#555;">_____%</span><br>Response time: <span style="color:#555;">_____</span><br>Uptime: <span style="color:#555;">_____</span></div>
+        </div>
+        <div style="background:rgba(251,191,36,0.08); border:1px solid rgba(251,191,36,0.15); border-radius:10px; padding:16px;">
+          <div style="font-size:12px; font-weight:800; color:#fbbf24; margin-bottom:6px;">The Measurement</div>
+          <div style="font-size:12px; color:#8899bb; line-height:1.9;">Metrics: <span style="color:#555;">_____</span><br>Method: <span style="color:#555;">_____</span><br>Reporting: <span style="color:#555;">_____</span></div>
+        </div>
+        <div style="background:rgba(248,113,113,0.08); border:1px solid rgba(248,113,113,0.15); border-radius:10px; padding:16px;">
+          <div style="font-size:12px; font-weight:800; color:#f87171; margin-bottom:6px;">The Escalation</div>
+          <div style="font-size:12px; color:#8899bb; line-height:1.9;">Below threshold: <span style="color:#555;">_____</span><br>Who's notified: <span style="color:#555;">_____</span><br>Users see: <span style="color:#555;">_____</span></div>
+        </div>
+        <div style="background:rgba(52,211,153,0.08); border:1px solid rgba(52,211,153,0.15); border-radius:10px; padding:16px;">
+          <div style="font-size:12px; font-weight:800; color:#34d399; margin-bottom:6px;">The Feedback Loop</div>
+          <div style="font-size:12px; color:#8899bb; line-height:1.9;">Corrections → model: <span style="color:#555;">_____</span><br>Dataset updates: <span style="color:#555;">_____</span><br>Cadence: <span style="color:#555;">_____</span></div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -636,10 +748,9 @@
       </div>
     </div>
     <div style="background:rgba(59,130,246,0.06); border:1px solid rgba(59,130,246,0.2); border-radius:14px; padding:22px; margin-top:12px;">
-      <div style="font-size:12px; font-weight:800; color:#3B82F6; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:10px;">Repo — <code style="color:#6ee7b7;">04-the-contract/golden-dataset.md</code></div>
+      <div style="font-size:12px; font-weight:800; color:#1241B0; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:10px;">Repo — <code style="color:#6ee7b7;">04-the-contract/golden-dataset.md</code></div>
       <p style="font-size:14px; color:#8899bb; line-height:1.5;">Eval spec · Golden dataset · Confidence UX · Reliability contract · #1 red-team miss · HITL map — all committed</p>
     </div>
-    <p style="font-size:14px; color:#fbbf24; font-weight:600; text-align:center; margin-top:14px;">Clap once if today changed what you’ll demo next sprint.</p>
   </div>
 </div>
 
@@ -659,7 +770,7 @@
       <div class="arc-arrow">→</div>
       <div class="arc-node" style="background:rgba(52,211,153,0.15); border:1px solid rgba(52,211,153,0.3);"><div style="font-size:10px;">M4</div>The Contract</div>
       <div class="arc-arrow">→</div>
-      <div class="arc-node active-node" style="background:rgba(59,130,246,0.2); border:2px solid #3B82F6;"><div style="font-size:10px;">M5</div>The Guardrails</div>
+      <div class="arc-node active-node" style="background:rgba(59,130,246,0.2); border:2px solid #1241B0;"><div style="font-size:10px;">M5</div>The Guardrails</div>
       <div class="arc-arrow" style="opacity:0.3;">→</div>
       <div class="arc-node" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.06); opacity:0.3;">M6</div>
     </div>
@@ -746,14 +857,14 @@
     <div class="module-tag">Module 4 Complete</div>
     <h1>Your Opinion Matters</h1>
     <div class="subtitle" style="margin:20px auto;">Scan QR or link — your notes shape the next cohort.</div>
-    <div style="width:180px; height:180px; background:#1a1a2e; border:2px solid #252840; border-radius:16px; margin:32px auto; display:flex; align-items:center; justify-content:center; color:#444; font-size:14px; font-weight:600;">QR Code</div>
+    <div style="width:180px; height:180px; background:#0f2d4a; border:2px solid #1a3a5c; border-radius:16px; margin:32px auto; display:flex; align-items:center; justify-content:center; color:#444; font-size:14px; font-weight:600;">QR Code</div>
   </div>
 </div>
 
 <!-- ===== SLIDE: Q&A ===== -->
 <div class="slide" data-notes="Open floor for questions.">
   <div class="slide-inner" style="text-align:center;">
-    <h1 style="font-size:64px; color:#3B82F6; margin-bottom:24px;">Q&amp;A</h1>
+    <h1 style="font-size:64px; color:#1241B0; margin-bottom:24px;">Q&amp;A</h1>
     <p style="font-size:20px; color:#8899bb;">Any questions before we close?</p>
     <p style="font-size:14px; color:#555; margin-top:20px;">Drop questions in Slack if something comes up later.</p>
   </div>
