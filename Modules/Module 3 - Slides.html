@@ -192,6 +192,54 @@
     font-size: 10px; font-weight: 700; text-transform: uppercase;
     letter-spacing: 0.1em; color: #3B82F6; margin-bottom: 6px;
   }
+
+  /* === Vibe Coding structural slides === */
+  .expect-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin: 24px 0; }
+  .expect-card { background: #161822; border: 1px solid #252840; border-radius: 10px; padding: 18px; text-align: center; }
+  .expect-icon { font-size: 24px; margin-bottom: 8px; }
+  .expect-title { font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+  .expect-desc { font-size: 12px; color: #8899bb; line-height: 1.4; }
+  .syllabus-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 20px 0; }
+  .syllabus-card { background: #161822; border: 1px solid #252840; border-radius: 10px; padding: 16px; display: flex; align-items: flex-start; gap: 14px; }
+  .syllabus-card.syl-active { background: rgba(59,130,246,0.08); border-color: rgba(59,130,246,0.3); }
+  .syllabus-num { width: 32px; height: 32px; border-radius: 8px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 800; color: #fff; background: #252840; }
+  .syllabus-card.syl-active .syllabus-num { background: #3B82F6; }
+  .syllabus-body .syl-title { font-size: 14px; font-weight: 700; color: #e0e0f0; margin-bottom: 2px; }
+  .syllabus-card.syl-active .syl-title { color: #fff; }
+  .syllabus-body .syl-desc { font-size: 11px; color: #64748b; line-height: 1.4; }
+  .debrief-box { background: rgba(192,132,252,0.06); border: 1px solid rgba(192,132,252,0.15); border-radius: 14px; padding: 32px; text-align: center; margin: 24px 0; }
+  .debrief-label { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; color: #c084fc; margin-bottom: 16px; }
+  .debrief-prompt { font-size: 22px; font-weight: 700; color: #fff; line-height: 1.4; margin-bottom: 12px; }
+  .debrief-sub { font-size: 14px; color: #8899bb; }
+  .complete-stats { display: flex; gap: 20px; margin: 24px 0; }
+  .complete-stat { flex: 1; background: #161822; border: 1px solid #252840; border-radius: 12px; padding: 20px; text-align: center; }
+  .complete-num { font-size: 36px; font-weight: 900; color: #3B82F6; margin-bottom: 4px; }
+  .complete-label { font-size: 13px; color: #8899bb; }
+  .complete-shifts { display: flex; flex-direction: column; gap: 12px; margin: 20px 0; }
+  .complete-shift { background: rgba(52,211,153,0.06); border: 1px solid rgba(52,211,153,0.12); border-radius: 10px; padding: 16px 20px; }
+  .shift-title { font-size: 15px; font-weight: 700; color: #34d399; margin-bottom: 4px; }
+  .shift-desc { font-size: 13px; color: #8899bb; line-height: 1.5; }
+  .takeaway-list { display: flex; flex-direction: column; gap: 14px; margin: 24px 0; }
+  .takeaway-item { background: #161822; border: 1px solid #252840; border-radius: 10px; padding: 18px 22px; }
+  .takeaway-item p { font-size: 15px; color: #b0b4c8; line-height: 1.6; }
+  .cameras-box { background: rgba(251,191,36,0.06); border: 1px solid rgba(251,191,36,0.15); border-radius: 14px; padding: 28px; text-align: center; max-width: 500px; margin: 32px auto; }
+  .tag-debrief { background: rgba(192,132,252,0.12); color: #d8b4fe; }
+  .tag-complete { background: rgba(52,211,153,0.12); color: #6ee7b7; }
+
+  .lab-header { background: linear-gradient(135deg, rgba(244,114,182,0.08), rgba(59,130,246,0.08)); border: 1px solid rgba(244,114,182,0.2); border-radius: 16px; padding: 40px; text-align: center; max-width: 640px; margin: 0 auto; }
+  .lab-title { font-size: 14px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.14em; color: #f9a8d4; margin-bottom: 12px; }
+  .lab-name { font-size: 32px; font-weight: 900; color: #fff; margin-bottom: 8px; }
+  .lab-desc { font-size: 16px; color: #8899bb; line-height: 1.6; }
+  .lab-steps { display: flex; flex-direction: column; gap: 12px; margin: 20px 0; text-align: left; }
+  .lab-step { display: flex; align-items: flex-start; gap: 14px; background: #161822; border: 1px solid #252840; border-radius: 10px; padding: 16px 18px; }
+  .lab-step-num { width: 28px; height: 28px; border-radius: 7px; background: #3B82F6; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; color: #fff; flex-shrink: 0; }
+  .lab-step-text { font-size: 14px; color: #b0b4c8; line-height: 1.5; }
+  .lab-goal { background: rgba(52,211,153,0.06); border: 1px solid rgba(52,211,153,0.12); border-radius: 10px; padding: 16px 20px; margin: 16px 0; }
+  .lab-goal-label { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: #34d399; margin-bottom: 6px; }
+  .lab-goal-text { font-size: 15px; color: #e0e0f0; line-height: 1.5; }
+  .lab-tip { background: rgba(251,191,36,0.06); border: 1px solid rgba(251,191,36,0.12); border-radius: 10px; padding: 14px 18px; margin: 12px 0; }
+  .lab-tip-label { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: #fbbf24; margin-bottom: 4px; }
+  .lab-tip-text { font-size: 13px; color: #8899bb; line-height: 1.5; }
 </style>
 </head>
 <body>
@@ -229,6 +277,54 @@
   </div>
 </div>
 
+<!-- ===== SLIDE: Class Expectations ===== -->
+<div class="slide" data-notes="Quick ground rules — don't read every card, let them scan.">
+  <div class="slide-inner">
+    <div class="module-tag">Ground Rules</div>
+    <h2>Class Expectations</h2>
+    <div class="expect-grid">
+      <div class="expect-card"><div class="expect-icon">📹</div><div class="expect-title">Cameras On</div><div class="expect-desc">Stay visible and engaged throughout the session.</div></div>
+      <div class="expect-card"><div class="expect-icon">⏰</div><div class="expect-title">Arrive On Time</div><div class="expect-desc">Respect everyone's time by arriving promptly.</div></div>
+      <div class="expect-card"><div class="expect-icon">✋</div><div class="expect-title">Active Engagement</div><div class="expect-desc">Participate in all exercises and discussions.</div></div>
+      <div class="expect-card"><div class="expect-icon">🌐</div><div class="expect-title">Network</div><div class="expect-desc">Connect with peers and build your learning network.</div></div>
+      <div class="expect-card"><div class="expect-icon">💬</div><div class="expect-title">Use Slack</div><div class="expect-desc">Keep questions and comments organized in the channel.</div></div>
+      <div class="expect-card"><div class="expect-icon">🎓</div><div class="expect-title">Instructor Support</div><div class="expect-desc">Save deeper questions for after class to keep flow.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SLIDE: Syllabus ===== -->
+<div class="slide" data-notes="Quick orientation — show the arc. Today is highlighted.">
+  <div class="slide-inner">
+    <div class="module-tag">AI Product Strategy Certification</div>
+    <h2>Course Syllabus</h2>
+    <div class="syllabus-grid">
+      <div class="syllabus-card"><div class="syllabus-num">1</div><div class="syllabus-body"><div class="syl-title">The Bet</div><div class="syl-desc">Diagnose where strategy breaks. Score vulnerability, build a prototype, lock in Component 1.</div></div></div>
+      <div class="syllabus-card"><div class="syllabus-num">2</div><div class="syllabus-body"><div class="syl-title">The Moat</div><div class="syl-desc">Score your data flywheel, stress-test with a 90-day encroachment plan, build a Kill Switch.</div></div></div>
+      <div class="syllabus-card syl-active"><div class="syllabus-num">3</div><div class="syllabus-body"><div class="syl-title">The Margin</div><div class="syl-desc">Map cost curves, design pricing, stress-test margins with cascading scenarios.</div></div></div>
+      <div class="syllabus-card"><div class="syllabus-num">4</div><div class="syllabus-body"><div class="syl-title">The Contract</div><div class="syl-desc">Build golden datasets, design confidence UX, write a reliability contract.</div></div></div>
+      <div class="syllabus-card"><div class="syllabus-num">5</div><div class="syllabus-body"><div class="syl-title">The Guardrails</div><div class="syl-desc">Design compounding systems, draft governance policy, run a shadow AI audit.</div></div></div>
+      <div class="syllabus-card"><div class="syllabus-num">6</div><div class="syllabus-body"><div class="syl-title">The Pitch</div><div class="syl-desc">Assemble the full strategy, build a roadmap, pitch to the room as your board.</div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SLIDE: Recall from M2 ===== -->
+<div class="slide" data-notes="Connect M2 to M3. Their repo should have 01-the-bet/ and 02-the-moat/ committed. The bridge: everything they built is meaningless if the economics don't work.">
+  <div class="slide-inner">
+    <div class="demo-tag tag-recall">Recall from Module 2 · 3 Minutes</div>
+    <h2>What You Brought Today</h2>
+    <div class="waypoints">
+      <div class="waypoint"><div class="waypoint-num" style="background:#059669;">✓</div><div class="waypoint-text"><div class="wt-title">01-the-bet/ committed</div><div class="wt-desc">Vulnerability diagnostic · prototype spec — in your repo</div></div></div>
+      <div class="waypoint"><div class="waypoint-num" style="background:#059669;">✓</div><div class="waypoint-text"><div class="wt-title">02-the-moat/ committed</div><div class="wt-desc">Flywheel map · kill-switch audit — in your repo</div></div></div>
+      <div class="waypoint"><div class="waypoint-num" style="background:#059669;">✓</div><div class="waypoint-text"><div class="wt-title">Two folders done</div><div class="wt-desc">The Bet and The Moat committed to your living strategy repo</div></div></div>
+    </div>
+    <div style="background:rgba(251,191,36,0.06); border:1px solid rgba(251,191,36,0.15); border-radius:10px; padding:16px; margin-top:16px; text-align:center;">
+      <p style="font-size:15px; font-weight:700; color:#fde68a;">The bridge: all that strategy is worthless if the economics don't work. Today we find out.</p>
+    </div>
+  </div>
+</div>
+
 <!-- ===== SLIDE 2: Agenda ===== -->
 <div class="slide" data-notes="Fast flyover. Why: time-box builds + peer break + board one-pager. They should see the arc in 60 seconds.">
   <div class="slide-inner">
@@ -247,36 +343,6 @@
       <div class="agenda-item"><div class="agenda-time">15 min</div><div class="agenda-text"><strong>Build Moment:</strong> Before/after value capture comparison for the board</div></div>
       <div class="agenda-item"><div class="agenda-time">5 min</div><div class="agenda-text"><strong>Synthesis + Bridge:</strong> Component 3 of your living strategy + what's coming in M4</div></div>
     </div>
-  </div>
-</div>
-
-<!-- ===== SLIDE 3: Recall from M2 ===== -->
-<div class="slide" data-notes="Bridge from M2. Why: moat without unit economics is theater. Point at each card. Pair prompt in slide — 20 sec: name one AI call that could get expensive.">
-  <div class="slide-inner">
-    <div class="demo-tag tag-recall">Recall from M2 · 3 Minutes</div>
-    <h2>What You Brought</h2>
-    <div class="subtitle">M2 artifacts — today we stress-test the money under them.</div>
-    <div style="display:flex; gap:16px; margin:24px 0;">
-      <div style="flex:1; background:#161822; border:1px solid #252840; border-radius:12px; padding:22px; text-align:center;">
-        <div style="font-size:28px; margin-bottom:8px;">🔄</div>
-        <div style="font-size:15px; font-weight:700; color:#fff; margin-bottom:6px;">Data Flywheel Map</div>
-        <div style="font-size:13px; color:#8899bb; line-height:1.4;">Loops scored · weakest loop flagged</div>
-      </div>
-      <div style="flex:1; background:#161822; border:1px solid #252840; border-radius:12px; padding:22px; text-align:center;">
-        <div style="font-size:28px; margin-bottom:8px;">📋</div>
-        <div style="font-size:15px; font-weight:700; color:#fff; margin-bottom:6px;">Components 1 + 2</div>
-        <div style="font-size:13px; color:#8899bb; line-height:1.4;">Bet + Moat</div>
-      </div>
-      <div style="flex:1; background:#161822; border:1px solid #252840; border-radius:12px; padding:22px; text-align:center;">
-        <div style="font-size:28px; margin-bottom:8px;">🔌</div>
-        <div style="font-size:15px; font-weight:700; color:#fff; margin-bottom:6px;">Kill Switch Audit</div>
-        <div style="font-size:13px; color:#8899bb; line-height:1.4;">Swap-ready vendors</div>
-      </div>
-    </div>
-    <div style="background:rgba(59,130,246,0.08); border:1px solid rgba(59,130,246,0.2); border-radius:10px; padding:14px 18px; margin-top:8px; text-align:center;">
-      <p style="font-size:14px; color:#93c5fd; font-weight:700;">→ Partner (20 sec): One AI feature that could spike cost?</p>
-    </div>
-    <p style="font-size:16px; color:#f87171; font-weight:600; text-align:center; margin-top:12px;">Pretty flywheel + ugly COGS = liability</p>
   </div>
 </div>
 
@@ -587,9 +653,8 @@
     </table>
     <p style="font-size:13px; color:#8899bb; text-align:center; margin-top:10px;">Vendors cut list prices over time (e.g. <strong style="color:#fff;">OpenAI</strong> 2023–25) — still stress <span style="color:#f87171;">+50% / 3×</span> for resilience</p>
     <p style="font-size:14px; color:#f87171; font-weight:600; text-align:center; margin-top:8px;">Stress &lt;40% gross? Architecture + pricing — not growth alone</p>
-    <a href="M3 - Margin Calculator.html" style="display:block; margin-top:14px; padding:12px 18px; background:rgba(91,141,239,0.08); border:1px solid rgba(91,141,239,0.2); border-radius:8px; text-decoration:none; text-align:center; transition:all 0.2s;">
-      <span style="font-size:13px; font-weight:700; color:#5b8def;">Open Interactive Margin Calculator →</span>
-      <span style="display:block; font-size:11px; color:#7a7a9a; margin-top:3px;">Auto-calculates, stress-tests, and exports your numbers</span>
+    <a href="Strategy Repo Template.html#cost-curve" style="display:block; margin-top:14px; padding:10px 18px; background:rgba(52,211,153,0.08); border:1px solid rgba(52,211,153,0.2); border-radius:8px; text-align:center; text-decoration:none; transition:all 0.2s;">
+      <span style="font-size:12px; font-weight:700; color:#34d399;">Open <code style="color:#6ee7b7;">03-the-margin/cost-curve.md</code> template → fill in and commit to your repo</span>
     </a>
   </div>
 </div>
@@ -604,11 +669,37 @@
   </div>
 </div>
 
+<!-- ===== SLIDE: Cameras On ===== -->
+<div class="slide" data-notes="Quick energy reset.">
+  <div class="slide-inner" style="text-align:center;">
+    <div class="cameras-box">
+      <div style="font-size:48px; margin-bottom:16px;">📹</div>
+      <h2 style="font-size:28px; margin-bottom:12px;">Cameras On</h2>
+      <p style="font-size:16px; color:#8899bb;">Welcome back! Stay present and visible to keep the energy up.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SLIDE: Hands-On Lab Header ===== -->
+<div class="slide" data-notes="Section break — entering applied work.">
+  <div class="slide-inner" style="text-align:center;">
+    <div class="lab-header">
+      <div class="lab-title">Hands-On Lab</div>
+      <div class="lab-name">Cost Curve & Pricing</div>
+      <div class="lab-desc">Map your AI costs, design your pricing, and stress-test your margins. Three exercises, 40 minutes total.</div>
+    </div>
+  </div>
+</div>
+
 <!-- ===== SLIDE 14: Build Your Cost Curve ===== -->
 <div class="slide" data-notes="Solo table work. Why: forces honest tiering. Roam: embeddings, over-assignment to frontier. Nudge: highest-volume feature first — triggers/day?">
   <div class="slide-inner">
     <div class="demo-tag tag-exercise">Applied Work · 15 Minutes</div>
     <h2>Build Your Cost Curve</h2>
+    <div class="lab-goal">
+      <div class="lab-goal-label">Your Goal</div>
+      <div class="lab-goal-text">Map every AI feature in your product to a model tier (frontier vs. mid vs. small) and calculate your blended cost per user per month.</div>
+    </div>
     <div class="subtitle">Features → tiers → blended COGS</div>
     <div style="background:rgba(59,130,246,0.08); border:1px solid rgba(59,130,246,0.2); border-radius:10px; padding:12px 16px; margin:14px 0; text-align:center;">
       <p style="font-size:13px; color:#93c5fd; font-weight:700;">⏱️ 2-min checkpoint: shout your highest-volume AI feature</p>
@@ -651,9 +742,12 @@
       </tbody>
     </table>
     <p style="font-size:13px; color:#8899bb; margin-top:10px;">Estimate OK — structure beats false precision</p>
-    <a href="M3 - Margin Calculator.html" style="display:block; margin-top:14px; padding:10px 18px; background:rgba(91,141,239,0.08); border:1px solid rgba(91,141,239,0.2); border-radius:8px; text-decoration:none; text-align:center; transition:all 0.2s;">
-      <span style="font-size:12px; font-weight:700; color:#5b8def;">Enter your numbers in the Margin Calculator →</span>
-      <span style="display:block; font-size:11px; color:#7a7a9a; margin-top:2px;">Your cost curve feeds directly into the stress test</span>
+    <div class="lab-tip">
+      <div class="lab-tip-label">Keep in Mind</div>
+      <div class="lab-tip-text">80% of requests can usually run on a cheaper model. Adjust the cascading ratio in your cost curve — the savings compound fast. Start with your highest-volume feature.</div>
+    </div>
+    <a href="Strategy Repo Template.html#cost-curve" style="display:block; margin-top:14px; padding:10px 18px; background:rgba(52,211,153,0.08); border:1px solid rgba(52,211,153,0.2); border-radius:8px; text-align:center; text-decoration:none; transition:all 0.2s;">
+      <span style="font-size:12px; font-weight:700; color:#34d399;">Open <code style="color:#6ee7b7;">03-the-margin/cost-curve.md</code> template → fill in and commit to your repo</span>
     </a>
   </div>
 </div>
@@ -698,9 +792,8 @@
         <p style="font-size:12px; color:#8899bb;"><strong style="color:#34d399;">Proof:</strong> GitHub Copilot $19/user = 4.75× base SaaS — 55% faster justifies it</p>
       </div>
     </div>
-    <a href="M3 - Pricing Strategy Designer.html" style="display:block; margin-top:14px; padding:10px 18px; background:rgba(160,123,232,0.08); border:1px solid rgba(160,123,232,0.2); border-radius:8px; text-decoration:none; text-align:center; transition:all 0.2s;">
-      <span style="font-size:12px; font-weight:700; color:#a07be8;">Open Pricing Strategy Designer →</span>
-      <span style="display:block; font-size:11px; color:#7a7a9a; margin-top:2px;">Pick strategy, model, bundling + WTP check — all in one tool</span>
+    <a href="Strategy Repo Template.html#cost-curve" style="display:block; margin-top:14px; padding:10px 18px; background:rgba(52,211,153,0.08); border:1px solid rgba(52,211,153,0.2); border-radius:8px; text-align:center; text-decoration:none; transition:all 0.2s;">
+      <span style="font-size:12px; font-weight:700; color:#34d399;">Open <code style="color:#6ee7b7;">03-the-margin/cost-curve.md</code> template → fill in and commit to your repo</span>
     </a>
   </div>
 </div>
@@ -708,8 +801,12 @@
 <!-- ===== SLIDE 16: Peer Challenge — Stress-Test ===== -->
 <div class="slide" data-notes="Partner time — be mean nicely. Why: CFO will 3× COGS in a scenario plan. Timer: 6 min each. Debrief one brutal vulnerability per pair.">
   <div class="slide-inner">
-    <div class="demo-tag tag-activity">Peer Challenge · 13 Minutes</div>
+    <div class="demo-tag tag-activity">Breakout Exercise · 13 Minutes</div>
     <h2>"What If Inference Costs 3x?"</h2>
+    <div class="lab-goal">
+      <div class="lab-goal-label">Your Goal</div>
+      <div class="lab-goal-text">Stress-test your partner's margin by 3x-ing their inference cost. Find what breaks first — pricing, cascading ratio, or the entire business model.</div>
+    </div>
     <div class="subtitle">6 min each · partner breaks your model</div>
     <div style="display:flex; gap:20px; margin:20px 0;">
       <div style="flex:1; background:rgba(248,113,113,0.06); border:1px solid rgba(248,113,113,0.15); border-radius:12px; padding:22px;">
@@ -725,11 +822,40 @@
   </div>
 </div>
 
+<!-- ===== SLIDE: Quick Debrief ===== -->
+<div class="slide" data-notes="Quick debrief after peer stress-test.">
+  <div class="slide-inner" style="text-align:center;">
+    <div class="demo-tag tag-debrief">Quick Debrief</div>
+    <h2>Margin Stress-Test</h2>
+    <div class="debrief-box">
+      <div class="debrief-label">Post on Slack</div>
+      <div class="debrief-prompt">IN ONE SENTENCE:</div>
+      <div class="debrief-sub">What broke first when your partner 3x'd your inference costs?</div>
+    </div>
+    <p style="font-size:14px; color:#8899bb; margin-top:16px;">Then reply to 2 peers with your reaction.</p>
+  </div>
+</div>
+
+<!-- ===== SLIDE: Hands-On Lab Header ===== -->
+<div class="slide" data-notes="Final build — the board deliverable.">
+  <div class="slide-inner" style="text-align:center;">
+    <div class="lab-header">
+      <div class="lab-title">Hands-On Lab</div>
+      <div class="lab-name">Board One-Pager</div>
+      <div class="lab-desc">Build a before/after value capture comparison that a CFO can read in 60 seconds.</div>
+    </div>
+  </div>
+</div>
+
 <!-- ===== SLIDE 17: Build Moment — Value Capture Comparison ===== -->
 <div class="slide" data-notes="Board artifact. Why: aligns execs on tradeoff story. Lower margin % can be fine if NRR + gross $ up — script that explicitly. Saves M6 prep.">
   <div class="slide-inner">
     <div class="demo-tag tag-build">Build Moment · 15 Minutes</div>
     <h2>Before/After for Your Board</h2>
+    <div class="lab-goal">
+      <div class="lab-goal-label">Your Goal</div>
+      <div class="lab-goal-text">Create a one-page comparison showing your current pricing vs. your redesigned pricing — with margin impact, model cascading ratio, and the narrative that sells it to the board.</div>
+    </div>
     <div class="subtitle">2-minute read: SaaS → AI economics</div>
     <div style="display:flex; gap:20px; margin:24px 0;">
       <div style="flex:1; background:rgba(100,116,139,0.06); border:1px solid rgba(100,116,139,0.15); border-radius:12px; padding:22px;">
@@ -775,8 +901,8 @@
       </div>
     </div>
     <div style="background:rgba(59,130,246,0.06); border:1px solid rgba(59,130,246,0.2); border-radius:14px; padding:20px; margin-top:10px;">
-      <div style="font-size:12px; font-weight:800; color:#3B82F6; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:8px;">Living Strategy — Component 3: The Margin</div>
-      <p style="font-size:13px; color:#8899bb; line-height:1.5;">Cascade map · blended COGS/user · pricing (base + usage) · margin now/stress · board before/after · #1 vulnerability</p>
+      <div style="font-size:12px; font-weight:800; color:#3B82F6; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:8px;">Committed to Your Repo — 03-the-margin/</div>
+      <p style="font-size:13px; color:#8899bb; line-height:1.5;"><code style="color:#6ee7b7;">cost-curve.md</code> — cascade map · blended COGS/user · pricing (base + usage) · margin now/stress · board before/after · #1 vulnerability</p>
     </div>
   </div>
 </div>
@@ -787,7 +913,7 @@
     <div class="module-tag">Bridge to Module 4</div>
     <h2>The Economics Work.<br>Will Users Trust the Output Enough to Pay?</h2>
     <div class="subtitle" style="margin:20px 0;">M4: provable reliability beats raw accuracy</div>
-    <p style="font-size:14px; color:#8899bb; margin-bottom:24px;"><strong>Bring to M4:</strong> Cost Curve · Pricing Strategy · Value Capture Comparison · Living Strategy Components 1 + 2 + 3</p>
+    <p style="font-size:14px; color:#8899bb; margin-bottom:24px;"><strong>Bring to M4:</strong> your repo with <code style="color:#6ee7b7;">01-the-bet/</code> · <code style="color:#6ee7b7;">02-the-moat/</code> · <code style="color:#6ee7b7;">03-the-margin/</code> committed</p>
     <div class="arc-flow">
       <div class="arc-node" style="background:rgba(52,211,153,0.15); border:1px solid rgba(52,211,153,0.3);">
         <div style="font-size:10px;">M1</div>The Bet
@@ -812,25 +938,76 @@
   </div>
 </div>
 
-<!-- ===== SLIDE 19.5: Module Tools ===== -->
-<div class="slide" data-notes="Point students to the interactive tools. They can fill these out during or after class. Data saves to browser and carries forward.">
+<!-- ===== SLIDE 19.5: Your Repo After Today ===== -->
+<div class="slide" data-notes="Reinforce the repo. 03-the-margin/ should now have their cost model committed.">
   <div class="slide-inner" style="text-align:center;">
-    <div class="module-tag">Your Module 3 Tools</div>
-    <h2>Continue Building</h2>
-    <div class="subtitle" style="margin:16px auto 28px;">Interactive tools — fill in during or after class. Your data carries forward to M4.</div>
+    <div class="module-tag">Your Living Strategy Repo</div>
+    <h2>Your Repo After Today</h2>
+    <div class="subtitle" style="margin:16px auto 28px;">Your economics are committed. Three components done.</div>
     <div style="display:flex; gap:14px; justify-content:center; flex-wrap:wrap;">
-      <a href="M3 - Margin Calculator.html" style="display:block; text-decoration:none; background:rgba(91,141,239,0.08); border:1px solid rgba(91,141,239,0.2); border-radius:10px; padding:20px 28px; transition:all 0.2s; min-width:200px;">
-        <div style="font-size:13px; font-weight:800; color:#5b8def; margin-bottom:6px;">Margin Calculator</div>
-        <div style="font-size:12px; color:#7a7a9a;">Auto-calculate your unit economics and stress-test at 3x</div>
-      </a>
-      <a href="M3 - Pricing Strategy Designer.html" style="display:block; text-decoration:none; background:rgba(91,141,239,0.08); border:1px solid rgba(91,141,239,0.2); border-radius:10px; padding:20px 28px; transition:all 0.2s; min-width:200px;">
-        <div style="font-size:13px; font-weight:800; color:#5b8def; margin-bottom:6px;">Pricing Strategy Designer</div>
-        <div style="font-size:12px; color:#7a7a9a;">Pick your strategy, pricing model, and bundling approach</div>
-      </a>
-      <a href="Living Strategy Builder.html" style="display:block; text-decoration:none; background:rgba(160,123,232,0.08); border:1px solid rgba(160,123,232,0.2); border-radius:10px; padding:20px 28px; transition:all 0.2s; min-width:200px;">
-        <div style="font-size:13px; font-weight:800; color:#a07be8; margin-bottom:6px;">Living Strategy Builder</div>
-        <div style="font-size:12px; color:#7a7a9a;">Add Component 3 to your living strategy</div>
-      </a>
+      <div style="background:rgba(52,211,153,0.05); border:1px solid rgba(52,211,153,0.12); border-radius:10px; padding:20px 28px; min-width:180px; text-align:left; opacity:0.5;">
+        <div style="font-size:13px; font-weight:800; color:#34d399; margin-bottom:6px;">01-the-bet/ ✓</div>
+        <div style="font-size:12px; color:#7a7a9a;">diagnostic · prototype</div>
+      </div>
+      <div style="background:rgba(52,211,153,0.05); border:1px solid rgba(52,211,153,0.12); border-radius:10px; padding:20px 28px; min-width:180px; text-align:left; opacity:0.5;">
+        <div style="font-size:13px; font-weight:800; color:#34d399; margin-bottom:6px;">02-the-moat/ ✓</div>
+        <div style="font-size:12px; color:#7a7a9a;">flywheel · kill-switch</div>
+      </div>
+      <div style="background:rgba(52,211,153,0.08); border:1px solid rgba(52,211,153,0.2); border-radius:10px; padding:20px 28px; min-width:180px; text-align:left;">
+        <div style="font-size:13px; font-weight:800; color:#34d399; margin-bottom:6px;">03-the-margin/ ✓</div>
+        <div style="font-size:12px; color:#7a7a9a;">cost-curve.md — costs, pricing, stress tests</div>
+      </div>
+      <div style="background:rgba(59,130,246,0.05); border:1px solid rgba(59,130,246,0.12); border-radius:10px; padding:20px 28px; min-width:180px; text-align:left; opacity:0.3;">
+        <div style="font-size:13px; font-weight:800; color:#60a5fa; margin-bottom:6px;">04-the-contract/ → M4</div>
+        <div style="font-size:12px; color:#7a7a9a;">golden-dataset · reliability</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SLIDE: Module Complete ===== -->
+<div class="slide" data-notes="Celebrate accomplishments.">
+  <div class="slide-inner">
+    <div class="demo-tag tag-complete">Module 3 Complete</div>
+    <h2>What You Accomplished Today</h2>
+    <div class="complete-stats">
+      <div class="complete-stat"><div class="complete-num">3</div><div class="complete-label">Repo Folders Committed</div></div>
+      <div class="complete-stat"><div class="complete-num">1</div><div class="complete-label">Cost Curve + Pricing in cost-curve.md</div></div>
+      <div class="complete-stat"><div class="complete-num">1</div><div class="complete-label">Board One-Pager Built</div></div>
+    </div>
+    <div class="complete-shifts">
+      <div class="complete-shift"><div class="shift-title">Margin Blind → Margin Mapped</div><div class="shift-desc">You calculated your actual AI cost per user and committed the model to your repo.</div></div>
+      <div class="complete-shift"><div class="shift-title">Seat Pricing → Value Capture</div><div class="shift-desc">You moved from default seat pricing to a strategy that matches how AI value actually shows up — committed to your repo.</div></div>
+    </div>
+    <p style="font-size:16px; color:#60a5fa; font-weight:600; text-align:center;">Next: Module 4 — The Contract. Economics without trust doesn't convert.</p>
+  </div>
+</div>
+
+<!-- ===== SLIDE: Key Takeaways ===== -->
+<div class="slide" data-notes="Three key takeaways.">
+  <div class="slide-inner">
+    <div class="module-tag">Key Takeaways</div>
+    <h2>The Margin</h2>
+    <div class="takeaway-list">
+      <div class="takeaway-item"><p><strong>AI products have fundamentally different economics.</strong> Traditional SaaS runs at 80%+ gross margins. AI introduces variable costs that scale with usage — power users can blow up your unit economics.</p></div>
+      <div class="takeaway-item"><p><strong>Model cascading is the highest-leverage margin lever.</strong> Routing 80% of requests to a cheap model and 20% to frontier can transform a -15% stress scenario into +30% margin.</p></div>
+      <div class="takeaway-item"><p><strong>How you charge matters more than how much.</strong> Most pricing failures happen because teams never figured out the pricing model, not the price point. Outcome-based pricing captures AI value; seat-based doesn't.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SLIDE: Extra Practice ===== -->
+<div class="slide" data-notes="Optional exercises. Preview M4.">
+  <div class="slide-inner">
+    <div class="module-tag">Extra Practice</div>
+    <h2>Optional: Go Deeper</h2>
+    <div class="evidence-cards" style="margin:24px 0;">
+      <div class="evidence-card"><div class="ec-label">Exercise 1</div><div class="ec-company">Stress-Test Your Cost Curve</div><div class="ec-text">Open <code style="color:#6ee7b7;">03-the-margin/cost-curve.md</code> in your repo. Re-run the cascading ratio at 60/40, 70/30, 80/20. Find the split that turns your worst stress case positive and commit the update.</div></div>
+      <div class="evidence-card"><div class="ec-label">Exercise 2</div><div class="ec-company">Price Like Intercom</div><div class="ec-text">Redesign your pricing as outcome-based (per resolved conversation, per insight surfaced). Update the pricing section in <code style="color:#6ee7b7;">cost-curve.md</code> and commit.</div></div>
+    </div>
+    <div class="artifact-preview">
+      <div class="ap-title">Next Session: Module 4 — The Contract</div>
+      <p style="font-size:15px; color:#8899bb; line-height:1.5;">Economics without trust doesn't convert. M4 covers golden datasets, confidence UX, and reliability contracts.</p>
     </div>
   </div>
 </div>
@@ -845,12 +1022,21 @@
   </div>
 </div>
 
+<!-- ===== SLIDE: Q&A ===== -->
+<div class="slide" data-notes="Open floor for questions.">
+  <div class="slide-inner" style="text-align:center;">
+    <h1 style="font-size:64px; color:#3B82F6; margin-bottom:24px;">Q&amp;A</h1>
+    <p style="font-size:20px; color:#8899bb;">Any questions before we close?</p>
+    <p style="font-size:14px; color:#555; margin-top:20px;">Drop questions in Slack if something comes up later.</p>
+  </div>
+</div>
+
 <!-- ===== UI CHROME ===== -->
 <div class="nav">
   <button class="nav-btn" onclick="prev()" title="Previous (←)">‹</button>
   <button class="nav-btn" onclick="next()" title="Next (→)">›</button>
 </div>
-<div class="slide-counter"><span id="current">1</span> / <span id="total">20</span></div>
+<div class="slide-counter"><span id="current">1</span> / <span id="total">31</span></div>
 <div class="progress"><div class="progress-bar" id="progress-bar"></div></div>
 <div class="help-hint">← → navigate · S speaker notes · F fullscreen</div>
 <div class="speaker-notes" id="speaker-notes">

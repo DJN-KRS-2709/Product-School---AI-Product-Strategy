@@ -295,6 +295,54 @@
     font-size: 10px; font-weight: 700; text-transform: uppercase;
     letter-spacing: 0.1em; color: #3B82F6; margin-bottom: 6px;
   }
+
+  /* === Vibe Coding structural slides === */
+  .expect-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin: 24px 0; }
+  .expect-card { background: #161822; border: 1px solid #252840; border-radius: 10px; padding: 18px; text-align: center; }
+  .expect-icon { font-size: 24px; margin-bottom: 8px; }
+  .expect-title { font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+  .expect-desc { font-size: 12px; color: #8899bb; line-height: 1.4; }
+  .syllabus-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 20px 0; }
+  .syllabus-card { background: #161822; border: 1px solid #252840; border-radius: 10px; padding: 16px; display: flex; align-items: flex-start; gap: 14px; }
+  .syllabus-card.syl-active { background: rgba(59,130,246,0.08); border-color: rgba(59,130,246,0.3); }
+  .syllabus-num { width: 32px; height: 32px; border-radius: 8px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 800; color: #fff; background: #252840; }
+  .syllabus-card.syl-active .syllabus-num { background: #3B82F6; }
+  .syllabus-body .syl-title { font-size: 14px; font-weight: 700; color: #e0e0f0; margin-bottom: 2px; }
+  .syllabus-card.syl-active .syl-title { color: #fff; }
+  .syllabus-body .syl-desc { font-size: 11px; color: #64748b; line-height: 1.4; }
+  .debrief-box { background: rgba(192,132,252,0.06); border: 1px solid rgba(192,132,252,0.15); border-radius: 14px; padding: 32px; text-align: center; margin: 24px 0; }
+  .debrief-label { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; color: #c084fc; margin-bottom: 16px; }
+  .debrief-prompt { font-size: 22px; font-weight: 700; color: #fff; line-height: 1.4; margin-bottom: 12px; }
+  .debrief-sub { font-size: 14px; color: #8899bb; }
+  .complete-stats { display: flex; gap: 20px; margin: 24px 0; }
+  .complete-stat { flex: 1; background: #161822; border: 1px solid #252840; border-radius: 12px; padding: 20px; text-align: center; }
+  .complete-num { font-size: 36px; font-weight: 900; color: #3B82F6; margin-bottom: 4px; }
+  .complete-label { font-size: 13px; color: #8899bb; }
+  .complete-shifts { display: flex; flex-direction: column; gap: 12px; margin: 20px 0; }
+  .complete-shift { background: rgba(52,211,153,0.06); border: 1px solid rgba(52,211,153,0.12); border-radius: 10px; padding: 16px 20px; }
+  .shift-title { font-size: 15px; font-weight: 700; color: #34d399; margin-bottom: 4px; }
+  .shift-desc { font-size: 13px; color: #8899bb; line-height: 1.5; }
+  .takeaway-list { display: flex; flex-direction: column; gap: 14px; margin: 24px 0; }
+  .takeaway-item { background: #161822; border: 1px solid #252840; border-radius: 10px; padding: 18px 22px; }
+  .takeaway-item p { font-size: 15px; color: #b0b4c8; line-height: 1.6; }
+  .cameras-box { background: rgba(251,191,36,0.06); border: 1px solid rgba(251,191,36,0.15); border-radius: 14px; padding: 28px; text-align: center; max-width: 500px; margin: 32px auto; }
+  .tag-debrief { background: rgba(192,132,252,0.12); color: #d8b4fe; }
+  .tag-complete { background: rgba(52,211,153,0.12); color: #6ee7b7; }
+
+  .lab-header { background: linear-gradient(135deg, rgba(244,114,182,0.08), rgba(59,130,246,0.08)); border: 1px solid rgba(244,114,182,0.2); border-radius: 16px; padding: 40px; text-align: center; max-width: 640px; margin: 0 auto; }
+  .lab-title { font-size: 14px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.14em; color: #f9a8d4; margin-bottom: 12px; }
+  .lab-name { font-size: 32px; font-weight: 900; color: #fff; margin-bottom: 8px; }
+  .lab-desc { font-size: 16px; color: #8899bb; line-height: 1.6; }
+  .lab-steps { display: flex; flex-direction: column; gap: 12px; margin: 20px 0; text-align: left; }
+  .lab-step { display: flex; align-items: flex-start; gap: 14px; background: #161822; border: 1px solid #252840; border-radius: 10px; padding: 16px 18px; }
+  .lab-step-num { width: 28px; height: 28px; border-radius: 7px; background: #3B82F6; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; color: #fff; flex-shrink: 0; }
+  .lab-step-text { font-size: 14px; color: #b0b4c8; line-height: 1.5; }
+  .lab-goal { background: rgba(52,211,153,0.06); border: 1px solid rgba(52,211,153,0.12); border-radius: 10px; padding: 16px 20px; margin: 16px 0; }
+  .lab-goal-label { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: #34d399; margin-bottom: 6px; }
+  .lab-goal-text { font-size: 15px; color: #e0e0f0; line-height: 1.5; }
+  .lab-tip { background: rgba(251,191,36,0.06); border: 1px solid rgba(251,191,36,0.12); border-radius: 10px; padding: 14px 18px; margin: 12px 0; }
+  .lab-tip-label { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: #fbbf24; margin-bottom: 4px; }
+  .lab-tip-text { font-size: 13px; color: #8899bb; line-height: 1.5; }
 </style>
 </head>
 <body>
@@ -332,6 +380,38 @@
   </div>
 </div>
 
+<!-- ===== SLIDE: Class Expectations ===== -->
+<div class="slide" data-notes="Quick ground rules — don't read every card, let them scan. Reinforce cameras and Slack.">
+  <div class="slide-inner">
+    <div class="module-tag">Ground Rules</div>
+    <h2>Class Expectations</h2>
+    <div class="expect-grid">
+      <div class="expect-card"><div class="expect-icon">📹</div><div class="expect-title">Cameras On</div><div class="expect-desc">Stay visible and engaged throughout the session.</div></div>
+      <div class="expect-card"><div class="expect-icon">⏰</div><div class="expect-title">Arrive On Time</div><div class="expect-desc">Respect everyone's time by arriving promptly.</div></div>
+      <div class="expect-card"><div class="expect-icon">✋</div><div class="expect-title">Active Engagement</div><div class="expect-desc">Participate in all exercises and discussions.</div></div>
+      <div class="expect-card"><div class="expect-icon">🌐</div><div class="expect-title">Network</div><div class="expect-desc">Connect with peers and build your learning network.</div></div>
+      <div class="expect-card"><div class="expect-icon">💬</div><div class="expect-title">Use Slack</div><div class="expect-desc">Keep questions and comments organized in the channel.</div></div>
+      <div class="expect-card"><div class="expect-icon">🎓</div><div class="expect-title">Instructor Support</div><div class="expect-desc">Save deeper questions for after class to keep flow.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SLIDE: Syllabus ===== -->
+<div class="slide" data-notes="Quick orientation — show the arc. Today is highlighted. Each module builds one component of their living strategy.">
+  <div class="slide-inner">
+    <div class="module-tag">AI Product Strategy Certification</div>
+    <h2>Course Syllabus</h2>
+    <div class="syllabus-grid">
+      <div class="syllabus-card"><div class="syllabus-num">1</div><div class="syllabus-body"><div class="syl-title">The Bet</div><div class="syl-desc">Diagnose where strategy breaks. Score vulnerability, build a prototype, lock in Component 1.</div></div></div>
+      <div class="syllabus-card syl-active"><div class="syllabus-num">2</div><div class="syllabus-body"><div class="syl-title">The Moat</div><div class="syl-desc">Score your data flywheel, stress-test with a 90-day encroachment plan, build a Kill Switch.</div></div></div>
+      <div class="syllabus-card"><div class="syllabus-num">3</div><div class="syllabus-body"><div class="syl-title">The Margin</div><div class="syl-desc">Map cost curves, design pricing, stress-test margins with cascading scenarios.</div></div></div>
+      <div class="syllabus-card"><div class="syllabus-num">4</div><div class="syllabus-body"><div class="syl-title">The Contract</div><div class="syl-desc">Build golden datasets, design confidence UX, write a reliability contract.</div></div></div>
+      <div class="syllabus-card"><div class="syllabus-num">5</div><div class="syllabus-body"><div class="syl-title">The Guardrails</div><div class="syl-desc">Design compounding systems, draft governance policy, run a shadow AI audit.</div></div></div>
+      <div class="syllabus-card"><div class="syllabus-num">6</div><div class="syllabus-body"><div class="syl-title">The Pitch</div><div class="syl-desc">Assemble the full strategy, build a roadmap, pitch to the room as your board.</div></div></div>
+    </div>
+  </div>
+</div>
+
 <!-- ===== SLIDE 2: Agenda ===== -->
 <div class="slide" data-notes="Quick flyover. Don't read every line — hit highlights: 'Heavy applied work again. Peer challenge is the centerpiece — your partner tries to kill your product. The Kill Switch at the end is the wow moment.' Move fast.">
   <div class="slide-inner">
@@ -350,6 +430,23 @@
       <div class="agenda-item"><div class="agenda-time">13 min</div><div class="agenda-text"><strong>Peer Challenge:</strong> The 90-Day Encroachment Plan</div></div>
       <div class="agenda-item"><div class="agenda-time">15 min</div><div class="agenda-text"><strong>Build Moment:</strong> The Kill Switch — vendor portability audit</div></div>
       <div class="agenda-item"><div class="agenda-time">5 min</div><div class="agenda-text"><strong>Synthesis + Bridge:</strong> Component 2 of your living strategy + what's coming in M3</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SLIDE: Recall from M1 ===== -->
+<div class="slide" data-notes="Connect M1 to M2. Quick reflection: what did they bring from last session?">
+  <div class="slide-inner">
+    <div class="demo-tag tag-recall">Recall from Module 1 · 3 Minutes</div>
+    <h2>What You Brought Today</h2>
+    <div class="subtitle">Connect last session to today's work.</div>
+    <div class="waypoints">
+      <div class="waypoint"><div class="waypoint-num" style="background:#059669;">✓</div><div class="waypoint-text"><div class="wt-title">Three-Axis Scorecard</div><div class="wt-desc">Your moat, data, and platform scores — the crack we're stress-testing today</div></div></div>
+      <div class="waypoint"><div class="waypoint-num" style="background:#059669;">✓</div><div class="waypoint-text"><div class="wt-title">Component 1: The Bet</div><div class="wt-desc">What you're building, for whom, and why now</div></div></div>
+      <div class="waypoint"><div class="waypoint-num" style="background:#059669;">✓</div><div class="waypoint-text"><div class="wt-title">Your Prototype</div><div class="wt-desc">The working link that proves the bet is real</div></div></div>
+    </div>
+    <div style="background:rgba(59,130,246,0.06); border:1px solid rgba(59,130,246,0.15); border-radius:10px; padding:16px; margin-top:16px; text-align:center;">
+      <p style="font-size:15px; font-weight:700; color:#60a5fa;">The bridge: your repo with <code style="color:#6ee7b7;">01-the-bet/</code> committed — today we build <code style="color:#6ee7b7;">02-the-moat/</code>.</p>
     </div>
   </div>
 </div>
@@ -620,28 +717,49 @@
   </div>
 </div>
 
-<!-- ===== SLIDE 12: Map Your Data Flywheel ===== -->
-<div class="slide" data-notes="15 minutes individual work. 'Four loops, scored 1–5. For each, write what data you actually capture today and how it compounds. If a loop doesn't exist, score it 1 and write what would need to be true for it to exist.' Walk the room. Common trap: people score preferences high because 'we have analytics.' Analytics is a System of Record. Do they use preference data to personalize model behavior? If not, it's a 1 or 2. Prompt the stuck: 'Start with the correction loop. When your AI gets something wrong, what happens to that correction?'">
-  <div class="slide-inner">
-    <div class="demo-tag tag-exercise">Individual Work · 15 Minutes</div>
-    <h2>Map Your Data Flywheel</h2>
-    <div class="subtitle">Four loops. Score each 1–5. Be honest — "we plan to build this" is a 1, not a 3.</div>
-    <table class="score-table">
-      <thead><tr><th>Loop</th><th>What data is captured?</th><th>How does it compound?</th><th>Score</th></tr></thead>
-      <tbody>
-        <tr><td style="color:#f87171;">Correction</td><td style="color:#555;">_______________</td><td style="color:#555;">_______________</td><td>__/5</td></tr>
-        <tr><td style="color:#fbbf24;">Preference</td><td style="color:#555;">_______________</td><td style="color:#555;">_______________</td><td>__/5</td></tr>
-        <tr><td style="color:#34d399;">Domain Context</td><td style="color:#555;">_______________</td><td style="color:#555;">_______________</td><td>__/5</td></tr>
-        <tr><td style="color:#c084fc;">Network</td><td style="color:#555;">_______________</td><td style="color:#555;">_______________</td><td>__/5</td></tr>
-      </tbody>
-    </table>
-    <div style="background:rgba(248,113,113,0.06); border:1px solid rgba(248,113,113,0.15); border-radius:10px; padding:18px; margin-top:16px; text-align:center;">
-      <p style="font-size:16px; font-weight:700; color:#fca5a5;">Weakest loop: ____________</p>
-      <p style="font-size:13px; color:#8899bb; margin-top:6px;">This is where you invest — or where you die.</p>
+<!-- ===== SLIDE: Cameras On ===== -->
+<div class="slide" data-notes="Quick energy reset. Keep it to 15 seconds.">
+  <div class="slide-inner" style="text-align:center;">
+    <div class="cameras-box">
+      <div style="font-size:48px; margin-bottom:16px;">📹</div>
+      <h2 style="font-size:28px; margin-bottom:12px;">Cameras On</h2>
+      <p style="font-size:16px; color:#8899bb;">Welcome back! Stay present and visible to keep the energy up.</p>
     </div>
-    <a href="M2 - Flywheel Scorer.html" style="display:block; margin-top:14px; padding:10px 18px; background:rgba(91,141,239,0.08); border:1px solid rgba(91,141,239,0.2); border-radius:8px; text-decoration:none; text-align:center; transition:all 0.2s;">
-      <span style="font-size:12px; font-weight:700; color:#5b8def;">Open Interactive Flywheel Scorer →</span>
-      <span style="display:block; font-size:11px; color:#7a7a9a; margin-top:2px;">Score your four data loops with a visual flywheel</span>
+  </div>
+</div>
+
+<!-- ===== SLIDE: Hands-On Lab Header ===== -->
+<div class="slide" data-notes="Section break — entering the applied work block.">
+  <div class="slide-inner" style="text-align:center;">
+    <div class="lab-header">
+      <div class="lab-title">Hands-On Lab</div>
+      <div class="lab-name">Data Flywheel & Kill Switch</div>
+      <div class="lab-desc">Map your compounding loops, face an attacker, and build your escape plan. Three exercises, 40 minutes total.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SLIDE 12: Map Your Data Flywheel ===== -->
+<div class="slide" data-notes="15 minutes individual work. Walk the room. Common trap: scoring preferences high because 'we have analytics.' Analytics ≠ personalization. If not sure, that’s a 1 or 2.">
+  <div class="slide-inner">
+    <div class="demo-tag tag-exercise">Individual Exercise · 15 Minutes</div>
+    <h2>Map Your Data Flywheel</h2>
+    <div class="lab-goal">
+      <div class="lab-goal-label">Your Goal</div>
+      <div class="lab-goal-text">Score your product’s four data loops 1–5. For each, write what data you <strong>actually capture today</strong> and how it compounds. “We plan to build this” = a 1, not a 3.</div>
+    </div>
+    <div class="lab-steps">
+      <div class="lab-step"><div class="lab-step-num">1</div><div class="lab-step-text"><strong>Correction loop:</strong> When your AI gets something wrong, what happens to that correction? Captured and reused → high. Discarded → low.</div></div>
+      <div class="lab-step"><div class="lab-step-num">2</div><div class="lab-step-text"><strong>Preference loop:</strong> Does the product learn individual/team preferences? Having analytics ≠ personalization.</div></div>
+      <div class="lab-step"><div class="lab-step-num">3</div><div class="lab-step-text"><strong>Domain context loop:</strong> Does usage in one area improve quality in adjacent areas? Siloed = 1, cross-domain transfer = 5.</div></div>
+      <div class="lab-step"><div class="lab-step-num">4</div><div class="lab-step-text"><strong>Network loop:</strong> Does each new user/team make the product better for everyone? Isolated = 1, strong network effects = 5.</div></div>
+    </div>
+    <div class="lab-tip">
+      <div class="lab-tip-label">Keep in Mind</div>
+      <div class="lab-tip-text">Your weakest loop is where competitors attack first. That’s your investment priority — or your death sentence.</div>
+    </div>
+    <a href="Strategy Repo Template.html#data-flywheel" style="display:block; margin-top:14px; padding:10px 18px; background:rgba(52,211,153,0.08); border:1px solid rgba(52,211,153,0.2); border-radius:8px; text-decoration:none; text-align:center; transition:all 0.2s;">
+      <span style="font-size:12px; font-weight:700; color:#34d399;">Open <code style="color:#6ee7b7;">02-the-moat/data-flywheel.md</code> template → fill in and commit to your repo</span>
     </a>
   </div>
 </div>
@@ -680,32 +798,38 @@
 </div>
 
 <!-- ===== SLIDE 14: Peer Challenge — 90-Day Encroachment Plan ===== -->
-<div class="slide" data-notes="13 minutes. 6 per person. This is the emotional peak of the module. 'The defender presents their flywheel and encroachment assessment. The attacker responds with a concrete 90-day encroachment plan — week by week, what they ship, how they poach users.' If pairs are being too polite: 'You're not being helpful by being nice. The market won't be nice.' After both rounds: 'Write down the single most dangerous move you heard. You're designing against it next.'">
+<div class="slide" data-notes="13 minutes. 6 per person. If pairs are too polite: 'You’re not being helpful by being nice. The market won’t be nice.'">
   <div class="slide-inner">
-    <div class="demo-tag tag-activity">Pair Work · 13 Minutes</div>
+    <div class="demo-tag tag-activity">Breakout Exercise · 13 Minutes</div>
     <h2>The 90-Day<br>Encroachment Plan</h2>
-    <div class="subtitle">6 minutes per person. Two roles.</div>
-    <div style="display:flex; gap:20px; margin:20px 0;">
-      <div style="flex:1; background:rgba(59,130,246,0.06); border:1px solid rgba(59,130,246,0.2); border-radius:14px; padding:24px;">
-        <div style="font-size:13px; font-weight:800; color:#3B82F6; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:12px;">The Defender</div>
-        <ul>
-          <li style="font-size:14px;">Present your data flywheel (4 loops, scored)</li>
-          <li style="font-size:14px;">Present your top encroachment threat</li>
-        </ul>
-      </div>
-      <div style="flex:1; background:rgba(248,113,113,0.06); border:1px solid rgba(248,113,113,0.2); border-radius:14px; padding:24px;">
-        <div style="font-size:13px; font-weight:800; color:#f87171; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:12px;">The Encroacher</div>
-        <ul>
-          <li style="font-size:14px;">"I'm Head of Product at [Google/OpenAI/Microsoft]. Here's my 90-day plan."</li>
-          <li style="font-size:14px;">Week 1–4: what you ship. Week 5–8: how you poach users. Week 9–12: why they don't come back</li>
-          <li style="font-size:14px;">Target the <strong>weakest flywheel loop</strong> — that's your entry point</li>
-        </ul>
-      </div>
+    <div class="lab-goal">
+      <div class="lab-goal-label">Your Goal</div>
+      <div class="lab-goal-text">As the “encroacher,” present a concrete 90-day plan to steal your partner’s users. As the “defender,” find the gap in your flywheel they’d exploit.</div>
     </div>
-    <div style="background:#161822; border:1px solid rgba(248,113,113,0.2); border-radius:10px; padding:16px; margin-top:12px; text-align:center;">
-      <p style="font-size:15px; font-weight:700; color:#fca5a5;">After both rounds: write down the single most dangerous move you heard.</p>
-      <p style="font-size:13px; color:#8899bb; margin-top:4px;">You'll design against it in the next exercise.</p>
+    <div class="lab-steps">
+      <div class="lab-step"><div class="lab-step-num">1</div><div class="lab-step-text"><strong>Defender presents</strong> their data flywheel (4 loops, scored) and top encroachment threat. 2 minutes.</div></div>
+      <div class="lab-step"><div class="lab-step-num">2</div><div class="lab-step-text"><strong>Encroacher responds:</strong> “I’m Head of Product at [Google/OpenAI/Microsoft]. Here’s my 90-day plan.” Week 1–4: what you ship. Week 5–8: how you poach users. Week 9–12: why they don’t come back. Target the <strong>weakest flywheel loop</strong>.</div></div>
+      <div class="lab-step"><div class="lab-step-num">3</div><div class="lab-step-text"><strong>Swap roles</strong> after 6 minutes. Same rules.</div></div>
+      <div class="lab-step"><div class="lab-step-num">4</div><div class="lab-step-text"><strong>Write down</strong> the single most dangerous move you heard. You’ll design against it next.</div></div>
     </div>
+    <div class="lab-tip">
+      <div class="lab-tip-label">Keep in Mind</div>
+      <div class="lab-tip-text">The discomfort is the point. If your partner’s plan sounds realistic, your moat has a crack. That crack is what the Kill Switch exercise addresses next.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SLIDE: Quick Debrief ===== -->
+<div class="slide" data-notes="Quick debrief after the 90-day encroachment plan. Post in Slack.">
+  <div class="slide-inner" style="text-align:center;">
+    <div class="demo-tag tag-debrief">Quick Debrief</div>
+    <h2>Encroachment Takeaway</h2>
+    <div class="debrief-box">
+      <div class="debrief-label">Post on Slack</div>
+      <div class="debrief-prompt">IN ONE SENTENCE:</div>
+      <div class="debrief-sub">What was the single most dangerous move your partner's encroachment plan revealed?</div>
+    </div>
+    <p style="font-size:14px; color:#8899bb; margin-top:16px;">Then reply to 2 peers with your reaction.</p>
   </div>
 </div>
 
@@ -742,11 +866,26 @@
   </div>
 </div>
 
+<!-- ===== SLIDE: Hands-On Lab Header ===== -->
+<div class="slide" data-notes="Second lab — the build moment.">
+  <div class="slide-inner" style="text-align:center;">
+    <div class="lab-header">
+      <div class="lab-title">Hands-On Lab</div>
+      <div class="lab-name">The Kill Switch</div>
+      <div class="lab-desc">Audit your vendor dependency and build a concrete swap plan. Can you switch providers in 48 hours?</div>
+    </div>
+  </div>
+</div>
+
 <!-- ===== SLIDE 14: Your Portability Audit ===== -->
 <div class="slide" data-notes="15 minutes. This is the build moment. Walk the room. 'If you don't know, write unknown — that's a finding.' Push for specific action items. This checklist travels to M3 — portability affects cost.">
   <div class="slide-inner">
-    <div class="demo-tag tag-build">Build Moment · 15 Minutes</div>
+    <div class="demo-tag tag-build">Lab Exercise · 15 Minutes</div>
     <h2>The Kill Switch: Your Product</h2>
+    <div class="lab-goal" style="margin-bottom:16px;">
+      <div class="lab-goal-label">Your Goal</div>
+      <div class="lab-goal-text">Complete a portability audit of your AI stack with <strong>three specific actions</strong> (this week, this month, this quarter) to reach 48-hour swap readiness.</div>
+    </div>
     <div style="display:flex; gap:14px; margin:20px 0;">
       <div style="flex:1; background:rgba(59,130,246,0.06); border:1px solid rgba(59,130,246,0.2); border-radius:14px; padding:22px;">
         <div style="font-size:12px; font-weight:800; color:#3B82F6; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:14px;">1. What's your setup?</div>
@@ -792,9 +931,8 @@
         </div>
       </div>
     </div>
-    <a href="M2 - Kill Switch Audit.html" style="display:block; margin-top:14px; padding:10px 18px; background:rgba(91,141,239,0.08); border:1px solid rgba(91,141,239,0.2); border-radius:8px; text-decoration:none; text-align:center; transition:all 0.2s;">
-      <span style="font-size:12px; font-weight:700; color:#5b8def;">Open Kill Switch Audit Tool →</span>
-      <span style="display:block; font-size:11px; color:#7a7a9a; margin-top:2px;">Audit your vendor dependency and plan three actions</span>
+    <a href="Strategy Repo Template.html#kill-switch" style="display:block; margin-top:14px; padding:10px 18px; background:rgba(52,211,153,0.08); border:1px solid rgba(52,211,153,0.2); border-radius:8px; text-decoration:none; text-align:center; transition:all 0.2s;">
+      <span style="font-size:12px; font-weight:700; color:#34d399;">Open <code style="color:#6ee7b7;">02-the-moat/kill-switch.md</code> template → fill in and commit to your repo</span>
     </a>
   </div>
 </div>
@@ -828,8 +966,8 @@
       </div>
     </div>
     <div class="artifact-preview" style="margin-top:20px;">
-      <div class="ap-title">Living Strategy — Component 2: The Moat</div>
-      <p style="font-size:15px; color:#8899bb; line-height:1.7;"><strong>Fill in now:</strong> Data flywheel map (4 loops scored) · Weakest loop · Top encroachment threat · Portability readiness · 48-hour swap plan · Three action items</p>
+      <div class="ap-title">Your Repo — 02-the-moat/</div>
+      <p style="font-size:15px; color:#8899bb; line-height:1.7;"><strong>Commit now:</strong> <code style="color:#6ee7b7;">data-flywheel.md</code> (4 loops scored · weakest loop · top encroachment threat) and <code style="color:#6ee7b7;">kill-switch.md</code> (portability audit · 48-hour swap plan · three action items)</p>
     </div>
   </div>
 </div>
@@ -843,10 +981,10 @@
     <div style="background:#161822; border:1px solid #252840; border-radius:12px; padding:24px; margin:32px auto; max-width:500px; text-align:left;">
       <p style="font-size:15px; font-weight:700; color:#fff; margin-bottom:10px;">Bring to M3:</p>
       <ul>
-        <li>Your Data Flywheel Map</li>
-        <li>Encroachment Threat Assessment</li>
+        <li>Your repo with <code style="color:#6ee7b7;">02-the-moat/</code> committed</li>
+        <li>Data Flywheel Map + Scores</li>
         <li>Kill Switch Audit</li>
-        <li>Living Strategy — Components 1 + 2</li>
+        <li><code style="color:#6ee7b7;">01-the-bet/</code> + <code style="color:#6ee7b7;">02-the-moat/</code> — two folders done</li>
       </ul>
     </div>
     <div class="arc-flow" style="margin-top:28px;">
@@ -871,25 +1009,73 @@
   </div>
 </div>
 
-<!-- ===== SLIDE 18.5: Module Tools ===== -->
-<div class="slide" data-notes="Point students to the interactive tools. They can fill these out during or after class. Data saves to browser and carries forward.">
+<!-- ===== SLIDE 18.5: Your Living Strategy Repo ===== -->
+<div class="slide" data-notes="Reinforce the repo as the anchor. Show the repo structure — 02-the-moat/ should now have two committed files.">
   <div class="slide-inner" style="text-align:center;">
-    <div class="module-tag">Your Module 2 Tools</div>
-    <h2>Continue Building</h2>
-    <div class="subtitle" style="margin:16px auto 28px;">Interactive tools — fill in during or after class. Your data carries forward to M3.</div>
+    <div class="module-tag">Your Living Strategy Repo</div>
+    <h2>Your Repo After Today</h2>
+    <div class="subtitle" style="margin:16px auto 28px;">Two more artifacts committed. Your strategy is growing.</div>
     <div style="display:flex; gap:14px; justify-content:center; flex-wrap:wrap;">
-      <a href="M2 - Flywheel Scorer.html" style="display:block; text-decoration:none; background:rgba(91,141,239,0.08); border:1px solid rgba(91,141,239,0.2); border-radius:10px; padding:20px 28px; transition:all 0.2s; min-width:200px;">
-        <div style="font-size:13px; font-weight:800; color:#5b8def; margin-bottom:6px;">Data Flywheel Scorer</div>
-        <div style="font-size:12px; color:#7a7a9a;">Score your four data loops with a visual flywheel</div>
-      </a>
-      <a href="M2 - Kill Switch Audit.html" style="display:block; text-decoration:none; background:rgba(91,141,239,0.08); border:1px solid rgba(91,141,239,0.2); border-radius:10px; padding:20px 28px; transition:all 0.2s; min-width:200px;">
-        <div style="font-size:13px; font-weight:800; color:#5b8def; margin-bottom:6px;">Kill Switch Audit</div>
-        <div style="font-size:12px; color:#7a7a9a;">Audit your vendor dependency in three panels</div>
-      </a>
-      <a href="Living Strategy Builder.html" style="display:block; text-decoration:none; background:rgba(160,123,232,0.08); border:1px solid rgba(160,123,232,0.2); border-radius:10px; padding:20px 28px; transition:all 0.2s; min-width:200px;">
-        <div style="font-size:13px; font-weight:800; color:#a07be8; margin-bottom:6px;">Living Strategy Builder</div>
-        <div style="font-size:12px; color:#7a7a9a;">Add Component 2 to your living strategy</div>
-      </a>
+      <div style="background:rgba(52,211,153,0.05); border:1px solid rgba(52,211,153,0.12); border-radius:10px; padding:20px 28px; min-width:200px; text-align:left; opacity:0.5;">
+        <div style="font-size:13px; font-weight:800; color:#34d399; margin-bottom:6px;">01-the-bet/ ✓</div>
+        <div style="font-size:12px; color:#7a7a9a;">diagnostic.md · prototype.md</div>
+      </div>
+      <div style="background:rgba(52,211,153,0.08); border:1px solid rgba(52,211,153,0.2); border-radius:10px; padding:20px 28px; min-width:200px; text-align:left;">
+        <div style="font-size:13px; font-weight:800; color:#34d399; margin-bottom:6px;">02-the-moat/ ✓</div>
+        <div style="font-size:12px; color:#7a7a9a;">data-flywheel.md — loops + scores</div>
+        <div style="font-size:12px; color:#7a7a9a; margin-top:4px;">kill-switch.md — portability audit</div>
+      </div>
+      <div style="background:rgba(59,130,246,0.05); border:1px solid rgba(59,130,246,0.12); border-radius:10px; padding:20px 28px; min-width:200px; text-align:left; opacity:0.3;">
+        <div style="font-size:13px; font-weight:800; color:#60a5fa; margin-bottom:6px;">03-the-margin/ → M3</div>
+        <div style="font-size:12px; color:#7a7a9a;">cost-curve.md · pricing-strategy.md</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SLIDE: Module Complete ===== -->
+<div class="slide" data-notes="Celebrate accomplishments.">
+  <div class="slide-inner">
+    <div class="demo-tag tag-complete">Module 2 Complete</div>
+    <h2>What You Accomplished Today</h2>
+    <div class="complete-stats">
+      <div class="complete-stat"><div class="complete-num">2</div><div class="complete-label">Files Committed to Repo</div></div>
+      <div class="complete-stat"><div class="complete-num">4</div><div class="complete-label">Flywheel Loops Scored</div></div>
+      <div class="complete-stat"><div class="complete-num">1</div><div class="complete-label">90-Day Attack Plan Survived</div></div>
+    </div>
+    <div class="complete-shifts">
+      <div class="complete-shift"><div class="shift-title">Data Stockpile → Compounding Loops</div><div class="shift-desc">You stopped claiming a data moat and started measuring whether your product actually gets smarter with use.</div></div>
+      <div class="complete-shift"><div class="shift-title">Vendor Lock-in → Kill Switch Ready</div><div class="shift-desc">You mapped your provider dependency and built a concrete swap plan. 48-hour readiness is measured, not assumed.</div></div>
+    </div>
+    <p style="font-size:16px; color:#60a5fa; font-weight:600; text-align:center;">Next: Module 3 — The Margin. Does any of this make money?</p>
+  </div>
+</div>
+
+<!-- ===== SLIDE: Key Takeaways ===== -->
+<div class="slide" data-notes="Three key takeaways.">
+  <div class="slide-inner">
+    <div class="module-tag">Key Takeaways</div>
+    <h2>The Moat</h2>
+    <div class="takeaway-list">
+      <div class="takeaway-item"><p><strong>Data in a database isn't a moat — loops are.</strong> Most AI products scale without compounding, making them commodities. If your product doesn't get smarter with use, someone else's will.</p></div>
+      <div class="takeaway-item"><p><strong>Self-assessment is always generous.</strong> A partner's 90-day encroachment plan surfaces blind spots you can't see yourself. Week-by-week specificity forces honesty about vulnerability.</p></div>
+      <div class="takeaway-item"><p><strong>Vendor portability is strategy, not ops.</strong> Can't swap providers in 48 hours? That's not a technology choice — it's a dependency. The Kill Switch turns lock-in into optionality.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SLIDE: Extra Practice ===== -->
+<div class="slide" data-notes="Optional exercises. Preview M3.">
+  <div class="slide-inner">
+    <div class="module-tag">Extra Practice</div>
+    <h2>Optional: Go Deeper</h2>
+    <div class="evidence-cards" style="margin:24px 0;">
+      <div class="evidence-card"><div class="ec-label">Exercise 1</div><div class="ec-company">Score a Competitor's Flywheel</div><div class="ec-text">Pick a competitor and score their four flywheel loops 1–5. Add a comparison section to your <code style="color:#6ee7b7;">02-the-moat/data-flywheel.md</code>.</div></div>
+      <div class="evidence-card"><div class="ec-label">Exercise 2</div><div class="ec-company">Flesh Out Your Moat Files</div><div class="ec-text">Expand <code style="color:#6ee7b7;">02-the-moat/kill-switch.md</code> with a fire-drill timeline. Update your <code style="color:#6ee7b7;">README.md</code> with a moat summary.</div></div>
+    </div>
+    <div class="artifact-preview">
+      <div class="ap-title">Next Session: Module 3 — The Margin</div>
+      <p style="font-size:15px; color:#8899bb; line-height:1.5;">AI inference costs are compressing margins from 80% to 40%. M3 is the economics reality check — does any of this make money? You'll add <code style="color:#6ee7b7;">03-the-margin/</code> to your repo.</p>
     </div>
   </div>
 </div>
@@ -904,12 +1090,21 @@
   </div>
 </div>
 
+<!-- ===== SLIDE: Q&A ===== -->
+<div class="slide" data-notes="Open floor for questions.">
+  <div class="slide-inner" style="text-align:center;">
+    <h1 style="font-size:64px; color:#3B82F6; margin-bottom:24px;">Q&amp;A</h1>
+    <p style="font-size:20px; color:#8899bb;">Any questions before we close?</p>
+    <p style="font-size:14px; color:#555; margin-top:20px;">Drop questions in Slack if something comes up later.</p>
+  </div>
+</div>
+
 <!-- ===== UI CHROME ===== -->
 <div class="nav">
   <button class="nav-btn" onclick="prev()" title="Previous (←)">‹</button>
   <button class="nav-btn" onclick="next()" title="Next (→)">›</button>
 </div>
-<div class="slide-counter"><span id="current">1</span> / <span id="total">18</span></div>
+<div class="slide-counter"><span id="current">1</span> / <span id="total">30</span></div>
 <div class="progress"><div class="progress-bar" id="progress-bar"></div></div>
 <div class="help-hint">← → navigate · S speaker notes · F fullscreen</div>
 <div class="speaker-notes" id="speaker-notes">

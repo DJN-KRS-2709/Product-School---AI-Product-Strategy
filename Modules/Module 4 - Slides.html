@@ -90,6 +90,54 @@
   .speaker-notes.visible { display: block; }
   .speaker-notes strong { color: #b0b4c8; }
   .notes-tag { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #3B82F6; margin-bottom: 6px; }
+
+  /* === Vibe Coding structural slides === */
+  .expect-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin: 24px 0; }
+  .expect-card { background: #161822; border: 1px solid #252840; border-radius: 10px; padding: 18px; text-align: center; }
+  .expect-icon { font-size: 24px; margin-bottom: 8px; }
+  .expect-title { font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+  .expect-desc { font-size: 12px; color: #8899bb; line-height: 1.4; }
+  .syllabus-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 20px 0; }
+  .syllabus-card { background: #161822; border: 1px solid #252840; border-radius: 10px; padding: 16px; display: flex; align-items: flex-start; gap: 14px; }
+  .syllabus-card.syl-active { background: rgba(59,130,246,0.08); border-color: rgba(59,130,246,0.3); }
+  .syllabus-num { width: 32px; height: 32px; border-radius: 8px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 800; color: #fff; background: #252840; }
+  .syllabus-card.syl-active .syllabus-num { background: #3B82F6; }
+  .syllabus-body .syl-title { font-size: 14px; font-weight: 700; color: #e0e0f0; margin-bottom: 2px; }
+  .syllabus-card.syl-active .syl-title { color: #fff; }
+  .syllabus-body .syl-desc { font-size: 11px; color: #64748b; line-height: 1.4; }
+  .debrief-box { background: rgba(192,132,252,0.06); border: 1px solid rgba(192,132,252,0.15); border-radius: 14px; padding: 32px; text-align: center; margin: 24px 0; }
+  .debrief-label { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; color: #c084fc; margin-bottom: 16px; }
+  .debrief-prompt { font-size: 22px; font-weight: 700; color: #fff; line-height: 1.4; margin-bottom: 12px; }
+  .debrief-sub { font-size: 14px; color: #8899bb; }
+  .complete-stats { display: flex; gap: 20px; margin: 24px 0; }
+  .complete-stat { flex: 1; background: #161822; border: 1px solid #252840; border-radius: 12px; padding: 20px; text-align: center; }
+  .complete-num { font-size: 36px; font-weight: 900; color: #3B82F6; margin-bottom: 4px; }
+  .complete-label { font-size: 13px; color: #8899bb; }
+  .complete-shifts { display: flex; flex-direction: column; gap: 12px; margin: 20px 0; }
+  .complete-shift { background: rgba(52,211,153,0.06); border: 1px solid rgba(52,211,153,0.12); border-radius: 10px; padding: 16px 20px; }
+  .shift-title { font-size: 15px; font-weight: 700; color: #34d399; margin-bottom: 4px; }
+  .shift-desc { font-size: 13px; color: #8899bb; line-height: 1.5; }
+  .takeaway-list { display: flex; flex-direction: column; gap: 14px; margin: 24px 0; }
+  .takeaway-item { background: #161822; border: 1px solid #252840; border-radius: 10px; padding: 18px 22px; }
+  .takeaway-item p { font-size: 15px; color: #b0b4c8; line-height: 1.6; }
+  .cameras-box { background: rgba(251,191,36,0.06); border: 1px solid rgba(251,191,36,0.15); border-radius: 14px; padding: 28px; text-align: center; max-width: 500px; margin: 32px auto; }
+  .tag-debrief { background: rgba(192,132,252,0.12); color: #d8b4fe; }
+  .tag-complete { background: rgba(52,211,153,0.12); color: #6ee7b7; }
+
+  .lab-header { background: linear-gradient(135deg, rgba(244,114,182,0.08), rgba(59,130,246,0.08)); border: 1px solid rgba(244,114,182,0.2); border-radius: 16px; padding: 40px; text-align: center; max-width: 640px; margin: 0 auto; }
+  .lab-title { font-size: 14px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.14em; color: #f9a8d4; margin-bottom: 12px; }
+  .lab-name { font-size: 32px; font-weight: 900; color: #fff; margin-bottom: 8px; }
+  .lab-desc { font-size: 16px; color: #8899bb; line-height: 1.6; }
+  .lab-steps { display: flex; flex-direction: column; gap: 12px; margin: 20px 0; text-align: left; }
+  .lab-step { display: flex; align-items: flex-start; gap: 14px; background: #161822; border: 1px solid #252840; border-radius: 10px; padding: 16px 18px; }
+  .lab-step-num { width: 28px; height: 28px; border-radius: 7px; background: #3B82F6; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; color: #fff; flex-shrink: 0; }
+  .lab-step-text { font-size: 14px; color: #b0b4c8; line-height: 1.5; }
+  .lab-goal { background: rgba(52,211,153,0.06); border: 1px solid rgba(52,211,153,0.12); border-radius: 10px; padding: 16px 20px; margin: 16px 0; }
+  .lab-goal-label { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: #34d399; margin-bottom: 6px; }
+  .lab-goal-text { font-size: 15px; color: #e0e0f0; line-height: 1.5; }
+  .lab-tip { background: rgba(251,191,36,0.06); border: 1px solid rgba(251,191,36,0.12); border-radius: 10px; padding: 14px 18px; margin: 12px 0; }
+  .lab-tip-label { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: #fbbf24; margin-bottom: 4px; }
+  .lab-tip-text { font-size: 13px; color: #8899bb; line-height: 1.5; }
 </style>
 </head>
 <body>
@@ -107,6 +155,54 @@
     </div>
     <div class="flow-line">Out: Living strategy Component 4 · eval dashboard spec · reliability contract</div>
 
+  </div>
+</div>
+
+<!-- ===== SLIDE: Class Expectations ===== -->
+<div class="slide" data-notes="Quick ground rules — don't read every card, let them scan.">
+  <div class="slide-inner">
+    <div class="module-tag">Ground Rules</div>
+    <h2>Class Expectations</h2>
+    <div class="expect-grid">
+      <div class="expect-card"><div class="expect-icon">📹</div><div class="expect-title">Cameras On</div><div class="expect-desc">Stay visible and engaged throughout the session.</div></div>
+      <div class="expect-card"><div class="expect-icon">⏰</div><div class="expect-title">Arrive On Time</div><div class="expect-desc">Respect everyone's time by arriving promptly.</div></div>
+      <div class="expect-card"><div class="expect-icon">✋</div><div class="expect-title">Active Engagement</div><div class="expect-desc">Participate in all exercises and discussions.</div></div>
+      <div class="expect-card"><div class="expect-icon">🌐</div><div class="expect-title">Network</div><div class="expect-desc">Connect with peers and build your learning network.</div></div>
+      <div class="expect-card"><div class="expect-icon">💬</div><div class="expect-title">Use Slack</div><div class="expect-desc">Keep questions and comments organized in the channel.</div></div>
+      <div class="expect-card"><div class="expect-icon">🎓</div><div class="expect-title">Instructor Support</div><div class="expect-desc">Save deeper questions for after class to keep flow.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SLIDE: Syllabus ===== -->
+<div class="slide" data-notes="Quick orientation — show the arc. Today is highlighted.">
+  <div class="slide-inner">
+    <div class="module-tag">AI Product Strategy Certification</div>
+    <h2>Course Syllabus</h2>
+    <div class="syllabus-grid">
+      <div class="syllabus-card"><div class="syllabus-num">1</div><div class="syllabus-body"><div class="syl-title">The Bet</div><div class="syl-desc">Diagnose where strategy breaks. Score vulnerability, build a prototype, lock in Component 1.</div></div></div>
+      <div class="syllabus-card"><div class="syllabus-num">2</div><div class="syllabus-body"><div class="syl-title">The Moat</div><div class="syl-desc">Score your data flywheel, stress-test with a 90-day encroachment plan, build a Kill Switch.</div></div></div>
+      <div class="syllabus-card"><div class="syllabus-num">3</div><div class="syllabus-body"><div class="syl-title">The Margin</div><div class="syl-desc">Map cost curves, design pricing, stress-test margins with cascading scenarios.</div></div></div>
+      <div class="syllabus-card syl-active"><div class="syllabus-num">4</div><div class="syllabus-body"><div class="syl-title">The Contract</div><div class="syl-desc">Build golden datasets, design confidence UX, write a reliability contract.</div></div></div>
+      <div class="syllabus-card"><div class="syllabus-num">5</div><div class="syllabus-body"><div class="syl-title">The Guardrails</div><div class="syl-desc">Design compounding systems, draft governance policy, run a shadow AI audit.</div></div></div>
+      <div class="syllabus-card"><div class="syllabus-num">6</div><div class="syllabus-body"><div class="syl-title">The Pitch</div><div class="syl-desc">Assemble the full strategy, build a roadmap, pitch to the room as your board.</div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SLIDE: Recall from M3 ===== -->
+<div class="slide" data-notes="Connect M3 to M4. The bridge: economics only pay off if users trust the output. Confirm repos have 01–03 committed.">
+  <div class="slide-inner">
+    <div class="demo-tag tag-recall">Recall from Module 3 · 3 Minutes</div>
+    <h2>What You Brought Today</h2>
+    <div class="waypoints">
+      <div class="waypoint"><div class="waypoint-num" style="background:#059669;">✓</div><div class="waypoint-text"><div class="wt-title">Cost Curve</div><div class="wt-desc">Every AI feature mapped to a model tier with cost estimates</div></div></div>
+      <div class="waypoint"><div class="waypoint-num" style="background:#059669;">✓</div><div class="waypoint-text"><div class="wt-title">Pricing Strategy</div><div class="wt-desc">Access vs. outcome model with bundling decisions</div></div></div>
+      <div class="waypoint"><div class="waypoint-num" style="background:#059669;">✓</div><div class="waypoint-text"><div class="wt-title">Your Repo — 3 folders committed</div><div class="wt-desc"><code style="color:#6ee7b7;">01-the-bet/</code> · <code style="color:#6ee7b7;">02-the-moat/</code> · <code style="color:#6ee7b7;">03-the-margin/</code> — all pushed to your living strategy repo</div></div></div>
+    </div>
+    <div style="background:rgba(192,132,252,0.06); border:1px solid rgba(192,132,252,0.15); border-radius:10px; padding:16px; margin-top:16px; text-align:center;">
+      <p style="font-size:15px; font-weight:700; color:#d8b4fe;">The bridge: great economics mean nothing if users don't trust the output. Today we build the trust layer.</p>
+    </div>
   </div>
 </div>
 
@@ -129,33 +225,6 @@
       <div class="agenda-item"><div class="agenda-time">15 min</div><div class="agenda-text"><strong>Build Moment:</strong> Draft your reliability contract</div></div>
       <div class="agenda-item"><div class="agenda-time">5 min</div><div class="agenda-text"><strong>Synthesis + Bridge:</strong> Component 4 + what's coming in M5</div></div>
     </div>
-  </div>
-</div>
-
-<!-- ===== SLIDE 3: Recall from M3 ===== -->
-<div class="slide" data-notes="'You brought your cost curve, board-ready value capture comparison, and living strategy Components 1-3. Today's connection: economics only work if users trust the output enough to pay.'">
-  <div class="slide-inner">
-    <div class="demo-tag tag-recall">Recall from M3 · 3 Minutes</div>
-    <h2>What You Brought</h2>
-    <div class="subtitle">Three artifacts from Module 3. Today we build the trust layer underneath them.</div>
-    <div style="display:flex; gap:16px; margin:24px 0;">
-      <div style="flex:1; background:#161822; border:1px solid #252840; border-radius:12px; padding:22px; text-align:center;">
-        <div style="font-size:28px; margin-bottom:8px;">📈</div>
-        <div style="font-size:15px; font-weight:700; color:#fff; margin-bottom:6px;">Your Cost Curve</div>
-        <div style="font-size:13px; color:#8899bb; line-height:1.4;">Features mapped to model tiers, blended COGS, cascading architecture.</div>
-      </div>
-      <div style="flex:1; background:#161822; border:1px solid #252840; border-radius:12px; padding:22px; text-align:center;">
-        <div style="font-size:28px; margin-bottom:8px;">📋</div>
-        <div style="font-size:15px; font-weight:700; color:#fff; margin-bottom:6px;">Components 1 + 2 + 3</div>
-        <div style="font-size:13px; color:#8899bb; line-height:1.4;">The Bet · The Moat · The Margin — building, defensible, profitable.</div>
-      </div>
-      <div style="flex:1; background:#161822; border:1px solid #252840; border-radius:12px; padding:22px; text-align:center;">
-        <div style="font-size:28px; margin-bottom:8px;">📊</div>
-        <div style="font-size:15px; font-weight:700; color:#fff; margin-bottom:6px;">Value Capture Comparison</div>
-        <div style="font-size:13px; color:#8899bb; line-height:1.4;">Before/after P&L with narrative and margin trajectory.</div>
-      </div>
-    </div>
-    <p style="font-size:16px; color:#f87171; font-weight:600; text-align:center; margin-top:12px;">The economics only work if users trust the output enough to pay.</p>
   </div>
 </div>
 
@@ -241,11 +310,26 @@
   </div>
 </div>
 
+<!-- ===== SLIDE: Hands-On Lab Header ===== -->
+<div class="slide" data-notes="Section break — entering the trust-building exercises.">
+  <div class="slide-inner" style="text-align:center;">
+    <div class="lab-header">
+      <div class="lab-title">Hands-On Lab</div>
+      <div class="lab-name">Trust Infrastructure</div>
+      <div class="lab-desc">Build golden datasets, red-team your eval spec, and draft a reliability contract. Three exercises, 40 minutes total.</div>
+    </div>
+  </div>
+</div>
+
 <!-- ===== SLIDE 7: Define Your Golden Dataset (Applied) ===== -->
 <div class="slide" data-notes="They just learned what golden datasets are — now they build one. Writing beats listening. Prompt stuck folks: start with 5 failures. Notion/Linear teams version eval rows like code.">
   <div class="slide-inner">
     <div class="demo-tag tag-exercise">Applied Work · 15 Minutes</div>
     <h2>Define Your Golden Dataset</h2>
+    <div class="lab-goal">
+      <div class="lab-goal-label">Your Goal</div>
+      <div class="lab-goal-text">Write 10 test cases for your product's golden dataset — including 3 adversarial inputs. Define pass/fail criteria and the judge that evaluates them.</div>
+    </div>
     <div class="subtitle">Your ground-truth spec — ship-blocking, not side project.</div>
     <div style="display:flex; gap:16px; margin:20px 0;">
       <div style="flex:1; background:#161822; border:1px solid #252840; border-radius:10px; padding:20px;">
@@ -263,10 +347,7 @@
     </div>
     <p style="font-size:14px; color:#fbbf24; font-weight:600; text-align:center; margin-top:8px;">Sales test: one sentence — “Here’s how we test our AI.”</p>
     <p style="font-size:13px; color:#60a5fa; font-weight:600; text-align:center; margin-top:6px;">Stand up if your set includes at least one adversarial row.</p>
-    <a href="M4 - Golden Dataset Builder.html" style="display:block; margin-top:14px; padding:10px 18px; background:rgba(91,141,239,0.08); border:1px solid rgba(91,141,239,0.2); border-radius:8px; text-decoration:none; text-align:center; transition:all 0.2s;">
-      <span style="font-size:12px; font-weight:700; color:#5b8def;">Open Golden Dataset Builder →</span>
-      <span style="display:block; font-size:11px; color:#7a7a9a; margin-top:2px;">Build your eval dataset with structured test cases</span>
-    </a>
+    <a href="Strategy Repo Template.html#golden-dataset" style="display:block; margin-top:14px; padding:10px 18px; background:rgba(52,211,153,0.08); border:1px solid rgba(52,211,153,0.2); border-radius:8px; text-align:center; text-decoration:none; transition:all 0.2s;"><span style="font-size:12px; font-weight:700; color:#34d399;">Open <code style="color:#6ee7b7;">04-the-contract/golden-dataset.md</code> template → fill in and commit to your repo</span></a>
   </div>
 </div>
 
@@ -277,6 +358,17 @@
     <h1>☕</h1>
     <div class="subtitle" style="margin:16px auto;">Back for: Air Canada scare story · confidence UX · partner red-team.</div>
     <p style="font-size:16px; color:#555;">Bring your trust issues.</p>
+  </div>
+</div>
+
+<!-- ===== SLIDE: Cameras On ===== -->
+<div class="slide" data-notes="Quick energy reset.">
+  <div class="slide-inner" style="text-align:center;">
+    <div class="cameras-box">
+      <div style="font-size:48px; margin-bottom:16px;">📹</div>
+      <h2 style="font-size:28px; margin-bottom:12px;">Cameras On</h2>
+      <p style="font-size:16px; color:#8899bb;">Welcome back! Stay present and visible to keep the energy up.</p>
+    </div>
   </div>
 </div>
 
@@ -369,10 +461,7 @@
       <div style="flex:1; background:#161822; border:1px solid #252840; border-radius:8px; padding:12px; font-size:12px; color:#8899bb; text-align:center;">Corrections → model? <span style="color:#555;">Y/N</span></div>
     </div>
     <p style="font-size:13px; color:#60a5fa; font-weight:600; text-align:center; margin-top:12px;">Point to your screen: which tier is your live product closest to?</p>
-    <a href="M4 - Confidence UX Checklist.html" style="display:block; margin-top:14px; padding:10px 18px; background:rgba(91,141,239,0.08); border:1px solid rgba(91,141,239,0.2); border-radius:8px; text-decoration:none; text-align:center; transition:all 0.2s;">
-      <span style="font-size:12px; font-weight:700; color:#5b8def;">Open Confidence UX Checklist →</span>
-      <span style="display:block; font-size:11px; color:#7a7a9a; margin-top:2px;">16-point checklist for designing AI uncertainty</span>
-    </a>
+    <a href="Strategy Repo Template.html#golden-dataset" style="display:block; margin-top:14px; padding:10px 18px; background:rgba(52,211,153,0.08); border:1px solid rgba(52,211,153,0.2); border-radius:8px; text-align:center; text-decoration:none; transition:all 0.2s;"><span style="font-size:12px; font-weight:700; color:#34d399;">Open <code style="color:#6ee7b7;">04-the-contract/golden-dataset.md</code> template → fill in and commit to your repo</span></a>
   </div>
 </div>
 
@@ -435,8 +524,16 @@
 <!-- ===== SLIDE 14: Peer Challenge — Red-Team ===== -->
 <div class="slide" data-notes="Why: cheapest lawsuit is here. 6 min each — attacker uses four lenses. Close: 'Better this room than court.' Reference Microsoft/Copilot enterprise red-team programs if you need gravitas.">
   <div class="slide-inner">
-    <div class="demo-tag tag-activity">Peer Challenge · 13 Minutes</div>
+    <div class="demo-tag tag-activity">Breakout Exercise · 13 Minutes</div>
     <h2>"What Failure Mode Did You Miss?"</h2>
+    <div class="lab-goal">
+      <div class="lab-goal-label">Your Goal</div>
+      <div class="lab-goal-text">Find the worst miss in your partner's eval spec. What input would break their golden dataset? What edge case did they not consider?</div>
+    </div>
+    <div class="lab-tip">
+      <div class="lab-tip-label">Keep in Mind</div>
+      <div class="lab-tip-text">Explore your partner's spec silently for 2 minutes before discussing. Look for: missing edge cases, unclear pass/fail criteria, assumptions about user behavior.</div>
+    </div>
     <div class="subtitle">6 min each — partner stress-tests your eval spec.</div>
     <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:20px 0;">
       <div style="background:rgba(248,113,113,0.06); border:1px solid rgba(248,113,113,0.15); border-radius:10px; padding:18px;">
@@ -461,11 +558,40 @@
   </div>
 </div>
 
+<!-- ===== SLIDE: Quick Debrief ===== -->
+<div class="slide" data-notes="Quick debrief after red-team challenge.">
+  <div class="slide-inner" style="text-align:center;">
+    <div class="demo-tag tag-debrief">Quick Debrief</div>
+    <h2>Red-Team Takeaway</h2>
+    <div class="debrief-box">
+      <div class="debrief-label">Post on Slack</div>
+      <div class="debrief-prompt">IN ONE SENTENCE:</div>
+      <div class="debrief-sub">What was the worst miss your partner found in your eval spec?</div>
+    </div>
+    <p style="font-size:14px; color:#8899bb; margin-top:16px;">Then reply to 2 peers with your reaction.</p>
+  </div>
+</div>
+
+<!-- ===== SLIDE: Hands-On Lab Header ===== -->
+<div class="slide" data-notes="Final build of the module.">
+  <div class="slide-inner" style="text-align:center;">
+    <div class="lab-header">
+      <div class="lab-title">Hands-On Lab</div>
+      <div class="lab-name">Reliability Contract</div>
+      <div class="lab-desc">Draft the contract between your AI and your users. What you promise, how you measure, what happens when it breaks.</div>
+    </div>
+  </div>
+</div>
+
 <!-- ===== SLIDE 15: Build Moment — Reliability Contract ===== -->
 <div class="slide" data-notes="Why: execs buy explicit promises. Push real numbers — even wrong numbers get corrected faster than mush. This is M6 board slide fodder. AWS/Azure SLAs as analogy.">
   <div class="slide-inner">
     <div class="demo-tag tag-build">Build Moment · 15 Minutes</div>
     <h2>Your Reliability Contract</h2>
+    <div class="lab-goal">
+      <div class="lab-goal-label">Your Goal</div>
+      <div class="lab-goal-text">Draft a reliability contract with four sections: <strong>promises</strong> (what AI will/won't do), <strong>measurements</strong> (how you know), <strong>escalation</strong> (what happens on failure), and <strong>feedback loops</strong> (how it improves).</div>
+    </div>
     <div class="subtitle">Promise · measure · escalate — in writing.</div>
     <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:20px 0;">
       <div style="background:rgba(59,130,246,0.06); border:1px solid rgba(59,130,246,0.15); border-radius:10px; padding:20px;">
@@ -510,20 +636,20 @@
       </div>
     </div>
     <div style="background:rgba(59,130,246,0.06); border:1px solid rgba(59,130,246,0.2); border-radius:14px; padding:22px; margin-top:12px;">
-      <div style="font-size:12px; font-weight:800; color:#3B82F6; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:10px;">Living Strategy — Component 4: The Contract</div>
-      <p style="font-size:14px; color:#8899bb; line-height:1.5;">Gold spec · Eval dashboard · Confidence UX · Contract · #1 red-team miss · HITL map</p>
+      <div style="font-size:12px; font-weight:800; color:#3B82F6; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:10px;">Repo — <code style="color:#6ee7b7;">04-the-contract/golden-dataset.md</code></div>
+      <p style="font-size:14px; color:#8899bb; line-height:1.5;">Eval spec · Golden dataset · Confidence UX · Reliability contract · #1 red-team miss · HITL map — all committed</p>
     </div>
     <p style="font-size:14px; color:#fbbf24; font-weight:600; text-align:center; margin-top:14px;">Clap once if today changed what you’ll demo next sprint.</p>
   </div>
 </div>
 
 <!-- ===== SLIDE 17: Bridge to M5 ===== -->
-<div class="slide" data-notes="M5 = org-scale failure modes. Hook: governance sells enterprise deals. Keep eval + contract artifacts visible on desk metaphor.">
+<div class="slide" data-notes="M5 = org-scale failure modes. Hook: governance sells enterprise deals. Repo should have 01–04 committed.">
   <div class="slide-inner">
     <div class="module-tag">Bridge to Module 5</div>
     <h2>Users Trust the System.<br>What Breaks When You Scale It?</h2>
     <div class="subtitle" style="margin:20px 0;">M5: compounding loops, agent governance, shadow-AI audits — governance as a sales asset.</div>
-    <p style="font-size:14px; color:#8899bb; margin-bottom:24px;"><strong>Bring to M5:</strong> Eval Dashboard Spec · Reliability Contract · Confidence UX · Living Strategy Components 1–4</p>
+    <p style="font-size:14px; color:#8899bb; margin-bottom:24px;"><strong>Before M5:</strong> push <code style="color:#6ee7b7;">04-the-contract/</code> to your repo — golden dataset, confidence UX, reliability contract all committed.</p>
     <div class="arc-flow">
       <div class="arc-node" style="background:rgba(52,211,153,0.15); border:1px solid rgba(52,211,153,0.3);"><div style="font-size:10px;">M1</div>The Bet</div>
       <div class="arc-arrow">→</div>
@@ -540,25 +666,76 @@
   </div>
 </div>
 
-<!-- ===== SLIDE 17.5: Module Tools ===== -->
-<div class="slide" data-notes="Point students to the interactive tools. Data saves to browser and carries forward.">
+<!-- ===== SLIDE 17.5: Your Living Strategy Repo ===== -->
+<div class="slide" data-notes="Reinforce the repo. 04-the-contract/ should now have their trust infrastructure committed.">
   <div class="slide-inner" style="text-align:center;">
-    <div class="module-tag">Your Module 4 Tools</div>
-    <h2>Continue Building</h2>
-    <div class="subtitle" style="margin:16px auto 28px;">Interactive tools — fill in during or after class. Your data carries forward to M5.</div>
+    <div class="module-tag">Your Living Strategy Repo</div>
+    <h2>Your Repo After Today</h2>
+    <div class="subtitle" style="margin:16px auto 28px;">Trust infrastructure committed. Four components done.</div>
     <div style="display:flex; gap:14px; justify-content:center; flex-wrap:wrap;">
-      <a href="M4 - Golden Dataset Builder.html" style="display:block; text-decoration:none; background:rgba(91,141,239,0.08); border:1px solid rgba(91,141,239,0.2); border-radius:10px; padding:20px 28px; transition:all 0.2s; min-width:200px;">
-        <div style="font-size:13px; font-weight:800; color:#5b8def; margin-bottom:6px;">Golden Dataset Builder</div>
-        <div style="font-size:12px; color:#7a7a9a;">Build your evaluation dataset with curated test cases</div>
-      </a>
-      <a href="M4 - Confidence UX Checklist.html" style="display:block; text-decoration:none; background:rgba(91,141,239,0.08); border:1px solid rgba(91,141,239,0.2); border-radius:10px; padding:20px 28px; transition:all 0.2s; min-width:200px;">
-        <div style="font-size:13px; font-weight:800; color:#5b8def; margin-bottom:6px;">Confidence UX Checklist</div>
-        <div style="font-size:12px; color:#7a7a9a;">16-point checklist for designing AI uncertainty</div>
-      </a>
-      <a href="Living Strategy Builder.html" style="display:block; text-decoration:none; background:rgba(160,123,232,0.08); border:1px solid rgba(160,123,232,0.2); border-radius:10px; padding:20px 28px; transition:all 0.2s; min-width:200px;">
-        <div style="font-size:13px; font-weight:800; color:#a07be8; margin-bottom:6px;">Living Strategy Builder</div>
-        <div style="font-size:12px; color:#7a7a9a;">Add Component 4 to your living strategy</div>
-      </a>
+      <div style="background:rgba(52,211,153,0.05); border:1px solid rgba(52,211,153,0.12); border-radius:10px; padding:20px 28px; min-width:160px; text-align:left; opacity:0.4;">
+        <div style="font-size:13px; font-weight:800; color:#34d399;">01-the-bet/ ✓</div>
+      </div>
+      <div style="background:rgba(52,211,153,0.05); border:1px solid rgba(52,211,153,0.12); border-radius:10px; padding:20px 28px; min-width:160px; text-align:left; opacity:0.4;">
+        <div style="font-size:13px; font-weight:800; color:#34d399;">02-the-moat/ ✓</div>
+      </div>
+      <div style="background:rgba(52,211,153,0.05); border:1px solid rgba(52,211,153,0.12); border-radius:10px; padding:20px 28px; min-width:160px; text-align:left; opacity:0.4;">
+        <div style="font-size:13px; font-weight:800; color:#34d399;">03-the-margin/ ✓</div>
+      </div>
+      <div style="background:rgba(52,211,153,0.08); border:1px solid rgba(52,211,153,0.2); border-radius:10px; padding:20px 28px; min-width:200px; text-align:left;">
+        <div style="font-size:13px; font-weight:800; color:#34d399; margin-bottom:6px;">04-the-contract/ ✓</div>
+        <div style="font-size:12px; color:#7a7a9a;">golden-dataset.md — evals, confidence UX, reliability contract</div>
+      </div>
+      <div style="background:rgba(59,130,246,0.05); border:1px solid rgba(59,130,246,0.12); border-radius:10px; padding:20px 28px; min-width:160px; text-align:left; opacity:0.3;">
+        <div style="font-size:13px; font-weight:800; color:#60a5fa;">05-the-guardrails/ → M5</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SLIDE: Module Complete ===== -->
+<div class="slide" data-notes="Celebrate accomplishments.">
+  <div class="slide-inner">
+    <div class="demo-tag tag-complete">Module 4 Complete</div>
+    <h2>What You Accomplished Today</h2>
+    <div class="complete-stats">
+      <div class="complete-stat"><div class="complete-num">1</div><div class="complete-label">File Committed to Repo</div></div>
+      <div class="complete-stat"><div class="complete-num">1</div><div class="complete-label">Red-Team Survived</div></div>
+      <div class="complete-stat"><div class="complete-num">4</div><div class="complete-label">Repo Folders Done</div></div>
+    </div>
+    <div class="complete-shifts">
+      <div class="complete-shift"><div class="shift-title">Trust = Accuracy → Trust = Perceived Control</div><div class="shift-desc">An 85% system with confidence scores and overrides beats a 95% black box. Trust is a product feature, not a metric.</div></div>
+      <div class="complete-shift"><div class="shift-title">Evals Later → Evals as Launch Infra</div><div class="shift-desc">AI degrades silently. Golden datasets, judges, and drift alerts are launch infrastructure — not a nice-to-have for later.</div></div>
+    </div>
+    <p style="font-size:16px; color:#60a5fa; font-weight:600; text-align:center;">Next: Module 5 — The Guardrails. Push <code style="color:#6ee7b7;">04-the-contract/</code> before next session.</p>
+  </div>
+</div>
+
+<!-- ===== SLIDE: Key Takeaways ===== -->
+<div class="slide" data-notes="Three key takeaways.">
+  <div class="slide-inner">
+    <div class="module-tag">Key Takeaways</div>
+    <h2>The Contract</h2>
+    <div class="takeaway-list">
+      <div class="takeaway-item"><p><strong>Trust is a function of perceived control, not accuracy.</strong> Users don't need perfect AI — they need to understand when it's confident, when it's uncertain, and when to override. Confidence UX makes trust visible.</p></div>
+      <div class="takeaway-item"><p><strong>Golden datasets are your receipts.</strong> When a buyer asks "how do you test this?" — your golden dataset is the answer. Version it like code, use it as a release gate, update it when the world changes.</p></div>
+      <div class="takeaway-item"><p><strong>Reliability contracts aren't metaphors.</strong> Air Canada's chatbot invented policy and the court held the company liable. Your AI's promises are your company's promises. Specify them, measure them, enforce them.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SLIDE: Extra Practice ===== -->
+<div class="slide" data-notes="Optional exercises. Preview M5. All work goes into the repo.">
+  <div class="slide-inner">
+    <div class="module-tag">Extra Practice</div>
+    <h2>Optional: Go Deeper</h2>
+    <div class="evidence-cards" style="margin:24px 0;">
+      <div class="evidence-card"><div class="ec-label">Exercise 1</div><div class="ec-company">Expand Your Golden Dataset</div><div class="ec-text">Add 10 more test cases to <code style="color:#6ee7b7;">04-the-contract/golden-dataset.md</code> — including 3 adversarial inputs that would break most systems. Commit to your repo.</div></div>
+      <div class="evidence-card"><div class="ec-label">Exercise 2</div><div class="ec-company">Detail Your Confidence UI</div><div class="ec-text">Expand the confidence UX section in your repo — sketch what your product looks like at 90% vs. 50% vs. below 50%. What visually changes? Commit the update.</div></div>
+    </div>
+    <div class="artifact-preview">
+      <div class="ap-title">Next Session: Module 5 — The Guardrails</div>
+      <p style="font-size:15px; color:#8899bb; line-height:1.5;">M4 was product-level trust. M5 is what breaks at org scale — agents choosing actions, shadow AI tools, governance as strategy. Bring your repo with <code style="color:#6ee7b7;">01/</code> through <code style="color:#6ee7b7;">04/</code> committed.</p>
     </div>
   </div>
 </div>
@@ -573,12 +750,21 @@
   </div>
 </div>
 
+<!-- ===== SLIDE: Q&A ===== -->
+<div class="slide" data-notes="Open floor for questions.">
+  <div class="slide-inner" style="text-align:center;">
+    <h1 style="font-size:64px; color:#3B82F6; margin-bottom:24px;">Q&amp;A</h1>
+    <p style="font-size:20px; color:#8899bb;">Any questions before we close?</p>
+    <p style="font-size:14px; color:#555; margin-top:20px;">Drop questions in Slack if something comes up later.</p>
+  </div>
+</div>
+
 <!-- ===== UI CHROME ===== -->
 <div class="nav">
   <button class="nav-btn" onclick="prev()" title="Previous (←)">‹</button>
   <button class="nav-btn" onclick="next()" title="Next (→)">›</button>
 </div>
-<div class="slide-counter"><span id="current">1</span> / <span id="total">18</span></div>
+<div class="slide-counter"><span id="current">1</span> / <span id="total">29</span></div>
 <div class="progress"><div class="progress-bar" id="progress-bar"></div></div>
 <div class="help-hint">← → navigate · S speaker notes · F fullscreen</div>
 <div class="speaker-notes" id="speaker-notes">

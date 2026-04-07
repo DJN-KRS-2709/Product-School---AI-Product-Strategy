@@ -141,6 +141,21 @@
     opacity: 0; transition: all 0.3s; pointer-events: none; z-index: 100;
   }
   .saved-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  .strategy-cta {
+    margin-top: 20px; margin-bottom: 4px; padding: 14px 18px;
+    background: rgba(160,123,232,0.06); border: 1px solid rgba(160,123,232,0.2);
+    border-radius: 10px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+  }
+  .strategy-cta-text { flex: 1; min-width: 200px; font-size: 13px; color: var(--text-dim); line-height: 1.5; }
+  .strategy-cta-text strong { color: var(--purple, #a07be8); }
+  .strategy-cta-btn {
+    font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 700;
+    padding: 8px 16px; border-radius: 8px; text-decoration: none;
+    background: rgba(160,123,232,0.12); border: 1px solid rgba(160,123,232,0.3);
+    color: #a07be8; white-space: nowrap; transition: all 0.2s;
+  }
+  .strategy-cta-btn:hover { background: rgba(160,123,232,0.2); color: #fff; border-color: #a07be8; }
 </style>
 </head>
 <body>
@@ -243,6 +258,11 @@
   </div>
 
   <p class="carry-forward">This carries forward to <strong>M3 (Margin Calculator)</strong> and <strong>M4 (Contract evaluation)</strong>.</p>
+
+  <div class="strategy-cta">
+    <div class="strategy-cta-text"><strong>Component 2 saved.</strong> Open the Living Strategy Builder to see your Moat in the dashboard.</div>
+    <a href="Living Strategy Builder.html" class="strategy-cta-btn" target="_blank">Open Living Strategy →</a>
+  </div>
 
   <div class="actions">
     <button type="button" class="btn" onclick="resetAll()">Reset</button>

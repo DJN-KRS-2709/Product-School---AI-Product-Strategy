@@ -23,6 +23,9 @@
     --purple: #a07be8;
     --purple-bg: rgba(160,123,232,0.1);
     --blue-bg: rgba(91,141,239,0.08);
+    --green-bg: rgba(61,214,140,0.08);
+    --yellow-bg: rgba(240,192,64,0.08);
+    --red-bg: rgba(239,91,91,0.08);
     --radius: 10px;
     --radius-lg: 14px;
   }
@@ -38,9 +41,8 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  /* Elevated master shell */
   .ls-shell {
-    max-width: 748px;
+    max-width: 820px;
     margin: 0 auto;
     padding: 2px;
     border-radius: calc(var(--radius-lg) + 3px);
@@ -53,302 +55,210 @@
     padding: 28px 22px 36px;
   }
 
-  .header { text-align: center; margin-bottom: 28px; }
+  .header { text-align: center; margin-bottom: 24px; }
+  .header-top { display: flex; justify-content: center; align-items: center; gap: 12px; margin-bottom: 14px; flex-wrap: wrap; }
   .badge {
     display: inline-block;
-    font-size: 10px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    color: var(--purple);
-    background: var(--purple-bg);
+    font-size: 10px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.12em;
+    color: var(--purple); background: var(--purple-bg);
     border: 1px solid rgba(160,123,232,0.25);
-    padding: 5px 14px;
-    border-radius: 20px;
-    margin-bottom: 14px;
+    padding: 5px 14px; border-radius: 20px;
   }
-  .header h1 {
-    font-size: 30px;
-    font-weight: 800;
-    color: #fff;
-    margin-bottom: 8px;
-    letter-spacing: -0.02em;
-    background: linear-gradient(90deg, #fff 0%, #d4c4f5 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-  .header p {
-    font-size: 14px;
-    color: var(--text-dim);
-    line-height: 1.6;
-    max-width: 520px;
-    margin: 0 auto;
-  }
-
-  .ls-layout {
-    display: grid;
-    grid-template-columns: 120px 1fr;
-    gap: 20px;
-    align-items: start;
-  }
-
-  .ls-stepper {
-    position: sticky;
-    top: 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    padding-left: 4px;
-  }
-  .step-item {
-    display: flex;
-    gap: 10px;
-    align-items: flex-start;
-    min-height: 56px;
-  }
-  .step-item:last-child .step-line { display: none; }
-  .step-dot-wrap {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 22px;
-    flex-shrink: 0;
-  }
-  .step-dot {
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    border: 2px solid var(--border);
-    background: var(--surface2);
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    font-weight: 700;
-    color: var(--text-muted);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.25s;
-  }
-  .step-item.done .step-dot {
-    border-color: var(--green);
-    background: rgba(61,214,140,0.15);
-    color: var(--green);
-  }
-  .step-item.current .step-dot {
-    border-color: var(--purple);
-    background: var(--purple-bg);
-    color: var(--purple);
-    box-shadow: 0 0 0 3px rgba(160,123,232,0.15);
-  }
-  .step-line {
-    width: 2px;
-    flex: 1;
-    min-height: 28px;
-    background: var(--border);
-    margin: 4px 0;
-  }
-  .step-item.done .step-line { background: rgba(61,214,140,0.25); }
-  .step-label {
-    font-size: 11px;
-    font-weight: 700;
-    color: var(--text-dim);
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    padding-top: 2px;
-  }
-  .step-item.done .step-label { color: var(--green); }
-  .step-item.current .step-label { color: var(--purple); }
-
-  .ls-main { min-width: 0; }
-
-  .card {
-    background: var(--surface);
+  .pres-toggle {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    padding: 5px 14px; border-radius: 20px;
     border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    margin-bottom: 18px;
-    overflow: hidden;
-    transition: border-color 0.2s;
-    scroll-margin-top: 20px;
+    background: var(--surface2); color: var(--text-dim);
+    cursor: pointer; transition: all 0.2s;
+  }
+  .pres-toggle:hover { border-color: var(--blue); color: var(--blue); }
+  body.present .pres-toggle { background: var(--blue-bg); border-color: var(--blue); color: var(--blue); }
+  .header h1 {
+    font-size: 30px; font-weight: 800; color: #fff;
+    margin-bottom: 8px; letter-spacing: -0.02em;
+    background: linear-gradient(90deg, #fff 0%, #d4c4f5 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+  .header p { font-size: 14px; color: var(--text-dim); line-height: 1.6; max-width: 560px; margin: 0 auto; }
+
+  /* Health score hero */
+  .health-row {
+    display: flex; gap: 16px; align-items: stretch; margin-bottom: 22px; flex-wrap: wrap;
+  }
+  .health-score-card {
+    flex: 0 0 160px;
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 20px 16px; text-align: center;
+  }
+  .health-number {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 42px; font-weight: 800; line-height: 1;
+    background: linear-gradient(135deg, var(--purple), var(--blue));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+  .health-label { font-size: 11px; font-weight: 600; color: var(--text-dim); margin-top: 6px; text-transform: uppercase; letter-spacing: 0.06em; }
+  .health-band { font-size: 12px; font-weight: 700; margin-top: 4px; }
+  .complete-bar-wrap {
+    flex: 1; min-width: 200px;
+    padding: 18px 20px;
+    background: var(--surface); border: 1px solid rgba(160,123,232,0.2); border-radius: var(--radius-lg);
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .complete-bar-label {
+    display: flex; justify-content: space-between;
+    font-size: 12px; font-weight: 600; color: var(--text-dim); margin-bottom: 8px;
+  }
+  .complete-bar-label span { font-family: 'JetBrains Mono', monospace; color: var(--purple); }
+  .complete-bar-track {
+    height: 8px; background: var(--surface2); border-radius: 4px;
+    overflow: hidden; border: 1px solid var(--border);
+  }
+  .complete-bar-fill { height: 100%; background: linear-gradient(90deg, var(--purple), var(--blue)); border-radius: 4px; transition: width 0.4s ease; }
+  .component-dots { display: flex; gap: 8px; margin-top: 12px; }
+  .component-dot {
+    display: flex; align-items: center; gap: 5px;
+    font-size: 10px; font-weight: 600; color: var(--text-muted);
+  }
+  .component-dot .cd-circ {
+    width: 10px; height: 10px; border-radius: 50%;
+    border: 2px solid var(--border); background: transparent; transition: all 0.3s;
+  }
+  .component-dot.done .cd-circ { border-color: var(--green); background: var(--green); }
+  .component-dot.done { color: var(--green); }
+
+  /* Cards */
+  .card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-lg); margin-bottom: 18px;
+    overflow: hidden; transition: border-color 0.2s; scroll-margin-top: 20px;
   }
   .card:hover { border-color: rgba(160,123,232,0.35); }
-
   .card-head {
-    padding: 16px 20px;
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 10px;
-    justify-content: space-between;
+    padding: 16px 20px; border-bottom: 1px solid var(--border);
+    display: flex; flex-wrap: wrap; align-items: center; gap: 10px; justify-content: space-between;
   }
   .card-head-left { min-width: 0; }
   .card-title { font-size: 15px; font-weight: 700; color: #fff; }
   .card-sub { font-size: 11px; color: var(--text-muted); margin-top: 3px; }
   .card-body { padding: 18px 20px 20px; }
+  .card-viz { padding: 20px; display: flex; flex-direction: column; align-items: center; gap: 12px; }
 
   .btn-sm {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 11px;
-    font-weight: 700;
-    padding: 7px 12px;
-    border-radius: 7px;
-    border: 1px solid rgba(160,123,232,0.35);
-    background: var(--purple-bg);
-    color: var(--purple);
-    cursor: pointer;
-    white-space: nowrap;
-    transition: all 0.2s;
+    font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 700;
+    padding: 7px 12px; border-radius: 7px;
+    border: 1px solid rgba(160,123,232,0.35); background: var(--purple-bg);
+    color: var(--purple); cursor: pointer; white-space: nowrap; transition: all 0.2s;
   }
-  .btn-sm:hover {
-    background: rgba(160,123,232,0.2);
-    color: #fff;
-    border-color: var(--purple);
-  }
+  .btn-sm:hover { background: rgba(160,123,232,0.2); color: #fff; border-color: var(--purple); }
 
   .field { margin-bottom: 14px; }
   .field:last-child { margin-bottom: 0; }
   .field label {
-    display: block;
-    font-size: 11px;
-    font-weight: 600;
-    color: var(--text-dim);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin-bottom: 6px;
+    display: block; font-size: 11px; font-weight: 600;
+    color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px;
   }
   .field input, .field select, .field textarea {
-    width: 100%;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 13px;
-    font-weight: 500;
-    color: #fff;
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 10px 12px;
-    outline: none;
-    transition: border-color 0.2s, box-shadow 0.2s;
+    width: 100%; font-family: 'JetBrains Mono', monospace;
+    font-size: 13px; font-weight: 500; color: #fff;
+    background: var(--surface2); border: 1px solid var(--border); border-radius: 8px;
+    padding: 10px 12px; outline: none; transition: border-color 0.2s, box-shadow 0.2s;
   }
   .field textarea { min-height: 72px; resize: vertical; line-height: 1.45; }
   .field input:focus, .field select:focus, .field textarea:focus {
-    border-color: var(--purple);
-    box-shadow: 0 0 0 3px rgba(160,123,232,0.12);
+    border-color: var(--purple); box-shadow: 0 0 0 3px rgba(160,123,232,0.12);
   }
   .auto-box {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    color: var(--text-dim);
-    background: var(--surface2);
-    border: 1px dashed var(--border);
-    border-radius: 8px;
-    padding: 10px 12px;
-    line-height: 1.5;
-    min-height: 42px;
+    font-family: 'JetBrains Mono', monospace; font-size: 12px;
+    color: var(--text-dim); background: var(--surface2);
+    border: 1px dashed var(--border); border-radius: 8px;
+    padding: 10px 12px; line-height: 1.5; min-height: 42px;
   }
   .auto-box.has-data { border-style: solid; border-color: rgba(160,123,232,0.3); color: var(--text); }
 
-  .complete-bar-wrap {
-    margin-top: 8px;
-    padding: 18px 20px;
-    background: var(--surface);
-    border: 1px solid rgba(160,123,232,0.2);
-    border-radius: var(--radius-lg);
-  }
-  .complete-bar-label {
-    display: flex;
-    justify-content: space-between;
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--text-dim);
-    margin-bottom: 8px;
-  }
-  .complete-bar-label span { font-family: 'JetBrains Mono', monospace; color: var(--purple); }
-  .complete-bar-track {
-    height: 8px;
-    background: var(--surface2);
-    border-radius: 4px;
-    overflow: hidden;
-    border: 1px solid var(--border);
-  }
-  .complete-bar-fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--purple), var(--blue));
-    border-radius: 4px;
-    transition: width 0.4s ease;
+  /* Viz panels */
+  .viz-row { display: flex; gap: 16px; flex-wrap: wrap; align-items: flex-start; }
+  .viz-col { flex: 1; min-width: 180px; }
+
+  canvas.chart { display: block; max-width: 100%; }
+
+  .vuln-bars { display: flex; gap: 12px; width: 100%; }
+  .vuln-bar-item { flex: 1; text-align: center; }
+  .vuln-bar-label { font-size: 10px; font-weight: 600; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 6px; }
+  .vuln-bar-track { height: 80px; background: var(--surface2); border-radius: 6px; border: 1px solid var(--border); position: relative; overflow: hidden; }
+  .vuln-bar-fill { position: absolute; bottom: 0; left: 0; right: 0; border-radius: 0 0 5px 5px; transition: height 0.4s ease, background 0.3s; }
+  .vuln-bar-val { font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 700; margin-top: 4px; }
+
+  .archetype-badge {
+    display: inline-block; padding: 6px 16px; border-radius: 8px;
+    font-size: 13px; font-weight: 700;
+    background: var(--purple-bg); border: 1px solid rgba(160,123,232,0.3); color: var(--purple);
   }
 
-  .bottom-actions {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    margin-top: 20px;
+  .stat-row { display: flex; gap: 14px; flex-wrap: wrap; }
+  .stat-box {
+    flex: 1; min-width: 100px; padding: 12px 14px;
+    background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius);
+    text-align: center;
   }
-  .btn-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    justify-content: center;
+  .stat-val { font-family: 'JetBrains Mono', monospace; font-size: 18px; font-weight: 700; color: #fff; }
+  .stat-label { font-size: 10px; font-weight: 600; color: var(--text-muted); margin-top: 3px; text-transform: uppercase; }
+
+  .trust-meter { display: flex; gap: 3px; height: 18px; border-radius: 4px; overflow: hidden; width: 100%; max-width: 280px; }
+  .trust-seg { flex: 1; transition: background 0.3s; }
+
+  .slider-group { margin-top: 6px; }
+  .slider-group label { font-size: 11px; font-weight: 600; color: var(--text-dim); }
+  .slider-row { display: flex; align-items: center; gap: 10px; margin-top: 4px; }
+  .slider-row input[type="range"] {
+    flex: 1; appearance: none; height: 6px; border-radius: 3px;
+    background: var(--surface2); border: 1px solid var(--border); outline: none;
   }
+  .slider-row input[type="range"]::-webkit-slider-thumb {
+    appearance: none; width: 18px; height: 18px; border-radius: 50%;
+    background: var(--purple); border: 2px solid #fff; cursor: pointer;
+  }
+  .slider-val { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 700; color: var(--purple); min-width: 36px; text-align: right; }
+
+  .bottom-actions { display: flex; flex-direction: column; gap: 12px; margin-top: 20px; }
+  .btn-row { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
   .btn {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 13px;
-    font-weight: 600;
-    padding: 10px 18px;
-    border-radius: 8px;
-    border: 1px solid var(--border);
-    background: var(--surface2);
-    color: var(--text);
-    cursor: pointer;
-    transition: all 0.2s;
+    font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600;
+    padding: 10px 18px; border-radius: 8px; border: 1px solid var(--border);
+    background: var(--surface2); color: var(--text); cursor: pointer; transition: all 0.2s;
   }
   .btn:hover { border-color: var(--purple); color: #fff; }
-  .btn.primary {
-    background: linear-gradient(135deg, var(--purple), #7b5fd4);
-    border-color: transparent;
-    color: #fff;
-  }
+  .btn.primary { background: linear-gradient(135deg, var(--purple), #7b5fd4); border-color: transparent; color: #fff; }
   .btn.primary:hover { filter: brightness(1.08); }
-  .btn.accent {
-    background: var(--blue-bg);
-    border-color: rgba(91,141,239,0.35);
-    color: var(--blue);
-  }
+  .btn.accent { background: var(--blue-bg); border-color: rgba(91,141,239,0.35); color: var(--blue); }
   .btn.accent:hover { color: #fff; border-color: var(--blue); }
 
   .saved-toast {
-    position: fixed;
-    bottom: 24px;
-    left: 50%;
+    position: fixed; bottom: 24px; left: 50%;
     transform: translateX(-50%) translateY(60px);
-    background: var(--green);
-    color: #000;
-    font-size: 13px;
-    font-weight: 600;
-    padding: 10px 24px;
-    border-radius: 8px;
-    opacity: 0;
-    transition: all 0.3s;
-    pointer-events: none;
-    z-index: 100;
-    max-width: 90vw;
-    text-align: center;
+    background: var(--green); color: #000;
+    font-size: 13px; font-weight: 600; padding: 10px 24px; border-radius: 8px;
+    opacity: 0; transition: all 0.3s; pointer-events: none; z-index: 100;
+    max-width: 90vw; text-align: center;
   }
   .saved-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
+  /* Presentation mode */
+  body.present { padding: 24px 16px 40px; }
+  body.present .ls-shell { max-width: 1000px; }
+  body.present .edit-only { display: none !important; }
+  body.present .card-viz { padding: 24px 28px; }
+  body.present .card-head .btn-sm { display: none; }
+  body.present .bottom-actions .edit-row { display: none; }
+
   @media (max-width: 640px) {
-    .ls-layout { grid-template-columns: 1fr; }
-    .ls-stepper {
-      position: relative;
-      top: 0;
-      flex-direction: row;
-      flex-wrap: wrap;
-      gap: 8px;
-      padding: 0;
-    }
-    .step-item { min-height: auto; flex-direction: column; align-items: center; }
-    .step-line { display: none !important; }
-    .step-label { text-align: center; font-size: 10px; }
+    .health-row { flex-direction: column; }
+    .health-score-card { flex: none; width: 100%; }
+    .viz-row { flex-direction: column; }
+    .vuln-bars { flex-direction: row; }
   }
 </style>
 </head>
@@ -357,192 +267,275 @@
 <div class="ls-shell">
   <div class="ls-inner">
     <div class="header">
-      <div class="badge">Cross-Module Tool</div>
+      <div class="header-top">
+        <div class="badge">Living Strategy</div>
+        <button type="button" class="pres-toggle" onclick="togglePresent()" id="presBtn">Board View</button>
+      </div>
       <h1>Living Strategy Builder</h1>
-      <p>Your compounding strategy artifact. Built across M1–M5, integrated in M6.</p>
+      <p>Your compounding strategy artifact. Each module feeds this dashboard — play with the numbers, visualize your position, and present it to the board.</p>
     </div>
 
-    <div class="complete-bar-wrap">
-      <div class="complete-bar-label">Strategy completeness <span id="completeFrac">0/5</span></div>
-      <div class="complete-bar-track"><div class="complete-bar-fill" id="completeFill" style="width:0%"></div></div>
+    <div class="health-row">
+      <div class="health-score-card">
+        <div class="health-number" id="healthNum">0</div>
+        <div class="health-label">Strategy Health</div>
+        <div class="health-band" id="healthBand">—</div>
+      </div>
+      <div class="complete-bar-wrap">
+        <div class="complete-bar-label">Strategy completeness <span id="completeFrac">0/5</span></div>
+        <div class="complete-bar-track"><div class="complete-bar-fill" id="completeFill" style="width:0%"></div></div>
+        <div class="component-dots" id="componentDots"></div>
+      </div>
     </div>
 
-    <div class="ls-layout" style="margin-top:22px">
-      <aside class="ls-stepper" id="stepper" aria-hidden="true"></aside>
-      <div class="ls-main">
-        <!-- M1 -->
-        <section class="card" id="card-m1">
-          <div class="card-head">
-            <div class="card-head-left">
-              <div class="card-title">The Bet · M1</div>
-              <div class="card-sub">Product framing and vulnerability context</div>
-            </div>
-            <button type="button" class="btn-sm" onclick="importM1()">Pull from M1 Vulnerability Scorecard</button>
+    <!-- M1: THE BET -->
+    <section class="card" id="card-m1">
+      <div class="card-head">
+        <div class="card-head-left">
+          <div class="card-title">The Bet · M1</div>
+          <div class="card-sub">Product framing and vulnerability exposure</div>
+        </div>
+        <button type="button" class="btn-sm" onclick="importM1()">Pull from M1</button>
+      </div>
+      <div class="card-viz">
+        <div class="viz-row" style="width:100%">
+          <div class="viz-col" style="display:flex;flex-direction:column;align-items:center;gap:8px">
+            <div class="archetype-badge" id="vizArchetype">No archetype</div>
+            <div id="vizProduct" style="font-size:13px;font-weight:600;color:var(--text-dim);margin-top:2px">—</div>
+            <div id="vizBet" style="font-size:12px;color:var(--text-muted);text-align:center;max-width:260px;line-height:1.5;margin-top:2px">—</div>
           </div>
-          <div class="card-body">
-            <div class="field">
-              <label>Product name</label>
-              <input type="text" id="c1_product" placeholder="e.g. Acme Copilot">
+          <div class="viz-col">
+            <div class="vuln-bars" id="vulnBars">
+              <div class="vuln-bar-item"><div class="vuln-bar-label">Moat</div><div class="vuln-bar-track"><div class="vuln-bar-fill" id="vb_moat"></div></div><div class="vuln-bar-val" id="vv_moat">—</div></div>
+              <div class="vuln-bar-item"><div class="vuln-bar-label">Data</div><div class="vuln-bar-track"><div class="vuln-bar-fill" id="vb_data"></div></div><div class="vuln-bar-val" id="vv_data">—</div></div>
+              <div class="vuln-bar-item"><div class="vuln-bar-label">Platform</div><div class="vuln-bar-track"><div class="vuln-bar-fill" id="vb_platform"></div></div><div class="vuln-bar-val" id="vv_platform">—</div></div>
             </div>
-            <div class="field">
-              <label>AI value archetype</label>
-              <select id="c1_archetype">
-                <option value="">Select…</option>
-                <option value="Automator">Automator</option>
-                <option value="Copilot">Copilot</option>
-                <option value="Oracle">Oracle</option>
-                <option value="Creator">Creator</option>
-                <option value="Orchestrator">Orchestrator</option>
-              </select>
-            </div>
-            <div class="field">
-              <label>One-line bet statement</label>
-              <textarea id="c1_bet" placeholder="What are you betting the company on?"></textarea>
-            </div>
-            <div class="field">
-              <label>Vulnerability score summary</label>
-              <div class="auto-box" id="c1_vuln">—</div>
-            </div>
-          </div>
-        </section>
-
-        <!-- M2 -->
-        <section class="card" id="card-m2">
-          <div class="card-head">
-            <div class="card-head-left">
-              <div class="card-title">The Moat · M2</div>
-              <div class="card-sub">Flywheel strength and dependency risk</div>
-            </div>
-            <button type="button" class="btn-sm" onclick="importM2()">Pull from M2 tools</button>
-          </div>
-          <div class="card-body">
-            <div class="field">
-              <label>Primary moat type</label>
-              <select id="c2_moat">
-                <option value="">Select…</option>
-                <option value="Data">Data</option>
-                <option value="Workflow">Workflow</option>
-                <option value="Regulatory">Regulatory</option>
-                <option value="Distribution">Distribution</option>
-                <option value="Ecosystem">Ecosystem</option>
-                <option value="Network">Network</option>
-                <option value="Physical Infrastructure">Physical Infrastructure</option>
-                <option value="Scale">Scale</option>
-              </select>
-            </div>
-            <div class="field">
-              <label>Flywheel score summary</label>
-              <div class="auto-box" id="c2_fly">—</div>
-            </div>
-            <div class="field">
-              <label>Kill switch status</label>
-              <div class="auto-box" id="c2_kill">—</div>
-            </div>
-            <div class="field">
-              <label>Biggest threat</label>
-              <textarea id="c2_threat" placeholder="What could unwind the moat fastest?"></textarea>
-            </div>
-          </div>
-        </section>
-
-        <!-- M3 -->
-        <section class="card" id="card-m3">
-          <div class="card-head">
-            <div class="card-head-left">
-              <div class="card-title">The Margin · M3</div>
-              <div class="card-sub">Pricing logic and unit economics</div>
-            </div>
-            <button type="button" class="btn-sm" onclick="importM3()">Pull from M3 tools</button>
-          </div>
-          <div class="card-body">
-            <div class="field">
-              <label>Pricing strategy</label>
-              <div class="auto-box" id="c3_strategy">—</div>
-            </div>
-            <div class="field">
-              <label>Pricing model</label>
-              <div class="auto-box" id="c3_model">—</div>
-            </div>
-            <div class="field">
-              <label>Current margin %</label>
-              <div class="auto-box" id="c3_margin">—</div>
-            </div>
-            <div class="field">
-              <label>Revenue per user</label>
-              <div class="auto-box" id="c3_rev">—</div>
-            </div>
-            <div class="field">
-              <label>Key risk from stress test</label>
-              <textarea id="c3_risk" placeholder="What breaks first if costs spike or usage doubles?"></textarea>
-            </div>
-          </div>
-        </section>
-
-        <!-- M4 -->
-        <section class="card" id="card-m4">
-          <div class="card-head">
-            <div class="card-head-left">
-              <div class="card-title">The Contract · M4</div>
-              <div class="card-sub">Evaluation and confidence UX</div>
-            </div>
-            <button type="button" class="btn-sm" onclick="importM4()">Pull from M4 tools</button>
-          </div>
-          <div class="card-body">
-            <div class="field">
-              <label>Eval method</label>
-              <div class="auto-box" id="c4_eval">—</div>
-            </div>
-            <div class="field">
-              <label>Golden dataset size</label>
-              <div class="auto-box" id="c4_golden">—</div>
-            </div>
-            <div class="field">
-              <label>Confidence UX maturity</label>
-              <div class="auto-box" id="c4_conf">—</div>
-            </div>
-            <div class="field">
-              <label>Key quality commitment</label>
-              <textarea id="c4_commit" placeholder="What do you promise users about quality and failures?"></textarea>
-            </div>
-          </div>
-        </section>
-
-        <!-- M5 -->
-        <section class="card" id="card-m5">
-          <div class="card-head">
-            <div class="card-head-left">
-              <div class="card-title">The Guardrails · M5</div>
-              <div class="card-sub">Maturity and governance</div>
-            </div>
-            <button type="button" class="btn-sm" onclick="importM5()">Pull from M5 tools</button>
-          </div>
-          <div class="card-body">
-            <div class="field">
-              <label>AI maturity score</label>
-              <div class="auto-box" id="c5_maturity">—</div>
-            </div>
-            <div class="field">
-              <label>Shadow tools found</label>
-              <div class="auto-box" id="c5_shadow">—</div>
-            </div>
-            <div class="field">
-              <label>Top governance priority</label>
-              <textarea id="c5_gov" placeholder="Policy, access, logging, review — what comes first?"></textarea>
-            </div>
-          </div>
-        </section>
-
-        <div class="bottom-actions">
-          <div class="btn-row">
-            <button type="button" class="btn primary" onclick="exportFullMarkdown()">Export Full Strategy</button>
-            <button type="button" class="btn accent" onclick="copyStrategySummary()">Copy Strategy Summary</button>
-          </div>
-          <div class="btn-row">
-            <button type="button" class="btn" onclick="resetAll()">Reset</button>
-            <button type="button" class="btn" onclick="copyAsText()">Copy as Text</button>
-            <button type="button" class="btn" onclick="exportMarkdownFile()">Export Markdown</button>
           </div>
         </div>
+      </div>
+      <div class="card-body edit-only">
+        <div class="field">
+          <label>Product name</label>
+          <input type="text" id="c1_product" placeholder="e.g. Acme Copilot">
+        </div>
+        <div class="field">
+          <label>AI value archetype</label>
+          <select id="c1_archetype">
+            <option value="">Select…</option>
+            <option value="Automator">Automator</option>
+            <option value="Copilot">Copilot</option>
+            <option value="Oracle">Oracle</option>
+            <option value="Creator">Creator</option>
+            <option value="Orchestrator">Orchestrator</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>One-line bet statement</label>
+          <textarea id="c1_bet" placeholder="What are you betting the company on?"></textarea>
+        </div>
+        <div class="field">
+          <label>Vulnerability score summary</label>
+          <div class="auto-box" id="c1_vuln">—</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- M2: THE MOAT -->
+    <section class="card" id="card-m2">
+      <div class="card-head">
+        <div class="card-head-left">
+          <div class="card-title">The Moat · M2</div>
+          <div class="card-sub">Flywheel strength, positioning, and dependency risk</div>
+        </div>
+        <button type="button" class="btn-sm" onclick="importM2()">Pull from M2</button>
+      </div>
+      <div class="card-viz">
+        <div class="stat-row" style="width:100%">
+          <div class="stat-box"><div class="stat-val" id="vizMoatType">—</div><div class="stat-label">Moat Type</div></div>
+          <div class="stat-box"><div class="stat-val" id="vizFlyScore">—</div><div class="stat-label">Flywheel</div></div>
+          <div class="stat-box"><div class="stat-val" id="vizKillSwitch">—</div><div class="stat-label">Kill Switch</div></div>
+        </div>
+        <canvas id="flywheelCanvas" class="chart" width="340" height="200" style="margin-top:8px"></canvas>
+      </div>
+      <div class="card-body edit-only">
+        <div class="field">
+          <label>Primary moat type</label>
+          <select id="c2_moat">
+            <option value="">Select…</option>
+            <option value="Data">Data</option>
+            <option value="Workflow">Workflow</option>
+            <option value="Regulatory">Regulatory</option>
+            <option value="Distribution">Distribution</option>
+            <option value="Ecosystem">Ecosystem</option>
+            <option value="Network">Network</option>
+            <option value="Physical Infrastructure">Physical Infrastructure</option>
+            <option value="Scale">Scale</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Flywheel score summary</label>
+          <div class="auto-box" id="c2_fly">—</div>
+        </div>
+        <div class="field">
+          <label>Kill switch status</label>
+          <div class="auto-box" id="c2_kill">—</div>
+        </div>
+        <div class="field">
+          <label>Biggest threat</label>
+          <textarea id="c2_threat" placeholder="What could unwind the moat fastest?"></textarea>
+        </div>
+      </div>
+    </section>
+
+    <!-- M3: THE MARGIN -->
+    <section class="card" id="card-m3">
+      <div class="card-head">
+        <div class="card-head-left">
+          <div class="card-title">The Margin · M3</div>
+          <div class="card-sub">Unit economics with live scenario modeling</div>
+        </div>
+        <button type="button" class="btn-sm" onclick="importM3()">Pull from M3</button>
+      </div>
+      <div class="card-viz">
+        <div class="stat-row" style="width:100%">
+          <div class="stat-box"><div class="stat-val" id="vizMargin">—</div><div class="stat-label">Margin</div></div>
+          <div class="stat-box"><div class="stat-val" id="vizRev">—</div><div class="stat-label">Rev / User</div></div>
+          <div class="stat-box"><div class="stat-val" id="vizStrategy">—</div><div class="stat-label">Pricing</div></div>
+        </div>
+        <canvas id="marginCanvas" class="chart" width="480" height="180" style="margin-top:8px"></canvas>
+        <div style="width:100%;max-width:480px">
+          <div class="slider-group">
+            <div class="slider-row">
+              <label>Inference cost multiplier</label>
+              <input type="range" id="costSlider" min="50" max="500" value="100" step="10">
+              <span class="slider-val" id="costSliderVal">1.0x</span>
+            </div>
+          </div>
+          <div class="slider-group" style="margin-top:8px">
+            <div class="slider-row">
+              <label>Usage volume multiplier</label>
+              <input type="range" id="volSlider" min="100" max="1000" value="100" step="50">
+              <span class="slider-val" id="volSliderVal">1.0x</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body edit-only">
+        <div class="field">
+          <label>Pricing strategy</label>
+          <div class="auto-box" id="c3_strategy">—</div>
+        </div>
+        <div class="field">
+          <label>Pricing model</label>
+          <div class="auto-box" id="c3_model">—</div>
+        </div>
+        <div class="field">
+          <label>Current margin %</label>
+          <div class="auto-box" id="c3_margin">—</div>
+        </div>
+        <div class="field">
+          <label>Revenue per user</label>
+          <div class="auto-box" id="c3_rev">—</div>
+        </div>
+        <div class="field">
+          <label>Key risk from stress test</label>
+          <textarea id="c3_risk" placeholder="What breaks first if costs spike or usage doubles?"></textarea>
+        </div>
+      </div>
+    </section>
+
+    <!-- M4: THE CONTRACT -->
+    <section class="card" id="card-m4">
+      <div class="card-head">
+        <div class="card-head-left">
+          <div class="card-title">The Contract · M4</div>
+          <div class="card-sub">Trust architecture and evaluation coverage</div>
+        </div>
+        <button type="button" class="btn-sm" onclick="importM4()">Pull from M4</button>
+      </div>
+      <div class="card-viz">
+        <div class="stat-row" style="width:100%">
+          <div class="stat-box"><div class="stat-val" id="vizEval">—</div><div class="stat-label">Eval Method</div></div>
+          <div class="stat-box"><div class="stat-val" id="vizGolden">—</div><div class="stat-label">Golden Dataset</div></div>
+          <div class="stat-box"><div class="stat-val" id="vizConf">—</div><div class="stat-label">Confidence UX</div></div>
+        </div>
+        <div style="text-align:center;width:100%;margin-top:4px">
+          <div style="font-size:10px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:6px">Trust Maturity</div>
+          <div class="trust-meter" id="trustMeter" style="margin:0 auto">
+            <div class="trust-seg" id="ts0"></div><div class="trust-seg" id="ts1"></div><div class="trust-seg" id="ts2"></div>
+            <div class="trust-seg" id="ts3"></div><div class="trust-seg" id="ts4"></div>
+          </div>
+          <div style="display:flex;justify-content:space-between;max-width:280px;margin:4px auto 0;font-size:9px;color:var(--text-muted)"><span>No evals</span><span>Full trust arch.</span></div>
+        </div>
+      </div>
+      <div class="card-body edit-only">
+        <div class="field">
+          <label>Eval method</label>
+          <div class="auto-box" id="c4_eval">—</div>
+        </div>
+        <div class="field">
+          <label>Golden dataset size</label>
+          <div class="auto-box" id="c4_golden">—</div>
+        </div>
+        <div class="field">
+          <label>Confidence UX maturity</label>
+          <div class="auto-box" id="c4_conf">—</div>
+        </div>
+        <div class="field">
+          <label>Key quality commitment</label>
+          <textarea id="c4_commit" placeholder="What do you promise users about quality and failures?"></textarea>
+        </div>
+      </div>
+    </section>
+
+    <!-- M5: THE GUARDRAILS -->
+    <section class="card" id="card-m5">
+      <div class="card-head">
+        <div class="card-head-left">
+          <div class="card-title">The Guardrails · M5</div>
+          <div class="card-sub">AI maturity radar and governance posture</div>
+        </div>
+        <button type="button" class="btn-sm" onclick="importM5()">Pull from M5</button>
+      </div>
+      <div class="card-viz">
+        <div class="viz-row" style="width:100%">
+          <div class="viz-col" style="display:flex;flex-direction:column;align-items:center">
+            <canvas id="radarCanvas" class="chart" width="240" height="240"></canvas>
+          </div>
+          <div class="viz-col">
+            <div class="stat-row" style="flex-direction:column;gap:10px">
+              <div class="stat-box"><div class="stat-val" id="vizMaturity">—</div><div class="stat-label">Maturity Score</div></div>
+              <div class="stat-box"><div class="stat-val" id="vizShadow">—</div><div class="stat-label">Shadow Tools</div></div>
+              <div class="stat-box" id="vizMatBand"><div class="stat-val" id="vizBandLabel">—</div><div class="stat-label">Band</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body edit-only">
+        <div class="field">
+          <label>AI maturity score</label>
+          <div class="auto-box" id="c5_maturity">—</div>
+        </div>
+        <div class="field">
+          <label>Shadow tools found</label>
+          <div class="auto-box" id="c5_shadow">—</div>
+        </div>
+        <div class="field">
+          <label>Top governance priority</label>
+          <textarea id="c5_gov" placeholder="Policy, access, logging, review — what comes first?"></textarea>
+        </div>
+      </div>
+    </section>
+
+    <div class="bottom-actions">
+      <div class="btn-row">
+        <button type="button" class="btn primary" onclick="exportFullMarkdown()">Export Full Strategy</button>
+        <button type="button" class="btn accent" onclick="copyBoardSummary()">Copy Board Summary</button>
+      </div>
+      <div class="btn-row edit-row edit-only">
+        <button type="button" class="btn" onclick="resetAll()">Reset</button>
+        <button type="button" class="btn" onclick="copyAsText()">Copy as Text</button>
+        <button type="button" class="btn" onclick="exportMarkdownFile()">Export Markdown</button>
       </div>
     </div>
   </div>
@@ -555,72 +548,434 @@ const KEY = 'aps-strategy';
 const $ = id => document.getElementById(id);
 
 const M1_AXES = [
-  { k: 'contextualMoat', label: 'Contextual Moat' },
-  { k: 'dataAdvantage', label: 'Data Advantage' },
-  { k: 'platformExposure', label: 'Platform Exposure' }
+  { k: 'contextualMoat', label: 'Contextual Moat', short: 'Moat' },
+  { k: 'dataAdvantage', label: 'Data Advantage', short: 'Data' },
+  { k: 'platformExposure', label: 'Platform Exposure', short: 'Platform' }
 ];
 const FW_LOOPS = [
-  { key: 'corrections', title: 'Corrections Loop' },
-  { key: 'preferences', title: 'Preferences Loop' },
-  { key: 'domainContext', title: 'Domain Context Loop' },
-  { key: 'network', title: 'Network Loop' }
+  { key: 'corrections', title: 'Corrections' },
+  { key: 'preferences', title: 'Preferences' },
+  { key: 'domainContext', title: 'Domain Context' },
+  { key: 'network', title: 'Network' }
 ];
 const KILL_INTEGRATION_LABEL = {
-  direct: 'Direct API calls',
+  direct: 'Direct API',
   thin: 'Thin wrapper',
-  abstract: 'Abstraction layer',
-  multi: 'Multi-provider routing'
+  abstract: 'Abstracted',
+  multi: 'Multi-provider'
 };
 const STRATEGY_LABEL = { skim: 'Skim', penetrate: 'Penetrate', maximize: 'Maximize' };
-const MODEL_LABEL = { seat: 'Seat / Access', hybrid: 'Hybrid (base + usage)', outcome: 'Outcome / Resolution' };
+const MODEL_LABEL = { seat: 'Seat / Access', hybrid: 'Hybrid', outcome: 'Outcome' };
+const M5_DIMS = ['Compliance','Transparency','Fairness','Privacy','Accountability'];
 
-const INPUT_IDS = [
-  'c1_product', 'c1_archetype', 'c1_bet',
-  'c2_moat', 'c2_threat',
-  'c3_risk',
-  'c4_commit',
-  'c5_gov'
-];
+const INPUT_IDS = ['c1_product','c1_archetype','c1_bet','c2_moat','c2_threat','c3_risk','c4_commit','c5_gov'];
 
-function safeJSON(key) {
-  try {
-    const s = localStorage.getItem(key);
-    return s ? JSON.parse(s) : null;
-  } catch (e) { return null; }
+function safeJSON(key) { try { const s = localStorage.getItem(key); return s ? JSON.parse(s) : null; } catch(e) { return null; } }
+function num(v, d = null) { const n = parseFloat(v); return Number.isFinite(n) ? n : d; }
+function setAuto(el, text, has) { el.textContent = text || '—'; el.classList.toggle('has-data', !!has && text !== '—'); }
+function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
+
+/* ── Vulnerability bars (M1) ── */
+let vulnScores = [null, null, null];
+function drawVulnBars() {
+  const ids = ['moat','data','platform'];
+  const colors = [
+    {lo:'var(--red)',hi:'var(--green)'},
+    {lo:'var(--red)',hi:'var(--green)'},
+    {lo:'var(--green)',hi:'var(--red)'}
+  ];
+  vulnScores.forEach((v, i) => {
+    const fill = $('vb_' + ids[i]);
+    const val = $('vv_' + ids[i]);
+    if (v == null) {
+      fill.style.height = '0%';
+      fill.style.background = 'var(--border)';
+      val.textContent = '—';
+      val.style.color = 'var(--text-muted)';
+    } else {
+      const pct = (v / 5) * 100;
+      fill.style.height = pct + '%';
+      const c = v <= 2 ? 'var(--red)' : v <= 3 ? 'var(--yellow)' : 'var(--green)';
+      const pc = i === 2 ? (v <= 2 ? 'var(--green)' : v >= 4 ? 'var(--red)' : 'var(--yellow)') : c;
+      fill.style.background = pc;
+      val.textContent = v + '/5';
+      val.style.color = pc;
+    }
+  });
 }
 
-function num(v, d = null) {
-  const n = parseFloat(v);
-  return Number.isFinite(n) ? n : d;
+/* ── Flywheel canvas (M2) ── */
+let fwScores = [0, 0, 0, 0];
+function drawFlywheel() {
+  const cv = $('flywheelCanvas');
+  const ctx = cv.getContext('2d');
+  const W = cv.width, H = cv.height;
+  ctx.clearRect(0, 0, W, H);
+  const cx = W / 2, cy = H / 2, r = 60;
+  const labels = FW_LOOPS.map(l => l.title);
+  const angles = labels.map((_, i) => -Math.PI / 2 + (2 * Math.PI * i) / labels.length);
+
+  ctx.strokeStyle = 'rgba(160,123,232,0.15)';
+  ctx.lineWidth = 1;
+  for (let ring = 1; ring <= 5; ring++) {
+    ctx.beginPath();
+    ctx.arc(cx, cy, r * ring / 5, 0, Math.PI * 2);
+    ctx.stroke();
+  }
+
+  const pts = fwScores.map((s, i) => {
+    const a = angles[i];
+    const d = r * (s / 5);
+    return [cx + d * Math.cos(a), cy + d * Math.sin(a)];
+  });
+
+  ctx.fillStyle = 'rgba(160,123,232,0.12)';
+  ctx.strokeStyle = 'rgba(160,123,232,0.7)';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  pts.forEach((p, i) => i === 0 ? ctx.moveTo(p[0], p[1]) : ctx.lineTo(p[0], p[1]));
+  ctx.closePath();
+  ctx.fill();
+  ctx.stroke();
+
+  pts.forEach((p, i) => {
+    ctx.beginPath();
+    ctx.arc(p[0], p[1], 4, 0, Math.PI * 2);
+    ctx.fillStyle = fwScores[i] >= 4 ? '#3dd68c' : fwScores[i] >= 2 ? '#f0c040' : '#ef5b5b';
+    ctx.fill();
+  });
+
+  ctx.font = '600 10px DM Sans';
+  ctx.textAlign = 'center';
+  ctx.fillStyle = '#7a7a9a';
+  labels.forEach((l, i) => {
+    const a = angles[i];
+    const lx = cx + (r + 22) * Math.cos(a);
+    const ly = cy + (r + 22) * Math.sin(a);
+    ctx.fillText(l, lx, ly + 3);
+  });
+
+  for (let i = 0; i < labels.length; i++) {
+    const j = (i + 1) % labels.length;
+    const mp = [(pts[i][0] + pts[j][0]) / 2, (pts[i][1] + pts[j][1]) / 2];
+    const a = Math.atan2(pts[j][1] - pts[i][1], pts[j][0] - pts[i][0]);
+    ctx.save();
+    ctx.translate(mp[0], mp[1]);
+    ctx.rotate(a);
+    ctx.fillStyle = 'rgba(160,123,232,0.5)';
+    ctx.beginPath();
+    ctx.moveTo(6, 0); ctx.lineTo(-2, -3); ctx.lineTo(-2, 3); ctx.closePath();
+    ctx.fill();
+    ctx.restore();
+  }
 }
 
-function setAuto(el, text, has) {
-  el.textContent = text || '—';
-  el.classList.toggle('has-data', !!has && text !== '—');
+/* ── Margin chart (M3) ── */
+let marginBase = null;
+function getMarginData() {
+  const m = safeJSON('aps-m3-margin');
+  if (!m) return null;
+  const requests = num(m.requests, 0);
+  const costPerReq = num(m.costPerReq, 0);
+  const revenue = num(m.revenue, 0);
+  const otherCogs = num(m.otherCogs, 0);
+  if (revenue <= 0 || requests <= 0) return null;
+  return { requests, costPerReq, revenue, otherCogs };
+}
+function drawMarginChart() {
+  const cv = $('marginCanvas');
+  const ctx = cv.getContext('2d');
+  const W = cv.width, H = cv.height;
+  ctx.clearRect(0, 0, W, H);
+
+  const d = marginBase || getMarginData();
+  if (!d) {
+    ctx.font = '500 13px DM Sans';
+    ctx.fillStyle = '#55556a';
+    ctx.textAlign = 'center';
+    ctx.fillText('Import M3 data to see your cost curve', W/2, H/2);
+    return;
+  }
+
+  const costMul = parseInt($('costSlider').value) / 100;
+  const volMul = parseInt($('volSlider').value) / 100;
+  $('costSliderVal').textContent = costMul.toFixed(1) + 'x';
+  $('volSliderVal').textContent = volMul.toFixed(1) + 'x';
+
+  const steps = 10;
+  const pad = { t: 20, r: 20, b: 30, l: 48 };
+  const cw = W - pad.l - pad.r;
+  const ch = H - pad.t - pad.b;
+
+  const points = [];
+  for (let i = 0; i <= steps; i++) {
+    const xMul = 0.5 + (i / steps) * 4.5;
+    const aiCogs = d.requests * volMul * d.costPerReq * costMul * xMul;
+    const gp = d.revenue - aiCogs - d.otherCogs;
+    const margin = (gp / d.revenue) * 100;
+    points.push({ x: xMul, margin: clamp(margin, -100, 100) });
+  }
+
+  const yMin = -100, yMax = 100;
+
+  ctx.strokeStyle = 'rgba(255,255,255,0.06)';
+  ctx.lineWidth = 1;
+  for (let v = -100; v <= 100; v += 50) {
+    const y = pad.t + ch - ((v - yMin) / (yMax - yMin)) * ch;
+    ctx.beginPath(); ctx.moveTo(pad.l, y); ctx.lineTo(W - pad.r, y); ctx.stroke();
+    ctx.font = '500 10px JetBrains Mono';
+    ctx.fillStyle = '#55556a';
+    ctx.textAlign = 'right';
+    ctx.fillText(v + '%', pad.l - 6, y + 3);
+  }
+
+  const zeroY = pad.t + ch - ((0 - yMin) / (yMax - yMin)) * ch;
+  ctx.strokeStyle = 'rgba(239,91,91,0.3)';
+  ctx.setLineDash([4, 4]);
+  ctx.beginPath(); ctx.moveTo(pad.l, zeroY); ctx.lineTo(W - pad.r, zeroY); ctx.stroke();
+  ctx.setLineDash([]);
+
+  ctx.strokeStyle = 'rgba(160,123,232,0.8)';
+  ctx.lineWidth = 2.5;
+  ctx.beginPath();
+  points.forEach((p, i) => {
+    const px = pad.l + ((p.x - 0.5) / 4.5) * cw;
+    const py = pad.t + ch - ((p.margin - yMin) / (yMax - yMin)) * ch;
+    i === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py);
+  });
+  ctx.stroke();
+
+  const curX = pad.l + ((1 - 0.5) / 4.5) * cw;
+  const curAiCogs = d.requests * volMul * d.costPerReq * costMul;
+  const curMargin = ((d.revenue - curAiCogs - d.otherCogs) / d.revenue) * 100;
+  const curY = pad.t + ch - ((clamp(curMargin, -100, 100) - yMin) / (yMax - yMin)) * ch;
+  ctx.beginPath();
+  ctx.arc(curX, curY, 5, 0, Math.PI * 2);
+  ctx.fillStyle = curMargin >= 40 ? '#3dd68c' : curMargin >= 0 ? '#f0c040' : '#ef5b5b';
+  ctx.fill();
+
+  ctx.font = '700 10px JetBrains Mono';
+  ctx.fillStyle = '#fff';
+  ctx.textAlign = 'left';
+  ctx.fillText(clamp(curMargin, -100, 100).toFixed(1) + '%', curX + 8, curY + 4);
+
+  ctx.font = '500 9px DM Sans';
+  ctx.fillStyle = '#55556a';
+  ctx.textAlign = 'center';
+  ctx.fillText('Relative cost scale', W / 2, H - 4);
+
+  $('vizMargin').textContent = curMargin.toFixed(1) + '%';
+  $('vizMargin').style.color = curMargin >= 40 ? 'var(--green)' : curMargin >= 0 ? 'var(--yellow)' : 'var(--red)';
+}
+
+/* ── Radar chart (M5) ── */
+let m5Scores = [0, 0, 0, 0, 0];
+function drawRadar() {
+  const cv = $('radarCanvas');
+  const ctx = cv.getContext('2d');
+  const W = cv.width, H = cv.height;
+  ctx.clearRect(0, 0, W, H);
+  const cx = W / 2, cy = H / 2, R = 85;
+  const n = 5;
+  const angles = M5_DIMS.map((_, i) => -Math.PI / 2 + (2 * Math.PI * i) / n);
+
+  for (let ring = 1; ring <= 5; ring++) {
+    ctx.strokeStyle = 'rgba(255,255,255,0.06)';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    angles.forEach((a, i) => {
+      const x = cx + R * (ring / 5) * Math.cos(a);
+      const y = cy + R * (ring / 5) * Math.sin(a);
+      i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    });
+    ctx.closePath();
+    ctx.stroke();
+  }
+
+  angles.forEach(a => {
+    ctx.strokeStyle = 'rgba(255,255,255,0.04)';
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.lineTo(cx + R * Math.cos(a), cy + R * Math.sin(a));
+    ctx.stroke();
+  });
+
+  const pts = m5Scores.map((s, i) => {
+    const d = R * (s / 5);
+    return [cx + d * Math.cos(angles[i]), cy + d * Math.sin(angles[i])];
+  });
+  ctx.fillStyle = 'rgba(91,141,239,0.15)';
+  ctx.strokeStyle = 'rgba(91,141,239,0.7)';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  pts.forEach((p, i) => i === 0 ? ctx.moveTo(p[0], p[1]) : ctx.lineTo(p[0], p[1]));
+  ctx.closePath();
+  ctx.fill();
+  ctx.stroke();
+
+  pts.forEach((p, i) => {
+    ctx.beginPath();
+    ctx.arc(p[0], p[1], 3.5, 0, Math.PI * 2);
+    ctx.fillStyle = m5Scores[i] >= 4 ? '#3dd68c' : m5Scores[i] >= 2 ? '#5b8def' : '#ef5b5b';
+    ctx.fill();
+  });
+
+  ctx.font = '600 9px DM Sans';
+  ctx.textAlign = 'center';
+  ctx.fillStyle = '#7a7a9a';
+  M5_DIMS.forEach((l, i) => {
+    const lx = cx + (R + 18) * Math.cos(angles[i]);
+    const ly = cy + (R + 18) * Math.sin(angles[i]);
+    ctx.fillText(l, lx, ly + 3);
+  });
+}
+
+/* ── Trust meter (M4) ── */
+function drawTrustMeter() {
+  let level = 0;
+  const evalText = $('c4_eval').textContent.trim();
+  const goldenText = $('c4_golden').textContent.trim();
+  const confText = $('c4_conf').textContent.trim();
+  const commitText = $('c4_commit').value.trim();
+  if (evalText && evalText !== '—') level++;
+  if (goldenText && goldenText !== '—') level++;
+  if (confText && confText !== '—') level++;
+  if (commitText) level++;
+  if (level >= 4) level = 5;
+  for (let i = 0; i < 5; i++) {
+    const seg = $('ts' + i);
+    if (i < level) {
+      const colors = ['var(--red)','var(--yellow)','var(--yellow)','var(--blue)','var(--green)'];
+      seg.style.background = colors[clamp(level - 1, 0, 4)];
+    } else {
+      seg.style.background = 'var(--surface2)';
+    }
+  }
+}
+
+/* ── Import functions (same logic as original) ── */
+function importM1() {
+  const d = safeJSON('aps-m1-vulnerability');
+  if (!d) { showToast('No M1 data found'); return; }
+  const scored = M1_AXES.map(({ k }) => d[k] >= 1 && d[k] <= 5 ? d[k] : null);
+  vulnScores = scored;
+  const all = scored.every(x => x != null);
+  const sum = all ? scored.reduce((s, x) => s + x, 0) : null;
+  let weakest = '—';
+  if (all) {
+    const min = Math.min(...scored);
+    weakest = M1_AXES.filter((_, i) => scored[i] === min).map(a => a.label).join(' · ');
+  }
+  const parts = [];
+  if (sum != null) parts.push('Score ' + sum + '/15');
+  if (weakest !== '—') parts.push('weakest: ' + weakest);
+  if (d.weakestCompetitor) parts.push('watch: ' + d.weakestCompetitor);
+  setAuto($('c1_vuln'), parts.length ? parts.join(' · ') : 'M1 saved — add axis scores for summary.', parts.length > 0);
+  showToast('Imported from M1');
+  save(); refreshAll();
+}
+
+function importM2() {
+  const fly = safeJSON('aps-m2-flywheel');
+  const kill = safeJSON('aps-m2-killswitch');
+  if (!fly && !kill) { showToast('No M2 data found'); return; }
+  if (fly) {
+    const loops = FW_LOOPS.map(L => fly[L.key] >= 1 && fly[L.key] <= 5 ? fly[L.key] : 0);
+    fwScores = loops;
+    const all = loops.every(x => x > 0);
+    const total = all ? loops.reduce((s, x) => s + x, 0) : null;
+    let strongest = '';
+    if (all) {
+      const mx = Math.max(...loops);
+      strongest = FW_LOOPS.filter((_, i) => loops[i] === mx).map(l => l.title).join(' · ');
+    }
+    const txt = total != null
+      ? 'Total ' + total + '/20' + (strongest ? ' · strongest: ' + strongest : '')
+      : 'Partial flywheel — complete all loops.';
+    setAuto($('c2_fly'), txt, total != null);
+  } else { setAuto($('c2_fly'), '—', false); }
+  if (kill && kill.integration) {
+    const lab = KILL_INTEGRATION_LABEL[kill.integration] || kill.integration;
+    const prov = kill.provider ? 'Provider: ' + kill.provider + '. ' : '';
+    setAuto($('c2_kill'), prov + 'Depth: ' + lab, true);
+  } else if (kill) {
+    setAuto($('c2_kill'), 'Audit saved — select depth.', false);
+  } else { setAuto($('c2_kill'), '—', false); }
+  showToast('Imported from M2');
+  save(); refreshAll();
+}
+
+function importM3() {
+  const pr = safeJSON('aps-m3-pricing');
+  const mk = safeJSON('aps-m3-margin');
+  if (!pr && !mk) { showToast('No M3 data found'); return; }
+  if (pr) {
+    const strat = pr.strategy ? STRATEGY_LABEL[pr.strategy] || pr.strategy : '—';
+    const mod = pr.model ? MODEL_LABEL[pr.model] || pr.model : '—';
+    setAuto($('c3_strategy'), strat, strat !== '—');
+    setAuto($('c3_model'), mod, mod !== '—');
+  } else { setAuto($('c3_strategy'), '—', false); setAuto($('c3_model'), '—', false); }
+  marginBase = getMarginData();
+  const mPct = marginPctWithPricingRev() ?? computeMarginPctFromMarginKey();
+  setAuto($('c3_margin'), mPct != null ? mPct.toFixed(1) + '%' : '—', mPct != null);
+  const rev = revenueFromPricingDesigner(pr) ?? (mk ? num(mk.revenue, null) : null);
+  setAuto($('c3_rev'), rev != null ? '$' + rev.toFixed(2) : '—', rev != null);
+  $('costSlider').value = 100;
+  $('volSlider').value = 100;
+  showToast('Imported from M3');
+  save(); refreshAll();
+}
+
+function importM4() {
+  const g = safeJSON('aps-m4-golden-dataset');
+  const c = safeJSON('aps-m4-confidence-ux');
+  if (!g && !c) { showToast('No M4 data found'); return; }
+  if (g) {
+    const cases = num(g.testCases, num(g.count, num(g.size, num(g.cases, null))));
+    const ev = g.evalMethod || g.eval || g.method || g.approach || '';
+    setAuto($('c4_golden'), cases != null ? cases + ' test cases' : '—', cases != null);
+    setAuto($('c4_eval'), ev || '—', !!ev);
+  } else { setAuto($('c4_golden'), '—', false); setAuto($('c4_eval'), '—', false); }
+  if (c) {
+    const conf = c.maturity || c.level || c.score || c.label || c.summary || '';
+    setAuto($('c4_conf'), conf ? String(conf) : '—', !!conf);
+  } else { setAuto($('c4_conf'), '—', false); }
+  showToast('Imported from M4');
+  save(); refreshAll();
+}
+
+function importM5() {
+  const mat = safeJSON('aps-m5-ai-maturity');
+  const sh = safeJSON('aps-m5-shadow-audit');
+  if (!mat && !sh) { showToast('No M5 data found'); return; }
+  if (mat) {
+    if (Array.isArray(mat.scores) && mat.scores.length === 5) {
+      m5Scores = mat.scores.map(v => clamp(parseInt(v) || 0, 0, 5));
+    }
+    let score = num(mat.totalScore, num(mat.total, num(mat.score, num(mat.maturityScore, null))));
+    if (score == null && mat.scores) score = mat.scores.reduce((s, v) => s + (parseInt(v) || 0), 0);
+    setAuto($('c5_maturity'), score != null ? score + '/25' : '—', score != null);
+  } else { setAuto($('c5_maturity'), '—', false); }
+  if (sh) {
+    const n = num(sh.shadowTools, num(sh.count, num(sh.toolsFound, Array.isArray(sh.tools) ? sh.tools.length : null)));
+    setAuto($('c5_shadow'), n != null ? String(n) : (sh.summary ? String(sh.summary) : '—'), n != null || !!sh.summary);
+  } else { setAuto($('c5_shadow'), '—', false); }
+  showToast('Imported from M5');
+  save(); refreshAll();
 }
 
 function computeMarginPctFromMarginKey() {
   const d = safeJSON('aps-m3-margin');
   if (!d) return null;
-  const requests = num(d.requests, 0);
-  const costPerReq = num(d.costPerReq, 0);
-  const revenue = num(d.revenue, 0);
-  const otherCogs = num(d.otherCogs, 0);
+  const requests = num(d.requests, 0), costPerReq = num(d.costPerReq, 0), revenue = num(d.revenue, 0), otherCogs = num(d.otherCogs, 0);
   if (revenue <= 0) return null;
-  const aiCogs = requests * costPerReq;
-  const gp = revenue - aiCogs - otherCogs;
-  return (gp / revenue) * 100;
+  return ((revenue - requests * costPerReq - otherCogs) / revenue) * 100;
 }
-
 function revenueFromPricingDesigner(d) {
   if (!d) return null;
-  const base = num(d.baseFee, 0);
-  const ppu = num(d.pricePerUnit, 0);
-  const u = num(d.unitsPerUser, 0);
-  const r = base + ppu * u;
+  const r = num(d.baseFee, 0) + num(d.pricePerUnit, 0) * num(d.unitsPerUser, 0);
   return r > 0 ? r : null;
 }
-
 function marginPctWithPricingRev() {
   const m = safeJSON('aps-m3-margin');
   if (!m) return null;
@@ -630,374 +985,232 @@ function marginPctWithPricingRev() {
   return ((rev - mc) / rev) * 100;
 }
 
-function importM1() {
-  const d = safeJSON('aps-m1-vulnerability');
-  if (!d) {
-    showToast('No M1 data found');
-    return;
-  }
-  const scored = M1_AXES.map(({ k, label }) => ({ label, v: d[k] >= 1 && d[k] <= 5 ? d[k] : null }));
-  const all = scored.every(x => x.v != null);
-  const sum = all ? scored.reduce((s, x) => s + x.v, 0) : null;
-  let weakest = '—';
-  if (all) {
-    const min = Math.min(...scored.map(x => x.v));
-    weakest = scored.filter(x => x.v === min).map(x => x.label).join(' · ');
-  }
-  const parts = [];
-  if (sum != null) parts.push(`Score ${sum}/15`);
-  if (weakest !== '—') parts.push(`weakest: ${weakest}`);
-  if (d.weakestCompetitor) parts.push(`watch: ${d.weakestCompetitor}`);
-  setAuto($('c1_vuln'), parts.length ? parts.join(' · ') : 'M1 saved — add axis scores in the scorecard for a full summary.', parts.length > 0);
-  showToast('Imported from M1');
-  save();
-  refreshUI();
-}
-
-function importM2() {
-  const fly = safeJSON('aps-m2-flywheel');
-  const kill = safeJSON('aps-m2-killswitch');
-  if (!fly && !kill) {
-    showToast('No M2 data found');
-    return;
-  }
-  if (fly) {
-    const loops = FW_LOOPS.map(L => ({
-      title: L.title,
-      v: fly[L.key] >= 1 && fly[L.key] <= 5 ? fly[L.key] : null
-    }));
-    const all = loops.every(x => x.v != null);
-    const total = all ? loops.reduce((s, x) => s + x.v, 0) : null;
-    let strongest = '';
-    if (all) {
-      const mx = Math.max(...loops.map(x => x.v));
-      strongest = loops.filter(x => x.v === mx).map(x => x.title).join(' · ');
-    }
-    const txt = total != null
-      ? `Total ${total}/20` + (strongest ? ` · strongest: ${strongest}` : '')
-      : 'Partial flywheel — complete all four loops in the scorer.';
-    setAuto($('c2_fly'), txt, total != null);
-  } else {
-    setAuto($('c2_fly'), '—', false);
-  }
-  if (kill && kill.integration) {
-    const lab = KILL_INTEGRATION_LABEL[kill.integration] || kill.integration;
-    const prov = kill.provider ? `Provider: ${kill.provider}. ` : '';
-    setAuto($('c2_kill'), prov + `Integration depth: ${lab}.`, true);
-  } else if (kill) {
-    setAuto($('c2_kill'), 'Kill switch audit saved — select integration depth in the audit tool.', false);
-  } else {
-    setAuto($('c2_kill'), '—', false);
-  }
-  showToast('Imported from M2');
-  save();
-  refreshUI();
-}
-
-function importM3() {
-  const pr = safeJSON('aps-m3-pricing');
-  const marginKey = safeJSON('aps-m3-margin');
-  if (!pr && !marginKey) {
-    showToast('No M3 data found');
-    return;
-  }
-  if (pr) {
-    const strat = pr.strategy ? STRATEGY_LABEL[pr.strategy] || pr.strategy : '—';
-    const mod = pr.model ? MODEL_LABEL[pr.model] || pr.model : '—';
-    setAuto($('c3_strategy'), strat, strat !== '—');
-    setAuto($('c3_model'), mod, mod !== '—');
-  } else {
-    setAuto($('c3_strategy'), '—', false);
-    setAuto($('c3_model'), '—', false);
-  }
-  const mPct = marginPctWithPricingRev() ?? computeMarginPctFromMarginKey();
-  setAuto($('c3_margin'), mPct != null ? `${mPct.toFixed(1)}%` : '—', mPct != null);
-  const rev = revenueFromPricingDesigner(pr) ?? (marginKey ? num(marginKey.revenue, null) : null);
-  setAuto($('c3_rev'), rev != null ? `$${rev.toFixed(2)} / user` : '—', rev != null);
-  showToast('Imported from M3');
-  save();
-  refreshUI();
-}
-
-function importM4() {
-  const g = safeJSON('aps-m4-golden-dataset');
-  const c = safeJSON('aps-m4-confidence-ux');
-  if (!g && !c) {
-    showToast('No M4 data found');
-    return;
-  }
-  if (g) {
-    const cases = num(g.testCases, num(g.count, num(g.size, num(g.cases, null)));
-    const ev = g.evalMethod || g.eval || g.method || g.approach || '';
-    setAuto($('c4_golden'), cases != null ? `${cases} test cases` : '—', cases != null);
-    setAuto($('c4_eval'), ev || '—', !!ev);
-  } else {
-    setAuto($('c4_golden'), '—', false);
-    setAuto($('c4_eval'), '—', false);
-  }
-  if (c) {
-    const conf = c.maturity || c.level || c.score || c.label || c.summary || '';
-    setAuto($('c4_conf'), conf ? String(conf) : '—', !!conf);
-  } else {
-    setAuto($('c4_conf'), '—', false);
-  }
-  showToast('Imported from M4');
-  save();
-  refreshUI();
-}
-
-function importM5() {
-  const mat = safeJSON('aps-m5-ai-maturity');
-  const sh = safeJSON('aps-m5-shadow-audit');
-  if (!mat && !sh) {
-    showToast('No M5 data found');
-    return;
-  }
-  if (mat) {
-    let score = num(mat.totalScore, num(mat.total, num(mat.score, num(mat.maturityScore, null))));
-    if (score == null && mat.dimensions && typeof mat.dimensions === 'object') {
-      score = Object.values(mat.dimensions).reduce((s, v) => s + num(v, 0), 0);
-    }
-    setAuto($('c5_maturity'), score != null ? `${score}/25` : '—', score != null);
-  } else {
-    setAuto($('c5_maturity'), '—', false);
-  }
-  if (sh) {
-    const n = num(sh.shadowTools, num(sh.count, num(sh.toolsFound, Array.isArray(sh.tools) ? sh.tools.length : null)));
-    setAuto($('c5_shadow'), n != null ? String(n) : (sh.summary ? String(sh.summary) : '—'), n != null || !!sh.summary);
-  } else {
-    setAuto($('c5_shadow'), '—', false);
-  }
-  showToast('Imported from M5');
-  save();
-  refreshUI();
-}
-
+/* ── Section completeness ── */
 function sectionComplete(i) {
   const dash = s => !s || s === '—';
   switch (i) {
-    case 1:
-      return $('c1_product').value.trim() && $('c1_archetype').value && $('c1_bet').value.trim();
-    case 2:
-      return $('c2_moat').value && $('c2_threat').value.trim();
+    case 1: return !!($('c1_product').value.trim() && $('c1_archetype').value && $('c1_bet').value.trim());
+    case 2: return !!($('c2_moat').value && $('c2_threat').value.trim());
     case 3: {
-      const econ =
-        !dash($('c3_margin').textContent) ||
-        !dash($('c3_rev').textContent) ||
+      const econ = !dash($('c3_margin').textContent) || !dash($('c3_rev').textContent) ||
         (!dash($('c3_strategy').textContent) && $('c3_strategy').textContent.trim() !== '—') ||
         (!dash($('c3_model').textContent) && $('c3_model').textContent.trim() !== '—');
-      return $('c3_risk').value.trim() && econ;
+      return !!($('c3_risk').value.trim() && econ);
     }
-    case 4:
-      return $('c4_commit').value.trim();
-    case 5:
-      return $('c5_gov').value.trim();
-    default:
-      return false;
+    case 4: return !!$('c4_commit').value.trim();
+    case 5: return !!$('c5_gov').value.trim();
+    default: return false;
   }
 }
 
-function refreshUI() {
-  let n = 0;
-  for (let i = 1; i <= 5; i++) if (sectionComplete(i)) n++;
-  $('completeFrac').textContent = `${n}/5`;
-  $('completeFill').style.width = `${(n / 5) * 100}%`;
-
-  const stepper = $('stepper');
-  stepper.innerHTML = [1, 2, 3, 4, 5].map(i => {
-    const done = sectionComplete(i);
-    const cur = !done && (i === 1 || sectionComplete(i - 1));
-    const cls = done ? 'done' : cur ? 'current' : '';
-    return `<div class="step-item ${cls}"><div class="step-dot-wrap"><div class="step-dot">${done ? '✓' : 'M' + i}</div><div class="step-line"></div></div><div class="step-label">M${i}</div></div>`;
-  }).join('');
+function computeHealthScore() {
+  let score = 0;
+  for (let i = 1; i <= 5; i++) if (sectionComplete(i)) score += 14;
+  const vulnAll = vulnScores.every(v => v != null);
+  if (vulnAll) score += (vulnScores.reduce((s, v) => s + v, 0) / 15) * 6;
+  const fwAll = fwScores.every(v => v > 0);
+  if (fwAll) score += (fwScores.reduce((s, v) => s + v, 0) / 20) * 6;
+  const matTotal = m5Scores.reduce((s, v) => s + v, 0);
+  if (matTotal > 0) score += (matTotal / 25) * 6;
+  const md = marginBase || getMarginData();
+  if (md) score += 4;
+  const trustLevel = [
+    $('c4_eval').textContent.trim(),
+    $('c4_golden').textContent.trim(),
+    $('c4_conf').textContent.trim(),
+    $('c4_commit').value.trim()
+  ].filter(t => t && t !== '—').length;
+  score += (trustLevel / 4) * 4;
+  return Math.round(clamp(score, 0, 100));
 }
 
+function refreshAll() {
+  let n = 0;
+  for (let i = 1; i <= 5; i++) if (sectionComplete(i)) n++;
+  $('completeFrac').textContent = n + '/5';
+  $('completeFill').style.width = ((n / 5) * 100) + '%';
+
+  const names = ['Bet','Moat','Margin','Contract','Guardrails'];
+  $('componentDots').innerHTML = [1,2,3,4,5].map(i => {
+    const done = sectionComplete(i);
+    return '<div class="component-dot ' + (done ? 'done' : '') + '"><div class="cd-circ"></div>' + names[i-1] + '</div>';
+  }).join('');
+
+  const h = computeHealthScore();
+  $('healthNum').textContent = h;
+  const band = h >= 80 ? {t:'Board-Ready',c:'var(--green)'} : h >= 55 ? {t:'Developing',c:'var(--yellow)'} : h >= 25 ? {t:'Emerging',c:'var(--blue)'} : {t:'Getting Started',c:'var(--text-muted)'};
+  $('healthBand').textContent = band.t;
+  $('healthBand').style.color = band.c;
+
+  $('vizProduct').textContent = $('c1_product').value.trim() || '—';
+  $('vizArchetype').textContent = $('c1_archetype').value || 'No archetype';
+  $('vizBet').textContent = $('c1_bet').value.trim() || '—';
+
+  $('vizMoatType').textContent = $('c2_moat').value || '—';
+  const flyText = $('c2_fly').textContent;
+  const flyMatch = flyText.match(/Total (\d+)\/20/);
+  $('vizFlyScore').textContent = flyMatch ? flyMatch[1] + '/20' : '—';
+  const killText = $('c2_kill').textContent;
+  $('vizKillSwitch').textContent = killText && killText !== '—' ? (killText.length > 14 ? killText.substring(0, 14) + '…' : killText) : '—';
+
+  $('vizRev').textContent = $('c3_rev').textContent;
+  $('vizStrategy').textContent = $('c3_strategy').textContent;
+
+  $('vizEval').textContent = $('c4_eval').textContent;
+  $('vizEval').style.fontSize = ($('c4_eval').textContent.length > 10 ? '13px' : '18px');
+  $('vizGolden').textContent = $('c4_golden').textContent;
+  $('vizConf').textContent = $('c4_conf').textContent;
+  $('vizConf').style.fontSize = ($('c4_conf').textContent.length > 10 ? '13px' : '18px');
+
+  const matTotal = m5Scores.reduce((s, v) => s + v, 0);
+  $('vizMaturity').textContent = matTotal > 0 ? matTotal + '/25' : ($('c5_maturity').textContent || '—');
+  $('vizShadow').textContent = $('c5_shadow').textContent;
+  const matBand = matTotal <= 10 ? {t:'Reactive',c:'var(--red)'} : matTotal <= 15 ? {t:'Developing',c:'var(--yellow)'} : matTotal <= 20 ? {t:'Proactive',c:'var(--blue)'} : {t:'Leading',c:'var(--green)'};
+  $('vizBandLabel').textContent = matTotal > 0 ? matBand.t : '—';
+  $('vizBandLabel').style.color = matTotal > 0 ? matBand.c : '';
+
+  drawVulnBars();
+  drawFlywheel();
+  drawMarginChart();
+  drawRadar();
+  drawTrustMeter();
+}
+
+/* ── State management ── */
 function getState() {
   const o = {};
   INPUT_IDS.forEach(id => { o[id] = $(id).value; });
   o.auto = {
     c1_vuln: $('c1_vuln').textContent,
-    c2_fly: $('c2_fly').textContent,
-    c2_kill: $('c2_kill').textContent,
-    c3_strategy: $('c3_strategy').textContent,
-    c3_model: $('c3_model').textContent,
-    c3_margin: $('c3_margin').textContent,
-    c3_rev: $('c3_rev').textContent,
-    c4_eval: $('c4_eval').textContent,
-    c4_golden: $('c4_golden').textContent,
-    c4_conf: $('c4_conf').textContent,
-    c5_maturity: $('c5_maturity').textContent,
-    c5_shadow: $('c5_shadow').textContent
+    c2_fly: $('c2_fly').textContent, c2_kill: $('c2_kill').textContent,
+    c3_strategy: $('c3_strategy').textContent, c3_model: $('c3_model').textContent,
+    c3_margin: $('c3_margin').textContent, c3_rev: $('c3_rev').textContent,
+    c4_eval: $('c4_eval').textContent, c4_golden: $('c4_golden').textContent, c4_conf: $('c4_conf').textContent,
+    c5_maturity: $('c5_maturity').textContent, c5_shadow: $('c5_shadow').textContent
   };
+  o.vulnScores = vulnScores;
+  o.fwScores = fwScores;
+  o.m5Scores = m5Scores;
+  o.costSlider = $('costSlider').value;
+  o.volSlider = $('volSlider').value;
   return o;
 }
-
 function setState(data) {
   if (!data) return;
-  INPUT_IDS.forEach(id => {
-    if (data[id] !== undefined) $(id).value = data[id];
-  });
+  INPUT_IDS.forEach(id => { if (data[id] !== undefined) $(id).value = data[id]; });
   if (data.auto) {
     Object.keys(data.auto).forEach(k => {
       const el = $(k);
-      if (el) {
-        el.textContent = data.auto[k];
-        el.classList.toggle('has-data', data.auto[k] && data.auto[k] !== '—');
-      }
+      if (el) { el.textContent = data.auto[k]; el.classList.toggle('has-data', data.auto[k] && data.auto[k] !== '—'); }
     });
   }
+  if (Array.isArray(data.vulnScores)) vulnScores = data.vulnScores;
+  if (Array.isArray(data.fwScores)) fwScores = data.fwScores;
+  if (Array.isArray(data.m5Scores)) m5Scores = data.m5Scores;
+  if (data.costSlider) $('costSlider').value = data.costSlider;
+  if (data.volSlider) $('volSlider').value = data.volSlider;
 }
 
 let saveT;
-function scheduleSave() {
-  clearTimeout(saveT);
-  saveT = setTimeout(() => {
-    localStorage.setItem(KEY, JSON.stringify(getState()));
-    showToast('Auto-saved');
-    refreshUI();
-  }, 400);
-}
-
-function save() {
-  localStorage.setItem(KEY, JSON.stringify(getState()));
-  refreshUI();
-}
-
+function scheduleSave() { clearTimeout(saveT); saveT = setTimeout(() => { save(); showToast('Auto-saved'); }, 400); }
+function save() { localStorage.setItem(KEY, JSON.stringify(getState())); refreshAll(); }
 function load() {
-  try {
-    const d = JSON.parse(localStorage.getItem(KEY));
-    if (d) setState(d);
-  } catch (e) {}
-  refreshUI();
+  try { const d = JSON.parse(localStorage.getItem(KEY)); if (d) setState(d); } catch(e) {}
+  marginBase = getMarginData();
+  refreshAll();
 }
 
 function resetAll() {
   localStorage.removeItem(KEY);
   INPUT_IDS.forEach(id => { $(id).value = ''; });
-  ['c1_vuln', 'c2_fly', 'c2_kill', 'c3_strategy', 'c3_model', 'c3_margin', 'c3_rev', 'c4_eval', 'c4_golden', 'c4_conf', 'c5_maturity', 'c5_shadow'].forEach(id => {
-    const el = $(id);
-    el.textContent = '—';
-    el.classList.remove('has-data');
+  ['c1_vuln','c2_fly','c2_kill','c3_strategy','c3_model','c3_margin','c3_rev','c4_eval','c4_golden','c4_conf','c5_maturity','c5_shadow'].forEach(id => {
+    $(id).textContent = '—'; $(id).classList.remove('has-data');
   });
-  refreshUI();
+  vulnScores = [null, null, null]; fwScores = [0,0,0,0]; m5Scores = [0,0,0,0,0]; marginBase = null;
+  $('costSlider').value = 100; $('volSlider').value = 100;
+  refreshAll();
   showToast('Reset');
 }
 
+/* ── Presentation mode ── */
+function togglePresent() {
+  document.body.classList.toggle('present');
+  $('presBtn').textContent = document.body.classList.contains('present') ? 'Edit View' : 'Board View';
+}
+
+/* ── Exports ── */
 function buildMarkdownFull() {
-  const s = getState();
-  const T = (id) => $(id).textContent.trim();
-  return `# Living Strategy — Full Export
-
-> Cross-module artifact · AI Product Strategy
-
-## 1. The Bet (M1)
-- **Product:** ${$('c1_product').value.trim() || '—'}
-- **Archetype:** ${$('c1_archetype').value || '—'}
-- **One-line bet:** ${$('c1_bet').value.trim() || '—'}
-- **Vulnerability summary:** ${T('c1_vuln')}
-
-## 2. The Moat (M2)
-- **Primary moat type:** ${$('c2_moat').value || '—'}
-- **Flywheel summary:** ${T('c2_fly')}
-- **Kill switch:** ${T('c2_kill')}
-- **Biggest threat:** ${$('c2_threat').value.trim() || '—'}
-
-## 3. The Margin (M3)
-- **Pricing strategy:** ${T('c3_strategy')}
-- **Pricing model:** ${T('c3_model')}
-- **Current margin %:** ${T('c3_margin')}
-- **Revenue per user:** ${T('c3_rev')}
-- **Key stress-test risk:** ${$('c3_risk').value.trim() || '—'}
-
-## 4. The Contract (M4)
-- **Eval method:** ${T('c4_eval')}
-- **Golden dataset:** ${T('c4_golden')}
-- **Confidence UX maturity:** ${T('c4_conf')}
-- **Quality commitment:** ${$('c4_commit').value.trim() || '—'}
-
-## 5. The Guardrails (M5)
-- **AI maturity score:** ${T('c5_maturity')}
-- **Shadow tools found:** ${T('c5_shadow')}
-- **Top governance priority:** ${$('c5_gov').value.trim() || '—'}
-
----
-*Completeness: ${$('completeFrac').textContent} components ready*
-`;
+  const T = id => $(id).textContent.trim();
+  return '# Living Strategy — Full Export\n\n' +
+    '> Cross-module artifact · AI Product Strategy\n> Strategy Health: ' + $('healthNum').textContent + '/100 (' + $('healthBand').textContent + ')\n\n' +
+    '## 1. The Bet (M1)\n' +
+    '- **Product:** ' + ($('c1_product').value.trim() || '—') + '\n' +
+    '- **Archetype:** ' + ($('c1_archetype').value || '—') + '\n' +
+    '- **One-line bet:** ' + ($('c1_bet').value.trim() || '—') + '\n' +
+    '- **Vulnerability summary:** ' + T('c1_vuln') + '\n\n' +
+    '## 2. The Moat (M2)\n' +
+    '- **Primary moat type:** ' + ($('c2_moat').value || '—') + '\n' +
+    '- **Flywheel summary:** ' + T('c2_fly') + '\n' +
+    '- **Kill switch:** ' + T('c2_kill') + '\n' +
+    '- **Biggest threat:** ' + ($('c2_threat').value.trim() || '—') + '\n\n' +
+    '## 3. The Margin (M3)\n' +
+    '- **Pricing strategy:** ' + T('c3_strategy') + '\n' +
+    '- **Pricing model:** ' + T('c3_model') + '\n' +
+    '- **Current margin %:** ' + T('c3_margin') + '\n' +
+    '- **Revenue per user:** ' + T('c3_rev') + '\n' +
+    '- **Key stress-test risk:** ' + ($('c3_risk').value.trim() || '—') + '\n\n' +
+    '## 4. The Contract (M4)\n' +
+    '- **Eval method:** ' + T('c4_eval') + '\n' +
+    '- **Golden dataset:** ' + T('c4_golden') + '\n' +
+    '- **Confidence UX maturity:** ' + T('c4_conf') + '\n' +
+    '- **Quality commitment:** ' + ($('c4_commit').value.trim() || '—') + '\n\n' +
+    '## 5. The Guardrails (M5)\n' +
+    '- **AI maturity score:** ' + T('c5_maturity') + '\n' +
+    '- **Shadow tools found:** ' + T('c5_shadow') + '\n' +
+    '- **Top governance priority:** ' + ($('c5_gov').value.trim() || '—') + '\n\n' +
+    '---\n*Completeness: ' + $('completeFrac').textContent + ' components ready*\n';
 }
 
-function buildSummaryText() {
-  const L = (id) => $(id).value.trim();
-  return `LIVING STRATEGY — SUMMARY
-
-THE BET
-${L('c1_product')} · ${$('c1_archetype').value || '—'}
-${L('c1_bet')}
-Vulnerability: ${$('c1_vuln').textContent}
-
-THE MOAT
-Type: ${$('c2_moat').value || '—'}
-${$('c2_fly').textContent}
-Kill switch: ${$('c2_kill').textContent}
-Threat: ${L('c2_threat')}
-
-THE MARGIN
-${$('c3_strategy').textContent} · ${$('c3_model').textContent}
-Margin ${$('c3_margin').textContent} · ${$('c3_rev').textContent}
-Risk: ${L('c3_risk')}
-
-THE CONTRACT
-${$('c4_eval').textContent} · ${$('c4_golden').textContent}
-Confidence UX: ${$('c4_conf').textContent}
-Commitment: ${L('c4_commit')}
-
-THE GUARDRAILS
-Maturity ${$('c5_maturity').textContent} · Shadow tools ${$('c5_shadow').textContent}
-Priority: ${L('c5_gov')}
-
-Completeness: ${$('completeFrac').textContent}
-`;
-}
-
-function buildPlainExport() {
-  return buildMarkdownFull().replace(/^# /gm, '').replace(/^## /gm, '').replace(/^- \*\*/gm, '- ').replace(/\*\*/g, '');
+function buildBoardSummary() {
+  const p = $('c1_product').value.trim() || '[Product]';
+  const a = $('c1_archetype').value || '—';
+  const bet = $('c1_bet').value.trim() || '—';
+  const moat = $('c2_moat').value || '—';
+  const margin = $('c3_margin').textContent;
+  const rev = $('c3_rev').textContent;
+  const maturity = $('c5_maturity').textContent;
+  const health = $('healthNum').textContent;
+  return p.toUpperCase() + ' — AI PRODUCT STRATEGY\n' +
+    'Strategy Health: ' + health + '/100\n\n' +
+    'THE BET: ' + bet + ' (' + a + ')\n' +
+    'THE MOAT: ' + moat + ' · Flywheel ' + $('c2_fly').textContent + '\n' +
+    'THE MARGIN: ' + margin + ' margin · ' + rev + ' rev/user · ' + $('c3_strategy').textContent + '\n' +
+    'THE CONTRACT: ' + $('c4_eval').textContent + ' · ' + $('c4_golden').textContent + '\n' +
+    'THE GUARDRAILS: Maturity ' + maturity + ' · Shadow tools ' + $('c5_shadow').textContent + '\n\n' +
+    'KEY RISK: ' + ($('c3_risk').value.trim() || '—') + '\n' +
+    'GOVERNANCE PRIORITY: ' + ($('c5_gov').value.trim() || '—');
 }
 
 function exportFullMarkdown() {
   const blob = new Blob([buildMarkdownFull()], { type: 'text/markdown' });
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = 'living-strategy-full.md';
-  a.click();
-  URL.revokeObjectURL(a.href);
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+  a.download = 'living-strategy-full.md'; a.click(); URL.revokeObjectURL(a.href);
   showToast('Downloaded full strategy');
 }
-
-function copyStrategySummary() {
-  navigator.clipboard.writeText(buildSummaryText()).then(() => showToast('Summary copied'));
-}
-
-function copyAsText() {
-  navigator.clipboard.writeText(buildPlainExport()).then(() => showToast('Copied to clipboard'));
-}
-
+function copyBoardSummary() { navigator.clipboard.writeText(buildBoardSummary()).then(() => showToast('Board summary copied')); }
+function copyAsText() { navigator.clipboard.writeText(buildMarkdownFull().replace(/^#+ /gm,'').replace(/\*\*/g,'')).then(() => showToast('Copied')); }
 function exportMarkdownFile() {
   const blob = new Blob([buildMarkdownFull()], { type: 'text/markdown' });
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = 'living-strategy.md';
-  a.click();
-  URL.revokeObjectURL(a.href);
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+  a.download = 'living-strategy.md'; a.click(); URL.revokeObjectURL(a.href);
   showToast('Downloaded');
 }
 
-function showToast(msg) {
-  const t = $('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 1800);
-}
+function showToast(msg) { const t = $('toast'); t.textContent = msg; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 1800); }
 
 INPUT_IDS.forEach(id => $(id).addEventListener('input', scheduleSave));
+$('costSlider').addEventListener('input', () => { drawMarginChart(); scheduleSave(); });
+$('volSlider').addEventListener('input', () => { drawMarginChart(); scheduleSave(); });
 
 load();
 </script>

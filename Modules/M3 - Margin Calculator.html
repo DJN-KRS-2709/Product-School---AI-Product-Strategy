@@ -167,6 +167,45 @@
   }
   .tip strong { color: var(--blue); }
 
+  .scenario-slider { margin-bottom: 14px; }
+  .scenario-slider label {
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 11px; font-weight: 600; color: var(--text-dim);
+    text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px;
+  }
+  .scenario-slider label span {
+    font-family: 'JetBrains Mono', monospace; font-size: 13px;
+    font-weight: 700; color: var(--purple); text-transform: none; letter-spacing: 0;
+  }
+  .scenario-slider input[type="range"] {
+    width: 100%; appearance: none; height: 6px; border-radius: 3px;
+    background: var(--surface2); border: 1px solid var(--border); outline: none;
+  }
+  .scenario-slider input[type="range"]::-webkit-slider-thumb {
+    appearance: none; width: 18px; height: 18px; border-radius: 50%;
+    background: var(--purple); border: 2px solid #fff; cursor: pointer;
+  }
+  .scenario-canvas-wrap {
+    position: relative; width: 100%; margin-top: 8px;
+    border-radius: var(--radius); background: var(--surface2);
+    border: 1px solid var(--border); overflow: hidden;
+  }
+  .scenario-canvas-wrap canvas { display: block; width: 100%; }
+  .scenario-stats {
+    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-top: 14px;
+  }
+  .scenario-stat {
+    text-align: center; padding: 10px; background: var(--surface2);
+    border: 1px solid var(--border); border-radius: var(--radius);
+  }
+  .scenario-stat .ss-val {
+    font-family: 'JetBrains Mono', monospace; font-size: 20px; font-weight: 700; color: #fff;
+  }
+  .scenario-stat .ss-label {
+    font-size: 10px; font-weight: 600; color: var(--text-muted);
+    text-transform: uppercase; margin-top: 3px;
+  }
+
   .saved-toast {
     position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(60px);
     background: var(--green); color: #000; font-size: 13px; font-weight: 600;
@@ -188,6 +227,21 @@
   @media (max-width: 600px) {
     .input-grid, .input-grid.three, .results, .stress-grid { grid-template-columns: 1fr; }
   }
+
+  .strategy-cta {
+    margin-top: 20px; margin-bottom: 4px; padding: 14px 18px;
+    background: rgba(160,123,232,0.06); border: 1px solid rgba(160,123,232,0.2);
+    border-radius: 10px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+  }
+  .strategy-cta-text { flex: 1; min-width: 200px; font-size: 13px; color: var(--text-dim); line-height: 1.5; }
+  .strategy-cta-text strong { color: var(--purple, #a07be8); }
+  .strategy-cta-btn {
+    font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 700;
+    padding: 8px 16px; border-radius: 8px; text-decoration: none;
+    background: rgba(160,123,232,0.12); border: 1px solid rgba(160,123,232,0.3);
+    color: #a07be8; white-space: nowrap; transition: all 0.2s;
+  }
+  .strategy-cta-btn:hover { background: rgba(160,123,232,0.2); color: #fff; border-color: #a07be8; }
 </style>
 </head>
 <body>
@@ -304,7 +358,44 @@
     </div>
   </div>
 
+  <!-- SCENARIO LAB -->
+  <div class="card" id="scenarioCard" style="display:none;">
+    <div class="card-head">
+      <div class="card-icon" style="background:var(--purple);">4</div>
+      <div><div class="card-title">Scenario Lab</div><div class="card-sub">Drag the sliders to explore how your margin behaves under different conditions</div></div>
+    </div>
+    <div class="card-body">
+      <div class="scenario-slider">
+        <label>Inference cost multiplier <span id="scenCostVal">1.0x</span></label>
+        <input type="range" id="scenCost" min="25" max="500" value="100" step="5">
+      </div>
+      <div class="scenario-slider">
+        <label>Usage volume multiplier <span id="scenVolVal">1.0x</span></label>
+        <input type="range" id="scenVol" min="50" max="1000" value="100" step="25">
+      </div>
+      <div class="scenario-slider">
+        <label>Cascading ratio (% routed to cheap model) <span id="scenCascVal">0%</span></label>
+        <input type="range" id="scenCasc" min="0" max="95" value="0" step="5">
+      </div>
+      <div class="scenario-stats">
+        <div class="scenario-stat"><div class="ss-val" id="scenMargin">—</div><div class="ss-label">Margin</div></div>
+        <div class="scenario-stat"><div class="ss-val" id="scenCogs">—</div><div class="ss-label">AI COGS</div></div>
+        <div class="scenario-stat"><div class="ss-val" id="scenProfit">—</div><div class="ss-label">Gross Profit</div></div>
+      </div>
+      <div class="scenario-canvas-wrap">
+        <canvas id="scenarioCanvas" width="672" height="220"></canvas>
+      </div>
+      <div class="tip" style="margin-top:14px">
+        <strong>How to read this:</strong> The chart shows your margin % across a range of cost multipliers at your current volume and cascading settings. The dot marks your selected scenario. Drag sliders to see how cascading offsets cost spikes — this is the economic argument for model routing.
+      </div>
+    </div>
+  </div>
+
   <!-- ACTIONS -->
+  <div class="strategy-cta">
+    <div class="strategy-cta-text"><strong>Component 3 saved.</strong> Open the Living Strategy Builder to see your Margin in the dashboard.</div>
+    <a href="Living Strategy Builder.html" class="strategy-cta-btn" target="_blank">Open Living Strategy →</a>
+  </div>
   <div class="actions">
     <button class="btn" onclick="resetAll()">Reset</button>
     <button class="btn" onclick="copyToClipboard()">Copy as Text</button>
@@ -333,7 +424,8 @@ function calc() {
   const hasInput = v.requests > 0 && v.costPerReq > 0 && v.revenue > 0;
   $('resultsCard').style.display = hasInput ? '' : 'none';
   $('stressCard').style.display = hasInput ? '' : 'none';
-  if (!hasInput) return;
+  $('scenarioCard').style.display = hasInput ? '' : 'none';
+  if (!hasInput) { return; }
 
   const aiCogs = v.requests * v.costPerReq;
   const totalCogs = aiCogs + v.otherCogs;
@@ -390,7 +482,105 @@ function calc() {
     $('stressVerdict').textContent = smsgs[scls];
   }
 
+  drawScenario();
   save();
+}
+
+function drawScenario() {
+  const v = getVals();
+  if (v.requests <= 0 || v.costPerReq <= 0 || v.revenue <= 0) return;
+
+  const costMul = parseInt($('scenCost').value) / 100;
+  const volMul = parseInt($('scenVol').value) / 100;
+  const cascPct = parseInt($('scenCasc').value) / 100;
+  $('scenCostVal').textContent = costMul.toFixed(1) + 'x';
+  $('scenVolVal').textContent = volMul.toFixed(1) + 'x';
+  $('scenCascVal').textContent = Math.round(cascPct * 100) + '%';
+
+  const cheapFactor = 0.1;
+  const effectiveCostPerReq = v.costPerReq * (cascPct * cheapFactor + (1 - cascPct));
+  const aiCogs = v.requests * volMul * effectiveCostPerReq * costMul;
+  const totalCogs = aiCogs + v.otherCogs;
+  const gp = v.revenue - totalCogs;
+  const margin = (gp / v.revenue) * 100;
+
+  const mColor = margin >= 40 ? 'var(--green)' : margin >= 0 ? 'var(--yellow)' : 'var(--red)';
+  $('scenMargin').textContent = margin.toFixed(1) + '%';
+  $('scenMargin').style.color = mColor;
+  $('scenCogs').textContent = '$' + aiCogs.toFixed(2);
+  $('scenProfit').textContent = '$' + gp.toFixed(2);
+  $('scenProfit').style.color = gp >= 0 ? 'var(--green)' : 'var(--red)';
+
+  const cv = $('scenarioCanvas');
+  const ctx = cv.getContext('2d');
+  const W = cv.width, H = cv.height;
+  ctx.clearRect(0, 0, W, H);
+
+  const pad = { t: 20, r: 20, b: 28, l: 50 };
+  const cw = W - pad.l - pad.r;
+  const ch = H - pad.t - pad.b;
+
+  const steps = 20;
+  const points = [];
+  for (let i = 0; i <= steps; i++) {
+    const xMul = 0.25 + (i / steps) * 4.75;
+    const ec = v.costPerReq * (cascPct * cheapFactor + (1 - cascPct));
+    const ac = v.requests * volMul * ec * xMul;
+    const m = ((v.revenue - ac - v.otherCogs) / v.revenue) * 100;
+    points.push({ x: xMul, margin: Math.max(-120, Math.min(100, m)) });
+  }
+
+  ctx.strokeStyle = 'rgba(255,255,255,0.06)';
+  ctx.lineWidth = 1;
+  for (let v2 = -100; v2 <= 100; v2 += 50) {
+    const y = pad.t + ch - ((v2 + 120) / 220) * ch;
+    ctx.beginPath(); ctx.moveTo(pad.l, y); ctx.lineTo(W - pad.r, y); ctx.stroke();
+    ctx.font = '500 9px JetBrains Mono';
+    ctx.fillStyle = '#55556a';
+    ctx.textAlign = 'right';
+    ctx.fillText(v2 + '%', pad.l - 6, y + 3);
+  }
+
+  const zeroY = pad.t + ch - ((0 + 120) / 220) * ch;
+  ctx.strokeStyle = 'rgba(239,91,91,0.25)';
+  ctx.setLineDash([4, 4]);
+  ctx.beginPath(); ctx.moveTo(pad.l, zeroY); ctx.lineTo(W - pad.r, zeroY); ctx.stroke();
+  ctx.setLineDash([]);
+
+  ctx.font = '500 8px DM Sans';
+  ctx.fillStyle = 'rgba(239,91,91,0.4)';
+  ctx.textAlign = 'left';
+  ctx.fillText('Break-even', pad.l + 4, zeroY - 4);
+
+  ctx.strokeStyle = 'rgba(160,123,232,0.8)';
+  ctx.lineWidth = 2.5;
+  ctx.beginPath();
+  points.forEach((p, i) => {
+    const px = pad.l + ((p.x - 0.25) / 4.75) * cw;
+    const py = pad.t + ch - ((p.margin + 120) / 220) * ch;
+    i === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py);
+  });
+  ctx.stroke();
+
+  const curPx = pad.l + ((costMul - 0.25) / 4.75) * cw;
+  const curPy = pad.t + ch - ((Math.max(-120, Math.min(100, margin)) + 120) / 220) * ch;
+  ctx.beginPath();
+  ctx.arc(curPx, curPy, 6, 0, Math.PI * 2);
+  ctx.fillStyle = margin >= 40 ? '#3dd68c' : margin >= 0 ? '#f0c040' : '#ef5b5b';
+  ctx.fill();
+  ctx.strokeStyle = '#fff';
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  ctx.font = '700 10px JetBrains Mono';
+  ctx.fillStyle = '#fff';
+  ctx.textAlign = 'left';
+  ctx.fillText(margin.toFixed(1) + '%', curPx + 10, curPy + 4);
+
+  ctx.font = '500 9px DM Sans';
+  ctx.fillStyle = '#55556a';
+  ctx.textAlign = 'center';
+  ctx.fillText('Cost multiplier', W / 2, H - 4);
 }
 
 function save() {
@@ -424,6 +614,8 @@ function resetAll() {
   inputs.forEach(k => $(k).value = '');
   $('resultsCard').style.display = 'none';
   $('stressCard').style.display = 'none';
+  $('scenarioCard').style.display = 'none';
+  $('scenCost').value = 100; $('scenVol').value = 100; $('scenCasc').value = 0;
   localStorage.removeItem(KEY);
   showToast('Reset');
 }
@@ -481,6 +673,7 @@ function showToast(msg) {
 }
 
 inputs.forEach(k => $(k).addEventListener('input', calc));
+['scenCost','scenVol','scenCasc'].forEach(id => $(id).addEventListener('input', drawScenario));
 load();
 </script>
 </body>

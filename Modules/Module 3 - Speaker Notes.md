@@ -63,6 +63,8 @@ Same logic as slide 9 — dedicated activity moment. The fill-in cards with emoj
 
 This is where abstract becomes concrete. The sticky note exercise (write your gross margin %, hold it up) creates anonymous social pressure — nobody has to shout a number but everyone sees the range. Walk through the math live on screen. The interactive tool link is on this slide — students can open the Margin Calculator, plug in their numbers, and it auto-calculates everything including the stress tests. Way faster than doing it by hand and they can export the results.
 
+The Margin Calculator now includes a **Scenario Lab** panel below the stress tests. Once they've entered their base numbers, three sliders appear: inference cost multiplier (0.25x to 5x), usage volume multiplier (0.5x to 10x), and cascading ratio (% routed to a cheap model). As they drag, a live chart shows their margin curve across different cost scenarios, with their current position marked by a dot. This is the "what if we do this? what if we do that?" element — they can immediately see that cascading 60% of requests to a cheap model turns a -15% stress scenario into a +30% margin. The chart makes the economic argument for model routing viscerally obvious. Point this out during the exercise: "Play with the cascading slider and watch what happens to your margin curve."
+
 ### Slide 13 — Break
 
 Reset before the heavy applied work. Suggest they pull up their provider's pricing page during the break — they'll need it for the cost curve exercise.
@@ -86,6 +88,8 @@ This is the most "real world" artifact in the module. 15 minutes to build a befo
 ### Slide 18 — Synthesis
 
 Tie it all back to slide 4. Margin compression is the default for AI products. But now they have the levers (cascading, routing, pricing model, bundling) and the artifacts (cost curve, pricing strategy, board one-pager) to do something about it. Component 3 gets locked in here.
+
+After they finalize Component 3, point them to the Living Strategy Builder: "Pull from M3 and your margin %, revenue per user, and pricing strategy all show up in the dashboard. The Living Strategy now has a live cost curve with sliders — you can keep playing with scenarios after class to find the pricing model that actually works."
 
 ### Slide 19 — Bridge to M4
 

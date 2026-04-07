@@ -94,11 +94,12 @@ Models get copied. Features get cloned. Data gets aggregated. The only durable a
 
 **What they build:**
 - A data flywheel map for their product, scored loop by loop
+- A competitive positioning map: their product and 3-5 competitors placed on two strategic axes (interactive, draggable canvas)
 - An encroachment threat assessment: who attacks them, from where, with what
 - A vendor portability checklist for surviving price shocks or ToS changes
 
 **What they take to M3:**
-The Moat component — defensibility analysis, data flywheel, portability plan.
+The Moat component — defensibility analysis, data flywheel, competitive position, portability plan.
 
 **The bridge:** "You know what's defensible. But will the economics actually work, or will inference costs eat your margin?"
 
@@ -120,10 +121,11 @@ This is the module nobody else teaches at depth. Most AI courses mention pricing
 **What they build:**
 - A cost curve with cascading architecture modeled
 - A hybrid pricing strategy with stress tests (what if inference costs 3x? what if your heaviest segment doubles usage?)
+- Interactive scenario modeling: live sliders for inference cost multiplier, volume growth, and cascading ratio — the margin curve updates in real-time as they explore
 - A before/after value capture comparison for their board
 
 **What they take to M4:**
-The Margin component — cost model, pricing strategy, P&L projection with stress tests.
+The Margin component — cost model, pricing strategy, scenario analysis, P&L projection with stress tests.
 
 **The bridge:** "The economics work on paper. But will users actually trust the output enough to pay for it?"
 
@@ -207,7 +209,7 @@ Before the board simulation, participants use the AI Bet Evaluator tool to run t
 Present the full strategy to the room. The room plays the board. Challenges are real: "Why should we fund this? What's the risk you haven't addressed? What happens when OpenAI ships this natively?"
 
 **What they leave with:**
-A living strategy they can present Monday morning. Built on their real product. Challenged by peers who understand the domain. A reusable AI evaluation workflow for any future bet. Not a certificate — a weapon.
+A living strategy repo they can share Monday morning — not a document, not a slide deck, a GitHub repo with six component folders, structured markdown artifacts, and a top-level README that tells the complete strategy story. Built on their real product. Challenged by peers who understand the domain. Version-controlled, forkable, alive. A reusable AI evaluation workflow for any future bet. Not a certificate — a weapon.
 
 ---
 

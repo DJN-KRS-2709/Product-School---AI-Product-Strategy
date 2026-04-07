@@ -238,6 +238,55 @@
     font-size: 10px; font-weight: 700; text-transform: uppercase;
     letter-spacing: 0.1em; color: #3B82F6; margin-bottom: 6px;
   }
+
+  /* === Vibe Coding structural slides === */
+  .expect-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin: 24px 0; }
+  .expect-card { background: #161822; border: 1px solid #252840; border-radius: 10px; padding: 18px; text-align: center; }
+  .expect-icon { font-size: 24px; margin-bottom: 8px; }
+  .expect-title { font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+  .expect-desc { font-size: 12px; color: #8899bb; line-height: 1.4; }
+  .syllabus-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 20px 0; }
+  .syllabus-card { background: #161822; border: 1px solid #252840; border-radius: 10px; padding: 16px; display: flex; align-items: flex-start; gap: 14px; }
+  .syllabus-card.syl-active { background: rgba(59,130,246,0.08); border-color: rgba(59,130,246,0.3); }
+  .syllabus-num { width: 32px; height: 32px; border-radius: 8px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 800; color: #fff; background: #252840; }
+  .syllabus-card.syl-active .syllabus-num { background: #3B82F6; }
+  .syllabus-body .syl-title { font-size: 14px; font-weight: 700; color: #e0e0f0; margin-bottom: 2px; }
+  .syllabus-card.syl-active .syl-title { color: #fff; }
+  .syllabus-body .syl-desc { font-size: 11px; color: #64748b; line-height: 1.4; }
+  .debrief-box { background: rgba(192,132,252,0.06); border: 1px solid rgba(192,132,252,0.15); border-radius: 14px; padding: 32px; text-align: center; margin: 24px 0; }
+  .debrief-label { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; color: #c084fc; margin-bottom: 16px; }
+  .debrief-prompt { font-size: 22px; font-weight: 700; color: #fff; line-height: 1.4; margin-bottom: 12px; }
+  .debrief-sub { font-size: 14px; color: #8899bb; }
+  .complete-stats { display: flex; gap: 20px; margin: 24px 0; }
+  .complete-stat { flex: 1; background: #161822; border: 1px solid #252840; border-radius: 12px; padding: 20px; text-align: center; }
+  .complete-num { font-size: 36px; font-weight: 900; color: #3B82F6; margin-bottom: 4px; }
+  .complete-label { font-size: 13px; color: #8899bb; }
+  .complete-shifts { display: flex; flex-direction: column; gap: 12px; margin: 20px 0; }
+  .complete-shift { background: rgba(52,211,153,0.06); border: 1px solid rgba(52,211,153,0.12); border-radius: 10px; padding: 16px 20px; }
+  .shift-title { font-size: 15px; font-weight: 700; color: #34d399; margin-bottom: 4px; }
+  .shift-desc { font-size: 13px; color: #8899bb; line-height: 1.5; }
+  .takeaway-list { display: flex; flex-direction: column; gap: 14px; margin: 24px 0; }
+  .takeaway-item { background: #161822; border: 1px solid #252840; border-radius: 10px; padding: 18px 22px; }
+  .takeaway-item p { font-size: 15px; color: #b0b4c8; line-height: 1.6; }
+  .cameras-box { background: rgba(251,191,36,0.06); border: 1px solid rgba(251,191,36,0.15); border-radius: 14px; padding: 28px; text-align: center; max-width: 500px; margin: 32px auto; }
+  .tag-debrief { background: rgba(192,132,252,0.12); color: #d8b4fe; }
+  .tag-complete { background: rgba(52,211,153,0.12); color: #6ee7b7; }
+  .tag-recall { background: rgba(59,130,246,0.12); color: #93c5fd; }
+
+  .lab-header { background: linear-gradient(135deg, rgba(244,114,182,0.08), rgba(59,130,246,0.08)); border: 1px solid rgba(244,114,182,0.2); border-radius: 16px; padding: 40px; text-align: center; max-width: 640px; margin: 0 auto; }
+  .lab-title { font-size: 14px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.14em; color: #f9a8d4; margin-bottom: 12px; }
+  .lab-name { font-size: 32px; font-weight: 900; color: #fff; margin-bottom: 8px; }
+  .lab-desc { font-size: 16px; color: #8899bb; line-height: 1.6; }
+  .lab-steps { display: flex; flex-direction: column; gap: 12px; margin: 20px 0; text-align: left; }
+  .lab-step { display: flex; align-items: flex-start; gap: 14px; background: #161822; border: 1px solid #252840; border-radius: 10px; padding: 16px 18px; }
+  .lab-step-num { width: 28px; height: 28px; border-radius: 7px; background: #3B82F6; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; color: #fff; flex-shrink: 0; }
+  .lab-step-text { font-size: 14px; color: #b0b4c8; line-height: 1.5; }
+  .lab-goal { background: rgba(52,211,153,0.06); border: 1px solid rgba(52,211,153,0.12); border-radius: 10px; padding: 16px 20px; margin: 16px 0; }
+  .lab-goal-label { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: #34d399; margin-bottom: 6px; }
+  .lab-goal-text { font-size: 15px; color: #e0e0f0; line-height: 1.5; }
+  .lab-tip { background: rgba(251,191,36,0.06); border: 1px solid rgba(251,191,36,0.12); border-radius: 10px; padding: 14px 18px; margin: 12px 0; }
+  .lab-tip-label { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: #fbbf24; margin-bottom: 4px; }
+  .lab-tip-text { font-size: 13px; color: #8899bb; line-height: 1.5; }
 </style>
 </head>
 <body>
@@ -271,7 +320,39 @@
         </div>
       </div>
     </div>
-    <div class="flow-line">Today: <strong>Component 1</strong> (The Bet) + a <strong>working prototype</strong>.</div>
+    <div class="flow-line">Today: Set up your <strong>strategy repo</strong>, build <strong>Component 1</strong> (The Bet) + a <strong>working prototype</strong>.</div>
+  </div>
+</div>
+
+<!-- ===== SLIDE: Class Expectations ===== -->
+<div class="slide" data-notes="Quick ground rules — don't read every card, let them scan. Reinforce cameras and Slack.">
+  <div class="slide-inner">
+    <div class="module-tag">Ground Rules</div>
+    <h2>Class Expectations</h2>
+    <div class="expect-grid">
+      <div class="expect-card"><div class="expect-icon">📹</div><div class="expect-title">Cameras On</div><div class="expect-desc">Stay visible and engaged throughout the session.</div></div>
+      <div class="expect-card"><div class="expect-icon">⏰</div><div class="expect-title">Arrive On Time</div><div class="expect-desc">Respect everyone's time by arriving promptly.</div></div>
+      <div class="expect-card"><div class="expect-icon">✋</div><div class="expect-title">Active Engagement</div><div class="expect-desc">Participate in all exercises and discussions.</div></div>
+      <div class="expect-card"><div class="expect-icon">🌐</div><div class="expect-title">Network</div><div class="expect-desc">Connect with peers and build your learning network.</div></div>
+      <div class="expect-card"><div class="expect-icon">💬</div><div class="expect-title">Use Slack</div><div class="expect-desc">Keep questions and comments organized in the channel.</div></div>
+      <div class="expect-card"><div class="expect-icon">🎓</div><div class="expect-title">Instructor Support</div><div class="expect-desc">Save deeper questions for after class to keep flow.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SLIDE: Syllabus ===== -->
+<div class="slide" data-notes="Quick orientation — show the arc. Today is highlighted. Each module builds one component of their living strategy.">
+  <div class="slide-inner">
+    <div class="module-tag">AI Product Strategy Certification</div>
+    <h2>Course Syllabus</h2>
+    <div class="syllabus-grid">
+      <div class="syllabus-card syl-active"><div class="syllabus-num">1</div><div class="syllabus-body"><div class="syl-title">The Bet</div><div class="syl-desc">Diagnose where strategy breaks. Score vulnerability, build a prototype, lock in Component 1.</div></div></div>
+      <div class="syllabus-card"><div class="syllabus-num">2</div><div class="syllabus-body"><div class="syl-title">The Moat</div><div class="syl-desc">Score your data flywheel, stress-test with a 90-day encroachment plan, build a Kill Switch.</div></div></div>
+      <div class="syllabus-card"><div class="syllabus-num">3</div><div class="syllabus-body"><div class="syl-title">The Margin</div><div class="syl-desc">Map cost curves, design pricing, stress-test margins with cascading scenarios.</div></div></div>
+      <div class="syllabus-card"><div class="syllabus-num">4</div><div class="syllabus-body"><div class="syl-title">The Contract</div><div class="syl-desc">Build golden datasets, design confidence UX, write a reliability contract.</div></div></div>
+      <div class="syllabus-card"><div class="syllabus-num">5</div><div class="syllabus-body"><div class="syl-title">The Guardrails</div><div class="syl-desc">Design compounding systems, draft governance policy, run a shadow AI audit.</div></div></div>
+      <div class="syllabus-card"><div class="syllabus-num">6</div><div class="syllabus-body"><div class="syl-title">The Pitch</div><div class="syl-desc">Assemble the full strategy, build a roadmap, pitch to the room as your board.</div></div></div>
+    </div>
   </div>
 </div>
 
@@ -351,10 +432,11 @@
       <div class="agenda-item"><div class="agenda-time">7 min</div><div class="agenda-text"><strong>Case:</strong> Notion — 4-day validation loop</div></div>
       <div class="agenda-item"><div class="agenda-time">8 min</div><div class="agenda-text"><strong>Framework:</strong> 5 AI Value Archetypes + poll</div></div>
       <div class="agenda-item"><div class="agenda-time">5 min</div><div class="agenda-text" style="color:#94a3b8;">☕ Break</div></div>
-      <div class="agenda-item"><div class="agenda-time">25 min</div><div class="agenda-text"><strong>Apply:</strong> Live diagnostic → your product scores</div></div>
+      <div class="agenda-item"><div class="agenda-time">5 min</div><div class="agenda-text" style="color:#34d399;"><strong style="color:#fff;">Repo:</strong> Fork your Living Strategy repo</div></div>
+      <div class="agenda-item"><div class="agenda-time">20 min</div><div class="agenda-text"><strong>Apply:</strong> Live diagnostic → score + commit</div></div>
       <div class="agenda-item"><div class="agenda-time">13 min</div><div class="agenda-text"><strong>Peers:</strong> Challenge scores + killer memo</div></div>
-      <div class="agenda-item"><div class="agenda-time">15 min</div><div class="agenda-text"><strong>Build:</strong> Prototype one idea (v0 / Cursor / Lovable)</div></div>
-      <div class="agenda-item"><div class="agenda-time">5 min</div><div class="agenda-text"><strong>Close:</strong> Component 1 + M2 hook</div></div>
+      <div class="agenda-item"><div class="agenda-time">15 min</div><div class="agenda-text"><strong>Build:</strong> Prototype one idea → push to repo</div></div>
+      <div class="agenda-item"><div class="agenda-time">5 min</div><div class="agenda-text"><strong>Close:</strong> Component 1 committed + M2 hook</div></div>
     </div>
   </div>
 </div>
@@ -426,7 +508,7 @@
 </div>
 
 <!-- ===== SLIDE 6: The Arc ===== -->
-<div class="slide" data-notes="~2 min. Trace the arc with your finger. Why: orientation — today is only The Bet. Don't teach M2–M6 depth; names only.">
+<div class="slide" data-notes="~2 min. Trace the arc with your finger. Why: orientation — today is only The Bet. Don't teach M2–M6 depth; names only. Emphasize: the repo IS the strategy. Not a doc, not a deck — a living repo they build across 6 sessions.">
   <div class="slide-inner">
     <div class="module-tag">The Course Arc</div>
     <h2>Six Questions. One Living Strategy.</h2>
@@ -456,8 +538,8 @@
       </div>
     </div>
     <div class="artifact-preview">
-      <div class="ap-title">Your Living Strategy — Built Across 6 Sessions</div>
-      <p style="font-size:15px; color:#8899bb; line-height:1.5;">Cumulative artifact — one component per module. <strong>Today → Component 1: The Bet.</strong></p>
+      <div class="ap-title">Your Living Strategy — A Repo You Build Across 6 Sessions</div>
+      <p style="font-size:15px; color:#8899bb; line-height:1.5;">Not a doc. Not a slide deck. A <strong>GitHub repo</strong> — version-controlled, shareable, alive. One component per module. <strong>Today → Component 1: The Bet.</strong></p>
     </div>
   </div>
 </div>
@@ -578,6 +660,42 @@
   </div>
 </div>
 
+<!-- ===== SLIDE: Cameras On ===== -->
+<div class="slide" data-notes="Quick energy reset. Keep it to 15 seconds.">
+  <div class="slide-inner" style="text-align:center;">
+    <div class="cameras-box">
+      <div style="font-size:48px; margin-bottom:16px;">📹</div>
+      <h2 style="font-size:28px; margin-bottom:12px;">Cameras On</h2>
+      <p style="font-size:16px; color:#8899bb;">Welcome back! Stay present and visible to keep the energy up.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SLIDE: Fork Your Strategy Repo ===== -->
+<div class="slide" data-notes="5 min max. This is the 'set up your workspace' moment. Template repo has folder structure + placeholder files for all 6 modules. They fork it, open in Cursor or VS Code or GitHub web. If someone doesn't have GitHub: pair them, they can create after class. The repo is the anchor artifact — everything from now on goes here.">
+  <div class="slide-inner">
+    <div class="demo-tag tag-build">Lab Exercise · 5 Minutes</div>
+    <h2>Fork Your Living Strategy Repo</h2>
+    <div class="lab-goal">
+      <div class="lab-goal-label">Your Goal</div>
+      <div class="lab-goal-text">Set up the repository that becomes your strategy. Every artifact you build in this course — diagnostic, prototype, cost model, governance policy — lives here. By M6, the repo IS your board-ready strategy.</div>
+    </div>
+    <div class="lab-steps">
+      <div class="lab-step"><div class="lab-step-num">1</div><div class="lab-step-text"><strong>Open the template repo</strong> link (posted in Slack). Click <strong>"Use this template"</strong> → Create a new repository.</div></div>
+      <div class="lab-step"><div class="lab-step-num">2</div><div class="lab-step-text"><strong>Name it</strong> something like <code>ai-product-strategy</code>. Public or private — your call.</div></div>
+      <div class="lab-step"><div class="lab-step-num">3</div><div class="lab-step-text"><strong>Open it</strong> in Cursor, VS Code, or GitHub's web editor. You'll be writing to <code>01-the-bet/</code> in a few minutes.</div></div>
+    </div>
+    <div class="lab-tip">
+      <div class="lab-tip-label">Keep in Mind</div>
+      <div class="lab-tip-text">This isn't busywork. The repo is your living strategy — version-controlled, portable, shareable. When you present to your board in M6, you'll present from this repo. It travels with you after the course.</div>
+    </div>
+    <a href="Strategy Repo Template.html" style="display:block; margin-top:14px; padding:10px 18px; background:rgba(52,211,153,0.08); border:1px solid rgba(52,211,153,0.2); border-radius:8px; text-decoration:none; text-align:center; transition:all 0.2s;">
+      <span style="font-size:12px; font-weight:700; color:#34d399;">Browse the Template Structure →</span>
+      <span style="display:block; font-size:11px; color:#7a7a9a; margin-top:2px;">See all folders, files, and what you'll fill in each module</span>
+    </a>
+  </div>
+</div>
+
 <!-- ===== SLIDE 13: Three-Axis Diagnostic Explained ===== -->
 <div class="slide" data-notes="Name the three axes. Why: shared rubric before live + solo scoring; partner attacks later. Use Figma / Slack / ChatGPT UI / Zapier calibrate line aloud so 1–5 scale lands.">
   <div class="slide-inner">
@@ -640,11 +758,14 @@
 </div>
 
 <!-- ===== SLIDE 15: Your Diagnostic ===== -->
-<div class="slide" data-notes="10 min silent. Why: personal stakes; scorecard feeds M2 + pair drill. All 5s = lie. Roam — pens moving.">
+<div class="slide" data-notes="10 min silent. All 5s = lie. Roam — pens moving.">
   <div class="slide-inner">
-    <div class="demo-tag tag-exercise">Individual Work · 10 Minutes</div>
+    <div class="demo-tag tag-exercise">Individual Exercise · 10 Minutes</div>
     <h2>Three-Axis Diagnostic:<br>Your Product</h2>
-    <div class="subtitle">Score 1–5 · name one killer vulnerability.</div>
+    <div class="lab-goal">
+      <div class="lab-goal-label">Your Goal</div>
+      <div class="lab-goal-text">Score your product 1–5 on each axis and name your single biggest vulnerability in one line.</div>
+    </div>
     <div class="diag-axes">
       <div class="diag-axis" style="border-top:3px solid #60a5fa;">
         <div class="da-num accent" style="font-size:20px;">__/5</div>
@@ -662,38 +783,48 @@
         <div class="da-q">Encroachment risk × pivot speed</div>
       </div>
     </div>
-    <p style="margin-top:18px; font-size:17px; font-weight:700; color:#fff; text-align:center;">Biggest vulnerability in one line?</p>
-    <p style="font-size:13px; color:#8899bb; text-align:center; margin-top:6px;">→ Next: partner tries to lower a score.</p>
-    <a href="M1 - Vulnerability Scorecard.html" style="display:block; margin-top:14px; padding:10px 18px; background:rgba(91,141,239,0.08); border:1px solid rgba(91,141,239,0.2); border-radius:8px; text-decoration:none; text-align:center; transition:all 0.2s;">
-      <span style="font-size:12px; font-weight:700; color:#5b8def;">Open Interactive Vulnerability Scorecard →</span>
-      <span style="display:block; font-size:11px; color:#7a7a9a; margin-top:2px;">Score your three axes with auto-calculation and export</span>
+    <div class="lab-tip">
+      <div class="lab-tip-label">Keep in Mind</div>
+      <div class="lab-tip-text">If all your scores are 5s, you haven't looked hard enough. Calibrate: Figma = deep moat, thin ChatGPT UI wrapper = shallow. Your partner attacks your weakest score next.</div>
+    </div>
+    <a href="Strategy Repo Template.html#diagnostic" style="display:block; margin-top:14px; padding:10px 18px; background:rgba(52,211,153,0.08); border:1px solid rgba(52,211,153,0.2); border-radius:8px; text-decoration:none; text-align:center; transition:all 0.2s;">
+      <span style="font-size:12px; font-weight:700; color:#34d399;">Open <code style="color:#6ee7b7;">01-the-bet/diagnostic.md</code> template → fill in and commit to your repo</span>
     </a>
   </div>
 </div>
 
 <!-- ===== SLIDE 16: Pair Challenge ===== -->
-<div class="slide" data-notes="10 min · 5 each. Why: social pressure beats solo rationalization. 60s solo before naming attacker — forces specificity (e.g., Cursor vs GitHub Copilot on code workflows).">
+<div class="slide" data-notes="10 min · 5 each. If pairs are too polite: 'You’re not being helpful by being nice. The market won’t be nice.'">
   <div class="slide-inner">
-    <div class="demo-tag tag-activity">Pair Work · 10 Minutes</div>
+    <div class="demo-tag tag-activity">Breakout Exercise · 10 Minutes</div>
     <h2>Defend Your Scores.<br>Name the Attacker.</h2>
-    <div class="subtitle">5 min each · two non-negotiables.</div>
-    <div class="waypoints">
-      <div class="waypoint">
-        <div class="waypoint-num">1</div>
-        <div class="waypoint-text">
-          <div class="wt-title">Lower at least one score</div>
-          <div class="wt-desc">Polite agreement = failing your partner</div>
-        </div>
-      </div>
-      <div class="waypoint">
-        <div class="waypoint-num">2</div>
-        <div class="waypoint-text">
-          <div class="wt-title">Name a live competitor on that axis</div>
-          <div class="wt-desc"><em>Ex:</em> <strong>Notion AI</strong> vs <strong>Coda</strong> · <strong>Perplexity</strong> vs classic search UIs</div>
-        </div>
-      </div>
+    <div class="lab-goal">
+      <div class="lab-goal-label">Your Goal</div>
+      <div class="lab-goal-text">Lower at least one of your partner’s scores and name the specific competitor that exploits that axis.</div>
     </div>
-    <p style="margin-top:16px; font-size:15px; color:#f87171; font-weight:600; text-align:center;">Uncomfortable on purpose — that’s the insight.</p>
+    <div class="lab-steps">
+      <div class="lab-step"><div class="lab-step-num">1</div><div class="lab-step-text"><strong>Swap scorecards</strong> with your partner. Read their three axes silently for 60 seconds.</div></div>
+      <div class="lab-step"><div class="lab-step-num">2</div><div class="lab-step-text"><strong>Challenge one score.</strong> Which axis is too generous? Name a live competitor on that axis. <em>Ex: “Your moat is a 4 but Cursor would eat GitHub Copilot’s code workflow in 6 months.”</em></div></div>
+      <div class="lab-step"><div class="lab-step-num">3</div><div class="lab-step-text"><strong>Swap roles</strong> after 5 minutes. Same rules — be specific, not polite.</div></div>
+    </div>
+    <div class="lab-tip">
+      <div class="lab-tip-label">Keep in Mind</div>
+      <div class="lab-tip-text">Polite agreement = failing your partner. The discomfort is the insight — that’s what self-assessment always misses.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SLIDE: Quick Debrief ===== -->
+<div class="slide" data-notes="Quick debrief after pair challenge. Post in Slack.">
+  <div class="slide-inner" style="text-align:center;">
+    <div class="demo-tag tag-debrief">Quick Debrief</div>
+    <h2>Key Learning</h2>
+    <div class="debrief-box">
+      <div class="debrief-label">Post on Slack</div>
+      <div class="debrief-prompt">IN ONE SENTENCE:</div>
+      <div class="debrief-sub">What score did your partner lower — and what competitor did they name?</div>
+    </div>
+    <p style="font-size:14px; color:#8899bb; margin-top:16px;">Then reply to 2 peers with your reaction.</p>
   </div>
 </div>
 
@@ -712,25 +843,36 @@
   </div>
 </div>
 
-<!-- ===== SLIDE 18: The Prototype Bet ===== -->
-<div class="slide" data-notes="15 min build window — wow moment. Why: diagnosis without artifact fades. Pair if no account. Bar = shareable URL, not pretty UI.">
-  <div class="slide-inner">
-    <div class="demo-tag tag-build">The Prototype Bet · 15 Minutes</div>
-    <h2>Build One Idea. Right Now.</h2>
-    <div class="subtitle">Rough beats perfect — ship a thought today.</div>
-    <div class="evidence-cards">
-      <div class="evidence-card">
-        <div class="ec-label">Tools</div>
-        <div class="ec-company">v0 · Cursor · Lovable</div>
-        <div class="ec-text">Plain-English prompt → first build → one iteration if time.</div>
-      </div>
-      <div class="evidence-card">
-        <div class="ec-label">Bar</div>
-        <div class="ec-company">Shareable link</div>
-        <div class="ec-text">Not slides <em>about</em> the product — the clickable thing.</div>
-      </div>
+<!-- ===== SLIDE: Hands-On Lab Header ===== -->
+<div class="slide" data-notes="Section break — energy shift. They're building now, not discussing.">
+  <div class="slide-inner" style="text-align:center;">
+    <div class="lab-header">
+      <div class="lab-title">Hands-On Lab</div>
+      <div class="lab-name">The Prototype Bet</div>
+      <div class="lab-desc">Turn your diagnosis into something clickable. 15 minutes. Rough beats perfect.</div>
     </div>
-    <p style="margin-top:18px; font-size:17px; font-weight:700; color:#fff; text-align:center;">Bring the link to M2.</p>
+  </div>
+</div>
+
+<!-- ===== SLIDE 18: The Prototype Bet ===== -->
+<div class="slide" data-notes="15 min build window — wow moment. Pair if no account. Bar = shareable URL, not pretty UI. Walk the room — if someone is stuck at prompting, pair them.">
+  <div class="slide-inner">
+    <div class="demo-tag tag-build">Lab Exercise · 15 Minutes</div>
+    <h2>Build One Idea. Right Now.</h2>
+    <div class="lab-goal">
+      <div class="lab-goal-label">Your Goal</div>
+      <div class="lab-goal-text">Produce a <strong>shareable link</strong> to a clickable prototype that demonstrates your product bet — not slides <em>about</em> the product, the actual thing.</div>
+    </div>
+    <div class="lab-steps">
+      <div class="lab-step"><div class="lab-step-num">1</div><div class="lab-step-text"><strong>Pick your tool:</strong> v0, Cursor, or Lovable. If you don't have an account, pair with someone who does.</div></div>
+      <div class="lab-step"><div class="lab-step-num">2</div><div class="lab-step-text"><strong>Write a plain-English prompt</strong> describing what your user sees first. One screen, one flow. Don't over-specify — let the tool surprise you.</div></div>
+      <div class="lab-step"><div class="lab-step-num">3</div><div class="lab-step-text"><strong>Iterate once</strong> if time allows. Fix the biggest gap. Don't start over — steer.</div></div>
+      <div class="lab-step"><div class="lab-step-num">4</div><div class="lab-step-text"><strong>Push to your repo:</strong> paste the prototype link in <a href="Strategy Repo Template.html#prototype" style="color:#34d399; text-decoration:underline;"><code>01-the-bet/prototype.md</code></a>, commit, and share the link in Slack.</div></div>
+    </div>
+    <div class="lab-tip">
+      <div class="lab-tip-label">Keep in Mind</div>
+      <div class="lab-tip-text">Instagram's first version was built in 8 weeks by 2 people. It did one thing. That's the energy here — what's the simplest version that proves your bet works?</div>
+    </div>
   </div>
 </div>
 
@@ -757,14 +899,14 @@
       <div class="waypoint">
         <div class="waypoint-num" style="background:#059669;">✓</div>
         <div class="waypoint-text">
-          <div class="wt-title">Shipped a prototype link</div>
-          <div class="wt-desc">Tangible artifact beats strategy theater</div>
+          <div class="wt-title">Shipped a prototype + committed to repo</div>
+          <div class="wt-desc">Tangible artifact in a living repo beats strategy theater</div>
         </div>
       </div>
     </div>
     <div class="artifact-preview" style="margin-top:18px;">
-      <div class="ap-title">Living Strategy — Component 1: The Bet</div>
-      <p style="font-size:14px; color:#8899bb; line-height:1.5;"><strong>Now:</strong> what / who / why now · archetype · 3 scores · top risk · confidence (H/M/L)</p>
+      <div class="ap-title">Your Repo — <code>01-the-bet/</code> now contains:</div>
+      <p style="font-size:14px; color:#8899bb; line-height:1.5;"><strong>diagnostic.md</strong> — 3 scores + rationale + killer memo &nbsp;·&nbsp; <strong>prototype.md</strong> — link + bet thesis + kill criteria</p>
     </div>
   </div>
 </div>
@@ -778,9 +920,9 @@
     <div style="background:#161822; border:1px solid #252840; border-radius:12px; padding:24px; margin:32px auto; max-width:500px; text-align:left;">
       <p style="font-size:15px; font-weight:700; color:#fff; margin-bottom:10px;">Bring to M2:</p>
       <ul>
-        <li>Your Three-Axis Diagnostic scorecard</li>
-        <li>Living Strategy — Component 1: The Bet</li>
-        <li>Your prototype</li>
+        <li>Your strategy repo with <code>01-the-bet/</code> committed</li>
+        <li>Your prototype link</li>
+        <li>Your diagnostic scores — M2 stress-tests them</li>
       </ul>
     </div>
     <div class="arc-flow" style="margin-top:28px;">
@@ -803,21 +945,73 @@
   </div>
 </div>
 
-<!-- ===== SLIDE 21.5: Module Tools ===== -->
-<div class="slide" data-notes="Point students to the interactive tools. They can fill these out during or after class. Data saves to browser and carries forward.">
+<!-- ===== SLIDE: Your Strategy Repo ===== -->
+<div class="slide" data-notes="Reinforce the repo as the anchor. Show the repo structure on screen if possible. Encourage them to review and flesh out their 01-the-bet/ files before M2.">
   <div class="slide-inner" style="text-align:center;">
-    <div class="module-tag">Your Module 1 Tools</div>
-    <h2>Continue Building</h2>
-    <div class="subtitle" style="margin:16px auto 28px;">Interactive tools — fill in during or after class. Your data carries forward to M2.</div>
+    <div class="module-tag">Your Living Strategy Repo</div>
+    <h2>Your Repo After Today</h2>
+    <div class="subtitle" style="margin:16px auto 28px;">Everything you built today is committed. This grows every module.</div>
     <div style="display:flex; gap:14px; justify-content:center; flex-wrap:wrap;">
-      <a href="M1 - Vulnerability Scorecard.html" style="display:block; text-decoration:none; background:rgba(91,141,239,0.08); border:1px solid rgba(91,141,239,0.2); border-radius:10px; padding:20px 28px; transition:all 0.2s; min-width:200px;">
-        <div style="font-size:13px; font-weight:800; color:#5b8def; margin-bottom:6px;">Vulnerability Scorecard</div>
-        <div style="font-size:12px; color:#7a7a9a;">Three-Axis Diagnostic: score your moat, data, and platform exposure</div>
-      </a>
-      <a href="Living Strategy Builder.html" style="display:block; text-decoration:none; background:rgba(160,123,232,0.08); border:1px solid rgba(160,123,232,0.2); border-radius:10px; padding:20px 28px; transition:all 0.2s; min-width:200px;">
-        <div style="font-size:13px; font-weight:800; color:#a07be8; margin-bottom:6px;">Living Strategy Builder</div>
-        <div style="font-size:12px; color:#7a7a9a;">Start building Component 1 of your living strategy</div>
-      </a>
+      <div style="background:rgba(52,211,153,0.08); border:1px solid rgba(52,211,153,0.2); border-radius:10px; padding:20px 28px; min-width:200px; text-align:left;">
+        <div style="font-size:13px; font-weight:800; color:#34d399; margin-bottom:6px;">01-the-bet/ ✓</div>
+        <div style="font-size:12px; color:#7a7a9a;">diagnostic.md — scores + rationale + killer memo</div>
+        <div style="font-size:12px; color:#7a7a9a; margin-top:4px;">prototype.md — link + bet thesis + kill criteria</div>
+      </div>
+      <div style="background:rgba(59,130,246,0.05); border:1px solid rgba(59,130,246,0.12); border-radius:10px; padding:20px 28px; min-width:200px; text-align:left; opacity:0.5;">
+        <div style="font-size:13px; font-weight:800; color:#60a5fa; margin-bottom:6px;">02-the-moat/ → M2</div>
+        <div style="font-size:12px; color:#7a7a9a;">data-flywheel.md · kill-switch.md</div>
+      </div>
+      <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.06); border-radius:10px; padding:20px 28px; min-width:200px; text-align:left; opacity:0.3;">
+        <div style="font-size:13px; font-weight:800; color:#8899bb; margin-bottom:6px;">README.md</div>
+        <div style="font-size:12px; color:#7a7a9a;">Living Strategy dashboard — fills in as you go</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SLIDE: Module Complete ===== -->
+<div class="slide" data-notes="Celebrate accomplishments. Name the numbers.">
+  <div class="slide-inner">
+    <div class="demo-tag tag-complete">Module 1 Complete</div>
+    <h2>What You Accomplished Today</h2>
+    <div class="complete-stats">
+      <div class="complete-stat"><div class="complete-num">1</div><div class="complete-label">Strategy Repo Created</div></div>
+      <div class="complete-stat"><div class="complete-num">3</div><div class="complete-label">Artifacts Committed</div></div>
+      <div class="complete-stat"><div class="complete-num">1</div><div class="complete-label">Prototype Shipped</div></div>
+    </div>
+    <div class="complete-shifts">
+      <div class="complete-shift"><div class="shift-title">Deterministic → Probabilistic</div><div class="shift-desc">You stopped promising outcomes and started framing bets with kill criteria and learning cadence.</div></div>
+      <div class="complete-shift"><div class="shift-title">Abstract → Diagnosed</div><div class="shift-desc">Your strategy went from vibes to a scored diagnostic with a named attacker on your weakest axis.</div></div>
+    </div>
+    <p style="font-size:16px; color:#60a5fa; font-weight:600; text-align:center;">Next: Module 2 — The Moat. Can anyone copy this in 6 months?</p>
+  </div>
+</div>
+
+<!-- ===== SLIDE: Key Takeaways ===== -->
+<div class="slide" data-notes="Three key takeaways. Let them read, then summarize verbally.">
+  <div class="slide-inner">
+    <div class="module-tag">Key Takeaways</div>
+    <h2>The Bet</h2>
+    <div class="takeaway-list">
+      <div class="takeaway-item"><p><strong>AI strategy is probabilistic.</strong> Traditional product strategy assumes deterministic outcomes, fixed costs, and annual planning. AI breaks all of these — bets with kill criteria replace promises.</p></div>
+      <div class="takeaway-item"><p><strong>Score your vulnerability honestly.</strong> The three-axis diagnostic forces specificity. If all your scores are 5s, you haven't looked hard enough. The partner stress-test and killer memo surface what self-assessment always misses.</p></div>
+      <div class="takeaway-item"><p><strong>Build to think, commit to learn.</strong> A working prototype in 15 minutes beats a strategy deck in 15 days. Pushing it to a repo makes it real — version-controlled, shareable, alive. That's what separates builders from deck-builders.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SLIDE: Extra Practice ===== -->
+<div class="slide" data-notes="Optional exercises for those who want to go deeper. Preview M2.">
+  <div class="slide-inner">
+    <div class="module-tag">Extra Practice</div>
+    <h2>Optional: Go Deeper</h2>
+    <div class="evidence-cards" style="margin:24px 0;">
+      <div class="evidence-card"><div class="ec-label">Exercise 1</div><div class="ec-company">Rewrite Your Killer Memo</div><div class="ec-text">Pick a different platform attacker (Apple instead of Google, or vice versa) and write a new 3-sentence killer memo. Does the attack vector change?</div></div>
+      <div class="evidence-card"><div class="ec-label">Exercise 2</div><div class="ec-company">Flesh Out Your Repo</div><div class="ec-text">Review your <code>01-the-bet/</code> files. Fill in any placeholders you skipped in class. Update the top-level <code>README.md</code> with your bet summary. Commit and push.</div></div>
+    </div>
+    <div class="artifact-preview">
+      <div class="ap-title">Next Session: Module 2 — The Moat</div>
+      <p style="font-size:15px; color:#8899bb; line-height:1.5;">You can build fast. Now — can anyone copy it? M2 covers data flywheels, vendor portability, and the 90-day encroachment plan.</p>
     </div>
   </div>
 </div>
@@ -832,12 +1026,21 @@
   </div>
 </div>
 
+<!-- ===== SLIDE: Q&A ===== -->
+<div class="slide" data-notes="Open floor for questions. Check Slack for written questions.">
+  <div class="slide-inner" style="text-align:center;">
+    <h1 style="font-size:64px; color:#3B82F6; margin-bottom:24px;">Q&amp;A</h1>
+    <p style="font-size:20px; color:#8899bb;">Any questions before we close?</p>
+    <p style="font-size:14px; color:#555; margin-top:20px;">Drop questions in Slack if something comes up later.</p>
+  </div>
+</div>
+
 <!-- ===== UI CHROME ===== -->
 <div class="nav">
   <button class="nav-btn" onclick="prev()" title="Previous (←)">‹</button>
   <button class="nav-btn" onclick="next()" title="Next (→)">›</button>
 </div>
-<div class="slide-counter"><span id="current">1</span> / <span id="total">22</span></div>
+<div class="slide-counter"><span id="current">1</span> / <span id="total">33</span></div>
 <div class="progress"><div class="progress-bar" id="progress-bar"></div></div>
 <div class="help-hint">← → navigate · S speaker notes · F fullscreen</div>
 <div class="speaker-notes" id="speaker-notes">

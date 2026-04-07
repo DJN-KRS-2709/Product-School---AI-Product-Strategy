@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Competitive Positioning Map — Module 2</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+  :root {
+    --bg: #0b0b10; --surface: #13131a; --surface2: #1a1a24;
+    --border: #252535; --border-hi: #35354a;
+    --text: #e0e0f0; --text-dim: #7a7a9a; --text-muted: #55556a;
+    --blue: #5b8def; --green: #3dd68c; --yellow: #f0c040; --red: #ef5b5b; --purple: #a07be8;
+    --green-bg: rgba(61,214,140,0.08);
+    --purple-bg: rgba(160,123,232,0.08);
+    --radius: 10px; --radius-lg: 14px;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: 'DM Sans', -apple-system, sans-serif;
+    background: var(--bg); color: var(--text);
+    min-height: 100vh; padding: 40px 20px 80px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page { max-width: 760px; margin: 0 auto; }
+
+  .header { text-align: center; margin-bottom: 36px; }
+  .badge {
+    display: inline-block; font-size: 10px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.12em;
+    color: var(--green); background: var(--green-bg);
+    border: 1px solid rgba(61,214,140,0.15);
+    padding: 5px 14px; border-radius: 20px; margin-bottom: 14px;
+  }
+  .header h1 { font-size: 28px; font-weight: 800; color: #fff; margin-bottom: 8px; letter-spacing: -0.02em; }
+  .header p { font-size: 14px; color: var(--text-dim); line-height: 1.6; max-width: 560px; margin: 0 auto; }
+
+  .card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-lg); margin-bottom: 20px; overflow: hidden; transition: border-color 0.2s;
+  }
+  .card:hover { border-color: var(--border-hi); }
+  .card-head {
+    padding: 18px 24px; display: flex; align-items: center; gap: 14px;
+    border-bottom: 1px solid var(--border);
+  }
+  .card-icon {
+    width: 32px; height: 32px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 800; color: #fff; flex-shrink: 0;
+  }
+  .card-title { font-size: 16px; font-weight: 700; color: #fff; }
+  .card-sub { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+  .card-body { padding: 20px 24px 24px; }
+
+  .axis-row { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 18px; }
+  .axis-field { flex: 1; min-width: 200px; }
+  .axis-field label {
+    display: block; font-size: 11px; font-weight: 600; color: var(--text-dim);
+    text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px;
+  }
+  .axis-field select {
+    width: 100%; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500;
+    color: #fff; background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 8px; padding: 10px 12px; outline: none; transition: border-color 0.2s;
+  }
+  .axis-field select:focus { border-color: var(--purple); }
+
+  .canvas-wrap {
+    position: relative; width: 100%; aspect-ratio: 1 / 1; max-width: 560px;
+    margin: 0 auto; border-radius: var(--radius);
+    background: var(--surface2); border: 1px solid var(--border); overflow: hidden;
+    cursor: crosshair;
+  }
+  .canvas-wrap canvas { display: block; width: 100%; height: 100%; }
+
+  .add-row { display: flex; gap: 10px; margin-top: 16px; flex-wrap: wrap; }
+  .add-row input {
+    flex: 1; min-width: 140px; font-family: 'JetBrains Mono', monospace;
+    font-size: 13px; color: #fff; background: var(--surface2);
+    border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; outline: none;
+  }
+  .add-row input:focus { border-color: var(--purple); }
+
+  .btn-sm {
+    font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 700;
+    padding: 10px 16px; border-radius: 8px;
+    border: 1px solid rgba(61,214,140,0.3); background: var(--green-bg);
+    color: var(--green); cursor: pointer; white-space: nowrap; transition: all 0.2s;
+  }
+  .btn-sm:hover { background: rgba(61,214,140,0.15); border-color: var(--green); color: #fff; }
+
+  .entries { margin-top: 16px; display: flex; flex-direction: column; gap: 6px; }
+  .entry {
+    display: flex; align-items: center; gap: 10px; padding: 8px 12px;
+    background: var(--surface2); border: 1px solid var(--border); border-radius: 8px;
+    font-size: 13px; font-weight: 500;
+  }
+  .entry .dot {
+    width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0;
+  }
+  .entry .name { flex: 1; color: #fff; }
+  .entry .coords { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-dim); }
+  .entry .del {
+    width: 22px; height: 22px; border-radius: 6px; border: none;
+    background: transparent; color: var(--text-muted); font-size: 14px;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    transition: all 0.15s;
+  }
+  .entry .del:hover { background: var(--red); color: #fff; }
+  .entry.is-you { border-color: rgba(91,141,239,0.3); background: rgba(91,141,239,0.06); }
+
+  .tip {
+    margin-top: 14px; padding: 12px 16px;
+    background: var(--purple-bg); border: 1px solid rgba(160,123,232,0.15);
+    border-radius: var(--radius); font-size: 12px; color: var(--text-dim); line-height: 1.5;
+  }
+  .tip strong { color: var(--purple); }
+
+  .actions { display: flex; gap: 10px; justify-content: center; margin-top: 24px; flex-wrap: wrap; }
+  .btn {
+    font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600;
+    padding: 10px 18px; border-radius: 8px; border: 1px solid var(--border);
+    background: var(--surface2); color: var(--text); cursor: pointer; transition: all 0.2s;
+  }
+  .btn:hover { border-color: var(--purple); color: #fff; }
+  .btn.primary { background: linear-gradient(135deg, var(--purple), #7b5fd4); border-color: transparent; color: #fff; }
+  .btn.primary:hover { filter: brightness(1.08); }
+
+  .saved-toast {
+    position: fixed; bottom: 24px; left: 50%;
+    transform: translateX(-50%) translateY(60px);
+    background: var(--green); color: #000; font-size: 13px; font-weight: 600;
+    padding: 10px 24px; border-radius: 8px; opacity: 0; transition: all 0.3s;
+    pointer-events: none; z-index: 100;
+  }
+  .saved-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  .strategy-cta {
+    margin-top: 20px; margin-bottom: 4px; padding: 14px 18px;
+    background: rgba(160,123,232,0.06); border: 1px solid rgba(160,123,232,0.2);
+    border-radius: 10px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+  }
+  .strategy-cta-text { flex: 1; min-width: 200px; font-size: 13px; color: var(--text-dim); line-height: 1.5; }
+  .strategy-cta-text strong { color: var(--purple, #a07be8); }
+  .strategy-cta-btn {
+    font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 700;
+    padding: 8px 16px; border-radius: 8px; text-decoration: none;
+    background: rgba(160,123,232,0.12); border: 1px solid rgba(160,123,232,0.3);
+    color: #a07be8; white-space: nowrap; transition: all 0.2s;
+  }
+  .strategy-cta-btn:hover { background: rgba(160,123,232,0.2); color: #fff; border-color: #a07be8; }
+</style>
+</head>
+<body>
+
+<div class="page">
+  <div class="header">
+    <div class="badge">Module 2 Tool</div>
+    <h1>Competitive Positioning Map</h1>
+    <p>Place your product and competitors on two strategic axes. Drag dots to reposition. Where you sit — and who's near you — reveals your real competitive exposure.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-icon" style="background:linear-gradient(135deg,var(--green),#2ab070)">1</div>
+      <div>
+        <div class="card-title">Choose Your Axes</div>
+        <div class="card-sub">Pick two dimensions that matter for your competitive landscape</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="axis-row">
+        <div class="axis-field">
+          <label>X-Axis (horizontal)</label>
+          <select id="axisX" onchange="onAxisChange()">
+            <option value="Workflow Depth">Workflow Depth</option>
+            <option value="Data Advantage">Data Advantage</option>
+            <option value="AI Maturity">AI Maturity</option>
+            <option value="Market Reach">Market Reach</option>
+            <option value="Trust / Compliance">Trust / Compliance</option>
+            <option value="Switching Cost">Switching Cost</option>
+          </select>
+        </div>
+        <div class="axis-field">
+          <label>Y-Axis (vertical)</label>
+          <select id="axisY" onchange="onAxisChange()">
+            <option value="Workflow Depth">Workflow Depth</option>
+            <option value="Data Advantage" selected>Data Advantage</option>
+            <option value="AI Maturity">AI Maturity</option>
+            <option value="Market Reach">Market Reach</option>
+            <option value="Trust / Compliance">Trust / Compliance</option>
+            <option value="Switching Cost">Switching Cost</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-icon" style="background:linear-gradient(135deg,var(--blue),#4070cc)">2</div>
+      <div>
+        <div class="card-title">Position Players</div>
+        <div class="card-sub">Click the map to place, or add by name below. Drag to reposition.</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="canvas-wrap" id="canvasWrap">
+        <canvas id="mapCanvas" width="560" height="560"></canvas>
+      </div>
+      <div class="add-row">
+        <input type="text" id="addName" placeholder="Company name (e.g. Jasper)">
+        <label style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text-dim);cursor:pointer;white-space:nowrap">
+          <input type="checkbox" id="addIsYou"> This is you
+        </label>
+        <button type="button" class="btn-sm" onclick="addRandom()">Add to Map</button>
+      </div>
+      <div class="entries" id="entries"></div>
+      <div class="tip">
+        <strong>How to use:</strong> Click anywhere on the map to place a new dot at that position. Drag existing dots to reposition. Your product is highlighted in blue — competitors in white. The quadrant lines help frame where defensibility concentrates.
+      </div>
+    </div>
+  </div>
+
+  <div class="strategy-cta">
+    <div class="strategy-cta-text"><strong>Component 2 saved.</strong> Open the Living Strategy Builder to see your Moat in the dashboard.</div>
+    <a href="Living Strategy Builder.html" class="strategy-cta-btn" target="_blank">Open Living Strategy →</a>
+  </div>
+
+  <div class="actions">
+    <button type="button" class="btn" onclick="resetAll()">Reset</button>
+    <button type="button" class="btn" onclick="copyToClipboard()">Copy as Text</button>
+    <button type="button" class="btn primary" onclick="exportMarkdown()">Export Markdown</button>
+  </div>
+</div>
+
+<div class="saved-toast" id="toast">Saved</div>
+
+<script>
+const KEY = 'aps-m2-positioning';
+const $ = id => document.getElementById(id);
+
+const DOT_COLORS = ['#5b8def','#3dd68c','#f0c040','#ef5b5b','#a07be8','#e070a0','#70d0d0','#d0a050'];
+const YOU_COLOR = '#5b8def';
+
+let players = [];
+let dragging = null;
+let dragOffX = 0, dragOffY = 0;
+
+function canvasCoords(e) {
+  const cv = $('mapCanvas');
+  const rect = cv.getBoundingClientRect();
+  const scaleX = cv.width / rect.width;
+  const scaleY = cv.height / rect.height;
+  return { x: (e.clientX - rect.left) * scaleX, y: (e.clientY - rect.top) * scaleY };
+}
+
+function draw() {
+  const cv = $('mapCanvas');
+  const ctx = cv.getContext('2d');
+  const W = cv.width, H = cv.height;
+  const pad = 40;
+  const cw = W - pad * 2, ch = H - pad * 2;
+  ctx.clearRect(0, 0, W, H);
+
+  ctx.fillStyle = '#0f0f18';
+  ctx.fillRect(0, 0, W, H);
+
+  ctx.strokeStyle = 'rgba(255,255,255,0.06)';
+  ctx.lineWidth = 1;
+  for (let i = 0; i <= 10; i++) {
+    const x = pad + (cw * i / 10);
+    const y = pad + (ch * i / 10);
+    ctx.beginPath(); ctx.moveTo(x, pad); ctx.lineTo(x, H - pad); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(pad, y); ctx.lineTo(W - pad, y); ctx.stroke();
+  }
+
+  ctx.strokeStyle = 'rgba(160,123,232,0.2)';
+  ctx.setLineDash([6, 4]);
+  const mx = pad + cw / 2, my = pad + ch / 2;
+  ctx.beginPath(); ctx.moveTo(mx, pad); ctx.lineTo(mx, H - pad); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(pad, my); ctx.lineTo(W - pad, my); ctx.stroke();
+  ctx.setLineDash([]);
+
+  ctx.font = '600 9px DM Sans';
+  ctx.fillStyle = 'rgba(160,123,232,0.3)';
+  ctx.textAlign = 'center';
+  const axX = $('axisX').value;
+  const axY = $('axisY').value;
+  ctx.fillText('Low ' + axX, pad + cw * 0.25, H - pad + 18);
+  ctx.fillText('High ' + axX, pad + cw * 0.75, H - pad + 18);
+  ctx.save();
+  ctx.translate(pad - 18, pad + ch * 0.75);
+  ctx.rotate(-Math.PI / 2);
+  ctx.fillText('Low ' + axY, 0, 0);
+  ctx.restore();
+  ctx.save();
+  ctx.translate(pad - 18, pad + ch * 0.25);
+  ctx.rotate(-Math.PI / 2);
+  ctx.fillText('High ' + axY, 0, 0);
+  ctx.restore();
+
+  players.forEach((p, i) => {
+    const px = pad + (p.x / 100) * cw;
+    const py = pad + ((100 - p.y) / 100) * ch;
+    const color = p.isYou ? YOU_COLOR : DOT_COLORS[(i + 1) % DOT_COLORS.length];
+
+    if (p.isYou) {
+      ctx.beginPath();
+      ctx.arc(px, py, 16, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(91,141,239,0.12)';
+      ctx.fill();
+      ctx.strokeStyle = 'rgba(91,141,239,0.3)';
+      ctx.lineWidth = 1;
+      ctx.stroke();
+    }
+
+    ctx.beginPath();
+    ctx.arc(px, py, p.isYou ? 8 : 6, 0, Math.PI * 2);
+    ctx.fillStyle = color;
+    ctx.fill();
+    ctx.strokeStyle = 'rgba(255,255,255,0.3)';
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+
+    ctx.font = (p.isYou ? '700' : '600') + ' 11px DM Sans';
+    ctx.fillStyle = p.isYou ? '#fff' : '#c0c0d0';
+    ctx.textAlign = 'center';
+    ctx.fillText(p.name, px, py - (p.isYou ? 14 : 11));
+  });
+}
+
+function hitTest(cx, cy) {
+  const cv = $('mapCanvas');
+  const pad = 40, cw = cv.width - pad * 2, ch = cv.height - pad * 2;
+  for (let i = players.length - 1; i >= 0; i--) {
+    const px = pad + (players[i].x / 100) * cw;
+    const py = pad + ((100 - players[i].y) / 100) * ch;
+    const dx = cx - px, dy = cy - py;
+    if (dx * dx + dy * dy < 15 * 15) return { idx: i, offX: dx, offY: dy };
+  }
+  return null;
+}
+
+function coordsToPercent(cx, cy) {
+  const cv = $('mapCanvas');
+  const pad = 40, cw = cv.width - pad * 2, ch = cv.height - pad * 2;
+  return {
+    x: Math.max(0, Math.min(100, ((cx - pad) / cw) * 100)),
+    y: Math.max(0, Math.min(100, 100 - ((cy - pad) / ch) * 100))
+  };
+}
+
+$('mapCanvas').addEventListener('mousedown', e => {
+  const c = canvasCoords(e);
+  const hit = hitTest(c.x, c.y);
+  if (hit) {
+    dragging = hit.idx;
+    dragOffX = hit.offX;
+    dragOffY = hit.offY;
+  }
+});
+
+$('mapCanvas').addEventListener('mousemove', e => {
+  if (dragging == null) return;
+  const c = canvasCoords(e);
+  const pos = coordsToPercent(c.x - dragOffX, c.y - dragOffY);
+  players[dragging].x = pos.x;
+  players[dragging].y = pos.y;
+  draw();
+  renderEntries();
+});
+
+window.addEventListener('mouseup', () => {
+  if (dragging != null) { dragging = null; save(); }
+});
+
+$('mapCanvas').addEventListener('click', e => {
+  if (dragging != null) return;
+  const c = canvasCoords(e);
+  if (hitTest(c.x, c.y)) return;
+  const pos = coordsToPercent(c.x, c.y);
+  const name = $('addName').value.trim() || 'Player ' + (players.length + 1);
+  const isYou = $('addIsYou').checked;
+  if (isYou) players.forEach(p => p.isYou = false);
+  players.push({ name, x: pos.x, y: pos.y, isYou });
+  $('addName').value = '';
+  $('addIsYou').checked = false;
+  save();
+  draw();
+  renderEntries();
+});
+
+function addRandom() {
+  const name = $('addName').value.trim();
+  if (!name) { showToast('Enter a company name'); return; }
+  const isYou = $('addIsYou').checked;
+  if (isYou) players.forEach(p => p.isYou = false);
+  players.push({
+    name, isYou,
+    x: 20 + Math.random() * 60,
+    y: 20 + Math.random() * 60
+  });
+  $('addName').value = '';
+  $('addIsYou').checked = false;
+  save();
+  draw();
+  renderEntries();
+}
+
+function removePlayer(i) {
+  players.splice(i, 1);
+  save(); draw(); renderEntries();
+}
+
+function renderEntries() {
+  const el = $('entries');
+  el.innerHTML = players.map((p, i) => {
+    const color = p.isYou ? YOU_COLOR : DOT_COLORS[(i + 1) % DOT_COLORS.length];
+    return '<div class="entry' + (p.isYou ? ' is-you' : '') + '">' +
+      '<div class="dot" style="background:' + color + '"></div>' +
+      '<div class="name">' + esc(p.name) + (p.isYou ? ' <span style="font-size:10px;color:var(--blue)">(YOU)</span>' : '') + '</div>' +
+      '<div class="coords">(' + Math.round(p.x) + ', ' + Math.round(p.y) + ')</div>' +
+      '<button type="button" class="del" onclick="removePlayer(' + i + ')">×</button>' +
+      '</div>';
+  }).join('');
+}
+
+function esc(s) { const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+
+function onAxisChange() { draw(); save(); }
+
+function save() {
+  localStorage.setItem(KEY, JSON.stringify({
+    axisX: $('axisX').value,
+    axisY: $('axisY').value,
+    players
+  }));
+  showToast('Auto-saved');
+}
+
+function load() {
+  try {
+    const d = JSON.parse(localStorage.getItem(KEY));
+    if (d) {
+      if (d.axisX) $('axisX').value = d.axisX;
+      if (d.axisY) $('axisY').value = d.axisY;
+      if (Array.isArray(d.players)) players = d.players;
+    }
+  } catch(e) {}
+  draw();
+  renderEntries();
+}
+
+function resetAll() {
+  players = [];
+  localStorage.removeItem(KEY);
+  $('axisX').value = 'Workflow Depth';
+  $('axisY').value = 'Data Advantage';
+  draw(); renderEntries();
+  showToast('Reset');
+}
+
+function buildText() {
+  const lines = ['COMPETITIVE POSITIONING MAP','','X-Axis: ' + $('axisX').value, 'Y-Axis: ' + $('axisY').value, ''];
+  players.forEach(p => {
+    lines.push((p.isYou ? '* ' : '  ') + p.name + ' — (' + Math.round(p.x) + ', ' + Math.round(p.y) + ')');
+  });
+  return lines.join('\n');
+}
+
+function copyToClipboard() { navigator.clipboard.writeText(buildText()).then(() => showToast('Copied')); }
+
+function exportMarkdown() {
+  const md = '# Competitive Positioning Map\n\n' +
+    '**X-Axis:** ' + $('axisX').value + '  \n' +
+    '**Y-Axis:** ' + $('axisY').value + '\n\n' +
+    '| Player | X | Y | You? |\n|--------|---|---|------|\n' +
+    players.map(p => '| ' + p.name + ' | ' + Math.round(p.x) + ' | ' + Math.round(p.y) + ' | ' + (p.isYou ? 'Yes' : '') + ' |').join('\n') + '\n';
+  const blob = new Blob([md], { type: 'text/markdown' });
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+  a.download = 'positioning-map.md'; a.click(); URL.revokeObjectURL(a.href);
+  showToast('Downloaded');
+}
+
+function showToast(msg) { const t = $('toast'); t.textContent = msg; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 1800); }
+
+load();
+</script>
+</body>
+</html>

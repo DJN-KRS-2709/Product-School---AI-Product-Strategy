@@ -66,19 +66,21 @@ This isn't a footnote. It's the reason the course exists. M1 should open with th
 
 ## The Throughline Artifact: The Living Strategy
 
-Not a document. Not a PRD. Not a dissertation. A **living strategy** — interactive, compounding, co-creating with you. Something that beats at a higher frequency than an annual review cycle.
+Not a document. Not a PRD. Not a dissertation. A **living strategy repo** — version-controlled, compounding, collaborative. A PRD on steroids that lives in GitHub. Something that beats at a higher frequency than an annual review cycle. Others can contribute via PRs without making this an annual rewrite.
 
-Five components built across M1–M5. M6 integrates and presents the whole thing.
+Participants fork a template repo in M1 and build into it across all 6 sessions. Five component folders built across M1–M5 (`01-the-bet/` through `05-the-guardrails/`). M6 finalizes `06-the-pitch/` and the top-level `README.md` — then presents the whole strategy to the room.
 
-| Session | Component | What It Contains |
-|---------|-----------|------------------|
-| M1 | **The Bet** | What we're building, for whom, why now, validation evidence, probabilistic confidence level |
-| M2 | **The Moat** | Data flywheel map, defensibility analysis, vendor portability plan, encroachment defense |
-| M3 | **The Margin** | Cost model with cascading, pricing strategy, P&L projection, stress tests |
-| M4 | **The Contract** | Eval spec, reliability targets, confidence UX design, HITL plan, golden dataset strategy |
-| M5 | **The Guardrails** | Compounding system design, governance framework, agent topology, feedback loops |
+| Session | Component | What It Contains | Visual Artifact |
+|---------|-----------|------------------|-----------------|
+| M1 | **The Bet** | What we're building, for whom, why now, validation evidence, probabilistic confidence level | Vulnerability heat bars (3-axis), archetype card |
+| M2 | **The Moat** | Data flywheel map, defensibility analysis, competitive positioning, vendor portability plan, encroachment defense | Flywheel radar chart, competitive positioning map |
+| M3 | **The Margin** | Cost model with cascading, pricing strategy, P&L projection, stress tests, scenario modeling | Live cost curve with what-if sliders |
+| M4 | **The Contract** | Eval spec, reliability targets, confidence UX design, HITL plan, golden dataset strategy | Trust maturity meter |
+| M5 | **The Guardrails** | Compounding system design, governance framework, agent topology, feedback loops | AI maturity radar/spider chart, risk badge |
 
-**M6 = Integration.** Stress-test the full strategy, refine the narrative, present it to the room.
+**M6 = Integration.** Finalize `README.md` with complete summaries, build `06-the-pitch/roadmap.md`, and present the repo to the room as a board simulation.
+
+The repo is the central artifact — not a sixth separate exercise. Every module pushes real files to specific folders. The top-level `README.md` serves as the living strategy dashboard — a single page that links to and summarizes all components. Share the repo link with your board Monday morning.
 
 Each component connects to the others — they're pillars of one strategy, not sequential steps in a checklist. The build order is sequential (you can't price what you can't defend), but the iteration order may differ in practice.
 
@@ -95,11 +97,11 @@ Every module includes a hands-on build moment that produces something tangible t
 | Module | Build Moment | Tangible Output |
 |--------|-------------|-----------------|
 | M1 | Prototype a product concept with AI tools (v0, Cursor, Lovable) | Shareable link to working prototype |
-| M2 | Map your data flywheel and score it live | Scored flywheel map + portability checklist |
-| M3 | Build a cost curve and pricing model | Cost model with stress tests |
+| M2 | Map your data flywheel, score it, and position against competitors | Scored flywheel map + competitive positioning map + portability checklist |
+| M3 | Build a cost curve, pricing model, and explore scenarios with live sliders | Cost model with stress tests + scenario lab with interactive margin curve |
 | M4 | Spec an eval dashboard with metrics, judges, drift alerts | Eval dashboard spec + reliability contract |
 | M5 | Design a compounding system + governance policy | System architecture + governance policy |
-| M6 | Present the full strategy, get challenged by the room | Complete, stress-tested living strategy |
+| M6 | Finalize README.md, build roadmap, present repo to the room | Complete strategy repo — 6 folders, board-ready README |
 
 Each session's build connects to the final artifact. By M6, they don't start from scratch — they assemble 5 components they've already built.
 
@@ -236,11 +238,11 @@ This creates a reusable tool: after the course, they can evaluate any future bet
 
 **Case study:** Jasper vs. ChatGPT — how native AI features encroached a $1.5B wrapper
 
-**Build moment:** Map your data flywheel, score each loop, identify the single weakest link
+**Build moment:** Map your data flywheel, score each loop, identify the single weakest link. Build a competitive positioning map — place your product and 3-5 competitors on two strategic axes (interactive canvas with draggable dots).
 
 **Peer challenge:** Partner plays the Big Tech attacker — "here's exactly how I kill your product"
 
-**Artifact component:** The Moat — data flywheel map, defensibility scores, vendor portability checklist
+**Artifact component:** The Moat — data flywheel map, defensibility scores, competitive positioning map, vendor portability checklist
 
 **Bridge to M3:** "You know what's defensible. M3 answers: will the economics actually work, or will inference costs eat your margin?"
 
@@ -259,11 +261,11 @@ This creates a reusable tool: after the course, they can evaluate any future bet
 
 **Case study:** Klarna — The Automator That Overcorrected (bet → crack → correction arc)
 
-**Build moment:** Build a cost curve + cascading model + hybrid pricing strategy; compare old SaaS revenue vs. AI usage revenue for board/sales enablement
+**Build moment:** Build a cost curve + cascading model + hybrid pricing strategy; compare old SaaS revenue vs. AI usage revenue for board/sales enablement. Then explore the Scenario Lab — drag sliders for inference cost multiplier, volume growth, and cascading ratio to see how your margin curve behaves in real time.
 
 **Peer challenge:** Partner stress-tests the model — "what happens when inference costs 3x? When your heaviest user segment doubles?"
 
-**Artifact component:** The Margin — cost model with cascading, pricing strategy, P&L projection with stress tests
+**Artifact component:** The Margin — cost model with cascading, pricing strategy, scenario analysis, P&L projection with stress tests
 
 **Bridge to M4:** "The economics work on paper. M4 answers: will users actually trust the output enough to pay for it?"
 
@@ -348,7 +350,7 @@ This creates a reusable tool: after the course, they can evaluate any future bet
 
 1. **The full strategic stack in one program.** Reforge splits bet/moat/margin/evals/governance across 6 separate paid courses. This threads them into one coherent arc where each piece depends on the last.
 
-2. **A living strategy, not a certificate.** Participants leave with a working strategy built on their actual product — five interconnected components, stress-tested by peers, presentable Monday morning.
+2. **A living repo, not a certificate.** Participants leave with a GitHub repo built on their actual product — six folders of interconnected strategy artifacts, stress-tested by peers, shareable Monday morning. Version-controlled. Portable. Alive.
 
 3. **Economics depth.** Nobody does a full module on AI unit economics with cascading models, cost curves, and hybrid pricing. This is the most underserved topic in AI product education. M3 could be the module people talk about.
 
