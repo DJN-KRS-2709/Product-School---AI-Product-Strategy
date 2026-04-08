@@ -401,6 +401,74 @@
   .lab-tip { background: rgba(251,191,36,0.06); border: 1px solid rgba(251,191,36,0.12); border-radius: 10px; padding: 14px 18px; margin: 12px 0; }
   .lab-tip-label { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: #fbbf24; margin-bottom: 4px; }
   .lab-tip-text { font-size: 13px; color: #8899bb; line-height: 1.5; }
+
+  /* === Skip Slide Feature === */
+  .skip-badge {
+    display: none; position: fixed; top: 16px; left: 24px;
+    font-size: 11px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase;
+    color: #f87171; background: rgba(248,113,113,0.1); border: 1px solid rgba(248,113,113,0.25);
+    padding: 5px 14px; border-radius: 6px; z-index: 150; cursor: pointer;
+  }
+  .skip-badge.visible { display: block; }
+  .skip-badge:hover { background: rgba(248,113,113,0.2); }
+
+  .slide-sorter {
+    display: none; position: fixed; inset: 0; z-index: 500;
+    background: rgba(7,22,44,0.97); overflow-y: auto;
+    padding: 60px 40px 40px;
+  }
+  .slide-sorter.visible { display: block; }
+  .sorter-header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 28px; max-width: 1200px; margin-left: auto; margin-right: auto;
+  }
+  .sorter-title {
+    font-family: 'Poppins', sans-serif; font-size: 22px; font-weight: 700; color: #fff;
+  }
+  .sorter-subtitle { font-size: 13px; color: #556; margin-top: 4px; }
+  .sorter-close {
+    width: 36px; height: 36px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.06); color: #888; font-size: 18px;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+  }
+  .sorter-close:hover { background: rgba(255,255,255,0.12); color: #fff; }
+  .sorter-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px; max-width: 1200px; margin: 0 auto;
+  }
+  .sorter-item {
+    background: #0c2340; border: 1px solid #1a3a5c; border-radius: 10px;
+    padding: 16px; cursor: pointer; transition: all 0.15s ease; position: relative;
+  }
+  .sorter-item:hover { border-color: #1241B0; background: #0f2d4a; }
+  .sorter-item.sorter-active { border-color: #1241B0; box-shadow: 0 0 12px rgba(18,65,176,0.3); }
+  .sorter-item.sorter-skipped { opacity: 0.4; }
+  .sorter-item.sorter-skipped:hover { opacity: 0.7; }
+  .sorter-num {
+    font-size: 11px; font-weight: 800; color: #1241B0; margin-bottom: 6px;
+  }
+  .sorter-label {
+    font-size: 13px; font-weight: 600; color: #e0e0f0; line-height: 1.4;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+    overflow: hidden; margin-bottom: 10px; min-height: 36px;
+  }
+  .sorter-skip-btn {
+    font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;
+    padding: 4px 10px; border-radius: 4px; border: none; cursor: pointer;
+    transition: all 0.15s ease;
+  }
+  .sorter-skip-btn.skip-off {
+    background: rgba(255,255,255,0.06); color: #556;
+  }
+  .sorter-skip-btn.skip-off:hover { background: rgba(248,113,113,0.15); color: #fca5a5; }
+  .sorter-skip-btn.skip-on {
+    background: rgba(248,113,113,0.15); color: #fca5a5;
+  }
+  .sorter-skip-btn.skip-on:hover { background: rgba(52,211,153,0.15); color: #6ee7b7; }
+  .sorter-tag {
+    display: inline-block; font-size: 9px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.06em; padding: 2px 6px; border-radius: 3px; margin-bottom: 6px;
+  }
 </style>
 </head>
 <body>
@@ -1174,10 +1242,18 @@
 </div>
 <div class="slide-counter"><span id="current">1</span> / <span id="total">33</span></div>
 <div class="progress"><div class="progress-bar" id="progress-bar"></div></div>
-<div class="help-hint">← → navigate · S speaker notes · F fullscreen</div>
+<div class="help-hint">← → navigate · S notes · F fullscreen · K skip slide · M slide sorter</div>
 <div class="speaker-notes" id="speaker-notes">
   <div class="notes-tag">Speaker Notes</div>
   <div id="notes-content"></div>
+</div>
+<div class="skip-badge" id="skip-badge" onclick="toggleSkip(current)" title="Click to unskip (K)">SKIPPED</div>
+<div class="slide-sorter" id="slide-sorter">
+  <div class="sorter-header">
+    <div><div class="sorter-title">Slide Sorter</div><div class="sorter-subtitle">Click a slide to jump · Toggle skip to hide during presentation</div></div>
+    <button class="sorter-close" onclick="closeSorter()" title="Close (M / Esc)">✕</button>
+  </div>
+  <div class="sorter-grid" id="sorter-grid"></div>
 </div>
 
 <script>
@@ -1185,20 +1261,106 @@
   const total = slides.length;
   let current = 0;
   let notesVisible = false;
+  let sorterVisible = false;
+
+  const STORAGE_KEY = 'skip-slides-' + document.title.replace(/[^a-zA-Z0-9]/g, '-').substring(0, 60);
+  const skippedSlides = new Set(JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'));
+
+  function saveSkips() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify([...skippedSlides]));
+  }
+
+  function getActiveSlides() {
+    return [...Array(total).keys()].filter(i => !skippedSlides.has(i));
+  }
 
   function show(idx) {
     slides.forEach((s, i) => { s.classList.toggle('active', i === idx); });
     current = idx;
-    document.getElementById('current').textContent = idx + 1;
-    document.getElementById('progress-bar').style.width = ((idx + 1) / total * 100) + '%';
+    const active = getActiveSlides();
+    const posInActive = active.indexOf(idx);
+    const displayPos = posInActive >= 0 ? posInActive + 1 : '•';
+    document.getElementById('current').textContent = displayPos;
+    document.getElementById('total').textContent = active.length;
+    const progress = posInActive >= 0 ? (posInActive + 1) / active.length * 100 : 0;
+    document.getElementById('progress-bar').style.width = progress + '%';
     const notes = slides[idx].getAttribute('data-notes') || '';
     document.getElementById('notes-content').innerHTML = notes || '<em style="color:#444;">No notes for this slide.</em>';
+    document.getElementById('skip-badge').classList.toggle('visible', skippedSlides.has(idx));
   }
 
-  function next() { if (current < total - 1) show(current + 1); }
-  function prev() { if (current > 0) show(current - 1); }
+  function nextActive(from, dir) {
+    let i = from + dir;
+    while (i >= 0 && i < total) {
+      if (!skippedSlides.has(i)) return i;
+      i += dir;
+    }
+    return -1;
+  }
+
+  function next() {
+    const n = nextActive(current, 1);
+    if (n >= 0) show(n);
+  }
+  function prev() {
+    const n = nextActive(current, -1);
+    if (n >= 0) show(n);
+  }
+
+  function toggleSkip(idx) {
+    if (skippedSlides.has(idx)) skippedSlides.delete(idx);
+    else skippedSlides.add(idx);
+    saveSkips();
+    show(current);
+    if (sorterVisible) renderSorter();
+  }
+
+  function getSlideLabel(el) {
+    const h = el.querySelector('h1, h2');
+    if (h) return h.textContent.trim().substring(0, 50);
+    const tag = el.querySelector('.module-tag');
+    if (tag) return tag.textContent.trim();
+    return 'Slide';
+  }
+
+  function getSlideTag(el) {
+    const tag = el.querySelector('.demo-tag');
+    if (!tag) return '';
+    const cls = [...tag.classList].find(c => c.startsWith('tag-'));
+    const label = tag.textContent.trim();
+    const style = cls ? `class="sorter-tag ${cls}"` : 'class="sorter-tag" style="background:rgba(255,255,255,0.06);color:#556;"';
+    return `<span ${style}>${label}</span>`;
+  }
+
+  function renderSorter() {
+    const grid = document.getElementById('sorter-grid');
+    grid.innerHTML = '';
+    slides.forEach((s, i) => {
+      const isSkipped = skippedSlides.has(i);
+      const isCurrent = i === current;
+      const div = document.createElement('div');
+      div.className = 'sorter-item' + (isSkipped ? ' sorter-skipped' : '') + (isCurrent ? ' sorter-active' : '');
+      div.innerHTML = `
+        <div class="sorter-num">Slide ${i + 1}</div>
+        ${getSlideTag(s)}
+        <div class="sorter-label">${getSlideLabel(s)}</div>
+        <button class="sorter-skip-btn ${isSkipped ? 'skip-on' : 'skip-off'}"
+                onclick="event.stopPropagation(); toggleSkip(${i})">
+          ${isSkipped ? '↩ Unskip' : '⊘ Skip'}
+        </button>`;
+      div.addEventListener('click', () => { show(i); closeSorter(); });
+      grid.appendChild(div);
+    });
+  }
+
+  function openSorter() { sorterVisible = true; renderSorter(); document.getElementById('slide-sorter').classList.add('visible'); }
+  function closeSorter() { sorterVisible = false; document.getElementById('slide-sorter').classList.remove('visible'); }
 
   document.addEventListener('keydown', e => {
+    if (sorterVisible) {
+      if (e.key === 'Escape' || e.key === 'm' || e.key === 'M') { e.preventDefault(); closeSorter(); }
+      return;
+    }
     if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); next(); }
     else if (e.key === 'ArrowLeft') { e.preventDefault(); prev(); }
     else if (e.key === 's' || e.key === 'S') {
@@ -1209,6 +1371,8 @@
       if (!document.fullscreenElement) document.documentElement.requestFullscreen();
       else document.exitFullscreen();
     }
+    else if (e.key === 'k' || e.key === 'K') { toggleSkip(current); }
+    else if (e.key === 'm' || e.key === 'M') { e.preventDefault(); openSorter(); }
   });
 
   let touchStartX = 0;
