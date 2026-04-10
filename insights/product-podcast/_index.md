@@ -1,0 +1,36 @@
+# The Product Podcast - Episode Index
+
+Total episodes: 29
+Last updated: 2026-04-10 10:39
+
+| Date | Title | Guest |
+|------|-------|-------|
+| 2026-04-08 | [TikTok VP of Product on Turning Video-First Feeds into a Full E-Commerce Platform | David Kaufman | E291](2026-04-08-tiktok-vp-of-product-on-turning-video-first-feeds-into-a-full-e-commerce-platfor.md) | David Kaufman |
+| 2026-04-01 | [OpenAI & Figma Product Builders on Killing the Design-to-Code Handoff and Vice Versa | Ed Bayes & Matt Colyer | E290](2026-04-01-openai-figma-product-builders-on-killing-the-design-to-code-handoff-and-vice-ver.md) | Ed Bayes & Matt Colyer |
+| 2026-03-25 | [Xero CPTO on Building an Agentic AI Platform to Manage Multiple Agents | Diya Jolly | E289](2026-03-25-xero-cpto-on-building-an-agentic-ai-platform-to-manage-multiple-agents-diya-joll.md) | Diya Jolly |
+| 2026-03-18 | [Shopify VP of Product on Transforming SaaS to AI-Native and Building $100B+ Agent-Led Commerce | Vanessa Lee | E288](2026-03-18-shopify-vp-of-product-on-transforming-saas-to-ai-native-and-building-100b-agent-.md) | Vanessa Lee |
+| 2026-03-11 | [Google VP of Product on The Future of Search and AI Mode | Robby Stein | E287](2026-03-11-google-vp-of-product-on-the-future-of-search-and-ai-mode-robby-stein-e287.md) | Robby Stein |
+| 2026-03-04 | [Zapier VP of Product on Orchestrating 800+ AI Agents to Manage Everything | Chris Geoghegan | E286](2026-03-04-zapier-vp-of-product-on-orchestrating-800-ai-agents-to-manage-everything-chris-g.md) | Chris Geoghegan |
+| 2026-02-18 | [Walmart CPO on Scaling AI-Powered Localization Across Hundreds of Stores Worldwide | Tim Simmons | E285](2026-02-18-walmart-cpo-on-scaling-ai-powered-localization-across-hundreds-of-stores-worldwi.md) | Tim Simmons |
+| 2026-02-04 | [Vercel SVP of Product on How Real AI-Native Products Operate and Ship Faster | Aparna Sinha | E284](2026-02-04-vercel-svp-of-product-on-how-real-ai-native-products-operate-and-ship-faster-apa.md) | Aparna Sinha |
+| 2026-01-21 | [Rippling GM on Running a $16B+ Company Like a Product at Scale | Anique Drumright | E283](2026-01-21-rippling-gm-on-running-a-16b-company-like-a-product-at-scale-anique-drumright-e2.md) | Anique Drumright |
+| 2026-01-07 | [Miro CEO on Leading AI Product Expansion Without Losing Focus | Andrey Khusid | E282](2026-01-07-miro-ceo-on-leading-ai-product-expansion-without-losing-focus-andrey-khusid-e282.md) | Andrey Khusid |
+| 2025-12-23 | [Webflow CPO on How Product Leaders at AI-Native Companies Act as Individual Contributors | Rachel Wolan | E281](2025-12-23-webflow-cpo-on-how-product-leaders-at-ai-native-companies-act-as-individual-cont.md) | Rachel Wolan |
+| 2025-12-10 | [Vercel V0 GM on Transforming Developer Workflows to Ship Faster | Zeb Hermann | E280](2025-12-10-vercel-v0-gm-on-transforming-developer-workflows-to-ship-faster-zeb-hermann-e280.md) | Zeb Hermann |
+| 2025-11-26 | [Lovable Head of Growth on The New AI-Native Growth Playbook | Elena Verna | E279](2025-11-26-lovable-head-of-growth-on-the-new-ai-native-growth-playbook-elena-verna-e279.md) | Elena Verna |
+| 2025-11-13 | [Hims & Hers CPO on Building Delightful Products in Regulated Markets | Dheerja Kaur | E278](2025-11-13-hims-hers-cpo-on-building-delightful-products-in-regulated-markets-dheerja-kaur-.md) | Dheerja Kaur |
+| 2025-03-12 | [Ex-Instagram VP of Product on Scaling & Monetizing Marketplaces | Tanya Cordrey, CPO at Motorway | E259](2025-03-12-ex-instagram-vp-of-product-on-scaling-monetizing-marketplaces-tanya-cordrey-cpo-.md) | Tanya Cordrey, CPO at Motorway |
+| 2025-01-29 | [Warner Music VP of Product Design on Design thinking and mystical practices for business breakthroughs | Christina Goldschmidt | E254](2025-01-29-warner-music-vp-of-product-design-on-design-thinking-and-mystical-practices-for-.md) | Christina Goldschmidt |
+| 2025-01-08 | [Brex President & CPO on embedding Product team into sales process to accelerate revenue growth | Karandeep Anand | E251](2025-01-08-brex-president-cpo-on-embedding-product-team-into-sales-process-to-accelerate-re.md) | Karandeep Anand |
+| 2024-12-25 | [Vix, the Netflix of Latin America with over 50 Million Users | TelevisaUnivision CPTO, Michael Cerda | E250](2024-12-25-vix-the-netflix-of-latin-america-with-over-50-million-users-televisaunivision-cp.md) | TelevisaUnivision CPTO, Michael Cerda |
+| 2024-10-30 | [From Free Open-Source Database to a $20B Enterprise Data Platform | MongoDB SVP of Product, Andrew Davidson | E242](2024-10-30-from-free-open-source-database-to-a-20b-enterprise-data-platform-mongodb-svp-of-.md) | MongoDB SVP of Product, Andrew Davidson |
+| 2024-10-09 | [The Future Of Last-Mile Delivery: Self-driving Cars, Virtual Kitchens, AI | Chief Product Officer at JustEat Takeaway, Jessica Hall | E239](2024-10-09-the-future-of-last-mile-delivery-self-driving-cars-virtual-kitchens-ai-chief-pro.md) | Chief Product Officer at JustEat Takeaway, Jessica Hall |
+| 2024-10-02 | [From Inventing Google Chromecast to Reinventing Physical Therapy with AI |  Mario Queiroz, Chief Product Officer at Hinge Health | E238](2024-10-02-from-inventing-google-chromecast-to-reinventing-physical-therapy-with-ai-mario-q.md) | Mario Queiroz, Chief Product Officer at Hinge Health |
+| 2024-09-25 | [Transforming a 27-Year-Old Business into an AI Powerhouse | Vinod Suresh, US Chief Product Officer at GoDaddy | E237](2024-09-25-transforming-a-27-year-old-business-into-an-ai-powerhouse-vinod-suresh-us-chief-.md) | Vinod Suresh, US Chief Product Officer at GoDaddy |
+| 2024-09-18 | [Scaling a Car Rental Marketplace to over $1Billion in Revenue | Tom Wang, Chief Product Officer at Turo | E236](2024-09-18-scaling-a-car-rental-marketplace-to-over-1billion-in-revenue-tom-wang-chief-prod.md) | Tom Wang, Chief Product Officer at Turo |
+| 2024-09-11 | [Growing as a CPO as your product grows from 0 to $10B valuation | Tomer London, Co-founder and Chief Product Officer at Gusto | E235](2024-09-11-growing-as-a-cpo-as-your-product-grows-from-0-to-10b-valuation-tomer-london-co-f.md) | Tomer London, Co-founder and Chief Product Officer at Gusto |
+| 2024-09-04 | [The tool product managers love and is disrupting Jira | Karri Saarinen, CEO at Linear | E234](2024-09-04-the-tool-product-managers-love-and-is-disrupting-jira-karri-saarinen-ceo-at-line.md) | Karri Saarinen, CEO at Linear |
+| 2024-08-28 | [How Twitch Captures the Attention of Over 140M Monthly Active Users | Jeremy Forrester, VP Product | E233](2024-08-28-how-twitch-captures-the-attention-of-over-140m-monthly-active-users-jeremy-forre.md) | Jeremy Forrester, VP Product |
+| 2024-08-21 | [The Secrets of Instacart's AI: What’s Next for Personalized Shopping? with CPO Daniel Danker | E232](2024-08-21-the-secrets-of-instacarts-ai-whats-next-for-personalized-shopping-with-cpo-danie.md) | CPO Daniel Danker |
+| 2024-08-09 | [Slack's VP of Product & GM Jaime DeLanghe Reveals How to Monetize AI Product Features! | E231](2024-08-09-slacks-vp-of-product-gm-jaime-delanghe-reveals-how-to-monetize-ai-product-featur.md) |  |
+| 2024-07-31 | [The Designer Behind Beats headphones' $1.5 Billion Success with Robert Brunner, Chief Designer at Beats by Dr. Dre | E230](2024-07-31-the-designer-behind-beats-headphones-15-billion-success-with-robert-brunner-chie.md) |  |
