@@ -353,13 +353,27 @@ section.cameras-section .cameras-inner {
   background: linear-gradient(135deg, #07162C 0%, #0c2244 50%, #1241B0 100%);
   display: flex; align-items: center; justify-content: center;
 }
+.cameras-layout {
+  display: flex; align-items: center; gap: 60px; max-width: 900px; width: 100%;
+}
+.cameras-left { flex: 1; position: relative; }
+.cameras-logo {
+  width: 48px; height: 48px; margin-bottom: 40px; opacity: 0.9;
+}
 .cameras-card {
   border: 1.5px solid rgba(255,255,255,0.15); border-radius: 20px;
-  padding: 48px 64px; max-width: 560px; text-align: left;
+  padding: 48px 64px; max-width: 520px; text-align: left;
 }
 .cameras-card h2 { font-size: 32px; margin-bottom: 8px; }
 .cameras-card .cameras-arrow { font-size: 18px; font-weight: 700; color: #60a5fa; margin-bottom: 4px; }
 .cameras-card p { font-size: 16px; color: rgba(255,255,255,0.65); line-height: 1.6; }
+.cameras-photo-strip {
+  flex-shrink: 0; width: 220px; height: 480px; border-radius: 16px;
+  overflow: hidden; border: 1.5px solid rgba(255,255,255,0.12);
+}
+.cameras-photo-strip img {
+  width: 100%; height: 100%; object-fit: cover;
+}
 
 /* ═══ COMPLETION ═══ */
 .complete-stats { display: flex; gap: 20px; margin: 24px 0; }
@@ -803,10 +817,18 @@ section.skipped { display: none; }
 <!-- 15: Cameras On -->
 <section class="cameras-section" data-title="Cameras On">
   <div class="cameras-inner">
-    <div class="cameras-card">
-      <h2>Reminder!</h2>
-      <div class="cameras-arrow">→ Cameras On</div>
-      <p>It's always better to see your smiling face! Be present and visible to stay engaged and keep interactions valuable.</p>
+    <div class="cameras-layout">
+      <div class="cameras-left">
+        <img class="cameras-logo" src="../Design/Minimalist shield with glowing _P_.png" alt="Logo">
+        <div class="cameras-card">
+          <h2>Reminder! 🎒</h2>
+          <div class="cameras-arrow">→ Cameras On</div>
+          <p>It's always better to see your smiling face! Be present and visible to stay engaged and keep interactions valuable.</p>
+        </div>
+      </div>
+      <div class="cameras-photo-strip">
+        <img src="../Design/camaras on pic.png" alt="Cameras On">
+      </div>
     </div>
   </div>
 </section>
