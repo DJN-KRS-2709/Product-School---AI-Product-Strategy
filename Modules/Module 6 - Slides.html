@@ -117,6 +117,15 @@ section.centered .inner { text-align: center; }
 .tag-case { background: rgba(210,153,34,0.12); color: #e3b341; }
 .tag-exercise { background: rgba(52,211,153,0.12); color: #6ee7b7; }
 .tag-activity { background: rgba(188,140,255,0.12); color: #d2a8ff; }
+.lab-timer {
+  position: absolute; top: 24px; right: 32px;
+  display: flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 12px; padding: 10px 18px;
+  font-family: 'IBM Plex Mono', monospace; font-size: 15px; font-weight: 600;
+  color: #60a5fa; z-index: 10;
+}
+.lab-timer .timer-icon { font-size: 18px; }
 .tag-build { background: rgba(255,123,182,0.12); color: #ff7b72; }
 .tag-break { background: rgba(100,116,139,0.12); color: #94a3b8; }
 .tag-debrief { background: rgba(188,140,255,0.12); color: #d2a8ff; }
@@ -353,13 +362,27 @@ section.cameras-section .cameras-inner {
   background: linear-gradient(135deg, #07162C 0%, #0c2244 50%, #1241B0 100%);
   display: flex; align-items: center; justify-content: center;
 }
+.cameras-layout {
+  display: flex; align-items: center; gap: 60px; max-width: 900px; width: 100%;
+}
+.cameras-left { flex: 1; position: relative; }
+.cameras-logo {
+  width: 48px; height: 48px; margin-bottom: 40px; opacity: 0.9;
+}
 .cameras-card {
   border: 1.5px solid rgba(255,255,255,0.15); border-radius: 20px;
-  padding: 48px 64px; max-width: 560px; text-align: left;
+  padding: 48px 64px; max-width: 520px; text-align: left;
 }
 .cameras-card h2 { font-size: 32px; margin-bottom: 8px; }
 .cameras-card .cameras-arrow { font-size: 18px; font-weight: 700; color: #60a5fa; margin-bottom: 4px; }
 .cameras-card p { font-size: 16px; color: rgba(255,255,255,0.65); line-height: 1.6; }
+.cameras-photo-strip {
+  flex-shrink: 0; width: 220px; height: 480px; border-radius: 16px;
+  overflow: hidden; border: 1.5px solid rgba(255,255,255,0.12);
+}
+.cameras-photo-strip img {
+  width: 100%; height: 100%; object-fit: cover;
+}
 
 /* ═══ COMPLETION ═══ */
 .complete-stats { display: flex; gap: 20px; margin: 24px 0; }
@@ -693,7 +716,7 @@ section.skipped { display: none; }
         <div style="font-size:11px; color:#8899bb;">How often updates break quality. Board: reliability.</div>
       </div>
     </div>
-    <p style="font-size:13px; color:#8899bb; text-align:center;"><strong style="color:#e3b341;">Gokul:</strong> Durability beats hype · retention = quality</p>
+    <p style="font-size:13px; color:#8899bb; text-align:center;">Durability beats hype · retention = quality</p>
   </div>
 </section>
 
@@ -803,10 +826,18 @@ section.skipped { display: none; }
 <!-- 15: Cameras On -->
 <section class="cameras-section" data-title="Cameras On">
   <div class="cameras-inner">
-    <div class="cameras-card">
-      <h2>Reminder!</h2>
-      <div class="cameras-arrow">→ Cameras On</div>
-      <p>It's always better to see your smiling face! Be present and visible to stay engaged and keep interactions valuable.</p>
+    <div class="cameras-layout">
+      <div class="cameras-left">
+        <img class="cameras-logo" src="../Design/Minimalist shield with glowing _P_.png" alt="Logo">
+        <div class="cameras-card">
+          <h2>Reminder! 🎒</h2>
+          <div class="cameras-arrow">→ Cameras On</div>
+          <p>It's always better to see your smiling face! Be present and visible to stay engaged and keep interactions valuable.</p>
+        </div>
+      </div>
+      <div class="cameras-photo-strip">
+        <img src="../Design/camaras on pic.png" alt="Cameras On">
+      </div>
     </div>
   </div>
 </section>
@@ -822,6 +853,7 @@ section.skipped { display: none; }
 
 <!-- 17: Finalize Living Strategy -->
 <section class="split-section" data-title="Finalize Strategy">
+<div class="lab-timer"><span class="timer-icon">⏱</span> 10 min</div>
   <div class="split-left">
     <div class="slide-tag tag-green">Applied Work</div>
     <h2>Finalize Living Strategy</h2>
@@ -861,6 +893,7 @@ section.skipped { display: none; }
 
 <!-- 18: AI Bet Evaluator -->
 <section data-title="AI Evaluator">
+<div class="lab-timer"><span class="timer-icon">⏱</span> 5 min</div>
   <div class="inner">
     <div class="demo-tag tag-activity">AI-Powered Check</div>
     <h2>Evaluate Your Strategy With AI</h2>
@@ -898,44 +931,73 @@ section.skipped { display: none; }
   </div>
 </section>
 
-<!-- 19: Build the Roadmap -->
-<section data-title="Build Roadmap">
-  <div class="inner">
+<!-- 19: Build the Roadmap — AI-Powered -->
+<section class="split-section" data-title="Build Roadmap">
+<div class="lab-timer"><span class="timer-icon">⏱</span> 12 min</div>
+  <div class="split-left">
     <div class="demo-tag tag-exercise">Applied Work</div>
-    <h2>Build the Roadmap</h2>
+    <h2>Build Your Roadmap<br>From Your Backlog</h2>
     <div class="lab-goal">
       <div class="lab-goal-label">Your Goal</div>
-      <div class="lab-goal-text">Build a 90-day AI roadmap with exactly 3 bets. Each bet has: the hypothesis, the kill criteria, the first milestone, and the resource ask. No more than one page.</div>
+      <div class="lab-goal-text">Feed your real backlog to the AI. It maps each initiative to your strategy components and sorts them into horizons. You review, adjust, and commit.</div>
     </div>
-    <p class="subtitle">H1 / H2 / H3 tied to your strategy — not a wishlist</p>
+    <div class="lab-tip">
+      <div class="lab-tip-text"><strong>No blank templates.</strong> Your initiatives already exist — in Jira, in docs, in your head. The AI connects them to the strategy you just built.</div>
+    </div>
+  </div>
+  <div class="split-right">
+    <div class="lab-badge-row"><span class="lab-badge">AI-Powered Exercise</span></div>
+    <div class="steps-heading">Steps to follow:</div>
+    <div class="lab-steps">
+      <div class="lab-step"><div class="lab-step-num">1</div><div class="lab-step-text"><strong>Dump your backlog.</strong> List 8–15 initiatives, features, or requests — from Jira, your roadmap, stakeholder asks. Rough is fine.</div></div>
+      <div class="lab-step"><div class="lab-step-num">2</div><div class="lab-step-text"><strong>Paste the prompt</strong> (see speaker notes) with your strategy summary + backlog into Claude or ChatGPT.</div></div>
+      <div class="lab-step"><div class="lab-step-num">3</div><div class="lab-step-text"><strong>Review the mapping.</strong> Does the AI's classification match your instinct? Move items that feel wrong. Flag items that don't connect to any component — those might be noise.</div></div>
+      <div class="lab-step"><div class="lab-step-num">4</div><div class="lab-step-text"><strong>Commit</strong> the result to <code style="color:#6ee7b7;">06-the-pitch/roadmap.md</code> in your repo.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 19b: Roadmap Output -->
+<section data-title="Roadmap Output">
+  <div class="inner">
+    <div class="demo-tag tag-exercise">What the AI generates</div>
+    <h2>From Backlog → Strategy-Linked Roadmap</h2>
+    <p class="subtitle" style="margin-bottom:20px;">Each initiative mapped to a strategy component and placed in a horizon</p>
     <div style="display:flex; gap:14px; margin:20px 0;">
       <div style="flex:1; background:rgba(52,211,153,0.06); border:1px solid rgba(52,211,153,0.15); border-radius:10px; padding:18px;">
         <div style="font-size:13px; font-weight:800; color:#34d399; margin-bottom:8px;">H1: Quick Wins (0–3mo)</div>
-        <div style="font-size:12px; color:#8899bb; line-height:2;">Initiative: <span style="color:#555;">_____</span><br>Metric impact: <span style="color:#555;">_____</span></div>
+        <div style="font-size:11px; color:#8899bb; line-height:1.8;">🎯 Bet &nbsp;·&nbsp; 🛡 Moat &nbsp;·&nbsp; 💰 Margin<br>🤝 Contract &nbsp;·&nbsp; ⚙️ Guardrails</div>
+        <div style="font-size:12px; color:#555; margin-top:8px; line-height:1.6; font-style:italic;">Initiatives that ship with existing capabilities + high confidence</div>
       </div>
       <div style="flex:1; background:rgba(59,130,246,0.06); border:1px solid rgba(59,130,246,0.15); border-radius:10px; padding:18px;">
         <div style="font-size:13px; font-weight:800; color:#60a5fa; margin-bottom:8px;">H2: Bets (3–12mo)</div>
-        <div style="font-size:12px; color:#8899bb; line-height:2;">The bet: <span style="color:#555;">_____</span><br>Kill criteria: <span style="color:#555;">_____</span></div>
+        <div style="font-size:11px; color:#8899bb; line-height:1.8;">Each with: hypothesis + kill criteria</div>
+        <div style="font-size:12px; color:#555; margin-top:8px; line-height:1.6; font-style:italic;">Initiatives that require new capabilities or integration — strategic bets</div>
       </div>
       <div style="flex:1; background:rgba(139,92,246,0.06); border:1px solid rgba(139,92,246,0.15); border-radius:10px; padding:18px;">
         <div style="font-size:13px; font-weight:800; color:#a78bfa; margin-bottom:8px;">H3: Moonshots (12+mo)</div>
-        <div style="font-size:12px; color:#8899bb; line-height:2;">Vision: <span style="color:#555;">_____</span><br>What must be true: <span style="color:#555;">_____</span></div>
+        <div style="font-size:11px; color:#8899bb; line-height:1.8;">Vision + what must be true first</div>
+        <div style="font-size:12px; color:#555; margin-top:8px; line-height:1.6; font-style:italic;">Initiatives that change user behavior or create new markets</div>
       </div>
     </div>
-    <a href="Strategy Repo Template.html#roadmap" style="display:block; margin-top:14px; padding:10px 18px; background:rgba(52,211,153,0.08); border:1px solid rgba(52,211,153,0.2); border-radius:8px; text-align:center; text-decoration:none; transition:all 0.2s;"><span style="font-size:12px; font-weight:700; color:#34d399;">Open <code style="color:#6ee7b7;">06-the-pitch/roadmap.md</code> template → fill in and commit to your repo</span></a>
+    <div style="background:rgba(248,113,113,0.06); border:1px solid rgba(248,113,113,0.12); border-radius:10px; padding:14px; margin-top:8px; text-align:center;">
+      <span style="font-size:13px; color:#f87171; font-weight:700;">⚠ Unmapped items</span>
+      <span style="font-size:12px; color:#8899bb;"> — initiatives that don't connect to any strategy component. Cut them or rethink them.</span>
+    </div>
   </div>
 </section>
 
 <!-- 20: Capstone — Board Simulation -->
 <section class="centered" data-title="Board Simulation">
+<div class="lab-timer"><span class="timer-icon">⏱</span> 8 min</div>
   <div class="inner">
     <div class="demo-tag tag-capstone">★ Capstone</div>
     <h2 style="font-size:42px;">Board Simulation</h2>
     <div class="lab-goal">
       <div class="lab-goal-label">Your Goal</div>
-      <div class="lab-goal-text">Present your strategy repo to the room. Walk the board through your README and key artifacts. Your partner plays the board — they ask the hardest questions they can think of.</div>
+      <div class="lab-goal-text">Present your strategy from the repo — walk the board through your README and key artifacts. No slides, no decks. Your partner plays the board — they ask the hardest questions they can think of.</div>
     </div>
-    <p class="subtitle" style="margin:16px auto;">Room = board · real objections</p>
+    <p class="subtitle" style="margin:16px auto;">Room = board · present from the repo · real objections</p>
     <div class="lab-tip">
       <div class="lab-tip-label">Keep in Mind</div>
       <div class="lab-tip-text">The board doesn't care about your framework names. They care about: What are we betting on? Why will it win? What does it cost? What happens if we're wrong? How do we know it's working?</div>
@@ -950,12 +1012,13 @@ section.skipped { display: none; }
         <div style="font-size:13px; color:#8899bb; line-height:1.75;">Why fund? · Moat score? · Margin stress? · Gov gap? · Kill plan?</div>
       </div>
     </div>
-    <p style="font-size:20px; font-weight:800; color:#fff; margin-top:12px;">5 min · 3 min Q · ~4 decks</p>
+    <p style="font-size:20px; font-weight:800; color:#fff; margin-top:12px;">5 min present · 3 min Q&A · ~4 participants</p>
   </div>
 </section>
 
 <!-- 22: Revisit Baseline -->
 <section class="centered" data-title="M1 vs Now">
+<div class="lab-timer"><span class="timer-icon">⏱</span> 3 min</div>
   <div class="inner">
     <div class="demo-tag tag-exercise">Individual</div>
     <h2>M1 → Now</h2>

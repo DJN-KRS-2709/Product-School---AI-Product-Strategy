@@ -76,55 +76,84 @@ This is the same muscle as board Q&A — narrative repair under scrutiny. Duolin
 
 ### Slide 12 — Moat Scorecard
 
-The slide shows a table with all eight moats from M2 (Data, Workflow, Regulatory, Distribution, Ecosystem, Network, Physical, Scale), each scored 0–1 with an "evidence" column. The key message — consistent with what we taught in M2 — is that you need one or two moats that are genuinely strong, not high scores across all eight. The eight moats are vocabulary for naming what's defensible, not a checklist to complete. Most great AI products have one dominant moat and maybe a secondary one. Trying to be strong on all eight is a sign you haven't made a strategic choice.
+here we show a table with all eight moats from M2 (Data, Workflow, Regulatory, Distribution, Ecosystem, Network, Physical, Scale), each scored 0–1 with an "evidence" column. The key message — consistent with what we taught in M2 — is that you need one or two moats that are genuinely strong, not high scores across all eight. The eight moats are vocabulary for naming what's defensible, not a checklist to complete. Most great AI products have one dominant moat and maybe a secondary one. Trying to be strong on all eight is a sign you haven't made a strategic choice.
 
-This gives participants vocabulary and self-defense for the inevitable board question: "Why can't someone copy this?" In the board simulation, partners playing the board will almost certainly ask some version of this question. Having one or two moats scored with concrete evidence is far more convincing than vague claims across all eight.
-
-Snowflake vs. Nvidia is a good comparison if you need a quick example: Snowflake's moat is data + ecosystem (data sharing network effects, third-party marketplace), while Nvidia's is physical + scale (fabrication lead time, CUDA ecosystem lock-in). One or two moats each, completely different shapes — but both can answer "why can't someone copy this?" in one sentence.
-
-Two minutes solo: score your eight moats with evidence. Most should be 0 — that's honest, not weak. The exercise is about finding which one or two are genuinely yours. Two minutes partner compare: where did you disagree? The disagreement is where the learning happens — it forces evidence over opinion. If someone scores themselves 1/1 on a moat with no evidence sentence, that's a 0.
 
 ### Slide 13 — Break
 
-Reset before the heaviest applied stretch in the entire course. Tease what's coming so they return focused: "When you come back — 15 minutes to finalize your strategy, 10 on the roadmap, then 35 minutes of board simulation. This is the session where everything you've built gets said out loud."
+Reset before the heaviest applied stretch in the entire course. Tease what's coming so they return focused: "When you come back — 
+
+### Slide 13
+camaras on
+
+### Slide 15- strategy 
+15 minutes to finalize your strategy, 10 on the roadmap, then 35 minutes of board simulation. This is the session where everything you've built gets said out loud."
 
 ### Slide 16 — Finalize Strategy
 
-This is a split-layout slide. The left side frames the goal: review all five component folders and update the top-level README.md with complete summaries. The right side shows the three component bundles: C1–C2 (Bet + Moat — thesis, flywheel, kill switch), C3–C4 (Margin + Contract — cost path, eval, trust UX), C5 (Guardrails — governance, agents, audit). A bottom bar links to the Strategy Repo Template for reference.
+So here we frame the goal: review all five component folders and update the top-level README.md with complete summaries. so everyone open their strategy repo. They should check each of the five component folders (01-the-bet through 05-the-guardrails) and make sure the key artifacts from each module are committed. Then update their README.md — this is the document they'll present from in the board simulation. The README should tell the full strategy story: what's the bet, why is it defensible, how do the economics work, what's the trust architecture, how does it govern at scale.
 
-The teaching point: integration skill matters more than starting over. Some people will want to panic-rewrite from scratch because the capstone feels high-stakes. That wastes five sessions of cohort work. The exercise is curation and synthesis — review each folder, tighten the language in the README, make sure the story flows from bet to pitch. Three rows on-slide, details live in their docs.
-
-Practical instruction: have everyone open their strategy repo. They should check each of the five component folders (01-the-bet through 05-the-guardrails) and make sure the key artifacts from each module are committed. Then update their README.md — this is the document they'll present from in the board simulation. The README should tell the full strategy story: what's the bet, why is it defensible, how do the economics work, what's the trust architecture, how does it govern at scale.
-
-Optional warm-up: 90-second elevator pitch to a partner before going into silent work. This surfaces the gaps before they start writing. If someone can't say their strategy in 90 seconds, they're not ready to finalize — they need to cut.
-
-What "good" looks like: a README that a colleague could read cold and understand the strategy without opening any sub-folders. What "bad" looks like: a README that's just headings with no substance, or five unconnected paragraphs that don't build on each other.
+ quickly mention What "good" looks like: a README that a colleague could read cold and understand the strategy without opening any sub-folders. What "bad" looks like: a README that's just headings with no substance, or five unconnected paragraphs that don't build on each other.
 
 ### Slide 17 — AI Evaluator
 
-The slide shows six evaluation dimensions in a 2×3 grid: Bet Validation (evidence-backed or just conviction?), Capability Gaps (what needs to be built?), Defensibility (platform-proof or copyable?), Pricing Alignment (economics hold under stress?), Trust & Reliability (contract explicit and measurable?), and Impact & Scale (what breaks at 10×?). Below: "Paste your strategy → generate prompt → run in ChatGPT or Claude → review before your pitch."
+Here we show six evaluation dimensions: Bet Validation (evidence-backed or just conviction?), Capability Gaps (what needs to be built?), Defensibility (platform-proof or copyable?), Pricing Alignment (economics hold under stress?), Trust & Reliability (contract explicit and measurable?), and Impact & Scale (what breaks at 10×?).
 
-This is the meta-move of the course — using AI to evaluate their own AI strategy. The evaluation dimensions aren't random; they're the same five lenses from M1–M5 turned into a systematic query. Bet validation is M1. Defensibility is M2. Pricing alignment is M3. Trust and reliability is M4. Impact and scale connects to M5's governance concerns. This creates a reusable workflow they take back to work — after the course, they can adapt these dimensions for any new bet.
+This is anther  twist to the course — using AI to evaluate their own AI strategy. The evaluation dimensions aren't random; they're the same five lenses from M1–M5 turned into a systematic query. Bet validation is M1. Defensibility is M2. Pricing alignment is M3. Trust and reliability is M4. Impact and scale connects to M5's governance concerns. This creates a reusable workflow they take back to work — after the course, they can adapt these dimensions for any new bet.
 
-How it works: participants open their strategy repo, copy their README or key component summaries, and construct a prompt that asks an AI to evaluate their strategy across these dimensions. They paste the prompt into ChatGPT or Claude and get a scored, specific critique. Give them about 5 minutes to construct and run the prompt, about 3 minutes to review the AI's output. The critique surfaces gaps they should address before the board simulation.
 
-If time is tight, this can be done after the session — the evaluation framework is permanent. But if you can fit it in, the AI feedback creates a powerful moment where participants see their blind spots surfaced by a dispassionate evaluator before their peers do it in the simulation.
+### Slide 18 — Build Roadmap (AI-Powered)
 
-### Slide 18 — Build Roadmap
+This is where the course frameworks connect to their real work. Instead of filling in blank roadmap boxes, participants dump their actual backlog — Jira items, feature requests, stakeholder asks, whatever they have — and the AI maps each initiative to their strategy components and places it in a horizon.
 
-The slide shows three horizon cards with fill-in fields: H1 Quick Wins (initiative + metric impact), H2 Bets (the bet + kill criteria), H3 Moonshots (vision + what must be true). A link at the bottom points to the `06-the-pitch/roadmap.md` template in their repo.
+The teaching point: a roadmap proves the strategy moves through time — it's not a wishlist. The roadmap has to show how H1 wins fund H2 bets, and how H2 bets earn the right to pursue H3 moonshots. But most PMs build roadmaps disconnected from strategy. This exercise forces the connection: every initiative has to link to a strategy component (Bet, Moat, Margin, Contract, Guardrails) or it's noise.
 
-The teaching point: a roadmap proves the strategy moves through time — it's not a wishlist. The roadmap has to show how H1 wins fund H2 bets, and how H2 bets earn the right to pursue H3 moonshots. The Amazon/AWS pattern is the classic: near-term commerce cash and operational improvements funded the platform bets that became AWS, the most profitable division. Near-term credibility buys long-term optionality.
+Here is the prompt participants should paste into Claude or ChatGPT:
 
-Two forcing functions: (1) Every roadmap must have an H3 line. If someone's roadmap is all H1, push them: "Where's the bet that scares you? That's H3. If you don't have one, your board will wonder where the ambition is." (2) Every H2 bet needs a kill line — a falsifiable signal that tells you whether to double down or walk away. Stripe-style check: "If we don't see X by month 6, we stop." If someone can't name their kill criteria, their H2 isn't a bet — it's a hope.
+> You are an AI Product Strategy advisor. I will give you two things: (1) my strategy summary and (2) a list of initiatives from my backlog.
+>
+> MY STRATEGY SUMMARY:
+> [Paste your README strategy summary here — bet, moat, margin, contract, guardrails]
+>
+> MY BACKLOG / INITIATIVES:
+> [List 8-15 initiatives, features, or requests. Can be rough — titles and one-line descriptions are enough]
+>
+> YOUR TASK:
+> 1. Map each initiative to the strategy component it most directly supports:
+>    - 🎯 The Bet (validates or extends the core product thesis)
+>    - 🛡 The Moat (deepens defensibility — data, workflow, ecosystem)
+>    - 💰 The Margin (improves unit economics — cost, pricing, cascading)
+>    - 🤝 The Contract (builds trust — eval, confidence UX, reliability)
+>    - ⚙️ The Guardrails (enables scale — governance, agents, compliance)
+>    - ⚠️ Unmapped (doesn't clearly connect to any strategy component)
+>
+> 2. Classify each initiative into a horizon:
+>    - H1 (0-3 months): Ships with existing capabilities. High confidence. Quick wins that fund H2.
+>    - H2 (3-12 months): Requires new capabilities or integrations. Strategic bets with kill criteria.
+>    - H3 (12+ months): Changes user behavior or creates new markets. Moonshots — high uncertainty, high potential.
+>
+> 3. For each H2 initiative, suggest a kill criteria (a falsifiable signal: "If we don't see X by month Y, we stop").
+>
+> 4. Flag any initiatives that don't connect to any strategy component — these are candidates to cut or rethink.
+>
+> OUTPUT FORMAT:
+> Create a markdown table grouped by horizon, with columns: Initiative | Strategy Component | Hypothesis | Kill Criteria (H2 only) | Confidence (H/M/L)
+>
+> Then list any unmapped items separately with a note on why they don't fit.
+
+After participants run the prompt, have them review the output: Does the AI's classification match their instinct? Move items that feel wrong. Pay special attention to unmapped items — those are either noise or missing from the strategy.
+
+Two forcing functions: (1) Every roadmap must have an H3 line. If someone's roadmap is all H1, push them: "Where's the bet that scares you? That's H3." (2) Every H2 bet needs a kill line. Stripe-style check: "If we don't see X by month 6, we stop." If the AI didn't generate a good kill criteria, that's their job to add.
+
+The output goes directly into `06-the-pitch/roadmap.md` in their repo.
 
 ### Slide 19 — Board Simulation
 
-This is the capstone exercise and the single best bang-for-minute in the whole certification. The slide shows: 5 minutes to present, 3 minutes for Q&A, approximately 4 decks presented to the room. The left card lists what to cover in 5 minutes (Bet, Moat, Margin, Trust, Scale risk, Roadmap). The right card lists what the board may ask (Why fund this? Moat score? Margin under stress? Governance gaps? Kill plan?).
+This is the capstone exercise and the single best bang-for-minute in the whole certification. 5 minutes to present, 3 minutes for Q&A, approximately 4 participants presenting to the room. No slides, no decks — they present directly from their strategy repo. The left card lists what to cover in 5 minutes (Bet, Moat, Margin, Trust, Scale risk, Roadmap). The right card lists what the board may ask (Why fund this? Moat score? Margin under stress? Governance gaps? Kill plan?).
 
-Setup: mix company sizes and archetypes in the presentation order if possible. Ask for volunteers first — there are usually 2–3 people who want to go. If the room is quiet, call on someone whose moat scorecard or roadmap was particularly interesting during the exercises. The presenting participant walks the room through their strategy repo README. Their partner (or the room) plays the board and asks the hardest questions they can think of.
+Setup: mix company sizes and archetypes in the presentation order if possible. Ask for volunteers first — there are usually 2–3 people who want to go. If the room is quiet, call on someone whose moat scorecard or roadmap was particularly interesting during the exercises. The presenting participant opens their strategy repo and walks the room through their README and key artifacts — no Google Slides, no deck. The repo is the artifact. Their partner (or the room) plays the board and asks the hardest questions they can think of.
 
-What to watch for: the decks that land will lead with the thesis first and tech stack second. If someone opens with "we use GPT-4 for X," gently redirect: "The board doesn't know what GPT-4 is. What problem are you solving?" The debrief after each presentation should name one thing that worked and one thing that didn't. The most common weakness: no kill criteria, no answer to "what if this doesn't work?"
+What to watch for: the presentations that land will lead with the thesis first and tech stack second. If someone opens with "we use GPT-4 for X," gently redirect: "The board doesn't know what GPT-4 is. What problem are you solving?" The debrief after each presentation should name one thing that worked and one thing that didn't. The most common weakness: no kill criteria, no answer to "what if this doesn't work?"
 
 If the room's questions are too soft, seed Stripe-style questions: "What's your inference cost per user?" "What happens when your provider doubles pricing?" "If I gave this to a competitor, how long until they replicate it?" These are the questions a real board asks. Nobody on a board cares about your model architecture — they care about the bet, the moat, and the margin.
 
