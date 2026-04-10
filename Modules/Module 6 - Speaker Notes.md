@@ -1,35 +1,31 @@
 # Module 6 — The Pitch
-## Speaker Briefing for Carlos
 
 ### What this module is about
 
-This is the capstone. Five components built across five sessions — now they assemble one story and pitch it under fire. The emotional arc is performance anxiety turning into confidence. They walk in nervous about presenting something they've been building in fragments; they leave having said it out loud to peers playing their board. That's the transformation: from worksheets to narrative.
+This is the capstone. Five components built across five sessions — now they assemble one story and pitch it. The emotional arc is performance anxiety turning into confidence. They walk in nervous about presenting something they've been building in fragments; they leave having said it out loud to peers playing their board. That's the transformation: from worksheets to narrative.
 
 The traditional assumption this module breaks: "A roadmap is a strategy." It's not — it's a delivery plan. A strategy answers why this bet, why now, and why us. The roadmap follows after the story is clear. Stripe's model is the reference: public writing plus principles → bets → then epics. Roadmap follows.
 
-They leave with four artifacts: a finalized living strategy dashboard (all five components visualized), a multi-horizon roadmap, a board pitch they've rehearsed out loud, and a before/after comparison of their M1 baseline to prove their own growth.
+They leave with four artifacts: a finalized living strategy dashboard (all five components visualized), a multi-horizon roadmap, a board pitch and a before/after comparison of their M1 baseline to prove their own growth.
 
-### The flow and why it's structured this way
+### Slide 2 - class expectations. 
 
-The first half is a fast lecture block — provocation, multi-horizon roadmaps, metrics, board questions, GTM frictions, Duolingo case. We cover a lot of ground quickly because the real work starts after the break. More than a third of the time is on the capstone — fast lecture block first, then work plus simulation. The agenda reassures people that the heavy lifting is collaborative, not solo. The break sits before the heaviest applied stretch in the entire course: finalize the living strategy, build the roadmap, run the board simulation. Over a third of the session is on the capstone — rehearsal, not consumption.
+### Slide 3 - syllabus
 
----
-
-### Slide 1 — The Pitch
-
-Capstone energy: five components into one story, and they pitch it with the room playing their board. Stakes and clarity beat another framework slide. The wow: "In about 2 hours you'll have said this out loud to peers playing your board."
+### Slide 4 - what you brought today 
+Components already mentioned. 
 
 ### Slide 5 — Course Arc
 
-Closure — they built a system, not slide decks. Three bundles (Components 1–2, 3–4, 5) keep the wall of text off the screen. The Adobe Firefly example walks through the arc: bet, workflow moat, bundle margin, IP plus opt-in trust contract — all in about 30 seconds if there's time. This is the first moment where the whole course clicks as one connected argument.
+Closure — they built a system, not slide decks. Three bundles (Bet and moat, margin and contract, and guardrails). in here, we are doubling down on the living strategy, which then you can extract to any need if you want to speak to the board, if you want to speak to the team, and so on.
 
 ### Slide 6 — Provocation
 
-Roadmap-as-strategy is the number one anti-pattern for PMs under OKR pressure. Poll each FALSE claim — thumbs, stand/sit, or Zoom reactions. The Stripe angle: public writing plus principles → bets → then epics; roadmap follows. Partner flash: which claim did they believe? Twenty seconds — surfaces assumptions they're still carrying.
+Roadmap-as-strategy is the number one anti-pattern for PMs under OKR pressure. 
 
 ### Slide 7 — Three Horizons
 
-Boards fund portfolios across time, not one backlog. Shopify-style story: H1 core polish, H2 AI in workflow (like Sidekick), H3 platform ambition — same narrative spine. "Point to H1 / H2 / H3" — where is their real weight? Most rooms cluster at H1, which is the honest answer but also the vulnerability. A board wants to see all three horizons funded with different risk profiles.
+Boards fund portfolios across time, not one backlog.  H1 core polish, H2 AI in workflow (like Sidekick), H3 platform ambition — same narrative spine. "Point to H1 / H2 / H3" — where is their real weight? Most rooms cluster at H1, which is the honest answer but also the vulnerability. A board wants to see all three horizons funded with different risk profiles.
 
 ### Slide 8 — AI Metrics
 
