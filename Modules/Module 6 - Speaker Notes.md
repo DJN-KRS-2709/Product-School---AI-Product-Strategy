@@ -91,13 +91,13 @@ Poll or hand-raise: "Is your current AI story mostly about the technology, or mo
 
 ### Slide 12 — Moat Scorecard
 
-The slide shows a table with all eight moats from M2 (Data, Workflow, Regulatory, Distribution, Ecosystem, Network, Physical, Scale), each scored 0–1 with an "evidence" column. A total score at the bottom: 4+ strong, 2–3 weak, 0–1 danger.
+The slide shows a table with all eight moats from M2 (Data, Workflow, Regulatory, Distribution, Ecosystem, Network, Physical, Scale), each scored 0–1 with an "evidence" column. The key message — consistent with what we taught in M2 — is that you need one or two moats that are genuinely strong, not high scores across all eight. The eight moats are vocabulary for naming what's defensible, not a checklist to complete. Most great AI products have one dominant moat and maybe a secondary one. Trying to be strong on all eight is a sign you haven't made a strategic choice.
 
-This gives participants vocabulary and self-defense for the inevitable board question: "Why can't someone copy this?" In the board simulation, partners playing the board will almost certainly ask some version of this question. Having a scored moat card with evidence means they can answer with specifics rather than generalities.
+This gives participants vocabulary and self-defense for the inevitable board question: "Why can't someone copy this?" In the board simulation, partners playing the board will almost certainly ask some version of this question. Having one or two moats scored with concrete evidence is far more convincing than vague claims across all eight.
 
-Snowflake vs. Nvidia is a good comparison if you need a quick example: Snowflake's moat is data + ecosystem (data sharing network effects, third-party marketplace), while Nvidia's moat is physical + scale (fabrication lead time, CUDA ecosystem lock-in). Completely different shapes, same scorecard framework.
+Snowflake vs. Nvidia is a good comparison if you need a quick example: Snowflake's moat is data + ecosystem (data sharing network effects, third-party marketplace), while Nvidia's is physical + scale (fabrication lead time, CUDA ecosystem lock-in). One or two moats each, completely different shapes — but both can answer "why can't someone copy this?" in one sentence.
 
-Two minutes solo: score your eight moats with evidence. Two minutes partner compare: where did you disagree? The disagreement is where the learning happens — it forces evidence over opinion. If someone scores themselves 1/1 on a moat with no evidence sentence, that's a 0.
+Two minutes solo: score your eight moats with evidence. Most should be 0 — that's honest, not weak. The exercise is about finding which one or two are genuinely yours. Two minutes partner compare: where did you disagree? The disagreement is where the learning happens — it forces evidence over opinion. If someone scores themselves 1/1 on a moat with no evidence sentence, that's a 0.
 
 ### Slide 13 — Break
 
