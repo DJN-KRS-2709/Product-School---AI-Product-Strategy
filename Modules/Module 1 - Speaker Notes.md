@@ -47,7 +47,7 @@ Orient on the six-question spine; today is only "The Bet." Trace M1 → M6 in ab
 
 ### Slide 10 — Annual Cycles
 
-This gives permission to stop pretending Q3 commitments map to model curves. The Cisco quote from Jeetu Patel is the external voice — variability plus probabilistic models, not "bad execution." Ask: "Who still has a frozen annual roadmap for AI bets?" Show of hands — the discomfort is the point.
+This gives permission to stop pretending Q3 commitments map to model curves. The Cisco quote is the external voice — variability plus probabilistic models, not "bad execution." Ask: "Who still has a frozen annual roadmap for AI bets?" Show of hands — the discomfort is the point.
 
 ### Slide 11 — Discovery
 

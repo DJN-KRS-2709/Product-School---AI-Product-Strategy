@@ -29,7 +29,7 @@ Similar to the previous modules. Three claims, all FALSE. "Governance slows us d
 
 ### Slide 6 — Compounding Systems
 
-This is the conceptual foundation of the first half. The slide contrasts "scales" (volume up, quality flat, linear cost) against "compounds" (each interaction makes the next one smarter). We use three mechanisms: recursive learning, cross-domain transfer, network intelligence. Duolingo is the anchor — every learner interaction sharpens lesson difficulty for the next learner. ServiceTitan is the vertical depth example from Gokul Rajaram's thread — 32 products, one stack, each feeding context to the others.
+This is the conceptual foundation of the first half. The slide contrasts "scales" (volume up, quality flat, linear cost) against "compounds" (each interaction makes the next one smarter). We use three mechanisms: recursive learning, cross-domain transfer, network intelligence. Duolingo is the anchor — every learner interaction sharpens lesson difficulty for the next learner. ServiceTitan is the vertical depth example — 32 products, one stack, each feeding context to the others.
 
 Why should they care: most AI products scale without compounding, which means they're commodities with variable costs. If your system doesn't get smarter with use, someone else's will.
 
@@ -53,7 +53,7 @@ We mention Google Gemini as the anchor — the image generation incident paused 
 
 ### Slide 12 — Agent Governance
 
-Multi-agent systems are fundamentally different from chatbots — authorization, memory, liability, and tool-calling in series. Four governance knobs: Autonomy (draft ≠ send, read ≠ write), Tool Calls (whitelist, rate-limit, log — each call is a potential risk), Memory (what persists, who reads), Chain (when agent B fails on agent A's output — named owner per handoff). Microsoft Copilot + Graph/plugins is the real-world example — log and whitelist like any production system. Gokul's point: design around principles, not model names, because specific models churn every ~6 months. We need to be tool agnostic.
+Multi-agent systems are fundamentally different from chatbots — authorization, memory, liability, and tool-calling in series. Four governance knobs: Autonomy (draft ≠ send, read ≠ write), Tool Calls (whitelist, rate-limit, log — each call is a potential risk), Memory (what persists, who reads), Chain (when agent B fails on agent A's output — named owner per handoff). Microsoft Copilot + Graph/plugins is the real-world example — log and whitelist like any production system. The key point: design around principles, not model names, because specific models churn every ~6 months. We need to be tool agnostic.
 
 Close with: "Point to one tool call that would scare Legal if unlogged." This surfaces the real risks before they write governance policy later.
 

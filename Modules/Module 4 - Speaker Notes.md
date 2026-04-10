@@ -25,7 +25,7 @@ Three learn-then-do cycles instead of front-loading all theory. Cycle 1 (pre-bre
 
 ### Slide 5 — Provocation
 
-**Teaching:** Three claims the room votes on, all revealed as FALSE. Claim #1: "Higher accuracy = more trust" — false because trust is about perceived control, not percentages (an 85% system with scores and overrides beats a 95% black box). Claim #2: "Users don't care how the AI works" — false because they care about reliability signals like citations and "I'm not sure" messages. Claim #3: "We'll add evals later" — false because AI degrades silently and evals are launch infrastructure. Context: Aman Khan (Arize AI, ex-Spotify/Cruise/Apple) wrote in Lenny's Newsletter that evals are "the defining skill for AI PMs" and "prompts make headlines, but evals quietly decide whether your product thrives or dies."
+**Teaching:** Three claims the room votes on, all revealed as FALSE. Claim #1: "Higher accuracy = more trust" — false because trust is about perceived control, not percentages (an 85% system with scores and overrides beats a 95% black box). Claim #2: "Users don't care how the AI works" — false because they care about reliability signals like citations and "I'm not sure" messages. Claim #3: "We'll add evals later" — false because AI degrades silently and evals are launch infrastructure. Evals are "the defining skill for AI PMs" — prompts make headlines, but evals quietly decide whether your product thrives or dies.
 
 **Doing:** Interactive poll — vote, reveal, argue. For each claim, ask for a show of hands (true or false?), then reveal the answer and spend a minute on the argument. For claim #3, ask the room directly: "How many of you have shipped AI without a golden dataset?" Let the silence land. Total: 8 minutes.
 
@@ -37,7 +37,7 @@ Three learn-then-do cycles instead of front-loading all theory. Cycle 1 (pre-bre
 
 ### Slide 7 — Golden Datasets
 
-**Teaching:** A golden dataset is a labeled set of test cases that defines "good" for your specific product — versioned like code, used as a release gate. Three roles: regression (catch dips before users feel them), domain anchor (your definition of quality, not a public leaderboard), and proof for buyers ("Show me how you test" — this is the demo). Company examples on-slide: Grammarly gates releases against correctness + tone benchmarks; OpenAI's PMs build ground truth in spreadsheets (current behavior vs. ideal behavior, pass/fail). Context from Lenny's: Karina Nguyen at OpenAI described this practice — tell the room "This isn't exotic data science. You can start there today."
+**Teaching:** A golden dataset is a labeled set of test cases that defines "good" for your specific product — versioned like code, used as a release gate. Three roles: regression (catch dips before users feel them), domain anchor (your definition of quality, not a public leaderboard), and proof for buyers ("Show me how you test" — this is the demo). Company examples on-slide: Grammarly gates releases against correctness + tone benchmarks; OpenAI's PMs build ground truth in spreadsheets (current behavior vs. ideal behavior, pass/fail). Tell the room "This isn't exotic data science. You can start there today."
 
 **Doing:** Lecture, ~4 minutes, ending with a 45-second pair exercise. Present the three roles, then pairs share: "One nasty input your gold set absolutely must include." This primes adversarial thinking for the applied block that's coming immediately next.
 
@@ -79,7 +79,7 @@ Three learn-then-do cycles instead of front-loading all theory. Cycle 1 (pre-bre
 
 ### Slide 16 — Eval Dashboard
 
-**Teaching:** This bridges from "why evals matter" to "what your eval system looks like." Four quadrants on a 2x2 grid: metrics (quality, latency, confidence spread, HITL%, overrides), judge setup (model, rubric, gold set, thresholds), drift alerts (auto-ping when trends cross the line), and UX hooks (scores in UI, citations, thumbs-up loops). Analogy: think Datadog or Stripe status-page energy for AI quality. Context from Lenny's: Nick Turley (Head of ChatGPT) said he started "writing evals before I knew what an eval was — just outlining clearly specified ideal behavior."
+**Teaching:** This bridges from "why evals matter" to "what your eval system looks like." Four quadrants on a 2x2 grid: metrics (quality, latency, confidence spread, HITL%, overrides), judge setup (model, rubric, gold set, thresholds), drift alerts (auto-ping when trends cross the line), and UX hooks (scores in UI, citations, thumbs-up loops). Analogy: think Datadog or Stripe status-page energy for AI quality. The mindset to convey: "writing evals before I knew what an eval was — just outlining clearly specified ideal behavior."
 
 **Doing:** Framework presentation, ~4 minutes. Walk through the four quadrants, then pose the challenge on-slide: "Thumbs up if you could screen-share this to a buyer next week." If most thumbs are down, that's the gap — the red-team coming next will pressure-test everything. Total: 5 minutes.
 

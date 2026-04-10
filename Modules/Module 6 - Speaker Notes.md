@@ -57,7 +57,7 @@ Interactive moment: "Point to H1 / H2 / H3 — where does your roadmap put most 
 
 ### Slide 8 — AI Metrics
 
-The slide shows a 3×2 grid of six AI-specific metrics that boards care about beyond standard product metrics: Hallucination Rate (liability signal), Drift Velocity (silent failure), Confidence Distribution (quality profile), HITL Rate (scalability ceiling), Inference ROI (margin health), and Eval Regression (reliability across updates). At the bottom, Gokul Rajaram's principle: "Durability beats hype — retention is the quality signal."
+The slide shows a 3×2 grid of six AI-specific metrics that boards care about beyond standard product metrics: Hallucination Rate (liability signal), Drift Velocity (silent failure), Confidence Distribution (quality profile), HITL Rate (scalability ceiling), Inference ROI (margin health), and Eval Regression (reliability across updates). At the bottom: "Durability beats hype — retention is the quality signal."
 
 The teaching point: without AI-quality and cost signals alongside traditional metrics, executives default to treating AI as a liability rather than an investment. These six metrics give your board a way to evaluate AI health the way they evaluate financial health — with leading indicators, not just lagging outcomes. Microsoft Copilot and Datadog are the reference patterns: pair the usage/adoption story with guardrails and degradation visibility.
 

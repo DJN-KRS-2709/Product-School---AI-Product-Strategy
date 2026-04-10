@@ -33,7 +33,7 @@ Interactive moment: "Which moat is yours? Name it in one word." Then: "What othe
 
 ### Slide 7 — $1.5B Wrapper
 
-"You just named your moat. Here's what happens when it isn't real." Bet: $125M raised, $1.5B valuation, 70K customers, fastest AI startup in 2022. Crack: ChatGPT launched, OpenAI added plugins, Google shipped Gemini into Workspace. AI writing became free and native. Fall: pivoted to enterprise marketing workflows. Gokul said "from 1 to 100 and 100 to 40."
+"You just named your moat. Here's what happens when it isn't real." Bet: $125M raised, $1.5B valuation, 70K customers, fastest AI startup in 2022. Crack: ChatGPT launched, OpenAI added plugins, Google shipped Gemini into Workspace. AI writing became free and native. Fall: pivoted to enterprise marketing workflows. The trajectory: "from 1 to 100 and 100 to 40."
 
 We place this right after the 8 Moats because the typology is abstract until you see a $1.5B company get eaten in real time. Jasper thought they had a moat — 70K customers, fastest growth in AI. They didn't. This raises the stakes for everything that follows. Ask the room: "Where is YOUR product — wrapper or workflow?" Get 2–3 answers. This should sting.
 

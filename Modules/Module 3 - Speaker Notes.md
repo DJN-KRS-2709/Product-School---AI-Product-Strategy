@@ -9,7 +9,7 @@ They leave with three artifacts: a cost curve, a pricing strategy, and a board-r
 
 ### The flow and why it's structured this way
 
-The first half is concept-heavy but we break it up with a case study (Klarna) and two standalone activity slides. This was based on Daria's feedback — she was right that pair activities buried inside theory slides get lost. So we pulled them out into their own full-screen moments where you can't miss them.
+The first half is concept-heavy but we break it up with a case study (Klarna) and two standalone activity slides. We learned that pair activities buried inside theory slides get lost. So we pulled them out into their own full-screen moments where you can't miss them.
 
 The second half is almost entirely hands-on: cost curve, pricing design, peer stress-test, and the board one-pager. That's where the real output gets created.
 
@@ -39,11 +39,11 @@ This is the answer to slide 6's problem. If the margin war is the disease, routi
 
 ### Slide 8 — Klarna Case
 
-We moved this here from later in the deck based on Daria's feedback. Six slides of concepts without real interaction is too long. Klarna is the perfect case because it's the most public story of "we automated everything" running into "variable COGS is messy." The debate format (headline pricing vs P&L pricing) gets voices in the room and resets the energy before the next theory block. The lesson isn't that Klarna failed — it's that the business model has to match the automation.
+We moved this here from later in the deck. Six slides of concepts without real interaction is too long. Klarna is the perfect case because it's the most public story of "we automated everything" running into "variable COGS is messy." The debate format (headline pricing vs P&L pricing) gets voices in the room and resets the energy before the next theory block. The lesson isn't that Klarna failed — it's that the business model has to match the automation.
 
 ### Slide 9 — Pricing Models
 
-This is where we bring in Madhavan Ramanujam's work. He's consulted with 400+ companies and his core insight is that most pricing failures happen because teams never figured out HOW to charge, not how MUCH. The three models on screen (seat/access, hybrid, outcome) are the spectrum. The standout example is Intercom Fin — they charge per resolved conversation, which is the only real pricing model innovation in AI. The data from Palle Broe (59% bundle, 23% add-on, 18% standalone) gives context for what the market is actually doing. The pair activity was pulled out into its own slide (next one) so it doesn't get lost.
+The core insight here is that most pricing failures happen because teams never figured out HOW to charge, not how MUCH. The three models on screen (seat/access, hybrid, outcome) are the spectrum. The standout example is Intercom Fin — they charge per resolved conversation, which is the only real pricing model innovation in AI. Market data shows the breakdown: 59% bundle, 23% add-on, 18% standalone — that gives context for what the market is actually doing. The pair activity was pulled out into its own slide (next one) so it doesn't get lost.
 
 If you want a "this literally just happened" example of access pricing failing: Anthropic's $200/month Max subscription let users run third-party agent harnesses like OpenClaw — a single agent running for one day burned $1,000–$5,000 in API-equivalent costs on a flat $200 plan. Every AI subscription is a bet on average usage, and tools that let power users blow past that average forced Anthropic to shut down third-party access entirely within four months. The one-time credits and discounted usage bundles they offered to soften the cutoff are a real-time example of a company retroactively unbundling heavy usage from a flat subscription.
 
@@ -53,7 +53,7 @@ This is a dedicated activity slide. The theory from slide 9 is useless if they d
 
 ### Slide 11 — Bundling
 
-This is Madhavan's bundling framework. The Big Mac analogy makes it stick: burger is the leader (what you come for), fries and Coke are fillers (bumps the average order), coffee would kill the bundle (too different, sell separately). Applied to AI: your core intelligence is the leader, lightweight features like summaries are fillers, and heavy inference stuff like image gen or agent workflows are killers that should be priced as add-ons. The 70% rule from Palle Broe gives them a concrete decision threshold. Again, the pair activity is on its own slide next. **Mental model:** Leaders/Fillers/Killers is a lens for thinking about value capture, not a prescription — they should pick the framing that matches how their buyer thinks about the product.
+The bundling framework. The Big Mac analogy makes it stick: burger is the leader (what you come for), fries and Coke are fillers (bumps the average order), coffee would kill the bundle (too different, sell separately). Applied to AI: your core intelligence is the leader, lightweight features like summaries are fillers, and heavy inference stuff like image gen or agent workflows are killers that should be priced as add-ons. The 70% rule gives them a concrete decision threshold. Again, the pair activity is on its own slide next. **Mental model:** Leaders/Fillers/Killers is a lens for thinking about value capture, not a prescription — they should pick the framing that matches how their buyer thinks about the product.
 
 ### Slide 12 — Name Your L/F/K
 
@@ -75,7 +75,7 @@ This is 15 minutes of solo work where they map every AI feature in their product
 
 ### Slide 18 — Pricing Design
 
-This is where Madhavan's "Product-Market-Pricing Fit" concept lands. The exercise walks them through three steps: pick a strategy (skim like Apple, penetrate like Amazon, maximize like Microsoft), name the unit of work they'd meter, and set the structure (base + usage). The GitHub Copilot proof point on the slide is powerful: $19/user is 4.75× a typical SaaS seat, justified because developers complete tasks 55% faster. The Pricing Strategy Designer tool is linked here for anyone who wants the full guided experience. **Mental model:** Hybrid and strategy archetypes are lenses, not playbooks — the right structure is the one that fits the buyer's mental model and how value shows up in their world.
+This is where "Product-Market-Pricing Fit" lands. The exercise walks them through three steps: pick a strategy (skim like Apple, penetrate like Amazon, maximize like Microsoft), name the unit of work they'd meter, and set the structure (base + usage). The GitHub Copilot proof point on the slide is powerful: $19/user is 4.75× a typical SaaS seat, justified because developers complete tasks 55% faster. The Pricing Strategy Designer tool is linked here for anyone who wants the full guided experience. **Mental model:** Hybrid and strategy archetypes are lenses, not playbooks — the right structure is the one that fits the buyer's mental model and how value shows up in their world.
 
 ### Slide 19 — Stress Test
 
