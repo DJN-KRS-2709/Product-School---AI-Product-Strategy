@@ -110,13 +110,50 @@ How it works: participants open their strategy repo, copy their README or key co
 
 If time is tight, this can be done after the session — the evaluation framework is permanent. But if you can fit it in, the AI feedback creates a powerful moment where participants see their blind spots surfaced by a dispassionate evaluator before their peers do it in the simulation.
 
-### Slide 18 — Build Roadmap
+### Slide 18 — Build Roadmap (AI-Powered)
 
-The slide shows three horizon cards with fill-in fields: H1 Quick Wins (initiative + metric impact), H2 Bets (the bet + kill criteria), H3 Moonshots (vision + what must be true). A link at the bottom points to the `06-the-pitch/roadmap.md` template in their repo.
+This is where the course frameworks connect to their real work. Instead of filling in blank roadmap boxes, participants dump their actual backlog — Jira items, feature requests, stakeholder asks, whatever they have — and the AI maps each initiative to their strategy components and places it in a horizon.
 
-The teaching point: a roadmap proves the strategy moves through time — it's not a wishlist. The roadmap has to show how H1 wins fund H2 bets, and how H2 bets earn the right to pursue H3 moonshots. The Amazon/AWS pattern is the classic: near-term commerce cash and operational improvements funded the platform bets that became AWS, the most profitable division. Near-term credibility buys long-term optionality.
+The teaching point: a roadmap proves the strategy moves through time — it's not a wishlist. The roadmap has to show how H1 wins fund H2 bets, and how H2 bets earn the right to pursue H3 moonshots. But most PMs build roadmaps disconnected from strategy. This exercise forces the connection: every initiative has to link to a strategy component (Bet, Moat, Margin, Contract, Guardrails) or it's noise.
 
-Two forcing functions: (1) Every roadmap must have an H3 line. If someone's roadmap is all H1, push them: "Where's the bet that scares you? That's H3. If you don't have one, your board will wonder where the ambition is." (2) Every H2 bet needs a kill line — a falsifiable signal that tells you whether to double down or walk away. Stripe-style check: "If we don't see X by month 6, we stop." If someone can't name their kill criteria, their H2 isn't a bet — it's a hope.
+Here is the prompt participants should paste into Claude or ChatGPT:
+
+> You are an AI Product Strategy advisor. I will give you two things: (1) my strategy summary and (2) a list of initiatives from my backlog.
+>
+> MY STRATEGY SUMMARY:
+> [Paste your README strategy summary here — bet, moat, margin, contract, guardrails]
+>
+> MY BACKLOG / INITIATIVES:
+> [List 8-15 initiatives, features, or requests. Can be rough — titles and one-line descriptions are enough]
+>
+> YOUR TASK:
+> 1. Map each initiative to the strategy component it most directly supports:
+>    - 🎯 The Bet (validates or extends the core product thesis)
+>    - 🛡 The Moat (deepens defensibility — data, workflow, ecosystem)
+>    - 💰 The Margin (improves unit economics — cost, pricing, cascading)
+>    - 🤝 The Contract (builds trust — eval, confidence UX, reliability)
+>    - ⚙️ The Guardrails (enables scale — governance, agents, compliance)
+>    - ⚠️ Unmapped (doesn't clearly connect to any strategy component)
+>
+> 2. Classify each initiative into a horizon:
+>    - H1 (0-3 months): Ships with existing capabilities. High confidence. Quick wins that fund H2.
+>    - H2 (3-12 months): Requires new capabilities or integrations. Strategic bets with kill criteria.
+>    - H3 (12+ months): Changes user behavior or creates new markets. Moonshots — high uncertainty, high potential.
+>
+> 3. For each H2 initiative, suggest a kill criteria (a falsifiable signal: "If we don't see X by month Y, we stop").
+>
+> 4. Flag any initiatives that don't connect to any strategy component — these are candidates to cut or rethink.
+>
+> OUTPUT FORMAT:
+> Create a markdown table grouped by horizon, with columns: Initiative | Strategy Component | Hypothesis | Kill Criteria (H2 only) | Confidence (H/M/L)
+>
+> Then list any unmapped items separately with a note on why they don't fit.
+
+After participants run the prompt, have them review the output: Does the AI's classification match their instinct? Move items that feel wrong. Pay special attention to unmapped items — those are either noise or missing from the strategy.
+
+Two forcing functions: (1) Every roadmap must have an H3 line. If someone's roadmap is all H1, push them: "Where's the bet that scares you? That's H3." (2) Every H2 bet needs a kill line. Stripe-style check: "If we don't see X by month 6, we stop." If the AI didn't generate a good kill criteria, that's their job to add.
+
+The output goes directly into `06-the-pitch/roadmap.md` in their repo.
 
 ### Slide 19 — Board Simulation
 
