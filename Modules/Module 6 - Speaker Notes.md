@@ -2,48 +2,41 @@
 ## Speaker Briefing for Carlos
 
 ### What this module is about
+### Slide 1 — The Pitch
 
-This is the capstone. Five components built across five sessions — now they assemble one story and pitch it under fire. The emotional arc is performance anxiety turning into confidence. They walk in nervous about presenting something they've been building in fragments; they leave having said it out loud to peers playing their board. That's the transformation: from worksheets to narrative.
+This is the capstone. Five components built across five sessions — now they assemble one story and pitch. The emotional arc is performance anxiety turning into confidence — from worksheets to narrative.
 
 The traditional assumption this module breaks: "A roadmap is a strategy." It's not — it's a delivery plan. A strategy answers why this bet, why now, and why us. The roadmap follows after the story is clear. Stripe's model is the reference: public writing plus principles → bets → then epics. Roadmap follows. Most PMs in the room will have never separated "strategy" from "roadmap" before — naming the distinction is the conceptual unlock of this module.
 
 They leave with four artifacts: a finalized living strategy repo (all five component folders plus a board-ready README), a multi-horizon roadmap committed to their repo, a board pitch they've rehearsed out loud, and a before/after comparison of their M1 baseline to prove their own growth.
 
-### The flow and why it's structured this way
+### Slide 2 — Expectations
 
-The first half is a fast lecture block — full arc, provocation, multi-horizon roadmaps, AI metrics, board questions, GTM frictions, Duolingo case, moat scorecard. We cover a lot of ground quickly because none of these are deep-dive concepts the way golden datasets or data flywheels were in earlier modules. These are translation skills: how to take the substance from M1–M5 and package it for an executive audience. The lecture block is essentially a crash course in "how boards think about AI investments."
+Keep it light. Everyone knows the drill by now.
 
-The break sits before the heaviest applied stretch in the entire course. After break, the session is almost entirely hands-on: finalize the living strategy (~15 min), run it through the AI evaluator (~8 min), build the roadmap (~10 min), then the board simulation capstone (~35 min). More than a third of the session is rehearsal and performance, not consumption. That ratio is deliberate — by M6, they know the frameworks. What they need is practice saying it out loud to someone who pushes back.
+### Slide 3 — Syllabus
 
-On the opening Expectations and Syllabus slides, keep it light. Everyone knows the drill by now. The Recall slide (slide 4) matters more — it connects M5's governance and compounding work to today's assembly task and reframes the session as "you've built it all, now sell it."
+Brief overview — point to the capstone simulation as the main event.
 
----
+### Slide 4 — Recall
 
-### Slide 1 — The Pitch
-
-This is the last title slide of the course, so the energy should feel different from the previous five. The three waypoints on-slide — Integrate, Translate, Present — are the session's three acts. Name them explicitly: "First half, we learn how boards think about AI investments. Second half, you assemble everything and pitch it under fire."
-
-The subtitle on the slide is "How Do You Get This Funded, Shipped, and Adopted?" — that's the question this whole module answers. The wow moment to plant early: "In about 2 hours you'll have said your strategy out loud to peers playing your board. Most of you have never done that." Let the stakes land. Performance anxiety is productive here — it focuses attention.
+Connect M5's governance and compounding work to today's assembly task. Reframe the session as "you've built it all, now sell it."
 
 ### Slide 5 — Course Arc
 
 This is the closure moment where the full course clicks as one connected argument instead of six isolated sessions. The slide shows all six module nodes in a flow (M1→M6), with the first five marked as complete and M6 highlighted as the current active node. Below the arc, three bundles break down how the components group: C1–C2 (Bet + Moat = thesis and defensibility), C3–C4 (Margin + Contract = economics and trust), C5 (Guardrails = scale without blowing up).
 
-Walk through the three bundles in about 30 seconds each. The Adobe Firefly example at the bottom of the slide is optional but powerful if you have time: bet on brand-safe generative AI → moat via Creative Cloud workflow integration → margin via bundles (Firefly is a filler inside Creative Cloud, not a standalone product) → contract via IP indemnification and opt-in training data. That's the whole course in one company story, told in about 30 seconds.
-
-The teaching point: they didn't build a deck — they built a system. Each component feeds the next. The bet validates what to build, the moat makes it defensible, the margin makes it sustainable, the contract makes it trustworthy, the guardrails make it scalable. The pitch is the story that ties them together.
+The key point: they didn't build a deck — they built a system. Each component feeds the next. The bet validates what to build, the moat makes it defensible, the margin makes it sustainable, the contract makes it trustworthy, the guardrails make it scalable. The pitch is the story that ties them together.
 
 ### Slide 6 — Provocation
 
-Three claims on-slide, all FALSE. Same format as previous modules — click to reveal. The three claims are: "Our roadmap IS our strategy," "AI metrics = product metrics," and "Great product sells itself."
+Three claims on-slide, all FALSE as usual. Click to reveal. The three claims are:
 
 Claim #1 (roadmap = strategy) is the core argument of the module. Most PMs equate roadmap with strategy because that's what they present quarterly. The distinction: a roadmap shows decisions made visible — features, timelines, resources. A strategy explains why those decisions and not others. A roadmap without a thesis is a to-do list. The Stripe reference: they write the strategy document first (public memos, principles, bets), then derive the roadmap from it. Epics follow strategy, not the other way around.
 
 Claim #2 (AI metrics = product metrics) sets up slide 8. Traditional product metrics like MAU and retention are necessary but insufficient for AI products. You also need quality signals (hallucination rate, drift velocity), cost signals (inference ROI), and trust signals (HITL rate, confidence distribution). Without these, your board defaults to "black box plus liability."
 
 Claim #3 (great product sells itself) sets up slide 10. AI products face three GTM frictions that traditional SaaS doesn't: probabilistic outputs make demos scary, governance gates block purchase decisions, and trust needs to ramp gradually. A great AI product with no governance pack loses to a mediocre one with a compliance story.
-
-Poll each claim — thumbs, stand/sit, or Zoom reactions. Then reveal. After all three, do a 20-second partner flash: "Which claim did you believe?" This surfaces assumptions they're still carrying into the capstone.
 
 ### Slide 7 — Three Horizons
 
@@ -53,41 +46,33 @@ The teaching point: boards fund portfolios across time, not one backlog. An AI r
 
 Shopify is the concrete example: H1 was polishing the core commerce stack (fast wins, proving the team ships). H2 was AI embedded in workflows — Sidekick, the merchant assistant — a bet on AI-as-copilot that changes how merchants manage their stores. H3 was the platform ambition — Shopify as the operating system for commerce, not just a storefront builder. Same narrative spine, three different time horizons, three different risk profiles.
 
-Interactive moment: "Point to H1 / H2 / H3 — where does your roadmap put most of its weight right now?" Most rooms cluster at H1, which is the honest answer but also the vulnerability. If someone says they're mostly H3, push gently: "What's your H1 proof point that earns the right to fund H3?" This primes the roadmap exercise after the break.
 
 ### Slide 8 — AI Metrics
 
 The slide shows a 3×2 grid of six AI-specific metrics that boards care about beyond standard product metrics: Hallucination Rate (liability signal), Drift Velocity (silent failure), Confidence Distribution (quality profile), HITL Rate (scalability ceiling), Inference ROI (margin health), and Eval Regression (reliability across updates). At the bottom: "Durability beats hype — retention is the quality signal."
 
-The teaching point: without AI-quality and cost signals alongside traditional metrics, executives default to treating AI as a liability rather than an investment. These six metrics give your board a way to evaluate AI health the way they evaluate financial health — with leading indicators, not just lagging outcomes. Microsoft Copilot and Datadog are the reference patterns: pair the usage/adoption story with guardrails and degradation visibility.
+Without AI-quality and cost signals alongside traditional metrics, executives default to treating AI as a liability rather than an investment. These six metrics give your board a way to evaluate AI health the way they evaluate financial health — with leading indicators, not just lagging outcomes. Microsoft Copilot and Datadog are the reference patterns: pair the usage/adoption story with guardrails and degradation visibility.
 
-Quick poll: "What's the number one AI metric you'd put on a board slide tomorrow?" Go round-robin — 3–4 people, 15 seconds each. This surfaces how few people have a clear answer, which is exactly the gap this slide fills. Most PMs can name their retention metric but can't name their drift metric. That's the problem.
+Quick poll: "What's the number one AI metric you'd put on a board slide tomorrow?" Go round-robin — 3–4 people, 15 seconds each.
 
 ### Slide 9 — Board Questions
 
 The slide frames board communication as four questions organized into three buckets: (1) The Case — why invest, why can't this be copied (maps to Bet + Moat), (2) The Model — does the math hold (maps to Margin), (3) The Risks — trust, failure modes, scale (maps to Contract + Guardrails). The red callout at the bottom: "Don't open with the model — open with the thesis."
 
-The teaching point: executive working memory operates in buckets, not your full stack trace. When you present to a board, they're mentally sorting everything you say into "do I believe the bet," "do the numbers work," and "what can go wrong." If you open with the tech architecture or the model details, you've lost them before they understand the thesis.
+Executive working memory operates in buckets, not your full stack trace. When you present to a board, they're mentally sorting everything you say into "do I believe the bet," "do the numbers work," and "what can go wrong." If you open with the tech architecture or the model details, you've lost them before they understand the thesis.
 
-Notion is the worked example: AI as a workflow wedge (bet) plus distribution advantage through existing workspace adoption (moat) — not "we use GPT-4" first. Stripe is another one: money movement plus risk management first, not "LLM inside our fraud detection."
-
-Sixty-second pair practice: one partner plays PM, the other plays board member. The PM frames their product using the three buckets — case, model, risks — in 60 seconds. This is a dress rehearsal for the board simulation structure they'll use after the break. If someone can't fill a bucket, that's a gap they need to fix in the finalization exercise.
+Notion is the worked example: AI as a workflow wedge (bet) plus distribution advantage through existing workspace adoption (moat) — not "we use GPT-4" first.
 
 ### Slide 10 — GTM Frictions
 
-This slide primes the real-world objections participants will face in the capstone simulation. Three AI-specific GTM friction patterns are shown: (1) Show + tell — probabilistic outputs mean one bad demo answer feels fatal, so you need to script demo paths and show recovery behavior. (2) Gov gate — enterprise buyers send security and legal through the door before they'll even look at the wow, so the M5 governance pack becomes actual sales collateral. (3) Trust ramp — start with high-confidence use cases and widen autonomy as proof stacks up, not "full AI from day one."
+This slide primes the real-world objections participants will face in the capstone simulation. Three AI-specific GTM friction patterns are shown: (1) Show + tell — probabilistic outputs mean one bad demo and you're done, so you need to script demo paths and show recovery behavior. (2) Gov gate — enterprise buyers send security and legal through the door before they'll even look at the wow, so the M5 governance pack becomes actual sales collateral. (3) Trust ramp — start with high-confidence use cases and widen autonomy as proof stacks up, not "full AI from day one."
 
-The Salesforce and Intercom reference: both built sales motions around governance-first storytelling. Salesforce sells the Einstein Trust Layer as a feature in the sales deck. Intercom leads with containment metrics ("Fin resolves X% of conversations without escalation") rather than "we use LLMs."
-
-Pair exercise: "Which of these three frictions is scariest for your buyer? Tell your partner in 45 seconds." Naming the friction now means they can preempt it in their board pitch later. If someone says "none of these apply to us," push them: "What would your buyer's CISO say about your AI product today? That's the friction."
 
 ### Slide 11 — Duolingo Case
 
-Standard 3-act case study format. Bet: Duolingo partnered with GPT-4 for roleplay conversations and explanations, unlocking conversational practice for 500M+ learners — moving beyond drills to real dialogue. Crack: the market asked "does AI actually improve learning outcomes?" — the story shifted from tech buzz to pedagogical scrutiny, and investor reactions were mixed. Fix: Duolingo reframed AI as extending the learning loop (practice → correction → better practice), published learning outcome data, and led investor decks with retention and learning metrics instead of "GPT-4 inside."
+Duolingo partnered with GPT-4 for roleplay conversations and explanations, unlocking conversational practice for 500M+ learners — moving beyond drills to real dialogue. Crack: the market asked "does AI actually improve learning outcomes?" — the story shifted from tech buzz to pedagogical scrutiny, and investor reactions were mixed. Fix: Duolingo reframed AI as extending the learning loop (practice → correction → better practice), published learning outcome data, and led investor decks with retention and learning metrics instead of "GPT-4 inside."
 
-The teaching point and why this case is here: this is the same muscle as board Q&A — narrative repair under scrutiny. Duolingo's mistake was leading with the technology story; their fix was leading with the user impact story. That's the exact shift most people in the room need to make. When a board member asks "so what?" — you answer with what changed for the user, not what model you used.
-
-Poll or hand-raise: "Is your current AI story mostly about the technology, or mostly about the user outcome?" Most people skew tech, which is exactly the Duolingo mistake. Let the self-awareness land before moving to the moat scorecard.
+This is the same muscle as board Q&A — narrative repair under scrutiny. Duolingo's mistake was leading with the technology story; their fix was leading with the user impact story. That's the exact shift most people in the room need to make.
 
 ### Slide 12 — Moat Scorecard
 
