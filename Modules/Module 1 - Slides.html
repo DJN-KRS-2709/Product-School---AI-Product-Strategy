@@ -156,6 +156,15 @@ section.centered .inner { text-align: center; }
 .tag-case { background: rgba(210,153,34,0.12); color: #e3b341; }
 .tag-exercise { background: rgba(52,211,153,0.12); color: #6ee7b7; }
 .tag-activity { background: rgba(188,140,255,0.12); color: #d2a8ff; }
+.lab-timer {
+  position: absolute; top: 24px; right: 32px;
+  display: flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 12px; padding: 10px 18px;
+  font-family: 'IBM Plex Mono', monospace; font-size: 15px; font-weight: 600;
+  color: #60a5fa; z-index: 10;
+}
+.lab-timer .timer-icon { font-size: 18px; }
 .tag-build { background: rgba(255,123,182,0.12); color: #ff7b72; }
 .tag-break { background: rgba(100,116,139,0.12); color: #94a3b8; }
 .tag-debrief { background: rgba(188,140,255,0.12); color: #d2a8ff; }
@@ -643,6 +652,7 @@ section.skipped { display: none; }
 
 <!-- 7: Baseline Write -->
 <section class="centered" data-title="CEO Question">
+<div class="lab-timer"><span class="timer-icon">⏱</span> 3 min</div>
   <div class="inner">
     <div class="demo-tag tag-exercise">Individual Work</div>
     <h2>Your CEO Asks:<br>"What's Our AI Strategy?"</h2>
@@ -848,6 +858,7 @@ section.skipped { display: none; }
 
 <!-- 20: Your Diagnostic -->
 <section data-title="Your Scores">
+<div class="lab-timer"><span class="timer-icon">⏱</span> 5 min</div>
   <div class="inner">
     <div class="demo-tag tag-exercise">Individual Exercise</div>
     <h2>Three-Axis Diagnostic:<br>Your Product</h2>
@@ -863,6 +874,7 @@ section.skipped { display: none; }
 
 <!-- 21: Pair Challenge -->
 <section class="split-section" data-title="Pair Challenge">
+<div class="lab-timer"><span class="timer-icon">⏱</span> 10 min</div>
   <div class="split-left">
     <div class="slide-tag">Breakout Exercise</div>
     <h2>Defend Your Scores. Name the Attacker.</h2>
@@ -882,6 +894,7 @@ section.skipped { display: none; }
 
 <!-- 23: In the Mind of a Killer -->
 <section class="centered" data-title="Killer Memo">
+<div class="lab-timer"><span class="timer-icon">⏱</span> 3 min</div>
   <div class="inner">
     <div class="demo-tag tag-exercise">Individual</div>
     <h2>In the Mind of a Killer</h2>
@@ -902,6 +915,7 @@ section.skipped { display: none; }
 
 <!-- 25: Prototype Bet -->
 <section class="split-section" data-title="Build">
+<div class="lab-timer"><span class="timer-icon">⏱</span> 15 min</div>
   <div class="split-left">
     <div class="slide-tag tag-pink">Individual Exercise</div>
     <h2>Build One Idea. Right Now.</h2>
