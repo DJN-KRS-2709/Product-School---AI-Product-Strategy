@@ -117,6 +117,15 @@ section.centered .inner { text-align: center; }
 .tag-case { background: rgba(210,153,34,0.12); color: #e3b341; }
 .tag-exercise { background: rgba(52,211,153,0.12); color: #6ee7b7; }
 .tag-activity { background: rgba(188,140,255,0.12); color: #d2a8ff; }
+.lab-timer {
+  position: absolute; top: 24px; right: 32px;
+  display: flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 12px; padding: 10px 18px;
+  font-family: 'IBM Plex Mono', monospace; font-size: 15px; font-weight: 600;
+  color: #60a5fa; z-index: 10;
+}
+.lab-timer .timer-icon { font-size: 18px; }
 .tag-build { background: rgba(255,123,182,0.12); color: #ff7b72; }
 .tag-break { background: rgba(100,116,139,0.12); color: #94a3b8; }
 .tag-debrief { background: rgba(188,140,255,0.12); color: #d2a8ff; }
@@ -649,6 +658,7 @@ section.skipped { display: none; }
 
 <!-- 9: Design Your Compounding System -->
 <section data-title="Design Compounding">
+<div class="lab-timer"><span class="timer-icon">⏱</span> 10 min</div>
   <div class="inner">
     <div class="demo-tag tag-exercise">Applied Work</div>
     <h2>Design Your Compounding System</h2>
@@ -844,6 +854,7 @@ section.skipped { display: none; }
 
 <!-- 17: Draft Governance Policy -->
 <section data-title="Draft Governance">
+<div class="lab-timer"><span class="timer-icon">⏱</span> 10 min</div>
   <div class="inner">
     <div class="demo-tag tag-exercise">Applied Work</div>
     <h2>Draft Your Governance Policy</h2>
@@ -872,6 +883,7 @@ section.skipped { display: none; }
 
 <!-- 18: Peer Challenge -->
 <section data-title="Peer Challenge">
+<div class="lab-timer"><span class="timer-icon">⏱</span> 12 min</div>
   <div class="inner">
     <div class="demo-tag tag-activity">Peer Challenge</div>
     <h2>"What Feedback Loop Is Broken?"</h2>
@@ -909,6 +921,7 @@ section.skipped { display: none; }
 
 <!-- 21: Build — Shadow AI Audit -->
 <section class="split-section" data-title="Build">
+<div class="lab-timer"><span class="timer-icon">⏱</span> 10 min</div>
   <div class="split-left">
     <div class="slide-tag tag-pink">Build Moment</div>
     <h2>Shadow AI Audit</h2>

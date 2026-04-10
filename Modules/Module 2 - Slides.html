@@ -117,6 +117,15 @@ section.centered .inner { text-align: center; }
 .tag-case { background: rgba(210,153,34,0.12); color: #e3b341; }
 .tag-exercise { background: rgba(52,211,153,0.12); color: #6ee7b7; }
 .tag-activity { background: rgba(188,140,255,0.12); color: #d2a8ff; }
+.lab-timer {
+  position: absolute; top: 24px; right: 32px;
+  display: flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 12px; padding: 10px 18px;
+  font-family: 'IBM Plex Mono', monospace; font-size: 15px; font-weight: 600;
+  color: #60a5fa; z-index: 10;
+}
+.lab-timer .timer-icon { font-size: 18px; }
 .tag-build { background: rgba(255,123,182,0.12); color: #ff7b72; }
 .tag-break { background: rgba(100,116,139,0.12); color: #94a3b8; }
 .tag-debrief { background: rgba(188,140,255,0.12); color: #d2a8ff; }
@@ -622,6 +631,7 @@ section.skipped { display: none; }
 
 <!-- 6: Moat Stress Test -->
 <section data-title="Moat Stress Test">
+<div class="lab-timer"><span class="timer-icon">⏱</span> 2 min</div>
   <div class="inner">
     <div class="demo-tag tag-activity">Opening Activity</div>
     <h2>Moat Stress Test</h2>
@@ -908,6 +918,7 @@ section.skipped { display: none; }
 
 <!-- 16: Map Your Data Flywheel -->
 <section class="split-section" data-title="Map Your Flywheel">
+<div class="lab-timer"><span class="timer-icon">⏱</span> 10 min</div>
   <div class="split-left">
     <div class="slide-tag tag-green">Individual Exercise</div>
     <h2>Map Your Data Flywheel</h2>
@@ -941,6 +952,7 @@ section.skipped { display: none; }
 
 <!-- 17: Encroachment Threat Assessment -->
 <section data-title="Encroachment Threats">
+<div class="lab-timer"><span class="timer-icon">⏱</span> 5 min</div>
   <div class="inner">
     <div class="demo-tag tag-exercise">Individual Work</div>
     <h2>Who Attacks You, From Where, With What?</h2>
@@ -974,6 +986,7 @@ section.skipped { display: none; }
 
 <!-- 18: 90-Day Encroachment Plan -->
 <section class="split-section" data-title="90-Day Encroachment">
+<div class="lab-timer"><span class="timer-icon">⏱</span> 12 min</div>
   <div class="split-left">
     <div class="slide-tag">Breakout Exercise</div>
     <h2>The 90-Day Encroachment Plan</h2>
@@ -1044,6 +1057,7 @@ section.skipped { display: none; }
 
 <!-- 22: Portability Audit -->
 <section data-title="Portability Audit">
+<div class="lab-timer"><span class="timer-icon">⏱</span> 10 min</div>
   <div class="inner">
     <div class="demo-tag tag-build">Lab Exercise</div>
     <h2>The Kill Switch: Your Product</h2>
