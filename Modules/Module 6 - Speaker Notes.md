@@ -40,11 +40,15 @@ Claim #3 (great product sells itself) sets up slide 10. AI products face three G
 
 ### Slide 7 — Three Horizons
 
-This is the first of four lecture points that teach board-level thinking. The slide shows three horizon cards: H1 (0–3 months, quick wins that fund H2), H2 (3–12 months, where the living strategy lives), H3 (12+ months, new behavior or new market). The red line at the bottom: "One horizon only = incomplete roadmap."
+This is the first of four lecture points that teach board-level thinking. The slide shows three horizon cards with AI-compressed timeframes: H1 "Ship" (0–4 weeks, high confidence, execute — earns credibility for H2), H2 "Validate" (1–3 months, medium confidence, kill criteria — living strategy lives here), H3 "Explore" (3–6 months, low confidence, small investment, experiment). The red line at the bottom: "One horizon only = incomplete roadmap · AI-native cadence = monthly, not quarterly."
 
-The teaching point: boards fund portfolios across time, not one backlog. An AI roadmap that's 100% H1 is execution without vision. An AI roadmap that's 100% H3 is vision without credibility. Boards want to see all three horizons funded with different risk profiles — H1 builds trust through delivery, H2 is the strategic bet, H3 is the optionality play.
+The big shift to name explicitly: traditional roadmaps ran on quarterly or annual cadence — H1 was 0–3 months, H2 was 3–12 months, H3 was 12+ months. In an AI-native world, those timeframes compress dramatically. Amplitude's QBRs and strategy planning cycles went from four-month roadmaps to four-week roadmaps. That's not an outlier — it's where the industry is heading. Nobody can credibly predict what happens 12 months from now in AI. If your H3 still says "12+ months," you're planning in a world that no longer exists.
 
-Shopify is the concrete example: H1 was polishing the core commerce stack (fast wins, proving the team ships). H2 was AI embedded in workflows — Sidekick, the merchant assistant — a bet on AI-as-copilot that changes how merchants manage their stores. H3 was the platform ambition — Shopify as the operating system for commerce, not just a storefront builder. Same narrative spine, three different time horizons, three different risk profiles.
+The approach to each horizon should be completely different. H1 is execution — you know what to build, you have the capabilities, ship it and earn trust. H2 is validation — you're running strategic bets, each with a named kill criteria and a hypothesis. If the signal doesn't appear within the window, you stop. H3 is experimentation — small investment, low confidence, you're exploring whether a behavior shift or new market is real. The level of investment, the team structure, and the decision-making framework should all differ across horizons.
+
+Boards fund portfolios across time, not one backlog. An AI roadmap that's 100% H1 is execution without vision. An AI roadmap that's 100% H3 is vision without credibility. Boards want to see all three horizons funded with different risk profiles — H1 builds trust through delivery, H2 is the strategic bet, H3 is the optionality play.
+
+Shopify is a concrete example: H1 was polishing the core commerce stack (fast wins, proving the team ships). H2 was AI embedded in workflows — Sidekick, the merchant assistant — a bet on AI-as-copilot that changes how merchants manage their stores. H3 was the platform ambition — Shopify as the operating system for commerce, not just a storefront builder. Same narrative spine, three different horizons, three different approaches. And the key framing: this isn't a document you write once a year. You revisit monthly, not annually. The living strategy is the mechanism — push an update to your repo, not a slide refresh to a deck.
 
 
 ### Slide 8 — AI Metrics
@@ -106,7 +110,7 @@ This is anther  twist to the course — using AI to evaluate their own AI strate
 
 This is where the course frameworks connect to their real work. Instead of filling in blank roadmap boxes, participants dump their actual backlog — Jira items, feature requests, stakeholder asks, whatever they have — and the AI maps each initiative to their strategy components and places it in a horizon.
 
-The teaching point: a roadmap proves the strategy moves through time — it's not a wishlist. The roadmap has to show how H1 wins fund H2 bets, and how H2 bets earn the right to pursue H3 moonshots. But most PMs build roadmaps disconnected from strategy. This exercise forces the connection: every initiative has to link to a strategy component (Bet, Moat, Margin, Contract, Guardrails) or it's noise.
+The teaching point: a roadmap proves the strategy moves through time — it's not a wishlist. The roadmap has to show how H1 wins fund H2 bets, and how H2 bets earn the right to pursue H3 experiments. But most PMs build roadmaps disconnected from strategy. This exercise forces the connection: every initiative has to link to a strategy component (Bet, Moat, Margin, Contract, Guardrails) or it's noise. Remind them of the compressed horizons from slide 7: H1 is 0–4 weeks (ship), H2 is 1–3 months (validate), H3 is 3–6 months (explore). This isn't annual planning — it's a living document they revisit monthly.
 
 Here is the prompt participants should paste into Claude or ChatGPT:
 
@@ -127,12 +131,12 @@ Here is the prompt participants should paste into Claude or ChatGPT:
 >    - ⚙️ The Guardrails (enables scale — governance, agents, compliance)
 >    - ⚠️ Unmapped (doesn't clearly connect to any strategy component)
 >
-> 2. Classify each initiative into a horizon:
->    - H1 (0-3 months): Ships with existing capabilities. High confidence. Quick wins that fund H2.
->    - H2 (3-12 months): Requires new capabilities or integrations. Strategic bets with kill criteria.
->    - H3 (12+ months): Changes user behavior or creates new markets. Moonshots — high uncertainty, high potential.
+> 2. Classify each initiative into a horizon (AI-compressed cadence):
+>    - H1 — Ship (0–4 weeks): High confidence. Ships with existing capabilities. Earns credibility for H2.
+>    - H2 — Validate (1–3 months): Medium confidence. Requires new capabilities or integration. Strategic bets with named kill criteria.
+>    - H3 — Explore (3–6 months): Low confidence. Small investment experiments. Changes user behavior or creates new markets.
 >
-> 3. For each H2 initiative, suggest a kill criteria (a falsifiable signal: "If we don't see X by month Y, we stop").
+> 3. For each H2 initiative, suggest a kill criteria (a falsifiable signal: "If we don't see X by week Y, we stop").
 >
 > 4. Flag any initiatives that don't connect to any strategy component — these are candidates to cut or rethink.
 >
@@ -143,7 +147,7 @@ Here is the prompt participants should paste into Claude or ChatGPT:
 
 After participants run the prompt, have them review the output: Does the AI's classification match their instinct? Move items that feel wrong. Pay special attention to unmapped items — those are either noise or missing from the strategy.
 
-Two forcing functions: (1) Every roadmap must have an H3 line. If someone's roadmap is all H1, push them: "Where's the bet that scares you? That's H3." (2) Every H2 bet needs a kill line. Stripe-style check: "If we don't see X by month 6, we stop." If the AI didn't generate a good kill criteria, that's their job to add.
+Two forcing functions: (1) Every roadmap must have an H3 line. If someone's roadmap is all H1, push them: "Where's the experiment that scares you? That's H3." (2) Every H2 bet needs a kill line. Stripe-style check: "If we don't see X by week 6, we stop." If the AI didn't generate a good kill criteria, that's their job to add. Reinforce: this roadmap isn't a one-time artifact. They should be re-running this prompt monthly as their backlog evolves and their strategy sharpens.
 
 The output goes directly into `06-the-pitch/roadmap.md` in their repo.
 
