@@ -18,13 +18,13 @@ I want to reduce anxiety early — show them it's applied-heavy and they'll be d
 
 ### Slide 1 — The Bet
 
-Alright, welcome everybody. I'm really glad you're here — seriously. So lets set the stage. This is a working session, not a passive lecture. You're going to leave today with real artifacts, not just notes. I know that sounds like something every instructor says, but I actually mean it. By the end of this session you'll have code committed to a repo.
+Alright, welcome everybody. I'm really glad you're here — seriously. This is a working session, not a passive lecture. You're going to leave today with real artifacts, not just notes. By the end of this session you'll have code committed to a repo.
 
 OK so heres the big shift we're wrestling with in this course. The way you've been trained to do product strategy — deterministic planning, annual roadmaps, fixed outcomes — that doesn't work for AI products. AI products are bets. And today we're going to figure out what your bet actually looks like.
 
 By the end of this session you'll have what I call Component 1 of your living strategy, plus a working prototype. And it doesn't matter whether you're bolting AI onto an existing product or building something AI-native from scratch — the strategic questions are the same.
 
-Quick thing before we go further — look at the slide. Diagnose, Discover, Decide. Which one of those feels hardest for you right now? Just point to it. I want to get a read on the room. Don't be shy.
+Quick thing before we go further — look at the slide. Diagnose, Discover, Decide. Which one of those feels hardest for you right now? Just write it in the chat.
 
 ### Slide 2 — Expectations
 
