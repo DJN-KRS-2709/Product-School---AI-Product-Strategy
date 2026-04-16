@@ -1,124 +1,197 @@
 # Module 1 — The Bet
-## Speaker Briefing for Carlos
 
 ### What this module is about
 
-This is the opening module and it sets the tone for everything. The core shift we're making: traditional product strategy assumes deterministic outcomes, fixed costs, and annual planning cycles. AI breaks all of that. M1 introduces probabilistic thinking — the idea that AI products are bets, not plans. The emotional arc is about controlled discomfort. They walk in expecting a framework deck; they leave having diagnosed their own vulnerability, written a killer memo against themselves, and built a working prototype.
+This is the opening module and it sets the tone for everything that comes after. Heres the big move: traditional product strategy assumes you can predict outcomes, lock in costs, and plan in annual cycles. AI breaks all of that. So today I'm introducing probabilistic thinking — the idea that AI products are bets, not plans. The emotional arc is about controlled discomfort. They're going to walk in expecting a framework deck and leave having diagnosed their own vulnerability, written a killer memo against themselves, and built a working prototype. That shift from passive to active is the whole point of Module 1.
 
-The traditional assumption this module breaks: "We can plan AI products the way we plan everything else." We can't. Outputs are probabilistic, costs are variable, competitive moats evaporate when platforms ship your feature for free, and discovery cycles that used to take 6 weeks now take 4 days. That's the table on slide 5 — five assumptions that AI shatters. Every module that follows maps to one of those rows.
+The assumption I'm breaking today: "We can plan AI products the way we plan everything else." We can't. Outputs are probabilistic, costs are variable, competitive moats evaporate when platforms ship your feature for free, and discovery cycles that used to take 6 weeks now take 4 days. That's what slide 5 is about — five assumptions that AI shatters. Every module that follows maps to one of those rows.
 
-They leave with a GitHub repo containing three artifacts: a vulnerability scorecard (three-axis diagnostic with honest scores), a killer memo (3-sentence attack from a platform's perspective), and a working prototype they built in 15 minutes. The repo IS the living strategy — they fork a template in this module and push real work to it in every module that follows. By M6, the repo is their board-ready strategy.
+They're leaving today with a GitHub repo containing three artifacts: a vulnerability scorecard with honest scores across three axes, a killer memo where they write three sentences attacking their own product from a platform's perspective, and a working prototype they built in 15 minutes. The repo IS the living strategy — they fork a template today and push real work to it in every module that follows. By M6, that repo is their board-ready strategy. It's a lot for one session but honestly the pace is what makes it land.
 
-### The flow and why it's structured this way
+### The flow
 
-The first half is concept-heavy but deliberately punctuated — provocation, thesis, case study, framework. We don't let theory run more than two slides without an interactive moment. The break sits after the framework slides so they've absorbed the diagnostic model before they apply it. Right after the break, they fork their strategy repo — the living strategy that anchors the entire course. The second half is almost entirely applied: set up the repo, score yourself, get challenged by a partner, write the killer memo, build a prototype, push everything to the repo. The prototype is the emotional peak — seeing something exist in 15 minutes makes the whole "probabilistic bets" argument feel real, not academic. And committing it to a real repo makes it permanent.
+The first half is concept-heavy but I keep it punchy — provocation, thesis, case study, framework. I never let theory run more than two slides without getting them doing something. The break sits after the framework slides so they've had time to absorb the diagnostic model before they have to apply it. Right after break, they fork their strategy repo — the living strategy that anchors the whole course. The second half is almost entirely hands-on: set up the repo, score yourself, get challenged by a partner, write the killer memo, build a prototype, push everything to the repo. The prototype is the emotional peak — seeing something exist in 15 minutes makes the whole "probabilistic bets" argument feel real instead of academic. And committing it to a real repo makes it permanent.
 
-Reduce anxiety, show it's applied-heavy — they'll do the arc, not memorize it. Two hours: provocation → short theory → case → framework → break → diagnose → pair → build → synthesize. Don't read every line; hit "three exercises, one case, one prototype."
+I want to reduce anxiety early — show them it's applied-heavy and they'll be doing stuff, not memorizing. Two hours: provocation, short theory, case, framework, break, diagnose, pair, build, synthesize. I don't need to read every line of these notes — just hit the beats: three exercises, one case, one prototype.
 
 ---
 
 ### Slide 1 — The Bet
 
-Set energy — this is a working session, not a passive lecture. Name the shift from deterministic planning to AI-era bets. They leave with Component 1 plus a prototype; same strategic questions whether they're bolting on AI or building AI-native. Optional opener: "Point to Diagnose / Discover / Decide — which feels hardest for you right now?" Quick read of the room.
+Alright, welcome everybody. I'm really glad you're here — seriously. So lets set the stage. This is a working session, not a passive lecture. You're going to leave today with real artifacts, not just notes. I know that sounds like something every instructor says, but I actually mean it. By the end of this session you'll have code committed to a repo.
+
+OK so heres the big shift we're wrestling with in this course. The way you've been trained to do product strategy — deterministic planning, annual roadmaps, fixed outcomes — that doesn't work for AI products. AI products are bets. And today we're going to figure out what your bet actually looks like.
+
+By the end of this session you'll have what I call Component 1 of your living strategy, plus a working prototype. And it doesn't matter whether you're bolting AI onto an existing product or building something AI-native from scratch — the strategic questions are the same.
+
+Quick thing before we go further — look at the slide. Diagnose, Discover, Decide. Which one of those feels hardest for you right now? Just point to it. I want to get a read on the room. Don't be shy.
 
 ### Slide 5 — The Premise
 
-This is the opening thesis for the entire course. Traditional product strategy makes five assumptions that AI breaks: deterministic outputs, fixed costs, clear competitive boundaries, trust by default, and annual planning cycles. Name all five explicitly — this table sets up every module that follows.
+OK so this is the opening thesis for the entire course, and I want you to really sit with this table because we're going to keep coming back to it. Like, constantly.
 
-Walk through the five rows. Don't lecture — let the visual do the work. About 90 seconds. Close with: "Which shift have you felt most in your product?" Quick show of hands or point-to-answer. This reads the room and tells you which modules will hit hardest for this cohort. Each row maps to a module: probabilistic outputs → M1, platform encroachment → M2, variable costs → M3, trust → M4, planning cadence → M5. Don't name the mapping — let them discover it over six sessions. This slide is the one they'll reference when someone at work asks "why can't we just use our normal strategy process?"
+Traditional product strategy makes five assumptions that AI just completely breaks. Deterministic outputs — you can predict what the product will do. Fixed costs — you know what it'll cost to run. Clear competitive boundaries — you can see who you're competing with. Trust by default — users believe your product works. And annual planning cycles — you plan once a year and execute. Sound familiar? Yeah, because most of us were trained on exactly this playbook.
+
+Let me walk you through each row. I'll keep it to about 90 seconds because the visual does most of the work here. Just look at the "Traditional" column and the "AI-era" column side by side. See how different that world is?
+
+OK so heres my question for you: which of these shifts have you felt most in your own product? Show of hands — who's felt the probabilistic outputs problem? Who's dealt with platform encroachment? Cost surprises? Trust issues? Planning chaos? Yeah, I thought so. That tells me a lot about which sessions are really going to hit home for this group. And by the way — each of these rows maps to a module in this course. But I'm not going to tell you which is which. You'll figure that out as we go. This slide is the one you'll pull up when someone at work asks "why can't we just use our normal strategy process for AI?"
 
 ### Slide 6 — Which Are You?
 
-This is where we see who's in the room. Both paths — bolting AI onto existing product vs. building AI-native — share the same frameworks. Show of hands or "point A or B" — under 2 minutes. Ground rule: real product at their company, not a startup fantasy.
+Alright, lets see who's in the room. There are really two paths here — you're either bolting AI onto an existing product, or you're building something AI-native from the ground up. The good news is the frameworks we're using work for both. I've been on both sides of this and honestly, the bolt-on path is harder in some ways because you're fighting existing assumptions the whole time.
+
+Quick show of hands — who's bolting on, who's building native? Point to A or B. Great, good mix. One ground rule though: I need you working on a real product at your company for the exercises today. Not a startup fantasy, not a side project — the thing you actually go to work and deal with every day. I know that feels a little exposing but that's what makes this useful. Trust me on this one.
 
 ### Slide 7 — CEO Question
 
-Private baseline for M6 comparison. This surfaces how fuzzy "AI strategy" language is before they have the tools. Three minutes, silent — the CEO question, 3 sentences, no polish. Don't debrief yet: "You'll cringe at this in a good way by M6."
+OK heres what I want you to do. Imagine your CEO stops you in the hallway tomorrow and says, "What's our AI strategy?" I want you to write your answer. Three sentences, no polish, just what you'd actually say. You've got three minutes. This is private — nobody's reading it.
+
+Don't overthink it. Seriously, I can see some of you already editing your first sentence. Stop. I just want to capture where your head is right now before we give you any tools or frameworks. And I promise you this — you'll look back at this answer in Module 6 and you'll cringe at it, in a really good way. I always do when I find old strategy docs from six months ago. That's the whole point. The cringe means you grew.
 
 ### Slide 8 — True/False
 
-Uncomfortable truths stick. This primes moats (M2), discovery speed, and non-determinism. Vote on each claim (hands, Zoom reaction, or poll) before the reveal — the tension is the point.
+Alright, lets have some fun. I'm going to throw some claims at you and I want you to vote on each one before I give you the answer. Ready?
 
-All three are FALSE. Best product doesn't win if platforms copy you — moats matter. Outcomes are distributions; big wins often come from new behaviors nobody predicted. And discovery that used to take 6–8 weeks can now run in days with AI-assisted loops — competitors won't wait for your research timeline.
+"The best product wins." True or false? Hands up for true. Hands up for false. Interesting.
+
+"AI product outcomes are predictable with enough data." True or false?
+
+"Traditional discovery timelines still apply." True or false?
+
+Heres the thing — all three are false. The best product doesn't win if a platform copies you overnight. Moats matter, and we'll dig deep into that in Module 2. Outcomes are distributions, not fixed points — some of the biggest AI wins came from entirely new behaviors that nobody predicted. And discovery that used to take six to eight weeks can now run in days with AI-assisted research loops. Your competitors are not going to wait for your research timeline.
+
+I know some of that is uncomfortable. Good. Thats the point. Better to feel it here than in a quarterly review.
 
 ### Slide 9 — Course Arc
 
-Orient on the six-question spine; today is only "The Bet." Trace M1 → M6 in about 90 seconds; no deep M3–M5 spoilers. Frame the "living strategy" as a GitHub repo they build across all six sessions — not a browser tool, not a worksheet, a real version-controlled repo. Name it explicitly: "By M6, your repo IS your strategy."
+Let me orient you on the full journey. There are six modules, six big questions. Today is just the first one — "The Bet." Let me trace the arc real quick so you know where we're headed.
+
+Module 1 is about diagnosing your bet. Module 2 asks whether anyone can copy you. Module 3 is the economics reality check. Module 4 is about trust and evaluation. Module 5 is the planning cadence. And Module 6 is where you put it all together and present.
+
+But the thing I really want you to hold onto is this: across all six sessions, you're building a living strategy in a GitHub repo. Not a browser tool, not a worksheet — a real version-controlled repository. I chose GitHub deliberately because strategy docs that live in Google Docs get forgotten. Strategy in a repo gets versioned, diffed, and evolved. By Module 6, your repo IS your strategy. That's the artifact you could walk into a board meeting with. Pretty cool, right?
 
 ### Slide 10 — Annual Cycles
 
-This gives permission to stop pretending Q3 commitments map to model curves. The Cisco quote is the external voice — variability plus probabilistic models, not "bad execution." Ask: "Who still has a frozen annual roadmap for AI bets?" Show of hands — the discomfort is the point.
+How many of you still have a frozen annual roadmap for your AI bets? Show of hands. Yeah, I see you. Look, I get it — your org plans that way. Everyone's org plans that way. But heres the reality: you cannot commit to Q3 deliverables when the underlying model might change three times between now and then.
+
+There's a great quote on this slide about variability and probabilistic models. This isn't about "bad execution" — it's about the fact that AI products are fundamentally variable. The planning horizon has to match the uncertainty of the domain. And right now, most planning processes don't. I've sat in so many annual planning meetings where people are basically making up numbers for AI initiatives and everyone in the room knows it but nobody wants to say it.
+
+This slide is me giving you permission to stop pretending. Feels good, right?
 
 ### Slide 11 — Discovery
 
-Concrete proof beats abstract "AI is faster." Notion compressed a ~6-week discovery loop to ~4 days using AI editor insights for clustering and synthesis. Name-check Intercom and Sprig-class stacks on-slide as examples of how teams actually compress research today.
+OK let me show you something concrete because "AI makes things faster" is way too abstract. Nobody changes their behavior based on a vague claim. So let me tell you a story about Notion. They had a standard discovery process — user interviews, synthesis, prioritization, the whole thing. Roughly six weeks, start to finish. Then they started using AI editor insights for clustering and synthesis and compressed that entire loop down to about four days. Four days. You can see Intercom and Sprig-class stacks on this slide as other examples of how teams are compressing research today. But Notion's the one that always gets a reaction in the room.
 
-Poll: "Your discovery cycle — under 2 weeks / 2–6 weeks / 6+ weeks?" Point or raise hands. Most rooms skew long, which sets up the urgency for the rest of the module.
+Quick poll — I want to know where you all are. Your discovery cycle right now: under two weeks, two to six weeks, or six-plus weeks? Raise your hand for your bucket.
+
+Yeah, most rooms skew long. Thats not a judgment — thats just the reality. And it's exactly why the rest of this module matters — because your competitors might be running at Notion speed while you're still in week three of your research plan. Let that sit for a second.
 
 ### Slide 12 — Probabilistic
 
-This is the core M1 reframe. Leaders are trained to promise outcomes; AI rewards bet-plus-kill-criteria-plus-learning-cadence instead. The old vs. new cards on-slide are the anchor; Bard → Gemini is the narrative pivot when the product is inherently variable. Non-consumption examples: Shopify, Gamma, Granola — behaviors that didn't exist before; TAM looks "small" until it doesn't.
+OK so this is the core reframe for today and honestly for the whole course. As leaders, we've been trained to promise outcomes. "We'll ship X by Q3, it'll move Y metric by Z percent." I've done this. You've done this. We've all done this. But AI doesn't work that way. AI rewards a different operating model: place a bet, define your kill criteria, set a learning cadence, and iterate.
 
-Pair prompt, 30 seconds: "What's one outcome your leadership still asks you to 'guarantee'?" This surfaces the gap between probabilistic reality and deterministic expectations.
+Look at the old versus new cards on the slide. Look at Bard becoming Gemini — same product, completely different positioning, because the underlying model is inherently variable. Google had to rebrand an entire product line because the technology moved faster than the strategy. And then think about non-consumption plays: Shopify started enabling merchants who never could have afforded custom AI before. Gamma replaced slide decks nobody wanted to make. Granola captured meeting notes nobody was taking. These are behaviors that didn't exist before AI. The TAM looks tiny until suddenly it doesn't.
+
+Alright, quick pair exercise. Turn to the person next to you — thirty seconds — tell each other: what's one outcome your leadership still asks you to "guarantee"? Because I bet most of you have at least one. And that gap between what they expect and what's actually possible? That's what we're here to close. Sound familiar? Yeah, I thought so.
 
 ### Slide 13 — Notion Case
 
-Same industry as most of them — docs, knowledge — so it feels transferable. Walk through Bet → Crack → Correction fast; emphasize time as the weapon. Discussion: "Which pace matches you — Notion-speed or research-first?" Get 2–3 voices, then move.
+Let me walk you through the Notion case because it's in the same industry as a lot of you — docs, knowledge, collaboration — so it should feel transferable.
+
+Heres the arc: the Bet, the Crack, the Correction. Notion saw AI coming, placed the bet early, moved fast. Then they found the crack — the first approach wasn't working the way they expected. And instead of doubling down or pretending everything was fine, they corrected quickly. The weapon here was time — speed of learning, not perfection of planning. They didn't have a better plan than anyone else. They just learned faster. And honestly, thats the whole thesis of this course in one case study.
+
+So heres my question: which pace matches you right now? Are you moving at Notion speed, or are you still in research-first mode? Lets be honest. I'd love to hear from two or three of you. What does your pace actually look like? Don't tell me what you wish it was — tell me what it is.
 
 ### Slide 14 — Archetypes
 
-Archetype drives margin, governance, and what "good" looks like. Teams skip this step then wonder why their economics don't work. Examples on-slide: UiPath (Automation), GitHub Copilot (Copilot), Palantir (Insight), Midjourney (Creation), Zapier AI (Orchestration) — walk one line each.
+OK so this is one of my favorite frameworks. I genuinely get excited about this one. Your AI product's archetype drives everything — your margins, your governance model, what "good" even looks like. And I see teams skip this step all the time and then wonder why their economics don't work or their eval metrics feel meaningless.
 
-**Mental model:** These five archetypes are a thinking tool, not a taxonomy. Most products blend 2–3. The point is knowing which archetype's economics and trust profile dominates your product, because that shapes everything from pricing (M3) to eval design (M4). Push participants to identify their primary plus secondary, and name what doesn't fit.
+Look at the five archetypes on the slide. UiPath is Automation — it does the work for you, full stop. GitHub Copilot is the Copilot archetype — it works alongside you, pair programming style. Palantir is Insight — it shows you what you couldn't see. Midjourney is Creation — it makes entirely new things that didn't exist before. Zapier AI is Orchestration — it connects and coordinates across systems.
 
-Quick poll: "Which archetype is your product?" Hands or chat — no debate, just self-label.
+Now heres the important thing: these five are a thinking tool, not a taxonomy. Most products blend two or three. I spent way too long trying to force one of my own products into a single archetype before I realized it was legitimately two. The point is knowing which archetype's economics and trust profile dominates your product, because that shapes everything from your pricing model in Module 3 to your eval design in Module 4. So figure out your primary, maybe your secondary, and be honest about what doesn't fit.
+
+Quick poll — which archetype is your product? Just shout it out or raise your hand when I read yours. Automation? Copilot? Insight? Creation? Orchestration? Great, good spread. Love seeing the variety in the room.
 
 ### Slide 15 — Break
 
-Reset before 25+ minutes of applied work. Five minutes; "honesty + laptop" on return.
+Amazing work so far. Seriously — you've covered a lot of ground and I can tell the energy is high. You deserved a break. Take five minutes. Grab some water, stretch, check your phone, do whatever you need to do.
+
+When you come back, bring your laptop and your honesty — because the next 25-plus minutes are all applied work. We're going to diagnose, challenge, build, and commit. The theory part is done. Now we build. See you in five.
 
 ### Slide 17 — Fork Repo
 
-This is the "set up your workspace" moment right after break. Template repo link goes in Slack. They click "Use this template" on GitHub, name it, and open it in Cursor, VS Code, or GitHub's web editor. Five minutes max — don't let it become a technical support session. If someone doesn't have GitHub, pair them with a neighbor who does; they can set up their own account after class. The important message: this repo is the anchor artifact for the entire course. Everything they build from now on goes here. It travels with them after the course ends. By M6, they present from this repo.
+Welcome back. Hope you got some water. Alright, first thing — lets get your workspace set up. I'm dropping the template repo link in Slack right now.
+
+Heres what you're going to do: click "Use this template" on GitHub, give it a name, and open it up in Cursor, VS Code, or even GitHub's web editor if you prefer. This should take about five minutes — lets not turn it into a tech support session.
+
+If you don't have a GitHub account, no stress — pair up with someone who does. You can set up your own account after class. But heres the important thing I want you to understand: this repo is the anchor artifact for the entire course. Everything you build from today forward goes here. It travels with you after the course ends. By Module 6, you're presenting from this repo. So it's not homework — it's your living strategy. Think of it like a product you're building for yourself.
 
 ### Slide 18 — Diagnostic
 
-Shared vocabulary for moat, data, and platform risk before they score themselves. Name the three axes; 1 = pain, 5 = strong — partner will challenge later.
+OK now lets talk about the diagnostic framework. We're going to score ourselves on three axes: moat strength, data advantage, and platform risk. One means you're in pain, five means you're strong. And don't worry if your numbers feel low — a partner is going to challenge your scores in a few minutes anyway, so there's no point in being generous with yourself.
 
-**Mental model:** The three axes are a lens, not a final score. The numbers force honesty — "all 5s" means you haven't looked hard enough. But the axes are deliberately broad: participants should adapt the scoring criteria to their specific domain. A healthcare AI's "platform risk" looks very different from a consumer app's.
+Let me be clear about something. These three axes are a lens, not a final score. The numbers force honesty — and if you score yourself all fives, come find me because we need to talk. Seriously. I've never seen a product that's a five on all three and I've looked at a lot of products. But the axes are deliberately broad. If you're in healthcare AI, your "platform risk" looks completely different from someone building a consumer app. Adapt the criteria to your world.
 
-Calibrate aloud using on-slide companies: Figma, Slack, thin ChatGPT UI, Zapier — one axis each where they win or get eaten.
+Let me calibrate with some companies you know. Figma built such deep workflow integration that switching costs are enormous — strong on workflow moat. Slack has network effects that grow with every team that joins — deep on that dimension. A thin ChatGPT wrapper UI? Lets be honest — basically no moat at all. One API change and you're done. Zapier built an entire ecosystem of integrations — strong on orchestration. See how different the profiles are? That's what your scores should reflect.
 
 ### Slide 19 — Live Diagnosis
 
-Demystify the rubric on a product everyone knows — argument equals learning. Pick one: Notion, Figma, Linear, Slack — "Apple / Google / OpenAI ships X native — then what?" Calibrate scores with the room; messy is good.
+Before you score yourselves, let me demystify this rubric by doing it live on a product we all know. Takes the pressure off. Lets pick one — Notion, Figma, Linear, or Slack. Shout one out. Doesn't matter which.
+
+OK heres the scenario: Apple, Google, or OpenAI ships a native version of this product's core feature tomorrow. Then what? Lets score it together as a room. What's the moat score? Shout it out. What's the data advantage? What's the platform risk?
+
+Don't worry if we disagree — messy is good here. The argument IS the learning. I want you to see how this rubric works before you turn it on your own product. And honestly, the disagreements are where the best insights come from. Someone always sees something the rest of the room missed.
 
 ### Slide 20 — Your Scores
 
-Abstract framework meets their product. The scorecard is what M2 pressure-tests. Ten minutes individual — scores plus one vulnerability written down. Ruthless honesty; all 5s is a red flag. Roam — they should be writing.
+Alright, your turn. This is where the abstract framework meets your actual product. You've got ten minutes. I want you to score yourself on all three axes and write down at least one specific vulnerability.
 
-They write their scores directly in `01-the-bet/diagnostic.md` in their repo. The template has the structure ready — they just fill in scores, rationale, and the killer memo. When they're done, they commit. That file travels to M2.
+Be ruthlessly honest. If everything is a five, that's a red flag — seriously, come find me. Open up `01-the-bet/diagnostic.md` in your repo. The template has the structure ready — just fill in your scores, your rationale, and we'll add the killer memo in a few minutes. When you're done, commit it. That file travels with you to Module 2.
+
+I'm going to walk around while you work. You should be writing, not staring. I can always tell when someone's agonizing over whether they're a 3 or a 4. Just pick one and move. You can always revise later — that's literally what version control is for.
 
 ### Slide 21 — Pair Challenge
 
-Social proof plus discomfort beat solo rationalization. This surfaces real competitors. Five minutes each: partner lowers at least one score and names a real attacker on that axis today. Give them 60 seconds solo before naming the competitor — specificity matters.
+OK time's up on solo work. Hope you were honest with yourselves. Now find a partner — someone you haven't worked with yet ideally. You've got five minutes each.
+
+Heres the deal: your partner has to lower at least one of your scores. Not to be mean — because self-assessment is always generous. Always. I've never met a PM who underscored themselves. A partner's pushback surfaces things you can't see yourself. And then they have to name a real attacker on that axis. Not "Big Tech" — a specific company or product that could exploit that weakness today. Give me a name and a URL.
+
+Take sixty seconds by yourself first to think about who that competitor might be. Specificity matters. If you can't name the attacker, you haven't looked hard enough. And if your partner is being too polite, tell them — being nice isn't being helpful. The market won't be nice.
 
 ### Slide 22 — Killer Memo
 
-Outside-in view catches blind spots self-scores miss. Three minutes silent — write a 3-sentence memo as a platform AI lead killing their product. Get 2–3 volunteers to read one sentence each if time allows.
+Now the fun part. I love this exercise. I want you to write a killer memo. Three sentences. You are the head of AI at a major platform — Google, Apple, Microsoft, OpenAI, whoever makes sense for your space. And you're writing the internal memo about why you're going to kill this product. Put yourself in their shoes. What do they see when they look at your product? Opportunity, that's what.
+
+Three minutes, silent. Write it as if you're that person. Outside-in perspective catches blind spots that your own self-scores miss every time. I've done this exercise on my own products and it's always the thing that makes me lose sleep. In a productive way.
+
+When you're done — and if we have time — I'd love to hear a sentence or two from a couple of volunteers. Who wants to read their attack? Don't be shy — the best ones are always a little painful to read out loud.
 
 ### Slide 24 — Build
 
-This is the "fireworks" moment — theory lands when something exists. It separates builders from deck-builders. Fifteen minutes using v0, Cursor, or Lovable; a shareable link is the bar. Pair with someone who has an account if needed. When they have a link, they paste it into `01-the-bet/prototype.md` and commit. The prototype now lives in their strategy repo — not a tab they'll lose.
+Alright, this is my favorite part of the session. Everything we've talked about — probabilistic bets, vulnerability, speed — it all becomes real right now. Theory is done. We build.
+
+You have fifteen minutes. I want you to build a working prototype of your AI product concept using v0, Cursor, or Lovable. The bar is a shareable link. That's it. It doesn't have to be pretty, it doesn't have to be complete — it has to exist. Fifteen minutes ago you were scoring yourself on a rubric. Now you're going to have a working thing. Thats the whole philosophy of this course in one exercise.
+
+If you don't have an account on any of those tools, pair up with someone who does. When you have your link, paste it into `01-the-bet/prototype.md` in your repo and commit. The prototype now lives in your strategy repo — it's not a browser tab you're going to lose tomorrow.
+
+This is what separates builders from deck-builders. Fifteen minutes. Go. I'll be walking around if anyone gets stuck.
 
 ### Slide 25 — Synthesis
 
-Lock learning into Component 1 so today isn't vibes. Their `01-the-bet/` folder should have `diagnostic.md` and `prototype.md` committed. Point at the repo structure: "That's your living strategy. It grows every session."
+OK lets bring it together. Look at what you accomplished today. Seriously, take a second to appreciate this. Look at your `01-the-bet/` folder in your repo. You should have `diagnostic.md` with your scores, your vulnerability, and your killer memo. And you should have `prototype.md` with your prototype link. Both committed.
+
+That right there? That's Component 1 of your living strategy. It's real, it's in version control, and it grows every session. This repo is yours — it's not a class exercise that disappears when the course ends. By Module 6, you'll be presenting from it. And it'll look completely different from what it looks like right now, in the best way.
+
+Hope you enjoyed that. Two hours ago most of you walked in not sure what to expect, and now you've got a vulnerability scorecard, a killer memo, and a working prototype — all committed to a repo. Thats not nothing.
 
 ### Slide 26 — Bridge to M2
 
-Clear carry: "Bring your repo with `01-the-bet/` committed." The hook: "Can anyone copy this in 6 months?" M2 is data flywheel plus vendor and copy risk — one sentence, don't teach M2 here.
+For next time — make sure your repo has `01-the-bet/` committed with everything from today. That's your carry-forward. Don't skip this part — Module 2 builds directly on what you did today.
+
+And heres the question that's going to keep you up at night until Module 2: can anyone copy what you just built in six months? Because Module 2 is all about data flywheels, vendor risk, and what happens when someone decides to eat your lunch. If the killer memo exercise made you a little nervous, good — Module 2 is where we figure out what to do about it. One session down, five to go. You're off to an amazing start.
 
 ### Slide 31 — Survey
 
-Close loop for Product School; takes 60 seconds. Thank them; QR or link — optional "one thing that surprised you" if you use a live form.
+Last thing — there's a quick survey, takes about sixty seconds. QR code is on the screen, I'll also drop the link in Slack. Your feedback really does help me make the next session better. I read every single response, I'm not just saying that.
+
+And if you want to share — what's one thing that surprised you today? Drop it in the survey or tell me on the way out. Thanks everybody, great first session. See you next time.
