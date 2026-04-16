@@ -26,6 +26,18 @@ By the end of this session you'll have what I call Component 1 of your living st
 
 Quick thing before we go further — look at the slide. Diagnose, Discover, Decide. Which one of those feels hardest for you right now? Just point to it. I want to get a read on the room. Don't be shy.
 
+### Slide 2 — Expectations
+
+Before we dive in, lets set our ground rules. Cameras on — I know, I know, but it genuinely makes a huge difference in how we connect and learn from each other. Be present, arrive on time, and I really encourage you to participate actively during exercises. Use Slack for all communication so nothing gets lost. And save deeper questions for after class or post them in Slack so we dont interrupt the flow — but dont worry, there will be plenty of time for everything.
+
+### Slide 3 — Introductions
+
+Alright, lets get to know each other. I'll keep my intro short — you can read the highlights on screen. But I'd love to hear from you. Drop your name, role, location, what you hope to get out of this course, and at least one fun fact in the Slack channel. Seriously, the fun fact is mandatory — the more random the better. And share your LinkedIn too so you can connect with each other after the course. The more we know about each other, the better we learn together. This cohort is your network now.
+
+### Slide 4 — Syllabus
+
+Heres the full outline. Six modules, each one building on the last. Module 1 is today — The Bet. You'll diagnose where strategy breaks and build your first prototype. Module 2 is The Moat — can anyone copy you? Module 3 is The Margin — does this make money? Module 4 is The Contract — trust and reliability. Module 5 is The Guardrails — what breaks at scale? And Module 6 is The Pitch — you assemble everything and present it. Each session adds a component to your living strategy repo. By the end, you dont have a deck — you have a version-controlled strategy you can actually use at work.
+
 ### Slide 5 — The Premise
 
 OK so this is the opening thesis for the entire course, and I want you to really sit with this table because we're going to keep coming back to it. Like, constantly.
@@ -118,6 +130,10 @@ Amazing work so far. Seriously — you've covered a lot of ground and I can tell
 
 When you come back, bring your laptop and your honesty — because the next 25-plus minutes are all applied work. We're going to diagnose, challenge, build, and commit. The theory part is done. Now we build. See you in five.
 
+### Slide 16 — Cameras On
+
+Welcome back! Quick reminder — cameras on, please. I know it feels like a small thing but it makes a real difference in how we interact and how much you get out of the exercises coming up. Plus I like seeing your faces. Lets stay present and engaged for this next stretch — its the most hands-on part of the session.
+
 ### Slide 17 — Fork Repo
 
 Welcome back. Hope you got some water. Alright, first thing — lets get your workspace set up. I'm dropping the template repo link in Slack right now.
@@ -166,6 +182,10 @@ Three minutes, silent. Write it as if you're that person. Outside-in perspective
 
 When you're done — and if we have time — I'd love to hear a sentence or two from a couple of volunteers. Who wants to read their attack? Don't be shy — the best ones are always a little painful to read out loud.
 
+### Slide 23 — Prototype Lab
+
+Alright, heres where it gets real. This is the hands-on lab section — The Prototype Bet. Everything weve talked about today — probabilistic thinking, vulnerability, speed — it all comes together right now. You've got 15 minutes to turn your diagnosis into something clickable. Rough beats perfect. Lets go.
+
 ### Slide 24 — Build
 
 Alright, this is my favorite part of the session. Everything we've talked about — probabilistic bets, vulnerability, speed — it all becomes real right now. Theory is done. We build.
@@ -190,8 +210,28 @@ For next time — make sure your repo has `01-the-bet/` committed with everythin
 
 And heres the question that's going to keep you up at night until Module 2: can anyone copy what you just built in six months? Because Module 2 is all about data flywheels, vendor risk, and what happens when someone decides to eat your lunch. If the killer memo exercise made you a little nervous, good — Module 2 is where we figure out what to do about it. One session down, five to go. You're off to an amazing start.
 
+### Slide 27 — Your Repo
+
+Take a look at this. This is what your repo looks like after today. You've got `01-the-bet/` with your diagnostic and your prototype — both committed. The other folders are grayed out because they fill in over the next five sessions. And that README at the bottom? Thats your living strategy dashboard. It builds up as you go. By Module 6, this whole thing is a board-ready artifact. Pretty satisfying to see it starting to take shape, right?
+
+### Slide 28 — Complete
+
+Look at what you accomplished today. One strategy repo created from scratch. Three artifacts committed — your diagnostic, your killer memo, and your prototype. And you shipped a working prototype in 15 minutes. Two big shifts happened: you went from deterministic thinking to probabilistic thinking, and you went from abstract strategy vibes to a scored diagnostic with a named attacker on your weakest axis. Thats real progress. You should feel good about that.
+
+### Slide 29 — Takeaways
+
+Let me bring this home with three key takeaways. First — AI strategy is probabilistic. Traditional product strategy assumes you can predict outcomes, fix costs, and plan annually. AI breaks all of that. Bets with kill criteria replace promises. Second — score your vulnerability honestly. The three-axis diagnostic forces specificity. If all your scores are fives, you havent looked hard enough. The partner stress-test and the killer memo surface what self-assessment always misses. Third — build to think, commit to learn. A working prototype in 15 minutes beats a strategy deck in 15 days. Pushing it to a repo makes it real — version-controlled, shareable, alive. Thats what separates builders from deck-builders.
+
+### Slide 30 — Extra Practice
+
+If you want to go deeper, two optional exercises. First — rewrite your killer memo with a different platform attacker. If you wrote it from Google's perspective, try Apple. Does the attack vector change? That tells you something important about where your vulnerability actually is. Second — flesh out your repo. Review your `01-the-bet/` files, fill in any placeholders you skipped in class, update the top-level README with your bet summary, and commit. Next session is Module 2 — The Moat. You can build fast. Now — can anyone copy it?
+
 ### Slide 31 — Survey
 
 Last thing — there's a quick survey, takes about sixty seconds. QR code is on the screen, I'll also drop the link in Slack. Your feedback really does help me make the next session better. I read every single response, I'm not just saying that.
 
 And if you want to share — what's one thing that surprised you today? Drop it in the survey or tell me on the way out. Thanks everybody, great first session. See you next time.
+
+### Slide 32 — Q&A
+
+Alright, before we close — any final questions? This is your time to ask anything about what we covered today. Feel free to unmute or drop your question in the chat. And if something pops up later, share it in Slack — Im always around. Thanks everybody. Amazing first session. See you next time!

@@ -16,6 +16,14 @@ We're doing three learn-then-do cycles instead of front-loading all the theory. 
 
 Alright, welcome back everyone. Today has three waypoints — Define, Measure, and Design. Define: what trust actually means. Measure: golden datasets, judges, eval infrastructure. Design: confidence UX. Heres the thing — all those economics we worked through in Module 3 only matter if users trust the output enough to keep paying. You can have beautiful margins and still be one silent failure away from a disaster. And I mean a real disaster, not a bad review — we're talking legal liability. Three deliverables by end of day: Component 4 of your living strategy, an eval dashboard spec, and a reliability contract. Busy day, but honestly? This is the module where everything starts feeling real. Lets get into it.
 
+### Slide 2 — Expectations
+
+Same ground rules. Cameras on, Slack for questions. Today we're doing three learn-then-do cycles instead of front-loading theory. So the pace is different — you'll build something within minutes of learning a concept. Stay sharp, it moves fast.
+
+### Slide 3 — Syllabus
+
+Quick look at where we are. Modules 1 through 3 covered your bet, your moat, and your margins. Today is Module 4 — The Contract. Trust and reliability. After today we have governance and the capstone pitch. Were in the back half now and the artifacts are getting more specific.
+
 ### Slide 4 — Recall from M3
 
 Quick reconnect. You brought your cost curve, Components 1 through 3, and your value capture comparison from last time. All that economics work — the margins, the pricing, the cost optimization — it only pays off if users trust the output. A product with great margins but silent failures is a lawsuit waiting to happen. Literally, as we'll see later today. I'm not being dramatic. We have a case study coming up that will prove it.
@@ -52,6 +60,10 @@ Heres the thing — this isn't exotic data science. Grammarly gates every releas
 
 Turn to your partner. 45 seconds. Share one nasty input your gold set absolutely must include. Think about the worst thing a user could throw at your product. The offensive content, the edge case, the thing that would embarrass you on Twitter. This primes us for the build exercise coming right after.
 
+### Slide 8 — Trust Infrastructure
+
+Alright, first lab of the day. You just learned about golden datasets — now you're building one while it's fresh. This is the Trust Infrastructure lab. Scope, sources, maintenance — three panels, fifteen minutes. Lets go.
+
 ### Slide 9 — Golden Dataset
 
 Great stuff. You just learned what golden datasets are. Now you're building one while it's fresh. You've got three panels to fill in for your own product. Scope — your domain, input and output types, target 100 to 500 rows. Sources — real user data, expert-curated, adversarial edge cases, yes or no for each. And Maintenance — who owns it, how often it gets updated, how you version it.
@@ -65,6 +77,10 @@ You've got 15 minutes. The Golden Dataset Builder tool is linked on-slide if you
 ### Slide 10 — Break
 
 Amazing work so far. Seriously — you just built a golden dataset spec from scratch. That alone is more than most AI teams have. You deserved a break. Take five minutes — grab some water, stretch, clear your head. When we come back, I promised you a scare story, and I'm going to deliver. It's about what happens when AI makes promises without guardrails. Then you're building confidence UX, and after that, your partner is going to try to break everything you've built. Fair warning — it's going to get fun.
+
+### Slide 11 — Cameras On
+
+Welcome back! Cameras on for this next stretch. We've got a scare story coming up that I think will get your attention, then you're designing confidence UX, and after that your partner is going to try to break everything you've built. Should be fun. Stay engaged.
 
 ### Slide 12 — Human-in-the-Loop
 
@@ -124,6 +140,10 @@ This is the cheapest place to find failures. Way cheaper here in this room than 
 
 You've got 13 minutes — six minutes each direction. One person attacks, the other defends, then swap. After both rounds, each pair states one line: "Worst miss my partner found." If those one-liners aren't at least a little uncomfortable, the red-teaming was too polite. Push each other. I mean it — be the competitor, not the friend. You can buy them coffee afterwards.
 
+### Slide 18 — Reliability Contract
+
+This is the capstone lab for today. Everything you've built — golden dataset spec, confidence UX, red-team findings — feeds into this reliability contract. Four quadrants: the promise, the measurement, the escalation, and the feedback loop. This is the artifact with the most teeth.
+
 ### Slide 19 — Build
 
 OK so look at what you've built today. A golden dataset spec, a confidence UX design, you survived a red-team attack. Now we tie it all together. This is the capstone artifact — the reliability contract. What you promise users, how you measure it, what happens when it breaks, and how corrections feed back. Four quadrants. The Promise: accuracy percentage, response time, uptime. The Measurement: metrics, method, reporting cadence. The Escalation: what happens when you drop below threshold — who's notified, what do users see? The Feedback Loop: how corrections get back to the model, how the dataset gets updated, on what cadence.
@@ -146,6 +166,26 @@ Today was product-level trust. Next time we go bigger — and honestly, it gets 
 
 Take a look at the module arc on screen — see where M5 sits. That's where we're heading. It builds directly on everything you did today.
 
+### Slide 22 — Your Repo
+
+Four folders done. `01-the-bet/`, `02-the-moat/`, `03-the-margin/`, and now `04-the-contract/` with your golden dataset spec, confidence UX design, and reliability contract. One more module of building, then we pitch. The living strategy is getting serious.
+
+### Slide 23 — Complete
+
+Look at what you accomplished. A golden dataset spec, a confidence UX design, a red-team stress test, and a reliability contract. Two shifts today: you went from trusting accuracy to designing for perceived control, and you went from no eval infrastructure to a spec you could hand to an engineer. This was the heaviest writing module so far and you nailed it.
+
+### Slide 24 — Takeaways
+
+Three takeaways. First — trust is a function of perceived control, not accuracy. An 85% system with confidence scores beats a 95% black box. Second — golden datasets are your receipts. When a buyer asks "how do you test this?", your golden dataset is the answer. Third — your AI's promises are your company's promises. Air Canada learned that the hard way. Specify them, measure them, enforce them.
+
+### Slide 25 — Extra Practice
+
+Two optional exercises. First — add five more adversarial rows to your golden dataset. Think about the worst inputs your users could throw at your product. Second — map your confidence UX tiers to actual UI elements in your product. Where exactly do confidence scores show up? What changes between the tiers? Next session: Module 5 — The Guardrails.
+
 ### Slide 26 — Survey
 
 Alright, QR code is on screen, link is there too. Take two minutes and fill this out — I genuinely read every one. This was the heaviest writing module so far, and honestly you crushed it. The amount of artifacts you built today is no joke. I appreciate you staying with it. Thank you, and I'll see you next time.
+
+### Slide 27 — Q&A
+
+Any final questions? Feel free to unmute or chat them. As always, Slack is open for anything that comes up later. This was a heavy one — appreciate you staying with it. See you next time.
