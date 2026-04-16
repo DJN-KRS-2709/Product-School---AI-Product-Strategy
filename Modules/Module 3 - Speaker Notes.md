@@ -20,6 +20,14 @@ On the opening Expectations and Syllabus slides, Im keeping it to quick orientat
 
 Alright, welcome back everyone. This session is calmer than the first two, but I'll warn you — the pain is sharper when the math actually lands. Its a different kind of uncomfortable. Not "someone could copy me" uncomfortable. More like "wait, am I losing money on every user?" uncomfortable. By the end of today, you will think differently about your products economics. Thats a promise.
 
+### Slide 2 — Expectations
+
+Same ground rules. Cameras on, Slack for questions, be present. Today's a math-heavy session, which I know isn't everyone's favorite. But I promise it's the kind of math that changes how you think about your product. And the tools do most of the number-crunching for you.
+
+### Slide 3 — Syllabus
+
+Quick orientation. Module 1 was The Bet, Module 2 was The Moat, and today is Module 3 — The Margin. We're at the halfway point. After today we move into trust, governance, and the capstone. Everything from the first two modules feeds into what we're doing today — your flywheel scores and your kill switch audit both show up in the cost model.
+
 ### Slide 4 — Recall
 
 OK so lets connect the dots. Everything you built in Module 2 — your flywheel, your moat, your kill switch — all of that is meaningless if the economics dont work. You can have the deepest moat in the world and still go broke. So before we dive into the new stuff, quick warm-up with your partner: name one AI call path in your product that could spike costs if usage doubled. Just one. I want you thinking about money before we even start. Go.
@@ -98,6 +106,14 @@ This is the "what if" playground. You can immediately see that cascading 60% of 
 
 Amazing work. Seriously — that was a lot of math and you stayed with it. You deserved a break. Take five minutes, grab some water, stretch. Before you come back though, pull up your providers pricing page — youre going to need it for the cost curve exercise right after. See you in five.
 
+### Slide 15 — Cameras On
+
+Welcome back! Cameras on please. The next stretch is all hands-on — cost curves, pricing design, and a peer stress test. You're going to need a partner for the stress test so make sure you can see each other. Lets finish strong.
+
+### Slide 16 — Cost Curve Lab
+
+Alright, this is the applied block. Everything from the first half — margin compression, model cascading, pricing models — you're about to apply all of it to your actual product. First up: mapping your cost curve. Lets go.
+
 ### Slide 17 — Cost Curve
 
 Alright, welcome back. Fifteen minutes of solo work here and this one matters. I want you to map every AI feature in your product to a model tier and estimate the cost. The goal here is honest tiering. Most peoples instinct is to say "we use frontier for everything" and this exercise is going to show you thats a 3x cost difference you cant sustain. I get it — frontier feels safer. "What if the cheap model gives a bad answer?" But be honest about what actually needs frontier-level intelligence and what doesnt. Your autocomplete does not need GPT-5. I promise.
@@ -118,6 +134,10 @@ Alright, time to break each others models. I love this exercise because its wher
 
 Write down the vulnerability you find in each others model. This matters — it travels to Module 4, so dont lose it. And if youre being too polite with your partner, remember: the CFO wont be polite when they see 3x in a scenario plan. Push each other. Be the stress test you wish youd had before the board meeting. Some of the best insights from previous cohorts came out of partners who were willing to say "this doesnt work and heres why."
 
+### Slide 20 — Board Lab
+
+OK, last lab of the day and it's the most "real world" one. You're building a board one-pager — a before-and-after comparison that you could actually present to leadership. Everything from today feeds into this artifact.
+
 ### Slide 21 — Board One-Pager
 
 OK this is the most "real world" artifact in the whole module, and I think youre going to love it. You have 15 minutes to build a before-and-after comparison — your current model versus the AI-enhanced model.
@@ -134,6 +154,26 @@ Once youve finalized Component 3, pull it into the Living Strategy Builder. Your
 
 So heres the connection going forward. Economics without trust doesnt convert. You can have perfect pricing and beautiful margins, but if customers dont trust the output, none of it matters. Module 4 is about reliability, contracts, and evaluation — the things that make customers actually adopt and keep using what youve priced and built. Everything from today — your cost curve, your pricing strategy, even the kill switch from Module 2 — feeds directly into Module 4s vendor evaluation framework. Its all connected. And honestly, Module 4 is where a lot of people have their biggest "aha" moment, so come ready.
 
+### Slide 24 — Your Repo
+
+Check out your repo. Three folders done now — `01-the-bet/`, `02-the-moat/`, and `03-the-margin/` with your cost curve, pricing strategy, and board one-pager. Halfway through the course and your living strategy already has three solid components. Feels good to see it building up.
+
+### Slide 25 — Complete
+
+Look at what you accomplished today. You mapped a cost curve, designed a pricing strategy, survived a partner stress test, and built a board one-pager. Two big shifts: you went from unknown margins to quantified cost-per-user, and you went from gut-feel pricing to a structured pricing strategy. This was a math-heavy session and you crushed it.
+
+### Slide 26 — Takeaways
+
+Three things to hold onto. First — AI products compress margins from 80% to 40% because inference costs scale with usage, not users. Second — model cascading is the highest-leverage margin lever most teams aren't using. Route 80% of requests to cheap models and save frontier for what actually needs it. Third — a lower margin percentage is fine if revenue and gross profit are both up. AI can expand the numerator even if the percentage dips. Thats the story your board one-pager tells.
+
+### Slide 27 — Extra Practice
+
+Two optional exercises. First — run three more scenarios in the Margin Calculator with different cascading ratios and see where the break-even is. Second — refine your board one-pager with actual numbers from your provider's pricing page. The more real the numbers, the more useful this artifact becomes. Next session: Module 4 — The Contract. Economics without trust doesnt convert.
+
 ### Slide 28 — Survey
 
 Thats it for today. Thank you, seriously — this was a lot of math and you stayed with it the whole way. I know numbers arent everyones favorite thing, but look at what you built: a cost curve, a pricing strategy, a board one-pager. Thats real work. Fill out the survey before you head out — it genuinely helps me make the next session better. See you next time.
+
+### Slide 29 — Q&A
+
+Any questions before we wrap? Feel free to unmute or drop them in the chat. Slack is always open too. Great work today — that was a lot of math and you stayed with it. See you next time.

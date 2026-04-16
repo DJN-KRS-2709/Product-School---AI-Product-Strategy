@@ -112,6 +112,14 @@ Amazing work so far. Seriously. You just covered horizons, AI metrics, board fra
 
 When you come back, cameras on. Fifteen minutes to finalize your strategy, ten on the roadmap, then 35 minutes of board simulation. This is the session where everything you've built gets said out loud. Im genuinely excited for this part.
 
+### Slide 14 -- Cameras On
+
+Welcome back everyone! Cameras on — this is the most important stretch of the entire course. You're about to finalize your strategy, build your roadmap, and then pitch to the room. The next 60 minutes are all applied work and performance. Stay locked in.
+
+### Slide 15 -- Strategy Assembly
+
+Alright, this is it. Strategy assembly time. Everything you've built across five modules — bet, moat, margin, contract, guardrails — now you pull it all together into one coherent narrative. Your repo becomes your pitch deck. Lets finalize.
+
 ### Slide 16 -- Finalize Strategy
 
 OK everyone open your strategy repo. Heres the goal: review all five component folders and update your top-level README.md with complete summaries.
@@ -159,6 +167,10 @@ Two forcing functions. First, every roadmap must have an H3 line. If your roadma
 
 And remember -- this roadmap isn't a one-time artifact. You should be re-running this prompt monthly as your backlog evolves and your strategy sharpens. The output goes directly into `06-the-pitch/roadmap.md` in your repo.
 
+### Slide 18.5 -- Roadmap Output
+
+Take a look at what the AI generated. Does the classification match your instinct? Move items that feel wrong. Pay special attention to initiatives that didn't map to any strategy component — those are either noise you should cut, or they're exposing a gap in your strategy. Both are valuable findings. Make sure you've got at least one H3 line — if your roadmap is all H1, I'm going to push you.
+
 ### Slide 19 -- Board Simulation
 
 OK. This is it. The capstone. The single best bang-for-minute in the whole certification, and honestly one of my favorite moments to watch. Heres how it works: five minutes to present, three minutes for Q&A. We'll get about four of you presenting to the room. No slides, no decks -- you present directly from your strategy repo.
@@ -193,8 +205,28 @@ Look at what you built. Seriously, look at it. This isn't a certificate you fram
 
 Done means: six modules, a living strategy, and a capstone delivered. You earned it. Im not going to give a big speech here because honestly, the work speaks for itself. The certification is the formal milestone, but the real proof is the repo you built. Congratulations. I mean that.
 
+### Slide 23 -- Complete Repo
+
+Take one last look at your repo. All six folders, all components committed. The README tells your complete strategy story. This is a version-controlled, shareable, forkable strategy document. Others at your company can open it, read it, build on it. Thats the power of putting strategy in a repo instead of a slide deck.
+
+### Slide 24 -- Complete
+
+Look at what you accomplished across this entire course. Six modules, six components, one living strategy. You went from a vague three-sentence answer about AI strategy to a specific, evidence-backed, board-ready pitch. You built a prototype, scored a flywheel, mapped a cost curve, designed trust architecture, audited governance, and pitched it live. Thats a transformation.
+
+### Slide 25 -- Takeaways
+
+Three final takeaways for the whole course. First — a roadmap is not a strategy. A strategy explains why these decisions and not others. The roadmap follows. Second — boards fund portfolios across time. Show them all three horizons with different risk profiles. Third — the living strategy is a practice, not a deliverable. Open your repo monthly, update a component, push a commit. The strategy gets sharper every time you revisit it.
+
+### Slide 26 -- Extra Practice
+
+Two optional exercises. First — re-run the AI roadmap prompt with your real backlog from work — not the simplified version from class. See what it maps and what it flags. Second — schedule a monthly strategy review using your repo. Set a calendar reminder, open the README, update one component. Thats the living strategy workflow.
+
 ### Slide 27 -- Survey
 
 Last thing -- QR code is on screen. Two minutes, fill it out before you go while the energy is still up. Your insights genuinely help me make each class better than the last, and I take every response seriously.
 
 Thank you. Genuinely. This was six sessions of hard work, real thinking, and a lot of honesty about your products. You showed up every time and you did the work. Im proud of what this group built. Now go use it. See you out there.
+
+### Slide 28 -- Q&A
+
+Alright, last Q&A of the course. Any final questions? Anything from today or from the whole journey? Feel free to unmute. And Slack stays open — Im always around if something comes up. Thank you so much for this experience. Six sessions, real work, real growth. Im proud of what you built. Now go use it.

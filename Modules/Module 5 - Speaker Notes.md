@@ -18,6 +18,14 @@ I moved the compounding system exercise before the break so it follows the lectu
 
 Alright, welcome to Module 5. We're making a big shift today — product to org. Three waypoints frame the session: Compound, Govern, Audit. By the time we're done, you'll have an audit you can actually hand to someone on Monday morning. And that's what separates this from abstract governance talk — you're walking out with something real. Let's get into it.
 
+### Slide 2 — Expectations
+
+Same ground rules — cameras on, Slack for questions. Today's session covers both product and organizational scale, so the scope is wider than previous modules. Some of the exercises might feel uncomfortably real — the shadow AI audit in particular tends to surface things people didn't expect. Thats the point.
+
+### Slide 3 — Syllabus
+
+Quick look at the map. Modules 1 through 4 are done — bet, moat, margin, contract. Today is Module 5 — The Guardrails. After today, the only thing left is Module 6 where you assemble everything and pitch. So this is the last building module. Make it count.
+
 ### Slide 4 — Recall from M4
 
 OK so let me connect where we left off to where we're going. You brought your eval dashboard spec, Components 1 through 4, and your reliability contract. Great work on all of that, by the way — M4 was a heavy one and you crushed it. Today we apply the same muscle at org scale.
@@ -44,6 +52,10 @@ Here's why you should care: most AI products scale without compounding. And that
 
 Turn to the person next to you. Thirty seconds. Name one thing in your product that compounds versus one that only scales. Go.
 
+### Slide 7 — Governance Lab
+
+First lab of the day. You just learned about compounding versus scaling — now sketch your own system while it's fresh. Three panels: recursive learning, cross-domain transfer, network intelligence. Lets build.
+
 ### Slide 8 — Design Compounding
 
 You just learned compounding versus volume — now sketch your own system while it's fresh. Three panels: Recursive Learning, Cross-Domain Transfer, Network Intelligence. Here's the forcing function I want you to use: freeze your product for 12 months. No updates, no improvements. Still winning? If yes, you're not compounding — you're just scaling. Good answers name specific data flows — something like "support ticket corrections feed the fine-tuning pipeline weekly."
@@ -53,6 +65,10 @@ Now, the three-panel structure is a thinking scaffold — not every product need
 ### Slide 9 — Break
 
 Amazing work so far. Seriously — you just wrestled with compounding systems and I know that's not easy to map onto your own product. You deserved a break. Take five minutes — grab some water, stretch, check your phone. When we come back it's the governance half: responsible AI ladder, how to govern agents, a Samsung scare story that's going to make some of you very nervous, and then you're writing policy while your partner audits everything. So rest up. You're going to need it.
+
+### Slide 10 — Cameras On
+
+Welcome back! Cameras on please. The next stretch is the governance block — responsible AI ladder, agent governance, the Samsung scare story, then you're writing policy and your partner is going to audit you. Should be intense. Lets go.
 
 ### Slide 11 — Responsible AI
 
@@ -126,6 +142,10 @@ Three panels. Discovery — known tools, suspected tools, expense-report tools. 
 
 The Shadow AI Audit tool is linked on the slide — it walks you through discovery, risk-scoring, and triage with exportable results. Use it. And export the results when you're done — this is the artifact you're handing to someone on Monday, remember?
 
+### Slide 18.5 — Shadow AI Lab
+
+This is the highest immediate ROI exercise in the entire course. You're building a shadow AI audit you can actually hand to IT or Finance on Monday. Discovery, risk scoring, and triage. Lets find out what's actually happening in your org.
+
 ### Slide 20 — Synthesis
 
 OK take a breath. Look at what you accomplished today. You mapped compounding systems, wrote a governance policy, survived a peer audit, and built a shadow AI tool inventory. That is a lot. Seriously — this was the densest module in the course and you handled it.
@@ -140,6 +160,26 @@ Module 5 closes the building phase. Everything from M1 through M5 — vulnerabil
 
 I'm not going to lie, it gets intense. But you've built five components now. You've got the foundation. You're ready for it. And honestly? It's the most fun module. There's something satisfying about watching people defend their strategy under pressure. Bring your A-game.
 
+### Slide 22 — Your Repo
+
+Five folders done. `01-the-bet/` through `05-the-guardrails/`. All five strategy components are committed. One session left and thats the pitch. Your living strategy is essentially complete — Module 6 is about assembling the narrative and pressure-testing it.
+
+### Slide 23 — Complete
+
+Look at what you built today. A compounding system architecture, a governance one-pager, a peer audit, and a shadow AI audit. Two shifts: you went from abstract compliance to governance as a GTM asset, and you went from unknown shadow AI risk to a concrete audit with action items. This was the densest module and you handled it.
+
+### Slide 24 — Takeaways
+
+Three takeaways. First — most AI products scale without compounding, which makes them commodities. If your system doesn't get smarter with use, someone else's will. Second — governance done right accelerates deals. Salesforce sells the Einstein Trust Layer as a product feature, not a compliance checkbox. Third — shadow AI is already happening in your org. The audit isn't hypothetical — it's inventory.
+
+### Slide 25 — Extra Practice
+
+Two optional exercises. First — run a real shadow AI survey with your team. Even five responses will surface tools you didn't know about. Second — expand your governance policy to include specific agent autonomy boundaries — what's OK to do solo versus what needs a human gate. Next session is Module 6 — The Pitch. Everything you've built becomes one story.
+
 ### Slide 26 — Survey
 
 QR code is on screen. Fill it out before you go — it genuinely helps me make the next session better. And thank you, seriously. This was the heaviest module in the course and you stuck with it. Great job today. See you next time.
+
+### Slide 27 — Q&A
+
+Any final questions? This was a dense one — genuine thanks for staying with it. Drop anything in Slack that comes up later. One more session to go and then you pitch. See you next time.

@@ -20,6 +20,18 @@ Alright, welcome back everyone. Hope Module 1 didn't keep you up at night — or
 
 OK so today we're going to find out if anyone can copy what you're building in six months. By the time we're done, you'll have a scored flywheel, a vendor portability plan, and Component 2 of your living strategy filled in. We're starting here because most AI products look differentiated right up until a platform ships the same feature for free. Module 1 diagnosed vulnerability — today we build the defense. Lets get into it.
 
+### Slide 2 — Expectations
+
+Same ground rules as Module 1. Cameras on, be present, use Slack for questions. One thing I'll add for today: the exercises are more intense than M1. When I say "be honest with your scores," I really mean it. Generous scores only hurt you when your partner tries to attack your flywheel later. Trust the process.
+
+### Slide 3 — Syllabus
+
+Quick look at where we are in the course. Module 1 was The Bet — you diagnosed your vulnerability. Today is Module 2 — The Moat. Can anyone copy what you're building? After today we move into economics, trust, governance, and the final pitch. Each module adds a component to your living strategy. Todays the one where you find out if your strategy has staying power.
+
+### Slide 4 — Recall from M1
+
+Quick reconnect before we jump in. You brought your Module 1 scorecard, your killer memo, and your prototype. All that work from last session feeds directly into what we're doing today. The vulnerability you diagnosed? Thats the crack we're going to try to defend. So pull up your repo and have your scores handy — you'll need them in about two minutes.
+
 ### Slide 5 — Moat Stress Test
 
 OK so pull out your Module 1 scorecard. Find the lowest score — thats your crack, your weak spot. Now I want you to name one specific company that could exploit it. And I don't mean "Big Tech" — give me a real name. A company with a face and a product page. You've got two minutes to write it down, then three minutes to share with the room.
@@ -76,6 +88,14 @@ Heres the thing: abstract concepts don't change behavior. Numbers do. Once you s
 
 Amazing work so far. Seriously — look at what you just did. You stress-tested your moat, named your weakest point out loud, watched a $1.5 billion company get eaten alive, and scored your own flywheel with actual numbers. Thats not a small thing. You deserved a break. Take five minutes — grab some water, stretch, check your phone, do whatever you need. When you come back its all applied work. You're going to map your flywheel, face an attacker, and build your escape plan. The fun stuff. I promise.
 
+### Slide 13 — Cameras On
+
+Welcome back everyone! Quick reminder — cameras on please. The applied work coming up is partner-heavy and its way better when you can see each others faces. Plus some of the exercises involve pointing at your screen, which is hard to do with cameras off. Lets stay engaged for this home stretch.
+
+### Slide 14 — Lab: Flywheel & Kill Switch
+
+Alright, this is where the real building happens. Everything from the first half — the 8 moats, the Jasper story, the flywheel concept — now you apply it to your own product. Two big exercises coming up: map your flywheel and build your Kill Switch. Lets get into it.
+
 ### Slide 15 — Map Your Flywheel
 
 OK welcome back. Hope you enjoyed that breather because we're going right back in.
@@ -108,6 +128,10 @@ That 48 hours is deliberately aggressive — it should make you uncomfortable. M
 
 Now, vendor portability looks different in every domain. Think of the 48-hour bar as a way to reason about dependency and swap readiness, not as a literal SLA you need to hit tomorrow. It's a thought experiment that reveals how trapped you actually are. And for some of you, the answer to that thought experiment is going to be uncomfortable. Thats OK. Thats why we're here.
 
+### Slide 19 — Lab: Kill Switch
+
+OK time to build your escape plan. This is the Kill Switch lab — the exercise where you audit your actual vendor dependencies and build a portability plan. Three layers, three timelines, one very uncomfortable question: how fast could you swap?
+
 ### Slide 20 — Portability Audit
 
 Fifteen minutes — audit your vendor dependency. Here are the stress tests: what if your provider doubles pricing? What if they restrict your use case? Walk out of this exercise with three concrete action items: this week, this month, this quarter. And I want specifics — not "build abstraction layer" but "abstract the embedding call in search by Friday." Specific enough that you could hand it to an engineer and they'd know exactly what to do. This checklist travels to Module 3 because portability directly affects your cost model.
@@ -128,6 +152,26 @@ Once you've filled it in, pull it into the Living Strategy Builder and watch you
 
 So here's what's coming next. Module 3 is the economics reality check — inference costs are compressing margins from 80% to 40%. Bring everything you built today. We've had two sessions on strategy and defensibility — Module 3 is the cold shower: does any of this make money? I'm not going to lie, it gets a little intense. But after what you did today — stress tests, encroachment attacks, kill switches — you've got the foundation. You'll be ready.
 
+### Slide 23 — Your Repo
+
+Take a look at your repo now. `01-the-bet/` is done from last session. And now `02-the-moat/` has your flywheel scores, your kill switch audit, and your encroachment analysis. Two folders down, four to go. The living strategy is starting to take real shape. Every module adds a layer and by M6 this thing tells your complete strategy story.
+
+### Slide 24 — Complete
+
+Look at what you accomplished today. You scored a data flywheel, survived a 90-day encroachment attack from a partner, and built a portability plan with real action items. Two big shifts: you went from claiming a data moat to proving compounding loops, and you went from vendor dependency to vendor optionality. Thats real progress. You should feel good about this one.
+
+### Slide 25 — Takeaways
+
+Three things to remember from today. First — its loops, not stockpiles. Data in a database isnt a moat. A product that gets smarter every time someone uses it — thats a moat. Second — depth beats features. Jasper had 70,000 customers and a $1.5 billion valuation and still got eaten because they sat at the chatbot end of the depth spectrum. Third — the Kill Switch is optionality. If you cant swap providers in 48 hours, you're not choosing your vendor — you're trapped with them. The three actions from your portability audit travel to Module 3.
+
+### Slide 26 — Extra Practice
+
+Two optional exercises if you want to go deeper. First — run the 90-day encroachment plan again, but this time YOU play the encroacher against a different product in your industry. What would you do? Second — review your kill switch audit and add technical detail to each action item. Make them specific enough that an engineer could pick them up. Next session is Module 3 — The Margin. Does any of this make money?
+
 ### Slide 27 — Survey
 
 QR code is on screen. Hope you enjoyed today — I know it was a lot. Like, genuinely a lot. But you handled it and you've got real artifacts to show for it. Fill out the survey before you go, it genuinely helps me make the next session better for you. Thanks everyone, amazing work today. See you next time.
+
+### Slide 28 — Q&A
+
+Alright, any final questions before we close? Feel free to unmute or drop them in the chat. And as always, Slack is open if something comes to you later. Great work today everyone. See you next time.
