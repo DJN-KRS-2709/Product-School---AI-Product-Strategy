@@ -132,7 +132,7 @@ Let me calibrate with some companies you know. Figma built such deep workflow in
 
 ### Slide 19 — Live Diagnosis
 
-Before you score yourselves, let me demystify this rubric by doing it live on a product we all know. Takes the pressure off. Shout one out — Notion, Figma, Linear, or Slack. Doesn't matter which. Heres the scenario: Apple, Google, or OpenAI ships a native version of this product's core feature tomorrow. Then what? Lets score it together. Shout out your moat score. Data advantage. Platform risk. Don't worry if we disagree — messy is good. The argument IS the learning.
+Before you score yourselves, let me demystify this rubric by doing it live on a product we all know. Shout one out what should be the product — Notion, Figma, Linear, or Slack? Heres the scenario: Apple, Google, or OpenAI ships a native version of this product's core feature tomorrow. Then what? Lets score it together. Shout out your moat score. Data advantage. Platform risk. Don't worry if we disagree — messy is good. The argument IS the learning. 
 
 **If the room picks Notion:**
 Moat — I'd say 3, maybe 4. Deep workflow gravity once teams build their whole wiki there. But the editor itself? Google Docs and Microsoft Loop are closing fast, and AI writing assistants are commoditizing the core. Switching cost is real but not impossible — people do migrate. Data Advantage — solid 4. They see how teams organize knowledge, what gets linked, what gets searched. That's proprietary signal that OpenAI doesn't have. Platform Risk — 3. Apple Intelligence in Notes, Google Gemini in Docs, Microsoft Copilot in OneNote — all of them are gunning for "AI-powered workspace." Notion's bet is that depth of integration and the knowledge graph keep people locked in. The risk is that "good enough AI" in a tool you already pay for wins.
@@ -146,7 +146,7 @@ Moat — 2 to 3. Issue trackers are notoriously easy to switch. The data is stru
 **If the room picks Slack:**
 Moat — 4. Network effects are real — every person who joins makes it stickier for everyone else. Your company's institutional memory lives in Slack channels. That's powerful gravity. Data Advantage — 4 to 5. They see every conversation, every workflow, every integration. That's an extraordinary signal about how teams actually work. If they can make AI that surfaces the right context at the right time, nobody else has that data. Platform Risk — 3. Microsoft Teams is the obvious threat and it's bundled free with Office 365. But the deeper risk is that AI assistants start to replace the chat paradigm entirely — why search Slack when an agent can just answer your question directly?
 
-After whichever product you run, land it with: "See how reasonable people can disagree on scores? That's exactly what happens when you score your own product. Now imagine your partner poking holes in your reasoning — that's the next exercise."
+and you might disagree on scores? That's exactly what happens when you score your own product. Now imagine your partner poking holes in your reasoning — that's the next exercise."
 
 ### Slide 20 — Your Scores
 
@@ -154,11 +154,11 @@ Alright, your turn. This is where the abstract framework meets your actual produ
 
 Be ruthlessly honest. If everything is a five, that's a red flag — seriously, come find me. Open up `01-the-bet/diagnostic.md` in your repo. The template has the structure ready — just fill in your scores, your rationale, and we'll add the killer memo in a few minutes. When you're done, commit it. That file travels with you to Module 2.
 
-I'm going to walk around while you work. You should be writing, not staring. I can always tell when someone's agonizing over whether they're a 3 or a 4. Just pick one and move. You can always revise later — that's literally what version control is for.
+I'm going to set you into breakout rooms for yourself. and again, don't overthink it whether the score is a 3 or a 4. Just pick one and move. You can always revise later — that's literally what version control is for.
 
 ### Slide 21 — Pair Challenge
 
-OK time's up on solo work. Hope you were honest with yourselves. Now find a partner — someone you haven't worked with yet ideally. You've got five minutes each.
+OK time's up on solo work. Hope you were honest with yourselves. I will now assign a partner to you. You've got five minutes each.
 
 Heres the deal: your partner has to lower at least one of your scores. Not to be mean — because self-assessment is always generous. Always. I've never met a PM who underscored themselves. A partner's pushback surfaces things you can't see yourself. And then they have to name a real attacker on that axis. Not "Big Tech" — a specific company or product that could exploit that weakness today. Give me a name and a URL.
 
@@ -168,13 +168,12 @@ Take sixty seconds by yourself first to think about who that competitor might be
 
 Now the fun part. I love this exercise. I want you to write a killer memo. Three sentences. You are the head of AI at a major platform — Google, Apple, Microsoft, OpenAI, whoever makes sense for your space. And you're writing the internal memo about why you're going to kill this product. Put yourself in their shoes. What do they see when they look at your product? Opportunity, that's what.
 
-Three minutes, silent. Write it as if you're that person. Outside-in perspective catches blind spots that your own self-scores miss every time. I've done this exercise on my own products and it's always the thing that makes me lose sleep. In a productive way.
+Three minutes, silent. Write it as if you're that person. Outside-in perspective catches blind spots that your own self-scores miss every time.  When you're done — and if we have time — I'd love to hear a sentence or two from a couple of volunteers.
 
-When you're done — and if we have time — I'd love to hear a sentence or two from a couple of volunteers. Who wants to read their attack? Don't be shy — the best ones are always a little painful to read out loud.
+Who wants to read their attack? Don't be shy — the best ones are always a little painful to read out loud.
 
 ### Slide 23 — Prototype Lab
-
-Alright, heres where it gets real. This is the hands-on lab section — The Prototype Bet. Everything weve talked about today — probabilistic thinking, vulnerability, speed — it all comes together right now. You've got 15 minutes to turn your diagnosis into something clickable. Rough beats perfect. Lets go.
+Alright, heres where it gets real. This is the hands-on lab section — The Prototype Bet. Everything weve talked about today — probabilistic thinking, vulnerability, speed — it all comes together right now. 
 
 ### Slide 24 — Build
 
