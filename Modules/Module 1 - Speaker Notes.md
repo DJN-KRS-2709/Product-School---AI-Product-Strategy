@@ -32,7 +32,9 @@ Before we dive in, lets set our ground rules. Cameras on — I know, I know, but
 
 ### Slide 3 — Introductions
 
-Alright, lets get to know each other. I'll keep my intro short — you can read the highlights on screen. But I'd love to hear from you. Drop your name, role, location, what you hope to get out of this course, and at least one fun fact in the Slack channel. Seriously, the fun fact is mandatory — the more random the better. And share your LinkedIn too so you can connect with each other after the course. The more we know about each other, the better we learn together. This cohort is your network now.
+I think by now, a lot of you folks could do the introduction for me. So I will keep it short. Hey everybody, Im Dejan. Im a father of two boys — six and eight. I like to say I buy Lego for them… but lets be honest, Im really buying it for myself. I am a coffee nerd tracking beans, extraction times, and grinder settings in spreadsheets. Ive been in product for more than 16 years. Back in the day, product management meant writing huge specifications and then praying for six months that the features would be delivered as expected. What should I say? They never did and we had to change our approach.
+
+Before Spotify, I worked at SoundCloud, where we built an insights and analytics platform from scratch. I also launched Fan-Powered Royalties — a completely new way of paying artists on a streaming service. Ive been at Spotify for about 4 years now. To help with the mission to unlock human creativity by giving a million artists the opportunity to live off the art and a billion fans to be inspired by it. But enough about me — Id love to get to know you. Drop your name, role, and at least one fun fact in Slack or the chat. The more we know about each other, the better we can learn together.
 
 ### Slide 4 — Syllabus
 
