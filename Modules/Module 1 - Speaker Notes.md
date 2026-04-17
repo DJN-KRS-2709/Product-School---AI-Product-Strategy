@@ -181,6 +181,26 @@ Alright, this is my favorite part of the session. Everything we've talked about 
 
 You have fifteen minutes. I want you to build a working prototype of your AI product concept using v0, Cursor, or Lovable. The bar is a shareable link. That's it. It doesn't have to be pretty, it doesn't have to be complete — it has to exist. Fifteen minutes ago you were scoring yourself on a rubric. Now you're going to have a working thing. Thats the whole philosophy of this course in one exercise.
 
+Now — I know staring at a blank prompt is the hardest part, so I'm dropping a starter template in Slack right now. Fill in the blanks and paste it into your tool. Here it is:
+
+**Prompt template to drop in Slack:**
+
+> Build me a web app prototype for an AI [your archetype: copilot / automator / oracle / creator / orchestrator] product called [name].
+>
+> **Who it's for:** [target user and their role]
+> **The one thing it does:** [one core task the AI handles — be specific]
+> **First screen:** When the user opens the app, they see [describe what's on screen — a dashboard, an input field, a list, etc.]
+> **The AI moment:** When the user [trigger action], the AI [what it generates / surfaces / automates]
+> **Show me:** [the key output — a recommendation, a report, a generated asset, a completed task]
+>
+> Use a clean, modern UI. Dark theme. One page, no login screen.
+
+Three tips before you start. First — don't build your whole product. Build the one screen that shows why AI makes this valuable. The "aha moment." If your product is a copilot, show the moment the AI suggests something smart. If it's an automator, show the before-and-after of a task that used to take 30 minutes.
+
+Second — don't over-specify the prompt. Write what the user experiences, not implementation details. "The AI analyzes their sales data and highlights the three riskiest deals" is better than "use a transformer model with RAG to process CSV uploads." Let the tool figure out the how.
+
+Third — iterate, don't restart. If the first result is 60% right, steer it. "Make the dashboard cards clickable" or "add a confidence score next to each recommendation." One follow-up prompt beats starting over every time.
+
 If you don't have an account on any of those tools, pair up with someone who does. When you have your link, paste it into `01-the-bet/prototype.md` in your repo and commit. The prototype now lives in your strategy repo — it's not a browser tab you're going to lose tomorrow.
 
 This is what separates builders from deck-builders. Fifteen minutes. Go. I'll be walking around if anyone gets stuck.
