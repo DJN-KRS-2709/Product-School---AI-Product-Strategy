@@ -108,28 +108,22 @@ Look at the five archetypes on the slide. UiPath is Automation — it does the w
 
 Now heres the important thing: these five are a thinking tool, not a taxonomy. Most products blend two or three. I spent way too long trying to force one of my own products into a single archetype before I realized it was legitimately two. The point is knowing which archetype's economics and trust profile dominates your product, because that shapes everything from your pricing model in Module 3 to your eval design in Module 4. So figure out your primary, maybe your secondary, and be honest about what doesn't fit.
 
-Quick poll — which archetype is your product? Just shout it out or raise your hand when I read yours. Automation? Copilot? Insight? Creation? Orchestration? Great, good spread. Love seeing the variety in the room.
+so please reflect: which archetype is your product? Automation? Copilot? Insight? Creation? Orchestration? 
 
 ### Slide 15 — Break
-
-Amazing work so far. Seriously — you've covered a lot of ground and I can tell the energy is high. You deserved a break. Take five minutes. Grab some water, stretch, check your phone, do whatever you need to do.
-
-When you come back, bring your laptop and your honesty — because the next 25-plus minutes are all applied work. We're going to diagnose, challenge, build, and commit. The theory part is done. Now we build. See you in five.
+Amazing work so far. Seriously — you've covered a lot of ground and I can tell the energy is high. You deserved a break. Take five minutes. Grab some water, stretch, check your phone a no don't check your phone. See you in five.
 
 ### Slide 16 — Cameras On
-
-Welcome back! Quick reminder — cameras on, please. I know it feels like a small thing but it makes a real difference in how we interact and how much you get out of the exercises coming up. Plus I like seeing your faces. Lets stay present and engaged for this next stretch — its the most hands-on part of the session.
+Welcome back! Quick reminder — cameras on, please. I know it feels like a small thing but it makes a real difference.
 
 ### Slide 17 — Fork Repo
+Alright, first thing — lets get your workspace set up. I'm dropping the template repo link in the chat https://djn-krs-2709.github.io/Product-School---AI-Product-Strategy/Modules/Strategy%20Repo%20Template.html 
 
-Welcome back. Hope you got some water. Alright, first thing — lets get your workspace set up. I'm dropping the template repo link in Slack right now.
-
-Heres what you're going to do: click "Use this template" on GitHub, give it a name, and open it up in Cursor, VS Code, or even GitHub's web editor if you prefer. This should take about five minutes — lets not turn it into a tech support session.
+Heres what you're going to do: click "Use this template" on GitHub, give it a name, and open it up in Cursor, VS Code, or even GitHub's web editor if you prefer. This should take about five minutes.
 
 If you don't have a GitHub account, no stress — pair up with someone who does. You can set up your own account after class. But heres the important thing I want you to understand: this repo is the anchor artifact for the entire course. Everything you build from today forward goes here. It travels with you after the course ends. By Module 6, you're presenting from this repo. So it's not homework — it's your living strategy. Think of it like a product you're building for yourself.
 
 ### Slide 18 — Diagnostic
-
 OK now lets talk about the diagnostic framework. We're going to score ourselves on three axes: moat strength, data advantage, and platform risk. One means you're in pain, five means you're strong. And don't worry if your numbers feel low — a partner is going to challenge your scores in a few minutes anyway, so there's no point in being generous with yourself.
 
 Let me be clear about something. These three axes are a lens, not a final score. The numbers force honesty — and if you score yourself all fives, come find me because we need to talk. Seriously. I've never seen a product that's a five on all three and I've looked at a lot of products. But the axes are deliberately broad. If you're in healthcare AI, your "platform risk" looks completely different from someone building a consumer app. Adapt the criteria to your world.
@@ -137,7 +131,6 @@ Let me be clear about something. These three axes are a lens, not a final score.
 Let me calibrate with some companies you know. Figma built such deep workflow integration that switching costs are enormous — strong on workflow moat. Slack has network effects that grow with every team that joins — deep on that dimension. A thin ChatGPT wrapper UI? Lets be honest — basically no moat at all. One API change and you're done. Zapier built an entire ecosystem of integrations — strong on orchestration. See how different the profiles are? That's what your scores should reflect.
 
 ### Slide 19 — Live Diagnosis
-
 Before you score yourselves, let me demystify this rubric by doing it live on a product we all know. Takes the pressure off. Lets pick one — Notion, Figma, Linear, or Slack. Shout one out. Doesn't matter which.
 
 OK heres the scenario: Apple, Google, or OpenAI ships a native version of this product's core feature tomorrow. Then what? Lets score it together as a room. What's the moat score? Shout it out. What's the data advantage? What's the platform risk?
