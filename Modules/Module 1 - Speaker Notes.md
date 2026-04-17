@@ -220,7 +220,7 @@ For next time — make sure your repo has `01-the-bet/` committed with everythin
 And heres the question that's going to keep you up at night until Module 2: can anyone copy what you just built in six months? Because Module 2 is all about data flywheels, vendor risk, and what happens when someone decides to eat your lunch. If the killer memo exercise made you a little nervous, good — Module 2 is where we figure out what to do about it. One session down, five to go. 
 
 
-### Slide 29 — Takeaways
+### Slide 27 — Takeaways
 
 Let me tell you a story that ties together everything we did today. Gamma — the AI presentation tool. A year and a half ago, Gamma was a small team with a simple bet: nobody actually wants to make slides. People want to communicate ideas, and the slide-making part is just friction. So they built an AI that turns a plain-text prompt into a full presentation. Ship fast, learn fast.
 
@@ -230,18 +230,15 @@ Now — did Gamma have a moat? Honestly, not much. The core technology is the sa
 
 And heres the part I love most. Gamma's first prototype took days, not months. It wasn't a strategy deck about AI presentations — it was an actual AI presentation tool. Rough, imperfect, but real. And because it existed, they could put it in front of users immediately and learn. Every insight they got came from the prototype, not from a research report. Thats takeaway three: **build to think, commit to learn.** You just did the same thing in fifteen minutes. A working prototype beats a strategy deck every time. And now yours lives in a repo — version-controlled, shareable, alive. Thats what separates builders from deck-builders.
 
-Three takeaways, one story. Bet probabilistically. Score yourself honestly. Build to learn. Thats Module 1.
-
 ### Slide 30 — Extra Practice
-
 If you want to go deeper, two optional exercises. First — rewrite your killer memo with a different platform attacker. If you wrote it from Google's perspective, try Apple. Does the attack vector change? That tells you something important about where your vulnerability actually is. Second — flesh out your repo. Review your `01-the-bet/` files, fill in any placeholders you skipped in class, update the top-level README with your bet summary, and commit. Next session is Module 2 — The Moat. You can build fast. Now — can anyone copy it?
 
 ### Slide 31 — Survey
 
 Last thing — there's a quick survey, takes about sixty seconds. QR code is on the screen, I'll also drop the link in Slack. Your feedback really does help me make the next session better. I read every single response, I'm not just saying that.
 
-And if you want to share — what's one thing that surprised you today? Drop it in the survey or tell me on the way out. Thanks everybody, great first session. See you next time.
+And if you want to share — what's one thing that surprised you today? Drop it in the survey or tell me on the way out. 
 
 ### Slide 32 — Q&A
 
-Alright, before we close — any final questions? This is your time to ask anything about what we covered today. Feel free to unmute or drop your question in the chat. And if something pops up later, share it in Slack — Im always around. Thanks everybody. Amazing first session. See you next time!
+Alright, before we close — any final questions? This is your time to ask anything about what we covered today. Feel free to unmute or drop your question in the chat. And if something pops up later, share it in Slack — Im always around. Thanks everybody. See you next time!
