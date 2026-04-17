@@ -131,11 +131,22 @@ Let me be clear about something. These three axes are a lens, not a final score.
 Let me calibrate with some companies you know. Figma built such deep workflow integration that switching costs are enormous — strong on workflow moat. Slack has network effects that grow with every team that joins — deep on that dimension. A thin ChatGPT wrapper UI? Lets be honest — basically no moat at all. One API change and you're done. Zapier built an entire ecosystem of integrations — strong on orchestration. See how different the profiles are? That's what your scores should reflect.
 
 ### Slide 19 — Live Diagnosis
-Before you score yourselves, let me demystify this rubric by doing it live on a product we all know. Takes the pressure off. Lets pick one — Notion, Figma, Linear, or Slack. Shout one out. Doesn't matter which.
 
-OK heres the scenario: Apple, Google, or OpenAI ships a native version of this product's core feature tomorrow. Then what? Lets score it together as a room. What's the moat score? Shout it out. What's the data advantage? What's the platform risk?
+Before you score yourselves, let me demystify this rubric by doing it live on a product we all know. Takes the pressure off. Shout one out — Notion, Figma, Linear, or Slack. Doesn't matter which. Heres the scenario: Apple, Google, or OpenAI ships a native version of this product's core feature tomorrow. Then what? Lets score it together. Shout out your moat score. Data advantage. Platform risk. Don't worry if we disagree — messy is good. The argument IS the learning.
 
-Don't worry if we disagree — messy is good here. The argument IS the learning. I want you to see how this rubric works before you turn it on your own product. And honestly, the disagreements are where the best insights come from. Someone always sees something the rest of the room missed.
+**If the room picks Notion:**
+Moat — I'd say 3, maybe 4. Deep workflow gravity once teams build their whole wiki there. But the editor itself? Google Docs and Microsoft Loop are closing fast, and AI writing assistants are commoditizing the core. Switching cost is real but not impossible — people do migrate. Data Advantage — solid 4. They see how teams organize knowledge, what gets linked, what gets searched. That's proprietary signal that OpenAI doesn't have. Platform Risk — 3. Apple Intelligence in Notes, Google Gemini in Docs, Microsoft Copilot in OneNote — all of them are gunning for "AI-powered workspace." Notion's bet is that depth of integration and the knowledge graph keep people locked in. The risk is that "good enough AI" in a tool you already pay for wins.
+
+**If the room picks Figma:**
+Moat — 4 to 5, genuinely strong. Design files, component libraries, design systems — the switching cost is enormous. Teams have years of work embedded in Figma. That's workflow gravity you can't replicate in a weekend. Data Advantage — 3. They see design patterns and component usage at scale, but it's not the kind of compounding data loop that makes the product smarter every use. Platform Risk — 2 to 3. Apple and Google aren't building Figma competitors. The real threat is AI-native design tools that skip the canvas entirely — prompt-to-UI tools that make the manual design step optional. That's the existential question for Figma.
+
+**If the room picks Linear:**
+Moat — 2 to 3. Issue trackers are notoriously easy to switch. The data is structured, exportable, and the workflows transfer. Linear is fast and opinionated, but Jira exists and AI-powered project management is coming from everywhere. Data Advantage — 2. They see sprint data and velocity, but so does every other project management tool. It's not proprietary signal that compounds. Platform Risk — 4, meaning high risk. GitHub is building project management natively. Notion is expanding into project tracking. If AI can auto-generate and manage tasks from conversations and code commits, the standalone issue tracker is the first thing that gets absorbed.
+
+**If the room picks Slack:**
+Moat — 4. Network effects are real — every person who joins makes it stickier for everyone else. Your company's institutional memory lives in Slack channels. That's powerful gravity. Data Advantage — 4 to 5. They see every conversation, every workflow, every integration. That's an extraordinary signal about how teams actually work. If they can make AI that surfaces the right context at the right time, nobody else has that data. Platform Risk — 3. Microsoft Teams is the obvious threat and it's bundled free with Office 365. But the deeper risk is that AI assistants start to replace the chat paradigm entirely — why search Slack when an agent can just answer your question directly?
+
+After whichever product you run, land it with: "See how reasonable people can disagree on scores? That's exactly what happens when you score your own product. Now imagine your partner poking holes in your reasoning — that's the next exercise."
 
 ### Slide 20 — Your Scores
 
