@@ -211,21 +211,14 @@ OK lets bring it together. Look at what you accomplished today. Seriously, take 
 
 That right there? That's Component 1 of your living strategy. It's real, it's in version control, and it grows every session. This repo is yours — it's not a class exercise that disappears when the course ends. By Module 6, you'll be presenting from it. And it'll look completely different from what it looks like right now, in the best way.
 
-Hope you enjoyed that. Two hours ago most of you walked in not sure what to expect, and now you've got a vulnerability scorecard, a killer memo, and a working prototype — all committed to a repo. Thats not nothing.
+ Two hours ago most of you walked in not sure what to expect, and now you've got a vulnerability scorecard, a killer memo, and a working prototype — all committed to a repo. 
 
 ### Slide 26 — Bridge to M2
 
 For next time — make sure your repo has `01-the-bet/` committed with everything from today. That's your carry-forward. Don't skip this part — Module 2 builds directly on what you did today.
 
-And heres the question that's going to keep you up at night until Module 2: can anyone copy what you just built in six months? Because Module 2 is all about data flywheels, vendor risk, and what happens when someone decides to eat your lunch. If the killer memo exercise made you a little nervous, good — Module 2 is where we figure out what to do about it. One session down, five to go. You're off to an amazing start.
+And heres the question that's going to keep you up at night until Module 2: can anyone copy what you just built in six months? Because Module 2 is all about data flywheels, vendor risk, and what happens when someone decides to eat your lunch. If the killer memo exercise made you a little nervous, good — Module 2 is where we figure out what to do about it. One session down, five to go. 
 
-### Slide 27 — Your Repo
-
-Take a look at this. This is what your repo looks like after today. You've got `01-the-bet/` with your diagnostic and your prototype — both committed. The other folders are grayed out because they fill in over the next five sessions. And that README at the bottom? Thats your living strategy dashboard. It builds up as you go. By Module 6, this whole thing is a board-ready artifact. Pretty satisfying to see it starting to take shape, right?
-
-### Slide 28 — Complete
-
-Look at what you accomplished today. One strategy repo created from scratch. Three artifacts committed — your diagnostic, your killer memo, and your prototype. And you shipped a working prototype in 15 minutes. Two big shifts happened: you went from deterministic thinking to probabilistic thinking, and you went from abstract strategy vibes to a scored diagnostic with a named attacker on your weakest axis. Thats real progress. You should feel good about that.
 
 ### Slide 29 — Takeaways
 
