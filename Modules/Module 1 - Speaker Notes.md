@@ -17,7 +17,6 @@ I want to reduce anxiety early — show them it's applied-heavy and they'll be d
 ---
 
 ### Slide 1 — The Bet
-
 Alright, welcome everybody. I'm really glad you're here. This is a working session, not a passive lecture. You're going to leave today with real artifacts, not just notes. By the end of this session you'll have code committed to a repo.
 
 So heres the big shift we're wrestling with in this course. The way you've been trained to do product strategy — deterministic planning, annual roadmaps, fixed outcomes — that doesn't work for AI products. AI products are bets. And today we're going to figure out what your bet actually looks like.
@@ -27,43 +26,34 @@ By the end of this session you'll have what I call Component 1 of your living st
 Quick thing before we go further — look at the slide. Diagnose, Discover, Decide. Which one of those feels hardest for you right now? Just write it in the chat.
 
 ### Slide 2 — Expectations
-
 Before we dive in, lets set our ground rules. Cameras on — I know, I know, but it genuinely makes a huge difference in how we connect and learn from each other. Be present, arrive on time, and I really encourage you to participate actively during exercises. Use Slack for all communication so nothing gets lost. And save deeper questions for after class or post them in Slack so we dont interrupt the flow — but dont worry, there will be plenty of time for everything.
 
 ### Slide 3 — Introductions
+I think by now, a lot of you folks could do the introduction for me. So I will keep it short. Im Dejan. Im a father of two boys — seven and eight. I like to say I buy Lego for them… but lets be honest, Im really buying it for myself. I am a coffee nerd tracking beans, extraction times, and grinder settings in spreadsheets. Ive been in product for more than 16 years. Back in the day, product management meant writing huge specifications and then praying for six months that the features would be delivered as expected. What should I say? They never did and we had to change our approach.
 
-I think by now, a lot of you folks could do the introduction for me. So I will keep it short. Hey everybody, Im Dejan. Im a father of two boys — six and eight. I like to say I buy Lego for them… but lets be honest, Im really buying it for myself. I am a coffee nerd tracking beans, extraction times, and grinder settings in spreadsheets. Ive been in product for more than 16 years. Back in the day, product management meant writing huge specifications and then praying for six months that the features would be delivered as expected. What should I say? They never did and we had to change our approach.
-
-Before Spotify, I worked at SoundCloud, where we built an insights and analytics platform from scratch. I also launched Fan-Powered Royalties — a completely new way of paying artists on a streaming service. Ive been at Spotify for about 4 years now. To help with the mission to unlock human creativity by giving a million artists the opportunity to live off the art and a billion fans to be inspired by it. But enough about me — Id love to get to know you. Drop your name, role, and at least one fun fact in Slack or the chat. The more we know about each other, the better we can learn together.
+Before Spotify, I worked at SoundCloud, where we built an insights and analytics platform from scratch. I also launched Fan-Powered Royalties — a completely new way of paying artists on a streaming service. Ive been at Spotify for 4.5 years now. To help with the mission to unlock human creativity by giving a million artists the opportunity to live off the art and a billion fans to be inspired by it. But enough about me — Id love to get to know you. Drop your name, role, and at least one fun fact in Slack or the chat. The more we know about each other, the better we can learn together.
 
 ### Slide 4 — Syllabus
-
 Heres the full outline. Six modules, each one building on the last. Module 1 is today — The Bet. You'll diagnose where strategy breaks and build your first prototype. Module 2 is The Moat — can anyone copy you? Module 3 is The Margin — does this make money? Module 4 is The Contract — trust and reliability. Module 5 is The Guardrails — what breaks at scale? And Module 6 is The Pitch — you assemble everything and present it. Each session adds a component to your living strategy repo. By the end, you dont have a deck — you have a version-controlled strategy you can actually use at work.
 
 ### Slide 5 — The Premise
-
 OK so this is the opening thesis for the entire course, and I want you to really sit with this table because we're going to keep coming back to it. Like, constantly.
 
 Traditional product strategy makes five assumptions that AI just completely breaks. Deterministic outputs — you can predict what the product will do. Fixed costs — you know what it'll cost to run. Clear competitive boundaries — you can see who you're competing with. Trust by default — users believe your product works. And annual planning cycles — you plan once a year and execute. Sound familiar? Yeah, because most of us were trained on exactly this playbook.
 
-Let me walk you through each row. I'll keep it to about 90 seconds because the visual does most of the work here. Just look at the "Traditional" column and the "AI-era" column side by side. See how different that world is?
-
-OK so heres my question for you: which of these shifts have you felt most in your own product? Show of hands — who's felt the probabilistic outputs problem? Who's dealt with platform encroachment? Cost surprises? Trust issues? Planning chaos? Yeah, I thought so. That tells me a lot about which sessions are really going to hit home for this group. And by the way — each of these rows maps to a module in this course. But I'm not going to tell you which is which. You'll figure that out as we go. This slide is the one you'll pull up when someone at work asks "why can't we just use our normal strategy process for AI?"
+OK so heres my question for you: which of these shifts have you felt most in your own product?  who's felt the probabilistic outputs problem? Who's dealt with platform encroachment? Cost surprises? Trust issues? Planning chaos?... And by the way — each of these rows maps to a module in this course. But I'm not going to tell you which is which. You'll figure that out as we go. This slide is the one you'll pull up when someone at work asks "why can't we just use our normal strategy process for AI?"
 
 ### Slide 6 — Which Are You?
+Alright, lets see who's in the room. There are really two paths here — you're either bolting AI onto an existing product, or you're building something AI-native from the ground up. The good news is, the frameworks we're using work for both. I've been on both sides of this and honestly, the bolt-on path is harder in some ways because you're fighting existing assumptions the whole time.
 
-Alright, lets see who's in the room. There are really two paths here — you're either bolting AI onto an existing product, or you're building something AI-native from the ground up. The good news is the frameworks we're using work for both. I've been on both sides of this and honestly, the bolt-on path is harder in some ways because you're fighting existing assumptions the whole time.
-
-Quick show of hands — who's bolting on, who's building native? Point to A or B. Great, good mix. One ground rule though: I need you working on a real product at your company for the exercises today. Not a startup fantasy, not a side project — the thing you actually go to work and deal with every day. I know that feels a little exposing but that's what makes this useful. Trust me on this one.
+please post in the chate who's bolting on, who's building native? Great, good mix. One ground rule though: I need you working on a real product at your company for the exercises today. Not a startup fantasy, not a side project — the thing you actually go to work and deal with every day. I know that feels a little exposing but that's what makes this useful. Trust me on this one.
 
 ### Slide 7 — CEO Question
+OK heres what I want you to do. Imagine your CEO/CPO or VP or Product stops you in the hallway tomorrow and says, "What's our AI strategy?" I want you to write your answer. Three sentences, no polish, just what you'd actually say. You've got three minutes. This is private — nobody's reading it.
 
-OK heres what I want you to do. Imagine your CEO stops you in the hallway tomorrow and says, "What's our AI strategy?" I want you to write your answer. Three sentences, no polish, just what you'd actually say. You've got three minutes. This is private — nobody's reading it.
-
-Don't overthink it. Seriously, I can see some of you already editing your first sentence. Stop. I just want to capture where your head is right now before we give you any tools or frameworks. And I promise you this — you'll look back at this answer in Module 6 and you'll cringe at it, in a really good way. I always do when I find old strategy docs from six months ago. That's the whole point. The cringe means you grew.
+Don't overthink it. Seriously, I just want to capture where your head is right now before we give you any tools or frameworks. And I promise you this — you'll look back at this answer in Module 6 and you'll cringe at it, in a really good way. I always do when I find old strategy docs from six months ago. That's the whole point. The means you grew.
 
 ### Slide 8 — True/False
-
 Alright, lets have some fun. I'm going to throw some claims at you and I want you to vote on each one before I give you the answer. Ready?
 
 "The best product wins." True or false? Hands up for true. Hands up for false. Interesting.
@@ -77,47 +67,41 @@ Heres the thing — all three are false. The best product doesn't win if a platf
 I know some of that is uncomfortable. Good. Thats the point. Better to feel it here than in a quarterly review.
 
 ### Slide 9 — Course Arc
-
-Let me orient you on the full journey. There are six modules, six big questions. Today is just the first one — "The Bet." Let me trace the arc real quick so you know where we're headed.
+Let me show you the full journey. There are six modules, six big questions. Today is just the first one — "The Bet." Let me trace the arc real quick so you know where we're headed.
 
 Module 1 is about diagnosing your bet. Module 2 asks whether anyone can copy you. Module 3 is the economics reality check. Module 4 is about trust and evaluation. Module 5 is the planning cadence. And Module 6 is where you put it all together and present.
 
-But the thing I really want you to hold onto is this: across all six sessions, you're building a living strategy in a GitHub repo. Not a browser tool, not a worksheet — a real version-controlled repository. I chose GitHub deliberately because strategy docs that live in Google Docs get forgotten. Strategy in a repo gets versioned, diffed, and evolved. By Module 6, your repo IS your strategy. That's the artifact you could walk into a board meeting with. Pretty cool, right?
+But the thing I really want you to hold onto is this: across all six sessions, you're building a living strategy in a GitHub repo. Not a browser tool, not a worksheet — a real version-controlled repo. I chose GitHub deliberately because strategy docs that live in Google Docs get forgotten. Strategy in a repo gets versioned, diffed, and evolved. By Module 6, your repo IS your strategy. That's the artifact you could walk into a board meeting with. Pretty cool, right?best thing is you can create an output of your strategy for individual audiences.
+- You want to pitch it to the board? Extract.
+- You want to pitch it to the team? Extract.
+Use the right language for the right audience
 
 ### Slide 10 — Annual Cycles
+How many of you still have a frozen annual roadmap for your AI bets? and I get it — your org plans that way. Everyone's org plans that way. But heres the reality: you cannot commit to Q3 deliverables when the underlying model might change three times between now and then.
 
-How many of you still have a frozen annual roadmap for your AI bets? Show of hands. Yeah, I see you. Look, I get it — your org plans that way. Everyone's org plans that way. But heres the reality: you cannot commit to Q3 deliverables when the underlying model might change three times between now and then.
-
-There's a great quote on this slide about variability and probabilistic models. This isn't about "bad execution" — it's about the fact that AI products are fundamentally variable. The planning horizon has to match the uncertainty of the domain. And right now, most planning processes don't. I've sat in so many annual planning meetings where people are basically making up numbers for AI initiatives and everyone in the room knows it but nobody wants to say it.
+There's a great quote on this slide about variability and probabilistic models. it is "With AI, outcomes are influenced by data variability, algorithm behavior, and probabilistic models.". This isn't about "bad execution" — it's about the fact that AI products are fundamentally variable. The planning horizon has to match the uncertainty of the domain. And right now, most planning processes don't. I've sat in so many annual planning meetings where people are basically making up numbers for AI initiatives and everyone in the room knows it but nobody wants to say it.
 
 This slide is me giving you permission to stop pretending. Feels good, right?
 
 ### Slide 11 — Discovery
+OK let me show you something concrete because "AI makes things faster" is way too abstract. Nobody changes their behavior based on a vague claim. So let me tell you a story about Notion. They had a standard discovery process — user interviews, synthesis, prioritization, the whole shabang. Roughly six weeks, start to finish. Then they started using AI editor insights for clustering and synthesis and compressed that entire loop down to about four days. Four days. You can see Intercom and Sprig-class stacks on this slide as other examples of how teams are compressing research today.  please post in the chat  — I want to know where you all are. Your discovery cycle right now: under two weeks, two to six weeks, or six-plus weeks?
 
-OK let me show you something concrete because "AI makes things faster" is way too abstract. Nobody changes their behavior based on a vague claim. So let me tell you a story about Notion. They had a standard discovery process — user interviews, synthesis, prioritization, the whole thing. Roughly six weeks, start to finish. Then they started using AI editor insights for clustering and synthesis and compressed that entire loop down to about four days. Four days. You can see Intercom and Sprig-class stacks on this slide as other examples of how teams are compressing research today. But Notion's the one that always gets a reaction in the room.
-
-Quick poll — I want to know where you all are. Your discovery cycle right now: under two weeks, two to six weeks, or six-plus weeks? Raise your hand for your bucket.
-
-Yeah, most rooms skew long. Thats not a judgment — thats just the reality. And it's exactly why the rest of this module matters — because your competitors might be running at Notion speed while you're still in week three of your research plan. Let that sit for a second.
+Thats not a judgment — thats just the reality. And it's exactly why the rest of this module matters — because your competitors might be running at Notion speed while you're still in week three of your research plan.
 
 ### Slide 12 — Probabilistic
-
 OK so this is the core reframe for today and honestly for the whole course. As leaders, we've been trained to promise outcomes. "We'll ship X by Q3, it'll move Y metric by Z percent." I've done this. You've done this. We've all done this. But AI doesn't work that way. AI rewards a different operating model: place a bet, define your kill criteria, set a learning cadence, and iterate.
 
-Look at the old versus new cards on the slide. Look at Bard becoming Gemini — same product, completely different positioning, because the underlying model is inherently variable. Google had to rebrand an entire product line because the technology moved faster than the strategy. And then think about non-consumption plays: Shopify started enabling merchants who never could have afforded custom AI before. Gamma replaced slide decks nobody wanted to make. Granola captured meeting notes nobody was taking. These are behaviors that didn't exist before AI. The TAM looks tiny until suddenly it doesn't.
+Look at the old versus new cards on the slide. Look at Bard becoming Gemini — same product, completely different positioning, because the underlying model is inherently variable. Google had to rebrand an entire product line because the technology moved faster than the strategy. And then think about non-consumption plays: Shopify started enabling merchants who never could have afforded custom AI before. Gamma replaced slide decks nobody wanted to make. Granola captured meeting notes nobody was taking. These are behaviors that didn't exist before AI. The Total adressable market looks tiny until suddenly it doesn't.
 
-Alright, quick pair exercise. Turn to the person next to you — thirty seconds — tell each other: what's one outcome your leadership still asks you to "guarantee"? Because I bet most of you have at least one. And that gap between what they expect and what's actually possible? That's what we're here to close. Sound familiar? Yeah, I thought so.
+Alright, quick  exercise. think for thirty seconds — and then post in the chat: what's one outcome your leadership still asks you to "guarantee"? Because I bet most of you have at least one. And that gap between what they expect and what's actually possible? That's what we're here to close. 
 
 ### Slide 13 — Notion Case
-
-Let me walk you through the Notion case because it's in the same industry as a lot of you — docs, knowledge, collaboration — so it should feel transferable.
-
+Let me walk you through the Notion case.
 Heres the arc: the Bet, the Crack, the Correction. Notion saw AI coming, placed the bet early, moved fast. Then they found the crack — the first approach wasn't working the way they expected. And instead of doubling down or pretending everything was fine, they corrected quickly. The weapon here was time — speed of learning, not perfection of planning. They didn't have a better plan than anyone else. They just learned faster. And honestly, thats the whole thesis of this course in one case study.
 
-So heres my question: which pace matches you right now? Are you moving at Notion speed, or are you still in research-first mode? Lets be honest. I'd love to hear from two or three of you. What does your pace actually look like? Don't tell me what you wish it was — tell me what it is.
+So heres my question: which pace matches you right now? Are you moving at Notion speed, or are you still in research-first mode? Lets be honest. I'd love to hear from two or three of you. What does your pace actually look like? Don't tell me what you wish it was — tell me what it is  right now.
 
 ### Slide 14 — Archetypes
-
 OK so this is one of my favorite frameworks. I genuinely get excited about this one. Your AI product's archetype drives everything — your margins, your governance model, what "good" even looks like. And I see teams skip this step all the time and then wonder why their economics don't work or their eval metrics feel meaningless.
 
 Look at the five archetypes on the slide. UiPath is Automation — it does the work for you, full stop. GitHub Copilot is the Copilot archetype — it works alongside you, pair programming style. Palantir is Insight — it shows you what you couldn't see. Midjourney is Creation — it makes entirely new things that didn't exist before. Zapier AI is Orchestration — it connects and coordinates across systems.
