@@ -1,7 +1,246 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta http-equiv="refresh" content="0; url=Pitch/AI Product Strategy - Pitch Deck.html">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Product Strategy — Course Modules</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Lato', sans-serif;
+  background: #07162C;
+  color: #e8e8f0;
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+.grain {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px;
+}
+
+.bg-glow {
+  position: fixed; top: -20%; left: -10%; width: 60%; height: 70%;
+  background: radial-gradient(ellipse, rgba(59,130,246,0.12) 0%, transparent 70%);
+  z-index: 0; pointer-events: none;
+}
+.bg-glow-2 {
+  position: fixed; bottom: -30%; right: -15%; width: 50%; height: 60%;
+  background: radial-gradient(ellipse, rgba(18,65,176,0.08) 0%, transparent 70%);
+  z-index: 0; pointer-events: none;
+}
+
+.container {
+  position: relative; z-index: 1;
+  max-width: 1000px; margin: 0 auto;
+  padding: 60px 40px 80px;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 64px;
+  animation: fadeUp 0.8s ease both;
+}
+
+.logo-row {
+  display: flex; align-items: center; justify-content: center; gap: 16px;
+  margin-bottom: 40px;
+}
+.logo-row img { height: 52px; width: auto; mix-blend-mode: lighten; }
+
+.label {
+  display: inline-block;
+  font-size: 11px; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase;
+  color: #60a5fa; margin-bottom: 20px;
+  background: rgba(59,130,246,0.08); border: 1px solid rgba(59,130,246,0.15);
+  padding: 6px 18px; border-radius: 20px;
+}
+
+h1 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 52px; font-weight: 900; color: #fff; line-height: 1.1;
+  margin-bottom: 16px;
+}
+h1 span { color: #3b82f6; }
+
+.subtitle {
+  font-size: 18px; color: #8899bb; max-width: 520px; margin: 0 auto; line-height: 1.6;
+}
+
+.modules-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.module-card {
+  position: relative;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 20px;
+  padding: 36px 32px 32px;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  overflow: hidden;
+  animation: fadeUp 0.6s ease both;
+}
+.module-card:nth-child(1) { animation-delay: 0.1s; }
+.module-card:nth-child(2) { animation-delay: 0.15s; }
+.module-card:nth-child(3) { animation-delay: 0.2s; }
+.module-card:nth-child(4) { animation-delay: 0.25s; }
+.module-card:nth-child(5) { animation-delay: 0.3s; }
+.module-card:nth-child(6) { animation-delay: 0.35s; }
+
+.module-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: var(--accent);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.module-card:hover::before { transform: scaleX(1); }
+.module-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 40px rgba(59,130,246,0.06);
+  background: rgba(255,255,255,0.05);
+}
+
+.module-num {
+  font-family: 'Poppins', sans-serif;
+  font-size: 13px; font-weight: 800; color: var(--accent);
+  letter-spacing: 0.06em; margin-bottom: 10px;
+  opacity: 0.8;
+}
+
+.module-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 26px; font-weight: 800; color: #fff;
+  margin-bottom: 8px; line-height: 1.2;
+}
+
+.module-question {
+  font-size: 15px; color: #60a5fa; font-weight: 600;
+  margin-bottom: 12px; font-style: italic;
+}
+
+.module-desc {
+  font-size: 14px; color: #8899bb; line-height: 1.6;
+}
+
+.module-arrow {
+  position: absolute; bottom: 28px; right: 28px;
+  width: 36px; height: 36px; border-radius: 50%;
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; color: #556;
+  transition: all 0.3s;
+}
+.module-card:hover .module-arrow {
+  background: var(--accent); border-color: var(--accent);
+  color: #fff; transform: translateX(2px);
+}
+
+footer {
+  text-align: center; margin-top: 56px;
+  animation: fadeUp 0.8s ease 0.5s both;
+}
+.footer-line {
+  font-size: 13px; color: #445; letter-spacing: 0.04em;
+}
+.footer-line strong { color: #8899bb; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 700px) {
+  .container { padding: 40px 20px 60px; }
+  h1 { font-size: 36px; }
+  .modules-grid { grid-template-columns: 1fr; }
+  .module-title { font-size: 22px; }
+}
+</style>
 </head>
-<body></body>
+<body>
+
+<div class="grain"></div>
+<div class="bg-glow"></div>
+<div class="bg-glow-2"></div>
+
+<div class="container">
+  <header>
+    <div class="logo-row">
+      <img src="Design/Minimalist shield with glowing _P_.png" alt="Product School" id="logo">
+    </div>
+    <div class="label">6-Module Certification</div>
+    <h1>AI Product <span>Strategy</span></h1>
+    <p class="subtitle">Six sessions. One living strategy. Each module builds a component of your board-ready AI product strategy.</p>
+  </header>
+
+  <div class="modules-grid">
+    <a class="module-card" style="--accent:#3b82f6;" href="Modules/Module%201%20-%20Slides%20(Shareable).html">
+      <div class="module-num">Module 1</div>
+      <div class="module-title">The Bet</div>
+      <div class="module-question">What should we build, and how do we know fast?</div>
+      <div class="module-desc">Diagnose where strategy breaks. Score vulnerability, build a prototype, lock in Component 1.</div>
+      <div class="module-arrow">→</div>
+    </a>
+    <a class="module-card" style="--accent:#58a6ff;" href="Modules/Module%202%20-%20Slides%20(Shareable).html">
+      <div class="module-num">Module 2</div>
+      <div class="module-title">The Moat</div>
+      <div class="module-question">Can anyone copy this in six months?</div>
+      <div class="module-desc">Score your data flywheel, stress-test with a 90-day encroachment plan, build a Kill Switch.</div>
+      <div class="module-arrow">→</div>
+    </a>
+    <a class="module-card" style="--accent:#d29922;" href="Modules/Module%203%20-%20Slides%20(Shareable).html">
+      <div class="module-num">Module 3</div>
+      <div class="module-title">The Margin</div>
+      <div class="module-question">Does any of this make money?</div>
+      <div class="module-desc">Map cost curves, design pricing, stress-test margins with cascading scenarios.</div>
+      <div class="module-arrow">→</div>
+    </a>
+    <a class="module-card" style="--accent:#bc8cff;" href="Modules/Module%204%20-%20Slides%20(Shareable).html">
+      <div class="module-num">Module 4</div>
+      <div class="module-title">The Contract</div>
+      <div class="module-question">Why should anyone trust this?</div>
+      <div class="module-desc">Build golden datasets, design confidence UX, write a reliability contract.</div>
+      <div class="module-arrow">→</div>
+    </a>
+    <a class="module-card" style="--accent:#f85149;" href="Modules/Module%205%20-%20Slides%20(Shareable).html">
+      <div class="module-num">Module 5</div>
+      <div class="module-title">The Guardrails</div>
+      <div class="module-question">What breaks when this scales?</div>
+      <div class="module-desc">Design compounding systems, draft governance policy, run a shadow AI audit.</div>
+      <div class="module-arrow">→</div>
+    </a>
+    <a class="module-card" style="--accent:#34d399;" href="Modules/Module%206%20-%20Slides%20(Shareable).html">
+      <div class="module-num">Module 6</div>
+      <div class="module-title">The Pitch</div>
+      <div class="module-question">Would you fund this?</div>
+      <div class="module-desc">Assemble the full strategy, build an AI-powered roadmap, pitch to the room as your board.</div>
+      <div class="module-arrow">→</div>
+    </a>
+  </div>
+
+  <footer>
+    <p class="footer-line"><strong>Product School</strong> — AI Product Strategy Certification</p>
+  </footer>
+</div>
+
+<script>
+// Embed logo as base64 for shareable version
+const img = document.getElementById('logo');
+if (img && !img.src.startsWith('data:')) {
+  // Works locally with relative path; GitHub Pages serves it fine too
+}
+</script>
+</body>
 </html>
