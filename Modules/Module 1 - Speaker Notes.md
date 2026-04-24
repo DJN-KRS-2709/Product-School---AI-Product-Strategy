@@ -36,7 +36,15 @@ Before Spotify, I worked at SoundCloud, where we built an insights and analytics
 ### Slide 4 — Syllabus
 Heres the full outline. Six modules, each one building on the last. Module 1 is today — The Bet. You'll diagnose where strategy breaks and build your first prototype. Module 2 is The Moat — can anyone copy you? Module 3 is The Margin — does this make money? Module 4 is The Contract — trust and reliability. Module 5 is The Guardrails — what breaks at scale? And Module 6 is The Pitch — you assemble everything and present it. Each session adds a component to your living strategy repo. By the end, you dont have a deck — you have a version-controlled strategy you can actually use at work.
 
-### Slide 5 — The Premise
+### Slide 5 — Final Project
+
+Before we get into the content, let me show you where all of this is going. Your final deliverable for this course is a Living Strategy Repo — a GitHub repository that you'll build one component at a time across all six sessions. Today you'll add the vulnerability diagnostic and a working prototype. Next session you'll add your data flywheel and kill switch. And so on — every module adds a layer.
+
+In Module 6, you assemble everything into one cohesive story and pitch it to the room. The class plays your board of directors. No slides, no deck — you present directly from your repo. Five minutes to pitch, three minutes of Q&A where your classmates ask the hardest questions they can think of.
+
+The repo is yours to keep after the course. It's version-controlled, shareable, and portable. You can hand it to a colleague, open it in a board meeting, or use it as a template for future strategy work. This isn't homework — it's the most useful thing you'll build all year. And the best part? You don't have to cram at the end. If you do the work each session, by M6 you're just polishing, not building from scratch. Alright, lets get into it.
+
+### Slide 6 — The Premise
 OK so this is the opening thesis for the entire course, and I want you to really sit with this table because we're going to keep coming back to it. Like, constantly.
 
 Traditional product strategy makes five assumptions that AI just completely breaks. Deterministic outputs — you can predict what the product will do. Fixed costs — you know what it'll cost to run. Clear competitive boundaries — you can see who you're competing with. Trust by default — users believe your product works. And annual planning cycles — you plan once a year and execute. Sound familiar? Yeah, because most of us were trained on exactly this playbook.
