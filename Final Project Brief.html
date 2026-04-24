@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Final Project Brief — AI Product Strategy Certification</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Lato', sans-serif;
+  background: #07162C;
+  color: #e8e8f0;
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.7;
+}
+
+.bg-glow {
+  position: fixed; top: -15%; left: -10%; width: 55%; height: 60%;
+  background: radial-gradient(ellipse, rgba(59,130,246,0.1) 0%, transparent 70%);
+  z-index: 0; pointer-events: none;
+}
+
+.container {
+  position: relative; z-index: 1;
+  max-width: 760px; margin: 0 auto;
+  padding: 56px 40px 80px;
+}
+
+header {
+  text-align: center; margin-bottom: 48px;
+  animation: fadeUp 0.7s ease both;
+}
+
+.badge {
+  display: inline-block; font-size: 11px; font-weight: 800;
+  letter-spacing: 0.16em; text-transform: uppercase; color: #60a5fa;
+  background: rgba(59,130,246,0.08); border: 1px solid rgba(59,130,246,0.15);
+  padding: 6px 18px; border-radius: 20px; margin-bottom: 20px;
+}
+
+h1 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 42px; font-weight: 900; color: #fff; line-height: 1.15;
+  margin-bottom: 14px;
+}
+h1 span { color: #3b82f6; }
+
+.lead {
+  font-size: 18px; color: #8899bb; max-width: 560px; margin: 0 auto;
+}
+
+h2 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 24px; font-weight: 800; color: #fff;
+  margin: 48px 0 16px; padding-top: 32px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+h2:first-of-type { border-top: none; margin-top: 0; padding-top: 0; }
+
+h3 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px; font-weight: 700; color: #e0e0f0;
+  margin: 24px 0 8px;
+}
+
+p { font-size: 16px; color: #b0b4c8; margin-bottom: 14px; }
+strong { color: #fff; }
+em { color: #60a5fa; font-style: normal; font-weight: 600; }
+code {
+  background: rgba(18,65,176,0.15); padding: 2px 8px; border-radius: 4px;
+  font-size: 14px; color: #60a5fa; font-family: monospace;
+}
+
+.tldr {
+  background: rgba(59,130,246,0.06); border: 1px solid rgba(59,130,246,0.15);
+  border-radius: 14px; padding: 24px 28px; margin: 28px 0;
+}
+.tldr p { margin-bottom: 6px; }
+.tldr p:last-child { margin-bottom: 0; }
+
+.component-grid {
+  display: flex; flex-direction: column; gap: 12px; margin: 20px 0;
+}
+.component {
+  display: flex; gap: 16px; align-items: flex-start;
+  background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 12px; padding: 18px 20px;
+  transition: all 0.3s;
+}
+.component:hover { border-color: rgba(59,130,246,0.25); transform: translateX(4px); }
+.comp-num {
+  width: 36px; height: 36px; border-radius: 8px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; font-weight: 800; color: #fff;
+}
+.comp-body { flex: 1; }
+.comp-title { font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 2px; }
+.comp-desc { font-size: 13px; color: #8899bb; line-height: 1.5; }
+.comp-artifact { font-size: 12px; color: #60a5fa; margin-top: 4px; font-weight: 600; }
+
+.timeline {
+  display: flex; flex-direction: column; gap: 0; margin: 20px 0;
+  position: relative;
+}
+.timeline::before {
+  content: ''; position: absolute; left: 17px; top: 18px; bottom: 18px;
+  width: 2px; background: rgba(59,130,246,0.15);
+}
+.tl-item {
+  display: flex; gap: 16px; align-items: flex-start;
+  padding: 12px 0; position: relative;
+}
+.tl-dot {
+  width: 36px; height: 36px; border-radius: 50%; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 800; color: #fff;
+  background: #1241B0; z-index: 1;
+}
+.tl-content { flex: 1; padding-top: 6px; }
+.tl-label { font-size: 14px; font-weight: 700; color: #fff; }
+.tl-detail { font-size: 13px; color: #8899bb; }
+
+.rubric-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 20px 0;
+}
+.rubric-item {
+  background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 12px; padding: 18px 20px;
+}
+.rubric-label { font-size: 13px; font-weight: 800; color: var(--rc, #60a5fa); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.06em; }
+.rubric-text { font-size: 13px; color: #8899bb; line-height: 1.5; }
+
+.submit-box {
+  background: rgba(52,211,153,0.06); border: 1px solid rgba(52,211,153,0.2);
+  border-radius: 14px; padding: 24px 28px; margin: 24px 0; text-align: center;
+}
+.submit-box p { color: #8899bb; }
+.submit-label { font-size: 13px; font-weight: 800; color: #34d399; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 10px; }
+
+.faq { margin: 20px 0; }
+.faq-item { border-bottom: 1px solid rgba(255,255,255,0.06); padding: 16px 0; }
+.faq-item:last-child { border-bottom: none; }
+.faq-q { font-size: 15px; font-weight: 700; color: #e0e0f0; margin-bottom: 4px; }
+.faq-a { font-size: 14px; color: #8899bb; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 600px) {
+  .container { padding: 32px 20px 60px; }
+  h1 { font-size: 30px; }
+  .rubric-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="bg-glow"></div>
+
+<div class="container">
+  <header>
+    <div class="badge">Final Project</div>
+    <h1>Your Living <span>Strategy</span></h1>
+    <p class="lead">Build an AI product strategy across 6 sessions. Present it to the room. Take it back to work.</p>
+  </header>
+
+  <div class="tldr">
+    <p><strong>What you submit:</strong> A GitHub repo link containing your complete AI product strategy.</p>
+    <p><strong>When:</strong> Module 6 — you present directly from your repo to the class (your "board").</p>
+    <p><strong>How it's built:</strong> One component per module. By M6, you assemble and pitch.</p>
+  </div>
+
+  <h2>What You're Building</h2>
+  <p>Your final project is a <strong>Living Strategy Repo</strong> — a version-controlled GitHub repository that contains six strategy components, one per module. This isn't a slide deck or a doc. It's a working, shareable, evolving strategy artifact you can use at work after the course.</p>
+
+  <div class="component-grid">
+    <div class="component">
+      <div class="comp-num" style="background:rgba(59,130,246,0.2); color:#3b82f6;">1</div>
+      <div class="comp-body">
+        <div class="comp-title">The Bet (Module 1)</div>
+        <div class="comp-desc">Diagnose your product's vulnerability across three axes (moat, data, platform risk). Write a killer memo from a competitor's perspective. Build a working prototype.</div>
+        <div class="comp-artifact">Artifacts: diagnostic.md + prototype.md</div>
+      </div>
+    </div>
+    <div class="component">
+      <div class="comp-num" style="background:rgba(88,166,255,0.2); color:#58a6ff;">2</div>
+      <div class="comp-body">
+        <div class="comp-title">The Moat (Module 2)</div>
+        <div class="comp-desc">Score your data flywheel, map competitive positioning, run a 90-day encroachment plan against yourself, and build a vendor Kill Switch with portability actions.</div>
+        <div class="comp-artifact">Artifacts: data-flywheel.md + kill-switch.md</div>
+      </div>
+    </div>
+    <div class="component">
+      <div class="comp-num" style="background:rgba(210,153,34,0.2); color:#d29922;">3</div>
+      <div class="comp-body">
+        <div class="comp-title">The Margin (Module 3)</div>
+        <div class="comp-desc">Map your cost curve with real inference pricing, design a pricing strategy (access vs. outcome vs. hybrid), and build a board-ready one-pager showing before/after AI economics.</div>
+        <div class="comp-artifact">Artifacts: cost-curve.md + board one-pager</div>
+      </div>
+    </div>
+    <div class="component">
+      <div class="comp-num" style="background:rgba(188,140,255,0.2); color:#bc8cff;">4</div>
+      <div class="comp-body">
+        <div class="comp-title">The Contract (Module 4)</div>
+        <div class="comp-desc">Build a golden dataset specification, design confidence UX tiers, red-team your own system, and write a reliability contract with explicit promises and escalation paths.</div>
+        <div class="comp-artifact">Artifacts: golden-dataset.md + reliability contract</div>
+      </div>
+    </div>
+    <div class="component">
+      <div class="comp-num" style="background:rgba(248,81,73,0.2); color:#f85149;">5</div>
+      <div class="comp-body">
+        <div class="comp-title">The Guardrails (Module 5)</div>
+        <div class="comp-desc">Design a compounding system (not just a scaling one), draft a governance policy, run a shadow AI audit of your org, and define agent autonomy boundaries.</div>
+        <div class="comp-artifact">Artifacts: compounding-system.md + governance policy + audit</div>
+      </div>
+    </div>
+    <div class="component">
+      <div class="comp-num" style="background:rgba(52,211,153,0.2); color:#34d399;">6</div>
+      <div class="comp-body">
+        <div class="comp-title">The Pitch (Module 6)</div>
+        <div class="comp-desc">Assemble all five components into a cohesive narrative. Build a three-horizon roadmap using AI. Evaluate your strategy with an AI prompt. Present to the room as your board.</div>
+        <div class="comp-artifact">Artifacts: roadmap.md + README.md (your board narrative)</div>
+      </div>
+    </div>
+  </div>
+
+  <h2>How It's Built — Session by Session</h2>
+  <p>You don't build the final project at the end. You build it <em>every session</em>. Each module adds one component to your repo. By Module 6, you assemble and pitch.</p>
+
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-dot">M1</div><div class="tl-content"><div class="tl-label">Fork the strategy repo template</div><div class="tl-detail">Create your repo, complete the diagnostic, build your prototype, commit to <code>01-the-bet/</code></div></div></div>
+    <div class="tl-item"><div class="tl-dot">M2</div><div class="tl-content"><div class="tl-label">Score flywheel + build Kill Switch</div><div class="tl-detail">Commit data flywheel analysis and portability audit to <code>02-the-moat/</code></div></div></div>
+    <div class="tl-item"><div class="tl-dot">M3</div><div class="tl-content"><div class="tl-label">Map cost curve + design pricing</div><div class="tl-detail">Commit cost model and board one-pager to <code>03-the-margin/</code></div></div></div>
+    <div class="tl-item"><div class="tl-dot">M4</div><div class="tl-content"><div class="tl-label">Build trust infrastructure</div><div class="tl-detail">Commit golden dataset spec and reliability contract to <code>04-the-contract/</code></div></div></div>
+    <div class="tl-item"><div class="tl-dot">M5</div><div class="tl-content"><div class="tl-label">Design guardrails + audit</div><div class="tl-detail">Commit compounding system, governance policy, shadow AI audit to <code>05-the-guardrails/</code></div></div></div>
+    <div class="tl-item"><div class="tl-dot" style="background:#34d399;">M6</div><div class="tl-content"><div class="tl-label">Assemble, evaluate, pitch</div><div class="tl-detail">Finalize <code>README.md</code>, build roadmap in <code>06-the-pitch/</code>, present to the room</div></div></div>
+  </div>
+
+  <h2>The Pitch (Module 6)</h2>
+  <p>In the final session, you present your strategy to the class. The class acts as your board of directors. No slides — you present directly from your repo.</p>
+
+  <h3>Format</h3>
+  <p><strong>5 minutes to present</strong> your strategy: the bet, the moat, the margin, the trust architecture, the governance approach, and the roadmap. <strong>3 minutes of Q&A</strong> from the room — your classmates ask the hardest questions they can think of.</p>
+
+  <h3>What Good Looks Like</h3>
+  <p>A README.md that a colleague could read cold and understand the complete strategy without opening any sub-folders. A narrative that leads with the problem and the user — not the technology. A roadmap with clear horizons, kill criteria for H2 bets, and at least one H3 experiment.</p>
+
+  <h2>What You Submit</h2>
+
+  <div class="submit-box">
+    <div class="submit-label">Submission</div>
+    <p><strong style="color:#fff; font-size:18px;">Your GitHub repo link</strong></p>
+    <p>One URL. Everything inside it. Version-controlled, portable, yours to keep.</p>
+  </div>
+
+  <h2>Evaluation Criteria</h2>
+  <p>Your strategy is evaluated across six dimensions — the same lenses you learned in Modules 1 through 5, plus the overall narrative.</p>
+
+  <div class="rubric-grid">
+    <div class="rubric-item">
+      <div class="rubric-label" style="--rc:#3b82f6;">Bet Clarity</div>
+      <div class="rubric-text">Is the product bet specific? Evidence-backed thesis, named target user, clear "why now." Not vague aspirations.</div>
+    </div>
+    <div class="rubric-item">
+      <div class="rubric-label" style="--rc:#58a6ff;">Defensibility</div>
+      <div class="rubric-text">Honest moat assessment with compounding loops — not just "we have data." Kill switch shows vendor optionality.</div>
+    </div>
+    <div class="rubric-item">
+      <div class="rubric-label" style="--rc:#d29922;">Economics</div>
+      <div class="rubric-text">Cost model with real numbers. Pricing strategy that matches the value archetype. Margin story that holds under stress.</div>
+    </div>
+    <div class="rubric-item">
+      <div class="rubric-label" style="--rc:#bc8cff;">Trust Architecture</div>
+      <div class="rubric-text">Golden dataset spec with adversarial cases. Confidence UX tiers. Reliability contract with explicit promises.</div>
+    </div>
+    <div class="rubric-item">
+      <div class="rubric-label" style="--rc:#f85149;">Governance</div>
+      <div class="rubric-text">Compounding system (not just scaling). Agent boundaries defined. Shadow AI acknowledged and triaged.</div>
+    </div>
+    <div class="rubric-item">
+      <div class="rubric-label" style="--rc:#34d399;">Narrative & Roadmap</div>
+      <div class="rubric-text">README tells a coherent story. Three-horizon roadmap with kill criteria. M1 vs. M6 baseline shows growth.</div>
+    </div>
+  </div>
+
+  <h2>FAQ</h2>
+  <div class="faq">
+    <div class="faq-item">
+      <div class="faq-q">Do I need to know how to code?</div>
+      <div class="faq-a">No. The repo uses markdown files (plain text with simple formatting). GitHub's web editor works fine — no terminal or coding required. The prototype in M1 uses AI tools that generate code for you.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">What if I miss a session?</div>
+      <div class="faq-a">Each module's template has clear prompts and instructions. You can complete missed components on your own using the interactive tools and the slides. The repo template guides you through every exercise.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Do I work on a real product or a hypothetical?</div>
+      <div class="faq-a">A real product at your company. The exercises are designed to produce artifacts you can actually use at work. Hypotheticals produce weaker strategies and less useful feedback from partners.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Can I keep the repo after the course?</div>
+      <div class="faq-a">Yes — it's yours. The repo lives in your GitHub account permanently. You can continue updating it, share it with colleagues, or use it as a template for future strategy work.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">What do I need before the first class?</div>
+      <div class="faq-a">Free accounts on: (1) GitHub, (2) one AI prototyping tool — we recommend v0.dev, and (3) one AI chat tool like ChatGPT or Claude. That's it. Everything else runs in your browser.</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
