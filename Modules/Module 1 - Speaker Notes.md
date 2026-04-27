@@ -215,16 +215,13 @@ This is what separates builders from deck-makers. Fifteen minutes. Go. I'll be w
 
 OK lets bring it together. Look at what you accomplished today. Seriously, take a second to appreciate this. Look at your `01-the-bet/` folder in your repo. You should have `diagnostic.md` with your scores, your vulnerability, and your killer memo. And you should have `prototype.md` with your prototype link. Both committed.
 
-That right there? That's Component 1 of your living strategy. It's real, it's in version control, and it grows every session. This repo is yours — it's not a class exercise that disappears when the course ends. By Module 6, you'll be presenting from it. And it'll look completely different from what it looks like right now, in the best way.
-
- Two hours ago most of you walked in not sure what to expect, and now you've got a vulnerability scorecard, a killer memo, and a working prototype — all committed to a repo. 
+That right there? That's Component 1 of your living strategy. It's real, it's in version control, and it grows every session. This repo is yours — it's not a class exercise that disappears when the course ends. By Module 6, you'll be presenting from it. And it'll look completely different from what it looks like right now, in a better way.
 
 ### Slide 26 — Bridge to M2
 
 For next time — make sure your repo has `01-the-bet/` committed with everything from today. That's your carry-forward. Don't skip this part — Module 2 builds directly on what you did today.
 
-And heres the question that's going to keep you up at night until Module 2: can anyone copy what you just built in six months? Because Module 2 is all about data flywheels, vendor risk, and what happens when someone decides to eat your lunch. If the killer memo exercise made you a little nervous, good — Module 2 is where we figure out what to do about it. One session down, five to go. 
-
+And heres the question that's going to keep you up at night until Module 2: can anyone copy what you just built in six months? Because Module 2 is all about data flywheels, vendor risk, and what happens when someone decides to eat your lunch. If the killer memo exercise made you a little nervous, good — Module 2 is where we figure out what to do about it.
 
 ### Slide 27 — Takeaways
 
@@ -234,16 +231,16 @@ Heres where it gets interesting. Their first version was rough. The outputs were
 
 Now — did Gamma have a moat? Honestly, not much. The core technology is the same LLM everyone else has access to. Any team could build "AI slides" in a weekend. And they knew it. They scored themselves honestly on that axis and instead of pretending they had a defensible position, they leaned into speed. They iterated on templates, user patterns, and distribution faster than anyone else could copy them. Thats takeaway two: **score your vulnerability honestly.** Gamma didn't lie to themselves about their moat score. They used that honesty to pick the right strategy — speed over defensibility. The teams that get in trouble are the ones who give themselves all fives and then get blindsided.
 
-And heres the part I love most. Gamma's first prototype took days, not months. It wasn't a strategy deck about AI presentations — it was an actual AI presentation tool. Rough, imperfect, but real. And because it existed, they could put it in front of users immediately and learn. Every insight they got came from the prototype, not from a research report. Thats takeaway three: **build to think, commit to learn.** You just did the same thing in fifteen minutes. A working prototype beats a strategy deck every time. And now yours lives in a repo — version-controlled, shareable, alive. Thats what separates builders from deck-builders.
+And heres the part I love most. Gamma's first prototype took days, not months. It wasn't a strategy deck about AI presentations — it was an actual AI presentation tool. Rough, imperfect, but real. And because it existed, they could put it in front of users immediately and learn. Every insight they got came from the prototype, not from a research report. Thats takeaway three: **build to think, commit to learn.** You just did the same thing in fifteen minutes. A working prototype beats a strategy deck every time. And now yours lives in a repo — version-controlled, shareable, alive. Thats what separates builders from deck-makers.
 
 ### Slide 30 — Extra Practice
-If you want to go deeper, two optional exercises. First — rewrite your killer memo with a different platform attacker. If you wrote it from Google's perspective, try Apple. Does the attack vector change? That tells you something important about where your vulnerability actually is. Second — flesh out your repo. Review your `01-the-bet/` files, fill in any placeholders you skipped in class, update the top-level README with your bet summary, and commit. Next session is Module 2 — The Moat. You can build fast. Now — can anyone copy it?
+If you want to go deeper, two optional exercises. First — rewrite your killer memo with a different platform attacker. If you wrote it from Google's perspective, try Anthropic. Does the attack vector change? That tells you something important about where your vulnerability actually is. Second — flesh out your repo. Review your `01-the-bet/` files, fill in any placeholders you skipped in class, update the top-level README with your bet summary, and commit. Next session is Module 2 — The Moat. You can build fast. Now — can anyone copy it?
 
 ### Slide 31 — Survey
 
-Last thing — there's a quick survey, takes about sixty seconds. QR code is on the screen, I'll also drop the link in Slack. Your feedback really does help me make the next session better. I read every single response, I'm not just saying that.
+Last thing — there's a quick survey, takes about sixty seconds. Link is in the slide and I'm aslo sharing it in the chat. Your feedback really does help me make the next session better. Help us.
 
-And if you want to share — what's one thing that surprised you today? Drop it in the survey or tell me on the way out. 
+And if you want to share — what's one thing that surprised you today? Drop it in the survey as well 
 
 ### Slide 32 — Q&A
 
