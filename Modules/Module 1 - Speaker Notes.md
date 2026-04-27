@@ -178,8 +178,6 @@ Now the fun part. I love this exercise. I want you to write a killer memo. Three
 
 Three minutes, silent. Write it as if you're that person. Outside-in perspective catches blind spots that your own self-scores miss every time.  When you're done — post them in Slack. I'd love to see some of them.
 
-Who wants to read their attack? Don't be shy — the best ones are always a little painful to read out loud.
-
 ### Slide 23 — Prototype Lab
 Alright, heres where it gets real. This is the hands-on lab section — The Prototype Bet. Everything weve talked about today — probabilistic thinking, vulnerability, speed — it all comes together right now. 
 
