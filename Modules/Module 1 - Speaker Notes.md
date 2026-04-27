@@ -54,7 +54,7 @@ OK so heres my question for you: which of these shifts have you felt most in you
 ### Slide 6 — Which Are You?
 Alright, lets see who's in the room. There are really two paths here — you're either bolting AI onto an existing product, or you're building something AI-native from the ground up. The good news is, the frameworks we're using work for both. I've been on both sides of this and honestly, the bolt-on path is harder in some ways because you're fighting existing assumptions the whole time.
 
-please post in the chate who's bolting on, who's building native? Great, good mix. One ground rule though: I need you working on a real product at your company for the exercises today. Not a startup fantasy, not a side project — the thing you actually go to work and deal with every day. I know that feels a little exposing but that's what makes this useful. Trust me on this one.
+please post in the chate who's bolting on, who's building native? One ground rule though: I need you working on a real product at your company for the exercises today. Not a startup fantasy, the thing you actually go to work and deal with every day. I know that feels a little exposing but that's what makes this useful. Trust me on this one.
 
 ### Slide 7 — CEO Question
 OK heres what I want you to do. Imagine your CEO/CPO or VP or Product stops you in the hallway tomorrow and says, "What's our AI strategy?" I want you to write your answer. Three sentences, no polish, just what you'd actually say. You've got three minutes. This is private — nobody's reading it.
@@ -65,12 +65,13 @@ Don't overthink it. Seriously, I just want to capture where your head is right n
 Alright, lets have some fun. I'm going to throw some claims at you and I want you to vote on each one before I give you the answer. Ready?
 
 "The best product wins." True or false? Hands up for true. Hands up for false. Interesting.
+The best product doesn't win if a platform copies you overnight. Moats matter, and we'll dig deep into that in Module 2.
 
 "AI product outcomes are predictable with enough data." True or false?
+Outcomes are distributions, not fixed points — some of the biggest AI wins came from entirely new behaviors that nobody predicted.
 
 "Traditional discovery timelines still apply." True or false?
-
-Heres the thing — all three are false. The best product doesn't win if a platform copies you overnight. Moats matter, and we'll dig deep into that in Module 2. Outcomes are distributions, not fixed points — some of the biggest AI wins came from entirely new behaviors that nobody predicted. And discovery that used to take six to eight weeks can now run in days with AI-assisted research loops. Your competitors are not going to wait for your research timeline.
+discovery that used to take six to eight weeks can now run in days with AI-assisted research loops. Your competitors are not going to wait for your research timeline.
 
 I know some of that is uncomfortable. Good. Thats the point. Better to feel it here than in a quarterly review.
 
