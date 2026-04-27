@@ -108,7 +108,6 @@ Alright, quick  exercise. think for thirty seconds — and then post in the chat
 Let me walk you through the Notion case.
 Heres the arc: the Bet, the Crack, the Correction. Notion saw AI coming, placed the bet early, moved fast. Then they found the crack — the first approach wasn't working the way they expected. And instead of doubling down or pretending everything was fine, they corrected quickly. The weapon here was time — speed of learning, not perfection of planning. They didn't have a better plan than anyone else. They just learned faster. And honestly, thats the whole thesis of this course in one case study.
 
-So heres my question: which pace matches you right now? Are you moving at Notion speed, or are you still in research-first mode? Lets be honest. I'd love to hear from two or three of you. What does your pace actually look like? Don't tell me what you wish it was — tell me what it is  right now.
 
 ### Slide 14 — Archetypes
 OK so this is one of my favorite frameworks. I genuinely get excited about this one. Your AI product's archetype drives everything — your margins, your governance model, what "good" even looks like. And I see teams skip this step all the time and then wonder why their economics don't work or their eval metrics feel meaningless.
