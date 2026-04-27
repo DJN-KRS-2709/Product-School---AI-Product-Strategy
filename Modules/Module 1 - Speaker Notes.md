@@ -140,7 +140,7 @@ Let me calibrate with some companies you know. Figma built such deep workflow in
 
 ### Slide 19 — Live Diagnosis
 
-Before you score yourselves, let me demystify this rubric by doing it live on a product we all know. Shout one out what should be the product — Notion, Figma, Linear, or Slack? Heres the scenario: Apple, Google, or OpenAI ships a native version of this product's core feature tomorrow. Then what? Lets score it together. Shout out your moat score. Data advantage. Platform risk. Don't worry if we disagree — messy is good. The argument IS the learning. 
+Before you score yourselves, let me demystify this rubric by doing it live on a product we all know. Shout one out what should be the product — Notion, Figma, Linear, or Slack? Heres the scenario: Apple, Google, or OpenAI ships a native version of this product's core feature tomorrow. Then what? Lets score it together.  
 
 **If the room picks Notion:**
 Moat — I'd say 3, maybe 4. Deep workflow gravity once teams build their whole wiki there. But the editor itself? Google Docs and Microsoft Loop are closing fast, and AI writing assistants are commoditizing the core. Switching cost is real but not impossible — people do migrate. Data Advantage — solid 4. They see how teams organize knowledge, what gets linked, what gets searched. That's proprietary signal that OpenAI doesn't have. Platform Risk — 3. Apple Intelligence in Notes, Google Gemini in Docs, Microsoft Copilot in OneNote — all of them are gunning for "AI-powered workspace." Notion's bet is that depth of integration and the knowledge graph keep people locked in. The risk is that "good enough AI" in a tool you already pay for wins.
