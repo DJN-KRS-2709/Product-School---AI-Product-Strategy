@@ -40,7 +40,7 @@ Heres the full outline. Six modules, each one building on the last. Module 1 is 
 
 Before we get into the content, let me show you where all of this is going. Your final deliverable for this course is a Living Strategy Repo — a GitHub repository that you'll build one component at a time across all six sessions. Today you'll add the vulnerability diagnostic and a working prototype. Next session you'll add your data flywheel and kill switch. And so on — every module adds a layer.
 
-In Module 6, you assemble everything into one cohesive story and pitch it to the room. The class plays your board of directors. No slides, no deck — you present directly from your repo. Five minutes to pitch, three minutes of Q&A where your classmates ask the hardest questions they can think of.
+In Module 6, you assemble everything into one cohesive story and pitch it to the room. The class plays your board of directors. Five minutes to pitch, three minutes of Q&A where your classmates ask the hardest questions they can think of.
 
 The repo is yours to keep after the course. It's version-controlled, shareable, and portable. You can hand it to a colleague, open it in a board meeting, or use it as a template for future strategy work. This isn't homework — it's the most useful thing you'll build all year. And the best part? You don't have to cram at the end. If you do the work each session, by M6 you're just polishing, not building from scratch. Alright, lets get into it.
 
