@@ -209,7 +209,7 @@ Third — iterate, don't restart. If the first result is 60% right, steer it. "M
 
 and If you don't have an account for any of those tools, pair up with someone who does. When you have your link, paste it into `01-the-bet/prototype.md` in your repo and commit. The prototype now lives in your strategy repo — it's not a browser tab you're going to lose tomorrow.
 
-This is what separates builders from deck-builders. Fifteen minutes. Go. I'll be walking around if anyone gets stuck.
+This is what separates builders from deck-makers. Fifteen minutes. Go. I'll be walking around if anyone gets stuck.
 
 ### Slide 25 — Synthesis
 
