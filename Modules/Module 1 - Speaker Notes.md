@@ -174,7 +174,7 @@ Take sixty seconds by yourself first to think about who that competitor might be
 
 ### Slide 22 — Killer Memo
 
-Now the fun part. I love this exercise. I want you to write a killer memo. Three sentences. You are the head of AI at a major platform — Google, Apple, Microsoft, OpenAI, whoever makes sense for your space. And you're writing the internal memo about why you're going to kill this product. Put yourself in their shoes. What do they see when they look at your product? Opportunity, that's what.
+Now the fun part. I love this exercise. I want you to write a killer memo. Three sentences. You are the head of AI at a major platform — Google, Anthropic, Microsoft, OpenAI, whoever makes sense for your space. And you're writing the internal memo about why you're going to kill this product. Put yourself in their shoes. What do they see when they look at your product? Opportunity, that's what.
 
 Three minutes, silent. Write it as if you're that person. Outside-in perspective catches blind spots that your own self-scores miss every time.  When you're done — and if we have time — I'd love to hear a sentence or two from a couple of volunteers.
 
