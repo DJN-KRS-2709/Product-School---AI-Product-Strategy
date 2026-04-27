@@ -122,8 +122,7 @@ Amazing work so far. Seriously — you've covered a lot of ground and I can tell
 Welcome back! Quick reminder — cameras on, please. I know it feels like a small thing but it makes a real difference.
 
 ### Slide 17 — Fork Repo
-Alright, first thing — lets get your workspace set up. I'm dropping the template repo link in the chat https://djn-krs-2709.github.io/Product-School---AI-Product-Strategy/Modules/Strategy%20Repo%20Template.html 
-
+Alright, first thing — lets get your workspace set up. I'm dropping the template repo link in the chat https://github.com/DJN-KRS-2709/ai-product-strategy-template/generate
 Heres what you're going to do: click "Use this template" on GitHub, give it a name, and  and click on Create Repo.  now you can copy your repo and use any tool you want: terminal, cursor, lovable, whatever you want.
 
 If you don't have a GitHub account, no stress — pair up with someone who does. You can set up your own account after class. But heres the important thing I want you to understand: this repo is the anchor artifact for the entire course. Everything you build from today forward goes here. It travels with you after the course ends. By Module 6, you're presenting from this repo. So it's not homework — it's your living strategy. Think of it like a product you're building for yourself.
