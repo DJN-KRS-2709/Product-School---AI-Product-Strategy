@@ -33,8 +33,15 @@ I think by now, a lot of you folks could do the introduction for me. So I will k
 
 Before Spotify, I worked at SoundCloud, where we built an insights and analytics platform from scratch. I also launched Fan-Powered Royalties — a completely new way of paying artists on a streaming service. Ive been at Spotify for 4.5 years now. To help with the mission to unlock human creativity by giving a million artists the opportunity to live off the art and a billion fans to be inspired by it. But enough about me — Id love to get to know you. Drop your name, role, and at least one fun fact in Slack or the chat. The more we know about each other, the better we can learn together.
 
-### Slide 4 — Syllabus
-Heres the full outline. Six modules, each one building on the last. Module 1 is today — The Bet. You'll diagnose where strategy breaks and build your first prototype. Module 2 is The Moat — can anyone copy you? Module 3 is The Margin — does this make money? Module 4 is The Contract — trust and reliability. Module 5 is The Guardrails — what breaks at scale? And Module 6 is The Pitch — you assemble everything and present it. Each session adds a component to your living strategy repo. By the end, you dont have a deck — you have a version-controlled strategy you can actually use at work.
+### Slide 4 — Course Arc
+Heres the full journey. Six modules, six big questions. Today is just the first one — "The Bet." Let me trace the arc real quick so you know where we're headed.
+
+Module 1 is today — The Bet. You'll diagnose where strategy breaks and build your first prototype. Module 2 is The Moat — can anyone copy you? Module 3 is The Margin — does this make money? Module 4 is The Contract — trust and reliability. Module 5 is The Guardrails — what breaks at scale? And Module 6 is The Pitch — you assemble everything and present it. Each session adds a component to your living strategy repo. By the end, you dont have a deck — you have a version-controlled strategy you can actually use at work.
+
+But the thing I really want you to hold onto is this: across all six sessions, you're building a living strategy in a GitHub repo. Not a browser tool, not a worksheet — a real version-controlled repo. I chose GitHub deliberately because strategy docs that live in Google Docs get forgotten. Strategy in a repo gets versioned, diffed, and evolved. By Module 6, your repo IS your strategy. That's the artifact you could walk into a board meeting with. Pretty cool, right? And the best thing is you can create an output of your strategy for individual audiences.
+- You want to pitch it to the board? Extract.
+- You want to pitch it to the team? Extract.
+Use the right language for the right audience.
 
 ### Slide 5 — Final Project
 
@@ -74,16 +81,6 @@ Outcomes are distributions, not fixed points — some of the biggest AI wins cam
 discovery that used to take six to eight weeks can now run in days with AI-assisted research loops. Your competitors are not going to wait for your research timeline.
 
 I know some of that is uncomfortable. Good. Thats the point. Better to feel it here than in a quarterly review.
-
-### Slide 9 — Course Arc
-Let me show you the full journey. There are six modules, six big questions. Today is just the first one — "The Bet." Let me trace the arc real quick so you know where we're headed.
-
-Module 1 is about diagnosing your bet. Module 2 asks whether anyone can copy you. Module 3 is the economics reality check. Module 4 is about trust and evaluation. Module 5 is the planning cadence. And Module 6 is where you put it all together and present.
-
-But the thing I really want you to hold onto is this: across all six sessions, you're building a living strategy in a GitHub repo. Not a browser tool, not a worksheet — a real version-controlled repo. I chose GitHub deliberately because strategy docs that live in Google Docs get forgotten. Strategy in a repo gets versioned, diffed, and evolved. By Module 6, your repo IS your strategy. That's the artifact you could walk into a board meeting with. Pretty cool, right?best thing is you can create an output of your strategy for individual audiences.
-- You want to pitch it to the board? Extract.
-- You want to pitch it to the team? Extract.
-Use the right language for the right audience
 
 ### Slide 10 — Annual Cycles
 How many of you still have a frozen annual roadmap for your AI bets? and I get it — your org plans that way. Everyone's org plans that way. But heres the reality: you cannot commit to Q3 deliverables when the underlying model might change three times between now and then.

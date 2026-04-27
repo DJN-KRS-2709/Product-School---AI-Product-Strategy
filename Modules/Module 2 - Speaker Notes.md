@@ -24,7 +24,7 @@ OK so today we're going to find out if anyone can copy what you're building in s
 
 Same ground rules as Module 1. Cameras on, be present, use Slack for questions. One thing I'll add for today: the exercises are more intense than M1. When I say "be honest with your scores," I really mean it. Generous scores only hurt you when your partner tries to attack your flywheel later. Trust the process.
 
-### Slide 3 — Syllabus
+### Slide 3 — Course Arc
 
 Quick look at where we are in the course. Module 1 was The Bet — you diagnosed your vulnerability. Today is Module 2 — The Moat. Can anyone copy what you're building? After today we move into economics, trust, governance, and the final pitch. Each module adds a component to your living strategy. Todays the one where you find out if your strategy has staying power.
 

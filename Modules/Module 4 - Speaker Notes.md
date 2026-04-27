@@ -20,7 +20,7 @@ Alright, welcome back everyone. Today has three waypoints — Define, Measure, a
 
 Same ground rules. Cameras on, Slack for questions. Today we're doing three learn-then-do cycles instead of front-loading theory. So the pace is different — you'll build something within minutes of learning a concept. Stay sharp, it moves fast.
 
-### Slide 3 — Syllabus
+### Slide 3 — Course Arc
 
 Quick look at where we are. Modules 1 through 3 covered your bet, your moat, and your margins. Today is Module 4 — The Contract. Trust and reliability. After today we have governance and the capstone pitch. Were in the back half now and the artifacts are getting more specific.
 

@@ -12,7 +12,7 @@ The first half is concept-heavy, but we break it up with a Klarna case study and
 
 The second half is almost entirely hands-on: cost curve, pricing design, peer stress-test, and the board one-pager. Thats where the real output gets created and honestly, thats where the energy picks back up after a math-heavy morning.
 
-On the opening Expectations and Syllabus slides, Im keeping it to quick orientation — I just want to show you that there are two big applied blocks after the break so you know the lecture portion is front-loaded and it gets hands-on from there. Nobody wants to hear "trust me, it gets interactive later" without seeing the agenda. So I show it.
+On the opening Expectations and Course Arc slides, Im keeping it to quick orientation — I just want to show you that there are two big applied blocks after the break so you know the lecture portion is front-loaded and it gets hands-on from there. Nobody wants to hear "trust me, it gets interactive later" without seeing the agenda. So I show it.
 
 ---
 
@@ -24,7 +24,7 @@ Alright, welcome back everyone. This session is calmer than the first two, but I
 
 Same ground rules. Cameras on, Slack for questions, be present. Today's a math-heavy session, which I know isn't everyone's favorite. But I promise it's the kind of math that changes how you think about your product. And the tools do most of the number-crunching for you.
 
-### Slide 3 — Syllabus
+### Slide 3 — Course Arc
 
 Quick orientation. Module 1 was The Bet, Module 2 was The Moat, and today is Module 3 — The Margin. We're at the halfway point. After today we move into trust, governance, and the capstone. Everything from the first two modules feeds into what we're doing today — your flywheel scores and your kill switch audit both show up in the cost model.
 

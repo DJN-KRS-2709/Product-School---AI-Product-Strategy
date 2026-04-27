@@ -26,9 +26,9 @@ Heres the big idea for today: a roadmap is not a strategy. I know that sounds ob
 
 We're on Module 6, you know the drill by now. Quick housekeeping and we're in. Lets make this last one count.
 
-### Slide 3 -- Syllabus
+### Slide 3 -- Course Arc
 
-Quick overview of where we are. The capstone simulation is the main event today -- everything else builds toward that moment. Think of the first half as loading the cannon and the simulation as firing it.
+Quick overview of where we are. The capstone simulation is the main event today -- everything else builds toward that moment. Think of the first half as loading the cannon and the simulation as firing it. Note: this is the forward-looking arc with M6 highlighted; the elaborate "Complete Journey" recap with checkmarks comes later in the deck (Slide 5).
 
 ### Slide 4 -- Recall
 

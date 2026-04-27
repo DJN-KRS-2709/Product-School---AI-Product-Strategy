@@ -22,7 +22,7 @@ Alright, welcome to Module 5. We're making a big shift today — product to org.
 
 Same ground rules — cameras on, Slack for questions. Today's session covers both product and organizational scale, so the scope is wider than previous modules. Some of the exercises might feel uncomfortably real — the shadow AI audit in particular tends to surface things people didn't expect. Thats the point.
 
-### Slide 3 — Syllabus
+### Slide 3 — Course Arc
 
 Quick look at the map. Modules 1 through 4 are done — bet, moat, margin, contract. Today is Module 5 — The Guardrails. After today, the only thing left is Module 6 where you assemble everything and pitch. So this is the last building module. Make it count.
 
