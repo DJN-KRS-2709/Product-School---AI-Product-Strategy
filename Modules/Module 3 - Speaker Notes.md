@@ -4,7 +4,7 @@
 
 This is the money module. Module 1 diagnosed where youre vulnerable, Module 2 built the defense. Now were asking a totally different question — does any of this actually make money? And the vibe shifts here. Modules 1 and 2 were about threat and defensibility, which gets the adrenaline going. This one is about math. And math creates a different kind of discomfort, the quiet kind where you realize you maybe should have looked at these numbers six months ago. Most of you have never calculated your AI cost per user. I know because I ask every cohort and the room always goes quiet. That gap between "I think were fine" and the actual number — thats where the learning happens today.
 
-By the end youll walk out with three artifacts committed to your repo under `03-the-margin/cost-curve.md`: a cost curve, a pricing strategy, and a board-ready one-pager. Real math you can drop into a spreadsheet or a board deck on Monday. Not theory.
+By the end youll walk out with three artifacts: a cost curve, a pricing strategy, and a board-ready one-pager. Those plus the interactive tools — the Margin Calculator and the Pricing Strategy Designer — give you something you can actually use at work on Monday. Not theory. Real math you can drop into a spreadsheet or a board deck.
 
 ### The flow and why its structured this way
 
@@ -96,9 +96,11 @@ This is the last activity before the Margin Calculator, so after this its all ha
 
 This is where abstract becomes concrete and honestly, this is my favorite part of the module. Heres what I want you to do — grab a sticky note, write your gross margin percentage on it, and hold it up. Nobody has to shout a number but everyone gets to see the range. Thats the point. Last cohort, the range was something like 12% to 78%. The room got very quiet after that.
 
-Walk them through the six-line table on screen — requests per user, cost per request, COGS per user, revenue, gross margin, gross margin %. Then run the stress column live: 3x the cost per request and watch what happens to the bottom row. Thats the whole demo. The point isnt precision, its the structure — if they can fill these six lines for their product, they know more about their AI economics than 90% of PMs.
+Lets walk through the math together on screen. Theres an interactive tool linked on this slide — open the Margin Calculator, plug in your numbers, and it auto-calculates everything including the stress tests. Way faster than doing it by hand, and you can export the results.
 
-The link at the bottom of the slide drops them straight into `03-the-margin/cost-curve.md` in their repo template. Tell them to keep that tab open — theyll be filling the same six lines for their own product in a few minutes.
+Now, below the stress tests theres a Scenario Lab panel. This is where it gets really fun. Once youve entered your base numbers, three sliders appear: inference cost multiplier, usage volume multiplier, and cascading ratio — thats the percentage routed to a cheap model. As you drag those sliders, a live chart shows your margin curve across different cost scenarios, with your current position marked by a dot.
+
+This is the "what if" playground. You can immediately see that cascading 60% of requests to a cheap model turns a negative-15% stress scenario into a positive-30% margin. The chart makes the economic argument for model routing viscerally obvious — you dont need me to convince you, the math does it. So play with that cascading slider and watch what happens to your margin curve. I promise youll have an "oh" moment.
 
 ### Slide 14 — Break
 
@@ -124,7 +126,7 @@ OK this is where "Product-Market-Pricing Fit" lands and I love this framework. W
 
 Let me tell you about GitHub Copilot for a second because its a perfect proof point. $19 per user. Thats 4.75x a typical SaaS seat. And nobody blinks. Why? Because developers complete tasks 55% faster. The price isnt justified by features — its justified by outcome. When someone saves an hour a day, $19 is a rounding error. Thats the kind of value-based pricing that works. The question is: can you make the same argument for your product?
 
-The link at the bottom drops them back into `03-the-margin/cost-curve.md` — same file as the cost curve exercise, theyre just filling the pricing section now. And remember — hybrid strategies and archetypes are lenses, not playbooks. The right structure is the one that fits your buyers mental model and how value shows up in their world. Dont force a framework. Let the buyer tell you what makes sense.
+Theres a Pricing Strategy Designer tool linked on this slide if you want the full guided experience. And remember — hybrid strategies and archetypes are lenses, not playbooks. The right structure is the one that fits your buyers mental model and how value shows up in their world. Dont force a framework. Let the buyer tell you what makes sense.
 
 ### Slide 19 — Stress Test
 
@@ -144,9 +146,9 @@ Heres the key reframe I want you to internalize, because this trips up even expe
 
 ### Slide 22 — Synthesis
 
-Lets tie it all back to where we started. Remember slide 5? The three security blankets — costs come down, seat pricing works, scale fixes everything? Look at what you know now. Margin compression is the default for AI products. But now you have the levers — cascading, routing, pricing model, bundling — and you have the artifacts — cost curve, pricing strategy, board one-pager — to actually do something about it. Thats not theory. Thats a toolkit.
+Lets tie it all back to where we started. Remember slide 5? The three security blankets — costs come down, seat pricing works, scale fixes everything? Look at what you know now. Margin compression is the default for AI products. But now you have the levers — cascading, routing, pricing model, bundling — and you have the artifacts — cost curve, pricing strategy, board one-pager — to actually do something about it. Thats not theory. Thats a toolkit. Lets lock in Component 3.
 
-This is the moment to lock in Component 3. `03-the-margin/cost-curve.md` should now contain your cascade map, blended COGS per user, pricing structure, margin under stress, and the board before/after. Commit it. Three folders done in your repo. Halfway through the course and your living strategy is starting to look like a real strategy.
+Once youve finalized Component 3, pull it into the Living Strategy Builder. Your margin percentage, revenue per user, and pricing strategy all show up in the dashboard. The Living Strategy now has a live cost curve with sliders — you can keep playing with scenarios after class to find the pricing model that actually works. Its pretty satisfying to see all three components side by side. Your strategy is starting to look like a real strategy.
 
 ### Slide 23 — Bridge to M4
 
@@ -166,7 +168,7 @@ Three things to hold onto. First — AI products compress margins from 80% to 40
 
 ### Slide 27 — Extra Practice
 
-Two optional exercises that both live in `03-the-margin/cost-curve.md`. First — re-run the cascading ratio at 60/40, 70/30, 80/20 and find the split that turns your worst stress case positive. Commit the update. Second — redesign your pricing as outcome-based, Intercom Fin-style, per-resolution or per-output. Update the pricing section and commit. The more real the numbers, the more useful this artifact becomes. Next session: Module 4 — The Contract. Economics without trust doesnt convert.
+Two optional exercises. First — run three more scenarios in the Margin Calculator with different cascading ratios and see where the break-even is. Second — refine your board one-pager with actual numbers from your provider's pricing page. The more real the numbers, the more useful this artifact becomes. Next session: Module 4 — The Contract. Economics without trust doesnt convert.
 
 ### Slide 28 — Survey
 

@@ -40,9 +40,9 @@ Heres the full outline. Six modules, each one building on the last. Module 1 is 
 
 Before we get into the content, let me show you where all of this is going. Your final deliverable for this course is a Living Strategy Repo — a GitHub repository that you'll build one component at a time across all six sessions. Today you'll add the vulnerability diagnostic and a working prototype. Next session you'll add your data flywheel and kill switch. And so on — every module adds a layer.
 
-In Module 6, you assemble everything into one cohesive story and pitch it to the room. The class plays your board of directors. No slides, no deck — you present directly from your repo. Five minutes to pitch, three minutes of Q&A where your classmates ask the hardest questions they can think of.
+In Module 6, you assemble everything into one cohesive story and pitch it to the room. The class plays your board of directors. Five minutes to pitch, three minutes of Q&A where your classmates ask the hardest questions they can think of.
 
-The repo is yours to keep after the course. It's version-controlled, shareable, and portable. You can hand it to a colleague, open it in a board meeting, or use it as a template for future strategy work. This isn't homework — it's the most useful thing you'll build all year. And the best part? You don't have to cram at the end. If you do the work each session, by M6 you're just polishing, not building from scratch. Alright, lets get into it.
+The repo is yours to keep after the course. It's version-controlled, shareable, and portable. You can hand it to a colleague, open it in a board meeting, or use it as a template for future strategy work. And the best part? You don't have to cram at the end. If you do the work each session, by M6 you're just polishing, not building from scratch. Alright, lets get into it.
 
 ### Slide 6 — The Premise
 OK so this is the opening thesis for the entire course, and I want you to really sit with this table because we're going to keep coming back to it. Like, constantly.
@@ -54,7 +54,7 @@ OK so heres my question for you: which of these shifts have you felt most in you
 ### Slide 6 — Which Are You?
 Alright, lets see who's in the room. There are really two paths here — you're either bolting AI onto an existing product, or you're building something AI-native from the ground up. The good news is, the frameworks we're using work for both. I've been on both sides of this and honestly, the bolt-on path is harder in some ways because you're fighting existing assumptions the whole time.
 
-please post in the chate who's bolting on, who's building native? Great, good mix. One ground rule though: I need you working on a real product at your company for the exercises today. Not a startup fantasy, not a side project — the thing you actually go to work and deal with every day. I know that feels a little exposing but that's what makes this useful. Trust me on this one.
+please post in the chate who's bolting on, who's building native? One ground rule though: I need you working on a real product at your company for the exercises today. Not a startup fantasy, the thing you actually go to work and deal with every day. I know that feels a little exposing but that's what makes this useful. Trust me on this one.
 
 ### Slide 7 — CEO Question
 OK heres what I want you to do. Imagine your CEO/CPO or VP or Product stops you in the hallway tomorrow and says, "What's our AI strategy?" I want you to write your answer. Three sentences, no polish, just what you'd actually say. You've got three minutes. This is private — nobody's reading it.
@@ -65,12 +65,13 @@ Don't overthink it. Seriously, I just want to capture where your head is right n
 Alright, lets have some fun. I'm going to throw some claims at you and I want you to vote on each one before I give you the answer. Ready?
 
 "The best product wins." True or false? Hands up for true. Hands up for false. Interesting.
+The best product doesn't win if a platform copies you overnight. Moats matter, and we'll dig deep into that in Module 2.
 
 "AI product outcomes are predictable with enough data." True or false?
+Outcomes are distributions, not fixed points — some of the biggest AI wins came from entirely new behaviors that nobody predicted.
 
 "Traditional discovery timelines still apply." True or false?
-
-Heres the thing — all three are false. The best product doesn't win if a platform copies you overnight. Moats matter, and we'll dig deep into that in Module 2. Outcomes are distributions, not fixed points — some of the biggest AI wins came from entirely new behaviors that nobody predicted. And discovery that used to take six to eight weeks can now run in days with AI-assisted research loops. Your competitors are not going to wait for your research timeline.
+discovery that used to take six to eight weeks can now run in days with AI-assisted research loops. Your competitors are not going to wait for your research timeline.
 
 I know some of that is uncomfortable. Good. Thats the point. Better to feel it here than in a quarterly review.
 
@@ -107,12 +108,11 @@ Alright, quick  exercise. think for thirty seconds — and then post in the chat
 Let me walk you through the Notion case.
 Heres the arc: the Bet, the Crack, the Correction. Notion saw AI coming, placed the bet early, moved fast. Then they found the crack — the first approach wasn't working the way they expected. And instead of doubling down or pretending everything was fine, they corrected quickly. The weapon here was time — speed of learning, not perfection of planning. They didn't have a better plan than anyone else. They just learned faster. And honestly, thats the whole thesis of this course in one case study.
 
-So heres my question: which pace matches you right now? Are you moving at Notion speed, or are you still in research-first mode? Lets be honest. I'd love to hear from two or three of you. What does your pace actually look like? Don't tell me what you wish it was — tell me what it is  right now.
 
 ### Slide 14 — Archetypes
 OK so this is one of my favorite frameworks. I genuinely get excited about this one. Your AI product's archetype drives everything — your margins, your governance model, what "good" even looks like. And I see teams skip this step all the time and then wonder why their economics don't work or their eval metrics feel meaningless.
 
-Look at the five archetypes on the slide. UiPath is Automation — it does the work for you, full stop. GitHub Copilot is the Copilot archetype — it works alongside you, pair programming style. Palantir is Insight — it shows you what you couldn't see. Midjourney is Creation — it makes entirely new things that didn't exist before. Zapier AI is Orchestration — it connects and coordinates across systems.
+Look at the five archetypes on the slide. UiPath is Automation — it does the work for you, full stop. GitHub Copilot is the Copilot archetype — it works alongside you, pair programming style. Palantir is Insight the Oracle — it shows you what you couldn't see. Midjourney is Creation — it makes entirely new things that didn't exist before. Zapier AI is Orchestration — it connects and coordinates across systems.
 
 Now heres the important thing: these five are a thinking tool, not a taxonomy. Most products blend two or three. I spent way too long trying to force one of my own products into a single archetype before I realized it was legitimately two. The point is knowing which archetype's economics and trust profile dominates your product, because that shapes everything from your pricing model in Module 3 to your eval design in Module 4. So figure out your primary, maybe your secondary, and be honest about what doesn't fit.
 
@@ -140,11 +140,7 @@ Let me calibrate with some companies you know. Figma built such deep workflow in
 
 ### Slide 19 — Live Diagnosis
 
-Before you score yourselves, let me demystify this rubric by doing it live on a product we all know. Shout one out what should be the product — Notion, Figma, Linear, or Slack? Heres the scenario: Apple, Google, or OpenAI ships a native version of this product's core feature tomorrow. Then what?
-
-We're going to score it together on all three axes from the previous slide — Contextual Moat, Data Advantage, and Platform Exposure — 1 to 5 on each. Shout out a number for Moat. Then Data Advantage. Then Platform Exposure. Don't worry if we disagree — messy is good. The argument IS the learning.
-
-Use the cheat sheet below as your fallback if the room goes quiet — it has my own rough scores across all three axes for each of the four products, so you can prime the discussion or check your gut against it.
+Before you score yourselves, let me demystify this rubric by doing it live on a product we all know. Shout one out what should be the product — Notion, Figma, Linear, or Slack? Heres the scenario: Apple, Google, or OpenAI ships a native version of this product's core feature tomorrow. Then what? Lets score it together.  
 
 **If the room picks Notion:**
 Moat — I'd say 3, maybe 4. Deep workflow gravity once teams build their whole wiki there. But the editor itself? Google Docs and Microsoft Loop are closing fast, and AI writing assistants are commoditizing the core. Switching cost is real but not impossible — people do migrate. Data Advantage — solid 4. They see how teams organize knowledge, what gets linked, what gets searched. That's proprietary signal that OpenAI doesn't have. Platform Risk — 3. Apple Intelligence in Notes, Google Gemini in Docs, Microsoft Copilot in OneNote — all of them are gunning for "AI-powered workspace." Notion's bet is that depth of integration and the knowledge graph keep people locked in. The risk is that "good enough AI" in a tool you already pay for wins.
@@ -178,11 +174,9 @@ Take sixty seconds by yourself first to think about who that competitor might be
 
 ### Slide 22 — Killer Memo
 
-Now the fun part. I love this exercise. I want you to write a killer memo. Three sentences. You are the head of AI at a major platform — Google, Apple, Microsoft, OpenAI, whoever makes sense for your space. And you're writing the internal memo about why you're going to kill this product. Put yourself in their shoes. What do they see when they look at your product? Opportunity, that's what.
+Now the fun part. I love this exercise. I want you to write a killer memo. Three sentences. You are the head of AI at a major platform — Google, Anthropic, Microsoft, OpenAI, whoever makes sense for your space. And you're writing the internal memo about why you're going to kill this product. Put yourself in their shoes. What do they see when they look at your product? Opportunity, that's what.
 
-Three minutes, silent. Write it as if you're that person. Outside-in perspective catches blind spots that your own self-scores miss every time.  When you're done — and if we have time — I'd love to hear a sentence or two from a couple of volunteers.
-
-Who wants to read their attack? Don't be shy — the best ones are always a little painful to read out loud.
+Three minutes, silent. Write it as if you're that person. Outside-in perspective catches blind spots that your own self-scores miss every time.  When you're done — post them in Slack. I'd love to see some of them.
 
 ### Slide 23 — Prototype Lab
 Alright, heres where it gets real. This is the hands-on lab section — The Prototype Bet. Everything weve talked about today — probabilistic thinking, vulnerability, speed — it all comes together right now. 
@@ -211,26 +205,23 @@ Three tips before you start. First — don't build your whole product. Build the
 
 Second — don't over-specify the prompt. Write what the user experiences, not implementation details. "The AI analyzes their sales data and highlights the three riskiest deals" is better than "use a transformer model with RAG to process CSV uploads." Let the tool figure out the how.
 
-Third — iterate, don't restart. If the first result is 60% right, steer it. "Make the dashboard cards clickable" or "add a confidence score next to each recommendation." One follow-up prompt beats starting over every time.
+Third — iterate, don't restart. If the first result is 60% right, steer it. "Make the dashboard cards clickable" or "add a confidence score next to each recommendation." One follow-up prompt beats starting over every time. in the Vibe Coding course I teach, I talk about the confidence line. We start with defining a strategy with high ambiguity, so our prompts need to be open-ended because we need to validate our core hypothesis and value proposition. If you haven't done the course already, I would also highly recommend doing it next, cause this would help you bringing your strategy to life.
 
-If you don't have an account on any of those tools, pair up with someone who does. When you have your link, paste it into `01-the-bet/prototype.md` in your repo and commit. The prototype now lives in your strategy repo — it's not a browser tab you're going to lose tomorrow.
+and If you don't have an account for any of those tools, pair up with someone who does. When you have your link, paste it into `01-the-bet/prototype.md` in your repo and commit. The prototype now lives in your strategy repo — it's not a browser tab you're going to lose tomorrow.
 
-This is what separates builders from deck-builders. Fifteen minutes. Go. I'll be walking around if anyone gets stuck.
+This is what separates builders from deck-makers. Fifteen minutes. Go. I'll be walking around if anyone gets stuck.
 
 ### Slide 25 — Synthesis
 
 OK lets bring it together. Look at what you accomplished today. Seriously, take a second to appreciate this. Look at your `01-the-bet/` folder in your repo. You should have `diagnostic.md` with your scores, your vulnerability, and your killer memo. And you should have `prototype.md` with your prototype link. Both committed.
 
-That right there? That's Component 1 of your living strategy. It's real, it's in version control, and it grows every session. This repo is yours — it's not a class exercise that disappears when the course ends. By Module 6, you'll be presenting from it. And it'll look completely different from what it looks like right now, in the best way.
-
- Two hours ago most of you walked in not sure what to expect, and now you've got a vulnerability scorecard, a killer memo, and a working prototype — all committed to a repo. 
+That right there? That's Component 1 of your living strategy. It's real, it's in version control, and it grows every session. This repo is yours — it's not a class exercise that disappears when the course ends. By Module 6, you'll be presenting from it. And it'll look completely different from what it looks like right now, in a better way.
 
 ### Slide 26 — Bridge to M2
 
 For next time — make sure your repo has `01-the-bet/` committed with everything from today. That's your carry-forward. Don't skip this part — Module 2 builds directly on what you did today.
 
-And heres the question that's going to keep you up at night until Module 2: can anyone copy what you just built in six months? Because Module 2 is all about data flywheels, vendor risk, and what happens when someone decides to eat your lunch. If the killer memo exercise made you a little nervous, good — Module 2 is where we figure out what to do about it. One session down, five to go. 
-
+And heres the question that's going to keep you up at night until Module 2: can anyone copy what you just built in six months? Because Module 2 is all about data flywheels, vendor risk, and what happens when someone decides to eat your lunch. If the killer memo exercise made you a little nervous, good — Module 2 is where we figure out what to do about it.
 
 ### Slide 27 — Takeaways
 
@@ -240,16 +231,16 @@ Heres where it gets interesting. Their first version was rough. The outputs were
 
 Now — did Gamma have a moat? Honestly, not much. The core technology is the same LLM everyone else has access to. Any team could build "AI slides" in a weekend. And they knew it. They scored themselves honestly on that axis and instead of pretending they had a defensible position, they leaned into speed. They iterated on templates, user patterns, and distribution faster than anyone else could copy them. Thats takeaway two: **score your vulnerability honestly.** Gamma didn't lie to themselves about their moat score. They used that honesty to pick the right strategy — speed over defensibility. The teams that get in trouble are the ones who give themselves all fives and then get blindsided.
 
-And heres the part I love most. Gamma's first prototype took days, not months. It wasn't a strategy deck about AI presentations — it was an actual AI presentation tool. Rough, imperfect, but real. And because it existed, they could put it in front of users immediately and learn. Every insight they got came from the prototype, not from a research report. Thats takeaway three: **build to think, commit to learn.** You just did the same thing in fifteen minutes. A working prototype beats a strategy deck every time. And now yours lives in a repo — version-controlled, shareable, alive. Thats what separates builders from deck-builders.
+And heres the part I love most. Gamma's first prototype took days, not months. It wasn't a strategy deck about AI presentations — it was an actual AI presentation tool. Rough, imperfect, but real. And because it existed, they could put it in front of users immediately and learn. Every insight they got came from the prototype, not from a research report. Thats takeaway three: **build to think, commit to learn.** You just did the same thing in fifteen minutes. A working prototype beats a strategy deck every time. And now yours lives in a repo — version-controlled, shareable, alive. Thats what separates builders from deck-makers.
 
 ### Slide 30 — Extra Practice
-If you want to go deeper, two optional exercises. First — rewrite your killer memo with a different platform attacker. If you wrote it from Google's perspective, try Apple. Does the attack vector change? That tells you something important about where your vulnerability actually is. Second — flesh out your repo. Review your `01-the-bet/` files, fill in any placeholders you skipped in class, update the top-level README with your bet summary, and commit. Next session is Module 2 — The Moat. You can build fast. Now — can anyone copy it?
+If you want to go deeper, two optional exercises. First — rewrite your killer memo with a different platform attacker. If you wrote it from Google's perspective, try Anthropic. Does the attack vector change? That tells you something important about where your vulnerability actually is. Second — flesh out your repo. Review your `01-the-bet/` files, fill in any placeholders you skipped in class, update the top-level README with your bet summary, and commit. Next session is Module 2 — The Moat. You can build fast. Now — can anyone copy it?
 
 ### Slide 31 — Survey
 
-Last thing — there's a quick survey, takes about sixty seconds. QR code is on the screen, I'll also drop the link in Slack. Your feedback really does help me make the next session better. I read every single response, I'm not just saying that.
+Last thing — there's a quick survey, takes about sixty seconds. Link is in the slide and I'm aslo sharing it in the chat. Your feedback really does help me make the next session better. Help us.
 
-And if you want to share — what's one thing that surprised you today? Drop it in the survey or tell me on the way out. 
+And if you want to share — what's one thing that surprised you today? Drop it in the survey as well 
 
 ### Slide 32 — Q&A
 
