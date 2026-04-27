@@ -205,9 +205,9 @@ Three tips before you start. First — don't build your whole product. Build the
 
 Second — don't over-specify the prompt. Write what the user experiences, not implementation details. "The AI analyzes their sales data and highlights the three riskiest deals" is better than "use a transformer model with RAG to process CSV uploads." Let the tool figure out the how.
 
-Third — iterate, don't restart. If the first result is 60% right, steer it. "Make the dashboard cards clickable" or "add a confidence score next to each recommendation." One follow-up prompt beats starting over every time.
+Third — iterate, don't restart. If the first result is 60% right, steer it. "Make the dashboard cards clickable" or "add a confidence score next to each recommendation." One follow-up prompt beats starting over every time. in the Vibe Coding course I teach, I talk about the confidence line. We start with defining a strategy with high ambiguity, so our prompts need to be open-ended because we need to validate our core hypothesis and value proposition. If you haven't done the course already, I would also highly recommend doing it next, cause this would help you bringing your strategy to life.
 
-If you don't have an account on any of those tools, pair up with someone who does. When you have your link, paste it into `01-the-bet/prototype.md` in your repo and commit. The prototype now lives in your strategy repo — it's not a browser tab you're going to lose tomorrow.
+and If you don't have an account for any of those tools, pair up with someone who does. When you have your link, paste it into `01-the-bet/prototype.md` in your repo and commit. The prototype now lives in your strategy repo — it's not a browser tab you're going to lose tomorrow.
 
 This is what separates builders from deck-builders. Fifteen minutes. Go. I'll be walking around if anyone gets stuck.
 
