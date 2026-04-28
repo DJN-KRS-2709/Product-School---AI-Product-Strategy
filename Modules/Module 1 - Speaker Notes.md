@@ -2,17 +2,17 @@
 
 ### What this module is about
 
-This is the opening module and it sets the tone for everything that comes after. Heres the big move: traditional product strategy assumes you can predict outcomes, lock in costs, and plan in annual cycles. AI breaks all of that. So today I'm introducing probabilistic thinking — the idea that AI products are bets, not plans. The emotional arc is about controlled discomfort. They're going to walk in expecting a framework deck and leave having diagnosed their own vulnerability, written a killer memo against themselves, and built a working prototype. That shift from passive to active is the whole point of Module 1.
+This is the opening module and it sets the tone for everything that comes after. Heres the big move: traditional product strategy assumes you can predict outcomes, lock in costs, and plan in annual cycles. AI breaks all of that. So today I'm introducing probabilistic thinking — the idea that AI products are bets, not plans. The emotional arc is about controlled discomfort. They're going to walk in expecting a framework deck and leave having diagnosed their own vulnerability and built a working prototype. That shift from passive to active is the whole point of Module 1.
 
 The assumption I'm breaking today: "We can plan AI products the way we plan everything else." We can't. Outputs are probabilistic, costs are variable, competitive moats evaporate when platforms ship your feature for free, and discovery cycles that used to take 6 weeks now take 4 days. That's what slide 5 is about — five assumptions that AI shatters. Every module that follows maps to one of those rows.
 
-They're leaving today with a GitHub repo containing three artifacts: a vulnerability scorecard with honest scores across three axes, a killer memo where they write three sentences attacking their own product from a platform's perspective, and a working prototype they built in 15 minutes. The repo IS the living strategy — they fork a template today and push real work to it in every module that follows. By M6, that repo is their board-ready strategy. It's a lot for one session but honestly the pace is what makes it land.
+They're leaving today with a GitHub repo containing two artifacts: a vulnerability scorecard with honest scores across three axes (stress-tested by a partner who names a real attacker), and a working prototype they built in 15 minutes. The repo IS the living strategy — they fork a template today and push real work to it in every module that follows. By M6, that repo is their board-ready strategy. It's a lot for one session but honestly the pace is what makes it land.
 
 ### The flow
 
-The first half is concept-heavy but I keep it punchy — provocation, thesis, case study, framework. I never let theory run more than two slides without getting them doing something. The break sits after the framework slides so they've had time to absorb the diagnostic model before they have to apply it. Right after break, they fork their strategy repo — the living strategy that anchors the whole course. The second half is almost entirely hands-on: set up the repo, score yourself, get challenged by a partner, write the killer memo, build a prototype, push everything to the repo. The prototype is the emotional peak — seeing something exist in 15 minutes makes the whole "probabilistic bets" argument feel real instead of academic. And committing it to a real repo makes it permanent.
+The first half is concept-heavy but I keep it punchy — provocation, thesis, case study, framework. I never let theory run more than two slides without getting them doing something. The break sits after the framework slides so they've had time to absorb the diagnostic model before they have to apply it. Right after break, they fork their strategy repo — the living strategy that anchors the whole course. The second half is almost entirely hands-on: set up the repo, score yourself, get challenged by a partner, build a prototype, push everything to the repo. The prototype is the emotional peak — seeing something exist in 15 minutes makes the whole "probabilistic bets" argument feel real instead of academic. And committing it to a real repo makes it permanent.
 
-I want to reduce anxiety early — show them it's applied-heavy and they'll be doing stuff, not memorizing. Two hours: provocation, short theory, case, framework, break, diagnose, pair, build, synthesize. I don't need to read every line of these notes — just hit the beats: three exercises, one case, one prototype.
+I want to reduce anxiety early — show them it's applied-heavy and they'll be doing stuff, not memorizing. Two hours: provocation, short theory, case, framework, break, diagnose, pair, build, synthesize. I don't need to read every line of these notes — just hit the beats: two exercises, one case, one prototype.
 
 ---
 
@@ -156,7 +156,7 @@ and you might disagree on scores? That's exactly what happens when you score you
 
 Alright, your turn. This is where the abstract framework meets your actual product. You've got ten minutes. I want you to score yourself on all three axes and write down at least one specific vulnerability.
 
-Be ruthlessly honest. If everything is a five, that's a red flag — seriously, come find me. Open up `01-the-bet/diagnostic.md` in your repo. The template has the structure ready — just fill in your scores, your rationale, and we'll add the killer memo in a few minutes. When you're done, commit it. That file travels with you to Module 2.
+Be ruthlessly honest. If everything is a five, that's a red flag — seriously, come find me. Open up `01-the-bet/diagnostic.md` in your repo. The template has the structure ready — just fill in your scores and your rationale. When you're done, commit it. That file travels with you to Module 2.
 
 I'm going to set you into breakout rooms for yourself. and again, don't overthink it whether the score is a 3 or a 4. Just pick one and move. You can always revise later — that's literally what version control is for.
 
@@ -168,16 +168,10 @@ Heres the deal: your partner has to lower at least one of your scores. Not to be
 
 Take sixty seconds by yourself first to think about who that competitor might be. Specificity matters. If you can't name the attacker, you haven't looked hard enough. And if your partner is being too polite, tell them — being nice isn't being helpful. The market won't be nice.
 
-### Slide 22 — Killer Memo
-
-Now the fun part. I love this exercise. I want you to write a killer memo. Three sentences. You are the head of AI at a major platform — Google, Anthropic, Microsoft, OpenAI, whoever makes sense for your space. And you're writing the internal memo about why you're going to kill this product. Put yourself in their shoes. What do they see when they look at your product? Opportunity, that's what.
-
-Three minutes, silent. Write it as if you're that person. Outside-in perspective catches blind spots that your own self-scores miss every time.  When you're done — post them in Slack. I'd love to see some of them.
-
-### Slide 23 — Prototype Lab
+### Slide 22 — Prototype Lab
 Alright, heres where it gets real. This is the hands-on lab section — The Prototype Bet. Everything weve talked about today — probabilistic thinking, vulnerability, speed — it all comes together right now. 
 
-### Slide 24 — Build
+### Slide 23 — Build
 
 Alright, this is my favorite part of the session. Everything we've talked about — probabilistic bets, vulnerability, speed — it all becomes real right now. Theory is done. We build.
 
@@ -207,19 +201,19 @@ and If you don't have an account for any of those tools, pair up with someone wh
 
 This is what separates builders from deck-makers. Fifteen minutes. Go. I'll be walking around if anyone gets stuck.
 
-### Slide 25 — Synthesis
+### Slide 24 — Synthesis
 
-OK lets bring it together. Look at what you accomplished today. Seriously, take a second to appreciate this. Look at your `01-the-bet/` folder in your repo. You should have `diagnostic.md` with your scores, your vulnerability, and your killer memo. And you should have `prototype.md` with your prototype link. Both committed.
+OK lets bring it together. Look at what you accomplished today. Seriously, take a second to appreciate this. Look at your `01-the-bet/` folder in your repo. You should have `diagnostic.md` with your scores and your vulnerability. And you should have `prototype.md` with your prototype link. Both committed.
 
 That right there? That's Component 1 of your living strategy. It's real, it's in version control, and it grows every session. This repo is yours — it's not a class exercise that disappears when the course ends. By Module 6, you'll be presenting from it. And it'll look completely different from what it looks like right now, in a better way.
 
-### Slide 26 — Bridge to M2
+### Slide 25 — Bridge to M2
 
 For next time — make sure your repo has `01-the-bet/` committed with everything from today. That's your carry-forward. Don't skip this part — Module 2 builds directly on what you did today.
 
-And heres the question that's going to keep you up at night until Module 2: can anyone copy what you just built in six months? Because Module 2 is all about data flywheels, vendor risk, and what happens when someone decides to eat your lunch. If the killer memo exercise made you a little nervous, good — Module 2 is where we figure out what to do about it.
+And heres the question that's going to keep you up at night until Module 2: can anyone copy what you just built in six months? Because Module 2 is all about data flywheels, vendor risk, and what happens when someone decides to eat your lunch. If the partner stress-test exposed a vulnerability that made you a little nervous, good — Module 2 is where we figure out what to do about it.
 
-### Slide 27 — Takeaways
+### Slide 26 — Takeaways
 
 Let me tell you a story that ties together everything we did today. Gamma — the AI presentation tool. A year and a half ago, Gamma was a small team with a simple bet: nobody actually wants to make slides. People want to communicate ideas, and the slide-making part is just friction. So they built an AI that turns a plain-text prompt into a full presentation. Ship fast, learn fast.
 
@@ -229,15 +223,15 @@ Now — did Gamma have a moat? Honestly, not much. The core technology is the sa
 
 And heres the part I love most. Gamma's first prototype took days, not months. It wasn't a strategy deck about AI presentations — it was an actual AI presentation tool. Rough, imperfect, but real. And because it existed, they could put it in front of users immediately and learn. Every insight they got came from the prototype, not from a research report. Thats takeaway three: **build to think, commit to learn.** You just did the same thing in fifteen minutes. A working prototype beats a strategy deck every time. And now yours lives in a repo — version-controlled, shareable, alive. Thats what separates builders from deck-makers.
 
-### Slide 30 — Extra Practice
-If you want to go deeper, two optional exercises. First — rewrite your killer memo with a different platform attacker. If you wrote it from Google's perspective, try Anthropic. Does the attack vector change? That tells you something important about where your vulnerability actually is. Second — flesh out your repo. Review your `01-the-bet/` files, fill in any placeholders you skipped in class, update the top-level README with your bet summary, and commit. Next session is Module 2 — The Moat. You can build fast. Now — can anyone copy it?
+### Slide 29 — Extra Practice
+If you want to go deeper, one optional exercise: flesh out your repo. Review your `01-the-bet/` files, fill in any placeholders you skipped in class, update the top-level README with your bet summary, and commit. Next session is Module 2 — The Moat. You can build fast. Now — can anyone copy it?
 
-### Slide 31 — Survey
+### Slide 30 — Survey
 
 Last thing — there's a quick survey, takes about sixty seconds. Link is in the slide and I'm aslo sharing it in the chat. Your feedback really does help me make the next session better. Help us.
 
 And if you want to share — what's one thing that surprised you today? Drop it in the survey as well 
 
-### Slide 32 — Q&A
+### Slide 31 — Q&A
 
 Alright, before we close — any final questions? This is your time to ask anything about what we covered today. Feel free to unmute or drop your question in the chat. And if something pops up later, share it in Slack — Im always around. Thanks everybody. See you next time!

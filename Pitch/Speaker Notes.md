@@ -79,8 +79,7 @@ Bullets with context. Carlos should be able to read this and understand the full
 - M1's job: break the old mental model and replace it with probabilistic thinking.
 - Opens with 3 True/False provocations — all FALSE. "The best AI product wins?" "You can predict which feature wins?" "Your discovery process is fast enough?" By #3, the room knows this isn't a beginner course.
 - Live diagnosis on a product everyone knows (Notion, Figma, Slack) using the Three-Axis Diagnostic: contextual moat, data advantage, platform exposure. Then they apply it to their own product at their company.
-- Peer challenge: partner must lower at least one score. Then name one real AI-native competitor attacking that vulnerability.
-- Killer memo: "You're the Big Tech exec whose job is to destroy your product. Write a 3-sentence memo." Reveals blind spots self-assessment always misses.
+- Peer challenge: partner must lower at least one score. Then name one real AI-native competitor attacking that vulnerability. The outside-in pressure reveals blind spots self-assessment always misses.
 - **Wow moment: build a working prototype with AI tools in 15 minutes.** Not slides. The thing itself.
 - They leave with: Strategy component 1 (The Bet) + a shareable prototype link. Both carry forward to M2.
 
