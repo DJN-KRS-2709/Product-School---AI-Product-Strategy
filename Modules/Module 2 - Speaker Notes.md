@@ -30,19 +30,19 @@ Quick look at where we are in the course. Module 1 was The Bet — you diagnosed
 
 ### Slide 4 — Recall from M1
 
-Quick reconnect before we jump in. You brought your Module 1 scorecard and your prototype. All that work from last session feeds directly into what we're doing today. The vulnerability you diagnosed? Thats the crack we're going to try to defend. So pull up your repo and have your scores handy — you'll need them very soon.
+Quick reconnect before we jump in. You brought your Module 1 scorecard and your prototype. All that work from last session feeds directly into what we're doing today. The vulnerability you diagnosed? Thats the crack we're going to try to defend. So pull up your repo and have your scores handy — you'll need them in about two minutes.
 
 ### Slide 5 — Moat Stress Test
 
 OK so pull out your Module 1 scorecard. Find the lowest score — thats your crack, your weak spot. Now I want you to name one specific company that could exploit it. And I don't mean "Big Tech" — give me a real name. A company with a face and a product page. You've got two minutes to write it down, then three minutes to share with the room.
 
-We're doing this first because it anchors everything that follows in something personal. Every concept I'm about to teach you is going to land harder because you already feel the threat. I know it's a little uncomfortable but trust me, be honest with yourselves. The generous answers don't help anybody. I learned that one the hard way.
+We're doing this first because it anchors everything that follows in something personal. Every concept I'm about to teach you is going to land harder because you already feel the threat. I know it's a little uncomfortable to start here — nobody loves staring at their weakest point first thing in the morning. But trust me, be honest with yourselves. The generous answers don't help anybody. I learned that one the hard way.
 
 ### Slide 6 — 8 Moats
 
 Lets look at the grid. One real company per moat: Bloomberg for Data, Salesforce for Workflow, Palantir for Regulatory, Apple for Distribution, Shopify for Ecosystem, LinkedIn for Network, Tesla for Physical, AWS for Scale. Heres the thing — you don't need all eight. You need ONE that's actually real. Strategy is being excellent at the minimum number of things, not average at many. And for AI products specifically, Data and Workflow are the two that matter most. I spent way too long early in my career trying to be defensible on five dimensions at once. Spoiler: I wasn't defensible on any of them. Learned that lesson the expensive way.
 
-So which moat is yours? Name it in one word. Go ahead and don't overthink it. And then — what other company masters one of these? I want to hear two or three. If you can't name your moat in one word, by the way, thats a finding. Thats not a failure — thats actually one of the most useful things you could discover today. Because you can't defend what you can't name.
+So which moat is yours? Name it in one word. Go ahead, just say it out loud — don't overthink it. And then — what other company masters one of these? I want to hear two or three of you. If you can't name your moat in one word, by the way, thats a finding. Thats not a failure — thats actually one of the most useful things you could discover today. Because you can't defend what you can't name.
 
 The way to think about this: most products need only one or two genuine moats, not all eight. This grid gives you vocabulary for naming what's defensible. It's not a checklist to complete — it's a mirror.
 
@@ -52,7 +52,7 @@ OK so you just named your moat. Heres what happens when it isn't real. Let me te
 
 Jasper. $125 million raised, $1.5 billion valuation, 70,000 customers. In 2022, they were THE AI startup. I mean THE one. Fastest growing, most hyped, investors literally fighting to get in. Every conference, every blog post, every "future of AI" list — Jasper was on it. They were the darling. And then ChatGPT launched. OpenAI added plugins. Google shipped Gemini into Workspace. And overnight — and I mean practically overnight — AI writing went from premium product to free feature baked into tools everyone already used. Jasper had to pivot to enterprise marketing workflows. The trajectory: from 1 to 100 and then 100 to 40. Thats not a dip. Thats an identity crisis. Sound familiar? It should, because this pattern is everywhere right now.
 
-I'm showing you this right after the 8 Moats because the typology is abstract until you see a $1.5 billion company get eaten in real time. Jasper thought they had a moat — 70,000 customers, fastest growth in AI. They didn't. So now I want to ask you: where is YOUR product — wrapper (A thin UI layer on top of someone else's AI model that dies the moment the model provider ships the same feature natively) or workflow (A product that orchestrates a process around the model — accumulating proprietary data, embedding into user operations, and surviving any model swap because the value is in the orchestration, not the API call.?) Posted in the chat.
+I'm showing you this right after the 8 Moats because the typology is abstract until you see a $1.5 billion company get eaten in real time. Jasper thought they had a moat — 70,000 customers, fastest growth in AI. They didn't. So now I want to ask you: where is YOUR product — wrapper or workflow? Lets hear two or three of you. And yeah, this should sting a little. Better to feel it in this room than in a board meeting.
 
 ### Slide 8 — Depth Spectrum
 
@@ -62,11 +62,11 @@ Where does your product sit? Point to a spot on this spectrum. Lets hear two or 
 
 ### Slide 9 — Loops, Not Data
 
-Quick pivot here and I think this might be the most important reframe of the day. 
+Quick pivot here and I think this might be the most important reframe of the day. So pay attention to this one.
 
-Everyone claims a data advantage. Every pitch deck I've ever read says "proprietary data moat" somewhere around in a slide. Its like a law of nature at this point. But lets be honest — data in a database isn't a moat. It's a cost center. The moat is whether your product gets smarter every time someone uses it. Thats a loop, not a stockpile. Look at the red question on screen: "When your users correct your AI, does that signal disappear — or compound?"
+Everyone claims a data advantage. Every pitch deck I've ever read says "proprietary data moat" somewhere around slide 7. Its like a law of nature at this point. But lets be honest — data in a database isn't a moat. It's a cost center. The moat is whether your product gets smarter every time someone uses it. Thats a loop, not a stockpile. Look at the red question on screen: "When your users correct your AI, does that signal disappear — or compound?"
 
-This matters because "data moat" is the thing every senior PM defaults to. It sounds smart. It slides easily into a strategy deck. But almost nobody actually has compounding loops. That distinction sets up the flywheel as a real mechanism, not just a concept. So keep that question in your head as we go into the next slide. It's the kind of question that changes how you see your product.
+This matters because "data moat" is the thing every senior PM defaults to. It sounds smart. It slides easily into a strategy deck. But almost nobody actually has compounding loops. That distinction sets up the flywheel as a real mechanism, not just a concept. So keep that question in your head as we go into the next slide. Seriously, write it down if you need to. It's the kind of question that changes how you see your product.
 
 ### Slide 10 — Data Flywheel
 
@@ -86,7 +86,7 @@ Heres the thing: abstract concepts don't change behavior. Numbers do. Once you s
 
 ### Slide 12 — Break
 
-Okay, let's. Take five minutes — grab some water, stretch, and after that You're going to map your flywheel, face an attacker, and build your escape plan. The fun stuff.
+Amazing work so far. Seriously — look at what you just did. You stress-tested your moat, named your weakest point out loud, watched a $1.5 billion company get eaten alive, and scored your own flywheel with actual numbers. Thats not a small thing. You deserved a break. Take five minutes — grab some water, stretch, check your phone, do whatever you need. When you come back its all applied work. You're going to map your flywheel, face an attacker, and build your escape plan. The fun stuff. I promise.
 
 ### Slide 13 — Cameras On
 
@@ -98,12 +98,13 @@ Alright, this is where the real building happens. Everything from the first half
 
 ### Slide 15 — Map Your Flywheel
 
-Hope you enjoyed the break cause we're going right back in.
+OK welcome back. Hope you enjoyed that breather because we're going right back in.
 
-You've got fifteen minutes on your own now to Score the four loops and write what you actually capture today. And I mean today — "we plan to build this" is a 1, not a 3. I know that feels harsh but I promise generous scores only hurt you later. I've watched people give themselves 4s on loops they haven't even started building yet. Don't be that person. This is the core artifact of the module. If you rush it, you'll score generously and the peer challenge coming up next won't bite. So be honest.
+You've got fifteen minutes on your own now and this is the big one. Score the four loops and write what you actually capture today. And I mean today — "we plan to build this" is a 1, not a 3. I know that feels harsh but I promise generous scores only hurt you later. I've watched people give themselves 4s on loops they haven't even started building yet. Don't be that person. Fifteen minutes instead of ten because this is the core artifact of the module. If you rush it, you'll score generously and the peer challenge coming up next won't bite. So be honest.
 
-I'll be walking around in case you have questions. 
-The Flywheel Scorer tool is linked right on the slide — it gives you a visual flywheel, scores each loop, and flags the weakest one. It also pulls in your Module 1 vulnerability data if you saved it. Open it up and let it do the heavy lifting on the visualization.
+I'll be walking around — and fair warning, if you say you're capturing preferences but your product doesn't actually personalize model behavior, I'm going to push back. Thats a 1. I'm not trying to be mean, I'm trying to be useful. There's a difference. And you'll thank me when your partner tries to attack your flywheel in about twenty minutes.
+
+Go to your repo and select the Flywheel Scorer tool — it gives you a visual flywheel, scores each loop, and flags the weakest one. It also pulls in your Module 1 vulnerability data if you saved it. Open it up and let it do the heavy lifting on the visualization.
 
 ### Slide 16 — Encroachment Threats
 
