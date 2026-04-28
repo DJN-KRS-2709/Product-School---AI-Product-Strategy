@@ -34,13 +34,13 @@ Quick reconnect before we jump in. You brought your Module 1 scorecard and your 
 
 ### Slide 5 — Moat Stress Test
 
-OK so pull out your Module 1 scorecard. Find the lowest score — thats your crack, your weak spot. Now I want you to name one specific company that could exploit it. And I don't mean "Big Tech" — give me a real name. A company with a face and a product page. You've got two minutes to write it down, then three minutes to share with the room.
+OK so pull out your Module 1 scorecard. Find the lowest score — thats your crack, your weak spot. Now I want you to name one specific company that could exploit it. And I don't mean "Big Tech" — give me a real name. A company with a face and a product page. You've got two minutes to write it down.
 
-We're doing this first because it anchors everything that follows in something personal. Every concept I'm about to teach you is going to land harder because you already feel the threat. I know it's a little uncomfortable to start here — nobody loves staring at their weakest point first thing in the morning. But trust me, be honest with yourselves. The generous answers don't help anybody. I learned that one the hard way.
+We're doing this first because it anchors everything that follows in something personal. Every concept I'm about to teach you is going to land harder because you already feel the threat. I know it's a little uncomfortable to start here  but trust me, be honest with yourselves. And don't worry, we will capture this officially in the encroachment threat assessment, which will be done later in the module.
 
 ### Slide 6 — 8 Moats
 
-Lets look at the grid. One real company per moat: Bloomberg for Data, Salesforce for Workflow, Palantir for Regulatory, Apple for Distribution, Shopify for Ecosystem, LinkedIn for Network, Tesla for Physical, AWS for Scale. Heres the thing — you don't need all eight. You need ONE that's actually real. Strategy is being excellent at the minimum number of things, not average at many. And for AI products specifically, Data and Workflow are the two that matter most. I spent way too long early in my career trying to be defensible on five dimensions at once. Spoiler: I wasn't defensible on any of them. Learned that lesson the expensive way.
+Lets look at the grid. One real company per moat: Bloomberg for Data, Salesforce for Workflow, Palantir for Regulatory, Apple for Distribution, Shopify for Ecosystem, LinkedIn for Network, Tesla for Physical, AWS for Scale. Heres the thing — you don't need all eight moats, You need ONE that's actually real. Strategy is being excellent at the minimum number of things, not average at many. And for AI products specifically, Data and Workflow are the two that matter most. I spent way too long early in my career trying to be defensible on five dimensions at once. Spoiler: I wasn't defensible on any of them. Learned that lesson the expensive way.
 
 So which moat is yours? Name it in one word. Go ahead, just say it out loud — don't overthink it. And then — what other company masters one of these? I want to hear two or three of you. If you can't name your moat in one word, by the way, thats a finding. Thats not a failure — thats actually one of the most useful things you could discover today. Because you can't defend what you can't name.
 
