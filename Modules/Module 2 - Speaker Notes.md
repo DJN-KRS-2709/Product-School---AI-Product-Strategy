@@ -88,25 +88,25 @@ Now, scoring forces specificity, but the loop set is yours to adapt — your fly
 
 Heres the thing: abstract concepts don't change behavior. Numbers do. Once you see a 1 or 2 staring back at you, the priority becomes obvious. You stop debating philosophy and start fixing plumbing. I've seen this happen in every cohort — the moment someone writes down a number, the conversation changes completely.
 
-### Slide 12 — Break
+### Slide 12 — Lab: Data Flywheel
 
-Amazing work so far. Seriously — look at what you just did. You stress-tested your moat, named your weakest point out loud, watched a $1.5 billion company get eaten alive, and scored your own flywheel with actual numbers. Thats not a small thing. You deserved a break. Take five minutes — grab some water, stretch, check your phone, do whatever you need. When you come back its all applied work. You're going to map your flywheel, face an attacker, and build your escape plan. The fun stuff. I promise.
+Alright, this is where the real building happens. Everything from the first half — the 8 moats, the Jasper story, the flywheel concept — now you apply it to your own product. We're going straight into the flywheel exercise before the break so that you can sit with your scores during the break and let them sink in. Lets get into it.
 
-### Slide 13 — Cameras On
+### Slide 13 — Map Your Flywheel
 
-Welcome back everyone! Quick reminder — cameras on please. The applied work coming up is partner-heavy and its way better when you can see each others faces. Plus some of the exercises involve pointing at your screen, which is hard to do with cameras off. Lets stay engaged for this home stretch.
-
-### Slide 14 — Lab: Flywheel & Kill Switch
-
-Alright, this is where the real building happens. Everything from the first half — the 8 moats, the Jasper story, the flywheel concept — now you apply it to your own product. Two big exercises coming up: map your flywheel and build your Kill Switch. Lets get into it.
-
-### Slide 15 — Map Your Flywheel
-
-You've got fifteen minutes on your own now . Score the four loops and write what you actually capture today. And I mean today — "we plan to build this" is a 1, not a 3. I know that feels harsh but I promise generous scores only hurt you later. I've watched people give themselves 4s on loops they haven't even started building yet. Don't be that person. If you rush it, you'll score generously and the peer challenge coming up next won't bite. So be honest.
+You've got fifteen minutes on your own now. Score the four loops and write what you actually capture today. And I mean today — "we plan to build this" is a 1, not a 3. I know that feels harsh but I promise generous scores only hurt you later. I've watched people give themselves 4s on loops they haven't even started building yet. Don't be that person. If you rush it, you'll score generously and the peer challenge coming up next won't bite. So be honest.
 
 I'll be walking around — so please ping me if you need anything.
 
 Go to your repo and select the Flywheel Scorer tool — it gives you a visual flywheel, scores each loop, and flags the weakest one. It also pulls in your Module 1 vulnerability data if you saved it. Open it up and let it do the heavy lifting on the visualization.
+
+### Slide 14 — Break
+
+Amazing work so far. Seriously — look at what you just did. You stress-tested your moat, named your weakest point out loud, watched a $1.5 billion company get eaten alive, and scored your own flywheel with actual numbers. Thats not a small thing. You deserved a break. Take five minutes — grab some water, stretch, check your phone, do whatever you need. Let those flywheel scores sit with you. When you come back: you're going to face an attacker and build your escape plan. The fun stuff. I promise.
+
+### Slide 15 — Cameras On
+
+Welcome back everyone! Quick reminder — cameras on please. The applied work coming up is partner-heavy and its way better when you can see each others faces. Plus some of the exercises involve pointing at your screen, which is hard to do with cameras off. Lets stay engaged for this home stretch.
 
 ### Slide 16 — Encroachment Threats
 
