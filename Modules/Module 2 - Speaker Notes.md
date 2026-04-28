@@ -30,17 +30,21 @@ Quick look at where we are in the course. Module 1 was The Bet — you diagnosed
 
 ### Slide 4 — Recall from M1
 
-Quick reconnect before we jump in. You brought your Module 1 scorecard and your prototype. All that work from last session feeds directly into what we're doing today. The vulnerability you diagnosed? Thats the crack we're going to try to defend. So pull up your repo and have your scores handy — you'll need them now.
+Quick reconnect before we jump in. You brought your Module 1 scorecard and your prototype. All that work from last session feeds directly into what we're doing today. The vulnerability you diagnosed? Thats the crack we're going to try to defend. So pull up your repo and have your scores handy — you'll need them in about two minutes.
 
 ### Slide 5 — Moat Stress Test
 
-OK so pull out your Module 1 scorecard. Find the lowest score — thats your crack, your weak spot. Now I want you to name one specific company that could exploit it. And I don't mean "Big Tech" — give me a real name. A company with a face and a product page. You've got two minutes to write it down.
+OK so pull out your Module 1 scorecard. Find the lowest score — thats your crack, your weak spot. Now I want you to name one specific company that could exploit it. And I don't mean "Big Tech" — give me a real name. A company with a face and a product page. You've got two minutes to write it down, then three minutes to share with the room.
 
-We're doing this first because it anchors everything that follows in something personal. Every concept I'm about to teach you is going to land harder because you already feel the threat. I know it's a little uncomfortable to start here  but trust me, be honest with yourselves. And don't worry, we will capture this officially in the encroachment threat assessment, which will be done later in the module.
+We're doing this first because it anchors everything that follows in something personal. Every concept I'm about to teach you is going to land harder because you already feel the threat. I know it's a little uncomfortable to start here — nobody loves staring at their weakest point first thing in the morning. But trust me, be honest with yourselves. The generous answers don't help anybody. I learned that one the hard way.
 
 ### Slide 6 — 8 Moats
 
-Lets look at the grid. One real company per moat: Bloomberg for Data, Salesforce for Workflow, Palantir for Regulatory, Apple for Distribution, Shopify for Ecosystem, LinkedIn for Network, Tesla for Physical, AWS for Scale. Heres the thing — you don't need all eight moats, You need ONE that's actually real. Strategy is being excellent at the minimum number of things, not average at many. And for AI products specifically, Data and Workflow are the two that matter most. I spent way too long early in my career trying to be defensible on five dimensions at once. Spoiler: I wasn't defensible on any of them. Learned that lesson the expensive way.
+Lets look at the grid. I want you to read each card and think about *why* each one is hard to copy — not just who does it.
+
+Bloomberg sits on proprietary data that compounds with every terminal session. The more people use it, the richer the dataset gets. Salesforce is so deeply embedded in how companies run their sales process that ripping it out would take years — switching cost is the moat. Palantir holds compliance certifications and government clearances that competitors have to earn from scratch — you can't shortcut that. Apple owns the channel — they decide how a billion people discover and adopt software. Shopify has thousands of third-party apps and integrations creating interdependence — leave Shopify and you leave the ecosystem. LinkedIn gets more valuable with every new user — classic network effects. Tesla has gigafactories, charging infrastructure, hardware that takes years and billions to replicate. AWS runs at a scale where unit economics keep improving — the bigger they get, the cheaper each unit becomes.
+
+Now heres the thing — you don't need all eight. You need ONE that's actually real. Strategy is being excellent at the minimum number of things, not average at many. And for AI products specifically, Data and Workflow are the two that matter most. I spent way too long early in my career trying to be defensible on five dimensions at once. Spoiler: I wasn't defensible on any of them. Learned that lesson the expensive way.
 
 So which moat is yours? Name it in one word. Go ahead, just say it out loud — don't overthink it. And then — what other company masters one of these? I want to hear two or three of you. If you can't name your moat in one word, by the way, thats a finding. Thats not a failure — thats actually one of the most useful things you could discover today. Because you can't defend what you can't name.
 
@@ -114,14 +118,15 @@ Heres a live example of adjacent expansion that still blows my mind. When Anthro
 
 ### Slide 17 — 90-Day Encroachment
 
-My favorite part of the course.
-I will pair you up. The defender presents their flywheel plus threats. The encroacher builds a concrete 90-day plan: weeks 1 through 4, what do you ship? Weeks 5 through 8, how do you poach users? Weeks 9 through 12, why don't users come back? Target the weakest flywheel loop — thats your entry point.
+OK this is one of my favorite exercises in the whole course. Seriously, I look forward to this one every cohort.
 
-A partner's attack plan surfaces blind spots you literally cannot see yourself. And the week-by-week structure forces specificity — no hiding behind "eventually someone might." If your partner is being too polite, tell them: you're not being helpful by being nice. The market won't be nice. People surprise themselves with how creative they can be when they're playing offense.
+Pair up with someone — ideally not the same partner from Module 1, mix it up a little. Six minutes per person. The defender presents their flywheel plus threats. The encroacher builds a concrete 90-day plan: weeks 1 through 4, what do you ship? Weeks 5 through 8, how do you poach users? Weeks 9 through 12, why don't users come back? Target the weakest flywheel loop — thats your entry point.
+
+Heres why this works: self-assessment is always generous. Always. I don't care how honest you think you are — when it's your own product, you soften the edges. A partner's attack plan surfaces blind spots you literally cannot see yourself. And the week-by-week structure forces specificity — no hiding behind "eventually someone might." If your partner is being too polite, tell them: you're not being helpful by being nice. The market won't be nice. I'd rather you feel the punch here than in a quarterly review. Have fun with it though — some of the best insights I've seen in this course come out of this exercise. People surprise themselves with how creative they can be when they're playing offense.
 
 ### Slide 18 — Kill Switch
 
-Three layers. First, abstraction — no direct provider calls in your code. Second, multi-model routing — tasks get routed by cost, quality, and latency. Third, an eval harness — an automated quality check. So let me ask: how many of you could swap providers in 48 hours? Show of hands. Yeah, almost nobody. I get it. Thats the normal answer. 
+Three layers. First, abstraction — no direct provider calls in your code. Second, multi-model routing — tasks get routed by cost, quality, and latency. Third, an eval harness — an automated quality check. So let me ask: how many of you could swap providers in 48 hours? Show of hands. Yeah, almost nobody. I get it. Thats the normal answer. Don't feel bad about it.
 
 That 48 hours is deliberately aggressive — it should make you uncomfortable. Most products are hard-wired to one provider and nobody thinks about it until that provider changes their pricing or their terms. And by then its a fire drill. The Kill Switch turns dependency into optionality. Its the difference between "we chose this provider" and "we're trapped with this provider."
 
@@ -137,7 +142,7 @@ Fifteen minutes — audit your vendor dependency. Here are the stress tests: wha
 
 And if anyone thinks "restricts your use case" feels hypothetical — oh, let me tell you. January 2026 — Anthropic quietly blocked subscription OAuth tokens from working outside Claude Code. February — rewrote the legal terms. March — shipped Claude Code Channels to replace the core reason people used third-party harnesses. April — cut the cord entirely. Four months from passive enforcement to full cutoff. If your product depends on a provider's subscription tier for cost arbitrage, that timeline is your portability risk made real. Four months. Thats not a lot of runway. Thats barely enough time to get alignment on a new vendor, let alone migrate.
 
-The Kill Switch Audit Markdown is in your repo next to the flywheel — you'll need it in Module 3.
+The Kill Switch Audit tool is linked on the slide — it walks through each dependency layer, stress-tests swap time, and gives you a concrete this-week, this-month, this-quarter action plan. Export it — you'll need it in Module 3.
 
 ### Slide 21 — Synthesis
 
