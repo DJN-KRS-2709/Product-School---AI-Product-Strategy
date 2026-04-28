@@ -30,7 +30,7 @@ Quick look at where we are in the course. Module 1 was The Bet — you diagnosed
 
 ### Slide 4 — Recall from M1
 
-Quick reconnect before we jump in. You brought your Module 1 scorecard and your prototype. All that work from last session feeds directly into what we're doing today. The vulnerability you diagnosed? Thats the crack we're going to try to defend. So pull up your repo and have your scores handy — you'll need them in about two minutes.
+Quick reconnect before we jump in. You brought your Module 1 scorecard and your prototype. All that work from last session feeds directly into what we're doing today. The vulnerability you diagnosed? Thats the crack we're going to try to defend. So pull up your repo and have your scores handy — you'll need them now.
 
 ### Slide 5 — Moat Stress Test
 
