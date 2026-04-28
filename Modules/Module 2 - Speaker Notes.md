@@ -114,15 +114,14 @@ Heres a live example of adjacent expansion that still blows my mind. When Anthro
 
 ### Slide 17 — 90-Day Encroachment
 
-OK this is one of my favorite exercises in the whole course. Seriously, I look forward to this one every cohort.
+My favorite part of the course.
+I will pair you up. The defender presents their flywheel plus threats. The encroacher builds a concrete 90-day plan: weeks 1 through 4, what do you ship? Weeks 5 through 8, how do you poach users? Weeks 9 through 12, why don't users come back? Target the weakest flywheel loop — thats your entry point.
 
-Pair up with someone — ideally not the same partner from Module 1, mix it up a little. Six minutes per person. The defender presents their flywheel plus threats. The encroacher builds a concrete 90-day plan: weeks 1 through 4, what do you ship? Weeks 5 through 8, how do you poach users? Weeks 9 through 12, why don't users come back? Target the weakest flywheel loop — thats your entry point.
-
-Heres why this works: self-assessment is always generous. Always. I don't care how honest you think you are — when it's your own product, you soften the edges. A partner's attack plan surfaces blind spots you literally cannot see yourself. And the week-by-week structure forces specificity — no hiding behind "eventually someone might." If your partner is being too polite, tell them: you're not being helpful by being nice. The market won't be nice. I'd rather you feel the punch here than in a quarterly review. Have fun with it though — some of the best insights I've seen in this course come out of this exercise. People surprise themselves with how creative they can be when they're playing offense.
+A partner's attack plan surfaces blind spots you literally cannot see yourself. And the week-by-week structure forces specificity — no hiding behind "eventually someone might." If your partner is being too polite, tell them: you're not being helpful by being nice. The market won't be nice. People surprise themselves with how creative they can be when they're playing offense.
 
 ### Slide 18 — Kill Switch
 
-Three layers. First, abstraction — no direct provider calls in your code. Second, multi-model routing — tasks get routed by cost, quality, and latency. Third, an eval harness — an automated quality check. So let me ask: how many of you could swap providers in 48 hours? Show of hands. Yeah, almost nobody. I get it. Thats the normal answer. Don't feel bad about it.
+Three layers. First, abstraction — no direct provider calls in your code. Second, multi-model routing — tasks get routed by cost, quality, and latency. Third, an eval harness — an automated quality check. So let me ask: how many of you could swap providers in 48 hours? Show of hands. Yeah, almost nobody. I get it. Thats the normal answer. 
 
 That 48 hours is deliberately aggressive — it should make you uncomfortable. Most products are hard-wired to one provider and nobody thinks about it until that provider changes their pricing or their terms. And by then its a fire drill. The Kill Switch turns dependency into optionality. Its the difference between "we chose this provider" and "we're trapped with this provider."
 
@@ -138,7 +137,7 @@ Fifteen minutes — audit your vendor dependency. Here are the stress tests: wha
 
 And if anyone thinks "restricts your use case" feels hypothetical — oh, let me tell you. January 2026 — Anthropic quietly blocked subscription OAuth tokens from working outside Claude Code. February — rewrote the legal terms. March — shipped Claude Code Channels to replace the core reason people used third-party harnesses. April — cut the cord entirely. Four months from passive enforcement to full cutoff. If your product depends on a provider's subscription tier for cost arbitrage, that timeline is your portability risk made real. Four months. Thats not a lot of runway. Thats barely enough time to get alignment on a new vendor, let alone migrate.
 
-The Kill Switch Audit tool is linked on the slide — it walks through each dependency layer, stress-tests swap time, and gives you a concrete this-week, this-month, this-quarter action plan. Export it — you'll need it in Module 3.
+The Kill Switch Audit Markdown is in your repo next to the flywheel — you'll need it in Module 3.
 
 ### Slide 21 — Synthesis
 
