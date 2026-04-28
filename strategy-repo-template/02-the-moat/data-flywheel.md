@@ -38,6 +38,28 @@
 
 ---
 
+## Encroachment Threat Assessment
+
+### 1. Platform Encroachment
+**Attacker:**
+**Vector:**
+**Time-to-threat:**
+**% of value at risk:**
+
+### 2. Vertical Competitor
+**Attacker:**
+**Vector:**
+**Time-to-threat:**
+**% of value at risk:**
+
+### 3. Adjacent Expansion
+**Attacker:**
+**Vector:**
+**Time-to-threat:**
+**% of value at risk:**
+
+---
+
 ## 90-Day Encroachment Plan
 
 *Your partner played the Big Tech attacker. What was their plan to kill you?*
