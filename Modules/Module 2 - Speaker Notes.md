@@ -102,7 +102,7 @@ Go to your repo and select the Flywheel Scorer tool — it gives you a visual fl
 
 ### Slide 14 — Break
 
-Amazing work so far. Seriously — look at what you just did. You stress-tested your moat, named your weakest point out loud, watched a $1.5 billion company get eaten alive, and scored your own flywheel with actual numbers. Thats not a small thing. You deserved a break. Take five minutes — grab some water, stretch, check your phone, do whatever you need. Let those flywheel scores sit with you. When you come back: you're going to face an attacker and build your escape plan. The fun stuff. I promise.
+ Take five minutes — grab some water, stretch, 
 
 ### Slide 15 — Cameras On
 
