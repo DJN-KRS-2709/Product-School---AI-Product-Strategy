@@ -149,7 +149,7 @@ Now its time to tie it together. Fill in Component 2 of your living strategy: fl
 
 ### Slide 22 — Bridge to M3
 
-So here's what's coming next. Module 3 is the economics reality check — inference costs are compressing margins from 80% to 40%. Bring everything you built today. We've had two sessions on strategy and defensibility — Module 3 is the cold shower: does any of this make money? I'm not going to lie, it gets a little intense. But after what you did today — stress tests, encroachment attacks, kill switches — you've got the foundation. You'll be ready.
+So here's what's coming next. Module 3 is the economics reality check — inference costs are compressing margins from 80% to 30%. Bring everything you built today. We've had two sessions on strategy and defensibility — Module 3 is the cold shower: does any of this make money? I'm not going to lie, it gets a little intense. But after what you did today — stress tests, encroachment attacks, kill switches — you've got the foundation. You'll be ready.
 
 ### Slide 23 — Your Repo
 
