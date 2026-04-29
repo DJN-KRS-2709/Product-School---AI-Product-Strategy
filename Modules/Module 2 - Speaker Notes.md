@@ -116,15 +116,14 @@ Welcome back everyone! Quick reminder — cameras on please. The applied work co
 
 ### Slide 17 — 90-Day Encroachment
 
-OK this is one of my favorite exercises in the whole course. Seriously, I look forward to this one every cohort.
+OK this is one of my favorite exercises.
+I'm going to pair you up with someone. Six minutes per person. The defender presents their flywheel plus threats. The encroacher builds a concrete 90-day plan: weeks 1 through 4, what do you ship? Weeks 5 through 8, how do you poach users? Weeks 9 through 12, why don't users come back? Target the weakest flywheel loop — thats your entry point.
 
-Pair up with someone — ideally not the same partner from Module 1, mix it up a little. Six minutes per person. The defender presents their flywheel plus threats. The encroacher builds a concrete 90-day plan: weeks 1 through 4, what do you ship? Weeks 5 through 8, how do you poach users? Weeks 9 through 12, why don't users come back? Target the weakest flywheel loop — thats your entry point.
-
-Heres why this works: self-assessment is always generous. Always. I don't care how honest you think you are — when it's your own product, you soften the edges. A partner's attack plan surfaces blind spots you literally cannot see yourself. And the week-by-week structure forces specificity — no hiding behind "eventually someone might." If your partner is being too polite, tell them: you're not being helpful by being nice. The market won't be nice. I'd rather you feel the punch here than in a quarterly review. Have fun with it though — some of the best insights I've seen in this course come out of this exercise. People surprise themselves with how creative they can be when they're playing offense.
+Here is why it is important to be challenged: self-assessment is always generous. Always. I don't care how honest you think you are — when it's your own product, you soften the edges. A partner's attack plan surfaces blind spots you literally cannot see yourself. And the week-by-week structure forces specificity — no hiding behind "eventually someone might." If your partner is being too polite, tell them: you're not being helpful by being nice. The market won't be nice.  Have fun with it  — some of the best insights I've seen come out of exercisesb like this. People surprise themselves with how creative they can be when they're playing offense.
 
 ### Slide 18 — Kill Switch
 
-Three layers. First, abstraction — no direct provider calls in your code. Second, multi-model routing — tasks get routed by cost, quality, and latency. Third, an eval harness — an automated quality check. So let me ask: how many of you could swap providers in 48 hours? Show of hands. Yeah, almost nobody. I get it. Thats the normal answer. Don't feel bad about it.
+Three layers. First, abstraction — no direct provider calls in your code. Second, multi-model routing — tasks get routed by cost, quality, and latency. Third, an eval harness — an automated quality check. So let me ask: how many of you could swap providers in 48 hours? Yeah, almost nobody. I get it. Thats the normal answer. Don't feel bad about it.
 
 That 48 hours is deliberately aggressive — it should make you uncomfortable. Most products are hard-wired to one provider and nobody thinks about it until that provider changes their pricing or their terms. And by then its a fire drill. The Kill Switch turns dependency into optionality. Its the difference between "we chose this provider" and "we're trapped with this provider."
 
@@ -138,17 +137,15 @@ OK time to build your escape plan. This is the Kill Switch lab — the exercise 
 
 Fifteen minutes — audit your vendor dependency. Here are the stress tests: what if your provider doubles pricing? What if they restrict your use case? Walk out of this exercise with three concrete action items: this week, this month, this quarter. And I want specifics — not "build abstraction layer" but "abstract the embedding call in search by Friday." Specific enough that you could hand it to an engineer and they'd know exactly what to do. This checklist travels to Module 3 because portability directly affects your cost model.
 
-And if anyone thinks "restricts your use case" feels hypothetical — oh, let me tell you. January 2026 — Anthropic quietly blocked subscription OAuth tokens from working outside Claude Code. February — rewrote the legal terms. March — shipped Claude Code Channels to replace the core reason people used third-party harnesses. April — cut the cord entirely. Four months from passive enforcement to full cutoff. If your product depends on a provider's subscription tier for cost arbitrage, that timeline is your portability risk made real. Four months. Thats not a lot of runway. Thats barely enough time to get alignment on a new vendor, let alone migrate.
+And if anyone thinks "restricts your use case" feels hypothetical — oh, let me tell you. January This year (2026) — Anthropic quietly blocked subscription OAuth tokens from working outside Claude Code. February — rewrote the legal terms. March — shipped Claude Code Channels to replace the core reason people used third-party harnesses. April — cut the cord entirely. Four months from passive enforcement to full cutoff. If your product depends on a provider's subscription tier for cost arbitrage, that timeline is your portability risk made real. Four months. Thats not a lot of runway. Thats barely enough time to get alignment on a new vendor.
 
 The Kill Switch Audit tool is linked on the slide — it walks through each dependency layer, stress-tests swap time, and gives you a concrete this-week, this-month, this-quarter action plan. Export it — you'll need it in Module 3.
 
 ### Slide 21 — Synthesis
 
-OK so take a breath. Seriously, take an actual breath. Look at what you accomplished today. You stress-tested your moat, scored a flywheel, survived a 90-day attack from a partner who was actively trying to destroy your business, and built a portability plan. Thats a lot. Hope you enjoyed it — I know some of it was intense but you handled it really well.
+OK so take a breath and Look at what you accomplished today. You stress-tested your moat, scored a flywheel, survived a 90-day attack from a partner who was actively trying to destroy your business, and built a portability plan. Thats a lot. Hope you enjoyed it — I know some of it was intense but you handled it really well.
 
-Now its time to tie it together. Fill in Component 2 of your living strategy: flywheel scores, weakest loop, top threat, portability plan, swap readiness, and your three actions. The living strategy compounds across all six modules — if you skip Component 2, Module 3's cost model won't have the right inputs. So don't skip this, even if you're tired. Future-you will thank present-you. I promise.
-
-Once you've filled it in, pull it into the Living Strategy Builder and watch your flywheel scores and kill switch status show up in the dashboard. This is the first real visual you'll see in there: a flywheel radar chart that color-codes the strength of each loop. It's pretty satisfying to see it come together. Like, genuinely satisfying. You've earned that little dopamine hit.
+Now its time to tie it together. Fill in Component 2 of your living strategy: flywheel scores, weakest loop, top threat, portability plan, swap readiness, and your three actions. The living strategy compounds across all six modules — if you skip Component 2, Module 3's cost model won't have the right inputs. So don't skip this. Future-you will thank present-you. I promise.
 
 ### Slide 22 — Bridge to M3
 
