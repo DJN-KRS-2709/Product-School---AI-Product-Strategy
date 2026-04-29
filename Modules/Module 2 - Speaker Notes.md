@@ -155,22 +155,24 @@ So here's what's coming next. Module 3 is the economics reality check — infere
 
 Take a look at your repo now. `01-the-bet/` is done from last session. And now `02-the-moat/` has your flywheel scores, your kill switch audit, and your encroachment analysis. Two folders down, four to go. The living strategy is starting to take real shape. Every module adds a layer and by M6 this thing tells your complete strategy story.
 
-### Slide 24 — Complete
+### Slide 24 — Takeaways
 
-Look at what you accomplished today. You scored a data flywheel, survived a 90-day encroachment attack from a partner, and built a portability plan with real action items. Two big shifts: you went from claiming a data moat to proving compounding loops, and you went from vendor dependency to vendor optionality. Thats real progress. You should feel good about this one.
+This is the storytelling close — same three-act structure we used for the Notion case in Module 1 and the Jasper case earlier today. Bet → Crack → Correction. I lean on the visuals and tell the story out loud, because by this point in the session people are tired and a list of bullets just bounces off them. A story lands.
 
-### Slide 25 — Takeaways
+Walk it left to right. Act one — "our data is our moat" — say it the way a PM would say it in a pitch meeting, slightly proud, slightly defensive. Thats where most of the room walked in this morning. Then act two — flip the energy. Jasper. $1.5 billion. 70,000 customers. Eaten in months. And they didnt see it coming because they were grading their own homework. Pause there. Let it sit. Then act three — heres what you actually built today. Compounding loops, not stockpiles. Peer-tested honesty, not self-assessment. Forty-eight hour swap readiness, not vendor dependency. Three real shifts, three real artifacts.
 
-Three things to remember from today. First — its loops, not stockpiles. Data in a database isnt a moat. A product that gets smarter every time someone uses it — thats a moat. Second — depth beats features. Jasper had 70,000 customers and a $1.5 billion valuation and still got eaten because they sat at the chatbot end of the depth spectrum. Third — the Kill Switch is optionality. If you cant swap providers in 48 hours, you're not choosing your vendor — you're trapped with them. The three actions from your portability audit travel to Module 3.
+Land on the closing line — "most AI products live in Act 1. Today, you wrote your Act 3." Thats the whole module in one sentence. If you want to add one personal thing, this is the slide for it — a moment when you watched a team you cared about live in Act 1 and pay for it. Makes the lesson stickier than any framework.
 
-### Slide 26 — Extra Practice
+This slide also replaces the old "What You Accomplished Today" closer — Synthesis already does that work, no need to repeat it. The Takeaways slide is now the emotional close, not the recap.
+
+### Slide 25 — Extra Practice
 
 Two optional exercises if you want to go deeper. First — run the 90-day encroachment plan again, but this time YOU play the encroacher against a different product in your industry. What would you do? Second — review your kill switch audit and add technical detail to each action item. Make them specific enough that an engineer could pick them up. Next session is Module 3 — The Margin. Does any of this make money?
 
-### Slide 27 — Survey
+### Slide 26 — Survey
 
 QR code is on screen. Hope you enjoyed today — I know it was a lot. Like, genuinely a lot. But you handled it and you've got real artifacts to show for it. Fill out the survey before you go, it genuinely helps me make the next session better for you. Thanks everyone, amazing work today. See you next time.
 
-### Slide 28 — Q&A
+### Slide 27 — Q&A
 
 Alright, any final questions before we close? Feel free to unmute or drop them in the chat. And as always, Slack is open if something comes to you later. Great work today everyone. See you next time.
