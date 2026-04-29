@@ -94,21 +94,21 @@ Alright, this is where the real building happens. Everything from the first half
 
 ### Slide 13 — Map Your Flywheel
 
-You've got fifteen minutes on your own now and this is the big one. Score the four loops and write what you actually capture today. And I mean today — "we plan to build this" is a 1, not a 3. I know that feels harsh but I promise generous scores only hurt you later. I've watched people give themselves 4s on loops they haven't even started building yet. Don't be that person. Fifteen minutes instead of ten because this is the core artifact of the module. If you rush it, you'll score generously and the peer challenge coming up next won't bite. So be honest.
+You've got fifteen minutes on your own now and this is the big one. Score the four loops and write what you actually capture today. And I mean today — "we plan to build this" is a 1, not a 3. I know that feels harsh but I promise generous scores only hurt you later. I've watched people give themselves 4s on loops they haven't even started building yet. Don't be that person. If you score generously and the peer challenge coming up next won't bite. So be honest.
 
-I'll be walking around — and fair warning, if you say you're capturing preferences but your product doesn't actually personalize model behavior, I'm going to push back. Thats a 1. I'm not trying to be mean, I'm trying to be useful. There's a difference. And you'll thank me when your partner tries to attack your flywheel in about twenty minutes.
+I'll be walking around So please shout if you need any help.
 
 Go to your repo and select the Flywheel Scorer tool — scores each loop, and flags the weakest one. It also pulls in your Module 1 vulnerability data if you saved it. 
 
 ### Slide 14 — Encroachment Threats
 
-There are three vectors I want you to think about: platform encroachment, vertical competitor, and adjacent expansion. For each one, name the attacker, identify the vector, estimate the time-to-threat, and the percentage of your value at risk. Go to your repo, open `02-the-moat/data-flywheel.md`, and scroll down to the Encroachment Threat Assessment section — fill in all three vectors there. We use three vectors because most people only think about direct competitors. Platform and adjacent are the two that blindside you — and honestly, they're the ones that actually kill products. Direct competition is a slow burn. Platform encroachment is a house fire. Big difference.
+There are three vectors I want you to think about: platform encroachment, vertical competitor, and adjacent expansion. For each one, name the attacker, identify the vector, estimate the time-to-threat, and the percentage of your value at risk. Go to your repo, open `02-the-moat/data-flywheel.md`, and scroll down to the Encroachment Threat Assessment section — fill in all three vectors there. We use three vectors because most people only think about direct competitors. Platform and adjacent are the two that blindside you — and honestly, they're the ones that actually kill products. Direct competition is a slow burn. Platform encroachment is a house fire.
 
-Heres a live example of adjacent expansion that still blows my mind. When Anthropic cracked down on third-party agent harnesses using Claude subscriptions in early 2026, OpenAI treated it as a customer acquisition channel. They hired OpenClaw's creator in February, publicly endorsed third-party harness use with Codex subscriptions, and positioned openness as a differentiator while Anthropic was locking down. One provider's governance decision became another provider's growth lever — thats encroachment through policy, not features. Wild, right? Nobody saw that coming.
+Heres a live example of adjacent expansion that still blows my mind. When Anthropic cracked down on third-party agent harnesses using Claude subscriptions early this year (2026), OpenAI treated it as a customer acquisition channel. They hired OpenClaw's creator in February, publicly endorsed third-party harness use with Codex subscriptions, and positioned openness as a differentiator while Anthropic was locking down. One provider's governance decision became another provider's growth lever — thats encroachment through policy, not features. Wild, right? Nobody saw that coming.
 
 ### Slide 15 — Break
 
-Amazing work so far. Seriously — look at what you just did. You scored your flywheel and mapped your encroachment threats. Thats not a small thing. You deserved a break. Take five minutes — grab some water, stretch, check your phone, do whatever you need. Let those scores and threats sit with you. When you come back: your partner is going to attack your moat for real with a 90-day plan. The fun stuff. I promise.
+Amazing work so far. You scored your flywheel and mapped your encroachment threats. You deserved a break. Take five minutes — grab some water, stretch. Let those scores and threats sit with you. When you come back: your partner is going to attack your moat for real with a 90-day plan. The fun stuff. 
 
 ### Slide 16 — Cameras On
 
