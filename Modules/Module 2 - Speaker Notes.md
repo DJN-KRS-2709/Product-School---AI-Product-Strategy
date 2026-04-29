@@ -48,7 +48,7 @@ Now heres the thing — you don't need all eight. You need ONE that's actually r
 
 So which moat is yours? Name it in one word. And then — what other company masters one of these? I want to hear it from you. Either raise your hand and unmute, or post it in the chat. If you can't name your moat in one word, by the way, thats a finding. Thats not a failure — thats actually one of the most useful things you could discover today. Because you can't defend what you can't name.
 
-The way to think about this: most products need only one or two genuine moats, not all eight. This grid gives you vocabulary for naming what's defensible. It's not a checklist to complete.
+The way to think about this: most products need only one or two genuine moats, not all eight. This grid gives you vocabulary for naming what's defensible. It's not a checklist to complete — it's a mirror.
 
 ### Slide 7 — $1.5B Wrapper
 
@@ -62,19 +62,19 @@ I'm showing you this right after the 8 Moats because the typology is abstract un
 
 OK heres a spectrum that I think makes this really concrete. On the left: Chatbot — you can switch in a day. On the right: Operating System — switching means rebuilding everything. Four examples along the way: Zendesk AI handles tickets, Notion AI sits inside docs, GitHub Copilot touches your editor plus PRs plus CI, and NetSuite runs the entire business. See the chatbot end? Jasper sat right there. The OS end? That's NetSuite. And you can kinda feel the difference, right? 
 
-Where does your product sit? choose a Point on this spectrum. And here's the uncomfortable question: could your users switch in a weekend? If yes, you're Jasper. I don't say that to be mean — I say it because I've watched it happen to products I cared about. Now if someone's thinking "we're early stage, we have no depth yet" — that's totally fine. Cold-start is temporary. Every product starts shallow. The real question is whether your architecture is designed to escape it. Thats what separates intentional from accidental. And thats what the rest of today is about.
+Where does your product sit? Point to a spot on this spectrum. Lets hear two or three. And here's the uncomfortable question: could your users switch in a weekend? If yes, you're Jasper. I don't say that to be mean — I say it because I've watched it happen to products I cared about. Now if someone's thinking "we're early stage, we have no depth yet" — that's totally fine. Cold-start is temporary. Every product starts shallow. The real question is whether your architecture is designed to escape it. Thats what separates intentional from accidental. And thats what the rest of today is about.
 
 ### Slide 9 — Loops, Not Data
 
 I think this might be the most important reframe of the day. 
 
-Everyone claims a data advantage. Every pitch deck I've ever read says "proprietary data moat" somewhere in the deck. Its like a law of nature at this point. But lets be honest — data in a database isn't a moat. It's a cost center. The moat is whether your product gets smarter every time someone uses it. Thats a loop, not a stockpile. Look at the red question on screen: "When your users correct your AI, does that signal disappear — or compound?"
+Everyone claims a data advantage. Every pitch deck I've ever read says "proprietary data moat" somewhere around slide 7. Its like a law of nature at this point. But lets be honest — data in a database isn't a moat. It's a cost center. The moat is whether your product gets smarter every time someone uses it. Thats a loop, not a stockpile. Look at the red question on screen: "When your users correct your AI, does that signal disappear — or compound?"
 
-This matters because "data moat" is the thing every senior PM defaults to. It sounds smart. It slides easily into a strategy deck. But almost nobody actually has compounding loops. That distinction sets up the flywheel as a real mechanism, not just a concept. So keep that question in your head as we go into the next slide. It's the kind of question that changes how you see your product.
+This matters because "data moat" is the thing every senior PM defaults to. It sounds smart. It slides easily into a strategy deck. But almost nobody actually has compounding loops. That distinction sets up the flywheel as a real mechanism, not just a concept. So keep that question in your head as we go into the next slide. Seriously, write it down if you need to. It's the kind of question that changes how you see your product.
 
 ### Slide 10 — Data Flywheel
 
-This is the engine that turns depth into distance. And this is why Jasper's story ended the way it did — they never built it. Look at the  diagram: users interact, you capture the signal, the model improves, you get better outputs, usage goes up, and the cycle starts again. Beautiful in theory. Hard in practice. Really hard, actually.
+This is the engine that turns depth into distance. And this is why Jasper's story ended the way it did — they never built it. Look at the circular diagram: users interact, you capture the signal, the model improves, you get better outputs, usage goes up, and the cycle starts again. Beautiful in theory. Hard in practice. Really hard, actually.
 
 There are three data types that actually compound. First, corrections — when a user fixes your AI, that's proprietary training data. Nobody else has it. Think about that. Every time a user goes "no, thats wrong, it should be THIS," thats gold. Second, preferences — every edit builds a taste profile. Third, domain context — industry-specific knowledge that generic models will never have because they'll never see the inside of your customers' workflows.
 
@@ -86,7 +86,7 @@ Four loops: Correction, Preference, Domain Context, Network. Score each one from
 
 Now, scoring forces specificity, but the loop set is yours to adapt — your flywheel might have two loops or six. This isn't a fixed template, it's a starting point. Make it yours.
 
-Heres the thing: abstract concepts don't change behavior. Numbers do. Once you see a 1 or 2 staring back at you, the priority becomes obvious. You stop debating philosophy and start fixing plumbing. I've seen this happen in every cohort — the moment someone writes down a number, the conversation changes completely.
+Heres the thing: abstract concepts don't change behavior. Numbers do. Once you see a 1 or 2 staring back at you, the priority becomes obvious. You stop debating philosophy and start fixing plumbing. I've seen this happen in every cohort — the moment someone writes down a number, the conversation changes completely. And this is the last thing before the break, so let it sit with you. Don't rush through it. Give yourself permission to be honest here.
 
 ### Slide 12 — Lab: Data Flywheel
 
@@ -94,25 +94,25 @@ Alright, this is where the real building happens. Everything from the first half
 
 ### Slide 13 — Map Your Flywheel
 
-You've got fifteen minutes on your own now. Score the four loops and write what you actually capture today. And I mean today — "we plan to build this" is a 1, not a 3. I know that feels harsh but I promise generous scores only hurt you later. I've watched people give themselves 4s on loops they haven't even started building yet. Don't be that person. If you rush it, you'll score generously and the peer challenge coming up next won't bite. So be honest.
+You've got fifteen minutes on your own now and this is the big one. Score the four loops and write what you actually capture today. And I mean today — "we plan to build this" is a 1, not a 3. I know that feels harsh but I promise generous scores only hurt you later. I've watched people give themselves 4s on loops they haven't even started building yet. Don't be that person. Fifteen minutes instead of ten because this is the core artifact of the module. If you rush it, you'll score generously and the peer challenge coming up next won't bite. So be honest.
 
-I'll be walking around — so please ping me if you need anything.
+I'll be walking around — and fair warning, if you say you're capturing preferences but your product doesn't actually personalize model behavior, I'm going to push back. Thats a 1. I'm not trying to be mean, I'm trying to be useful. There's a difference. And you'll thank me when your partner tries to attack your flywheel in about twenty minutes.
 
 Go to your repo and select the Flywheel Scorer tool — scores each loop, and flags the weakest one. It also pulls in your Module 1 vulnerability data if you saved it. 
 
-### Slide 14 — Break
-
- Take five minutes — grab some water, stretch, 
-
-### Slide 15 — Cameras On
-
-Welcome back everyone! Quick reminder — cameras on please. The applied work coming up is partner-heavy and its way better when you can see each others faces. Plus some of the exercises involve pointing at your screen, which is hard to do with cameras off. Lets stay engaged for this home stretch.
-
-### Slide 16 — Encroachment Threats
+### Slide 14 — Encroachment Threats
 
 There are three vectors I want you to think about: platform encroachment, vertical competitor, and adjacent expansion. For each one, name the attacker, identify the vector, estimate the time-to-threat, and the percentage of your value at risk. Go to your repo, open `02-the-moat/data-flywheel.md`, and scroll down to the Encroachment Threat Assessment section — fill in all three vectors there. We use three vectors because most people only think about direct competitors. Platform and adjacent are the two that blindside you — and honestly, they're the ones that actually kill products. Direct competition is a slow burn. Platform encroachment is a house fire. Big difference.
 
 Heres a live example of adjacent expansion that still blows my mind. When Anthropic cracked down on third-party agent harnesses using Claude subscriptions in early 2026, OpenAI treated it as a customer acquisition channel. They hired OpenClaw's creator in February, publicly endorsed third-party harness use with Codex subscriptions, and positioned openness as a differentiator while Anthropic was locking down. One provider's governance decision became another provider's growth lever — thats encroachment through policy, not features. Wild, right? Nobody saw that coming.
+
+### Slide 15 — Break
+
+Amazing work so far. Seriously — look at what you just did. You scored your flywheel and mapped your encroachment threats. Thats not a small thing. You deserved a break. Take five minutes — grab some water, stretch, check your phone, do whatever you need. Let those scores and threats sit with you. When you come back: your partner is going to attack your moat for real with a 90-day plan. The fun stuff. I promise.
+
+### Slide 16 — Cameras On
+
+Welcome back everyone! Quick reminder — cameras on please. The applied work coming up is partner-heavy and its way better when you can see each others faces. Plus some of the exercises involve pointing at your screen, which is hard to do with cameras off. Lets stay engaged for this home stretch.
 
 ### Slide 17 — 90-Day Encroachment
 
