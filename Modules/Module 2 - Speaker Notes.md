@@ -30,13 +30,13 @@ Quick look at where we are in the course. Module 1 was The Bet — you diagnosed
 
 ### Slide 4 — Recall from M1
 
-Quick reconnect before we jump in. You brought your Module 1 scorecard and your prototype. All that work from last session feeds directly into what we're doing today. The vulnerability you diagnosed? Thats the crack we're going to try to defend. So pull up your repo and have your scores handy — you'll need them in about two minutes.
+Quick reconnect before we jump in. You brought your Module 1 scorecard and your prototype. All that work from last session feeds directly into what we're doing today. The vulnerability you diagnosed? Thats the crack we're going to try to defend. So pull up your repo and have your scores handy — you'll need them now.
 
 ### Slide 5 — Moat Stress Test
 
-OK so pull out your Module 1 scorecard. Find the lowest score — thats your crack, your weak spot. Now I want you to name one specific company that could exploit it. And I don't mean "Big Tech" — give me a real name. A company with a face and a product page. You've got two minutes to write it down, then three minutes to share with the room.
+OK so pull out your Module 1 scorecard. Find the lowest score — thats your crack, your weak spot. Now I want you to name one specific company that could exploit it. And I don't mean "Big Tech" — give me a real name. A company with a face and a product page. You've got two minutes to write it down. 
 
-We're doing this first because it anchors everything that follows in something personal. Every concept I'm about to teach you is going to land harder because you already feel the threat. I know it's a little uncomfortable to start here — nobody loves staring at their weakest point first thing in the morning. But trust me, be honest with yourselves. The generous answers don't help anybody. I learned that one the hard way.
+We're doing this first because it anchors everything that follows in something personal. Every concept I'm about to teach you is going to land harder because you already feel the threat. I know it's a little uncomfortable to start here But trust me generous answers don't help anybody. I learned that one the hard way.
 
 ### Slide 6 — 8 Moats
 
@@ -46,7 +46,7 @@ Bloomberg sits on proprietary data that compounds with every terminal session. T
 
 Now heres the thing — you don't need all eight. You need ONE that's actually real. Strategy is being excellent at the minimum number of things, not average at many. And for AI products specifically, Data and Workflow are the two that matter most. I spent way too long early in my career trying to be defensible on five dimensions at once. Spoiler: I wasn't defensible on any of them. Learned that lesson the expensive way.
 
-So which moat is yours? Name it in one word. Go ahead, just say it out loud — don't overthink it. And then — what other company masters one of these? I want to hear two or three of you. If you can't name your moat in one word, by the way, thats a finding. Thats not a failure — thats actually one of the most useful things you could discover today. Because you can't defend what you can't name.
+So which moat is yours? Name it in one word. And then — what other company masters one of these? I want to hear it from you. Either raise your hand and unmute, or post it in the chat. If you can't name your moat in one word, by the way, thats a finding. Thats not a failure — thats actually one of the most useful things you could discover today. Because you can't defend what you can't name.
 
 The way to think about this: most products need only one or two genuine moats, not all eight. This grid gives you vocabulary for naming what's defensible. It's not a checklist to complete.
 
@@ -54,19 +54,19 @@ The way to think about this: most products need only one or two genuine moats, n
 
 OK so you just named your moat. Heres what happens when it isn't real. Let me tell you a story.
 
-Jasper. $125 million raised, $1.5 billion valuation, 70,000 customers. In 2022, they were THE AI startup. I mean THE one. Fastest growing, most hyped, investors literally fighting to get in. Every conference, every blog post, every "future of AI" list — Jasper was on it. They were the darling. And then ChatGPT launched. OpenAI added plugins. Google shipped Gemini into Workspace. And overnight — and I mean practically overnight — AI writing went from premium product to free feature baked into tools everyone already used. Jasper had to pivot to enterprise marketing workflows. The trajectory: from 1 to 100 and then 100 to 40. Thats not a dip. Thats an identity crisis. Sound familiar? It should, because this pattern is everywhere right now.
+Jasper. $125 million raised, $1.5 billion valuation, 70,000 customers. In 2022, they were THE AI startup. I mean THE one. Fastest growing, most hyped, investors literally fighting to get in. Every conference, every blog post, every "future of AI" list — Jasper was on it. They were the darling. And then ChatGPT launched. OpenAI added plugins. Google shipped Gemini into Workspace. And overnight — and I mean literally overnight — AI writing went from premium product to free feature baked into tools everyone already used. Jasper had to pivot to enterprise marketing workflows. The trajectory: from 1 to 100 and then 100 to 40. Thats not a dip. Thats an identity crisis. Sound familiar? It should, because this pattern is everywhere right now.
 
-I'm showing you this right after the 8 Moats because the typology is abstract until you see a $1.5 billion company get eaten in real time. Jasper thought they had a moat — 70,000 customers, fastest growth in AI. They didn't. So now I want to ask you: where is YOUR product — wrapper (A thin UI layer on top of someone else's AI model that dies the moment the model provider ships the same feature natively.)  or workflow (A product that orchestrates a process around the model — accumulating proprietary data, embedding into user operations, and surviving any model swap because the value is in the orchestration, not the API call.) ? 
+I'm showing you this right after the 8 Moats because the typology is abstract until you see a $1.5 billion company get eaten in real time. Jasper thought they had a moat — 70,000 customers, fastest growth in AI. They didn't. So now I want to ask you: what is YOUR product — wrapper (A thin UI layer on top of someone else's AI model that dies the moment the model provider ships the same feature natively.)  or workflow (A product that orchestrates a process around the model — accumulating proprietary data, embedding into user operations, and surviving any model swap because the value is in the orchestration, not the API call.) ? 
 
 ### Slide 8 — Depth Spectrum
 
-OK heres a spectrum that I think makes this really concrete. On the left: Chatbot — you can switch in a day. On the right: Operating System — switching means rebuilding everything. Four examples along the way: Zendesk AI handles tickets, Notion AI sits inside docs, GitHub Copilot touches your editor plus PRs plus CI, and NetSuite runs the entire business. See the chatbot end? Jasper sat right there. The OS end? That's NetSuite. And you can kinda feel the difference, right? It's almost physical.
+OK heres a spectrum that I think makes this really concrete. On the left: Chatbot — you can switch in a day. On the right: Operating System — switching means rebuilding everything. Four examples along the way: Zendesk AI handles tickets, Notion AI sits inside docs, GitHub Copilot touches your editor plus PRs plus CI, and NetSuite runs the entire business. See the chatbot end? Jasper sat right there. The OS end? That's NetSuite. And you can kinda feel the difference, right? 
 
 Where does your product sit? choose a Point on this spectrum. And here's the uncomfortable question: could your users switch in a weekend? If yes, you're Jasper. I don't say that to be mean — I say it because I've watched it happen to products I cared about. Now if someone's thinking "we're early stage, we have no depth yet" — that's totally fine. Cold-start is temporary. Every product starts shallow. The real question is whether your architecture is designed to escape it. Thats what separates intentional from accidental. And thats what the rest of today is about.
 
 ### Slide 9 — Loops, Not Data
 
-Quick pivot here and I think this might be the most important reframe of the day. 
+I think this might be the most important reframe of the day. 
 
 Everyone claims a data advantage. Every pitch deck I've ever read says "proprietary data moat" somewhere in the deck. Its like a law of nature at this point. But lets be honest — data in a database isn't a moat. It's a cost center. The moat is whether your product gets smarter every time someone uses it. Thats a loop, not a stockpile. Look at the red question on screen: "When your users correct your AI, does that signal disappear — or compound?"
 
@@ -98,7 +98,7 @@ You've got fifteen minutes on your own now. Score the four loops and write what 
 
 I'll be walking around — so please ping me if you need anything.
 
-Go to your repo and select the Flywheel Scorer tool — it gives you a visual flywheel, scores each loop, and flags the weakest one. It also pulls in your Module 1 vulnerability data if you saved it. Open it up and let it do the heavy lifting on the visualization.
+Go to your repo and select the Flywheel Scorer tool — scores each loop, and flags the weakest one. It also pulls in your Module 1 vulnerability data if you saved it. 
 
 ### Slide 14 — Break
 
