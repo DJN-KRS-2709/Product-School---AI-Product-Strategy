@@ -163,15 +163,15 @@ Now, here's where it gets interesting. The teams getting eaten in the same windo
 
 And here's the part I love most. When Anthropic released Claude 3.5 Sonnet, Cursor shipped support for it the same week. *Same week.* That doesn't happen by accident. It only happens if you've architected for portability from day one — abstraction layer, multi-model routing, eval harness. Cursor wasn't doing a six-week migration project while their competitors were. They were already there. They got to use the better model immediately because they had built the Kill Switch before they needed it. That's takeaway three: **vendor portability is strategy, not ops.** The next great model is going to drop on a Tuesday. The teams with optionality ship support on Wednesday. The teams without it spend a quarter unwinding lock-in while the market moves on. That's why your three actions from today — this week, this month, this quarter — matter so much.
 
-Three takeaways, one company, one story. Cursor built loops instead of claiming a stockpile, scored their own moat honestly instead of writing a defensible-sounding pitch deck, and architected portability before they needed it. You just did the same thing in three hours — flywheel scored, partner attack survived, Kill Switch designed. Now go ship it.
+Three takeaways, one company, one story. Cursor built loops instead of claiming a stockpile, scored their own moat honestly instead of writing a defensible-sounding pitch deck, and architected portability before they needed it. You just did the same thing  — flywheel scored, partner attack survived, Kill Switch designed.
 
 ### Slide 25 — Extra Practice
 
-Two optional exercises if you want to go deeper. First — run the 90-day encroachment plan again, but this time YOU play the encroacher against a different product in your industry. What would you do? Second — review your kill switch audit and add technical detail to each action item. Make them specific enough that an engineer could pick them up. Next session is Module 3 — The Margin. Does any of this make money?
+Two optional exercises if you want to go deeper. First — run the 90-day encroachment plan again, but this time YOU play the encroacher against a different product in your industry. What would you do? Second — review your kill switch audit and add technical detail to each action item. Make them specific enough that an engineer could pick them up. Next session is Module 3 — The Margin. Does any of this make money? Looking forward to that. 
 
 ### Slide 26 — Survey
 
-QR code is on screen. Hope you enjoyed today — I know it was a lot. Like, genuinely a lot. But you handled it and you've got real artifacts to show for it. Fill out the survey before you go, it genuinely helps me make the next session better for you. Thanks everyone, amazing work today. See you next time.
+QR code is on screen. Hope you enjoyed today. Fill out the survey before you go, it genuinely helps me make the next session better for you. Thanks everyone, and also thank you, everybody, for the feedback in regards to the final submission. The better we can learn and understand where you are coming from, the better we can also optimize the course.
 
 ### Slide 27 — Q&A
 
