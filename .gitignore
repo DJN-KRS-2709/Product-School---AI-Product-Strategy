@@ -1,0 +1,7 @@
+# macOS metadata
+.DS_Store
+
+# Instructor-only material. Keep these local and out of the shareable repo.
+private/
+Modules/*Speaker Notes*.md
+Pitch/*Speaker Notes*.md
