@@ -106,9 +106,6 @@
     transition: border-color 0.2s, box-shadow 0.2s;
     outline: none;
   }
-  .field input#leader, .field input#filler, .field input#killer {
-    font-family: 'DM Sans', sans-serif; font-size: 13px;
-  }
   .field input:focus {
     border-color: var(--blue); box-shadow: 0 0 0 3px rgba(91,141,239,0.12);
   }
@@ -125,47 +122,12 @@
     font-family: 'JetBrains Mono', monospace;
     font-size: 24px; font-weight: 700; color: var(--green);
   }
-  .calc-row .margin-note {
-    margin-top: 12px; font-size: 13px; color: var(--text-dim); line-height: 1.5;
-    padding-top: 12px; border-top: 1px solid var(--border);
-  }
-  .calc-row .margin-note strong { color: var(--blue); }
-
   .tip {
     margin-top: 14px; padding: 12px 16px;
     background: var(--blue-bg); border: 1px solid rgba(91,141,239,0.12);
     border-radius: var(--radius); font-size: 12px; color: var(--text-dim); line-height: 1.5;
   }
   .tip strong { color: var(--blue); }
-
-  .wtp-legend {
-    display: flex; flex-wrap: wrap; gap: 14px; margin-top: 14px; font-size: 11px; color: var(--text-dim);
-  }
-  .wtp-legend span { display: flex; align-items: center; gap: 6px; }
-  .wtp-legend i {
-    width: 12px; height: 12px; border-radius: 3px; display: inline-block;
-  }
-  .wtp-legend .lg { background: rgba(61,214,140,0.45); border: 1px solid var(--green); }
-  .wtp-legend .ly { background: rgba(240,192,64,0.35); border: 1px solid var(--yellow); }
-  .wtp-legend .lr { background: rgba(239,91,91,0.35); border: 1px solid var(--red); }
-  .wtp-legend .ln { background: var(--surface2); border: 1px solid var(--border); }
-
-  .spectrum-wrap { margin-top: 16px; }
-  .spectrum-svg {
-    width: 100%; height: 56px; display: block;
-    border-radius: 8px; overflow: hidden;
-    border: 1px solid var(--border);
-    background: var(--surface2);
-  }
-  .spectrum-labels {
-    display: flex; justify-content: space-between; flex-wrap: wrap;
-    gap: 8px; margin-top: 8px; font-size: 10px; color: var(--text-muted);
-    font-family: 'JetBrains Mono', monospace;
-  }
-  .spectrum-placeholder {
-    font-size: 12px; color: var(--text-muted); text-align: center;
-    padding: 20px; border: 1px dashed var(--border); border-radius: var(--radius);
-  }
 
   .footer-note {
     text-align: center; font-size: 12px; color: var(--text-muted);
@@ -200,21 +162,6 @@
     .pick-grid { grid-template-columns: 1fr; }
     .input-grid { grid-template-columns: 1fr; }
   }
-
-  .strategy-cta {
-    margin-top: 20px; margin-bottom: 4px; padding: 14px 18px;
-    background: rgba(160,123,232,0.06); border: 1px solid rgba(160,123,232,0.2);
-    border-radius: 10px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
-  }
-  .strategy-cta-text { flex: 1; min-width: 200px; font-size: 13px; color: var(--text-dim); line-height: 1.5; }
-  .strategy-cta-text strong { color: var(--purple, #a07be8); }
-  .strategy-cta-btn {
-    font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 700;
-    padding: 8px 16px; border-radius: 8px; text-decoration: none;
-    background: rgba(160,123,232,0.12); border: 1px solid rgba(160,123,232,0.3);
-    color: #a07be8; white-space: nowrap; transition: all 0.2s;
-  }
-  .strategy-cta-btn:hover { background: rgba(160,123,232,0.2); color: #fff; border-color: #a07be8; }
 </style>
 </head>
 <body>
@@ -223,7 +170,7 @@
   <div class="header">
     <div class="badge">Module 3 — The Margin</div>
     <h1>Pricing Strategy Designer</h1>
-    <p>Choose how you compete, how you charge, what you bundle — then sanity-check revenue against willingness to pay and your margin model.</p>
+    <p>A tiny walkthrough for the pricing block in <code>03-the-margin/cost-curve.md</code>: pick a posture, choose how to charge, then set base + metered pricing.</p>
   </div>
 
   <!-- Card 1 -->
@@ -283,50 +230,22 @@
           <div class="ex">e.g. Intercom Fin, Harvey</div>
         </div>
       </div>
-      <div class="callout">
-        <strong>Data callout:</strong> 59% of AI companies bundle into existing plan, 23% sell as add-on, 18% standalone — Palle Broe, 44 companies analyzed
-      </div>
     </div>
   </div>
 
   <!-- Card 3 -->
   <div class="card">
     <div class="card-head">
-      <div class="card-icon" style="background:var(--yellow); color:#111;">3</div>
-      <div><div class="card-title">Leaders, Fillers &amp; Killers</div><div class="card-sub">Bundling logic</div></div>
-    </div>
-    <div class="card-body">
-      <div class="input-grid single">
-        <div class="field">
-          <label>Leader</label>
-          <textarea id="leader" placeholder="e.g. AI code completion" rows="2"></textarea>
-          <div class="hint">What's the must-have AI feature users come for?</div>
-        </div>
-        <div class="field" style="margin-top:4px;">
-          <label>Filler</label>
-          <textarea id="filler" placeholder="e.g. AI summaries, translations" rows="2"></textarea>
-          <div class="hint">What AI feature bumps ARPU with marginal cost?</div>
-        </div>
-        <div class="field" style="margin-top:4px;">
-          <label>Killer</label>
-          <textarea id="killer" placeholder="e.g. AI image generation" rows="2"></textarea>
-          <div class="hint">What would kill the bundle if included? → Sell as add-on</div>
-        </div>
-      </div>
-      <div class="tip">
-        <strong>70% rule:</strong> If &gt;70% of users use the AI feature, bundle it. &lt;70% but high-value → add-on.
-      </div>
-    </div>
-  </div>
-
-  <!-- Card 4 -->
-  <div class="card">
-    <div class="card-head">
-      <div class="card-icon" style="background:var(--green);">4</div>
-      <div><div class="card-title">Price Your Product</div><div class="card-sub">Estimated revenue per user</div></div>
+      <div class="card-icon" style="background:var(--green);">3</div>
+      <div><div class="card-title">Set the Pricing Structure</div><div class="card-sub">Base fee + metered unit</div></div>
     </div>
     <div class="card-body">
       <div class="input-grid">
+        <div class="field" style="grid-column:1/-1;">
+          <label>Unit of work you're metering</label>
+          <input type="text" id="unitLabel" placeholder="e.g. resolved conversations, reports generated, workflows completed">
+          <div class="hint">Name the customer outcome, not the internal model action.</div>
+        </div>
         <div class="field">
           <label>Base fee ($/month)</label>
           <input type="number" id="baseFee" placeholder="e.g. 29" min="0" step="0.01">
@@ -335,71 +254,20 @@
           <label>Price per unit ($)</label>
           <input type="number" id="pricePerUnit" placeholder="e.g. 0.50" min="0" step="0.001">
         </div>
-        <div class="field" style="grid-column:1/-1;">
-          <label>Unit of work you're metering</label>
-          <input type="text" id="unitLabel" placeholder="e.g. resolved conversations, documents processed">
-        </div>
         <div class="field">
-          <label>Estimated units per user / month</label>
+          <label>Optional: estimated units per user / month</label>
           <input type="number" id="unitsPerUser" placeholder="e.g. 120" min="0" step="1">
         </div>
       </div>
       <div class="calc-row">
-        <div class="label">Estimated revenue per user / month</div>
+        <div class="label">Implied revenue per user / month</div>
         <div class="value" id="revPerUser">$0.00</div>
-        <div class="margin-note" id="marginCompare" style="display:none;"></div>
+        <div class="hint" style="margin-top:6px;">Use this as a sample number during the walkthrough. Students can paste the exported block into their repo and refine later.</div>
       </div>
     </div>
   </div>
 
-  <!-- Card 5 -->
-  <div class="card">
-    <div class="card-head">
-      <div class="card-icon" style="background:var(--red);">5</div>
-      <div><div class="card-title">WTP Quick-Check</div><div class="card-sub">Willingness to pay (Madhavan)</div></div>
-    </div>
-    <div class="card-body">
-      <div class="input-grid">
-        <div class="field">
-          <label>Acceptable price</label>
-          <input type="number" id="wtpOk" placeholder="$ feels fair" min="0" step="0.01">
-          <div class="hint">What price would customers consider acceptable?</div>
-        </div>
-        <div class="field">
-          <label>Expensive but they'd pay</label>
-          <input type="number" id="wtpHigh" placeholder="$ stretch" min="0" step="0.01">
-          <div class="hint">What price would feel expensive but they'd still pay?</div>
-        </div>
-        <div class="field" style="grid-column:1/-1;">
-          <label>Prohibitively expensive</label>
-          <input type="number" id="wtpNo" placeholder="$ no deal" min="0" step="0.01">
-          <div class="hint">What price is prohibitively expensive?</div>
-        </div>
-      </div>
-      <div class="wtp-legend">
-        <span><i class="lg"></i> Sweet spot (acceptable → expensive)</span>
-        <span><i class="ly"></i> Premium territory (expensive → prohibitive)</span>
-        <span><i class="lr"></i> Rejection zone (above prohibitive)</span>
-        <span><i class="ln"></i> Below acceptable</span>
-        <span style="color:var(--blue);"><span style="display:inline-block;width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-bottom:7px solid var(--blue);vertical-align:middle;margin-right:4px;"></span> Current price (Card 4)</span>
-      </div>
-      <div class="spectrum-wrap" id="spectrumWrap">
-        <div class="spectrum-placeholder" id="spectrumPh">Enter all three WTP prices to see the spectrum and your current price marker.</div>
-        <svg class="spectrum-svg" id="spectrumSvg" style="display:none;" viewBox="0 0 400 48" preserveAspectRatio="none" aria-hidden="true"></svg>
-        <div class="spectrum-labels" id="spectrumLabels" style="display:none;"></div>
-        <div class="tip" id="wtpOrderNote" style="display:none;margin-top:10px;padding:10px 14px;font-size:11px;">
-          <strong>Note:</strong> For the legend to match the bar, use <strong>acceptable ≤ expensive ≤ prohibitive</strong>. Showing four bands by sorted price until then.
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <p class="footer-note">Your pricing strategy feeds into the <strong style="color:var(--text-dim);">Living Strategy Builder (Component 3)</strong> and the <strong style="color:var(--text-dim);">M6 Pitch</strong>.</p>
-
-  <div class="strategy-cta">
-    <div class="strategy-cta-text"><strong>Component 3 saved.</strong> Open the Living Strategy Builder to see your Margin in the dashboard.</div>
-    <a href="Living Strategy Builder.html" class="strategy-cta-btn" target="_blank">Open Living Strategy →</a>
-  </div>
+  <p class="footer-note">Copy this into <strong style="color:var(--text-dim);">03-the-margin/cost-curve.md</strong> under the Pricing Strategy section.</p>
   <div class="actions">
     <button type="button" class="btn" onclick="resetAll()">Reset</button>
     <button type="button" class="btn" onclick="copyToClipboard()">Copy as Text</button>
@@ -411,7 +279,6 @@
 
 <script>
 const KEY = 'aps-m3-pricing';
-const MARGIN_KEY = 'aps-m3-margin';
 const $ = id => document.getElementById(id);
 
 let strategy = null;
@@ -421,16 +288,10 @@ function getState() {
   return {
     strategy,
     model,
-    leader: $('leader').value,
-    filler: $('filler').value,
-    killer: $('killer').value,
     baseFee: $('baseFee').value,
     unitLabel: $('unitLabel').value,
     pricePerUnit: $('pricePerUnit').value,
-    unitsPerUser: $('unitsPerUser').value,
-    wtpOk: $('wtpOk').value,
-    wtpHigh: $('wtpHigh').value,
-    wtpNo: $('wtpNo').value
+    unitsPerUser: $('unitsPerUser').value
   };
 }
 
@@ -472,20 +333,6 @@ function wirePickCards() {
   });
 }
 
-function parseMarginStorage() {
-  try {
-    const m = JSON.parse(localStorage.getItem(MARGIN_KEY));
-    if (!m) return null;
-    const req = parseFloat(m.requests) || 0;
-    const cpr = parseFloat(m.costPerReq) || 0;
-    const other = parseFloat(m.otherCogs) || 0;
-    const aiCogs = req * cpr;
-    const totalCogs = aiCogs + other;
-    if (req <= 0 && cpr <= 0 && other <= 0) return null;
-    return { aiCogs, totalCogs };
-  } catch (e) { return null; }
-}
-
 function revenuePerUser() {
   const base = parseFloat($('baseFee').value) || 0;
   const ppu = parseFloat($('pricePerUnit').value) || 0;
@@ -494,99 +341,7 @@ function revenuePerUser() {
 }
 
 function updatePricingOutputs() {
-  const rev = revenuePerUser();
-  $('revPerUser').textContent = '$' + rev.toFixed(2);
-
-  const mc = parseMarginStorage();
-  const el = $('marginCompare');
-  if (mc && rev > 0) {
-    const marginPct = ((rev - mc.totalCogs) / rev) * 100;
-    el.style.display = '';
-    el.innerHTML = 'From your <strong>Margin Calculator</strong>: COGS/user = <strong>$' + mc.totalCogs.toFixed(2) +
-      '</strong>. Your revenue/user here = <strong>$' + rev.toFixed(2) +
-      '</strong>. Margin = <strong>' + marginPct.toFixed(1) + '%</strong>.';
-  } else if (mc && rev <= 0) {
-    el.style.display = '';
-    el.innerHTML = 'From your <strong>Margin Calculator</strong>: COGS/user = <strong>$' + mc.totalCogs.toFixed(2) +
-      '</strong>. Add pricing inputs to compare margin.';
-  } else {
-    el.style.display = 'none';
-  }
-
-  updateSpectrum();
-}
-
-function updateSpectrum() {
-  const A = parseFloat($('wtpOk').value);
-  const E = parseFloat($('wtpHigh').value);
-  const P = parseFloat($('wtpNo').value);
-  const rev = revenuePerUser();
-
-  const ph = $('spectrumPh');
-  const svg = $('spectrumSvg');
-  const labels = $('spectrumLabels');
-  const orderNote = $('wtpOrderNote');
-
-  if (![A, E, P].every(n => typeof n === 'number' && n > 0 && isFinite(n))) {
-    ph.style.display = '';
-    ph.textContent = 'Enter all three WTP prices to see the spectrum and your current price marker.';
-    svg.style.display = 'none';
-    labels.style.display = 'none';
-    orderNote.style.display = 'none';
-    return;
-  }
-
-  ph.style.display = 'none';
-  svg.style.display = '';
-  labels.style.display = '';
-
-  const barMax = Math.max(A, E, P, rev) * 1.12 || 1;
-  const W = 400;
-  const x = v => (W * v) / barMax;
-
-  const ordered = A <= E && E <= P;
-  orderNote.style.display = ordered ? 'none' : '';
-
-  let inner = '';
-  if (ordered) {
-    inner += '<rect x="0" y="6" width="' + x(A) + '" height="28" fill="rgba(85,85,106,0.35)"/>';
-    const wG = Math.max(0, x(E) - x(A));
-    inner += '<rect x="' + x(A) + '" y="6" width="' + wG + '" height="28" fill="rgba(61,214,140,0.5)"/>';
-    const wY = Math.max(0, x(P) - x(E));
-    inner += '<rect x="' + x(E) + '" y="6" width="' + wY + '" height="28" fill="rgba(240,192,64,0.45)"/>';
-    inner += '<rect x="' + x(P) + '" y="6" width="' + (W - x(P)) + '" height="28" fill="rgba(239,91,91,0.45)"/>';
-  } else {
-    const s = [A, E, P].slice().sort((a, b) => a - b);
-    inner += '<rect x="0" y="6" width="' + x(s[0]) + '" height="28" fill="rgba(85,85,106,0.35)"/>';
-    inner += '<rect x="' + x(s[0]) + '" y="6" width="' + Math.max(0, x(s[1]) - x(s[0])) + '" height="28" fill="rgba(61,214,140,0.45)"/>';
-    inner += '<rect x="' + x(s[1]) + '" y="6" width="' + Math.max(0, x(s[2]) - x(s[1])) + '" height="28" fill="rgba(240,192,64,0.4)"/>';
-    inner += '<rect x="' + x(s[2]) + '" y="6" width="' + (W - x(s[2])) + '" height="28" fill="rgba(239,91,91,0.42)"/>';
-  }
-
-  inner += '<line x1="0" y1="40" x2="400" y2="40" stroke="#252535" stroke-width="1"/>';
-
-  const tick = (val, col) => {
-    const xi = x(val);
-    inner += '<line x1="' + xi + '" y1="34" x2="' + xi + '" y2="40" stroke="' + col + '" stroke-width="2"/>';
-  };
-  tick(A, '#3dd68c');
-  tick(E, '#f0c040');
-  tick(P, '#ef5b5b');
-
-  if (rev > 0 && isFinite(rev)) {
-    const xr = x(rev);
-    inner += '<line x1="' + xr + '" y1="2" x2="' + xr + '" y2="38" stroke="#5b8def" stroke-width="2.5"/>';
-    inner += '<polygon points="' + (xr - 5) + ',2 ' + (xr + 5) + ',2 ' + xr + ',10" fill="#5b8def"/>';
-  }
-
-  svg.innerHTML = inner;
-
-  const fmt = v => '$' + (Math.round(v * 100) / 100).toLocaleString();
-  labels.innerHTML =
-    '<span>0</span><span style="color:var(--green)">' + fmt(A) + ' acceptable</span>' +
-    '<span style="color:var(--yellow)">' + fmt(E) + ' expensive</span>' +
-    '<span style="color:var(--red)">' + fmt(P) + ' prohibitive</span>' +
-    '<span>' + fmt(barMax) + '</span>';
+  $('revPerUser').textContent = '$' + revenuePerUser().toFixed(2);
 }
 
 function save() {
@@ -600,7 +355,7 @@ function load() {
     if (!d) return;
     strategy = d.strategy || null;
     model = d.model || null;
-    ['leader','filler','killer','baseFee','unitLabel','pricePerUnit','unitsPerUser','wtpOk','wtpHigh','wtpNo'].forEach(k => {
+    ['baseFee','unitLabel','pricePerUnit','unitsPerUser'].forEach(k => {
       if (d[k] !== undefined && $(k)) $(k).value = d[k] || '';
     });
     applySelections();
@@ -611,7 +366,7 @@ function load() {
 function resetAll() {
   strategy = null;
   model = null;
-  ['leader','filler','killer','baseFee','unitLabel','pricePerUnit','unitsPerUser','wtpOk','wtpHigh','wtpNo'].forEach(k => { $(k).value = ''; });
+  ['baseFee','unitLabel','pricePerUnit','unitsPerUser'].forEach(k => { $(k).value = ''; });
   applySelections();
   localStorage.removeItem(KEY);
   updatePricingOutputs();
@@ -621,6 +376,7 @@ function resetAll() {
 function strategyLabel(k) {
   return { skim: 'Skim', penetrate: 'Penetrate', maximize: 'Maximize' }[k] || '—';
 }
+
 function modelLabel(k) {
   return { seat: 'Seat / Access', hybrid: 'Hybrid (base + usage)', outcome: 'Outcome / Resolution' }[k] || '—';
 }
@@ -628,43 +384,21 @@ function modelLabel(k) {
 function getExportText(md) {
   const s = getState();
   const rev = revenuePerUser();
-  const A = parseFloat(s.wtpOk) || 0, E = parseFloat(s.wtpHigh) || 0, P = parseFloat(s.wtpNo) || 0;
-  const mc = parseMarginStorage();
-  let marginLine = '';
-  if (mc && rev > 0) {
-    marginLine = 'Margin vs Margin Calculator: COGS/user $' + mc.totalCogs.toFixed(2) + ' → margin ' +
-      (((rev - mc.totalCogs) / rev) * 100).toFixed(1) + '%\n';
-  }
-
   const head = md ? '# ' : '';
   const h2 = md ? '## ' : '';
-  const h3 = md ? '### ' : '';
   const b = md ? '**' : '';
 
-  let out = head + 'Pricing Strategy Designer — Module 3\n\n';
-  out += h2 + 'Pick Your Strategy\n';
-  out += '- Selected: ' + b + strategyLabel(s.strategy) + (md ? '**' : '') + '\n\n';
-  out += h2 + 'How You Charge\n';
-  out += '- Model: ' + b + modelLabel(s.model) + (md ? '**' : '') + '\n';
-  out += '- Note: 59% bundle / 23% add-on / 18% standalone (Palle Broe, n=44)\n\n';
-  out += h2 + 'Leaders, Fillers & Killers\n';
-  out += '- Leader: ' + (s.leader || '—') + '\n';
-  out += '- Filler: ' + (s.filler || '—') + '\n';
-  out += '- Killer: ' + (s.killer || '—') + '\n\n';
-  out += h2 + 'Price Your Product\n';
-  out += '- Base fee ($/mo): ' + (s.baseFee || '0') + '\n';
-  out += '- Unit: ' + (s.unitLabel || '—') + '\n';
+  let out = head + 'Pricing Strategy Block — Module 3\n\n';
+  out += h2 + 'Pricing Strategy\n';
+  out += '- Strategy posture: ' + b + strategyLabel(s.strategy) + (md ? '**' : '') + '\n';
+  out += '- Pricing model: ' + b + modelLabel(s.model) + (md ? '**' : '') + '\n';
+  out += '- Unit of work metered: ' + (s.unitLabel || '—') + '\n';
+  out += '- Base fee ($/month): ' + (s.baseFee || '0') + '\n';
   out += '- Price per unit: $' + (s.pricePerUnit || '0') + '\n';
-  out += '- Est. units/user/mo: ' + (s.unitsPerUser || '0') + '\n';
-  out += '- ' + b + 'Est. revenue/user/mo: $' + rev.toFixed(2) + (md ? '**' : '') + '\n';
-  if (marginLine) out += '- ' + marginLine;
-  out += '\n' + h2 + 'WTP Quick-Check\n';
-  out += '- Acceptable: $' + A + '\n';
-  out += '- Expensive but pay: $' + E + '\n';
-  out += '- Prohibitive: $' + P + '\n';
-  out += '- Current price (from calc): $' + rev.toFixed(2) + '\n\n';
-  out += h2 + 'Next\n';
-  out += 'Feeds Living Strategy Builder (Component 3) and M6 Pitch.\n';
+  out += '- Estimated units/user/month: ' + (s.unitsPerUser || '0') + '\n';
+  out += '- ' + b + 'Implied revenue/user/month: $' + rev.toFixed(2) + (md ? '**' : '') + '\n\n';
+  out += h2 + 'Decision Note\n';
+  out += 'Why this pricing structure fits the buyer and the value delivered: —\n';
   return out;
 }
 
@@ -676,7 +410,7 @@ function exportMarkdown() {
   const blob = new Blob([getExportText(true)], { type: 'text/markdown' });
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
-  a.download = 'pricing-strategy.md';
+  a.download = 'pricing-strategy-block.md';
   a.click();
   URL.revokeObjectURL(a.href);
   showToast('Downloaded');
@@ -695,7 +429,7 @@ function onInput() {
 }
 
 wirePickCards();
-['leader','filler','killer','baseFee','unitLabel','pricePerUnit','unitsPerUser','wtpOk','wtpHigh','wtpNo'].forEach(k => {
+['baseFee','unitLabel','pricePerUnit','unitsPerUser'].forEach(k => {
   $(k).addEventListener('input', onInput);
 });
 
