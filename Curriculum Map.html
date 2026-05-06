@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Curriculum Map — AI Product Strategy Certification</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Lato', sans-serif;
+  background: #07162C;
+  color: #e8e8f0;
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.7;
+}
+
+.bg-glow {
+  position: fixed; top: -15%; left: -10%; width: 55%; height: 60%;
+  background: radial-gradient(ellipse, rgba(59,130,246,0.1) 0%, transparent 70%);
+  z-index: 0; pointer-events: none;
+}
+
+.container {
+  position: relative; z-index: 1;
+  max-width: 880px; margin: 0 auto;
+  padding: 56px 40px 80px;
+}
+
+header {
+  text-align: center; margin-bottom: 48px;
+  animation: fadeUp 0.7s ease both;
+}
+
+.badge {
+  display: inline-block; font-size: 11px; font-weight: 800;
+  letter-spacing: 0.16em; text-transform: uppercase; color: #60a5fa;
+  background: rgba(59,130,246,0.08); border: 1px solid rgba(59,130,246,0.15);
+  padding: 6px 18px; border-radius: 20px; margin-bottom: 20px;
+}
+
+h1 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 42px; font-weight: 900; color: #fff; line-height: 1.15;
+  margin-bottom: 14px;
+}
+h1 span { color: #3b82f6; }
+
+.lead {
+  font-size: 18px; color: #8899bb; max-width: 620px; margin: 0 auto;
+}
+
+h2 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 24px; font-weight: 800; color: #fff;
+  margin: 48px 0 16px; padding-top: 32px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+h2:first-of-type { border-top: none; margin-top: 0; padding-top: 0; }
+
+h3 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px; font-weight: 700; color: #e0e0f0;
+  margin: 24px 0 8px;
+}
+
+p { font-size: 16px; color: #b0b4c8; margin-bottom: 14px; }
+strong { color: #fff; }
+em { color: #60a5fa; font-style: normal; font-weight: 600; }
+code {
+  background: rgba(18,65,176,0.15); padding: 2px 8px; border-radius: 4px;
+  font-size: 14px; color: #60a5fa; font-family: monospace;
+}
+
+.tldr {
+  background: rgba(59,130,246,0.06); border: 1px solid rgba(59,130,246,0.15);
+  border-radius: 14px; padding: 24px 28px; margin: 28px 0;
+}
+.tldr p { margin-bottom: 6px; }
+.tldr p:last-child { margin-bottom: 0; }
+
+.module-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 16px;
+  padding: 28px 32px;
+  margin: 20px 0;
+  border-left: 4px solid var(--mc, #3b82f6);
+  transition: all 0.3s;
+}
+.module-card:hover { border-color: var(--mc, #3b82f6); transform: translateX(2px); }
+
+.mod-header {
+  display: flex; align-items: center; gap: 14px; margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+.mod-num {
+  font-family: 'Poppins', sans-serif;
+  font-size: 11px; font-weight: 800; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--mc, #3b82f6);
+  background: rgba(255,255,255,0.04);
+  padding: 5px 12px; border-radius: 20px;
+  border: 1px solid var(--mc, #3b82f6);
+}
+.mod-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 22px; font-weight: 800; color: #fff;
+}
+.mod-question {
+  font-size: 14px; color: #8899bb; font-style: italic;
+  margin-top: 2px; width: 100%;
+}
+
+.mod-focus {
+  font-size: 15px; color: #c8ccdc; margin: 14px 0 18px;
+  padding: 12px 16px;
+  background: rgba(255,255,255,0.02);
+  border-radius: 8px;
+}
+.mod-focus strong { color: var(--mc, #3b82f6); }
+
+.mod-section { margin: 18px 0; }
+.mod-label {
+  font-size: 11px; font-weight: 800; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--mc, #3b82f6);
+  margin-bottom: 8px;
+  display: flex; align-items: center; gap: 8px;
+}
+.mod-label::after {
+  content: ''; flex: 1; height: 1px;
+  background: linear-gradient(to right, rgba(59,130,246,0.2), transparent);
+}
+.mod-section ul {
+  list-style: none; padding: 0;
+}
+.mod-section ul li {
+  font-size: 14px; color: #b0b4c8; line-height: 1.65;
+  padding: 4px 0 4px 18px; position: relative;
+}
+.mod-section ul li::before {
+  content: '→'; position: absolute; left: 0; top: 4px;
+  color: var(--mc, #3b82f6); font-weight: 700;
+}
+.mod-section p {
+  font-size: 14px; color: #b0b4c8; margin-bottom: 0; line-height: 1.65;
+}
+
+.output-box {
+  background: rgba(52,211,153,0.04);
+  border: 1px solid rgba(52,211,153,0.18);
+  border-radius: 10px;
+  padding: 14px 18px;
+  margin-top: 8px;
+}
+.output-box ul li::before { color: #34d399; }
+.output-box .mod-label { color: #34d399; margin-bottom: 6px; }
+.output-box .mod-label::after { background: linear-gradient(to right, rgba(52,211,153,0.25), transparent); }
+
+.summary-table {
+  width: 100%; border-collapse: collapse; margin: 20px 0;
+  background: rgba(255,255,255,0.02);
+  border-radius: 12px; overflow: hidden;
+}
+.summary-table th, .summary-table td {
+  padding: 14px 16px; text-align: left;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  font-size: 14px; vertical-align: top;
+}
+.summary-table th {
+  background: rgba(59,130,246,0.08);
+  color: #fff; font-weight: 700;
+  font-family: 'Poppins', sans-serif;
+  font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;
+}
+.summary-table td:first-child { font-weight: 700; color: #fff; white-space: nowrap; }
+.summary-table tr:last-child td { border-bottom: none; }
+.summary-table td { color: #b0b4c8; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 700px) {
+  .container { padding: 32px 20px 60px; }
+  h1 { font-size: 30px; }
+  .module-card { padding: 22px 20px; }
+  .mod-title { font-size: 18px; }
+  .summary-table { font-size: 12px; }
+  .summary-table th, .summary-table td { padding: 10px 8px; }
+}
+</style>
+</head>
+<body>
+
+<div class="bg-glow"></div>
+
+<div class="container">
+  <header>
+    <div class="badge">Curriculum Map</div>
+    <h1>AI Product <span>Strategy</span></h1>
+    <p class="lead">A specialized certification helping product leaders build a board-ready AI strategy across six sequential modules — from initial validation to final executive pitch.</p>
+  </header>
+
+  <div class="tldr">
+    <p><strong>Format:</strong> 6 live sessions × 2 hours · senior PMs / AI-aware</p>
+    <p><strong>Throughline artifact:</strong> A version-controlled GitHub <em>Living Strategy Repo</em> — six interconnected components, one per module.</p>
+    <p><strong>Outcome:</strong> Participants leave with a board-ready AI product strategy on their real product — not a certificate, a weapon.</p>
+  </div>
+
+  <h2>Course Overview</h2>
+  <p>This AI Product Strategy course by Product School is a specialized certification designed to help product leaders build a comprehensive, "board-ready" AI strategy. The course is structured into six sequential modules, each focusing on a critical component of AI product development — from initial validation to final executive pitching.</p>
+  <p>The program moves beyond general product management to address the specific challenges of AI: data flywheels, cost structures, trust, and governance. By the end of the course, participants have assembled a <strong>Living Strategy Repo</strong> — a version-controlled GitHub repo with six interconnected components, ready for executive-level presentation.</p>
+
+  <h2>At a Glance</h2>
+  <table class="summary-table">
+    <thead>
+      <tr>
+        <th>Module</th>
+        <th>Strategic Question</th>
+        <th>Hands-On Output</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>M1 — The Bet</td>
+        <td>What should we build, and how do we know fast?</td>
+        <td>Vulnerability diagnostic + working prototype link</td>
+      </tr>
+      <tr>
+        <td>M2 — The Moat</td>
+        <td>Why won't this get copied in 6 months?</td>
+        <td>Data flywheel scorecard + competitive map + Kill Switch plan</td>
+      </tr>
+      <tr>
+        <td>M3 — The Margin</td>
+        <td>Will this make money or bleed it?</td>
+        <td>Cost curve + hybrid pricing strategy + board one-pager</td>
+      </tr>
+      <tr>
+        <td>M4 — The Contract</td>
+        <td>Why will users trust a probabilistic system?</td>
+        <td>Golden dataset spec + eval dashboard + reliability contract</td>
+      </tr>
+      <tr>
+        <td>M5 — The Guardrails</td>
+        <td>What breaks when this scales?</td>
+        <td>Compounding system design + governance policy + shadow AI audit</td>
+      </tr>
+      <tr>
+        <td>M6 — The Pitch</td>
+        <td>How do you get this funded, shipped, and adopted?</td>
+        <td>Three-horizon roadmap + board README + live pitch to the room</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>Module Detail</h2>
+
+  <!-- MODULE 1 -->
+  <div class="module-card" style="--mc:#3b82f6;">
+    <div class="mod-header">
+      <span class="mod-num">Module 1</span>
+      <span class="mod-title">The Bet</span>
+      <span class="mod-question">What should we build, and how do we know fast?</span>
+    </div>
+
+    <div class="mod-focus"><strong>Focus:</strong> Identifying what to build and validating it quickly.</div>
+
+    <div class="mod-section">
+      <div class="mod-label">Learning Objectives</div>
+      <p>Diagnose where traditional strategy fails in AI, score product vulnerability, build a prototype, and lock in the first component of the strategy.</p>
+    </div>
+
+    <div class="mod-section">
+      <div class="mod-label">Lecture Topics</div>
+      <ul>
+        <li>Why AI breaks traditional strategy: probabilistic outputs, variable infra costs, weekly capability shifts</li>
+        <li>AI-powered discovery: synthetic personas, automated insight synthesis, real-time segment simulation</li>
+        <li>The 5 AI Value Archetypes: Automator, Copilot, Oracle, Creator, Orchestrator</li>
+        <li>Probabilistic prioritization — confidence intervals, not commitments</li>
+        <li>The Three-Axis Vulnerability Diagnostic: Contextual Moat, Data Advantage, Platform Exposure</li>
+      </ul>
+    </div>
+
+    <div class="mod-section">
+      <div class="mod-label">Hands-On Exercise</div>
+      <p>Score your product on the Three-Axis Vulnerability Diagnostic, partner-challenge your weakest axis (name a specific real attacker), then prototype your AI product idea in 15 minutes using v0, Cursor, or Lovable.</p>
+    </div>
+
+    <div class="output-box">
+      <div class="mod-label">Output</div>
+      <ul>
+        <li>Forked <strong>Living Strategy Repo</strong> (GitHub template)</li>
+        <li><code>01-the-bet/diagnostic.md</code> — vulnerability scores, rationale, named attacker, biggest vulnerability in one line</li>
+        <li><code>01-the-bet/prototype.md</code> — shareable link to a working clickable prototype + bet thesis + kill criteria</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- MODULE 2 -->
+  <div class="module-card" style="--mc:#58a6ff;">
+    <div class="mod-header">
+      <span class="mod-num">Module 2</span>
+      <span class="mod-title">The Moat</span>
+      <span class="mod-question">Why won't this get copied in 6 months?</span>
+    </div>
+
+    <div class="mod-focus"><strong>Focus:</strong> Defensive strategy and long-term sustainability.</div>
+
+    <div class="mod-section">
+      <div class="mod-label">Learning Objectives</div>
+      <p>Evaluate and score your data flywheel, stress-test the product against a 90-day competitor encroachment plan, and design a Kill Switch for risky vendor and model dependencies.</p>
+    </div>
+
+    <div class="mod-section">
+      <div class="mod-label">Lecture Topics</div>
+      <ul>
+        <li>Data isn't a moat — <em>loops</em> are: System of Intelligence vs. System of Record</li>
+        <li>Zero-party data acquisition through correction and feedback UX</li>
+        <li>Cold-start survival: synthetic seeding, transfer learning, partnerships</li>
+        <li>Contextual moats via vertical depth and workflow embedding (switching costs)</li>
+        <li>Platform encroachment defense and the Model Dependency Kill Switch (abstraction layers, multi-model routing)</li>
+        <li>Competitive positioning on two strategic axes</li>
+      </ul>
+    </div>
+
+    <div class="mod-section">
+      <div class="mod-label">Hands-On Exercise</div>
+      <p>Score each loop of your data flywheel and identify the weakest link. Place your product and 3–5 competitors on a competitive positioning map. Run a partner-led 90-day "Big Tech attacker" encroachment simulation against your weakest axis. Draft a portability checklist.</p>
+    </div>
+
+    <div class="output-box">
+      <div class="mod-label">Output</div>
+      <ul>
+        <li><code>02-the-moat/data-flywheel.md</code> — scored flywheel map + weakest-link callout</li>
+        <li><code>02-the-moat/positioning-map.md</code> — competitive positioning canvas</li>
+        <li><code>02-the-moat/kill-switch.md</code> — vendor / model portability plan executable in &lt;48 hours</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- MODULE 3 -->
+  <div class="module-card" style="--mc:#d29922;">
+    <div class="mod-header">
+      <span class="mod-num">Module 3</span>
+      <span class="mod-title">The Margin</span>
+      <span class="mod-question">Will this make money or bleed it?</span>
+    </div>
+
+    <div class="mod-focus"><strong>Focus:</strong> Monetization and unit economics of AI.</div>
+
+    <div class="mod-section">
+      <div class="mod-label">Learning Objectives</div>
+      <p>Map AI cost curves, design pricing models specific to AI outputs, and stress-test profit margins using cascading financial scenarios.</p>
+    </div>
+
+    <div class="mod-section">
+      <div class="mod-label">Lecture Topics</div>
+      <ul>
+        <li>The margin war: 80% SaaS margins collapsing to 40–60% under AI inference cost</li>
+        <li>Model cascading: cheap triage model → frontier model for hard cases</li>
+        <li>CPO-level LLMOps levers: quantization, caching, routing, observability, GPU forecasting</li>
+        <li>Pricing evolution: hybrid (base + usage / outcome / credit), outcome-based, dynamic for agents and power users</li>
+        <li>Old SaaS revenue ($50/seat) vs. AI usage / outcome revenue ($2/successful automation)</li>
+        <li>Klarna case study: the Automator that overcorrected</li>
+      </ul>
+    </div>
+
+    <div class="mod-section">
+      <div class="mod-label">Hands-On Exercise</div>
+      <p>Build a cost curve with real inference pricing, design a hybrid pricing strategy matched to your value archetype, and stress-test with the Scenario Lab — drag sliders for inference cost multiplier (1x → 3x), volume growth, and cascading ratio to watch margin behavior in real time. Partner stress-tests the model.</p>
+    </div>
+
+    <div class="output-box">
+      <div class="mod-label">Output</div>
+      <ul>
+        <li><code>03-the-margin/cost-curve.md</code> — cost model with cascading + scenario stress tests</li>
+        <li><code>03-the-margin/pricing-strategy.md</code> — hybrid pricing model with rationale</li>
+        <li><code>03-the-margin/board-one-pager.md</code> — before/after AI economics for board and sales enablement</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- MODULE 4 -->
+  <div class="module-card" style="--mc:#bc8cff;">
+    <div class="mod-header">
+      <span class="mod-num">Module 4</span>
+      <span class="mod-title">The Contract</span>
+      <span class="mod-question">Why will users trust a probabilistic system?</span>
+    </div>
+
+    <div class="mod-focus"><strong>Focus:</strong> Trust, reliability, and user experience.</div>
+
+    <div class="mod-section">
+      <div class="mod-label">Learning Objectives</div>
+      <p>Build "golden datasets," design UX that communicates AI confidence levels to users, and draft a reliability contract that sets explicit performance expectations.</p>
+    </div>
+
+    <div class="mod-section">
+      <div class="mod-label">Lecture Topics</div>
+      <ul>
+        <li>Golden datasets and ground truth as product infrastructure</li>
+        <li>Human-in-the-loop architecture for 99.9% reliability in regulated verticals</li>
+        <li>LLM-as-a-Judge for regression testing, scaling evals, and drift detection</li>
+        <li>Confidence scores and probabilistic UX primitives — showing uncertainty, not hiding it</li>
+        <li>Trust ≠ accuracy: perceived control beats raw percentage points</li>
+        <li>Air Canada chatbot case: when an AI product made promises the company had to honor</li>
+      </ul>
+    </div>
+
+    <div class="mod-section">
+      <div class="mod-label">Hands-On Exercise</div>
+      <p>Spec a production eval dashboard — metrics, judge configuration, drift alerts, UX integration points. Design a tiered Confidence UX (high / medium / low confidence states). Red-team your own system with a partner to surface silent-failure modes. Draft your reliability contract.</p>
+    </div>
+
+    <div class="output-box">
+      <div class="mod-label">Output</div>
+      <ul>
+        <li><code>04-the-contract/golden-dataset.md</code> — dataset spec with adversarial cases</li>
+        <li><code>04-the-contract/eval-spec.md</code> — eval dashboard, judges, drift alerts</li>
+        <li><code>04-the-contract/confidence-ux.md</code> — UX tiers for showing uncertainty</li>
+        <li><code>04-the-contract/reliability-contract.md</code> — explicit promises, escalation paths, HITL plan</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- MODULE 5 -->
+  <div class="module-card" style="--mc:#f85149;">
+    <div class="mod-header">
+      <span class="mod-num">Module 5</span>
+      <span class="mod-title">The Guardrails</span>
+      <span class="mod-question">What breaks when this scales?</span>
+    </div>
+
+    <div class="mod-focus"><strong>Focus:</strong> Scaling safely and governance.</div>
+
+    <div class="mod-section">
+      <div class="mod-label">Learning Objectives</div>
+      <p>Design systems that compound value as they scale, draft internal AI governance policies, and conduct a "shadow AI audit" to surface hidden risks.</p>
+    </div>
+
+    <div class="mod-section">
+      <div class="mod-label">Lecture Topics</div>
+      <ul>
+        <li>Compounding systems vs. scaling systems: recursive learning, feedback loops, knowledge that compounds across teams</li>
+        <li>Connecting context: breaking domain silos so the system learns from every interaction</li>
+        <li>Responsible AI as competitive differentiator (EU AI Act, explainability, board-level risk translation)</li>
+        <li>Multi-agent orchestration governance: autonomy boundaries, tool-calling safety, memory management</li>
+        <li>ROI evaluation for agentic systems vs. traditional automation</li>
+        <li>Shadow AI audit: surfacing unsanctioned tools (Spotify: 1,000 tools → 15 after audit)</li>
+        <li>Samsung data leak case study</li>
+      </ul>
+    </div>
+
+    <div class="mod-section">
+      <div class="mod-label">Hands-On Exercise</div>
+      <p>Sketch a compounding system architecture for your product (where does quality improve with usage?). Draft a governance policy with agent-autonomy boundaries. Run a shadow AI audit of your own org — list unsanctioned tools, owners, risk level. Partner audits feedback loops and agent boundaries.</p>
+    </div>
+
+    <div class="output-box">
+      <div class="mod-label">Output</div>
+      <ul>
+        <li><code>05-the-guardrails/compounding-system.md</code> — system design with feedback loops + agent topology</li>
+        <li><code>05-the-guardrails/governance-policy.md</code> — internal AI governance framework</li>
+        <li><code>05-the-guardrails/shadow-ai-audit.md</code> — audit findings, owners, triage plan</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- MODULE 6 -->
+  <div class="module-card" style="--mc:#34d399;">
+    <div class="mod-header">
+      <span class="mod-num">Module 6</span>
+      <span class="mod-title">The Pitch</span>
+      <span class="mod-question">How do you get this funded, shipped, and adopted?</span>
+    </div>
+
+    <div class="mod-focus"><strong>Focus:</strong> Communication and leadership buy-in.</div>
+
+    <div class="mod-section">
+      <div class="mod-label">Learning Objectives</div>
+      <p>Assemble all components into a final strategy, build an AI-powered product roadmap, and pitch the strategy to a mock "Board of Directors" for funding and approval.</p>
+    </div>
+
+    <div class="mod-section">
+      <div class="mod-label">Lecture Topics</div>
+      <ul>
+        <li>Multi-horizon roadmaps in the continuous-sprint era: H1 quick wins + H2 bets + H3 moonshots</li>
+        <li>AI-specific board metrics: hallucination rate, drift velocity, trust scores, inference ROI</li>
+        <li>Pilot-to-production change management and adoption barriers</li>
+        <li>Board-ready storytelling: translating AI system complexity into investment narratives</li>
+        <li>AI GTM frictions: outcome packaging, trust barriers, demo strategy for probabilistic products</li>
+        <li>Duolingo case study: the AI transformation narrative to investors</li>
+      </ul>
+    </div>
+
+    <div class="mod-section">
+      <div class="mod-label">Hands-On Exercise</div>
+      <p>Assemble all five prior components into a cohesive <code>README.md</code> board narrative. Build a three-horizon roadmap with kill criteria for H2 bets and at least one H3 experiment. Run your strategy through an AI self-evaluation prompt across all six rubric dimensions. Pitch to the room (5 min present + 3 min Q&amp;A) — the class acts as your board.</p>
+    </div>
+
+    <div class="output-box">
+      <div class="mod-label">Output</div>
+      <ul>
+        <li><code>06-the-pitch/roadmap.md</code> — three-horizon roadmap with kill criteria</li>
+        <li><code>README.md</code> — board-ready narrative summarizing the complete strategy (a colleague should understand it cold without opening sub-folders)</li>
+        <li><strong>Final deliverable:</strong> the complete Living Strategy Repo URL — six folders, version-controlled, shareable Monday morning</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>Final Project — The Living Strategy Repo</h2>
+  <p>Participants don't build a final project at the end — they build it <em>every session</em>. The submission is a single GitHub repo URL containing all six components, evaluated across six dimensions: <strong>Bet Clarity, Defensibility, Economics, Trust Architecture, Governance,</strong> and <strong>Narrative &amp; Roadmap</strong>.</p>
+</div>
+
+</body>
+</html>
