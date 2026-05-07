@@ -78,23 +78,6 @@
 
   .stack { display: flex; flex-direction: column; gap: 16px; }
 
-  .method-grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
-  @media (min-width: 560px) { .method-grid { grid-template-columns: repeat(3, 1fr); } }
-
-  .method-opt {
-    text-align: left; padding: 14px 16px; border-radius: var(--radius);
-    border: 1px solid var(--border); background: var(--surface2);
-    cursor: pointer; transition: all 0.2s; font-family: inherit;
-    color: var(--text);
-  }
-  .method-opt:hover { border-color: var(--blue); }
-  .method-opt.selected {
-    border-color: var(--blue); background: var(--blue-bg);
-    box-shadow: 0 0 0 1px rgba(91,141,239,0.25);
-  }
-  .method-opt strong { display: block; font-size: 13px; color: #fff; margin-bottom: 6px; }
-  .method-opt span { font-size: 12px; color: var(--text-dim); line-height: 1.45; }
-
   .table-wrap { overflow-x: auto; margin: 0 -4px; }
   table { width: 100%; border-collapse: collapse; font-size: 12px; min-width: 640px; }
   th {
@@ -200,30 +183,7 @@
 
   <div class="card">
     <div class="card-head">
-      <div class="card-icon" style="background:var(--yellow); color:#000;">2</div>
-      <div><div class="card-title">Evaluation Method</div><div class="card-sub">Pick one approach for this dataset</div></div>
-    </div>
-    <div class="card-body">
-      <div class="method-grid" role="group" aria-label="Evaluation method">
-        <button type="button" class="method-opt" data-method="human">
-          <strong>Human Review</strong>
-          <span>Expert reviewers grade each output. Gold standard but slow.</span>
-        </button>
-        <button type="button" class="method-opt" data-method="llm">
-          <strong>LLM-as-Judge</strong>
-          <span>Use a model to evaluate another model at scale. Fast but needs calibration.</span>
-        </button>
-        <button type="button" class="method-opt" data-method="hybrid">
-          <strong>Hybrid</strong>
-          <span>LLM screens at scale, humans review disagreements. Best of both.</span>
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-head">
-      <div class="card-icon" style="background:var(--purple);">3</div>
+      <div class="card-icon" style="background:var(--purple);">2</div>
       <div><div class="card-title">Dataset Health</div><div class="card-sub">Balance signals at a glance</div></div>
     </div>
     <div class="card-body">
@@ -254,8 +214,6 @@
 <script>
 const KEY = 'aps-m4-golden-dataset';
 const $ = id => document.getElementById(id);
-
-let method = 'human';
 
 const JUDGES = ['rule', 'LLM', 'both'];
 const defaultRows = () => [
@@ -326,18 +284,6 @@ function addRow() {
 
 $('addRow').addEventListener('click', addRow);
 
-function setMethod(m) {
-  method = m;
-  document.querySelectorAll('.method-opt').forEach(b => {
-    b.classList.toggle('selected', b.dataset.method === m);
-  });
-  save();
-}
-
-document.querySelectorAll('.method-opt').forEach(b => {
-  b.addEventListener('click', () => setMethod(b.dataset.method));
-});
-
 function refreshHealth() {
   const total = rows.length;
   const edgeCount = rows.filter(r => !!r.edge).length;
@@ -373,7 +319,6 @@ function refreshHealth() {
 
 function collectState() {
   return {
-    method,
     rows: rows.map(r => ({ ...r }))
   };
 }
@@ -388,7 +333,6 @@ function load() {
     const raw = localStorage.getItem(KEY);
     if (!raw) return;
     const d = JSON.parse(raw);
-    if (d.method) method = d.method;
     if (Array.isArray(d.rows) && d.rows.length) {
       rows = d.rows.map(r => ({
         input: r.input || '',
@@ -397,16 +341,9 @@ function load() {
         judge: JUDGES.includes(r.judge) ? r.judge : 'rule'
       }));
     }
-    setMethod(method);
     renderRows();
     refreshHealth();
   } catch (e) {}
-}
-
-function methodLabel(m) {
-  if (m === 'llm') return 'LLM-as-Judge';
-  if (m === 'hybrid') return 'Hybrid';
-  return 'Human Review';
 }
 
 function mdCell(s) {
@@ -426,7 +363,6 @@ function buildExportText(md) {
     : '—';
 
   const head = md ? '# Golden Dataset — Module 4\n\n' : 'Golden Dataset — Module 4\n\n';
-  const methodLine = (md ? '_Method: ' : 'Method: ') + methodLabel(s.method) + (md ? '_\n\n' : '\n\n');
 
   let body;
   if (md) {
@@ -443,13 +379,11 @@ function buildExportText(md) {
     `- Edge cases: ${edgeCount} (${edgePct}%)\n` +
     `- Judge mix: ${mixLine}\n`;
 
-  return head + methodLine + body + health;
+  return head + body + health;
 }
 
 function resetAll() {
-  method = 'human';
   rows = defaultRows();
-  setMethod('human');
   renderRows();
   refreshHealth();
   localStorage.removeItem(KEY);
@@ -467,7 +401,6 @@ function showToast(msg) {
   setTimeout(() => t.classList.remove('show'), 1800);
 }
 
-setMethod('human');
 renderRows();
 refreshHealth();
 load();
