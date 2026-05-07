@@ -924,16 +924,42 @@ section.skipped { display: none; }
     <div class="lab-badge-row">
       <span class="lab-badge">Lab Exercise</span>
     </div>
-    <div class="steps-heading">Steps to follow:</div>
-    <div class="lab-steps">
-      <div class="lab-step"><div class="lab-step-num">1</div><div class="lab-step-text"><strong>Correction loop:</strong> When your AI gets something wrong, what happens to that correction? Captured and reused → high. Discarded → low.</div></div>
-      <div class="lab-step"><div class="lab-step-num">2</div><div class="lab-step-text"><strong>Preference loop:</strong> Does the product learn individual/team preferences? Having analytics ≠ personalization.</div></div>
-      <div class="lab-step"><div class="lab-step-num">3</div><div class="lab-step-text"><strong>Domain context loop:</strong> Does usage in one area improve quality in adjacent areas? Siloed = 1, cross-domain transfer = 5.</div></div>
-      <div class="lab-step"><div class="lab-step-num">4</div><div class="lab-step-text"><strong>Network loop:</strong> Does each new user/team make the product better for everyone? Isolated = 1, strong network effects = 5.</div></div>
+    <div class="steps-heading">Capture in <code style="color:#6ee7b7; font-family:'IBM Plex Mono',monospace; font-size:12px;">data-flywheel.md</code>:</div>
+    <table class="score-table" style="font-size:12px;">
+      <thead><tr><th>Loop</th><th style="width:54px;">Score</th><th>What you capture today</th><th>How it compounds</th></tr></thead>
+      <tbody>
+        <tr>
+          <td style="color:#fbbf24; font-weight:700;">Correction</td>
+          <td style="color:#555; font-family:'IBM Plex Mono',monospace; text-align:center;">__/5</td>
+          <td style="color:#555; font-family:'IBM Plex Mono',monospace;">_____</td>
+          <td style="color:#555; font-family:'IBM Plex Mono',monospace;">_____</td>
+        </tr>
+        <tr>
+          <td style="color:#f472b6; font-weight:700;">Preference</td>
+          <td style="color:#555; font-family:'IBM Plex Mono',monospace; text-align:center;">__/5</td>
+          <td style="color:#555; font-family:'IBM Plex Mono',monospace;">_____</td>
+          <td style="color:#555; font-family:'IBM Plex Mono',monospace;">_____</td>
+        </tr>
+        <tr>
+          <td style="color:#34d399; font-weight:700;">Domain Context</td>
+          <td style="color:#555; font-family:'IBM Plex Mono',monospace; text-align:center;">__/5</td>
+          <td style="color:#555; font-family:'IBM Plex Mono',monospace;">_____</td>
+          <td style="color:#555; font-family:'IBM Plex Mono',monospace;">_____</td>
+        </tr>
+        <tr>
+          <td style="color:#c084fc; font-weight:700;">Network</td>
+          <td style="color:#555; font-family:'IBM Plex Mono',monospace; text-align:center;">__/5</td>
+          <td style="color:#555; font-family:'IBM Plex Mono',monospace;">_____</td>
+          <td style="color:#555; font-family:'IBM Plex Mono',monospace;">_____</td>
+        </tr>
+      </tbody>
+    </table>
+    <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:10px; padding:10px 14px; margin-top:10px;">
+      <div style="font-size:12px; color:#8899bb; line-height:1.7;"><strong style="color:#fff;">Total:</strong> <span style="color:#555; font-family:'IBM Plex Mono',monospace;">__/20</span> &nbsp;·&nbsp; <strong style="color:#fff;">Weakest loop:</strong> <span style="color:#555; font-family:'IBM Plex Mono',monospace;">_____</span> &nbsp;·&nbsp; <strong style="color:#fff;">Fix:</strong> <span style="color:#555; font-family:'IBM Plex Mono',monospace;">_____</span></div>
     </div>
   </div>
   <div class="bottom-cta">
-    <p style="font-size:13px; text-align:center; margin-top:8px;"><span style="color:#34d399;">📂</span> <strong style="color:#6ee7b7;">Go to your repo →</strong> <code style="color:#6ee7b7; font-size:12px;">02-the-moat/data-flywheel.md</code> <span style="color:#8899bb;">→ Score all four flywheel loops 1–5</span></p>
+    <p style="font-size:13px; text-align:center; margin-top:8px;"><span style="color:#34d399;">📂</span> <strong style="color:#6ee7b7;">Go to your repo →</strong> <code style="color:#6ee7b7; font-size:12px;">02-the-moat/data-flywheel.md</code> <span style="color:#8899bb;">→ Flywheel Loops · Total/20 · Weakest Loop · Fix</span></p>
   </div>
 </section>
 
@@ -1024,9 +1050,20 @@ section.skipped { display: none; }
       <div class="lab-step"><div class="lab-step-num">1</div><div class="lab-step-text"><strong>Defender presents</strong> their data flywheel (4 loops, scored) and top encroachment threat. 2 minutes.</div></div>
       <div class="lab-step"><div class="lab-step-num">2</div><div class="lab-step-text"><strong>Encroacher responds:</strong> "I'm Head of Product at [Google/OpenAI/Microsoft]. Here's my 90-day plan." Target the <strong>weakest flywheel loop</strong>.</div></div>
       <div class="lab-step"><div class="lab-step-num">3</div><div class="lab-step-text"><strong>Swap roles</strong> after 6 minutes. Same rules.</div></div>
-      <div class="lab-step"><div class="lab-step-num">4</div><div class="lab-step-text"><strong>Write down</strong> the single most dangerous move you heard. You'll design against it next.</div></div>
+      <div class="lab-step"><div class="lab-step-num">4</div><div class="lab-step-text"><strong>Capture below</strong> — write the most dangerous plan and your defense.</div></div>
     </div>
-    <p style="font-size:13px; text-align:center; margin-top:8px;"><span style="color:#34d399;">📂</span> <strong style="color:#6ee7b7;">Go to your repo →</strong> <code style="color:#6ee7b7; font-size:12px;">02-the-moat/data-flywheel.md</code> <span style="color:#8899bb;">→ 90-Day Encroachment Plan section</span></p>
+    <div style="background:rgba(248,113,113,0.06); border:1px solid rgba(248,113,113,0.2); border-radius:10px; padding:14px 16px; margin-top:12px;">
+      <div style="font-size:11px; font-weight:900; color:#f87171; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:10px;">Capture in <code style="color:#fca5a5; font-family:'IBM Plex Mono',monospace; font-size:11px;">data-flywheel.md → 90-Day Encroachment Plan</code></div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px 16px; font-size:12px; color:#8899bb; line-height:1.85;">
+        <div>Attacker: <span style="color:#555; font-family:'IBM Plex Mono',monospace;">_____</span></div>
+        <div>Attack vector (weakest loop): <span style="color:#555; font-family:'IBM Plex Mono',monospace;">_____</span></div>
+        <div>Wks 1–4 — what they ship: <span style="color:#555; font-family:'IBM Plex Mono',monospace;">_____</span></div>
+        <div>Wks 5–8 — how they poach users: <span style="color:#555; font-family:'IBM Plex Mono',monospace;">_____</span></div>
+        <div>Wks 9–12 — why users don't return: <span style="color:#555; font-family:'IBM Plex Mono',monospace;">_____</span></div>
+        <div>Your defense: <span style="color:#555; font-family:'IBM Plex Mono',monospace;">_____</span></div>
+      </div>
+    </div>
+    <p style="font-size:13px; text-align:center; margin-top:10px;"><span style="color:#34d399;">📂</span> <strong style="color:#6ee7b7;">Go to your repo →</strong> <code style="color:#6ee7b7; font-size:12px;">02-the-moat/data-flywheel.md</code> <span style="color:#8899bb;">→ 90-Day Encroachment Plan section</span></p>
   </div>
 </section>
 
@@ -1082,52 +1119,46 @@ section.skipped { display: none; }
       <div class="lab-goal-label">Your Goal</div>
       <div class="lab-goal-text">Complete a portability audit of your AI stack with <strong>three specific actions</strong> (this week, this month, this quarter) to reach 48-hour swap readiness.</div>
     </div>
-    <div style="display:flex; gap:14px; margin:20px 0;">
-      <div style="flex:1; background:rgba(59,130,246,0.06); border:1px solid rgba(59,130,246,0.2); border-radius:14px; padding:22px;">
-        <div style="font-size:12px; font-weight:800; color:#1241B0; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:14px;">1. What's your setup?</div>
-        <div style="font-size:15px; color:#e0e0f0; margin-bottom:10px;">Provider: <span style="color:#555; font-family:'IBM Plex Mono',monospace;">_________</span></div>
-        <div style="display:flex; gap:12px; margin-bottom:8px;">
-          <div style="flex:1; background:rgba(255,255,255,0.04); border-radius:8px; padding:10px; text-align:center;">
-            <div style="font-size:11px; color:#64748b;">Abstraction</div>
-            <div style="font-size:16px; font-weight:800; color:#60a5fa; margin-top:4px;">Y / N</div>
-          </div>
-          <div style="flex:1; background:rgba(255,255,255,0.04); border-radius:8px; padding:10px; text-align:center;">
-            <div style="font-size:11px; color:#64748b;">Multi-model</div>
-            <div style="font-size:16px; font-weight:800; color:#60a5fa; margin-top:4px;">Y / N</div>
-          </div>
-          <div style="flex:1; background:rgba(255,255,255,0.04); border-radius:8px; padding:10px; text-align:center;">
-            <div style="font-size:11px; color:#64748b;">Eval harness</div>
-            <div style="font-size:16px; font-weight:800; color:#60a5fa; margin-top:4px;">Y / N</div>
-          </div>
-        </div>
+    <table class="score-table" style="font-size:13px; margin-top:8px;">
+      <thead><tr><th>Dimension</th><th>Current State</th><th style="width:90px;">Risk</th><th>48-hour action</th></tr></thead>
+      <tbody>
+        <tr>
+          <td style="color:#60a5fa; font-weight:700;">Provider</td>
+          <td style="color:#555; font-family:'IBM Plex Mono',monospace;">_____</td>
+          <td style="color:#555; font-family:'IBM Plex Mono',monospace; text-align:center;">H / M / L</td>
+          <td style="color:#555; font-family:'IBM Plex Mono',monospace;">_____</td>
+        </tr>
+        <tr>
+          <td style="color:#60a5fa; font-weight:700;">Abstraction</td>
+          <td style="color:#555; font-family:'IBM Plex Mono',monospace;">_____</td>
+          <td style="color:#555; font-family:'IBM Plex Mono',monospace; text-align:center;">H / M / L</td>
+          <td style="color:#555; font-family:'IBM Plex Mono',monospace;">_____</td>
+        </tr>
+        <tr>
+          <td style="color:#60a5fa; font-weight:700;">Routing</td>
+          <td style="color:#555; font-family:'IBM Plex Mono',monospace;">_____</td>
+          <td style="color:#555; font-family:'IBM Plex Mono',monospace; text-align:center;">H / M / L</td>
+          <td style="color:#555; font-family:'IBM Plex Mono',monospace;">_____</td>
+        </tr>
+        <tr>
+          <td style="color:#60a5fa; font-weight:700;">Eval</td>
+          <td style="color:#555; font-family:'IBM Plex Mono',monospace;">_____</td>
+          <td style="color:#555; font-family:'IBM Plex Mono',monospace; text-align:center;">H / M / L</td>
+          <td style="color:#555; font-family:'IBM Plex Mono',monospace;">_____</td>
+        </tr>
+      </tbody>
+    </table>
+    <div style="display:flex; gap:14px; margin-top:14px;">
+      <div style="flex:0 0 220px; background:rgba(52,211,153,0.06); border:1px solid rgba(52,211,153,0.25); border-radius:12px; padding:14px 16px; text-align:center;">
+        <div style="font-size:11px; font-weight:800; color:#34d399; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:6px;">Portability Score</div>
+        <div style="font-size:14px; color:#555; font-family:'IBM Plex Mono',monospace;">Ready / Partial / Locked</div>
       </div>
-      <div style="flex:1; background:rgba(248,113,113,0.06); border:1px solid rgba(248,113,113,0.2); border-radius:14px; padding:22px;">
-        <div style="font-size:12px; font-weight:800; color:#f87171; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:14px;">2. Stress test</div>
-        <div style="font-size:14px; color:#e0e0f0; line-height:2.2;">
-          Provider doubles pricing → <span style="color:#555; font-family:'IBM Plex Mono',monospace;">____ days</span> to switch<br>
-          Provider restricts your use case → what breaks? <span style="color:#555; font-family:'IBM Plex Mono',monospace;">________</span><br>
-          Biggest blocker → <span style="color:#555; font-family:'IBM Plex Mono',monospace;">________</span>
-        </div>
-      </div>
-    </div>
-    <div style="background:rgba(52,211,153,0.06); border:1px solid rgba(52,211,153,0.2); border-radius:14px; padding:20px;">
-      <div style="font-size:12px; font-weight:800; color:#34d399; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:12px;">3. Three actions — be specific</div>
-      <div style="display:flex; gap:12px;">
-        <div style="flex:1; background:rgba(255,255,255,0.04); border-radius:8px; padding:14px; text-align:center;">
-          <div style="font-size:11px; color:#64748b; margin-bottom:6px;">This week</div>
-          <div style="font-size:14px; color:#555; font-family:'IBM Plex Mono',monospace;">_______________</div>
-        </div>
-        <div style="flex:1; background:rgba(255,255,255,0.04); border-radius:8px; padding:14px; text-align:center;">
-          <div style="font-size:11px; color:#64748b; margin-bottom:6px;">This month</div>
-          <div style="font-size:14px; color:#555; font-family:'IBM Plex Mono',monospace;">_______________</div>
-        </div>
-        <div style="flex:1; background:rgba(255,255,255,0.04); border-radius:8px; padding:14px; text-align:center;">
-          <div style="font-size:11px; color:#64748b; margin-bottom:6px;">This quarter</div>
-          <div style="font-size:14px; color:#555; font-family:'IBM Plex Mono',monospace;">_______________</div>
-        </div>
+      <div style="flex:1; background:rgba(248,113,113,0.06); border:1px solid rgba(248,113,113,0.2); border-radius:12px; padding:14px 16px;">
+        <div style="font-size:11px; font-weight:800; color:#f87171; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:8px;">Stress scenarios</div>
+        <div style="font-size:12px; color:#8899bb; line-height:1.85;">If primary vendor <strong style="color:#fff;">doubles pricing</strong> tomorrow: <span style="color:#555; font-family:'IBM Plex Mono',monospace;">_____</span><br>If primary vendor <strong style="color:#fff;">ships a competing product</strong>: <span style="color:#555; font-family:'IBM Plex Mono',monospace;">_____</span></div>
       </div>
     </div>
-    <p style="font-size:13px; text-align:center; margin-top:8px;"><span style="color:#34d399;">📂</span> <strong style="color:#6ee7b7;">Go to your repo →</strong> <code style="color:#6ee7b7; font-size:12px;">02-the-moat/kill-switch.md</code> <span style="color:#8899bb;">→ Portability audit + 48-hour swap plan</span></p>
+    <p style="font-size:13px; text-align:center; margin-top:10px;"><span style="color:#34d399;">📂</span> <strong style="color:#6ee7b7;">Go to your repo →</strong> <code style="color:#6ee7b7; font-size:12px;">02-the-moat/kill-switch.md</code> <span style="color:#8899bb;">→ Vendor Dependency Assessment · Portability Score · Both scenarios</span></p>
   </div>
 </section>
 
