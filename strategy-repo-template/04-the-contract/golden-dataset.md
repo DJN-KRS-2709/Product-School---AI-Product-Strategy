@@ -17,9 +17,9 @@
 
 **Approach:** show uncertainty / tiered confidence / human-in-loop trigger
 
-**High confidence (>90%):**
-**Medium confidence (70-90%):**
-**Low confidence (<70%):**
+**Confident (>90%):**
+**Uncertain (50-90%):**
+**Not confident (<50%):**
 
 **User control surface:**
 
