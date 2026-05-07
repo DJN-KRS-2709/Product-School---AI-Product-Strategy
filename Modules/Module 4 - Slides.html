@@ -673,25 +673,44 @@ section.skipped { display: none; }
     <h2>Define Your Golden Dataset</h2>
     <div class="lab-goal">
       <div class="lab-goal-label">Your Goal</div>
-      <div class="lab-goal-text">Write 10 test cases for your product's golden dataset — including 3 adversarial inputs. Define pass/fail criteria and the judge that evaluates them.</div>
+      <div class="lab-goal-text">Draft 10 golden test cases — 3 adversarial — and define the judge that grades each one. Today: 10 cases · v1 ship target: ~150.</div>
     </div>
     <p class="subtitle">Your ground-truth spec — ship-blocking, not side project.</p>
-    <div style="display:flex; gap:16px; margin:20px 0;">
-      <div style="flex:1; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:10px; padding:20px;">
-        <div style="font-size:13px; font-weight:800; color:#60a5fa; margin-bottom:10px;">Scope</div>
-        <div style="font-size:13px; color:#8899bb; line-height:2;">Domain: <span style="color:#555;">_____</span><br>Input/output types: <span style="color:#555;">_____</span><br>Target examples: <span style="color:#555;">_____ (100–500)</span></div>
+    <table class="score-table" style="font-size:12px; margin:14px 0 10px;">
+      <thead><tr><th style="width:36px;">#</th><th>Input</th><th>Expected Output</th><th style="width:90px;">Edge Case?</th><th style="width:120px;">Judge Type</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td style="color:#94a3b8; font-style:italic;">Account has 42% usage drop, 3 unresolved P1 tickets, renewal in 75 days</td>
+          <td style="color:#94a3b8; font-style:italic;">High renewal risk — exec escalation + recovery plan</td>
+          <td style="color:#555; text-align:center;">N</td>
+          <td style="color:#94a3b8;">rule + LLM</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td style="color:#555; font-family:'IBM Plex Mono',monospace;">_____</td>
+          <td style="color:#555; font-family:'IBM Plex Mono',monospace;">_____</td>
+          <td style="color:#555; font-family:'IBM Plex Mono',monospace; text-align:center;">Y / N</td>
+          <td style="color:#555; font-family:'IBM Plex Mono',monospace;">rule / LLM</td>
+        </tr>
+      </tbody>
+    </table>
+    <div style="display:flex; gap:14px; margin-top:10px;">
+      <div style="flex:1; background:rgba(248,113,113,0.06); border:1px solid rgba(248,113,113,0.2); border-radius:10px; padding:12px 14px; text-align:center;">
+        <div style="font-size:11px; font-weight:800; color:#f87171; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:4px;">Adversarial rows</div>
+        <div style="font-size:13px; color:#555; font-family:'IBM Plex Mono',monospace;">_____ (target ≥3)</div>
       </div>
-      <div style="flex:1; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:10px; padding:20px;">
-        <div style="font-size:13px; font-weight:800; color:#d29922; margin-bottom:10px;">Sources</div>
-        <div style="font-size:13px; color:#8899bb; line-height:2;">Real user interactions: <span style="color:#555;">Y / N</span><br>Expert curated: <span style="color:#555;">Y / N</span><br>Adversarial / edge cases: <span style="color:#555;">Y / N</span></div>
+      <div style="flex:1; background:rgba(210,153,34,0.06); border:1px solid rgba(210,153,34,0.2); border-radius:10px; padding:12px 14px; text-align:center;">
+        <div style="font-size:11px; font-weight:800; color:#d29922; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:4px;">Judge mix (rule / LLM)</div>
+        <div style="font-size:13px; color:#555; font-family:'IBM Plex Mono',monospace;">__% / __%</div>
       </div>
-      <div style="flex:1; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:10px; padding:20px;">
-        <div style="font-size:13px; font-weight:800; color:#34d399; margin-bottom:10px;">Maintenance</div>
-        <div style="font-size:13px; color:#8899bb; line-height:2;">Owner: <span style="color:#555;">_____</span><br>Update frequency: <span style="color:#555;">_____</span><br>Versioning: <span style="color:#555;">_____</span></div>
+      <div style="flex:1; background:rgba(96,165,250,0.06); border:1px solid rgba(96,165,250,0.2); border-radius:10px; padding:12px 14px; text-align:center;">
+        <div style="font-size:11px; font-weight:800; color:#60a5fa; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:4px;">Coverage gap (from partner)</div>
+        <div style="font-size:13px; color:#555; font-family:'IBM Plex Mono',monospace;">_____</div>
       </div>
     </div>
-    <p style="font-size:14px; color:#d29922; font-weight:600; text-align:center; margin-top:8px;">Sales test: one sentence — "Here's how we test our AI."</p>
-    <p style="font-size:13px; text-align:center; margin-top:8px;"><span style="color:#34d399;">📂</span> <strong style="color:#6ee7b7;">Go to your repo →</strong> <code style="color:#6ee7b7; font-size:12px;">04-the-contract/golden-dataset.md</code> <span style="color:#8899bb;">→ Golden Dataset section</span></p>
+    <p style="font-size:14px; color:#d29922; font-weight:600; text-align:center; margin-top:10px;">Sales test: one sentence — "Here's how we test our AI."</p>
+    <p style="font-size:13px; text-align:center; margin-top:6px;"><span style="color:#34d399;">📂</span> <strong style="color:#6ee7b7;">Go to your repo →</strong> <code style="color:#6ee7b7; font-size:12px;">04-the-contract/golden-dataset.md</code> <span style="color:#8899bb;">→ Golden Dataset Spec · Adversarial rows · Coverage gaps</span></p>
   </div>
 </section>
 
@@ -812,7 +831,7 @@ section.skipped { display: none; }
       <div style="flex:1; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:8px; padding:12px; font-size:12px; color:#8899bb; text-align:center;">Correct & override? <span style="color:#555;">Y/N</span></div>
       <div style="flex:1; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:8px; padding:12px; font-size:12px; color:#8899bb; text-align:center;">Corrections → model? <span style="color:#555;">Y/N</span></div>
     </div>
-    <p style="font-size:13px; text-align:center; margin-top:8px;"><span style="color:#34d399;">📂</span> <strong style="color:#6ee7b7;">Go to your repo →</strong> <code style="color:#6ee7b7; font-size:12px;">04-the-contract/golden-dataset.md</code> <span style="color:#8899bb;">→ Confidence UX section</span></p>
+    <p style="font-size:13px; text-align:center; margin-top:8px;"><span style="color:#34d399;">📂</span> <strong style="color:#6ee7b7;">Go to your repo →</strong> <code style="color:#6ee7b7; font-size:12px;">04-the-contract/golden-dataset.md</code> <span style="color:#8899bb;">→ Confidence UX Design section</span></p>
   </div>
 </section>
 
@@ -903,7 +922,16 @@ section.skipped { display: none; }
         <div style="font-size:12px; color:#8899bb; line-height:1.45;">Never-seen inputs · what breaks?</div>
       </div>
     </div>
-    <p style="font-size:16px; color:#f87171; font-weight:600; text-align:center; margin-top:12px;">After both: one line — worst miss your partner found.</p>
+    <div style="background:rgba(248,113,113,0.08); border:1px solid rgba(248,113,113,0.25); border-radius:10px; padding:14px 16px; margin-top:10px;">
+      <div style="font-size:11px; font-weight:900; color:#f87171; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:8px;">Capture in <code style="color:#fca5a5; font-family:'IBM Plex Mono',monospace; font-size:11px;">golden-dataset.md → Red-Team Findings</code></div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px 16px; font-size:12px; color:#8899bb; line-height:1.85;">
+        <div>Worst miss partner found: <span style="color:#555; font-family:'IBM Plex Mono',monospace;">_____</span></div>
+        <div>Failure category (above): <span style="color:#555; font-family:'IBM Plex Mono',monospace;">_____</span></div>
+        <div>Severity: <span style="color:#555; font-family:'IBM Plex Mono',monospace;">High / Med / Low</span></div>
+        <div>New row to add to gold set: <span style="color:#555; font-family:'IBM Plex Mono',monospace;">_____</span></div>
+      </div>
+    </div>
+    <p style="font-size:13px; text-align:center; margin-top:10px;"><span style="color:#34d399;">📂</span> <strong style="color:#6ee7b7;">Go to your repo →</strong> <code style="color:#6ee7b7; font-size:12px;">04-the-contract/golden-dataset.md</code> <span style="color:#8899bb;">→ Red-Team Findings section</span></p>
   </div>
 </section>
 
@@ -928,25 +956,39 @@ section.skipped { display: none; }
   <div class="split-right">
     <div class="lab-badge-row"><span class="lab-badge">Lab Exercise</span></div>
     <div class="steps-heading">Fill in your contract:</div>
-    <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-      <div style="background:rgba(59,130,246,0.08); border:1px solid rgba(59,130,246,0.15); border-radius:10px; padding:16px;">
-        <div style="font-size:12px; font-weight:800; color:#60a5fa; margin-bottom:6px;">The Promise</div>
-        <div style="font-size:12px; color:#8899bb; line-height:1.9;">Accuracy: <span style="color:#555;">_____%</span><br>Response time: <span style="color:#555;">_____</span><br>Uptime: <span style="color:#555;">_____</span></div>
-      </div>
-      <div style="background:rgba(251,191,36,0.08); border:1px solid rgba(251,191,36,0.15); border-radius:10px; padding:16px;">
-        <div style="font-size:12px; font-weight:800; color:#d29922; margin-bottom:6px;">The Measurement</div>
-        <div style="font-size:12px; color:#8899bb; line-height:1.9;">Metrics: <span style="color:#555;">_____</span><br>Method: <span style="color:#555;">_____</span><br>Reporting: <span style="color:#555;">_____</span></div>
-      </div>
-      <div style="background:rgba(248,113,113,0.08); border:1px solid rgba(248,113,113,0.15); border-radius:10px; padding:16px;">
-        <div style="font-size:12px; font-weight:800; color:#f87171; margin-bottom:6px;">The Escalation</div>
-        <div style="font-size:12px; color:#8899bb; line-height:1.9;">Below threshold: <span style="color:#555;">_____</span><br>Who's notified: <span style="color:#555;">_____</span><br>Users see: <span style="color:#555;">_____</span></div>
-      </div>
-      <div style="background:rgba(52,211,153,0.08); border:1px solid rgba(52,211,153,0.15); border-radius:10px; padding:16px;">
-        <div style="font-size:12px; font-weight:800; color:#34d399; margin-bottom:6px;">The Feedback Loop</div>
-        <div style="font-size:12px; color:#8899bb; line-height:1.9;">Corrections → model: <span style="color:#555;">_____</span><br>Dataset updates: <span style="color:#555;">_____</span><br>Cadence: <span style="color:#555;">_____</span></div>
-      </div>
+    <table class="score-table" style="font-size:12px;">
+      <thead><tr><th>Metric</th><th>Target</th><th>Measurement</th><th>Alert Threshold</th></tr></thead>
+      <tbody>
+        <tr>
+          <td style="color:#60a5fa; font-weight:700;">Accuracy</td>
+          <td style="color:#555; font-family:'IBM Plex Mono',monospace;">__%</td>
+          <td style="color:#555; font-family:'IBM Plex Mono',monospace;">_____</td>
+          <td style="color:#555; font-family:'IBM Plex Mono',monospace;">_____</td>
+        </tr>
+        <tr>
+          <td style="color:#f87171; font-weight:700;">Hallucination rate</td>
+          <td style="color:#555; font-family:'IBM Plex Mono',monospace;">≤ __%</td>
+          <td style="color:#555; font-family:'IBM Plex Mono',monospace;">_____</td>
+          <td style="color:#555; font-family:'IBM Plex Mono',monospace;">_____</td>
+        </tr>
+        <tr>
+          <td style="color:#d29922; font-weight:700;">Latency p95</td>
+          <td style="color:#555; font-family:'IBM Plex Mono',monospace;">__ ms</td>
+          <td style="color:#555; font-family:'IBM Plex Mono',monospace;">_____</td>
+          <td style="color:#555; font-family:'IBM Plex Mono',monospace;">_____</td>
+        </tr>
+        <tr>
+          <td style="color:#a78bfa; font-weight:700;">Drift velocity</td>
+          <td style="color:#555; font-family:'IBM Plex Mono',monospace;">_____</td>
+          <td style="color:#555; font-family:'IBM Plex Mono',monospace;">_____</td>
+          <td style="color:#555; font-family:'IBM Plex Mono',monospace;">_____</td>
+        </tr>
+      </tbody>
+    </table>
+    <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:10px; padding:10px 14px; margin-top:10px;">
+      <div style="font-size:12px; color:#8899bb; line-height:1.7;"><strong style="color:#fff;">HITL architecture:</strong> <span style="color:#555; font-family:'IBM Plex Mono',monospace;">when does a human enter the loop? · who reviews?</span></div>
     </div>
-    <p style="font-size:13px; text-align:center; margin-top:8px;"><span style="color:#34d399;">📂</span> <strong style="color:#6ee7b7;">Go to your repo →</strong> <code style="color:#6ee7b7; font-size:12px;">04-the-contract/golden-dataset.md</code> <span style="color:#8899bb;">→ Reliability Contract section</span></p>
+    <p style="font-size:13px; text-align:center; margin-top:8px;"><span style="color:#34d399;">📂</span> <strong style="color:#6ee7b7;">Go to your repo →</strong> <code style="color:#6ee7b7; font-size:12px;">04-the-contract/golden-dataset.md</code> <span style="color:#8899bb;">→ Reliability Contract + HITL Architecture sections</span></p>
   </div>
 </section>
 
