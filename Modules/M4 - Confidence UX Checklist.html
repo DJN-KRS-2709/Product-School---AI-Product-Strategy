@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Confidence UX Checklist — Module 4</title>
+<title>Confidence UX Designer — Module 4</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
 
@@ -25,9 +25,9 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  .page { max-width: 720px; margin: 0 auto; }
+  .page { max-width: 760px; margin: 0 auto; }
 
-  .header { text-align: center; margin-bottom: 36px; }
+  .header { text-align: center; margin-bottom: 28px; }
   .badge {
     display: inline-block; font-size: 10px; font-weight: 700;
     text-transform: uppercase; letter-spacing: 0.12em;
@@ -36,7 +36,7 @@
     padding: 5px 14px; border-radius: 20px; margin-bottom: 14px;
   }
   .header h1 { font-size: 30px; font-weight: 800; color: #fff; margin-bottom: 8px; letter-spacing: -0.02em; }
-  .header p { font-size: 14px; color: var(--text-dim); line-height: 1.6; max-width: 560px; margin: 0 auto; }
+  .header p { font-size: 14px; color: var(--text-dim); line-height: 1.6; max-width: 580px; margin: 0 auto; }
 
   .card {
     background: var(--surface); border: 1px solid var(--border);
@@ -56,68 +56,109 @@
   }
   .card-title { font-size: 16px; font-weight: 700; color: #fff; }
   .card-sub { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
-  .card-body { padding: 20px 24px 24px; }
+  .card-body { padding: 22px 24px 24px; }
 
-  .check-row {
+  .pill-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+  .pill {
+    font-family: inherit; font-size: 13px; font-weight: 600;
+    padding: 8px 14px; border-radius: 20px;
+    border: 1px solid var(--border); background: var(--surface2); color: var(--text);
+    cursor: pointer; transition: all 0.2s;
+  }
+  .pill:hover { border-color: var(--border-hi); }
+  .pill.on {
+    background: var(--blue-bg); color: #fff; border-color: var(--blue);
+    box-shadow: 0 0 0 1px rgba(91,141,239,0.25);
+  }
+
+  .field { margin-bottom: 14px; }
+  .field:last-child { margin-bottom: 0; }
+  .field label {
+    display: block; font-size: 12px; font-weight: 700; color: var(--text-dim);
+    text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px;
+  }
+  .field textarea, .field input[type="text"] {
+    width: 100%; font-family: inherit; font-size: 14px; color: var(--text);
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 12px 14px; resize: vertical; line-height: 1.55;
+    transition: all 0.2s;
+  }
+  .field textarea { min-height: 76px; }
+  .field input[type="text"] { line-height: 1.5; }
+  .field textarea:focus, .field input[type="text"]:focus {
+    outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px rgba(91,141,239,0.15);
+  }
+  .field textarea::placeholder, .field input::placeholder { color: var(--text-muted); }
+
+  .tier {
+    display: grid; grid-template-columns: 88px 1fr; gap: 14px; align-items: start;
+    padding: 14px 0; border-bottom: 1px solid var(--border);
+  }
+  .tier:first-child { padding-top: 0; }
+  .tier:last-child { border-bottom: none; padding-bottom: 0; }
+  .tier-tag {
+    display: inline-block; padding: 4px 10px; border-radius: 16px;
+    font-size: 11px; font-weight: 700; text-align: center; letter-spacing: 0.04em;
+    border: 1px solid var(--border);
+  }
+  .tier-tag.high { color: var(--green); background: var(--green-bg); border-color: rgba(61,214,140,0.25); }
+  .tier-tag.mid  { color: var(--yellow); background: var(--yellow-bg); border-color: rgba(240,192,64,0.25); }
+  .tier-tag.low  { color: var(--red); background: var(--red-bg); border-color: rgba(239,91,91,0.25); }
+
+  .yesno-row {
     display: flex; align-items: center; justify-content: space-between; gap: 16px;
     padding: 12px 0; border-bottom: 1px solid var(--border);
   }
-  .check-row:last-child { border-bottom: none; }
-  .check-label {
-    font-size: 14px; color: var(--text); line-height: 1.45; flex: 1;
-  }
+  .yesno-row:last-of-type { border-bottom: none; }
+  .yesno-label { font-size: 14px; color: var(--text); flex: 1; line-height: 1.45; }
 
-  .switch {
-    position: relative; width: 48px; height: 26px; flex-shrink: 0;
-  }
-  .switch input {
-    opacity: 0; width: 0; height: 0; position: absolute;
-  }
-  .switch-slider {
+  .toggle { position: relative; width: 48px; height: 26px; flex-shrink: 0; }
+  .toggle input { opacity: 0; width: 0; height: 0; position: absolute; }
+  .toggle-slider {
     position: absolute; inset: 0; cursor: pointer;
     background: var(--surface2); border: 1px solid var(--border);
     border-radius: 26px; transition: 0.2s;
   }
-  .switch-slider::before {
+  .toggle-slider::before {
     content: ''; position: absolute; height: 20px; width: 20px; left: 3px; bottom: 2px;
     background: var(--text-muted); border-radius: 50%; transition: 0.2s;
   }
-  .switch input:checked + .switch-slider {
+  .toggle input:checked + .toggle-slider {
     background: var(--blue-bg); border-color: var(--blue);
   }
-  .switch input:checked + .switch-slider::before {
+  .toggle input:checked + .toggle-slider::before {
     transform: translateX(22px); background: var(--blue);
   }
-  .switch input:focus-visible + .switch-slider {
+  .toggle input:focus-visible + .toggle-slider {
     box-shadow: 0 0 0 3px rgba(91,141,239,0.25);
   }
 
   .summary {
     background: var(--surface2); border: 1px solid var(--border);
-    border-radius: var(--radius-lg); padding: 20px 24px; margin-bottom: 20px;
+    border-radius: var(--radius-lg); padding: 18px 22px; margin-bottom: 20px;
   }
   .summary-top {
     display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 12px;
-    margin-bottom: 14px;
+    margin-bottom: 12px;
   }
   .summary-count {
     font-family: 'JetBrains Mono', monospace; font-size: 22px; font-weight: 700; color: #fff;
   }
   .summary-count span { color: var(--text-dim); font-size: 14px; font-weight: 500; }
-  .maturity-tag {
+  .stage-tag {
     font-size: 12px; font-weight: 700; padding: 6px 14px; border-radius: 20px;
     border: 1px solid var(--border);
   }
-  .maturity-tag.starting { color: var(--red); background: var(--red-bg); border-color: rgba(239,91,91,0.25); }
-  .maturity-tag.developing { color: var(--yellow); background: var(--yellow-bg); border-color: rgba(240,192,64,0.25); }
-  .maturity-tag.mature { color: var(--blue); background: var(--blue-bg); border-color: rgba(91,141,239,0.25); }
-  .maturity-tag.advanced { color: var(--green); background: var(--green-bg); border-color: rgba(61,214,140,0.25); }
+  .stage-tag.empty { color: var(--red); background: var(--red-bg); border-color: rgba(239,91,91,0.25); }
+  .stage-tag.draft { color: var(--yellow); background: var(--yellow-bg); border-color: rgba(240,192,64,0.25); }
+  .stage-tag.shaped { color: var(--blue); background: var(--blue-bg); border-color: rgba(91,141,239,0.25); }
+  .stage-tag.ready { color: var(--green); background: var(--green-bg); border-color: rgba(61,214,140,0.25); }
 
-  .mat-bar-track {
-    height: 12px; border-radius: 6px; background: var(--surface);
+  .progress-track {
+    height: 10px; border-radius: 5px; background: var(--surface);
     border: 1px solid var(--border); overflow: hidden;
   }
-  .mat-bar-fill {
+  .progress-fill {
     height: 100%; border-radius: 5px; transition: width 0.35s, background 0.35s;
     width: 0%;
   }
@@ -129,7 +170,6 @@
     background: var(--surface2); color: var(--text); cursor: pointer; transition: all 0.2s;
   }
   .btn:hover { border-color: var(--blue); color: #fff; }
-  .btn.primary { background: var(--blue); border-color: var(--blue); color: #fff; }
 
   .saved-toast {
     position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(60px);
@@ -146,67 +186,92 @@
 <div class="page">
   <div class="header">
     <div class="badge">Module 4 — The Contract</div>
-    <h1>Confidence UX Checklist</h1>
-    <p>Design for uncertainty. Every AI output should show how confident it is.</p>
+    <h1>Confidence UX Designer</h1>
+    <p>Design what your AI does at high, medium, and low confidence — and what users can do about it. Output mirrors the <code>Confidence UX Design</code> section of <code>04-the-contract/golden-dataset.md</code>.</p>
   </div>
 
-  <div class="summary" id="summaryBox">
+  <div class="summary">
     <div class="summary-top">
-      <div class="summary-count" id="countDisplay">0<span> / 16 items</span></div>
-      <div class="maturity-tag starting" id="maturityTag">Starting</div>
+      <div class="summary-count" id="countDisplay">0<span> / 5 fields</span></div>
+      <div class="stage-tag empty" id="stageTag">Empty</div>
     </div>
-    <div class="mat-bar-track"><div class="mat-bar-fill" id="maturityBar"></div></div>
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
   </div>
 
   <div class="card">
     <div class="card-head">
       <div class="card-icon" style="background:var(--blue);">1</div>
-      <div><div class="card-title">Showing Uncertainty</div><div class="card-sub">Surface confidence and provenance</div></div>
+      <div><div class="card-title">Approach</div><div class="card-sub">Pick one or more — extend in your own words below</div></div>
     </div>
     <div class="card-body">
-      <label class="check-row"><span class="check-label">Confidence scores visible to users (e.g. &quot;85% confident&quot;)</span><span class="switch"><input type="checkbox" data-i="0" class="chk"><span class="switch-slider"></span></span></label>
-      <label class="check-row"><span class="check-label">Visual indicators for low-confidence outputs (color, icon, label)</span><span class="switch"><input type="checkbox" data-i="1" class="chk"><span class="switch-slider"></span></span></label>
-      <label class="check-row"><span class="check-label">Disclaimer language for AI-generated content</span><span class="switch"><input type="checkbox" data-i="2" class="chk"><span class="switch-slider"></span></span></label>
-      <label class="check-row"><span class="check-label">Source citations or evidence links</span><span class="switch"><input type="checkbox" data-i="3" class="chk"><span class="switch-slider"></span></span></label>
+      <div class="pill-row" id="approachPills">
+        <button type="button" class="pill" data-app="show uncertainty">show uncertainty</button>
+        <button type="button" class="pill" data-app="tiered confidence">tiered confidence</button>
+        <button type="button" class="pill" data-app="human-in-loop trigger">human-in-loop trigger</button>
+      </div>
+      <div class="field">
+        <label for="approachNote">Approach (sentence form)</label>
+        <input type="text" id="approachNote" placeholder="e.g. Tiered confidence with an evidence panel and a human-in-loop trigger" autocomplete="off">
+      </div>
     </div>
   </div>
 
   <div class="card">
     <div class="card-head">
       <div class="card-icon" style="background:var(--green);">2</div>
-      <div><div class="card-title">Human-in-the-Loop Design</div><div class="card-sub">Escalate and learn from humans</div></div>
+      <div><div class="card-title">Tiered Confidence Design</div><div class="card-sub">What the UI shows + what the AI is allowed to say at each level</div></div>
     </div>
     <div class="card-body">
-      <label class="check-row"><span class="check-label">Escalation path when confidence &lt; threshold</span><span class="switch"><input type="checkbox" data-i="4" class="chk"><span class="switch-slider"></span></span></label>
-      <label class="check-row"><span class="check-label">Human review queue for flagged outputs</span><span class="switch"><input type="checkbox" data-i="5" class="chk"><span class="switch-slider"></span></span></label>
-      <label class="check-row"><span class="check-label">User correction mechanism (feedback loop)</span><span class="switch"><input type="checkbox" data-i="6" class="chk"><span class="switch-slider"></span></span></label>
-      <label class="check-row"><span class="check-label">Override capability for critical decisions</span><span class="switch"><input type="checkbox" data-i="7" class="chk"><span class="switch-slider"></span></span></label>
+      <div class="tier">
+        <span class="tier-tag high">&gt;90%</span>
+        <div class="field" style="margin:0;">
+          <label for="tierHigh">Confident</label>
+          <textarea id="tierHigh" placeholder="Full answer. Show evidence/citations. CSM/user can approve, edit, or reject."></textarea>
+        </div>
+      </div>
+      <div class="tier">
+        <span class="tier-tag mid">50–90%</span>
+        <div class="field" style="margin:0;">
+          <label for="tierMid">Uncertain</label>
+          <textarea id="tierMid" placeholder="Soften the UI. Hedge language, show drivers, request a clarifying input before drafting customer-facing text."></textarea>
+        </div>
+      </div>
+      <div class="tier">
+        <span class="tier-tag low">&lt;50%</span>
+        <div class="field" style="margin:0;">
+          <label for="tierLow">Not confident</label>
+          <textarea id="tierLow" placeholder="Don't generate. Show missing evidence, escalate, or route to a human queue."></textarea>
+        </div>
+      </div>
     </div>
   </div>
 
   <div class="card">
     <div class="card-head">
-      <div class="card-icon" style="background:var(--yellow); color:#000;">3</div>
-      <div><div class="card-title">Graceful Degradation</div><div class="card-sub">When models or systems fail</div></div>
+      <div class="card-icon" style="background:var(--purple);">3</div>
+      <div><div class="card-title">User Control Surface</div><div class="card-sub">What users can do to steer, correct, and feed the loop</div></div>
     </div>
     <div class="card-body">
-      <label class="check-row"><span class="check-label">Fallback behavior when AI is unavailable</span><span class="switch"><input type="checkbox" data-i="8" class="chk"><span class="switch-slider"></span></span></label>
-      <label class="check-row"><span class="check-label">Rate limiting with user-friendly messaging</span><span class="switch"><input type="checkbox" data-i="9" class="chk"><span class="switch-slider"></span></span></label>
-      <label class="check-row"><span class="check-label">Progressive disclosure (simple answer first, detail on demand)</span><span class="switch"><input type="checkbox" data-i="10" class="chk"><span class="switch-slider"></span></span></label>
-      <label class="check-row"><span class="check-label">&quot;I don&apos;t know&quot; responses instead of hallucination</span><span class="switch"><input type="checkbox" data-i="11" class="chk"><span class="switch-slider"></span></span></label>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-head">
-      <div class="card-icon" style="background:var(--purple);">4</div>
-      <div><div class="card-title">Trust Signals</div><div class="card-sub">Transparency builds durable trust</div></div>
-    </div>
-    <div class="card-body">
-      <label class="check-row"><span class="check-label">Last model update date visible</span><span class="switch"><input type="checkbox" data-i="12" class="chk"><span class="switch-slider"></span></span></label>
-      <label class="check-row"><span class="check-label">Known limitations documented</span><span class="switch"><input type="checkbox" data-i="13" class="chk"><span class="switch-slider"></span></span></label>
-      <label class="check-row"><span class="check-label">User control over AI involvement level</span><span class="switch"><input type="checkbox" data-i="14" class="chk"><span class="switch-slider"></span></span></label>
-      <label class="check-row"><span class="check-label">Audit trail / explainability for decisions</span><span class="switch"><input type="checkbox" data-i="15" class="chk"><span class="switch-slider"></span></span></label>
+      <label class="yesno-row">
+        <span class="yesno-label">Users adjust the confidence threshold</span>
+        <span class="toggle"><input type="checkbox" id="ctrlThreshold"><span class="toggle-slider"></span></span>
+      </label>
+      <label class="yesno-row">
+        <span class="yesno-label">Users see AI reasoning / drivers</span>
+        <span class="toggle"><input type="checkbox" id="ctrlReasoning"><span class="toggle-slider"></span></span>
+      </label>
+      <label class="yesno-row">
+        <span class="yesno-label">Users correct &amp; override outputs</span>
+        <span class="toggle"><input type="checkbox" id="ctrlOverride"><span class="toggle-slider"></span></span>
+      </label>
+      <label class="yesno-row">
+        <span class="yesno-label">Corrections feed back into the model / dataset</span>
+        <span class="toggle"><input type="checkbox" id="ctrlFeedback"><span class="toggle-slider"></span></span>
+      </label>
+      <div class="field" style="margin-top:14px;">
+        <label for="ctrlNotes">Specifics (optional)</label>
+        <textarea id="ctrlNotes" placeholder='e.g. Every recommendation has buttons for "accurate," "wrong driver," "missing context," "too aggressive," and "not actionable." These labels feed the correction loop.'></textarea>
+      </div>
     </div>
   </div>
 
@@ -220,108 +285,176 @@
 
 <script>
 const KEY = 'aps-m4-confidence-ux';
-const LABELS = [
-  'Confidence scores visible to users (e.g. "85% confident")',
-  'Visual indicators for low-confidence outputs (color, icon, label)',
-  'Disclaimer language for AI-generated content',
-  'Source citations or evidence links',
-  'Escalation path when confidence < threshold',
-  'Human review queue for flagged outputs',
-  'User correction mechanism (feedback loop)',
-  'Override capability for critical decisions',
-  'Fallback behavior when AI is unavailable',
-  'Rate limiting with user-friendly messaging',
-  'Progressive disclosure (simple answer first, detail on demand)',
-  '"I don\'t know" responses instead of hallucination',
-  'Last model update date visible',
-  'Known limitations documented',
-  'User control over AI involvement level',
-  'Audit trail / explainability for decisions'
+const $ = id => document.getElementById(id);
+
+const APPROACHES = ['show uncertainty', 'tiered confidence', 'human-in-loop trigger'];
+const CONTROLS = [
+  { id: 'ctrlThreshold', label: 'Users adjust the confidence threshold' },
+  { id: 'ctrlReasoning', label: 'Users see AI reasoning / drivers' },
+  { id: 'ctrlOverride',  label: 'Users correct & override outputs' },
+  { id: 'ctrlFeedback',  label: 'Corrections feed back into the model / dataset' }
 ];
 
-const $ = id => document.getElementById(id);
-let items = Array(16).fill(false);
+let state = {
+  approachTags: [],
+  approachNote: '',
+  tierHigh: '',
+  tierMid: '',
+  tierLow: '',
+  controls: { ctrlThreshold: false, ctrlReasoning: false, ctrlOverride: false, ctrlFeedback: false },
+  ctrlNotes: ''
+};
 
-function countChecked() {
-  return items.filter(Boolean).length;
+function approachText() {
+  const tagPart = state.approachTags.join(' / ');
+  const note = state.approachNote.trim();
+  if (note) return note;
+  return tagPart;
 }
 
-function maturityBand(n) {
-  if (n <= 4) return { cls: 'starting', label: 'Starting', color: 'var(--red)', pct: (n / 16) * 100 };
-  if (n <= 8) return { cls: 'developing', label: 'Developing', color: 'var(--yellow)', pct: (n / 16) * 100 };
-  if (n <= 12) return { cls: 'mature', label: 'Mature', color: 'var(--blue)', pct: (n / 16) * 100 };
-  return { cls: 'advanced', label: 'Advanced', color: 'var(--green)', pct: (n / 16) * 100 };
+function isFilled(s) { return !!(s && s.trim()); }
+
+function fieldsCount() {
+  let n = 0;
+  if (approachText()) n++;
+  if (isFilled(state.tierHigh)) n++;
+  if (isFilled(state.tierMid)) n++;
+  if (isFilled(state.tierLow)) n++;
+  const anyControl = Object.values(state.controls).some(Boolean) || isFilled(state.ctrlNotes);
+  if (anyControl) n++;
+  return n;
+}
+
+function stageBand(n) {
+  if (n === 0) return { cls: 'empty', label: 'Empty', color: 'var(--red)', pct: 0 };
+  if (n <= 2)  return { cls: 'draft', label: 'Draft', color: 'var(--yellow)', pct: (n / 5) * 100 };
+  if (n <= 4)  return { cls: 'shaped', label: 'Shaped', color: 'var(--blue)', pct: (n / 5) * 100 };
+  return { cls: 'ready', label: 'Ready', color: 'var(--green)', pct: 100 };
 }
 
 function refreshUI() {
-  const n = countChecked();
-  $('countDisplay').innerHTML = `${n}<span> / 16 items</span>`;
-  const b = maturityBand(n);
-  const tag = $('maturityTag');
-  tag.className = 'maturity-tag ' + b.cls;
+  const n = fieldsCount();
+  $('countDisplay').innerHTML = `${n}<span> / 5 fields</span>`;
+  const b = stageBand(n);
+  const tag = $('stageTag');
+  tag.className = 'stage-tag ' + b.cls;
   tag.textContent = b.label;
-  const bar = $('maturityBar');
-  bar.style.width = b.pct + '%';
-  bar.style.background = b.color;
+  const fill = $('progressFill');
+  fill.style.width = b.pct + '%';
+  fill.style.background = b.color;
+
+  document.querySelectorAll('#approachPills .pill').forEach(p => {
+    p.classList.toggle('on', state.approachTags.includes(p.dataset.app));
+  });
 }
 
 function save() {
-  localStorage.setItem(KEY, JSON.stringify({ items }));
+  localStorage.setItem(KEY, JSON.stringify(state));
   showToast('Auto-saved');
 }
 
 function load() {
   try {
     const d = JSON.parse(localStorage.getItem(KEY));
-    if (d && Array.isArray(d.items) && d.items.length === 16) {
-      items = d.items.map(x => !!x);
+    if (d && typeof d === 'object') {
+      state.approachTags = Array.isArray(d.approachTags) ? d.approachTags.filter(t => APPROACHES.includes(t)) : [];
+      state.approachNote = d.approachNote || '';
+      state.tierHigh = d.tierHigh || '';
+      state.tierMid  = d.tierMid  || '';
+      state.tierLow  = d.tierLow  || '';
+      if (d.controls && typeof d.controls === 'object') {
+        CONTROLS.forEach(c => { state.controls[c.id] = !!d.controls[c.id]; });
+      }
+      state.ctrlNotes = d.ctrlNotes || '';
     }
   } catch (e) {}
-  document.querySelectorAll('.chk').forEach((el, i) => { el.checked = items[i]; });
+
+  $('approachNote').value = state.approachNote;
+  $('tierHigh').value = state.tierHigh;
+  $('tierMid').value  = state.tierMid;
+  $('tierLow').value  = state.tierLow;
+  CONTROLS.forEach(c => { $(c.id).checked = !!state.controls[c.id]; });
+  $('ctrlNotes').value = state.ctrlNotes;
   refreshUI();
 }
 
 function resetAll() {
-  items = Array(16).fill(false);
-  document.querySelectorAll('.chk').forEach(el => { el.checked = false; });
+  state = {
+    approachTags: [],
+    approachNote: '',
+    tierHigh: '',
+    tierMid: '',
+    tierLow: '',
+    controls: { ctrlThreshold: false, ctrlReasoning: false, ctrlOverride: false, ctrlFeedback: false },
+    ctrlNotes: ''
+  };
+  $('approachNote').value = '';
+  $('tierHigh').value = '';
+  $('tierMid').value = '';
+  $('tierLow').value = '';
+  CONTROLS.forEach(c => { $(c.id).checked = false; });
+  $('ctrlNotes').value = '';
   localStorage.removeItem(KEY);
   refreshUI();
   showToast('Reset');
 }
 
-document.querySelectorAll('.chk').forEach(el => {
-  el.addEventListener('change', () => {
-    const i = +el.dataset.i;
-    items[i] = el.checked;
+document.querySelectorAll('#approachPills .pill').forEach(p => {
+  p.addEventListener('click', () => {
+    const v = p.dataset.app;
+    const i = state.approachTags.indexOf(v);
+    if (i >= 0) state.approachTags.splice(i, 1);
+    else state.approachTags.push(v);
     refreshUI();
     save();
   });
 });
 
-function buildExportText(md) {
-  const n = countChecked();
-  const b = maturityBand(n);
-  let out = md ? '# Confidence UX Checklist — Module 4\n\n' : 'Confidence UX Checklist — Module 4\n\n';
-  out += `Progress: ${n}/16 — ${b.label}\n\n`;
-  const sections = [
-    { title: 'Showing Uncertainty', start: 0, end: 4 },
-    { title: 'Human-in-the-Loop Design', start: 4, end: 8 },
-    { title: 'Graceful Degradation', start: 8, end: 12 },
-    { title: 'Trust Signals', start: 12, end: 16 }
-  ];
-  sections.forEach(s => {
-    out += (md ? '## ' : '') + s.title + '\n';
-    for (let i = s.start; i < s.end; i++) {
-      const mark = items[i] ? (md ? '[x]' : '[x]') : (md ? '[ ]' : '[ ]');
-      out += `${mark} ${LABELS[i]}\n`;
-    }
-    out += '\n';
+['approachNote', 'tierHigh', 'tierMid', 'tierLow', 'ctrlNotes'].forEach(id => {
+  const el = $(id);
+  el.addEventListener('input', () => {
+    state[id] = el.value;
+    refreshUI();
+    save();
   });
-  return out.trim() + '\n';
+});
+
+CONTROLS.forEach(c => {
+  $(c.id).addEventListener('change', () => {
+    state.controls[c.id] = $(c.id).checked;
+    refreshUI();
+    save();
+  });
+});
+
+function buildExportText() {
+  const lines = [];
+  lines.push('## Confidence UX Design');
+  lines.push('');
+  const ap = approachText();
+  lines.push(`**Approach:** ${ap || '_(not set)_'}`);
+  lines.push('');
+  lines.push(`**Confident (>90%):** ${state.tierHigh.trim() || '_(not set)_'}`);
+  lines.push('');
+  lines.push(`**Uncertain (50-90%):** ${state.tierMid.trim() || '_(not set)_'}`);
+  lines.push('');
+  lines.push(`**Not confident (<50%):** ${state.tierLow.trim() || '_(not set)_'}`);
+  lines.push('');
+
+  const onLines = CONTROLS.filter(c => state.controls[c.id]).map(c => `- ${c.label}`);
+  const offLines = CONTROLS.filter(c => !state.controls[c.id]).map(c => `- ${c.label} _(not yet)_`);
+  let surface = '';
+  if (state.ctrlNotes.trim()) surface = state.ctrlNotes.trim();
+  if (onLines.length || offLines.length) {
+    surface = (surface ? surface + '\n\n' : '') + onLines.concat(offLines).join('\n');
+  }
+  lines.push(`**User control surface:** ${surface ? '\n\n' + surface : '_(not set)_'}`);
+  lines.push('');
+  return lines.join('\n');
 }
 
 function copyToClipboard() {
-  navigator.clipboard.writeText(buildExportText(false)).then(() => showToast('Copied to clipboard'));
+  navigator.clipboard.writeText(buildExportText()).then(() => showToast('Copied to clipboard'));
 }
 
 function showToast(msg) {
