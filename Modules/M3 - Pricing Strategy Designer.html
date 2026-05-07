@@ -271,7 +271,6 @@
   <div class="actions">
     <button type="button" class="btn" onclick="resetAll()">Reset</button>
     <button type="button" class="btn" onclick="copyToClipboard()">Copy as Text</button>
-    <button type="button" class="btn primary" onclick="exportMarkdown()">Export Markdown</button>
   </div>
 </div>
 
@@ -404,16 +403,6 @@ function getExportText(md) {
 
 function copyToClipboard() {
   navigator.clipboard.writeText(getExportText(false)).then(() => showToast('Copied to clipboard'));
-}
-
-function exportMarkdown() {
-  const blob = new Blob([getExportText(true)], { type: 'text/markdown' });
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = 'pricing-strategy-block.md';
-  a.click();
-  URL.revokeObjectURL(a.href);
-  showToast('Downloaded');
 }
 
 function showToast(msg) {

@@ -119,20 +119,6 @@
   }
   .saved-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-  .strategy-cta {
-    margin-top: 20px; margin-bottom: 4px; padding: 14px 18px;
-    background: rgba(160,123,232,0.06); border: 1px solid rgba(160,123,232,0.2);
-    border-radius: 10px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
-  }
-  .strategy-cta-text { flex: 1; min-width: 200px; font-size: 13px; color: var(--text-dim); line-height: 1.5; }
-  .strategy-cta-text strong { color: var(--purple, #a07be8); }
-  .strategy-cta-btn {
-    font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 700;
-    padding: 8px 16px; border-radius: 8px; text-decoration: none;
-    background: rgba(160,123,232,0.12); border: 1px solid rgba(160,123,232,0.3);
-    color: #a07be8; white-space: nowrap; transition: all 0.2s;
-  }
-  .strategy-cta-btn:hover { background: rgba(160,123,232,0.2); color: #fff; border-color: #a07be8; }
 </style>
 </head>
 <body>
@@ -197,15 +183,9 @@
     </div>
   </div>
 
-  <div class="strategy-cta">
-    <div class="strategy-cta-text"><strong>Component 5 saved.</strong> Open the Living Strategy Builder to see your Guardrails in the dashboard.</div>
-    <a href="Living Strategy Builder.html" class="strategy-cta-btn" target="_blank">Open Living Strategy →</a>
-  </div>
-
   <div class="actions">
     <button type="button" class="btn" onclick="resetAll()">Reset</button>
     <button type="button" class="btn" onclick="copyToClipboard()">Copy as Text</button>
-    <button type="button" class="btn primary" onclick="exportMarkdown()">Export Markdown</button>
   </div>
 </div>
 
@@ -384,16 +364,6 @@ function buildExportText(md) {
 
 function copyToClipboard() {
   navigator.clipboard.writeText(buildExportText(false)).then(() => showToast('Copied to clipboard'));
-}
-
-function exportMarkdown() {
-  const blob = new Blob([buildExportText(true)], { type: 'text/markdown' });
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = 'ai-maturity-scorer.md';
-  a.click();
-  URL.revokeObjectURL(a.href);
-  showToast('Downloaded');
 }
 
 function showToast(msg) {
