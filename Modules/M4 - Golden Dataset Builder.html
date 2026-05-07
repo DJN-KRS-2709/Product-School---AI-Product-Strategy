@@ -284,13 +284,18 @@ function addRow() {
 
 $('addRow').addEventListener('click', addRow);
 
+function rowHasContent(r) {
+  return (r.input && r.input.trim() !== '') || (r.expected && r.expected.trim() !== '');
+}
+
 function refreshHealth() {
-  const total = rows.length;
-  const edgeCount = rows.filter(r => !!r.edge).length;
+  const filled = rows.filter(rowHasContent);
+  const total = filled.length;
+  const edgeCount = filled.filter(r => !!r.edge).length;
   const edgePct = total ? Math.round((edgeCount / total) * 1000) / 10 : 0;
 
   const counts = { rule: 0, LLM: 0, both: 0 };
-  rows.forEach(r => { if (counts[r.judge] !== undefined) counts[r.judge]++; });
+  filled.forEach(r => { if (counts[r.judge] !== undefined) counts[r.judge]++; });
   const mixParts = [];
   if (total) {
     JUDGES.forEach(j => {
@@ -352,12 +357,13 @@ function mdCell(s) {
 
 function buildExportText(md) {
   const s = collectState();
-  const total = s.rows.length;
-  const edgeCount = s.rows.filter(r => !!r.edge).length;
+  const filled = s.rows.filter(rowHasContent);
+  const total = filled.length;
+  const edgeCount = filled.filter(r => !!r.edge).length;
   const edgePct = total ? ((edgeCount / total) * 100).toFixed(1) : '0';
 
   const counts = { rule: 0, LLM: 0, both: 0 };
-  s.rows.forEach(r => { if (counts[r.judge] !== undefined) counts[r.judge]++; });
+  filled.forEach(r => { if (counts[r.judge] !== undefined) counts[r.judge]++; });
   const mixLine = total
     ? JUDGES.map(j => `${Math.round((counts[j] / total) * 100)}% ${j}`).join(' / ')
     : '—';
@@ -365,11 +371,13 @@ function buildExportText(md) {
   const head = md ? '# Golden Dataset — Module 4\n\n' : 'Golden Dataset — Module 4\n\n';
 
   let body;
-  if (md) {
+  if (!total) {
+    body = md ? '_No test cases yet — start filling in the Build Test Cases table._\n' : 'No test cases yet — start filling in the Build Test Cases table.\n';
+  } else if (md) {
     body = '| # | Input | Expected Output | Edge Case? | Judge Type |\n| --- | --- | --- | --- | --- |\n' +
-      s.rows.map((r, i) => `| ${i + 1} | ${mdCell(r.input)} | ${mdCell(r.expected)} | ${r.edge ? 'Y' : 'N'} | ${r.judge} |`).join('\n');
+      filled.map((r, i) => `| ${i + 1} | ${mdCell(r.input)} | ${mdCell(r.expected)} | ${r.edge ? 'Y' : 'N'} | ${r.judge} |`).join('\n');
   } else {
-    body = 'Test cases:\n' + s.rows.map((r, i) =>
+    body = 'Test cases:\n' + filled.map((r, i) =>
       `  ${i + 1}. Edge: ${r.edge ? 'Y' : 'N'} · Judge: ${r.judge} — IN: ${r.input || '—'} → OUT: ${r.expected || '—'}`
     ).join('\n');
   }
