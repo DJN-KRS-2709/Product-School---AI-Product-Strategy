@@ -10,7 +10,7 @@ Module 1 asked what you are betting on. Module 2 asked whether the bet can survi
 
 The vibe shifts here. The first two modules were about threat and defensibility, which gets the adrenaline going. This one is about math, and math creates a different kind of discomfort: the quiet kind where you realize you should probably have looked at these numbers six months ago. Most PMs have never calculated their AI cost per user. The point of today is to close that gap.
 
-You leave with three artifacts in your repo: a **cost curve**, a **pricing strategy**, and a **board-ready one-pager** comparing your current model to the AI-enhanced one. Backed by two interactive tools, the **Margin Calculator** and the **Pricing Strategy Designer**, that do most of the number-crunching for you. The deliverables go in `03-the-margin/cost-curve.md`.
+You leave with one artifact, `03-the-margin/cost-curve.md`, with five filled-in sections: **Cost Model** (your AI COGS table), **Cascading Strategy** (cheap-model / frontier-model routing), **Pricing Model** (current vs. proposed), **Stress Tests** (what breaks if costs 3x or usage doubles), and a **Board One-Pager** (before/after, plus net margin shift). Backed by two interactive tools, the **Margin Calculator** and the **Pricing Strategy Designer**, that do most of the number-crunching for you.
 
 ---
 
@@ -192,7 +192,7 @@ A worked example for an AI support copilot:
 
 Compare that to a flat $49 subscription. If the product actually resolves 80 conversations a month, the old price was giving away $60 of value per user before margin even enters the conversation.
 
-After the tool, update the **Pricing Model** section of `cost-curve.md`: current pricing, proposed AI pricing, model type, and why that model fits the buyer. If you have time, start the revenue side of **Break-Even Math**: average customer size, base revenue, overage revenue, implied revenue per user.
+After the tool, update the **Pricing Model** section of `cost-curve.md` — three lines: current pricing, proposed AI pricing, and model type (seat / usage / outcome / hybrid). If you have time, start the **Stress Tests** table: what happens to margin if inference costs 3x, your heaviest segment doubles, or your model provider raises prices 50%. The tool gives you the numbers; the repo captures the decision.
 
 A reminder: hybrid strategies and archetypes are lenses, not playbooks. The right structure is the one that fits your buyer's mental model and how value shows up in their world.
 
@@ -208,7 +208,7 @@ The reframe to internalize, because it trips up even experienced PMs: **a lower 
 
 This one-pager is what you'd actually present to a board. When someone asks "why is our margin lower?" - this is your answer.
 
-In `03-the-margin/cost-curve.md`, this is the **Board One-Pager** plus the final **Break-Even Math**. The minimum acceptable output: before pricing, after pricing, gross margin shift, why the lower margin is acceptable, and the business outcome that makes the bet worth it.
+In `03-the-margin/cost-curve.md`, this is the **Board One-Pager** section plus a final pass on the **Stress Tests** table. The minimum acceptable output for the Board One-Pager: Before (traditional SaaS), After (AI-enabled), and Net margin shift. Then make sure your three stress scenarios have a margin impact and a response. That's what survives a board question of "what if you're wrong?"
 
 ### Slide 21 - Your Repo After Today
 

@@ -47,7 +47,7 @@ A numerical representation of a piece of text (or image, audio, etc.) that captu
 ### Eval / Eval harness
 
 An automated test suite that scores whether the AI is producing good outputs against a known set of expected answers. The eval harness is what proves a replacement model meets your quality bar before you switch.
-*Seen in: M2, Slide 18 (the third layer of the Kill Switch).*
+*Seen in: M2, Slide 18 (the Eval dimension of the Kill Switch audit). Goes much deeper in M4.*
 
 ### Fine-tuning
 
@@ -76,7 +76,7 @@ The trained AI system that takes input and produces output. Models come in tiers
 
 ### Multi-model routing
 
-Logic that decides, for each request, which model to send it to - based on cost, latency, quality, or task type. The middle layer of the Kill Switch and the mechanism that makes cascading possible.
+Logic that decides, for each request, which model to send it to - based on cost, latency, quality, or task type. The Routing dimension of the Kill Switch audit and the mechanism that makes cascading possible.
 *Seen in: M2, Slide 18; M3, Slide 7.*
 
 ### Prompt
@@ -160,7 +160,7 @@ The conditions under which you stop a bet, written down before the bet starts. T
 
 ### Kill Switch
 
-The strategy for escaping AI vendor lock-in. Three layers: an **abstraction layer**, **multi-model routing**, and an **eval harness**. The test: could you swap providers in under 48 hours?
+The strategy for escaping AI vendor lock-in. The audit in `02-the-moat/kill-switch.md` runs across **four dimensions**: **Provider** (who you depend on), **Abstraction** (a generic interface in your code), **Routing** (multi-model routing by cost / latency / quality), and **Eval** (automated tests that prove a replacement model meets your quality bar). Each dimension gets an H / M / L risk rating and a 48-hour action. The whole stack gets a Portability Score: Ready / Partial / Locked. The test: could you swap providers in under 48 hours?
 *Seen in: M2, Slide 18.*
 
 ### Network loop
@@ -224,12 +224,12 @@ A hybrid pricing structure: customers pay a recurring base for access plus a usa
 
 ### Board one-pager
 
-A before-and-after comparison of your current vs. AI-enhanced model that shows revenue, cost, gross margin, and the business outcome that justifies the bet. The third Module 3 artifact in `03-the-margin/cost-curve.md`.
+A before-and-after comparison of your current vs. AI-enhanced model that shows revenue, cost, gross margin, and the net margin shift that justifies the bet. The closing section of `03-the-margin/cost-curve.md` after Cost Model, Cascading Strategy, Pricing Model, and Stress Tests.
 *Seen in: M3, Slides 19-20.*
 
 ### Break-even
 
-The point where revenue covers cost. In Module 3 it shows up as the **Break-Even Math** section of `cost-curve.md`: average customer size, base revenue, overage revenue, and implied revenue per user.
+The point where revenue covers cost. In Module 3, break-even thinking shows up across the **Pricing Model** section (current vs. proposed pricing, and the unit you charge for) and the **Stress Tests** table of `cost-curve.md` — what survives if inference costs 3x, your heaviest segment doubles, or your model provider raises prices 50%. The Board One-Pager then captures the net margin shift that justifies the bet.
 *Seen in: M3, Slides 18, 20.*
 
 ### COGS (Cost of Goods Sold)
@@ -239,7 +239,7 @@ The direct cost of delivering your product. In classic SaaS this is mostly fixed
 
 ### Cost curve
 
-A map of how your AI cost grows as usage grows. Built by tagging every AI feature in your product with a model tier and a per-call estimate. The first Module 3 artifact in `cost-curve.md`.
+A map of how your AI cost grows as usage grows. Built by tagging every AI feature in your product with a model tier and a per-call estimate. Captured in the **Cost Model** table and **Cascading Strategy** section of `03-the-margin/cost-curve.md`.
 *Seen in: M3, Slides 16-17.*
 
 ### Fixed vs. variable cost

@@ -108,18 +108,20 @@ For full term definitions, see [`Glossary.md`](./Glossary.md). For the narrative
 
 ---
 
-### Kill Switch - 3 Layers
+### Kill Switch - 4-Dimension Audit
 
 **What it answers:** Could you swap AI providers in under 48 hours?
-**How to use it:** Audit each layer. Then write three actions: this week, this month, this quarter.
+**How to use it:** Score each dimension H / M / L for risk. Attach a 48-hour action to each. Then assign a Portability Score for the whole stack: Ready / Partial / Locked.
 
-| Layer | What it does | What "good" looks like |
+| Dimension | What it covers | What "low risk" looks like |
 |---|---|---|
-| **Abstraction Layer** | Product code calls a generic interface, not a specific provider | All embedding calls behind `ai_gateway.search()` |
-| **Multi-Model Routing** | Tasks route by cost, latency, and quality | Routing rules per task type, observable in production |
-| **Eval Harness** | Automated tests prove a replacement provider meets your quality bar | A test suite that runs on every model swap |
+| **Provider** | Who you depend on, and how concentrated that dependency is | Multiple providers in production, no single point of failure |
+| **Abstraction** | Product code calls a generic interface, not a specific provider | All embedding calls behind `ai_gateway.search()` |
+| **Routing** | Tasks route by cost, latency, and quality | Routing rules per task type, observable in production |
+| **Eval** | Automated tests prove a replacement provider meets your quality bar | A test suite that runs on every model swap |
 
 **Specificity test:** "Build abstraction layer" is a weak action. "Move all embedding calls behind `ai_gateway.search()` by Friday" is a strong one.
+**Stress scenarios** (also in the artifact): *If [primary vendor] doubles pricing tomorrow* → 48-hour response. *If [primary vendor] ships a competing product* → what's defensible that they can't replicate?
 **Lives in:** `02-the-moat/kill-switch.md`.
 
 ---
@@ -153,7 +155,7 @@ For full term definitions, see [`Glossary.md`](./Glossary.md). For the narrative
 | **Killer** | Heavy inference (image generation, agent workflows) - too expensive to bundle | Coffee - sell separately |
 
 **Caveat:** It's a lens, not a prescription. If your buyer doesn't think about your product as a bundle, this framing isn't the right one.
-**Lives in:** Packaging block in `03-the-margin/cost-curve.md`.
+**Lives in:** Pricing Model section of `03-the-margin/cost-curve.md` (it informs how you bundle vs. add-on).
 
 ---
 
@@ -169,7 +171,7 @@ For full term definitions, see [`Glossary.md`](./Glossary.md). For the narrative
 | **Maximize** | Capture the highest value through hybrid or outcome pricing | Microsoft / GitHub Copilot |
 
 **Anchor example:** GitHub Copilot at $19/user is 4.75x a typical SaaS seat - and nobody blinks, because developers complete tasks 55% faster. The price is justified by outcome, not features.
-**Lives in:** Pricing block in `03-the-margin/cost-curve.md`.
+**Lives in:** Pricing Model section of `03-the-margin/cost-curve.md`.
 
 ---
 
@@ -200,7 +202,7 @@ For full term definitions, see [`Glossary.md`](./Glossary.md). For the narrative
 | M2 | Workflow Depth Spectrum | (used in framing) |
 | M2 | Data Flywheel - 4 Loops | `02-the-moat/data-flywheel.md` |
 | M2 | Encroachment Threat Vectors | `02-the-moat/data-flywheel.md` |
-| M2 | Kill Switch - 3 Layers | `02-the-moat/kill-switch.md` |
+| M2 | Kill Switch - 4-Dimension Audit | `02-the-moat/kill-switch.md` |
 | M3 | Three Pricing Models | `03-the-margin/cost-curve.md` |
 | M3 | Leader / Filler / Killer + 70% Rule | `03-the-margin/cost-curve.md` |
 | M3 | Three Pricing Strategies | `03-the-margin/cost-curve.md` |

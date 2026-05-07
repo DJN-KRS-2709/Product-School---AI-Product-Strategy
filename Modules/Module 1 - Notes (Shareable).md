@@ -145,7 +145,12 @@ The point isn't the scores themselves — it's that each profile is *different*,
 
 ### Slide 20 — Three-Axis Diagnostic: Your Product
 
-The first artifact in the repo (`01-the-bet/diagnostic.md`) — your scores on each axis, the rationale, and your single biggest vulnerability in one line. The rubric: if all your scores are 5s, you haven't looked hard enough. The slide reminds you: **Figma = deep moat, thin ChatGPT wrapper = shallow.** That's the calibration range.
+The first artifact in the repo (`01-the-bet/diagnostic.md`). The slide gives you a capture card per axis, plus a footer:
+
+- **Per axis:** your score (1–5), a one-line rationale, and a **named attacker** (the specific company that exploits this weakness).
+- **Footer:** **Top Vulnerability** in one line, plus your **Confidence** in the bet after the diagnostic — H, M, or L.
+
+The rubric: if all your scores are 5s, you haven't looked hard enough. The slide reminds you: **Figma = deep moat, thin ChatGPT wrapper = shallow.** That's the calibration range. Confidence H is rare on day one and that's normal — the diagnostic is the first honest look, not the last word.
 
 ### Slide 21 — Defend Your Scores. Name the Attacker.
 
@@ -154,6 +159,17 @@ Self-assessment is always generous. The pair exercise exists to lower at least o
 ### Slide 23 — The Prototype Bet
 
 The hands-on lab. Everything in the first half — probabilistic thinking, vulnerability, speed — converges here. The bar is a **shareable link to a clickable prototype** that demonstrates your bet. Not slides about the product. The actual thing.
+
+The capture card on the slide mirrors the six fields in `01-the-bet/prototype.md`:
+
+- **What I built** — one sentence describing what the prototype demonstrates.
+- **Tool** — v0 / Cursor / Lovable / other.
+- **Link** — the shareable URL.
+- **Archetype** — Automator / Copilot / Oracle / Creator / Orchestrator (from Slide 14).
+- **Bet in one sentence** — what you're building, for whom, why now.
+- **Kill criteria** — the evidence that would stop you.
+
+That's the whole `prototype.md` artifact. Six lines after the build.
 
 ### Slide 24 — Build One Idea. Right Now.
 
@@ -181,8 +197,8 @@ The prototype link gets pushed into `01-the-bet/prototype.md` in your repo. It's
 
 What's now in your `01-the-bet/` folder:
 
-- **diagnostic.md** — your three scores and the rationale
-- **prototype.md** — the link, the bet thesis, and the kill criteria
+- **diagnostic.md** — three scores, rationale per axis, a named attacker per axis, top vulnerability in one line, and confidence (H/M/L).
+- **prototype.md** — what you built, tool used, link, archetype, the bet in one sentence, and kill criteria.
 
 That's Component 1 of your living strategy. Real, in version control, and the foundation that every subsequent module builds on.
 

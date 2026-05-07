@@ -143,7 +143,7 @@ These are the strategy terms that recur module-to-module. The full definitions l
 
 - **Moat** - whatever makes it hard for someone to copy you. Workflow depth and proprietary loops are the two that hold up best in AI.
 - **Flywheel** - the loop where usage produces signal, signal improves the product, and the better product drives more usage. Module 2's central idea.
-- **Kill switch** - the architecture (abstraction layer + multi-model routing + evals) that lets you swap AI providers in under 48 hours. Module 2.
+- **Kill switch** - the four-dimension audit (Provider, Abstraction, Routing, Eval) that proves you can swap AI providers in under 48 hours. Module 2.
 - **Encroachment** - the three ways someone moves on your space: a platform shipping it natively, a vertical specialist going deeper, or an adjacent tool adding it as one more feature. Module 2.
 - **Cascading** - routing each request to the cheapest model that can handle it well. Module 3's #1 margin lever.
 - **Leader / Filler / Killer** - bundling lens. Leader is what users come for, Filler bumps the average order, Killer is too heavy or too different to bundle. Module 3.
