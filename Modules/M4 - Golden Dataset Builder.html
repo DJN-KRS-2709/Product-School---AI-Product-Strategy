@@ -174,48 +174,18 @@
 
   <div class="card">
     <div class="card-head">
-      <div class="card-icon" style="background:var(--blue);">1</div>
-      <div><div class="card-title">Define Your Eval Scope</div><div class="card-sub">What you are measuring and why it matters</div></div>
-    </div>
-    <div class="card-body">
-      <div class="stack">
-        <div class="field">
-          <label>AI feature being evaluated</label>
-          <input type="text" id="feature" placeholder="e.g. Customer support chatbot" autocomplete="off">
-        </div>
-        <div class="field">
-          <label>Evaluation type</label>
-          <select id="evalType">
-            <option>Accuracy</option>
-            <option>Relevance</option>
-            <option>Safety</option>
-            <option>Tone</option>
-            <option>Latency</option>
-            <option>Custom</option>
-          </select>
-        </div>
-        <div class="field">
-          <label>Success criteria in one sentence</label>
-          <input type="text" id="successCriteria" placeholder="e.g. Correct answer with source citation in &lt; 3 seconds" autocomplete="off">
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-head">
-      <div class="card-icon" style="background:var(--green);">2</div>
-      <div><div class="card-title">Build Test Cases</div><div class="card-sub">Input prompt, expected output, and case type</div></div>
+      <div class="card-icon" style="background:var(--green);">1</div>
+      <div><div class="card-title">Build Test Cases</div><div class="card-sub">Input, expected output, edge case, and judge type</div></div>
     </div>
     <div class="card-body">
       <div class="table-wrap">
         <table>
           <thead>
             <tr>
-              <th style="min-width:140px;">Input Prompt</th>
+              <th style="min-width:140px;">Input</th>
               <th style="min-width:140px;">Expected Output</th>
               <th class="cell-check">Edge Case?</th>
-              <th style="min-width:130px;">Category</th>
+              <th style="min-width:130px;">Judge Type</th>
               <th style="width:44px;"></th>
             </tr>
           </thead>
@@ -230,7 +200,7 @@
 
   <div class="card">
     <div class="card-head">
-      <div class="card-icon" style="background:var(--yellow); color:#000;">3</div>
+      <div class="card-icon" style="background:var(--yellow); color:#000;">2</div>
       <div><div class="card-title">Evaluation Method</div><div class="card-sub">Pick one approach for this dataset</div></div>
     </div>
     <div class="card-body">
@@ -253,14 +223,14 @@
 
   <div class="card">
     <div class="card-head">
-      <div class="card-icon" style="background:var(--purple);">4</div>
+      <div class="card-icon" style="background:var(--purple);">3</div>
       <div><div class="card-title">Dataset Health</div><div class="card-sub">Balance signals at a glance</div></div>
     </div>
     <div class="card-body">
       <div class="stat-grid">
         <div class="stat"><div class="k">Total test cases</div><div class="v" id="stTotal">0</div></div>
         <div class="stat"><div class="k">Edge cases</div><div class="v" id="stEdge">0 (0%)</div></div>
-        <div class="stat"><div class="k">Adversarial cases</div><div class="v" id="stAdv">0</div></div>
+        <div class="stat"><div class="k">Judge mix</div><div class="v" id="stJudgeMix">—</div></div>
         <div class="stat"><div class="k">Coverage score</div><div class="v" id="stCovLabel">—</div></div>
       </div>
       <div class="bar-wrap">
@@ -268,7 +238,7 @@
         <div class="bar-track"><div class="bar-fill" id="covBar"></div></div>
       </div>
       <div class="tip">
-        <strong>Tip:</strong> Aim for at least 20% edge cases and 10% adversarial. Your golden dataset is only as good as its hardest examples.
+        <strong>Tip:</strong> Aim for at least 20% edge cases and at least 3 adversarial rows. Your golden dataset is only as good as its hardest examples.
       </div>
     </div>
   </div>
@@ -287,20 +257,20 @@ const $ = id => document.getElementById(id);
 
 let method = 'human';
 
+const JUDGES = ['rule', 'LLM', 'both'];
 const defaultRows = () => [
-  { input: '', expected: '', edge: false, category: 'Happy path' },
-  { input: '', expected: '', edge: false, category: 'Happy path' },
-  { input: '', expected: '', edge: false, category: 'Happy path' }
+  { input: '', expected: '', edge: false, judge: 'rule' },
+  { input: '', expected: '', edge: false, judge: 'rule' },
+  { input: '', expected: '', edge: false, judge: 'rule' }
 ];
 
 function rowTemplate(r, idx) {
-  const cats = ['Happy path', 'Edge case', 'Adversarial', 'Ambiguous'];
-  const opts = cats.map(c => `<option${r.category === c ? ' selected' : ''}>${c}</option>`).join('');
+  const opts = JUDGES.map(c => `<option${r.judge === c ? ' selected' : ''}>${c}</option>`).join('');
   return `<tr data-idx="${idx}">
     <td><input type="text" class="cell-inp" data-f="input" value="${escAttr(r.input)}" placeholder="User or system input"></td>
     <td><input type="text" class="cell-inp" data-f="expected" value="${escAttr(r.expected)}" placeholder="Gold answer"></td>
     <td class="cell-check"><input type="checkbox" class="cell-edge" ${r.edge ? 'checked' : ''}></td>
-    <td><select class="cell-cat">${opts}</select></td>
+    <td><select class="cell-judge">${opts}</select></td>
     <td><button type="button" class="btn-icon" title="Remove row" aria-label="Remove row" onclick="removeRow(${idx})">×</button></td>
   </tr>`;
 }
@@ -329,11 +299,11 @@ function renderRows() {
       save(); refreshHealth();
     });
   });
-  $('rowsBody').querySelectorAll('.cell-cat').forEach(el => {
+  $('rowsBody').querySelectorAll('.cell-judge').forEach(el => {
     el.addEventListener('change', () => {
       const tr = el.closest('tr');
       const i = +tr.dataset.idx;
-      rows[i].category = el.value;
+      rows[i].judge = el.value;
       save(); refreshHealth();
     });
   });
@@ -348,7 +318,7 @@ function removeRow(i) {
 }
 
 function addRow() {
-  rows.push({ input: '', expected: '', edge: false, category: 'Happy path' });
+  rows.push({ input: '', expected: '', edge: false, judge: 'rule' });
   renderRows();
   save();
   refreshHealth();
@@ -368,19 +338,24 @@ document.querySelectorAll('.method-opt').forEach(b => {
   b.addEventListener('click', () => setMethod(b.dataset.method));
 });
 
-function rowIsEdge(r) {
-  return !!r.edge || r.category === 'Edge case';
-}
-
 function refreshHealth() {
   const total = rows.length;
-  const edgeCount = rows.filter(rowIsEdge).length;
-  const adv = rows.filter(r => r.category === 'Adversarial').length;
+  const edgeCount = rows.filter(r => !!r.edge).length;
   const edgePct = total ? Math.round((edgeCount / total) * 1000) / 10 : 0;
+
+  const counts = { rule: 0, LLM: 0, both: 0 };
+  rows.forEach(r => { if (counts[r.judge] !== undefined) counts[r.judge]++; });
+  const mixParts = [];
+  if (total) {
+    JUDGES.forEach(j => {
+      const pct = Math.round((counts[j] / total) * 100);
+      if (pct > 0) mixParts.push(`${pct}% ${j}`);
+    });
+  }
 
   $('stTotal').textContent = String(total);
   $('stEdge').textContent = `${edgeCount} (${edgePct}%)`;
-  $('stAdv').textContent = String(adv);
+  $('stJudgeMix').textContent = mixParts.length ? mixParts.join(' / ') : '—';
 
   let barColor = 'var(--red)';
   let label = 'Low';
@@ -398,9 +373,6 @@ function refreshHealth() {
 
 function collectState() {
   return {
-    feature: $('feature').value,
-    evalType: $('evalType').value,
-    successCriteria: $('successCriteria').value,
     method,
     rows: rows.map(r => ({ ...r }))
   };
@@ -416,16 +388,13 @@ function load() {
     const raw = localStorage.getItem(KEY);
     if (!raw) return;
     const d = JSON.parse(raw);
-    if (d.feature !== undefined) $('feature').value = d.feature;
-    if (d.evalType) $('evalType').value = d.evalType;
-    if (d.successCriteria !== undefined) $('successCriteria').value = d.successCriteria;
     if (d.method) method = d.method;
     if (Array.isArray(d.rows) && d.rows.length) {
       rows = d.rows.map(r => ({
         input: r.input || '',
         expected: r.expected || '',
         edge: !!r.edge,
-        category: r.category || 'Happy path'
+        judge: JUDGES.includes(r.judge) ? r.judge : 'rule'
       }));
     }
     setMethod(method);
@@ -433,11 +402,6 @@ function load() {
     refreshHealth();
   } catch (e) {}
 }
-
-['feature','evalType','successCriteria'].forEach(id => {
-  $(id).addEventListener('change', () => { save(); });
-  $(id).addEventListener('input', () => { save(); });
-});
 
 function methodLabel(m) {
   if (m === 'llm') return 'LLM-as-Judge';
@@ -452,39 +416,37 @@ function mdCell(s) {
 function buildExportText(md) {
   const s = collectState();
   const total = s.rows.length;
-  const edgeCount = s.rows.filter(rowIsEdge).length;
-  const adv = s.rows.filter(r => r.category === 'Adversarial').length;
+  const edgeCount = s.rows.filter(r => !!r.edge).length;
   const edgePct = total ? ((edgeCount / total) * 100).toFixed(1) : '0';
 
-  const head = md ? '# Golden Dataset Builder — Module 4\n\n' : 'Golden Dataset Builder — Module 4\n\n';
-  const scope = (md ? '## ' : '') + 'Eval Scope\n' +
-    `- Feature: ${s.feature || '—'}\n` +
-    `- Evaluation type: ${s.evalType}\n` +
-    `- Success criteria: ${s.successCriteria || '—'}\n` +
-    `- Method: ${methodLabel(s.method)}\n\n`;
+  const counts = { rule: 0, LLM: 0, both: 0 };
+  s.rows.forEach(r => { if (counts[r.judge] !== undefined) counts[r.judge]++; });
+  const mixLine = total
+    ? JUDGES.map(j => `${Math.round((counts[j] / total) * 100)}% ${j}`).join(' / ')
+    : '—';
+
+  const head = md ? '# Golden Dataset — Module 4\n\n' : 'Golden Dataset — Module 4\n\n';
+  const methodLine = (md ? '_Method: ' : 'Method: ') + methodLabel(s.method) + (md ? '_\n\n' : '\n\n');
 
   let body;
   if (md) {
-    body = '| Input | Expected | Edge? | Category |\n| --- | --- | --- | --- |\n' +
-      s.rows.map(r => `| ${mdCell(r.input)} | ${mdCell(r.expected)} | ${r.edge ? 'Yes' : 'No'} | ${r.category} |`).join('\n');
+    body = '| # | Input | Expected Output | Edge Case? | Judge Type |\n| --- | --- | --- | --- | --- |\n' +
+      s.rows.map((r, i) => `| ${i + 1} | ${mdCell(r.input)} | ${mdCell(r.expected)} | ${r.edge ? 'Y' : 'N'} | ${r.judge} |`).join('\n');
   } else {
-    body = 'Test cases:\n' + s.rows.map(r =>
-      `  - [${r.category}] Edge checkbox: ${r.edge ? 'yes' : 'no'} — IN: ${r.input || '—'} → OUT: ${r.expected || '—'}`
+    body = 'Test cases:\n' + s.rows.map((r, i) =>
+      `  ${i + 1}. Edge: ${r.edge ? 'Y' : 'N'} · Judge: ${r.judge} — IN: ${r.input || '—'} → OUT: ${r.expected || '—'}`
     ).join('\n');
   }
 
   const health = '\n\n' + (md ? '## ' : '') + 'Dataset health\n' +
     `- Total: ${total}\n` +
-    `- Edge cases (checkbox or Edge category): ${edgeCount} (${edgePct}%)\n` +
-    `- Adversarial: ${adv}\n`;
+    `- Edge cases: ${edgeCount} (${edgePct}%)\n` +
+    `- Judge mix: ${mixLine}\n`;
 
-  return head + scope + body + health;
+  return head + methodLine + body + health;
 }
 
 function resetAll() {
-  $('feature').value = '';
-  $('evalType').selectedIndex = 0;
-  $('successCriteria').value = '';
   method = 'human';
   rows = defaultRows();
   setMethod('human');
