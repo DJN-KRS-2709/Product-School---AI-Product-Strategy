@@ -1,0 +1,55 @@
+---
+description: Shareable student-facing HTML reading documents (pre-reads, post-session notes companions)
+globs: Modules/*(Shareable)*.html, Modules/*Pre-Read*.html, Modules/*Notes*.html
+alwaysApply: false
+---
+
+# Shareable Student-Facing Reading Documents
+
+Documents students receive directly — pre-reads, post-session notes companions, primer docs — are delivered as **polished, self-contained HTML files**, not markdown. Markdown stays internal (instructor speaker notes, audit docs, working files). HTML is what gets sent to students.
+
+`Modules/Module 4 - Pre-Read (Shareable).html` is the reference. Match its design system across all shareable reading docs.
+
+## Format
+- Single self-contained HTML file. No external assets except Google Fonts.
+- Reading-optimized layout — single column, `max-width: 760px`, comfortable line-height. **Not** scroll-snap (that's for slides).
+- Top-of-page progress bar that fills as the reader scrolls.
+- Hero section with module tag, title, italic lede, and meta strip.
+- Footer with module name and short closing message.
+
+## Design System (matches the Shareable slide decks)
+- Background: `#07162C`. Body text: `#b0b4c8`. Accent blue: `#1241B0` / `#60a5fa`. White headings: `#fff`.
+- Module-specific accent on hero radial gradient and pull-quote borders:
+  - M1 The Bet → blue `#3b82f6`
+  - M2 The Moat → green `#34d399`
+  - M3 The Margin → gold `#e3b341`
+  - M4 The Contract → purple `#bc8cff` / `#d2a8ff`
+  - M5 The Guardrails → red `#f87171`
+  - M6 The Pitch → teal `#39d2c0`
+- Fonts: `Poppins` (headings, weights 700-900), `Lato` (body), `IBM Plex Mono` (labels, code, meta).
+- `code` styling matches the module accent — e.g. `Module 4 → rgba(188,140,255,0.10)` background, `#d2a8ff` text.
+
+## Component Patterns (use these, don't reinvent)
+- **Pull-quote** for the one big idea — purple/accent left border, oversized `"` mark, Poppins 22px white quote text.
+- **Compare cards** for binary contrasts (e.g. 95% black box vs. 85% legible) — two-card grid, big-number, label, short desc, color-coded (red/green).
+- **Notice/reference table** with monospace uppercase header row tinted in the module accent.
+- **Vocab list** — each term in a card with a left accent bar that turns the module color on hover.
+- **Q-card** for prompts/questions students should arrive ready to answer — gradient background, monospace prompt label, large title, body copy.
+- **Domain card grid** for short multi-example lists (e.g. Healthcare / Finance / Legal / Support / Sales).
+- **Teaser block** in gold/`#e3b341` for "no spoilers, but here's the hook" sections.
+- **Bring-list** with `→` arrow markers for "what to bring" / "what you take home" sections.
+
+## Content Rules (same as the markdown shareable-notes template, just rendered as HTML)
+- Reader-facing voice — third person or direct "you," not "students should..."
+- Lede in italic at the top of the hero.
+- Skip purely transitional slides (agenda, recall) when adapting from a slide deck. Merge consecutive slides where possible.
+- Real company names, not generic placeholders.
+- Inline `<code>` for repo paths (`01-the-bet/`, `cost-curve.md`).
+- `<em>` is styled as the module-accent color, **not** italic — use it for the named concept on each slide; reserve italic for the hero lede.
+
+## What's NOT Shareable HTML
+- **Speaker Notes** (instructor briefing) → stays markdown. See `speaker-notes-standards.mdc`.
+- **Working insights, audits, meeting notes, repo template files** → stay markdown.
+- **Internal speaker notes archived in `private/`** → stay markdown.
+
+If the user asks for "the shareable X for module N" and X is something a student reads (pre-read, notes companion, glossary, primer), default to HTML using this design system.

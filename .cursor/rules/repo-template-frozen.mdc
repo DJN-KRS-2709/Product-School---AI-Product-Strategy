@@ -1,0 +1,47 @@
+---
+description: Strategy repo template is FROZEN — slides must mirror the repo, never the other way around
+globs: Modules/*Slides*.html, strategy-repo-template/**/*.md
+alwaysApply: true
+---
+
+# Strategy Repo Template Is Frozen
+
+**Students have already forked `strategy-repo-template/`.** It is shipped, immutable, and out of our hands. We cannot change repo template files anymore.
+
+## The hard rule
+
+- **NEVER** edit any file under `strategy-repo-template/**`. Not headings, not field names, not comments, not whitespace. Treat it as read-only.
+- When a slide and the repo template disagree, **the slide is wrong.** Adjust the slide.
+- This applies to: section headings, field names, capture prompts, table columns, comment hints, and any "Go to your repo →" reference on a slide.
+
+## Required workflow before touching repo references on any slide
+
+Any slide that says "Capture in `…`", "Go to your repo →", or otherwise tells a student to write something into a specific repo file:
+
+1. **Read the actual repo template file first.** Don't infer the structure — open it.
+2. **Mirror the structure verbatim.** Every field the slide asks students to fill must exist in the repo file with the same name. Don't invent fields. Don't rename them. Don't add severity/category/priority columns the repo doesn't have.
+3. **Don't drop fields.** If the repo has a field, surface it on the slide too — students will look for it.
+4. **Open prompts stay open.** If the repo just has a single italic question (e.g. `*What failure mode did your partner find that you missed?*`), the slide capture block is one open answer area, not a structured form.
+
+## Reference: the artifacts that exist per module
+
+| Module | Repo file | Sections (verbatim) |
+|---|---|---|
+| M1 The Bet | `01-the-bet/diagnostic.md`, `01-the-bet/prototype.md` | (see file) |
+| M2 The Moat | `02-the-moat/data-flywheel.md`, `02-the-moat/kill-switch.md` | (see file) |
+| M3 The Margin | `03-the-margin/cost-curve.md` | (see file) |
+| M4 The Contract | `04-the-contract/golden-dataset.md` | Golden Dataset Spec · Confidence UX Design · Reliability Contract · HITL Architecture · Red-Team Findings |
+| M5 The Guardrails | `05-the-guardrails/compounding-system.md` | (see file) |
+| M6 The Pitch | `06-the-pitch/roadmap.md` | (see file) |
+
+The headings in the right column are the **only** sections a slide may reference. If a needed scaffold doesn't exist in the repo, find another way — extra structure goes on the slide or in an interactive tool, not into the frozen repo.
+
+## What teaching scaffolds on slides ARE allowed
+
+Slides can still teach with structure that doesn't live in the repo (e.g. four failure-mode example cards, a worked example table row, a category gradient). What's forbidden is **promising students a repo capture surface that doesn't exist**.
+
+If a slide shows fields like `_____` next to a "Capture in repo" header, those exact field names must exist in the repo. Otherwise, render them as on-slide thinking prompts (no `Capture in →` framing) or move them into the relevant interactive tool.
+
+## When the user asks "is this slide mirroring the repo?"
+
+Always read the repo file first, then audit each `Capture in →` and `Go to your repo →` reference against the actual sections and fields. Surface drift as a clear table (slide says X / repo has Y) before fixing.

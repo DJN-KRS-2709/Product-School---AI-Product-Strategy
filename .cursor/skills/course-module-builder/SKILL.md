@@ -58,13 +58,18 @@ This skill documents a complete workflow for building course content: self-conta
 
 ### Naming Conventions
 
-| Asset | Pattern | Example |
-|-------|---------|---------|
-| Slide deck | `Module {N} - Slides.html` | `Module 3 - Slides.html` |
-| Speaker notes | `Module {N} - Speaker Notes.md` | `Module 3 - Speaker Notes.md` |
-| Interactive tool | `M{N} - {Tool Name}.html` | `M2 - Flywheel Scorer.html` |
-| Meeting notes | `YYYY-MM-DD-{topic}.md` | `2025-03-10-working-session.md` |
-| Strategy folders | `{NN}-the-{name}/` | `03-the-margin/` |
+| Asset | Pattern | Example | Audience |
+|-------|---------|---------|----------|
+| Internal slide deck | `Module {N} - Slides.html` | `Module 3 - Slides.html` | Instructor (full fidelity) |
+| Shareable slide deck | `Module {N} - Slides (Shareable).html` | `Module 3 - Slides (Shareable).html` | Students (after session) |
+| Speaker notes | `Module {N} - Speaker Notes.md` | `Module 3 - Speaker Notes.md` | Instructor briefing (markdown) |
+| Pre-read | `Module {N} - Pre-Read (Shareable).html` | `Module 4 - Pre-Read (Shareable).html` | Students (before session) |
+| Notes companion | `Module {N} - Notes (Shareable).html` | `Module 1 - Notes (Shareable).html` | Students (after session) |
+| Interactive tool | `M{N} - {Tool Name}.html` | `M2 - Flywheel Scorer.html` | Students (in-session + after) |
+| Meeting notes | `YYYY-MM-DD-{topic}.md` | `2025-03-10-working-session.md` | Internal |
+| Strategy folders | `{NN}-the-{name}/` | `03-the-margin/` | Student template |
+
+**Rule of thumb:** Anything a student receives directly is **HTML** with the shared design system. Anything internal (instructor briefings, working notes, audits) stays **markdown**. See `.cursor/rules/shareable-student-docs-standards.mdc` for the shareable-HTML reading-doc design system.
 
 ---
 
@@ -156,9 +161,21 @@ All tools:
 - Are linkable from slides for in-class use
 - Export results as markdown or structured text
 
-### Step 5: Update course-status.md
+### Step 5: Build shareable student-facing artifacts (HTML)
 
-Mark the module status and note what's complete (Speaker Notes, HTML Slides, tools).
+Anything sent directly to students is delivered as **polished, self-contained HTML** — not markdown. The reference is `Modules/Module 4 - Pre-Read (Shareable).html`. Design rules live in `.cursor/rules/shareable-student-docs-standards.mdc`.
+
+The three shareable HTML artifacts per module:
+
+1. **`Module {N} - Pre-Read (Shareable).html`** — pre-session reading. ~20-min read. Hero, "one idea" pull-quote, vocabulary cards, "two questions to come ready to answer" prompt cards.
+2. **`Module {N} - Slides (Shareable).html`** — the slide deck cleaned up for students after the session. Same scroll-snap structure as the internal deck, internal-only sections removed.
+3. **`Module {N} - Notes (Shareable).html`** — per-slide reader companion in long-form HTML. Replaces the older `Module {N} - Notes (Shareable).md` pattern. Same content arc as the markdown template ([shareable-notes-template.md](../legacy-course-converter/shareable-notes-template.md)) but rendered with the shareable HTML design system.
+
+Each is reading-optimized (single column, ~760px max-width, no scroll-snap on the reading docs) and uses the module's accent color from the rule. Save with the file pattern in the table above so the cursor rule auto-attaches.
+
+### Step 6: Update course-status.md
+
+Mark the module status and note what's complete (Speaker Notes, internal Slides HTML, shareable HTML pre-read / notes / slides, interactive tools).
 
 ---
 
@@ -207,11 +224,13 @@ When creating a new course, scaffold this structure to match your module arc.
 
 ## Cursor Rules
 
-Two `.mdc` rule files in `.cursor/rules/` enforce consistency:
+Three `.mdc` rule files in `.cursor/rules/` enforce consistency:
 
 1. **`slide-design-standards.mdc`** — Applies to `Modules/*Slides*.html`. References Module 2 as the gold standard. Covers text density, visual structure, company examples, interactive moments, build exercises.
 
 2. **`speaker-notes-standards.mdc`** — Applies to `Modules/*Speaker Notes*.md`. References Module 3 as the gold standard. Covers tone (briefing memo), document structure, per-slide format, content rules.
+
+3. **`shareable-student-docs-standards.mdc`** — Applies to `Modules/*(Shareable)*.html`, `Modules/*Pre-Read*.html`, `Modules/*Notes*.html`. References `Modules/Module 4 - Pre-Read (Shareable).html` as the gold standard for student-facing reading docs. Covers the reading-optimized HTML layout, module accent colors, and component patterns (pull-quote, compare cards, vocab list, q-cards, teaser, bring-list).
 
 When starting a new course, create equivalent `.mdc` files with your reference module and instructor name.
 
