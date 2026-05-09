@@ -994,29 +994,48 @@ section.skipped { display: none; }
   </div>
 </section>
 
-<!-- 22: Synthesis -->
-<section data-title="Synthesis">
+<!-- 22: Synthesis (combined: deliverables + repo state, modeled on M3) -->
+<section class="centered" data-title="Synthesis">
   <div class="inner">
     <div class="section-label">Synthesis</div>
-    <h2>What You Did Today</h2>
-    <p class="subtitle">You shipped receipts — gold set, UX, contract.</p>
-    <div style="display:flex; flex-direction:column; gap:12px; margin:20px 0;">
-      <div style="display:flex; align-items:center; gap:14px; padding:14px 20px; background:rgba(59,130,246,0.06); border:1px solid rgba(59,130,246,0.12); border-radius:10px;">
-        <div style="font-size:18px; color:#3b82f6; font-weight:700;">✓</div>
-        <div><span style="font-size:15px; font-weight:700; color:#fff;">Golden dataset spec</span> <span style="font-size:14px; color:#8899bb;">— scope · sources · owner</span></div>
+    <h2>Your Repo After Today</h2>
+    <p class="subtitle">Trust infrastructure committed. Four components done.</p>
+    <div style="display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin:24px 0;">
+      <div style="background:rgba(52,211,153,0.05); border:1px solid rgba(52,211,153,0.12); border-radius:10px; padding:20px 24px; min-width:160px; text-align:left; opacity:0.5;">
+        <div style="font-size:13px; font-weight:800; color:#34d399; margin-bottom:6px;">01-the-bet/ ✓</div>
+        <div style="font-size:12px; color:#7a7a9a;">diagnostic · prototype</div>
       </div>
-      <div style="display:flex; align-items:center; gap:14px; padding:14px 20px; background:rgba(59,130,246,0.06); border:1px solid rgba(59,130,246,0.12); border-radius:10px;">
-        <div style="font-size:18px; color:#3b82f6; font-weight:700;">✓</div>
-        <div><span style="font-size:15px; font-weight:700; color:#fff;">Confidence UX</span> <span style="font-size:14px; color:#8899bb;">— 3 tiers · controls · feedback</span></div>
+      <div style="background:rgba(52,211,153,0.05); border:1px solid rgba(52,211,153,0.12); border-radius:10px; padding:20px 24px; min-width:160px; text-align:left; opacity:0.5;">
+        <div style="font-size:13px; font-weight:800; color:#34d399; margin-bottom:6px;">02-the-moat/ ✓</div>
+        <div style="font-size:12px; color:#7a7a9a;">flywheel · kill-switch</div>
       </div>
-      <div style="display:flex; align-items:center; gap:14px; padding:14px 20px; background:rgba(59,130,246,0.06); border:1px solid rgba(59,130,246,0.12); border-radius:10px;">
-        <div style="font-size:18px; color:#3b82f6; font-weight:700;">✓</div>
-        <div><span style="font-size:15px; font-weight:700; color:#fff;">Reliability contract (draft)</span> <span style="font-size:14px; color:#8899bb;">— promise · measure · escalate</span></div>
+      <div style="background:rgba(52,211,153,0.05); border:1px solid rgba(52,211,153,0.12); border-radius:10px; padding:20px 24px; min-width:160px; text-align:left; opacity:0.5;">
+        <div style="font-size:13px; font-weight:800; color:#34d399; margin-bottom:6px;">03-the-margin/ ✓</div>
+        <div style="font-size:12px; color:#7a7a9a;">cost-curve.md</div>
+      </div>
+      <div style="background:rgba(52,211,153,0.08); border:1px solid rgba(52,211,153,0.2); border-radius:10px; padding:20px 28px; min-width:220px; text-align:left;">
+        <div style="font-size:13px; font-weight:800; color:#34d399; margin-bottom:6px;">04-the-contract/ ✓</div>
+        <div style="font-size:12px; color:#d8def0;">golden-dataset.md</div>
+        <div style="font-size:12px; color:#7a7a9a; margin-top:4px;">evals · confidence UX · reliability</div>
+      </div>
+      <div style="background:rgba(59,130,246,0.05); border:1px solid rgba(59,130,246,0.12); border-radius:10px; padding:20px 24px; min-width:180px; text-align:left; opacity:0.3;">
+        <div style="font-size:13px; font-weight:800; color:#60a5fa; margin-bottom:6px;">05-the-guardrails/ → M5</div>
+        <div style="font-size:12px; color:#7a7a9a;">compounding · governance</div>
       </div>
     </div>
-    <div class="artifact-preview" style="margin-top:12px;">
-      <div class="ap-title">Repo — <code style="color:#6ee7b7;">04-the-contract/golden-dataset.md</code></div>
-      <p style="font-size:14px; color:#8899bb; line-height:1.5;">Eval spec · Golden dataset · Confidence UX · Reliability contract · #1 red-team miss · HITL map — all committed</p>
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:12px; max-width:820px; margin:0 auto;">
+      <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:10px; padding:14px;">
+        <div style="font-size:12px; font-weight:800; color:#6ee7b7; margin-bottom:6px;">Golden Dataset</div>
+        <div style="font-size:12px; color:#8899bb; line-height:1.45;">scope · sources · owner</div>
+      </div>
+      <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:10px; padding:14px;">
+        <div style="font-size:12px; font-weight:800; color:#6ee7b7; margin-bottom:6px;">Confidence UX</div>
+        <div style="font-size:12px; color:#8899bb; line-height:1.45;">3 tiers · controls · feedback</div>
+      </div>
+      <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:10px; padding:14px;">
+        <div style="font-size:12px; font-weight:800; color:#6ee7b7; margin-bottom:6px;">Reliability Contract</div>
+        <div style="font-size:12px; color:#8899bb; line-height:1.45;">promise · measure · escalate</div>
+      </div>
     </div>
   </div>
 </section>
@@ -1041,51 +1060,6 @@ section.skipped { display: none; }
       <div class="arc-arrow" style="opacity:0.3;">→</div>
       <div class="arc-node" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.06); opacity:0.3;">M6</div>
     </div>
-  </div>
-</section>
-
-<!-- 24: Your Repo -->
-<section class="centered" data-title="Your Repo">
-  <div class="inner">
-    <div class="section-label">Your Living Strategy Repo</div>
-    <h2>Your Repo After Today</h2>
-    <p class="subtitle">Trust infrastructure committed. Four components done.</p>
-    <div style="display:flex; gap:14px; justify-content:center; flex-wrap:wrap;">
-      <div style="background:rgba(52,211,153,0.05); border:1px solid rgba(52,211,153,0.12); border-radius:10px; padding:20px 28px; min-width:160px; text-align:left; opacity:0.4;">
-        <div style="font-size:13px; font-weight:800; color:#34d399;">01-the-bet/ ✓</div>
-      </div>
-      <div style="background:rgba(52,211,153,0.05); border:1px solid rgba(52,211,153,0.12); border-radius:10px; padding:20px 28px; min-width:160px; text-align:left; opacity:0.4;">
-        <div style="font-size:13px; font-weight:800; color:#34d399;">02-the-moat/ ✓</div>
-      </div>
-      <div style="background:rgba(52,211,153,0.05); border:1px solid rgba(52,211,153,0.12); border-radius:10px; padding:20px 28px; min-width:160px; text-align:left; opacity:0.4;">
-        <div style="font-size:13px; font-weight:800; color:#34d399;">03-the-margin/ ✓</div>
-      </div>
-      <div style="background:rgba(52,211,153,0.08); border:1px solid rgba(52,211,153,0.2); border-radius:10px; padding:20px 28px; min-width:200px; text-align:left;">
-        <div style="font-size:13px; font-weight:800; color:#34d399; margin-bottom:6px;">04-the-contract/ ✓</div>
-        <div style="font-size:12px; color:#8899bb;">golden-dataset.md — evals, confidence UX, reliability contract</div>
-      </div>
-      <div style="background:rgba(59,130,246,0.05); border:1px solid rgba(59,130,246,0.12); border-radius:10px; padding:20px 28px; min-width:160px; text-align:left; opacity:0.3;">
-        <div style="font-size:13px; font-weight:800; color:#60a5fa;">05-the-guardrails/ → M5</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 25: Module Complete -->
-<section data-title="Complete">
-  <div class="inner">
-    <div class="demo-tag tag-complete">Module 4 Complete</div>
-    <h2>What You Accomplished Today</h2>
-    <div class="complete-stats">
-      <div class="complete-stat"><div class="complete-num">1</div><div class="complete-label">File Committed to Repo</div></div>
-      <div class="complete-stat"><div class="complete-num">1</div><div class="complete-label">Red-Team Survived</div></div>
-      <div class="complete-stat"><div class="complete-num">4</div><div class="complete-label">Repo Folders Done</div></div>
-    </div>
-    <div class="complete-shifts">
-      <div class="complete-shift"><div class="shift-title">Trust = Accuracy → Trust = Perceived Control</div><div class="shift-desc">An 85% system with confidence scores and overrides beats a 95% black box. Trust is a product feature, not a metric.</div></div>
-      <div class="complete-shift"><div class="shift-title">Evals Later → Evals as Launch Infra</div><div class="shift-desc">AI degrades silently. Golden datasets, judges, and drift alerts are launch infrastructure — not a nice-to-have for later.</div></div>
-    </div>
-    <p style="font-size:16px; color:#60a5fa; font-weight:600; text-align:center;">Next: Module 5 — The Guardrails. Push <code style="color:#6ee7b7;">04-the-contract/</code> before next session.</p>
   </div>
 </section>
 

@@ -1021,28 +1021,48 @@ section.skipped { display: none; }
   </div>
 </section>
 
-<!-- 22: Synthesis -->
-<section data-title="Synthesis">
+<!-- 22: Synthesis (combined: deliverables + repo state, modeled on M3) -->
+<section class="centered" data-title="Synthesis">
   <div class="inner">
     <div class="section-label">Synthesis</div>
-    <h2>What You Did Today</h2>
-    <div style="display:flex; flex-direction:column; gap:12px; margin:24px 0;">
-      <div style="display:flex; align-items:center; gap:14px; padding:14px 20px; background:rgba(52,211,153,0.06); border:1px solid rgba(52,211,153,0.12); border-radius:10px;">
-        <div style="font-size:18px; color:#34d399; font-weight:700;">✓</div>
-        <div><span style="font-size:15px; font-weight:700; color:#fff;">Compounding sketch</span> <span style="font-size:14px; color:#8899bb;">— 3 loops that actually learn</span></div>
+    <h2>Your Repo After Today</h2>
+    <p class="subtitle">Guardrails locked in. Five components done — one to go.</p>
+    <div style="display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin:24px 0;">
+      <div style="background:rgba(52,211,153,0.05); border:1px solid rgba(52,211,153,0.12); border-radius:10px; padding:20px 22px; min-width:140px; text-align:left; opacity:0.5;">
+        <div style="font-size:13px; font-weight:800; color:#34d399;">01-the-bet/ ✓</div>
       </div>
-      <div style="display:flex; align-items:center; gap:14px; padding:14px 20px; background:rgba(52,211,153,0.06); border:1px solid rgba(52,211,153,0.12); border-radius:10px;">
-        <div style="font-size:18px; color:#34d399; font-weight:700;">✓</div>
-        <div><span style="font-size:15px; font-weight:700; color:#fff;">Governance one-pager</span> <span style="font-size:14px; color:#8899bb;">— autonomy · data · regs · owners</span></div>
+      <div style="background:rgba(52,211,153,0.05); border:1px solid rgba(52,211,153,0.12); border-radius:10px; padding:20px 22px; min-width:140px; text-align:left; opacity:0.5;">
+        <div style="font-size:13px; font-weight:800; color:#34d399;">02-the-moat/ ✓</div>
       </div>
-      <div style="display:flex; align-items:center; gap:14px; padding:14px 20px; background:rgba(52,211,153,0.06); border:1px solid rgba(52,211,153,0.12); border-radius:10px;">
-        <div style="font-size:18px; color:#34d399; font-weight:700;">✓</div>
-        <div><span style="font-size:15px; font-weight:700; color:#fff;">Shadow AI audit starter</span> <span style="font-size:14px; color:#8899bb;">— inventory + risk + kill/keep</span></div>
+      <div style="background:rgba(52,211,153,0.05); border:1px solid rgba(52,211,153,0.12); border-radius:10px; padding:20px 22px; min-width:140px; text-align:left; opacity:0.5;">
+        <div style="font-size:13px; font-weight:800; color:#34d399;">03-the-margin/ ✓</div>
+      </div>
+      <div style="background:rgba(52,211,153,0.05); border:1px solid rgba(52,211,153,0.12); border-radius:10px; padding:20px 22px; min-width:140px; text-align:left; opacity:0.5;">
+        <div style="font-size:13px; font-weight:800; color:#34d399;">04-the-contract/ ✓</div>
+      </div>
+      <div style="background:rgba(52,211,153,0.08); border:1px solid rgba(52,211,153,0.2); border-radius:10px; padding:20px 28px; min-width:220px; text-align:left;">
+        <div style="font-size:13px; font-weight:800; color:#34d399; margin-bottom:6px;">05-the-guardrails/ ✓</div>
+        <div style="font-size:12px; color:#d8def0;">compounding-system.md</div>
+        <div style="font-size:12px; color:#7a7a9a; margin-top:4px;">loops · governance · shadow AI</div>
+      </div>
+      <div style="background:rgba(59,130,246,0.08); border:1px solid rgba(59,130,246,0.2); border-radius:10px; padding:20px 28px; min-width:200px; text-align:left;">
+        <div style="font-size:13px; font-weight:800; color:#60a5fa; margin-bottom:6px;">06-the-pitch/ → M6 Capstone</div>
+        <div style="font-size:12px; color:#7a7a9a;">roadmap.md — the finale</div>
       </div>
     </div>
-    <div style="background:rgba(52,211,153,0.06); border:1px solid rgba(52,211,153,0.2); border-radius:14px; padding:22px; margin-top:12px;">
-      <div style="font-size:12px; font-weight:800; color:#34d399; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:10px;">Committed → <code style="color:#6ee7b7;">05-the-guardrails/compounding-system.md</code></div>
-      <p style="font-size:14px; color:#8899bb; line-height:1.6;">Loops · governance policy · shadow AI audit · agent topology — all in your repo</p>
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:12px; max-width:820px; margin:0 auto;">
+      <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:10px; padding:14px;">
+        <div style="font-size:12px; font-weight:800; color:#6ee7b7; margin-bottom:6px;">Compounding Sketch</div>
+        <div style="font-size:12px; color:#8899bb; line-height:1.45;">3 loops that actually learn</div>
+      </div>
+      <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:10px; padding:14px;">
+        <div style="font-size:12px; font-weight:800; color:#6ee7b7; margin-bottom:6px;">Governance One-Pager</div>
+        <div style="font-size:12px; color:#8899bb; line-height:1.45;">autonomy · data · regs · owners</div>
+      </div>
+      <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:10px; padding:14px;">
+        <div style="font-size:12px; font-weight:800; color:#6ee7b7; margin-bottom:6px;">Shadow AI Audit</div>
+        <div style="font-size:12px; color:#8899bb; line-height:1.45;">inventory · risk · kill/keep</div>
+      </div>
     </div>
   </div>
 </section>
@@ -1067,55 +1087,6 @@ section.skipped { display: none; }
       <div class="arc-arrow">→</div>
       <div class="arc-node active-node" style="background:rgba(59,130,246,0.2); border:2px solid #1241B0;"><div style="font-size:10px;">M6</div>The Pitch</div>
     </div>
-  </div>
-</section>
-
-<!-- 24: Your Repo After Today -->
-<section class="centered" data-title="Your Repo">
-  <div class="inner">
-    <div class="section-label">Your Living Strategy Repo</div>
-    <h2>Your Repo After Today</h2>
-    <div class="subtitle" style="margin:16px auto 28px;">Guardrails committed. Five components done — one to go.</div>
-    <div style="display:flex; gap:14px; justify-content:center; flex-wrap:wrap;">
-      <div style="background:rgba(52,211,153,0.05); border:1px solid rgba(52,211,153,0.12); border-radius:10px; padding:20px 28px; min-width:140px; text-align:left; opacity:0.4;">
-        <div style="font-size:13px; font-weight:800; color:#34d399;">01 ✓</div>
-      </div>
-      <div style="background:rgba(52,211,153,0.05); border:1px solid rgba(52,211,153,0.12); border-radius:10px; padding:20px 28px; min-width:140px; text-align:left; opacity:0.4;">
-        <div style="font-size:13px; font-weight:800; color:#34d399;">02 ✓</div>
-      </div>
-      <div style="background:rgba(52,211,153,0.05); border:1px solid rgba(52,211,153,0.12); border-radius:10px; padding:20px 28px; min-width:140px; text-align:left; opacity:0.4;">
-        <div style="font-size:13px; font-weight:800; color:#34d399;">03 ✓</div>
-      </div>
-      <div style="background:rgba(52,211,153,0.05); border:1px solid rgba(52,211,153,0.12); border-radius:10px; padding:20px 28px; min-width:140px; text-align:left; opacity:0.4;">
-        <div style="font-size:13px; font-weight:800; color:#34d399;">04 ✓</div>
-      </div>
-      <div style="background:rgba(52,211,153,0.08); border:1px solid rgba(52,211,153,0.2); border-radius:10px; padding:20px 28px; min-width:220px; text-align:left;">
-        <div style="font-size:13px; font-weight:800; color:#34d399; margin-bottom:6px;">05-the-guardrails/ ✓</div>
-        <div style="font-size:12px; color:#8899bb;">compounding-system.md — loops, governance, shadow AI</div>
-      </div>
-      <div style="background:rgba(59,130,246,0.08); border:1px solid rgba(59,130,246,0.2); border-radius:10px; padding:20px 28px; min-width:220px; text-align:left;">
-        <div style="font-size:13px; font-weight:800; color:#60a5fa; margin-bottom:6px;">06-the-pitch/ → M6 Capstone</div>
-        <div style="font-size:12px; color:#8899bb;">roadmap.md — the finale</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 25: Module Complete -->
-<section data-title="Complete">
-  <div class="inner">
-    <div class="demo-tag tag-complete">Module 5 Complete</div>
-    <h2>What You Accomplished Today</h2>
-    <div class="complete-stats">
-      <div class="complete-stat"><div class="complete-num">5/6</div><div class="complete-label">Repo Folders Committed</div></div>
-      <div class="complete-stat"><div class="complete-num">1</div><div class="complete-label">Governance Policy Drafted</div></div>
-      <div class="complete-stat"><div class="complete-num">1</div><div class="complete-label">Shadow AI Audit Started</div></div>
-    </div>
-    <div class="complete-shifts">
-      <div class="complete-shift"><div class="shift-title">Compliance Checklist → Living Governance</div><div class="shift-desc">Governance isn't one-and-done — AI systems compound or degrade silently. You built policy with named owners and review cadence, committed to your repo.</div></div>
-      <div class="complete-shift"><div class="shift-title">Invisible Risk → Audited Risk</div><div class="shift-desc">Shadow AI tools went from "probably fine" to discovered, risk-scored, and triaged. Hand the repo link to IT Monday.</div></div>
-    </div>
-    <p style="font-size:16px; color:#60a5fa; font-weight:600; text-align:center;">Next: Module 6 — The Pitch. Repo complete → one story → board simulation.</p>
   </div>
 </section>
 
