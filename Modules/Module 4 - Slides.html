@@ -705,12 +705,12 @@ section.skipped { display: none; }
         <div style="font-size:13px; color:#555; font-family:'IBM Plex Mono',monospace;">_____ (target ≥3)</div>
       </div>
       <div style="flex:1; background:rgba(210,153,34,0.06); border:1px solid rgba(210,153,34,0.2); border-radius:10px; padding:12px 14px; text-align:center;">
-        <div style="font-size:11px; font-weight:800; color:#d29922; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:4px;">Judge mix (rule / LLM)</div>
-        <div style="font-size:13px; color:#555; font-family:'IBM Plex Mono',monospace;">__% / __%</div>
+        <div style="font-size:11px; font-weight:800; color:#d29922; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:4px;">Coverage gaps identified by partner</div>
+        <div style="font-size:13px; color:#555; font-family:'IBM Plex Mono',monospace;">_____</div>
       </div>
     </div>
     <p style="font-size:14px; color:#d29922; font-weight:600; text-align:center; margin-top:10px;">Sales test: one sentence — "Here's how we test our AI."</p>
-    <p style="font-size:13px; text-align:center; margin-top:6px;"><span style="color:#34d399;">📂</span> <strong style="color:#6ee7b7;">Go to your repo →</strong> <code style="color:#6ee7b7; font-size:12px;">04-the-contract/golden-dataset.md</code> <span style="color:#8899bb;">→ Golden Dataset Spec · Adversarial rows</span></p>
+    <p style="font-size:13px; text-align:center; margin-top:6px;"><span style="color:#34d399;">📂</span> <strong style="color:#6ee7b7;">Go to your repo →</strong> <code style="color:#6ee7b7; font-size:12px;">04-the-contract/golden-dataset.md</code> <span style="color:#8899bb;">→ Golden Dataset Spec · Adversarial rows · Coverage gaps</span></p>
   </div>
 </section>
 
@@ -812,7 +812,11 @@ section.skipped { display: none; }
       <a href="M4 - Confidence UX Checklist.html" target="_blank" style="display:inline-block; background:#1241B0; color:#fff; text-decoration:none; font-size:14px; font-weight:800; padding:10px 18px; border-radius:999px; box-shadow:0 8px 24px rgba(18,65,176,0.35);">Open Confidence UX Designer ↗</a>
       <div style="font-size:12px; color:#8899bb; margin-top:6px;">Drafts your Approach, three confidence tiers, and User Control Surface in the exact shape of golden-dataset.md</div>
     </div>
-    <div style="display:flex; flex-direction:column; gap:12px; margin:20px 0;">
+    <div style="background:rgba(59,130,246,0.06); border:1px solid rgba(59,130,246,0.18); border-radius:10px; padding:14px 18px; margin:14px 0 10px;">
+      <div style="font-size:11px; font-weight:800; color:#60a5fa; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:6px;">Approach</div>
+      <div style="font-size:13px; color:#8899bb;">show uncertainty &nbsp;/&nbsp; tiered confidence &nbsp;/&nbsp; human-in-loop trigger &nbsp;<span style="color:#555;">— pick one or combine</span></div>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:12px; margin:14px 0 20px;">
       <div style="background:rgba(52,211,153,0.06); border:1px solid rgba(52,211,153,0.15); border-radius:10px; padding:18px;">
         <div style="font-size:13px; font-weight:800; color:#34d399; margin-bottom:6px;">CONFIDENT (>90%)</div>
         <div style="font-size:13px; color:#8899bb;">UI + copy when you're sure: <span style="color:#555;">_____</span></div>
@@ -925,12 +929,8 @@ section.skipped { display: none; }
     </div>
     <div style="background:rgba(248,113,113,0.08); border:1px solid rgba(248,113,113,0.25); border-radius:10px; padding:14px 16px; margin-top:10px;">
       <div style="font-size:11px; font-weight:900; color:#f87171; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:8px;">Capture in <code style="color:#fca5a5; font-family:'IBM Plex Mono',monospace; font-size:11px;">golden-dataset.md → Red-Team Findings</code></div>
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px 16px; font-size:12px; color:#8899bb; line-height:1.85;">
-        <div>Worst miss partner found: <span style="color:#555; font-family:'IBM Plex Mono',monospace;">_____</span></div>
-        <div>Failure category (above): <span style="color:#555; font-family:'IBM Plex Mono',monospace;">_____</span></div>
-        <div>Severity: <span style="color:#555; font-family:'IBM Plex Mono',monospace;">High / Med / Low</span></div>
-        <div>New row to add to gold set: <span style="color:#555; font-family:'IBM Plex Mono',monospace;">_____</span></div>
-      </div>
+      <div style="font-size:13px; color:#e0e0f0; font-style:italic; margin-bottom:6px;">"What failure mode did your partner find that you missed?"</div>
+      <div style="font-size:12px; color:#555; font-family:'IBM Plex Mono',monospace; line-height:1.85;">_______________________________________________________________</div>
     </div>
     <p style="font-size:13px; text-align:center; margin-top:10px;"><span style="color:#34d399;">📂</span> <strong style="color:#6ee7b7;">Go to your repo →</strong> <code style="color:#6ee7b7; font-size:12px;">04-the-contract/golden-dataset.md</code> <span style="color:#8899bb;">→ Red-Team Findings section</span></p>
   </div>
