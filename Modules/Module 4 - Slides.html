@@ -951,45 +951,46 @@ section.skipped { display: none; }
   <div class="split-left">
     <div class="slide-tag tag-pink">Build Moment</div>
     <h2>Your Reliability Contract</h2>
-    <div class="lab-goal"><div class="lab-goal-text"><strong>Your goal is</strong> to draft a reliability contract: promises, measurements, escalation, and feedback loops.</div></div>
-    <div class="lab-tip"><div class="lab-tip-text"><strong>Keep in mind:</strong> Even wrong numbers get corrected faster than mush. This is M6 board slide fodder.</div></div>
+    <div class="lab-goal"><div class="lab-goal-text"><strong>Your goal is</strong> to draft your contract in the repo, modeled on the worked example. Real targets, real tooling, real escalation paths — fill it directly in <code style="color:#6ee7b7;">golden-dataset.md</code>.</div></div>
+    <div class="lab-tip"><div class="lab-tip-text"><strong>Keep in mind:</strong> Wrong numbers get corrected; mush doesn't. The exemplar is the bar — yours doesn't have to match it, it has to be <em>specific</em>. This becomes M6 board fodder.</div></div>
   </div>
   <div class="split-right">
-    <div class="lab-badge-row"><span class="lab-badge">Lab Exercise</span></div>
-    <div class="steps-heading">Fill in your contract:</div>
-    <table class="score-table" style="font-size:12px;">
-      <thead><tr><th>Metric</th><th>Target</th><th>Measurement</th><th>Alert Threshold</th></tr></thead>
+    <div class="lab-badge-row"><span class="lab-badge">Worked Example</span></div>
+    <div class="steps-heading" style="font-size:15px;">Customer Support Copilot</div>
+    <p style="font-size:11px; color:#8899bb; margin:-8px 0 8px;">What "good" looks like — yours will have your numbers, your tools, your on-call.</p>
+    <table class="score-table" style="font-size:11px;">
+      <thead><tr><th style="width:22%;">Metric</th><th style="width:14%;">Target</th><th style="width:36%;">Measurement</th><th style="width:28%;">Alert Threshold</th></tr></thead>
       <tbody>
         <tr>
           <td style="color:#60a5fa; font-weight:700;">Accuracy</td>
-          <td style="color:#555; font-family:'IBM Plex Mono',monospace;">__%</td>
-          <td style="color:#555; font-family:'IBM Plex Mono',monospace;">_____</td>
-          <td style="color:#555; font-family:'IBM Plex Mono',monospace;">_____</td>
+          <td style="color:#34d399; font-family:'IBM Plex Mono',monospace; font-weight:700;">92%</td>
+          <td style="color:#b0b4c8; line-height:1.45;">Weekly · 300 golden rows · LLM-as-Judge (GPT-4o, accuracy rubric)</td>
+          <td style="color:#fca5a5; line-height:1.45;">&lt;88% → pages on-call PM</td>
         </tr>
         <tr>
           <td style="color:#f87171; font-weight:700;">Hallucination rate</td>
-          <td style="color:#555; font-family:'IBM Plex Mono',monospace;">≤ __%</td>
-          <td style="color:#555; font-family:'IBM Plex Mono',monospace;">_____</td>
-          <td style="color:#555; font-family:'IBM Plex Mono',monospace;">_____</td>
+          <td style="color:#34d399; font-family:'IBM Plex Mono',monospace; font-weight:700;">&lt;1%</td>
+          <td style="color:#b0b4c8; line-height:1.45;">Same weekly run · safety rubric flags fabricated policies/numbers</td>
+          <td style="color:#fca5a5; line-height:1.45;">&gt;2% → pauses prod traffic, rolls to last good model</td>
         </tr>
         <tr>
           <td style="color:#d29922; font-weight:700;">Latency p95</td>
-          <td style="color:#555; font-family:'IBM Plex Mono',monospace;">__ ms</td>
-          <td style="color:#555; font-family:'IBM Plex Mono',monospace;">_____</td>
-          <td style="color:#555; font-family:'IBM Plex Mono',monospace;">_____</td>
+          <td style="color:#34d399; font-family:'IBM Plex Mono',monospace; font-weight:700;">&lt;800 ms</td>
+          <td style="color:#b0b4c8; line-height:1.45;">Continuous prod monitoring (Datadog)</td>
+          <td style="color:#fca5a5; line-height:1.45;">&gt;1200 ms for 5 min → PagerDuty</td>
         </tr>
         <tr>
           <td style="color:#a78bfa; font-weight:700;">Drift velocity</td>
-          <td style="color:#555; font-family:'IBM Plex Mono',monospace;">_____</td>
-          <td style="color:#555; font-family:'IBM Plex Mono',monospace;">_____</td>
-          <td style="color:#555; font-family:'IBM Plex Mono',monospace;">_____</td>
+          <td style="color:#34d399; font-family:'IBM Plex Mono',monospace; font-weight:700;">&lt;0.5%/wk</td>
+          <td style="color:#b0b4c8; line-height:1.45;">4-week rolling accuracy trend</td>
+          <td style="color:#fca5a5; line-height:1.45;">&gt;1% decay/wk → gold-set audit</td>
         </tr>
       </tbody>
     </table>
     <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:10px; padding:10px 14px; margin-top:10px;">
-      <div style="font-size:12px; color:#8899bb; line-height:1.7;"><strong style="color:#fff;">HITL architecture:</strong> <span style="color:#555; font-family:'IBM Plex Mono',monospace;">when does a human enter the loop? · who reviews?</span></div>
+      <div style="font-size:11px; color:#b0b4c8; line-height:1.55;"><strong style="color:#fff;">HITL architecture:</strong> Confidence &lt;60% OR safety flag → human reviewer (rotating PM on-call); reviewer corrections feed back into the weekly gold-set audit.</div>
     </div>
-    <p style="font-size:13px; text-align:center; margin-top:8px;"><span style="color:#34d399;">📂</span> <strong style="color:#6ee7b7;">Go to your repo →</strong> <code style="color:#6ee7b7; font-size:12px;">04-the-contract/golden-dataset.md</code> <span style="color:#8899bb;">→ Reliability Contract + HITL Architecture sections</span></p>
+    <p style="font-size:13px; text-align:center; margin-top:8px;"><span style="color:#34d399;">📂</span> <strong style="color:#6ee7b7;">Now do yours →</strong> <code style="color:#6ee7b7; font-size:12px;">04-the-contract/golden-dataset.md</code> <span style="color:#8899bb;">→ Reliability Contract + HITL Architecture sections</span></p>
   </div>
 </section>
 
