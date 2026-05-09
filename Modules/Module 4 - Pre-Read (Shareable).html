@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 4 — The Contract · Pre-Read</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Lato', -apple-system, sans-serif;
+  background: #07162C;
+  color: #b0b4c8;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ═══ READING PROGRESS BAR ═══ */
+.progress-bar {
+  position: fixed; top: 0; left: 0; height: 3px; z-index: 100;
+  background: linear-gradient(90deg, #1241B0, #bc8cff);
+  width: 0%; transition: width 0.1s ease;
+}
+
+/* ═══ HERO ═══ */
+.hero {
+  min-height: 70vh;
+  padding: 120px 32px 80px;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center; position: relative;
+  background: radial-gradient(ellipse at 30% 30%, rgba(188,140,255,0.20) 0%, #07162C 60%);
+  border-bottom: 1px solid rgba(188,140,255,0.10);
+}
+.hero .module-tag {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px; font-weight: 600; letter-spacing: 0.16em;
+  text-transform: uppercase; color: #d2a8ff;
+  padding: 8px 18px; border-radius: 6px;
+  background: rgba(188,140,255,0.10);
+  border: 1px solid rgba(188,140,255,0.20);
+  margin-bottom: 24px;
+}
+.hero h1 {
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(40px, 6vw, 68px); font-weight: 900;
+  color: #fff; line-height: 1.05;
+  max-width: 880px; margin-bottom: 20px;
+}
+.hero h1 span { color: #d2a8ff; }
+.hero .lede {
+  font-family: 'Lato', sans-serif;
+  font-size: 19px; line-height: 1.65; max-width: 720px;
+  color: #8899bb; font-style: italic;
+}
+.hero .meta {
+  display: flex; gap: 24px; flex-wrap: wrap; justify-content: center;
+  margin-top: 40px; font-size: 13px;
+  font-family: 'IBM Plex Mono', monospace;
+  color: #60a5fa; opacity: 0.8;
+}
+.hero .meta span::before { content: '·'; margin-right: 8px; color: #333; }
+.hero .meta span:first-child::before { content: ''; margin-right: 0; }
+
+/* ═══ MAIN CONTAINER ═══ */
+.container {
+  max-width: 760px; margin: 0 auto;
+  padding: 80px 32px 120px;
+}
+
+/* ═══ SECTIONS ═══ */
+section.chapter {
+  margin-bottom: 72px;
+  scroll-margin-top: 40px;
+}
+.section-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px; font-weight: 600; letter-spacing: 0.18em;
+  text-transform: uppercase; color: #60a5fa;
+  margin-bottom: 14px;
+}
+h2 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 34px; font-weight: 800;
+  color: #fff; line-height: 1.15;
+  margin-bottom: 28px;
+}
+h3 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 18px; font-weight: 700;
+  color: #e0e0f0; line-height: 1.3;
+  margin-top: 32px; margin-bottom: 12px;
+}
+p {
+  font-size: 17px; line-height: 1.75;
+  color: #b0b4c8; margin-bottom: 18px;
+}
+strong { color: #fff; font-weight: 700; }
+em { color: #d2a8ff; font-style: italic; font-weight: 600; }
+a {
+  color: #60a5fa; text-decoration: none;
+  border-bottom: 1px dashed rgba(96,165,250,0.4);
+  transition: all 0.2s;
+}
+a:hover { color: #93c5fd; border-bottom-style: solid; }
+
+code {
+  font-family: 'IBM Plex Mono', monospace;
+  background: rgba(188,140,255,0.10);
+  color: #d2a8ff;
+  padding: 2px 8px; border-radius: 4px;
+  font-size: 14px; font-weight: 500;
+}
+
+/* ═══ SECTION DIVIDER ═══ */
+.divider {
+  width: 60px; height: 2px;
+  background: linear-gradient(90deg, #bc8cff, transparent);
+  margin: 0 auto 80px;
+  border: none;
+}
+
+/* ═══ PULL QUOTE ═══ */
+.pull-quote {
+  margin: 32px 0;
+  padding: 32px 36px;
+  background: rgba(188,140,255,0.06);
+  border-left: 3px solid #bc8cff;
+  border-radius: 0 12px 12px 0;
+  position: relative;
+}
+.pull-quote::before {
+  content: '"';
+  position: absolute; top: 8px; left: 16px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 64px; font-weight: 900;
+  color: rgba(188,140,255,0.20);
+  line-height: 1;
+}
+.pull-quote p {
+  font-family: 'Poppins', sans-serif;
+  font-size: 22px; line-height: 1.4;
+  color: #fff; font-weight: 600;
+  margin: 0; padding-left: 32px;
+}
+
+/* ═══ COMPARISON CARDS (95% vs 85%) ═══ */
+.compare {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 16px; margin: 28px 0;
+}
+.compare-card {
+  border-radius: 12px; padding: 24px;
+  transition: transform 0.2s ease;
+}
+.compare-card:hover { transform: translateY(-2px); }
+.compare-card .label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.10em;
+  text-transform: uppercase; margin-bottom: 10px;
+}
+.compare-card .big-num {
+  font-family: 'Poppins', sans-serif;
+  font-size: 38px; font-weight: 900;
+  margin-bottom: 8px; line-height: 1;
+}
+.compare-card .desc {
+  font-size: 14px; line-height: 1.5; color: #8899bb;
+}
+.compare-card.bad {
+  background: rgba(248,113,113,0.05);
+  border: 1px solid rgba(248,113,113,0.18);
+}
+.compare-card.bad .label, .compare-card.bad .big-num { color: #f87171; }
+.compare-card.good {
+  background: rgba(52,211,153,0.06);
+  border: 1px solid rgba(52,211,153,0.20);
+}
+.compare-card.good .label, .compare-card.good .big-num { color: #34d399; }
+
+/* ═══ NOTICING TABLE ═══ */
+.notice-table {
+  width: 100%; border-collapse: collapse;
+  margin: 24px 0;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px; overflow: hidden;
+}
+.notice-table th {
+  text-align: left; padding: 16px 20px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.10em; text-transform: uppercase;
+  color: #d2a8ff;
+  background: rgba(188,140,255,0.06);
+  border-bottom: 1px solid rgba(188,140,255,0.15);
+}
+.notice-table td {
+  padding: 18px 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  font-size: 14px; line-height: 1.55;
+  color: #b0b4c8; vertical-align: top;
+}
+.notice-table tr:last-child td { border-bottom: none; }
+.notice-table td:first-child {
+  font-weight: 700; color: #fff;
+  white-space: nowrap; width: 200px;
+}
+.notice-table tr:hover td { background: rgba(188,140,255,0.03); }
+
+/* ═══ VOCAB LIST ═══ */
+.vocab {
+  display: flex; flex-direction: column; gap: 14px;
+  margin: 24px 0;
+}
+.vocab-item {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-left: 3px solid #1241B0;
+  border-radius: 0 10px 10px 0;
+  padding: 16px 20px;
+  transition: all 0.2s;
+}
+.vocab-item:hover {
+  border-left-color: #bc8cff;
+  background: rgba(188,140,255,0.04);
+}
+.vocab-term {
+  font-family: 'Poppins', sans-serif;
+  font-size: 15px; font-weight: 700;
+  color: #fff; margin-bottom: 4px;
+}
+.vocab-def {
+  font-size: 14px; line-height: 1.55;
+  color: #8899bb;
+}
+
+/* ═══ DOMAIN EXAMPLES ═══ */
+.domains {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px; margin: 24px 0;
+}
+.domain-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 10px;
+  padding: 16px 18px;
+  transition: all 0.2s;
+}
+.domain-card:hover {
+  border-color: rgba(188,140,255,0.30);
+  transform: translateY(-2px);
+}
+.domain-card .domain-name {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: #d2a8ff; margin-bottom: 6px;
+}
+.domain-card .domain-bad {
+  font-size: 14px; line-height: 1.5;
+  color: #e0e0f0;
+}
+
+/* ═══ QUESTION CARDS ═══ */
+.q-card {
+  background: linear-gradient(135deg, rgba(188,140,255,0.08), rgba(59,130,246,0.05));
+  border: 1px solid rgba(188,140,255,0.20);
+  border-radius: 14px;
+  padding: 28px 32px;
+  margin: 20px 0;
+}
+.q-card .q-num {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: #d2a8ff; margin-bottom: 8px;
+}
+.q-card .q-text {
+  font-family: 'Poppins', sans-serif;
+  font-size: 19px; font-weight: 700;
+  color: #fff; line-height: 1.4;
+  margin-bottom: 12px;
+}
+.q-card .q-body {
+  font-size: 15px; line-height: 1.65;
+  color: #a0a8b4;
+}
+
+/* ═══ BRING LIST ═══ */
+.bring-list {
+  list-style: none; padding: 0;
+  display: flex; flex-direction: column; gap: 10px;
+  margin: 20px 0;
+}
+.bring-list li {
+  display: flex; align-items: flex-start; gap: 14px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 10px;
+  padding: 14px 18px;
+  font-size: 15px; line-height: 1.55;
+  color: #b0b4c8;
+}
+.bring-list li::before {
+  content: '→'; color: #d2a8ff;
+  font-weight: 700; flex-shrink: 0;
+  font-size: 16px; padding-top: 1px;
+}
+
+/* ═══ TEASER BLOCK ═══ */
+.teaser {
+  background: rgba(210,153,34,0.06);
+  border: 1px solid rgba(210,153,34,0.20);
+  border-radius: 12px;
+  padding: 28px 32px;
+  margin: 24px 0;
+}
+.teaser .teaser-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: #e3b341; margin-bottom: 10px;
+}
+.teaser p { color: #d4c4a0; }
+.teaser p:last-child { margin-bottom: 0; }
+
+/* ═══ FOOTER ═══ */
+footer {
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 60px 32px;
+  text-align: center;
+  background: #050f1f;
+}
+footer .footer-tag {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px; letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #4a5670; margin-bottom: 12px;
+}
+footer .footer-msg {
+  font-family: 'Poppins', sans-serif;
+  font-size: 22px; font-weight: 700;
+  color: #fff; margin-bottom: 8px;
+}
+footer .footer-sub {
+  font-size: 14px; color: #6b7589;
+  font-style: italic;
+}
+
+/* ═══ RESPONSIVE ═══ */
+@media (max-width: 720px) {
+  .hero { padding: 80px 24px 60px; }
+  .container { padding: 60px 24px 80px; }
+  h2 { font-size: 28px; }
+  .compare { grid-template-columns: 1fr; }
+  .pull-quote p { font-size: 18px; }
+  .notice-table td:first-child { width: auto; }
+}
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<header class="hero">
+  <div class="module-tag">Module 4 · Pre-Read · ~20 min</div>
+  <h1>The <span>Contract</span></h1>
+  <p class="lede">Twenty minutes of reading and one short noticing exercise. Done before the session, this is the difference between hearing the M4 ideas for the first time in the room and walking in already chewing on them. Especially worth doing if any of the AI vocabulary still feels slippery.</p>
+  <div class="meta">
+    <span>AI Product Strategy</span>
+    <span>Pre-Session Reading</span>
+    <span>Bring honest answers</span>
+  </div>
+</header>
+
+<main class="container">
+
+<section class="chapter">
+  <div class="section-label">01 · Why this session matters</div>
+  <h2>From value and money to <em>promises</em>.</h2>
+  <p>Modules 1 to 3 gave you a bet, a moat, and the economics. Module 4 is where the strategy gets <em>teeth</em>.</p>
+  <p>Up until now the work has been about value and money. From Module 4 forward, it's about <strong>promises</strong>. Specifically, the kind of promises your company is legally on the hook for the moment your AI says them out loud. The "Contract" in the module title is not a metaphor.</p>
+  <p>This is also the most jargon-dense session in the course — golden datasets, eval harnesses, LLM-as-Judge, human-in-the-loop, confidence UX, reliability contracts. The pre-read closes that gap so the in-room time can be spent on your actual product instead of on definitions.</p>
+  <p>By the end of the session you'll leave with three artifacts in your repo: a <strong>golden dataset spec</strong>, a <strong>confidence UX design</strong>, and a <strong>reliability contract</strong> (<code>04-the-contract/</code>).</p>
+</section>
+
+<hr class="divider">
+
+<section class="chapter">
+  <div class="section-label">02 · The one idea to walk in already chewing on</div>
+  <h2>Trust isn't an accuracy number.</h2>
+
+  <div class="pull-quote">
+    <p>Trust is a function of perceived control, not accuracy percentages.</p>
+  </div>
+
+  <p>This is the central reframe of Module 4, and it is genuinely counterintuitive. The instinct — the one most teams build their roadmap around — is "more accurate = more trusted." It's wrong.</p>
+
+  <div class="compare">
+    <div class="compare-card bad">
+      <div class="label">Black Box</div>
+      <div class="big-num">95%</div>
+      <div class="desc">No scores. No sources. No override. Surprises you in production.</div>
+    </div>
+    <div class="compare-card good">
+      <div class="label">Legible System</div>
+      <div class="big-num">85%</div>
+      <div class="desc">Confidence scores. Citations. "I'm not sure" messages. User can correct.</div>
+    </div>
+  </div>
+
+  <p>An <strong>85% accurate system</strong> that shows confidence scores, cites sources, and lets the user override the answer beats a <strong>95% accurate black box</strong> every single time. Users don't trust what they can't see into. Even when the black box is technically right more often, the moment it's confidently wrong with no warning, trust evaporates — and there's no way to claw it back.</p>
+  <p>You already know this as a consumer. Think about the last time an AI tool gave you a confident, polished, completely wrong answer. How did that feel compared to one that said "I'm not sure — here's a source you can check"?</p>
+  <p>Sit with that idea for a minute before reading on. The whole module hinges on it.</p>
+</section>
+
+<hr class="divider">
+
+<section class="chapter">
+  <div class="section-label">03 · A 20-minute "noticing" exercise</div>
+  <h2>Pick three. Use them. Pay attention.</h2>
+  <p>This is the highest-leverage thing you can do to prepare. Pick <strong>three</strong> of the products below, use each for one real task you actually have to do this week, and notice <strong>how each one signals uncertainty</strong>. You're not building anything — you're just paying attention.</p>
+
+  <table class="notice-table">
+    <thead>
+      <tr><th>Product</th><th>What to look for</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Perplexity</td>
+        <td>Notice the citations on every claim. What happens to your trust when you can click through to the source?</td>
+      </tr>
+      <tr>
+        <td>Granola</td>
+        <td>Notice the confidence indicators on transcription. Where does it hedge? Where does it stay confident?</td>
+      </tr>
+      <tr>
+        <td>GitHub Copilot / Cursor</td>
+        <td>Notice when the suggestion is more aggressive vs. softer. Does the <em>style</em> of the suggestion change with confidence?</td>
+      </tr>
+      <tr>
+        <td>ChatGPT or Claude</td>
+        <td>Look for moments where it says "I'm not sure" or "I'd need to verify" vs. moments where it confidently invents. What triggers each?</td>
+      </tr>
+      <tr>
+        <td>Tesla Autopilot / ADAS</td>
+        <td>If you have access, notice the forced handoffs — the moments the system <em>makes you</em> take the wheel because it's not confident. That's confidence UX in physical form.</td>
+      </tr>
+      <tr>
+        <td>Notion AI / Grammarly</td>
+        <td>Notice how aggressively each suggests changes. Watch for moments the suggestion gets quieter or disappears entirely.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>Twenty minutes total. No notes required. The goal is to walk into Module 4 with <strong>felt examples</strong> of trust patterns, not just abstract ideas. When the slide goes up that says "what does your product look like at different confidence levels?", you'll have a library to draw from.</p>
+</section>
+
+<hr class="divider">
+
+<section class="chapter">
+  <div class="section-label">04 · Vocabulary you'll keep hearing</div>
+  <h2>One-liners so the words don't trip you up.</h2>
+  <p>Full definitions go in the cumulative <code>Glossary.md</code> after the session. One-liner each here so the words don't trip you up in the room.</p>
+
+  <div class="vocab">
+    <div class="vocab-item">
+      <div class="vocab-term">Golden dataset</div>
+      <div class="vocab-def">A labeled set of test cases that defines "good" for your specific product. Versioned like code, used as a release gate.</div>
+    </div>
+    <div class="vocab-item">
+      <div class="vocab-term">Eval / Eval harness</div>
+      <div class="vocab-def">The automated test suite that scores whether your AI is producing good outputs against the golden dataset.</div>
+    </div>
+    <div class="vocab-item">
+      <div class="vocab-term">LLM-as-Judge</div>
+      <div class="vocab-def">Using a model to grade other models' outputs at scale, calibrated against the golden dataset. Lets you check thousands of outputs a day without paying a human to look at each one.</div>
+    </div>
+    <div class="vocab-item">
+      <div class="vocab-term">Human-in-the-loop (HITL)</div>
+      <div class="vocab-def">Design pattern where a human reviews AI outputs at certain thresholds. Done well, it's a product feature. Done badly, it's a crutch that makes the team broke.</div>
+    </div>
+    <div class="vocab-item">
+      <div class="vocab-term">Confidence UX</div>
+      <div class="vocab-def">The visible signals in your product that tell users how sure the AI is — confidence scores, citations, hedged language, "I'm not certain" messages, override buttons.</div>
+    </div>
+    <div class="vocab-item">
+      <div class="vocab-term">Drift</div>
+      <div class="vocab-def">When AI quality slowly degrades over time, often silently, because the model or the inputs changed. The reason you need ongoing evals, not one-time testing.</div>
+    </div>
+    <div class="vocab-item">
+      <div class="vocab-term">Hallucination</div>
+      <div class="vocab-def">When the model produces an answer that sounds confident and is factually wrong.</div>
+    </div>
+    <div class="vocab-item">
+      <div class="vocab-term">Reliability contract</div>
+      <div class="vocab-def">The explicit promise your product makes to users about quality, response time, escalation, and feedback loops. The capstone artifact of Module 4.</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section class="chapter">
+  <div class="section-label">05 · There's a real legal case coming</div>
+  <h2>Don't blame us, blame the robot.</h2>
+
+  <div class="teaser">
+    <div class="teaser-label">Teaser · No spoilers</div>
+    <p>A major airline deployed a customer service chatbot. The chatbot invented a refund policy that didn't exist. A grieving customer relied on the bot's promise. The case went to a tribunal. The airline tried to argue the chatbot was a "separate legal entity" — basically, <em>don't blame us, blame the robot</em>.</p>
+    <p>It didn't go the way they hoped.</p>
+  </div>
+
+  <p>We'll walk through it in the room. Come ready to think about what would happen if your AI confidently told a user something it shouldn't have.</p>
+</section>
+
+<hr class="divider">
+
+<section class="chapter">
+  <div class="section-label">06 · Two questions to come ready to answer</div>
+  <h2>Show up with honest answers.</h2>
+  <p>These will become warmups in the session, so showing up with an honest answer pays off in the room.</p>
+
+  <div class="q-card">
+    <div class="q-num">Question 1</div>
+    <div class="q-text">What's the worst thing my AI could say with high confidence?</div>
+    <div class="q-body">Be specific. Domain matters.</div>
+  </div>
+
+  <div class="domains">
+    <div class="domain-card">
+      <div class="domain-name">Healthcare</div>
+      <div class="domain-bad">A wrong medication interaction.</div>
+    </div>
+    <div class="domain-card">
+      <div class="domain-name">Finance</div>
+      <div class="domain-bad">A false tax deduction.</div>
+    </div>
+    <div class="domain-card">
+      <div class="domain-name">Legal</div>
+      <div class="domain-bad">A made-up case citation.</div>
+    </div>
+    <div class="domain-card">
+      <div class="domain-name">Support</div>
+      <div class="domain-bad">A refund policy that doesn't exist.</div>
+    </div>
+    <div class="domain-card">
+      <div class="domain-name">Sales</div>
+      <div class="domain-bad">A discount no one authorized.</div>
+    </div>
+  </div>
+
+  <p>What's <em>your</em> version? Write it down. The actual sentence your AI could generate that would end up as a screenshot on social media.</p>
+
+  <div class="q-card">
+    <div class="q-num">Question 2</div>
+    <div class="q-text">What's our current eval situation, if any?</div>
+    <div class="q-body">Honest answer. The most common honest answer is "nothing." That's fine — it's true for most teams. The point is to walk in knowing where you actually stand, not where the deck claims you stand.</div>
+  </div>
+
+  <p>If you do have something — a benchmark you run, a spreadsheet of test cases, a vibes-based "we tried 20 prompts and they looked good" — bring it. We'll pressure-test it.</p>
+</section>
+
+<hr class="divider">
+
+<section class="chapter">
+  <div class="section-label">07 · What to bring</div>
+  <h2>The essentials for the room.</h2>
+  <ul class="bring-list">
+    <li>Your <code>cost-curve.md</code> from Module 3 (it gets referenced).</li>
+    <li>Your three artifacts so far: <code>01-the-bet/</code>, <code>02-the-moat/</code>, <code>03-the-margin/</code>.</li>
+    <li>Honest answers to the two questions above.</li>
+    <li>A willingness to be pressure-tested by a partner — the red-team exercise in this session is one of the most useful and one of the most uncomfortable things in the course. The point is to find the cracks here, before your users (or a tribunal) do.</li>
+  </ul>
+</section>
+
+</main>
+
+<footer>
+  <div class="footer-tag">Module 4 · The Contract</div>
+  <div class="footer-msg">See you in the room.</div>
+  <div class="footer-sub">AI Product Strategy · Pre-session reading</div>
+</footer>
+
+<script>
+const progressBar = document.getElementById('progressBar');
+window.addEventListener('scroll', () => {
+  const scrollTop = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const progress = (scrollTop / docHeight) * 100;
+  progressBar.style.width = progress + '%';
+});
+</script>
+
+</body>
+</html>
