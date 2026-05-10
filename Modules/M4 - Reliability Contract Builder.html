@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reliability Contract Builder — Module 4</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+  :root {
+    --bg: #0b0b10; --surface: #13131a; --surface2: #1a1a24; --border: #252535;
+    --border-hi: #35354a;
+    --text: #e0e0f0; --text-dim: #7a7a9a; --text-muted: #55556a;
+    --blue: #5b8def; --green: #3dd68c; --yellow: #f0c040; --red: #ef5b5b; --purple: #a07be8;
+    --blue-bg: rgba(91,141,239,0.08); --green-bg: rgba(61,214,140,0.08);
+    --yellow-bg: rgba(240,192,64,0.08); --red-bg: rgba(239,91,91,0.08);
+    --purple-bg: rgba(160,123,232,0.08);
+    --radius: 10px; --radius-lg: 14px;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: 'DM Sans', -apple-system, sans-serif;
+    background: var(--bg); color: var(--text);
+    min-height: 100vh; padding: 40px 20px 80px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page { max-width: 780px; margin: 0 auto; }
+
+  .header { text-align: center; margin-bottom: 28px; }
+  .badge {
+    display: inline-block; font-size: 10px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.12em;
+    color: var(--green); background: var(--green-bg);
+    border: 1px solid rgba(61,214,140,0.25);
+    padding: 5px 14px; border-radius: 20px; margin-bottom: 14px;
+  }
+  .header h1 { font-size: 30px; font-weight: 800; color: #fff; margin-bottom: 8px; letter-spacing: -0.02em; }
+  .header p { font-size: 14px; color: var(--text-dim); line-height: 1.6; max-width: 600px; margin: 0 auto; }
+  .header p code { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--text); background: var(--surface); padding: 2px 6px; border-radius: 4px; }
+
+  .header-actions { margin-top: 18px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+  .btn-load {
+    font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 700;
+    padding: 10px 18px; border-radius: 8px;
+    border: 1px solid rgba(61,214,140,0.4); background: var(--green-bg);
+    color: var(--green); cursor: pointer; transition: all 0.2s;
+  }
+  .btn-load:hover { border-color: var(--green); color: #fff; background: rgba(61,214,140,0.18); }
+
+  .summary {
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: var(--radius-lg); padding: 18px 22px; margin-bottom: 20px;
+  }
+  .summary-top {
+    display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 12px;
+    margin-bottom: 12px;
+  }
+  .summary-count { font-family: 'JetBrains Mono', monospace; font-size: 22px; font-weight: 700; color: #fff; }
+  .summary-count span { color: var(--text-dim); font-size: 14px; font-weight: 500; }
+  .stage-tag {
+    font-size: 12px; font-weight: 700; padding: 6px 14px; border-radius: 20px;
+    border: 1px solid var(--border);
+  }
+  .stage-tag.empty   { color: var(--red);    background: var(--red-bg);    border-color: rgba(239,91,91,0.25); }
+  .stage-tag.draft   { color: var(--yellow); background: var(--yellow-bg); border-color: rgba(240,192,64,0.25); }
+  .stage-tag.shaped  { color: var(--blue);   background: var(--blue-bg);   border-color: rgba(91,141,239,0.25); }
+  .stage-tag.ready   { color: var(--green);  background: var(--green-bg);  border-color: rgba(61,214,140,0.25); }
+  .progress-track {
+    height: 10px; border-radius: 5px; background: var(--surface);
+    border: 1px solid var(--border); overflow: hidden;
+  }
+  .progress-fill { height: 100%; border-radius: 5px; transition: width 0.35s, background 0.35s; width: 0%; }
+
+  .card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-lg); margin-bottom: 20px; overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .card:hover { border-color: var(--border-hi); }
+
+  .card-head {
+    padding: 18px 24px; display: flex; align-items: center; gap: 14px;
+    border-bottom: 1px solid var(--border);
+  }
+  .card-icon {
+    width: 36px; height: 36px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; font-weight: 800; color: #fff; flex-shrink: 0;
+  }
+  .card-title { font-size: 16px; font-weight: 700; color: #fff; }
+  .card-sub { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+  .card-body { padding: 20px 24px 22px; }
+
+  .metric-tip {
+    background: rgba(160,123,232,0.06); border: 1px solid rgba(160,123,232,0.25);
+    border-radius: var(--radius); padding: 10px 14px; margin-bottom: 16px;
+    font-size: 13px; color: var(--text); line-height: 1.5;
+  }
+  .metric-tip strong { color: var(--purple); font-weight: 700; }
+
+  .field { margin-bottom: 14px; }
+  .field:last-child { margin-bottom: 0; }
+  .field label {
+    display: block; font-size: 11px; font-weight: 700; color: var(--text-dim);
+    text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px;
+  }
+  .field textarea, .field input[type="text"] {
+    width: 100%; font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--text);
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 11px 14px; resize: vertical; line-height: 1.5;
+    transition: all 0.2s;
+  }
+  .field textarea { min-height: 64px; }
+  .field input[type="text"] {
+    font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; color: #fff;
+  }
+  .field textarea:focus, .field input[type="text"]:focus {
+    outline: none; border-color: var(--green); box-shadow: 0 0 0 3px rgba(61,214,140,0.12);
+  }
+  .field textarea::placeholder, .field input::placeholder { color: var(--text-muted); }
+
+  .bands {
+    display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px;
+  }
+  .band {
+    font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 12px;
+    border: 1px solid var(--border); background: var(--surface2);
+  }
+  .band.green  { color: var(--green);  border-color: rgba(61,214,140,0.25);  background: var(--green-bg); }
+  .band.yellow { color: var(--yellow); border-color: rgba(240,192,64,0.25);  background: var(--yellow-bg); }
+  .band.red    { color: var(--red);    border-color: rgba(239,91,91,0.25);   background: var(--red-bg); }
+
+  .field-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 540px) { .field-pair { grid-template-columns: 1fr; } }
+
+  .conseq-row { display: flex; flex-wrap: wrap; gap: 6px; }
+  .conseq {
+    font-family: inherit; font-size: 12px; font-weight: 600;
+    padding: 8px 12px; border-radius: 18px;
+    border: 1px solid var(--border); background: var(--surface2); color: var(--text-dim);
+    cursor: pointer; transition: all 0.2s;
+  }
+  .conseq:hover { border-color: var(--border-hi); color: var(--text); }
+  .conseq.on {
+    color: #fff; background: rgba(91,141,239,0.18); border-color: var(--blue);
+    box-shadow: 0 0 0 1px rgba(91,141,239,0.25);
+  }
+  .conseq.suggested:not(.on)::after {
+    content: ' · suggested';
+    font-size: 10px; color: var(--text-muted); font-weight: 500;
+  }
+
+  .actions { display: flex; gap: 10px; margin-top: 24px; justify-content: center; flex-wrap: wrap; }
+  .btn {
+    font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600;
+    padding: 10px 18px; border-radius: 8px; border: 1px solid var(--border);
+    background: var(--surface2); color: var(--text); cursor: pointer; transition: all 0.2s;
+  }
+  .btn:hover { border-color: var(--blue); color: #fff; }
+  .btn.findings {
+    border-color: rgba(61,214,140,0.4); color: var(--green);
+  }
+  .btn.findings:hover { border-color: var(--green); color: #fff; background: var(--green-bg); }
+
+  .repo-foot {
+    text-align: center; margin-top: 20px; font-size: 13px; color: var(--text-dim);
+  }
+  .repo-foot code {
+    font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--green);
+  }
+
+  .saved-toast {
+    position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(60px);
+    background: var(--green); color: #000; font-size: 13px; font-weight: 600;
+    padding: 10px 24px; border-radius: 8px; opacity: 0; transition: all 0.3s;
+    pointer-events: none; z-index: 100;
+  }
+  .saved-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+</style>
+</head>
+<body>
+
+<div class="page">
+  <div class="header">
+    <div class="badge">Module 4 — Capstone</div>
+    <h1>Reliability Contract Builder</h1>
+    <p>Four metrics, three columns each, plus HITL Architecture. Output mirrors <code>04-the-contract/golden-dataset.md → Reliability Contract + HITL Architecture</code>.</p>
+    <div class="header-actions">
+      <button type="button" class="btn-load" onclick="loadExample()">Load worked example as starter</button>
+    </div>
+  </div>
+
+  <div class="summary">
+    <div class="summary-top">
+      <div class="summary-count" id="countDisplay">0<span> / 5 sections</span></div>
+      <div class="stage-tag empty" id="stageTag">Empty</div>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+  </div>
+
+  <div class="card" data-metric="accuracy">
+    <div class="card-head">
+      <div class="card-icon" style="background:var(--blue);">📊</div>
+      <div><div class="card-title">Accuracy</div><div class="card-sub">How often the AI gets the answer right</div></div>
+    </div>
+    <div class="card-body">
+      <div class="metric-tip"><strong>💡 Tip.</strong> The point isn't the highest number — it's a <em>defensible</em> number you can hit AND measure weekly. 99% sounds great but you can't ship it.</div>
+      <div class="field-pair">
+        <div class="field">
+          <label>Target</label>
+          <input type="text" id="m-accuracy-target" placeholder="e.g. 92%" autocomplete="off">
+          <div class="bands">
+            <span class="band green">🟢 90–95% defensible</span>
+            <span class="band yellow">🟡 99%+ vanity</span>
+            <span class="band red">🔴 &lt;85% rebuild</span>
+          </div>
+        </div>
+        <div class="field">
+          <label>Alert threshold</label>
+          <input type="text" id="m-accuracy-threshold" placeholder="e.g. &lt;88%" autocomplete="off">
+        </div>
+      </div>
+      <div class="field">
+        <label>Measurement</label>
+        <textarea id="m-accuracy-measurement" placeholder="e.g. Weekly · 300 golden rows · LLM-as-Judge (GPT-4o, accuracy rubric)"></textarea>
+      </div>
+      <div class="field">
+        <label>Consequence — what fires when the threshold trips?</label>
+        <div class="conseq-row" data-conseq="accuracy">
+          <button type="button" class="conseq" data-c="page">📟 Page on-call</button>
+          <button type="button" class="conseq" data-c="rollback">⏮️ Auto-rollback</button>
+          <button type="button" class="conseq" data-c="audit">🔍 Gold-set audit</button>
+          <button type="button" class="conseq" data-c="queue">👤 Human queue</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" data-metric="hallucination">
+    <div class="card-head">
+      <div class="card-icon" style="background:var(--red);">🚨</div>
+      <div><div class="card-title">Hallucination rate</div><div class="card-sub">How often the AI confidently invents facts</div></div>
+    </div>
+    <div class="card-body">
+      <div class="metric-tip"><strong>💡 Tip.</strong> Auto-rollback, not page. Air Canada is why — the bot speaks for the brand, and the brand pays for the lie.</div>
+      <div class="field-pair">
+        <div class="field">
+          <label>Target</label>
+          <input type="text" id="m-hallucination-target" placeholder="e.g. &lt;1%" autocomplete="off">
+          <div class="bands">
+            <span class="band green">🟢 &lt;1% defensible</span>
+            <span class="band yellow">🟡 &lt;2% acceptable</span>
+            <span class="band red">🔴 ≥2% Air-Canada zone</span>
+          </div>
+        </div>
+        <div class="field">
+          <label>Alert threshold</label>
+          <input type="text" id="m-hallucination-threshold" placeholder="e.g. &gt;2%" autocomplete="off">
+        </div>
+      </div>
+      <div class="field">
+        <label>Measurement</label>
+        <textarea id="m-hallucination-measurement" placeholder="e.g. Same weekly run · safety rubric flags fabricated policies/numbers"></textarea>
+      </div>
+      <div class="field">
+        <label>Consequence — what fires when the threshold trips?</label>
+        <div class="conseq-row" data-conseq="hallucination">
+          <button type="button" class="conseq" data-c="page">📟 Page on-call</button>
+          <button type="button" class="conseq suggested" data-c="rollback">⏮️ Auto-rollback</button>
+          <button type="button" class="conseq" data-c="audit">🔍 Gold-set audit</button>
+          <button type="button" class="conseq" data-c="queue">👤 Human queue</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" data-metric="latency">
+    <div class="card-head">
+      <div class="card-icon" style="background:var(--yellow); color:#000;">⚡</div>
+      <div><div class="card-title">Latency (p95)</div><div class="card-sub">How long the slowest 5% of users wait</div></div>
+    </div>
+    <div class="card-body">
+      <div class="metric-tip"><strong>💡 Tip.</strong> The only metric measured continuously. Naming the tooling here (Datadog, PagerDuty) signals SRE rigor to your CTO.</div>
+      <div class="field-pair">
+        <div class="field">
+          <label>Target</label>
+          <input type="text" id="m-latency-target" placeholder="e.g. &lt;800ms" autocomplete="off">
+          <div class="bands">
+            <span class="band green">🟢 &lt;500ms (chat)</span>
+            <span class="band green">🟢 &lt;2s (agent)</span>
+            <span class="band red">🔴 &gt;5s losing users</span>
+          </div>
+        </div>
+        <div class="field">
+          <label>Alert threshold</label>
+          <input type="text" id="m-latency-threshold" placeholder="e.g. &gt;1200ms for 5min" autocomplete="off">
+        </div>
+      </div>
+      <div class="field">
+        <label>Measurement</label>
+        <textarea id="m-latency-measurement" placeholder="e.g. Continuous prod monitoring (Datadog) · p95 by endpoint"></textarea>
+      </div>
+      <div class="field">
+        <label>Consequence — what fires when the threshold trips?</label>
+        <div class="conseq-row" data-conseq="latency">
+          <button type="button" class="conseq suggested" data-c="page">📟 Page on-call</button>
+          <button type="button" class="conseq" data-c="rollback">⏮️ Auto-rollback</button>
+          <button type="button" class="conseq" data-c="audit">🔍 Gold-set audit</button>
+          <button type="button" class="conseq" data-c="queue">👤 Human queue</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" data-metric="drift">
+    <div class="card-head">
+      <div class="card-icon" style="background:var(--purple);">🔄</div>
+      <div><div class="card-title">Drift velocity</div><div class="card-sub">How fast quality decays over time</div></div>
+    </div>
+    <div class="card-body">
+      <div class="metric-tip"><strong>💡 Tip.</strong> Triggers a gold-set audit, not a model rollback. The world changed, not the model. If you rollback, you ship yesterday's truth.</div>
+      <div class="field-pair">
+        <div class="field">
+          <label>Target</label>
+          <input type="text" id="m-drift-target" placeholder="e.g. &lt;0.5%/wk" autocomplete="off">
+          <div class="bands">
+            <span class="band green">🟢 &lt;0.5%/4w defensible</span>
+            <span class="band yellow">🟡 &lt;1%/4w watch</span>
+            <span class="band red">🔴 &gt;1%/4w investigate</span>
+          </div>
+        </div>
+        <div class="field">
+          <label>Alert threshold</label>
+          <input type="text" id="m-drift-threshold" placeholder="e.g. &gt;1% decay/wk" autocomplete="off">
+        </div>
+      </div>
+      <div class="field">
+        <label>Measurement</label>
+        <textarea id="m-drift-measurement" placeholder="e.g. 4-week rolling accuracy trend"></textarea>
+      </div>
+      <div class="field">
+        <label>Consequence — what fires when the threshold trips?</label>
+        <div class="conseq-row" data-conseq="drift">
+          <button type="button" class="conseq" data-c="page">📟 Page on-call</button>
+          <button type="button" class="conseq" data-c="rollback">⏮️ Auto-rollback</button>
+          <button type="button" class="conseq suggested" data-c="audit">🔍 Gold-set audit</button>
+          <button type="button" class="conseq" data-c="queue">👤 Human queue</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-icon" style="background:var(--purple);">🤝</div>
+      <div><div class="card-title">HITL Architecture</div><div class="card-sub">When does a human enter? Who reviews? Does it feed back?</div></div>
+    </div>
+    <div class="card-body">
+      <div class="metric-tip"><strong>💡 Tip.</strong> Without "feeds back into the gold set," HITL is a crutch. With it, every correction becomes a training signal. That's the M2 flywheel connection.</div>
+      <div class="field">
+        <label>Trigger — when does a human enter the loop?</label>
+        <textarea id="hitl-trigger" placeholder="e.g. Confidence &lt;60% OR safety flag fires"></textarea>
+      </div>
+      <div class="field">
+        <label>Reviewer — who reviews?</label>
+        <input type="text" id="hitl-reviewer" placeholder="e.g. Rotating PM on call · weekday 9–5 ET" autocomplete="off">
+      </div>
+      <div class="field">
+        <label>Feedback loop — do corrections feed back into the gold set / model?</label>
+        <textarea id="hitl-feedback" placeholder="e.g. Reviewer corrections feed back into the weekly gold-set audit · monthly retrain trigger if 5+ rows updated"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button type="button" class="btn" onclick="resetAll()">Reset</button>
+    <button type="button" class="btn findings" onclick="copyContract()">Copy Reliability Contract</button>
+  </div>
+  <div class="repo-foot">
+    Paste into <code>04-the-contract/golden-dataset.md</code> → Reliability Contract + HITL Architecture
+  </div>
+</div>
+
+<div class="saved-toast" id="toast">Saved</div>
+
+<script>
+const KEY = 'aps-m4-reliability-contract';
+const $ = id => document.getElementById(id);
+
+const METRICS = [
+  { id: 'accuracy',      label: 'Accuracy' },
+  { id: 'hallucination', label: 'Hallucination rate' },
+  { id: 'latency',       label: 'Latency (p95)' },
+  { id: 'drift',         label: 'Drift velocity' }
+];
+
+const CONSEQUENCE_LABEL = {
+  page:     'page on-call',
+  rollback: 'auto-rollback to last good model',
+  audit:    'trigger gold-set audit',
+  queue:    'route to human review queue'
+};
+
+const EXAMPLE = {
+  accuracy:      { target: '92%',         threshold: '<88%',              measurement: 'Weekly · 300 golden rows · LLM-as-Judge (GPT-4o, accuracy rubric)',         consequence: 'page'     },
+  hallucination: { target: '<1%',         threshold: '>2%',               measurement: 'Same weekly run · safety rubric flags fabricated policies/numbers',        consequence: 'rollback' },
+  latency:       { target: '<800ms',      threshold: '>1200ms for 5min',  measurement: 'Continuous prod monitoring (Datadog) · p95 by endpoint',                   consequence: 'page'     },
+  drift:         { target: '<0.5%/wk',    threshold: '>1% decay/wk',      measurement: '4-week rolling accuracy trend vs. golden dataset',                         consequence: 'audit'    }
+};
+
+const HITL_EXAMPLE = {
+  trigger:  'Confidence <60% OR safety rubric flag fires on a customer-facing output',
+  reviewer: 'Rotating PM on call (weekday 9–5 ET) · senior CSM after hours',
+  feedback: 'Reviewer corrections feed back into the weekly gold-set audit. 5+ corrections in a week triggers a model retrain candidate.'
+};
+
+let state = {
+  metrics: {
+    accuracy:      { target: '', threshold: '', measurement: '', consequence: '' },
+    hallucination: { target: '', threshold: '', measurement: '', consequence: '' },
+    latency:       { target: '', threshold: '', measurement: '', consequence: '' },
+    drift:         { target: '', threshold: '', measurement: '', consequence: '' }
+  },
+  hitl: { trigger: '', reviewer: '', feedback: '' }
+};
+
+const isFilled = s => !!(s && s.trim());
+
+function metricFilled(m) {
+  return isFilled(m.target) || isFilled(m.threshold) || isFilled(m.measurement) || !!m.consequence;
+}
+
+function fieldsCount() {
+  let n = 0;
+  METRICS.forEach(({ id }) => { if (metricFilled(state.metrics[id])) n++; });
+  if (isFilled(state.hitl.trigger) || isFilled(state.hitl.reviewer) || isFilled(state.hitl.feedback)) n++;
+  return n;
+}
+
+function stageBand(n) {
+  if (n === 0) return { cls: 'empty',  label: 'Empty',         color: 'var(--red)',    pct: 0 };
+  if (n <= 2)  return { cls: 'draft',  label: 'Drafting',      color: 'var(--yellow)', pct: (n / 5) * 100 };
+  if (n <= 4)  return { cls: 'shaped', label: 'Shaping',       color: 'var(--blue)',   pct: (n / 5) * 100 };
+  return       { cls: 'ready',  label: 'Contract ready', color: 'var(--green)',  pct: 100 };
+}
+
+function refreshUI() {
+  const n = fieldsCount();
+  $('countDisplay').innerHTML = `${n}<span> / 5 sections</span>`;
+  const b = stageBand(n);
+  const tag = $('stageTag');
+  tag.className = 'stage-tag ' + b.cls;
+  tag.textContent = b.label;
+  const fill = $('progressFill');
+  fill.style.width = b.pct + '%';
+  fill.style.background = b.color;
+
+  METRICS.forEach(({ id }) => {
+    const sel = state.metrics[id].consequence;
+    document.querySelectorAll(`[data-conseq="${id}"] .conseq`).forEach(el => {
+      el.classList.toggle('on', el.dataset.c === sel);
+    });
+  });
+}
+
+function save() {
+  localStorage.setItem(KEY, JSON.stringify(state));
+  showToast('Auto-saved');
+}
+
+function load() {
+  try {
+    const d = JSON.parse(localStorage.getItem(KEY));
+    if (d && typeof d === 'object') {
+      if (d.metrics && typeof d.metrics === 'object') {
+        METRICS.forEach(({ id }) => {
+          const m = d.metrics[id];
+          if (m) {
+            state.metrics[id] = {
+              target:      typeof m.target      === 'string' ? m.target      : '',
+              threshold:   typeof m.threshold   === 'string' ? m.threshold   : '',
+              measurement: typeof m.measurement === 'string' ? m.measurement : '',
+              consequence: ['page','rollback','audit','queue'].includes(m.consequence) ? m.consequence : ''
+            };
+          }
+        });
+      }
+      if (d.hitl && typeof d.hitl === 'object') {
+        state.hitl.trigger  = d.hitl.trigger  || '';
+        state.hitl.reviewer = d.hitl.reviewer || '';
+        state.hitl.feedback = d.hitl.feedback || '';
+      }
+    }
+  } catch (e) {}
+  syncDOMFromState();
+  refreshUI();
+}
+
+function syncDOMFromState() {
+  METRICS.forEach(({ id }) => {
+    $(`m-${id}-target`).value      = state.metrics[id].target;
+    $(`m-${id}-threshold`).value   = state.metrics[id].threshold;
+    $(`m-${id}-measurement`).value = state.metrics[id].measurement;
+  });
+  $('hitl-trigger').value  = state.hitl.trigger;
+  $('hitl-reviewer').value = state.hitl.reviewer;
+  $('hitl-feedback').value = state.hitl.feedback;
+}
+
+function resetAll() {
+  state = {
+    metrics: {
+      accuracy:      { target: '', threshold: '', measurement: '', consequence: '' },
+      hallucination: { target: '', threshold: '', measurement: '', consequence: '' },
+      latency:       { target: '', threshold: '', measurement: '', consequence: '' },
+      drift:         { target: '', threshold: '', measurement: '', consequence: '' }
+    },
+    hitl: { trigger: '', reviewer: '', feedback: '' }
+  };
+  syncDOMFromState();
+  localStorage.removeItem(KEY);
+  refreshUI();
+  showToast('Reset');
+}
+
+function loadExample() {
+  METRICS.forEach(({ id }) => {
+    state.metrics[id] = {
+      target:      EXAMPLE[id].target,
+      threshold:   EXAMPLE[id].threshold,
+      measurement: EXAMPLE[id].measurement,
+      consequence: EXAMPLE[id].consequence
+    };
+  });
+  state.hitl = { ...HITL_EXAMPLE };
+  syncDOMFromState();
+  refreshUI();
+  save();
+  showToast('Worked example loaded — edit to your product');
+}
+
+METRICS.forEach(({ id }) => {
+  ['target', 'threshold', 'measurement'].forEach(field => {
+    const el = $(`m-${id}-${field}`);
+    el.addEventListener('input', () => {
+      state.metrics[id][field] = el.value;
+      refreshUI();
+      save();
+    });
+  });
+});
+
+document.querySelectorAll('.conseq-row').forEach(row => {
+  const metricId = row.dataset.conseq;
+  row.querySelectorAll('.conseq').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const v = btn.dataset.c;
+      state.metrics[metricId].consequence = (state.metrics[metricId].consequence === v) ? '' : v;
+      refreshUI();
+      save();
+    });
+  });
+});
+
+['trigger', 'reviewer', 'feedback'].forEach(field => {
+  const el = $(`hitl-${field}`);
+  el.addEventListener('input', () => {
+    state.hitl[field] = el.value;
+    refreshUI();
+    save();
+  });
+});
+
+function alertCell(metricId) {
+  const m = state.metrics[metricId];
+  const t = m.threshold.trim();
+  const c = m.consequence ? CONSEQUENCE_LABEL[m.consequence] : '';
+  if (!t && !c) return '';
+  if (t && c)   return `${t} → ${c}`;
+  return t || c;
+}
+
+function buildContract() {
+  const lines = [];
+  lines.push('## Reliability Contract');
+  lines.push('');
+  lines.push('| Metric | Target | Measurement | Alert Threshold |');
+  lines.push('|--------|--------|-------------|-----------------|');
+  METRICS.forEach(({ id, label }) => {
+    const m = state.metrics[id];
+    lines.push(`| ${label} | ${m.target.trim() || '—'} | ${m.measurement.trim() || '—'} | ${alertCell(id) || '—'} |`);
+  });
+  lines.push('');
+  lines.push('## HITL Architecture');
+  lines.push('');
+  lines.push(`**Trigger:** ${state.hitl.trigger.trim() || '_(not set)_'}`);
+  lines.push('');
+  lines.push(`**Reviewer:** ${state.hitl.reviewer.trim() || '_(not set)_'}`);
+  lines.push('');
+  lines.push(`**Feedback loop:** ${state.hitl.feedback.trim() || '_(not set)_'}`);
+  lines.push('');
+  return lines.join('\n');
+}
+
+function copyContract() {
+  navigator.clipboard.writeText(buildContract()).then(() => showToast('Contract copied'));
+}
+
+function showToast(msg) {
+  const t = $('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 1800);
+}
+
+load();
+</script>
+</body>
+</html>
