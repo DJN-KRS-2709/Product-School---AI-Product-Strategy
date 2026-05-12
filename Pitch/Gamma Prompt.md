@@ -179,7 +179,7 @@ Numbered list with brief descriptions:
 1. **Build in every session** — Prototype in M1. Cost model in M3. Eval dashboard in M4. Governance policy in M5. Pitch in M6.
 2. **Opinionated throughout** — "Your data is not your moat." "AI will compress your margins." Every module opens with a provocation.
 3. **One case study format, repeated** — Bet → Crack → Correction. Klarna, Jasper, Air Canada, Samsung, Duolingo.
-4. **Peer challenge is structural** — Partner attacks your moat, stress-tests your pricing, red-teams your evals. M6 is a board simulation.
+4. **Peer challenge is structural** — Partner attacks your moat, stress-tests your pricing. M6 is a board simulation.
 5. **External-first language** — Every question is about the product, not the PM.
 
 ---

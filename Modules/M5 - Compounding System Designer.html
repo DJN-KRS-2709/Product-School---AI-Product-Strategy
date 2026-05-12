@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Compounding System Designer — Module 5</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+  :root {
+    --bg: #0b0b10; --surface: #13131a; --surface2: #1a1a24; --border: #252535;
+    --border-hi: #35354a;
+    --text: #e0e0f0; --text-dim: #7a7a9a; --text-muted: #55556a;
+    --blue: #5b8def; --green: #3dd68c; --yellow: #f0c040; --red: #ef5b5b; --purple: #a07be8;
+    --blue-bg: rgba(91,141,239,0.08); --green-bg: rgba(61,214,140,0.08);
+    --yellow-bg: rgba(240,192,64,0.08); --red-bg: rgba(239,91,91,0.08);
+    --purple-bg: rgba(160,123,232,0.1);
+    --radius: 10px; --radius-lg: 14px;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: 'DM Sans', -apple-system, sans-serif;
+    background: var(--bg); color: var(--text);
+    min-height: 100vh; padding: 40px 20px 80px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page { max-width: 760px; margin: 0 auto; }
+
+  .header { text-align: center; margin-bottom: 36px; }
+  .badge {
+    display: inline-block; font-size: 10px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.12em;
+    color: var(--purple); background: var(--purple-bg);
+    border: 1px solid rgba(160,123,232,0.25);
+    padding: 5px 14px; border-radius: 20px; margin-bottom: 14px;
+  }
+  .header h1 { font-size: 30px; font-weight: 800; color: #fff; margin-bottom: 8px; letter-spacing: -0.02em; }
+  .header p { font-size: 14px; color: var(--text-dim); line-height: 1.6; max-width: 580px; margin: 0 auto; }
+
+  .card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-lg); margin-bottom: 20px; overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .card:hover { border-color: var(--border-hi); }
+
+  .card-head {
+    padding: 18px 24px; display: flex; align-items: center; gap: 14px;
+    border-bottom: 1px solid var(--border);
+  }
+  .card-icon {
+    width: 32px; height: 32px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 800; color: #fff; flex-shrink: 0;
+  }
+  .card-title { font-size: 16px; font-weight: 700; color: #fff; }
+  .card-sub { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+  .card-body { padding: 20px 24px 24px; }
+
+  .field { margin-bottom: 18px; }
+  .field:last-child { margin-bottom: 0; }
+  .field label {
+    display: block; font-size: 11px; font-weight: 600;
+    color: var(--text-dim); text-transform: uppercase;
+    letter-spacing: 0.06em; margin-bottom: 6px;
+  }
+  .field label .lab-hint {
+    text-transform: none; letter-spacing: 0; font-weight: 400;
+    color: var(--text-muted); margin-left: 8px;
+  }
+  .field textarea, .field input[type="text"] {
+    width: 100%; font-family: 'JetBrains Mono', monospace;
+    font-size: 13px; font-weight: 500; color: #fff;
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 8px; padding: 12px 14px; outline: none;
+    resize: vertical; line-height: 1.45;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .field textarea { min-height: 80px; }
+  .field textarea:focus, .field input[type="text"]:focus {
+    border-color: var(--purple); box-shadow: 0 0 0 3px rgba(160,123,232,0.12);
+  }
+
+  /* ═══ LOOP ROWS ═══ */
+  .loop-row {
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 16px 18px; margin-bottom: 12px;
+    position: relative;
+  }
+  .loop-row:last-child { margin-bottom: 0; }
+  .loop-row.preset { border-left: 3px solid var(--purple); }
+  .loop-row.preset.recursive { border-left-color: var(--blue); }
+  .loop-row.preset.transfer  { border-left-color: var(--purple); }
+  .loop-row.preset.network   { border-left-color: var(--green); }
+
+  .loop-head {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 10px; margin-bottom: 12px;
+  }
+  .loop-name {
+    font-size: 13px; font-weight: 700; color: #fff;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .loop-name .ribbon {
+    font-family: 'JetBrains Mono', monospace; font-size: 9px;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    padding: 3px 8px; border-radius: 4px;
+  }
+  .loop-row.recursive .ribbon { color: var(--blue); background: var(--blue-bg); }
+  .loop-row.transfer  .ribbon { color: var(--purple); background: var(--purple-bg); }
+  .loop-row.network   .ribbon { color: var(--green); background: var(--green-bg); }
+  .loop-row.custom    .ribbon { color: var(--yellow); background: var(--yellow-bg); }
+
+  .loop-name .nm-input {
+    font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 700; color: #fff;
+    background: transparent; border: none; outline: none; min-width: 160px;
+  }
+  .loop-name .nm-input:focus { border-bottom: 1px dashed var(--purple); }
+
+  .loop-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+  }
+  .loop-grid .field { margin-bottom: 0; }
+  .loop-grid input[type="text"] { font-size: 12px; padding: 9px 11px; min-height: 0; }
+
+  .loop-controls {
+    display: flex; gap: 10px; margin-top: 10px;
+    align-items: center;
+  }
+  .loop-controls .field { margin-bottom: 0; flex: 1; }
+  .loop-controls select {
+    width: 100%; font-family: 'JetBrains Mono', monospace; font-size: 12px;
+    background: var(--surface); border: 1px solid var(--border); color: #fff;
+    border-radius: 6px; padding: 9px 11px; outline: none;
+  }
+  .loop-controls select:focus { border-color: var(--purple); }
+
+  .btn-icon {
+    width: 28px; height: 28px; border-radius: 6px; border: 1px solid var(--border);
+    background: var(--surface); color: var(--text-dim); cursor: pointer;
+    font-size: 14px; line-height: 1; transition: all 0.2s;
+  }
+  .btn-icon:hover { color: var(--red); border-color: rgba(239,91,91,0.4); }
+
+  .btn-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
+  .btn {
+    font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600;
+    padding: 10px 18px; border-radius: 8px; border: 1px solid var(--border);
+    background: var(--surface2); color: var(--text); cursor: pointer; transition: all 0.2s;
+  }
+  .btn:hover { border-color: var(--purple); color: #fff; }
+  .btn.primary { background: var(--purple); border-color: var(--purple); color: #fff; }
+  .btn.primary:hover { filter: brightness(1.1); }
+
+  /* ═══ DIAGNOSTIC PANEL ═══ */
+  .stat {
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 14px 16px; margin-bottom: 10px;
+  }
+  .stat:last-child { margin-bottom: 0; }
+  .stat .k { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); }
+  .stat .v { font-family: 'JetBrains Mono', monospace; font-size: 18px; font-weight: 700; color: #fff; margin-top: 4px; }
+  .stat .v.danger { color: var(--red); }
+  .stat .v.warn { color: var(--yellow); }
+  .stat .v.good { color: var(--green); }
+
+  .health-pill {
+    display: inline-block; margin-top: 8px; font-size: 12px; font-weight: 700;
+    padding: 6px 12px; border-radius: 20px; border: 1px solid var(--border);
+  }
+  .health-pill.compounding { color: var(--green); background: var(--green-bg); border-color: rgba(61,214,140,0.25); }
+  .health-pill.mixed       { color: var(--yellow); background: var(--yellow-bg); border-color: rgba(240,192,64,0.25); }
+  .health-pill.flat        { color: var(--red); background: var(--red-bg); border-color: rgba(239,91,91,0.25); }
+
+  /* ═══ FREEZE TEST ═══ */
+  .freeze-test {
+    background: linear-gradient(135deg, rgba(239,91,91,0.05), rgba(160,123,232,0.05));
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px 18px; margin-top: 14px;
+  }
+  .freeze-test .ft-label {
+    font-family: 'JetBrains Mono', monospace; font-size: 10px;
+    font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--red); margin-bottom: 6px;
+  }
+  .freeze-test .ft-q {
+    font-family: 'DM Sans', sans-serif; font-size: 14px;
+    font-weight: 700; color: #fff; margin-bottom: 6px;
+  }
+  .freeze-test .ft-a {
+    font-size: 13px; color: var(--text-dim); line-height: 1.55;
+  }
+  .freeze-test .ft-a strong { color: #fff; }
+
+  /* ═══ DIAGNOSTIC AUTO TEXT ═══ */
+  .diagnostic-auto {
+    font-size: 13px; line-height: 1.55; color: var(--text-dim);
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 14px 16px; margin-bottom: 14px;
+  }
+  .diagnostic-auto strong { color: var(--purple); }
+
+  .actions { display: flex; gap: 10px; margin-top: 24px; justify-content: center; flex-wrap: wrap; }
+
+  .saved-toast {
+    position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(60px);
+    background: var(--green); color: #000; font-size: 13px; font-weight: 600;
+    padding: 10px 24px; border-radius: 8px; opacity: 0; transition: all 0.3s;
+    pointer-events: none; z-index: 100;
+  }
+  .saved-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  /* ═══ RESPONSIVE ═══ */
+  @media (max-width: 640px) {
+    .loop-grid { grid-template-columns: 1fr; }
+    .loop-controls { flex-direction: column; align-items: stretch; }
+    .loop-controls .btn-icon { align-self: flex-end; }
+  }
+
+</style>
+</head>
+<body>
+
+<div class="page">
+  <div class="header">
+    <div class="badge">Module 5 — The Guardrails</div>
+    <h1>Compounding System Designer</h1>
+    <p>Map your product's compounding architecture — which loops <em>learn</em>, which just <em>scale</em>, and where the gap creates vulnerability. Exports directly into <code style="font-family:'JetBrains Mono',monospace; background:rgba(160,123,232,0.10); color:var(--purple); padding:1px 6px; border-radius:3px;">05-the-guardrails/compounding-system.md</code>.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-icon" style="background:var(--purple);">1</div>
+      <div><div class="card-title">Map your loops</div><div class="card-sub">Three preset loops + any you want to add. Be honest about Status.</div></div>
+    </div>
+    <div class="card-body">
+      <div id="loopRows"></div>
+      <div class="btn-row">
+        <button type="button" class="btn" id="addLoop">+ Add custom loop</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-icon" style="background:var(--blue);">2</div>
+      <div><div class="card-title">Live diagnostic</div><div class="card-sub">Derived from your loops above</div></div>
+    </div>
+    <div class="card-body">
+      <div class="diagnostic-auto" id="diagnosticAuto"></div>
+      <div class="stat"><div class="k">Loops mapped</div><div class="v" id="stTotal">0</div></div>
+      <div class="stat"><div class="k">Loops that actually compound</div><div class="v" id="stCompounds">0</div></div>
+      <div class="stat"><div class="k">Active / Broken / Missing</div><div class="v" id="stStatus">0 / 0 / 0</div></div>
+      <div class="stat">
+        <div class="k">System health</div>
+        <div class="v" id="stHealth" style="font-size:16px;">Add your loops to assess</div>
+        <span class="health-pill flat" id="healthPill">Flat — not compounding yet</span>
+      </div>
+
+      <div class="freeze-test">
+        <div class="ft-label">🧪 The Freeze Test</div>
+        <div class="ft-q" id="freezeQ">Freeze your model for 12 months. Do you still win?</div>
+        <div class="ft-a" id="freezeA">If yes, you're not compounding — your moat is something else (distribution, brand, integrations). That's fine, but call it what it is.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-icon" style="background:var(--red);">3</div>
+      <div><div class="card-title">The broken loop</div><div class="card-sub">Identify the weakest link + the fix plan</div></div>
+    </div>
+    <div class="card-body">
+      <div class="field">
+        <label>Broken loop identified <span class="lab-hint">— which one is leaking value? (or write the one your partner spotted)</span></label>
+        <input type="text" id="brokenLoop" placeholder="e.g. Recursive Learning — corrections never make it back to the gold set">
+      </div>
+      <div class="field">
+        <label>Fix plan <span class="lab-hint">— what changes Monday morning?</span></label>
+        <textarea id="fixPlan" placeholder="e.g. Add a thumbs-down → ticket → weekly gold-set audit pipeline. Owned by the on-call PM."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-icon" style="background:var(--green);">4</div>
+      <div><div class="card-title">Context connectivity</div><div class="card-sub">Where knowledge flows — and where it silos</div></div>
+    </div>
+    <div class="card-body">
+      <div class="field">
+        <label>How does knowledge flow across teams and domains?</label>
+        <textarea id="contextFlow" placeholder="e.g. Support tickets → CSAT signals → product analytics, but support corrections don't reach the model team."></textarea>
+      </div>
+      <div class="field">
+        <label>Where does it silo? <span class="lab-hint">— the gaps that block compounding</span></label>
+        <textarea id="contextSilo" placeholder="e.g. Sales objections never reach product. Customer correction logs sit in Zendesk only."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button type="button" class="btn" onclick="resetAll()">Reset</button>
+    <button type="button" class="btn primary" onclick="copyToClipboard()">Copy as Markdown → repo</button>
+  </div>
+</div>
+
+<div class="saved-toast" id="toast">Saved</div>
+
+<script>
+const KEY = 'aps-m5-compounding';
+const $ = id => document.getElementById(id);
+
+const PRESETS = [
+  {
+    key: 'recursive',
+    name: 'Recursive Learning',
+    cls: 'recursive',
+    ribbon: 'Loop 1',
+    hint: 'Outputs + corrections feed the model'
+  },
+  {
+    key: 'transfer',
+    name: 'Cross-Domain Transfer',
+    cls: 'transfer',
+    ribbon: 'Loop 2',
+    hint: 'Win in A lifts B next door'
+  },
+  {
+    key: 'network',
+    name: 'Network Intelligence',
+    cls: 'network',
+    ribbon: 'Loop 3',
+    hint: 'Fleet patterns — privacy-gated'
+  }
+];
+
+function newPresetLoop(preset) {
+  return {
+    preset: true,
+    key: preset.key,
+    name: preset.name,
+    cls: preset.cls,
+    ribbon: preset.ribbon,
+    input: '',
+    output: '',
+    compounds: 'N',
+    status: 'missing'
+  };
+}
+
+function newCustomLoop() {
+  return {
+    preset: false,
+    key: 'custom-' + Date.now(),
+    name: '',
+    cls: 'custom',
+    ribbon: 'Custom',
+    input: '',
+    output: '',
+    compounds: 'N',
+    status: 'missing'
+  };
+}
+
+function defaultLoops() {
+  return PRESETS.map(newPresetLoop);
+}
+
+let loops = defaultLoops();
+
+function escAttr(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');
+}
+
+function loopRowHtml(loop, idx) {
+  const statuses = ['active', 'broken', 'missing'];
+  const compounds = ['Y', 'N'];
+  const statusOpts = statuses.map(s => `<option value="${s}"${loop.status === s ? ' selected' : ''}>${s}</option>`).join('');
+  const compOpts = compounds.map(c => `<option value="${c}"${loop.compounds === c ? ' selected' : ''}>${c}</option>`).join('');
+
+  const nameBlock = loop.preset
+    ? `<span>${escAttr(loop.name)}</span>`
+    : `<input type="text" class="nm-input" data-f="name" value="${escAttr(loop.name)}" placeholder="Name your loop…">`;
+
+  const removeBtn = loop.preset
+    ? ''
+    : `<button type="button" class="btn-icon" title="Remove" onclick="removeLoop(${idx})">×</button>`;
+
+  return `<div class="loop-row preset ${loop.cls}" data-idx="${idx}">
+    <div class="loop-head">
+      <div class="loop-name">
+        <span class="ribbon">${escAttr(loop.ribbon)}</span>
+        ${nameBlock}
+      </div>
+      ${removeBtn}
+    </div>
+    <div class="loop-grid">
+      <div class="field">
+        <label>Input <span class="lab-hint">— what feeds this loop?</span></label>
+        <input type="text" class="lp-inp" data-f="input" value="${escAttr(loop.input)}" placeholder="e.g. user corrections in chat">
+      </div>
+      <div class="field">
+        <label>Output <span class="lab-hint">— what does the loop produce?</span></label>
+        <input type="text" class="lp-inp" data-f="output" value="${escAttr(loop.output)}" placeholder="e.g. updated golden dataset rows">
+      </div>
+    </div>
+    <div class="loop-controls">
+      <div class="field">
+        <label>Compounds?</label>
+        <select class="lp-sel" data-f="compounds">${compOpts}</select>
+      </div>
+      <div class="field">
+        <label>Status</label>
+        <select class="lp-sel" data-f="status">${statusOpts}</select>
+      </div>
+    </div>
+  </div>`;
+}
+
+function renderLoops() {
+  $('loopRows').innerHTML = loops.map((l, i) => loopRowHtml(l, i)).join('');
+  $('loopRows').querySelectorAll('.lp-inp, .nm-input').forEach(el => {
+    el.addEventListener('input', () => {
+      const row = el.closest('.loop-row');
+      const i = +row.dataset.idx;
+      loops[i][el.dataset.f] = el.value;
+      save();
+      refreshDiagnostic();
+    });
+  });
+  $('loopRows').querySelectorAll('.lp-sel').forEach(el => {
+    el.addEventListener('change', () => {
+      const row = el.closest('.loop-row');
+      const i = +row.dataset.idx;
+      loops[i][el.dataset.f] = el.value;
+      save();
+      refreshDiagnostic();
+    });
+  });
+}
+
+function addCustomLoop() {
+  loops.push(newCustomLoop());
+  renderLoops();
+  save();
+  refreshDiagnostic();
+}
+
+function removeLoop(i) {
+  if (loops[i] && loops[i].preset) {
+    showToast('Preset loops can\'t be removed');
+    return;
+  }
+  loops.splice(i, 1);
+  renderLoops();
+  save();
+  refreshDiagnostic();
+}
+
+$('addLoop').addEventListener('click', addCustomLoop);
+
+function mappedLoops() {
+  // A loop is "mapped" if it has any content beyond the preset name
+  return loops.filter(l => {
+    const hasIO = String(l.input).trim() || String(l.output).trim();
+    const hasStatus = l.status !== 'missing';
+    return hasIO || hasStatus || (!l.preset && String(l.name).trim());
+  });
+}
+
+function computeDiagnostic() {
+  const mapped = mappedLoops();
+  const total = mapped.length;
+  const compounds = mapped.filter(l => l.compounds === 'Y').length;
+  const active = mapped.filter(l => l.status === 'active').length;
+  const broken = mapped.filter(l => l.status === 'broken').length;
+  const missing = loops.length - active - broken; // includes untouched preset rows
+
+  let health = 'Flat — not compounding yet';
+  let healthCls = 'flat';
+  let stHealth = 'Not compounding';
+
+  if (total === 0) {
+    health = 'Add your loops to assess';
+    healthCls = 'flat';
+    stHealth = 'Add your loops to assess';
+  } else if (compounds >= 2 && broken === 0) {
+    health = 'Compounding — multiple loops active and learning';
+    healthCls = 'compounding';
+    stHealth = 'Compounding';
+  } else if (compounds >= 1) {
+    health = 'Mixed — one loop learns, others scale or stall';
+    healthCls = 'mixed';
+    stHealth = 'Mixed';
+  } else {
+    health = 'Flat — your system scales but doesn\'t get smarter';
+    healthCls = 'flat';
+    stHealth = 'Flat';
+  }
+
+  return { total, compounds, active, broken, missing, health, healthCls, stHealth };
+}
+
+function diagnosticOneLiner(d) {
+  if (d.total === 0) {
+    return 'Map at least one loop above to see your diagnostic.';
+  }
+  const parts = [];
+  parts.push(`<strong>${d.total}</strong> loops mapped`);
+  parts.push(`<strong>${d.compounds}</strong> that actually compound`);
+  if (d.broken > 0) parts.push(`<strong>${d.broken}</strong> broken`);
+  return parts.join(' · ') + '.';
+}
+
+function freezeTestText(d) {
+  if (d.compounds === 0) {
+    return {
+      q: 'Freeze your model for 12 months. Do you still win?',
+      a: '<strong>Probably yes — and that\'s the problem.</strong> Zero loops compounding means your product would survive a year-long model freeze. Whatever advantage you have isn\'t coming from intelligence that improves with use. Name your real moat (distribution, brand, integrations) or build at least one real learning loop.'
+    };
+  }
+  if (d.broken > 0) {
+    return {
+      q: 'Freeze your model for 12 months. Do you still win?',
+      a: `<strong>Maybe.</strong> ${d.compounds} loop${d.compounds === 1 ? '' : 's'} compound${d.compounds === 1 ? 's' : ''} but ${d.broken} ${d.broken === 1 ? 'is' : 'are'} broken. The broken loop is leaking the advantage faster than the working ones can build it. Fix the broken loop first.`
+    };
+  }
+  if (d.compounds >= 2) {
+    return {
+      q: 'Freeze your model for 12 months. Do you still win?',
+      a: `<strong>No — and that's the goal.</strong> ${d.compounds} loops compounding means a 12-month freeze visibly hurts. Each user makes the next one smarter. Document these in your repo — this is what a defensible AI strategy looks like.`
+    };
+  }
+  return {
+    q: 'Freeze your model for 12 months. Do you still win?',
+    a: `<strong>Maybe.</strong> ${d.compounds} loop is compounding, but the rest just scale. Single-loop compounding is fragile — one channel break kills the moat. Aim for two or three.`
+  };
+}
+
+function refreshDiagnostic() {
+  const d = computeDiagnostic();
+  $('stTotal').textContent = String(d.total);
+  $('stCompounds').textContent = String(d.compounds);
+  $('stStatus').textContent = `${d.active} / ${d.broken} / ${Math.max(0, d.missing)}`;
+
+  const compEl = $('stCompounds');
+  compEl.className = 'v' + (d.compounds === 0 ? ' danger' : d.compounds >= 2 ? ' good' : ' warn');
+
+  $('stHealth').textContent = d.stHealth;
+  const pill = $('healthPill');
+  pill.textContent = d.health;
+  pill.className = 'health-pill ' + d.healthCls;
+
+  $('diagnosticAuto').innerHTML = diagnosticOneLiner(d);
+
+  const ft = freezeTestText(d);
+  $('freezeQ').textContent = ft.q;
+  $('freezeA').innerHTML = ft.a;
+}
+
+function collectState() {
+  return {
+    loops: loops.map(l => ({ ...l })),
+    brokenLoop: $('brokenLoop').value,
+    fixPlan: $('fixPlan').value,
+    contextFlow: $('contextFlow').value,
+    contextSilo: $('contextSilo').value
+  };
+}
+
+function save() {
+  localStorage.setItem(KEY, JSON.stringify(collectState()));
+  showToast('Auto-saved');
+}
+
+function load() {
+  try {
+    const d = JSON.parse(localStorage.getItem(KEY));
+    if (d && Array.isArray(d.loops) && d.loops.length) {
+      // Ensure the three presets are present in order, then any customs
+      const byKey = {};
+      d.loops.forEach(l => { if (l && l.key) byKey[l.key] = l; });
+      const restored = PRESETS.map(p => {
+        const saved = byKey[p.key];
+        return saved
+          ? { ...newPresetLoop(p), ...saved, preset: true, name: p.name, cls: p.cls, ribbon: p.ribbon }
+          : newPresetLoop(p);
+      });
+      const customs = d.loops.filter(l => l && !l.preset).map(l => ({ ...newCustomLoop(), ...l, preset: false, cls: 'custom', ribbon: 'Custom' }));
+      loops = restored.concat(customs);
+    }
+    if (d) {
+      if (d.brokenLoop  !== undefined) $('brokenLoop').value  = d.brokenLoop;
+      if (d.fixPlan     !== undefined) $('fixPlan').value     = d.fixPlan;
+      if (d.contextFlow !== undefined) $('contextFlow').value = d.contextFlow;
+      if (d.contextSilo !== undefined) $('contextSilo').value = d.contextSilo;
+    }
+  } catch (e) {}
+  renderLoops();
+  refreshDiagnostic();
+}
+
+['brokenLoop', 'fixPlan', 'contextFlow', 'contextSilo'].forEach(id => {
+  $(id).addEventListener('input', () => { save(); });
+});
+
+function resetAll() {
+  loops = defaultLoops();
+  $('brokenLoop').value = '';
+  $('fixPlan').value = '';
+  $('contextFlow').value = '';
+  $('contextSilo').value = '';
+  localStorage.removeItem(KEY);
+  renderLoops();
+  refreshDiagnostic();
+  showToast('Reset');
+}
+
+function buildExportMarkdown() {
+  const s = collectState();
+  const mapped = mappedLoops();
+  let out = '## Feedback Loops\n\n';
+  out += '| Loop | Input | Output | Compounds? | Status |\n';
+  out += '|------|-------|--------|-----------|--------|\n';
+  loops.forEach(l => {
+    const name = (l.name || '').trim() || (l.preset ? l.ribbon : 'Custom');
+    const input = (l.input || '').trim() || '—';
+    const output = (l.output || '').trim() || '—';
+    out += `| ${name} | ${input} | ${output} | ${l.compounds} | ${l.status} |\n`;
+  });
+  out += '\n';
+  out += `**Broken loop identified by partner:** ${s.brokenLoop || '—'}\n`;
+  out += `**Fix plan:** ${s.fixPlan || '—'}\n\n`;
+  out += '## Context Connectivity\n';
+  out += '<!-- How does knowledge flow across teams and domains? Where does it silo? -->\n\n';
+  if (s.contextFlow) out += `**How knowledge flows:** ${s.contextFlow}\n\n`;
+  if (s.contextSilo) out += `**Where it silos:** ${s.contextSilo}\n`;
+  return out;
+}
+
+function copyToClipboard() {
+  navigator.clipboard.writeText(buildExportMarkdown()).then(() => showToast('Copied — paste into compounding-system.md'));
+}
+
+function showToast(msg) {
+  const t = $('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 1800);
+}
+
+load();
+</script>
+</body>
+</html>

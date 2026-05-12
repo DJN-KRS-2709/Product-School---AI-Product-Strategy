@@ -140,7 +140,6 @@ The people in the room are assets — but "pair work" is a format, not a mechani
 | M1 | Partner challenges your diagnostic scores |
 | M2 | Partner attacks your moat: "here's who kills you" |
 | M3 | Partner stress-tests your pricing: "what if inference costs 3x" |
-| M4 | Partner red-teams your eval spec: "what failure mode did you miss" |
 | M5 | Partner audits your system: "what feedback loop is broken" |
 | M6 | Full room challenges your pitch (board simulation) |
 
@@ -285,8 +284,6 @@ This creates a reusable tool: after the course, they can evaluate any future bet
 **Case study:** Air Canada chatbot liability — when an AI product made promises the company had to honor
 
 **Build moment:** Spec a production eval dashboard — metrics, judge configuration, drift alerts, UX integration points
-
-**Peer challenge:** Partner red-teams the eval spec — "what failure mode did you miss? Where does the system degrade silently?"
 
 **Artifact component:** The Contract — eval spec, reliability targets, confidence UX design, HITL architecture, golden dataset plan
 

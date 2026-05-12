@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 4 — The Contract · Companion Notes</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Lato', -apple-system, sans-serif;
+  background: #07162C;
+  color: #b0b4c8;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ═══ READING PROGRESS BAR ═══ */
+.progress-bar {
+  position: fixed; top: 0; left: 0; height: 3px; z-index: 100;
+  background: linear-gradient(90deg, #1241B0, #bc8cff);
+  width: 0%; transition: width 0.1s ease;
+}
+
+/* ═══ HERO ═══ */
+.hero {
+  min-height: 60vh;
+  padding: 120px 32px 80px;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center; position: relative;
+  background: radial-gradient(ellipse at 30% 30%, rgba(188,140,255,0.20) 0%, #07162C 60%);
+  border-bottom: 1px solid rgba(188,140,255,0.10);
+}
+.hero .module-tag {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px; font-weight: 600; letter-spacing: 0.16em;
+  text-transform: uppercase; color: #d2a8ff;
+  padding: 8px 18px; border-radius: 6px;
+  background: rgba(188,140,255,0.10);
+  border: 1px solid rgba(188,140,255,0.20);
+  margin-bottom: 24px;
+}
+.hero h1 {
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(40px, 6vw, 68px); font-weight: 900;
+  color: #fff; line-height: 1.05;
+  max-width: 880px; margin-bottom: 20px;
+}
+.hero h1 span { color: #d2a8ff; }
+.hero .lede {
+  font-family: 'Lato', sans-serif;
+  font-size: 19px; line-height: 1.65; max-width: 720px;
+  color: #8899bb; font-style: italic;
+}
+.hero .meta {
+  display: flex; gap: 24px; flex-wrap: wrap; justify-content: center;
+  margin-top: 40px; font-size: 13px;
+  font-family: 'IBM Plex Mono', monospace;
+  color: #60a5fa; opacity: 0.8;
+}
+.hero .meta span::before { content: '·'; margin-right: 8px; color: #333; }
+.hero .meta span:first-child::before { content: ''; margin-right: 0; }
+
+/* ═══ MAIN CONTAINER ═══ */
+.container {
+  max-width: 760px; margin: 0 auto;
+  padding: 80px 32px 120px;
+}
+
+/* ═══ SECTIONS ═══ */
+section.chapter {
+  margin-bottom: 72px;
+  scroll-margin-top: 40px;
+}
+.section-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px; font-weight: 600; letter-spacing: 0.18em;
+  text-transform: uppercase; color: #60a5fa;
+  margin-bottom: 14px;
+}
+h2 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 34px; font-weight: 800;
+  color: #fff; line-height: 1.15;
+  margin-bottom: 28px;
+}
+h3 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 20px; font-weight: 700;
+  color: #e0e0f0; line-height: 1.3;
+  margin-top: 48px; margin-bottom: 14px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+h3:first-of-type {
+  margin-top: 8px;
+  border-top: none;
+  padding-top: 0;
+}
+h3 .slide-num {
+  display: inline-block;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: #d2a8ff;
+  background: rgba(188,140,255,0.10);
+  padding: 4px 10px; border-radius: 4px;
+  margin-right: 12px; vertical-align: middle;
+}
+p {
+  font-size: 17px; line-height: 1.75;
+  color: #b0b4c8; margin-bottom: 18px;
+}
+strong { color: #fff; font-weight: 700; }
+em { color: #d2a8ff; font-style: italic; font-weight: 600; }
+a {
+  color: #60a5fa; text-decoration: none;
+  border-bottom: 1px dashed rgba(96,165,250,0.4);
+  transition: all 0.2s;
+}
+a:hover { color: #93c5fd; border-bottom-style: solid; }
+
+code {
+  font-family: 'IBM Plex Mono', monospace;
+  background: rgba(188,140,255,0.10);
+  color: #d2a8ff;
+  padding: 2px 8px; border-radius: 4px;
+  font-size: 14px; font-weight: 500;
+}
+
+ul, ol {
+  margin: 0 0 18px 24px;
+  font-size: 17px; line-height: 1.75;
+  color: #b0b4c8;
+}
+ul li, ol li { margin-bottom: 8px; }
+ul li::marker { color: #d2a8ff; }
+ol li::marker { color: #d2a8ff; font-weight: 700; }
+
+/* ═══ SECTION DIVIDER ═══ */
+.divider {
+  width: 60px; height: 2px;
+  background: linear-gradient(90deg, #bc8cff, transparent);
+  margin: 0 auto 80px;
+  border: none;
+}
+
+/* ═══ PULL QUOTE ═══ */
+.pull-quote {
+  margin: 32px 0;
+  padding: 32px 36px;
+  background: rgba(188,140,255,0.06);
+  border-left: 3px solid #bc8cff;
+  border-radius: 0 12px 12px 0;
+  position: relative;
+}
+.pull-quote::before {
+  content: '"';
+  position: absolute; top: 8px; left: 16px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 64px; font-weight: 900;
+  color: rgba(188,140,255,0.20);
+  line-height: 1;
+}
+.pull-quote p {
+  font-family: 'Poppins', sans-serif;
+  font-size: 22px; line-height: 1.4;
+  color: #fff; font-weight: 600;
+  margin: 0; padding-left: 32px;
+}
+
+/* ═══ COMPARISON CARDS ═══ */
+.compare {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 16px; margin: 28px 0;
+}
+.compare-card {
+  border-radius: 12px; padding: 24px;
+  transition: transform 0.2s ease;
+}
+.compare-card:hover { transform: translateY(-2px); }
+.compare-card .label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.10em;
+  text-transform: uppercase; margin-bottom: 10px;
+}
+.compare-card .big-num {
+  font-family: 'Poppins', sans-serif;
+  font-size: 38px; font-weight: 900;
+  margin-bottom: 8px; line-height: 1;
+}
+.compare-card .desc {
+  font-size: 14px; line-height: 1.5; color: #8899bb;
+}
+.compare-card.bad {
+  background: rgba(248,113,113,0.05);
+  border: 1px solid rgba(248,113,113,0.18);
+}
+.compare-card.bad .label, .compare-card.bad .big-num { color: #f87171; }
+.compare-card.good {
+  background: rgba(52,211,153,0.06);
+  border: 1px solid rgba(52,211,153,0.20);
+}
+.compare-card.good .label, .compare-card.good .big-num { color: #34d399; }
+
+/* ═══ NOTICING TABLE ═══ */
+.notice-table {
+  width: 100%; border-collapse: collapse;
+  margin: 24px 0;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px; overflow: hidden;
+}
+.notice-table th {
+  text-align: left; padding: 16px 20px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.10em; text-transform: uppercase;
+  color: #d2a8ff;
+  background: rgba(188,140,255,0.06);
+  border-bottom: 1px solid rgba(188,140,255,0.15);
+}
+.notice-table td {
+  padding: 16px 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  font-size: 14px; line-height: 1.55;
+  color: #b0b4c8; vertical-align: top;
+}
+.notice-table tr:last-child td { border-bottom: none; }
+.notice-table td:first-child {
+  font-weight: 700; color: #fff;
+  white-space: nowrap;
+}
+.notice-table tr:hover td { background: rgba(188,140,255,0.03); }
+
+/* ═══ BRING LIST ═══ */
+.bring-list {
+  list-style: none; padding: 0;
+  display: flex; flex-direction: column; gap: 10px;
+  margin: 20px 0;
+}
+.bring-list li {
+  display: flex; align-items: flex-start; gap: 14px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 10px;
+  padding: 14px 18px;
+  font-size: 15px; line-height: 1.55;
+  color: #b0b4c8;
+}
+.bring-list li::before {
+  content: '→'; color: #d2a8ff;
+  font-weight: 700; flex-shrink: 0;
+  font-size: 16px; padding-top: 1px;
+}
+
+/* ═══ REPO TREE (code block) ═══ */
+.repo-tree {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  padding: 22px 26px;
+  margin: 24px 0;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 14px;
+  line-height: 1.85;
+  color: #b0b4c8;
+  white-space: pre-wrap;
+}
+.repo-tree .folder { color: #d2a8ff; font-weight: 600; }
+.repo-tree .file { color: #6ee7b7; }
+.repo-tree .new { color: #fff; font-weight: 700; }
+.repo-tree .comment { color: #6b7589; }
+
+/* ═══ TAKEAWAY CARDS ═══ */
+.takeaways {
+  display: flex; flex-direction: column; gap: 16px;
+  margin: 28px 0;
+}
+.takeaway {
+  background: rgba(188,140,255,0.05);
+  border: 1px solid rgba(188,140,255,0.18);
+  border-radius: 12px;
+  padding: 22px 26px;
+}
+.takeaway .takeaway-num {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: #d2a8ff; margin-bottom: 10px;
+}
+.takeaway .takeaway-head {
+  font-family: 'Poppins', sans-serif;
+  font-size: 17px; font-weight: 700;
+  color: #fff; line-height: 1.4;
+  margin-bottom: 8px;
+}
+.takeaway p {
+  font-size: 15px; line-height: 1.65;
+  color: #a0a8b4; margin-bottom: 0;
+}
+
+/* ═══ FOOTER ═══ */
+footer {
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 60px 32px;
+  text-align: center;
+  background: #050f1f;
+}
+footer .footer-tag {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px; letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #4a5670; margin-bottom: 12px;
+}
+footer .footer-msg {
+  font-family: 'Poppins', sans-serif;
+  font-size: 22px; font-weight: 700;
+  color: #fff; margin-bottom: 8px;
+}
+footer .footer-sub {
+  font-size: 14px; color: #6b7589;
+  font-style: italic;
+}
+
+/* ═══ RESPONSIVE ═══ */
+@media (max-width: 720px) {
+  .hero { padding: 80px 24px 60px; }
+  .container { padding: 60px 24px 80px; }
+  h2 { font-size: 28px; }
+  h3 { font-size: 18px; }
+  .compare { grid-template-columns: 1fr; }
+  .pull-quote p { font-size: 18px; }
+  .repo-tree { font-size: 12px; padding: 16px 18px; }
+}
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<header class="hero">
+  <div class="module-tag">Module 4 · Companion Notes · ~25 min</div>
+  <h1>The <span>Contract</span></h1>
+  <p class="lede">Shareable companion notes. These walk you back through what each slide covered, in case you want to review the arguments, examples, and frameworks at your own pace.</p>
+  <div class="meta">
+    <span>AI Product Strategy</span>
+    <span>Post-Session Reading</span>
+    <span>Bring it back to your repo</span>
+  </div>
+</header>
+
+<main class="container">
+
+<section class="chapter">
+  <div class="section-label">00 · What this module is about</div>
+  <h2>From <em>does it pay?</em> to <em>will they trust it?</em></h2>
+  <p>Module 1 asked what you were betting on. Module 2 asked whether the bet survives contact with the market. Module 3 asked whether the economics actually work. Module 4 asks a different kind of question, and a harder one to fake: <strong>why will users trust the output of a probabilistic system enough to pay for it, rely on it, and not sue you over it?</strong></p>
+  <p>The vibe shifts again. M1 and M2 were about threat and defensibility. M3 was about math. M4 is about <em>promises</em> — the kind your company is legally on the hook for the moment your AI says them out loud. The word "Contract" in the module title is not a metaphor. There is a real airline case study in this session where a tribunal held a company liable for what its chatbot promised. We'll get to it.</p>
+  <p>This is also the most jargon-dense session in the course. Golden datasets. Eval harnesses. LLM-as-Judge. Human-in-the-loop. Confidence UX. Reliability contracts. Drift. Hallucination. The pre-read did most of the vocabulary lift, so the session itself can stay focused on your actual product.</p>
+  <p>You leave with one artifact, <code>04-the-contract/golden-dataset.md</code>, with four filled-in sections: <strong>Golden Dataset Spec</strong> (your 10–150 labeled test cases), <strong>Confidence UX Design</strong> (three explicit confidence tiers), <strong>Reliability Contract</strong> (measurable targets and alert thresholds), and <strong>HITL Architecture</strong> (when humans step in, where corrections go). Backed by three interactive tools — the <strong>Golden Dataset Builder</strong>, the <strong>Confidence UX Designer</strong>, and the <strong>Reliability Contract Builder</strong> — which do most of the structural lift for you.</p>
+</section>
+
+<hr class="divider">
+
+<section class="chapter">
+  <div class="section-label">01 · Opening</div>
+  <h2>Where we are, what you brought.</h2>
+
+  <h3><span class="slide-num">Slide 1</span>The Contract</h3>
+  <p>The opening sets the tone for the session and lays out the three waypoints: <strong>Define</strong> (trust isn't an accuracy number), <strong>Measure</strong> (golden sets, judges, eval infrastructure), and <strong>Design</strong> (confidence UX — show doubt, don't fake certainty). The framing question for the whole session: <em>why will users trust a probabilistic system?</em> Everything that follows is in service of that one question.</p>
+
+  <h3><span class="slide-num">Slide 2</span>Class Expectations</h3>
+  <p>Same ground rules as every other session — cameras on, Slack for questions, active engagement, save deep individual questions for after class. M4 is more lecture-and-build than M3. There is less math and more <em>design judgement</em>. The exercises are about decisions, not arithmetic.</p>
+
+  <h3><span class="slide-num">Slide 3</span>Course Arc</h3>
+  <p>Quick orientation. We are past the halfway point.</p>
+  <ul>
+    <li><strong>M1 — The Bet:</strong> What should we build, and how do we know fast?</li>
+    <li><strong>M2 — The Moat:</strong> Why won't this get copied in six months?</li>
+    <li><strong>M3 — The Margin:</strong> Will the economics actually work?</li>
+    <li><strong>M4 — The Contract:</strong> Why will users trust it? <em>(You are here.)</em></li>
+    <li><strong>M5 — The Guardrails:</strong> What breaks at scale?</li>
+    <li><strong>M6 — The Pitch:</strong> How do we get it funded, shipped, and adopted?</li>
+  </ul>
+  <p>The strategy is a repo, not a deck. One folder per module. Today: <code>04-the-contract/</code>.</p>
+
+  <h3><span class="slide-num">Slide 4</span>What You Brought Today</h3>
+  <p>Recall from Module 3 — your cost curve, your pricing strategy, and three committed folders (<code>01-the-bet/</code>, <code>02-the-moat/</code>, <code>03-the-margin/</code>) sitting in your living strategy repo. The bridge into M4 is direct: <strong>great economics mean nothing if users don't trust the output.</strong> Today is the trust layer.</p>
+</section>
+
+<hr class="divider">
+
+<section class="chapter">
+  <div class="section-label">02 · The provocation and the two big ideas</div>
+  <h2>Legibility beats accuracy.</h2>
+
+  <h3><span class="slide-num">Slide 5</span>Provocation</h3>
+  <p>The opening framing for the whole session, and a vote-first / argue-after exercise. Three statements that <em>sound</em> like industry common sense and turn out to be wrong:</p>
+  <ol>
+    <li><strong>"Higher accuracy = more trust."</strong> False. Trust is a function of <em>perceived control</em>, not the accuracy percentage. An 85% accurate system with confidence scores, explanations, and an override button is trusted more than a 95% black box.</li>
+    <li><strong>"Users don't care how the AI works."</strong> False. They don't care about transformer architecture. They care about <em>reliability signals</em> — confidence scores, source citations, "I'm not sure" messages, and the ability to correct. Legibility is a product feature.</li>
+    <li><strong>"We'll add evals later, after we ship."</strong> False. AI degrades silently — model drift, data shift, prompt injection, policy changes. By the time users complain, trust is gone. Evals are <em>launch infrastructure</em>, not technical debt.</li>
+  </ol>
+  <p>The point of voting first is to surface how many of these beliefs are still load-bearing in the room. In most cohorts, at least one of the three lands as "wait, really?" That's the gap the rest of the module closes.</p>
+
+  <h3><span class="slide-num">Slide 6</span>Trust ≠ Accuracy</h3>
+  <p>The central reframe. The instinct most teams build their roadmap around is "more accurate = more trusted." It's wrong in a way that matters for product design.</p>
+
+  <div class="compare">
+    <div class="compare-card bad">
+      <div class="label">Black Box</div>
+      <div class="big-num">95%</div>
+      <div class="desc">No scores. No sources. No override. Surprises you in production.</div>
+    </div>
+    <div class="compare-card good">
+      <div class="label">Legible System</div>
+      <div class="big-num">85%</div>
+      <div class="desc">Confidence scores. Citations. "I'm not sure" messages. User can correct.</div>
+    </div>
+  </div>
+
+  <p>An <strong>85% accurate system</strong> that shows its work beats a <strong>95% black box</strong> every time. The moment the black box is confidently wrong with no warning, trust evaporates — and there's no way to claw it back. Real-world anchors: Tesla / ADAS-style forced handoffs (the car <em>makes you</em> take the wheel when it's not sure); Perplexity and AI Overviews leading every answer with sources you can click through to.</p>
+
+  <div class="pull-quote">
+    <p>Understandable and controllable wins — even at a lower benchmark percentage.</p>
+  </div>
+
+  <h3><span class="slide-num">Slide 7</span>Golden Datasets</h3>
+  <p>The second big idea: a <strong>golden dataset</strong> is the labeled-truth fixture that defines "good" for your specific product. Not a public benchmark. Not a leaderboard score. Your domain, your edge cases, versioned in your repo like code. It exists for three reasons:</p>
+  <ol>
+    <li><strong>Regression.</strong> Every prompt change, every model swap, every retrieval tweak — your golden dataset catches the dip before users feel it. Without it, you ship blind.</li>
+    <li><strong>Domain anchor.</strong> "Good output" means something different in legal advice vs. customer support vs. coding assistance. The golden dataset is where you make that definition concrete and shareable across the team.</li>
+    <li><strong>Proof for buyers.</strong> The enterprise question on every AI procurement call now is: <em>"Show me how you test this."</em> Your golden dataset is the demo. The teams that can screen-share theirs in a sales call close. The teams that can't, don't.</li>
+  </ol>
+  <p>Industry anchors: Grammarly gates releases on correctness and tone benchmarks. OpenAI PMs build current-behavior-vs-ideal-behavior sheets that act as ground truth for new model rollouts. The rule of thumb: <strong>100–500 rows, edge cases included, version like code.</strong> Ten rows today, ~150 at v1 ship.</p>
+</section>
+
+<hr class="divider">
+
+<section class="chapter">
+  <div class="section-label">03 · Trust Infrastructure Lab</div>
+  <h2>Build a golden dataset. Design the confidence UX.</h2>
+
+  <h3><span class="slide-num">Slide 8</span>Trust Infrastructure (Lab Intro)</h3>
+  <p>Section break introducing the first build block. Three exercises across the next stretch of slides: <strong>build a golden dataset, design your confidence UX, and draft a reliability contract.</strong> Three exercises, 30 minutes total. Everything you draft in the next 30 minutes goes straight into <code>04-the-contract/golden-dataset.md</code>.</p>
+
+  <h3><span class="slide-num">Slide 9</span>Define Your Golden Dataset</h3>
+  <p>Ten minutes of solo work. Draft 10 golden test cases — at least three of them <strong>adversarial</strong> (inputs designed to break your system). For each row, capture four things: input, expected output, edge-case flag (Y/N), and judge type (rule-based or LLM-as-Judge).</p>
+  <p>Open the <strong>Golden Dataset Builder</strong> tool from the slide. It walks you through the structure, gives you starter prompts for each column, and exports in the exact shape <code>golden-dataset.md</code> expects, so you don't have to retype anything into the repo.</p>
+  <p>The bar for today: ten cases on the page. The bar for v1 ship: ~150. Don't try to perfect it — <strong>structure beats precision</strong>, and the dataset is supposed to grow with the product.</p>
+  <p>The sales test, said out loud: <em>"Here's how we test our AI."</em> If you can finish that sentence with something concrete, you're ahead of most teams. If you can't, that's the gap this exercise closes.</p>
+
+  <h3><span class="slide-num">Slide 10</span>Human-in-the-Loop Design</h3>
+  <p>HITL as a <em>shrinking queue</em>, not permanent babysitting. The instinct most teams have when AI quality drops is "let's review everything" — and that's the crutch pattern. Cost explodes. Reviewers burn out. Corrections vanish into Slack threads and never make it back into the model.</p>
+  <p>The <strong>feature pattern</strong> looks different: thresholded review (low confidence → human, high → auto), corrections captured back into the gold set (every edit = training fuel — this is where it connects directly to the M2 data flywheel), and escalation UX that makes uncertainty visible so users opt in to the handoff rather than being surprised by it.</p>
+  <p>Real-world anchor: medical imaging tools and ambient clinical scribes. The AI handles routine cases; clinicians sign off only on the high-risk outputs. The HITL percentage <em>drops over time</em> as the gold set grows and the model improves. That's the design target — a queue that shrinks, not one that scales linearly with usage.</p>
+
+  <h3><span class="slide-num">Slide 11</span>Air Canada Case</h3>
+  <p>The case study of the module, and the one most students remember six months later. Air Canada deployed a customer-service chatbot to deflect support tickets and automate FAQs. The bot, under no instruction from any human, <strong>invented a bereavement refund policy that didn't exist</strong>. A grieving customer relied on the bot's promise, booked travel, and tried to claim the refund. Air Canada refused.</p>
+  <p>In tribunal, the airline argued the chatbot was a "separate legal entity" — that the company shouldn't be liable for what its own bot said. Effectively: <em>don't blame us, blame the robot.</em></p>
+
+  <div class="pull-quote">
+    <p>The tribunal disagreed: a chatbot speaks for the brand. Air Canada was liable.</p>
+  </div>
+
+  <p>The lesson lands hard for AI PMs: receipts, thresholds, HITL, and confidence UX aren't risk-management theatre. They're the difference between a chatbot that's a product asset and one that's a court case. <strong>Every promise your AI makes is a promise your company makes.</strong> Specify them, measure them, and enforce them — or someone else will, in front of a tribunal.</p>
+
+  <h3><span class="slide-num">Slide 12</span>Design Your Confidence UX</h3>
+  <p>Ten minutes. The exercise asks you to design three modes, not one. Most AI products today ship with a single "here's the answer" UI — and that single mode is exactly what makes confident hallucinations so damaging.</p>
+  <ul>
+    <li><strong>Confident (&gt;90%):</strong> what does the UI and the copy look like when the AI is sure? Direct answer? No hedge? Auto-apply?</li>
+    <li><strong>Uncertain (50–90%):</strong> what <em>visibly softens</em>? Hedging language, confidence bar, "double-check this before sending," sources next to the answer, a "show me alternatives" button?</li>
+    <li><strong>Not confident (&lt;50%):</strong> block, escalate, route to human queue? What does the user see — and crucially, do they understand <em>why</em>?</li>
+  </ul>
+  <p>Anchors: <em>Grammarly</em> varies the depth of the rewrite suggestion based on confidence. <em>Copilot</em> adds citations or softens its tone when the model is less sure. The same answer can land radically differently depending on how the product frames it.</p>
+  <p>Open the <strong>Confidence UX Designer</strong> tool. It drafts your approach, three tiers, and the user-control surface in the shape <code>golden-dataset.md</code> expects.</p>
+</section>
+
+<hr class="divider">
+
+<section class="chapter">
+  <div class="section-label">04 · Reset and eval infrastructure</div>
+  <h2>The dashboard you can screen-share.</h2>
+
+  <h3><span class="slide-num">Slide 13</span>Break</h3>
+  <p>Five-minute break. The second half is heavier on infrastructure thinking — judges, dashboards, alerts, on-call rotations — and lighter on solo exercises. Come back with water.</p>
+
+  <h3><span class="slide-num">Slide 14</span>Cameras On</h3>
+  <p>Welcome back. The next stretch sets up the eval infrastructure that makes the morning's golden dataset usable in production — running automatically, alerting when things slip, and screen-shareable in a sales call.</p>
+
+  <h3><span class="slide-num">Slide 15</span>LLM-as-a-Judge</h3>
+  <p>Automated scoring, calibrated against your gold set. The pattern most teams converge on: <em>vendors</em> (LangSmith, Braintrust, Humanloop) provide the judge infrastructure and trace storage; <em>you</em> own the labels and the rubric. Three places LLM-as-Judge shows up:</p>
+  <ul>
+    <li><strong>Regression</strong> — the judge runs against your golden rows continuously, at high volume, every time anything changes (prompt, model, retrieval, system).</li>
+    <li><strong>Drift</strong> — trend lines on accuracy that fire alerts <em>before</em> NPS craters. The lead indicator.</li>
+    <li><strong>Quality gates</strong> — live routing decisions in production: this answer auto-ships, this one goes to a human, this one gets blocked.</li>
+  </ul>
+  <p>The question that comes up every time: <em>who judges the judge?</em> Answer: your golden dataset. Without that anchor, an LLM-as-Judge is just another opinion. With it, the judge becomes a calibrated, scalable extension of your team's quality bar.</p>
+
+  <h3><span class="slide-num">Slide 16</span>The Eval Dashboard Spec</h3>
+  <p>Think <strong>Datadog or Stripe status-page energy</strong> — for AI quality. Four blocks:</p>
+  <ul>
+    <li><strong>Metrics</strong> — quality, latency, confidence spread, HITL percentage, override rate.</li>
+    <li><strong>Judge setup</strong> — model used, rubric, which gold-set rows, thresholds.</li>
+    <li><strong>Drift alerts</strong> — automatic pings when any of the above cross the line.</li>
+    <li><strong>UX hooks</strong> — confidence scores rendered in the product UI, citations attached to answers, thumbs-up/down loops feeding back into the gold set.</li>
+  </ul>
+  <p>The acid test, and a question that comes up in every enterprise procurement call now: <strong>can you screen-share this in a sales call?</strong> If not, it's not product-grade. The eval dashboard isn't a back-office tool. It's a sales asset.</p>
+</section>
+
+<hr class="divider">
+
+<section class="chapter">
+  <div class="section-label">05 · The Reliability Contract</div>
+  <h2>What you promise. How you measure. What breaks.</h2>
+
+  <h3><span class="slide-num">Slide 17</span>Reliability Contract (Lab Intro)</h3>
+  <p>Section break introducing the final build block. The reliability contract is the <em>explicit promise</em> your product makes to users about quality, response time, escalation, and feedback loops. Drafted directly in the repo, modeled on a worked example. <strong>This is what survives a board question of "what if you're wrong?"</strong></p>
+
+  <h3><span class="slide-num">Slide 18</span>Your Reliability Contract</h3>
+  <p>Ten minutes. You're drafting a four-row table in <code>golden-dataset.md</code> with real targets, real measurement plans, and real alert thresholds. Not aspirational numbers. The exemplar isn't a target to match — yours has to be <em>specific</em>. Wrong numbers get corrected in a review. Mush doesn't.</p>
+  <p>The worked example, for a Customer Support Copilot:</p>
+
+  <table class="notice-table">
+    <thead>
+      <tr><th>Metric</th><th>Target</th><th>Measurement</th><th>Alert</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Accuracy</td>
+        <td>92%</td>
+        <td>Weekly · 300 golden rows · LLM-as-Judge (GPT-4o, accuracy rubric)</td>
+        <td>&lt;88% → pages on-call PM</td>
+      </tr>
+      <tr>
+        <td>Hallucination rate</td>
+        <td>&lt;1%</td>
+        <td>Same weekly run · safety rubric flags fabricated policies / numbers</td>
+        <td>&gt;2% → pauses prod traffic, rolls to last good model</td>
+      </tr>
+      <tr>
+        <td>Latency p95</td>
+        <td>&lt;800ms</td>
+        <td>Continuous production monitoring (Datadog)</td>
+        <td>&gt;1200ms for 5 min → PagerDuty</td>
+      </tr>
+      <tr>
+        <td>Drift velocity</td>
+        <td>&lt;0.5%/wk</td>
+        <td>4-week rolling accuracy trend</td>
+        <td>&gt;1% decay/wk → gold-set audit</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>The <strong>HITL architecture</strong> row that goes with it: confidence below 60% <em>or</em> a safety flag → human reviewer (rotating on-call PM); reviewer corrections feed back into the weekly gold-set audit. Closes the loop.</p>
+  <p>Open the <strong>Reliability Contract Builder</strong> tool from the slide. Per-metric defensible bands, a consequence picker for each alert threshold, a "Load worked example" starter, and copy-as-text → repo. You should leave the session with a filled-in Reliability Contract section that you'd genuinely be willing to defend to a board in Module 6.</p>
+</section>
+
+<hr class="divider">
+
+<section class="chapter">
+  <div class="section-label">06 · Wrap and what's next</div>
+  <h2>Four components committed. Half the strategy on disk.</h2>
+
+  <h3><span class="slide-num">Slide 19</span>Your Repo After Today</h3>
+  <p>Trust infrastructure committed. Your living strategy repo now has four components, and the trust layer is the one that turns the first three from interesting to <em>investable</em>.</p>
+
+  <div class="repo-tree"><span class="folder">01-the-bet/</span>
+  <span class="file">diagnostic.md</span>
+  <span class="file">prototype.md</span>
+
+<span class="folder">02-the-moat/</span>
+  <span class="file">data-flywheel.md</span>
+  <span class="file">kill-switch.md</span>
+
+<span class="folder">03-the-margin/</span>
+  <span class="file">cost-curve.md</span>
+
+<span class="folder new">04-the-contract/</span>
+  <span class="file new">golden-dataset.md</span>   <span class="comment"># 4 sections · 3 tools used</span></div>
+
+  <p>The four sections inside <code>golden-dataset.md</code>: Golden Dataset Spec, Confidence UX Design, Reliability Contract, HITL Architecture. If one of them feels light, that's homework before Module 5.</p>
+
+  <h3><span class="slide-num">Slide 20</span>Bridge to Module 5</h3>
+  <p>Today was <em>product-level</em> trust — "users trust the AI because we showed our work and our promises hold." Module 5 is what breaks at <em>organizational</em> scale: agents picking actions on their own, shadow AI tools spreading across the company, governance as a sales asset, compounding feedback loops that either get stronger or quietly collapse.</p>
+  <p>Bring your repo with <code>01/</code> through <code>04/</code> committed. M5 will lean on all four.</p>
+
+  <h3><span class="slide-num">Slide 21</span>Key Takeaways</h3>
+
+  <div class="takeaways">
+    <div class="takeaway">
+      <div class="takeaway-num">Takeaway 1</div>
+      <div class="takeaway-head">Trust is a function of perceived control, not accuracy.</div>
+      <p>Users don't need perfect AI — they need to understand when it's confident, when it's uncertain, and when to override. Confidence UX is what makes trust visible. Get this right and a lower-accuracy product can outperform a higher-accuracy one in the market.</p>
+    </div>
+    <div class="takeaway">
+      <div class="takeaway-num">Takeaway 2</div>
+      <div class="takeaway-head">Golden datasets are your receipts.</div>
+      <p>When a buyer asks "how do you test this?" — your golden dataset is the answer. Version it like code. Use it as a release gate. Update it when the world changes. It's both your internal quality fixture and your external sales asset.</p>
+    </div>
+    <div class="takeaway">
+      <div class="takeaway-num">Takeaway 3</div>
+      <div class="takeaway-head">Reliability contracts aren't metaphors.</div>
+      <p>Air Canada's chatbot invented policy and the tribunal held the company liable. Your AI's promises are your company's promises. Specify them. Measure them. Enforce them. Or someone else will, in court.</p>
+    </div>
+  </div>
+
+  <p>The single line to hold onto, if you only hold onto one: <strong>legibility beats accuracy. Receipts beat assertions. Contracts beat hopes.</strong></p>
+
+  <h3><span class="slide-num">Slide 22</span>Optional · Go Deeper</h3>
+  <p>Two optional exercises between now and Module 5. Both go directly into the repo.</p>
+  <ul class="bring-list">
+    <li><strong>Expand your golden dataset to ~25 cases.</strong> Add adversarial inputs — the kind that would break most systems. Commit to your repo.</li>
+    <li><strong>Detail your confidence UI.</strong> Sketch what your product looks like at &gt;90%, 50–90%, and &lt;50% confidence. What visually changes between modes? Commit the update to <code>golden-dataset.md</code>.</li>
+  </ul>
+  <p>Next session: <strong>Module 5 — The Guardrails.</strong> Product-level trust holds. What happens when this scales across the organization?</p>
+
+  <h3><span class="slide-num">Slide 23</span>Survey</h3>
+  <p>Brief survey before signing off. The feedback genuinely shapes the next session — it's not boilerplate.</p>
+
+  <h3><span class="slide-num">Slide 24</span>Q&amp;A</h3>
+  <p>Questions before wrap. Slack stays open between sessions for anything that surfaces later — especially the ones that don't crystallise until you sit down with your golden dataset and try to fill it in for real.</p>
+</section>
+
+</main>
+
+<footer>
+  <div class="footer-tag">Module 4 · The Contract</div>
+  <div class="footer-msg">Receipts in the repo. See you in Module 5.</div>
+  <div class="footer-sub">AI Product Strategy · Post-session companion notes</div>
+</footer>
+
+<script>
+const progressBar = document.getElementById('progressBar');
+window.addEventListener('scroll', () => {
+  const scrollTop = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const progress = (scrollTop / docHeight) * 100;
+  progressBar.style.width = progress + '%';
+});
+</script>
+
+</body>
+</html>

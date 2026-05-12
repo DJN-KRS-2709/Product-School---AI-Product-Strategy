@@ -661,7 +661,7 @@ section.skipped { display: none; }
   <div class="section-break-inner">
     <div class="lab-title">Hands-On Lab</div>
     <div class="lab-name">Trust Infrastructure</div>
-    <div class="lab-desc">Build golden datasets, red-team your eval spec, and draft a reliability contract. Three exercises, 40 minutes total.</div>
+    <div class="lab-desc">Build a golden dataset, design your confidence UX, and draft a reliability contract. Three exercises, 30 minutes total.</div>
   </div>
 </section>
 
@@ -816,8 +816,8 @@ section.skipped { display: none; }
   <div class="inner">
     <div class="demo-tag tag-break">Break</div>
     <h1 style="font-size:64px; color:#333; margin-top:40px;">☕</h1>
-    <p class="subtitle" style="margin:16px auto;">Back for: LLM-as-Judge · eval dashboard · partner red-team · reliability contract.</p>
-    <p style="font-size:16px; color:#555;">Bring your sharpest attacks.</p>
+    <p class="subtitle" style="margin:16px auto;">Back for: LLM-as-Judge · eval dashboard · reliability contract.</p>
+    <p style="font-size:16px; color:#555;">Bring your sharpest numbers.</p>
   </div>
 </section>
 
@@ -894,53 +894,7 @@ section.skipped { display: none; }
   </div>
 </section>
 
-<!-- 18: Peer Challenge — Red-Team -->
-<section data-title="Red-Team">
-<div class="lab-timer">⏰ 12 min</div>
-  <div class="inner">
-    <div class="demo-tag tag-activity">Breakout Exercise</div>
-    <h2>"What Failure Mode Did You Miss?"</h2>
-    <div class="lab-goal">
-      <div class="lab-goal-label">Your Goal</div>
-      <div class="lab-goal-text">Find the worst miss in your partner's eval spec. What input would break their golden dataset? What edge case did they not consider?</div>
-    </div>
-    <div class="lab-tip">
-      <div class="lab-tip-label">Keep in Mind</div>
-      <div class="lab-tip-text">Explore your partner's spec silently for 2 minutes before discussing. Look for: missing edge cases, unclear pass/fail criteria, assumptions about user behavior.</div>
-    </div>
-    <p class="subtitle">6 min each — partner stress-tests your eval spec.</p>
-    <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:20px 0;">
-      <div style="background:rgba(248,113,113,0.06); border:1px solid rgba(248,113,113,0.15); border-radius:10px; padding:18px;">
-        <div style="font-size:13px; font-weight:800; color:#f87171; margin-bottom:6px;">🎯 Confident Hallucination</div>
-        <div style="font-size:12px; color:#8899bb; line-height:1.45;">95% confident · wrong · then what?</div>
-      </div>
-      <div style="background:rgba(248,113,113,0.06); border:1px solid rgba(248,113,113,0.15); border-radius:10px; padding:18px;">
-        <div style="font-size:13px; font-weight:800; color:#f87171; margin-bottom:6px;">⚡ Adversarial Input</div>
-        <div style="font-size:12px; color:#8899bb; line-height:1.45;">Injection · messy real user text</div>
-      </div>
-      <div style="background:rgba(248,113,113,0.06); border:1px solid rgba(248,113,113,0.15); border-radius:10px; padding:18px;">
-        <div style="font-size:13px; font-weight:800; color:#f87171; margin-bottom:6px;">🔄 Ground Truth Shifts</div>
-        <div style="font-size:12px; color:#8899bb; line-height:1.45;">Policy/docs changed · gold set stale</div>
-      </div>
-      <div style="background:rgba(248,113,113,0.06); border:1px solid rgba(248,113,113,0.15); border-radius:10px; padding:18px;">
-        <div style="font-size:13px; font-weight:800; color:#f87171; margin-bottom:6px;">🗺️ Boundary Cases</div>
-        <div style="font-size:12px; color:#8899bb; line-height:1.45;">Never-seen inputs · what breaks?</div>
-      </div>
-    </div>
-    <div style="text-align:center; margin:10px 0 8px;">
-      <a href="M4 - Red-Team Card.html" target="_blank" style="display:inline-block; background:#1241B0; color:#fff; text-decoration:none; font-size:14px; font-weight:800; padding:10px 18px; border-radius:999px; box-shadow:0 8px 24px rgba(18,65,176,0.35);">Open Red-Team Card ↗</a>
-      <div style="font-size:12px; color:#8899bb; margin-top:6px;">Brief your partner in 60s · pick one of four lenses · capture the worst miss in the right format for your repo</div>
-    </div>
-    <div style="background:rgba(248,113,113,0.08); border:1px solid rgba(248,113,113,0.25); border-radius:10px; padding:14px 16px; margin-top:10px;">
-      <div style="font-size:11px; font-weight:900; color:#f87171; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:8px;">Capture in <code style="color:#fca5a5; font-family:'IBM Plex Mono',monospace; font-size:11px;">golden-dataset.md → Red-Team Findings</code></div>
-      <div style="font-size:13px; color:#e0e0f0; font-style:italic; margin-bottom:6px;">"What failure mode did your partner find that you missed?"</div>
-      <div style="font-size:12px; color:#555; font-family:'IBM Plex Mono',monospace; line-height:1.85;">_______________________________________________________________</div>
-    </div>
-    <p style="font-size:13px; text-align:center; margin-top:10px;"><span style="color:#34d399;">📂</span> <strong style="color:#6ee7b7;">Go to your repo →</strong> <code style="color:#6ee7b7; font-size:12px;">04-the-contract/golden-dataset.md</code> <span style="color:#8899bb;">→ Red-Team Findings section</span></p>
-  </div>
-</section>
-
-<!-- 20: Lab Header — Reliability Contract -->
+<!-- 18: Lab Header — Reliability Contract -->
 <section class="section-break" data-title="Reliability Contract">
   <div class="section-break-inner">
     <div class="lab-title">Hands-On Lab</div>

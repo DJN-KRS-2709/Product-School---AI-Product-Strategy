@@ -34,6 +34,3 @@
 
 ## HITL Architecture
 <!-- When does a human step in? What's the escalation path? -->
-
-## Red-Team Findings
-*What failure mode did your partner find that you missed?*

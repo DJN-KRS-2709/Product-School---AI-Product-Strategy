@@ -100,6 +100,5 @@ If you do have something - a benchmark you run, a spreadsheet of test cases, a v
 - Your `cost-curve.md` from Module 3 (it gets referenced).
 - Your three artifacts so far: `01-the-bet/`, `02-the-moat/`, `03-the-margin/`.
 - Honest answers to the two questions above.
-- A willingness to be pressure-tested by a partner - the red-team exercise in this session is one of the most useful and one of the most uncomfortable things in the course. The point is to find the cracks here, before your users (or a tribunal) do.
 
 See you in the room.

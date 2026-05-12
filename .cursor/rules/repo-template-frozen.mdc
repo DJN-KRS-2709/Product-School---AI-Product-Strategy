@@ -30,7 +30,7 @@ Any slide that says "Capture in `…`", "Go to your repo →", or otherwise tell
 | M1 The Bet | `01-the-bet/diagnostic.md`, `01-the-bet/prototype.md` | (see file) |
 | M2 The Moat | `02-the-moat/data-flywheel.md`, `02-the-moat/kill-switch.md` | (see file) |
 | M3 The Margin | `03-the-margin/cost-curve.md` | (see file) |
-| M4 The Contract | `04-the-contract/golden-dataset.md` | Golden Dataset Spec · Confidence UX Design · Reliability Contract · HITL Architecture · Red-Team Findings |
+| M4 The Contract | `04-the-contract/golden-dataset.md` | Golden Dataset Spec · Confidence UX Design · Reliability Contract · HITL Architecture |
 | M5 The Guardrails | `05-the-guardrails/compounding-system.md` | (see file) |
 | M6 The Pitch | `06-the-pitch/roadmap.md` | (see file) |
 
