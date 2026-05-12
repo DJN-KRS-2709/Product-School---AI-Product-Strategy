@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Governance Policy Drafter — Module 5</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+  :root {
+    --bg: #0b0b10; --surface: #13131a; --surface2: #1a1a24; --border: #252535;
+    --border-hi: #35354a;
+    --text: #e0e0f0; --text-dim: #7a7a9a; --text-muted: #55556a;
+    --blue: #5b8def; --green: #3dd68c; --yellow: #f0c040; --red: #ef5b5b; --purple: #a07be8;
+    --blue-bg: rgba(91,141,239,0.08); --green-bg: rgba(61,214,140,0.08);
+    --yellow-bg: rgba(240,192,64,0.08); --red-bg: rgba(239,91,91,0.08);
+    --purple-bg: rgba(160,123,232,0.08);
+    --radius: 10px; --radius-lg: 14px;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: 'DM Sans', -apple-system, sans-serif;
+    background: var(--bg); color: var(--text);
+    min-height: 100vh; padding: 40px 20px 80px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page { max-width: 820px; margin: 0 auto; }
+
+  .header { text-align: center; margin-bottom: 28px; }
+  .badge {
+    display: inline-block; font-size: 10px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.12em;
+    color: var(--purple); background: var(--purple-bg);
+    border: 1px solid rgba(160,123,232,0.25);
+    padding: 5px 14px; border-radius: 20px; margin-bottom: 14px;
+  }
+  .header h1 { font-size: 30px; font-weight: 800; color: #fff; margin-bottom: 8px; letter-spacing: -0.02em; }
+  .header p { font-size: 14px; color: var(--text-dim); line-height: 1.6; max-width: 640px; margin: 0 auto; }
+  .header p code { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--text); background: var(--surface); padding: 2px 6px; border-radius: 4px; }
+
+  .header-actions { margin-top: 18px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+  .btn-load {
+    font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 700;
+    padding: 10px 18px; border-radius: 8px;
+    border: 1px solid rgba(160,123,232,0.4); background: var(--purple-bg);
+    color: var(--purple); cursor: pointer; transition: all 0.2s;
+  }
+  .btn-load:hover { border-color: var(--purple); color: #fff; background: rgba(160,123,232,0.18); }
+
+  .product-input-wrap {
+    max-width: 420px; margin: 18px auto 0; display: flex; align-items: center; gap: 10px;
+  }
+  .product-input-wrap label {
+    font-size: 11px; font-weight: 700; color: var(--text-dim);
+    text-transform: uppercase; letter-spacing: 0.08em; white-space: nowrap;
+  }
+  .product-input-wrap input {
+    flex: 1; font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 600; color: #fff;
+    background: var(--surface2); border: 1px solid var(--border); border-radius: 8px;
+    padding: 9px 12px; transition: all 0.2s;
+  }
+  .product-input-wrap input:focus { outline: none; border-color: var(--purple); box-shadow: 0 0 0 3px rgba(160,123,232,0.15); }
+  .product-input-wrap input::placeholder { color: var(--text-muted); }
+
+  .summary {
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: var(--radius-lg); padding: 18px 22px; margin-bottom: 20px;
+  }
+  .summary-top {
+    display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 12px;
+    margin-bottom: 12px;
+  }
+  .summary-count { font-family: 'JetBrains Mono', monospace; font-size: 22px; font-weight: 700; color: #fff; }
+  .summary-count span { color: var(--text-dim); font-size: 14px; font-weight: 500; }
+  .stage-tag {
+    font-size: 12px; font-weight: 700; padding: 6px 14px; border-radius: 20px;
+    border: 1px solid var(--border);
+  }
+  .stage-tag.empty   { color: var(--red);    background: var(--red-bg);    border-color: rgba(239,91,91,0.25); }
+  .stage-tag.draft   { color: var(--yellow); background: var(--yellow-bg); border-color: rgba(240,192,64,0.25); }
+  .stage-tag.shaped  { color: var(--blue);   background: var(--blue-bg);   border-color: rgba(91,141,239,0.25); }
+  .stage-tag.ready   { color: var(--green);  background: var(--green-bg);  border-color: rgba(61,214,140,0.25); }
+  .progress-track {
+    height: 10px; border-radius: 5px; background: var(--surface);
+    border: 1px solid var(--border); overflow: hidden;
+  }
+  .progress-fill { height: 100%; border-radius: 5px; transition: width 0.35s, background 0.35s; width: 0%; }
+
+  .card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-lg); margin-bottom: 20px; overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .card:hover { border-color: var(--border-hi); }
+  .card.optional { opacity: 0.92; }
+
+  .card-head {
+    padding: 18px 24px; display: flex; align-items: center; gap: 14px;
+    border-bottom: 1px solid var(--border);
+  }
+  .card-icon {
+    width: 36px; height: 36px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; font-weight: 800; color: #fff; flex-shrink: 0;
+  }
+  .card-title { font-size: 16px; font-weight: 700; color: #fff; }
+  .card-title .opt-pill {
+    font-size: 10px; font-weight: 700; color: var(--text-dim);
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 10px; padding: 2px 8px; margin-left: 8px; vertical-align: 2px;
+    text-transform: uppercase; letter-spacing: 0.08em;
+  }
+  .card-sub { font-size: 11px; color: var(--text-muted); margin-top: 2px; line-height: 1.4; }
+  .card-body { padding: 20px 24px 22px; }
+
+  .tip {
+    background: rgba(160,123,232,0.06); border: 1px solid rgba(160,123,232,0.25);
+    border-radius: var(--radius); padding: 10px 14px; margin-bottom: 16px;
+    font-size: 13px; color: var(--text); line-height: 1.5;
+  }
+  .tip strong { color: var(--purple); font-weight: 700; }
+
+  .field { margin-bottom: 14px; }
+  .field:last-child { margin-bottom: 0; }
+  .field label {
+    display: block; font-size: 11px; font-weight: 700; color: var(--text-dim);
+    text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px;
+  }
+  .field label .opt { color: var(--text-muted); font-weight: 500; text-transform: none; letter-spacing: 0; }
+  .field textarea, .field input[type="text"] {
+    width: 100%; font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--text);
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 11px 14px; resize: vertical; line-height: 1.5;
+    transition: all 0.2s;
+  }
+  .field textarea { min-height: 70px; }
+  .field textarea:focus, .field input[type="text"]:focus {
+    outline: none; border-color: var(--purple); box-shadow: 0 0 0 3px rgba(160,123,232,0.12);
+  }
+  .field textarea::placeholder, .field input::placeholder { color: var(--text-muted); }
+
+  /* Structured rows */
+  .row-list { display: flex; flex-direction: column; gap: 10px; }
+  .row {
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 12px;
+    display: grid; gap: 10px; align-items: center;
+  }
+  .row.autonomy-row { grid-template-columns: 1fr auto auto; }
+  .row.audit-row    { grid-template-columns: 140px 1fr 1fr auto; }
+  @media (max-width: 640px) {
+    .row.autonomy-row, .row.audit-row { grid-template-columns: 1fr; }
+  }
+  .row input[type="text"], .row select {
+    width: 100%; font-family: 'DM Sans', sans-serif; font-size: 13px; color: var(--text);
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 8px; padding: 9px 11px; transition: all 0.2s;
+  }
+  .row input[type="text"]:focus, .row select:focus {
+    outline: none; border-color: var(--purple); box-shadow: 0 0 0 3px rgba(160,123,232,0.12);
+  }
+  .row input[type="text"]::placeholder { color: var(--text-muted); }
+  .row select {
+    font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600;
+    appearance: none; -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%237a7a9a' d='M2 4l4 4 4-4z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 10px center;
+    padding-right: 28px;
+  }
+
+  .level-group { display: flex; gap: 4px; }
+  .level {
+    font-family: inherit; font-size: 11px; font-weight: 600;
+    padding: 7px 10px; border-radius: 8px;
+    border: 1px solid var(--border); background: var(--surface);
+    color: var(--text-dim); cursor: pointer; transition: all 0.15s;
+    white-space: nowrap;
+  }
+  .level:hover { border-color: var(--border-hi); color: var(--text); }
+  .level.on.auto     { color: var(--green);  background: var(--green-bg);  border-color: var(--green); }
+  .level.on.approval { color: var(--yellow); background: var(--yellow-bg); border-color: var(--yellow); }
+  .level.on.never    { color: var(--red);    background: var(--red-bg);    border-color: var(--red); }
+
+  .row-remove {
+    width: 30px; height: 30px; border-radius: 8px;
+    background: var(--surface); border: 1px solid var(--border);
+    color: var(--text-dim); font-size: 16px; cursor: pointer;
+    transition: all 0.15s; display: flex; align-items: center; justify-content: center;
+  }
+  .row-remove:hover { color: var(--red); border-color: var(--red); }
+
+  .row-add {
+    font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 600;
+    padding: 9px 14px; border-radius: 8px; align-self: flex-start;
+    border: 1px dashed var(--border-hi); background: transparent;
+    color: var(--text-dim); cursor: pointer; transition: all 0.2s; margin-top: 4px;
+  }
+  .row-add:hover { color: var(--purple); border-color: var(--purple); }
+
+  .tier-group { display: flex; gap: 8px; flex-wrap: wrap; }
+  .tier {
+    font-family: inherit; font-size: 12px; font-weight: 600;
+    padding: 8px 14px; border-radius: 18px;
+    border: 1px solid var(--border); background: var(--surface2);
+    color: var(--text-dim); cursor: pointer; transition: all 0.15s;
+  }
+  .tier:hover { border-color: var(--border-hi); color: var(--text); }
+  .tier.on.minimal { color: var(--green);  background: var(--green-bg);  border-color: var(--green); }
+  .tier.on.limited { color: var(--yellow); background: var(--yellow-bg); border-color: var(--yellow); }
+  .tier.on.high    { color: var(--red);    background: var(--red-bg);    border-color: var(--red); }
+
+  .actions { display: flex; gap: 10px; margin-top: 24px; justify-content: center; flex-wrap: wrap; }
+  .btn {
+    font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600;
+    padding: 10px 18px; border-radius: 8px; border: 1px solid var(--border);
+    background: var(--surface2); color: var(--text); cursor: pointer; transition: all 0.2s;
+  }
+  .btn:hover { border-color: var(--purple); color: #fff; }
+  .btn.primary {
+    border-color: rgba(160,123,232,0.4); color: var(--purple);
+  }
+  .btn.primary:hover { border-color: var(--purple); color: #fff; background: var(--purple-bg); }
+
+  .repo-foot {
+    text-align: center; margin-top: 20px; font-size: 13px; color: var(--text-dim);
+  }
+  .repo-foot code {
+    font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--purple);
+  }
+
+  .saved-toast {
+    position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(60px);
+    background: var(--purple); color: #fff; font-size: 13px; font-weight: 600;
+    padding: 10px 24px; border-radius: 8px; opacity: 0; transition: all 0.3s;
+    pointer-events: none; z-index: 100;
+  }
+  .saved-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+</style>
+</head>
+<body>
+
+<div class="page">
+  <div class="header">
+    <div class="badge">Module 5 — Applied Work</div>
+    <h1>Governance Policy Drafter</h1>
+    <p>Five sections your CISO wouldn't redline on sight, plus an optional agent topology. Output mirrors <code>05-the-guardrails/compounding-system.md → Governance Policy + Agent Topology</code>.</p>
+    <div class="header-actions">
+      <button type="button" class="btn-load" onclick="loadExample()">Load worked example as starter</button>
+    </div>
+    <div class="product-input-wrap">
+      <label>Policy for</label>
+      <input type="text" id="product" placeholder="Product / version — e.g. SupportCopilot v1.2" autocomplete="off">
+    </div>
+  </div>
+
+  <div class="summary">
+    <div class="summary-top">
+      <div class="summary-count" id="countDisplay">0<span> / 5 sections</span></div>
+      <div class="stage-tag empty" id="stageTag">Empty</div>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+  </div>
+
+  <!-- 1. Scope -->
+  <div class="card">
+    <div class="card-head">
+      <div class="card-icon" style="background:var(--blue);">🎯</div>
+      <div><div class="card-title">Scope</div><div class="card-sub">What this policy covers — and what it does not</div></div>
+    </div>
+    <div class="card-body">
+      <div class="tip"><strong>💡 Tip.</strong> Be specific about what's IN. Use the exclusion line so reviewers don't wonder "what about X?"</div>
+      <div class="field">
+        <label>What this policy covers</label>
+        <textarea id="scope-covers" placeholder="e.g. AI features in the SupportCopilot product line — automated reply drafting, routing, and resolution scoring."></textarea>
+      </div>
+      <div class="field">
+        <label>What it excludes <span class="opt">(optional, but recommended)</span></label>
+        <textarea id="scope-excludes" placeholder="e.g. Internal-only analytics dashboards (covered by separate data-team policy)."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Autonomy Boundaries -->
+  <div class="card">
+    <div class="card-head">
+      <div class="card-icon" style="background:var(--purple);">⚙️</div>
+      <div><div class="card-title">Autonomy boundaries</div><div class="card-sub">For each decision: who gets to make it?</div></div>
+    </div>
+    <div class="card-body">
+      <div class="tip"><strong>💡 Tip.</strong> Three levels: <span style="color:var(--green);">🟢 auto</span>, <span style="color:var(--yellow);">🟡 human approval</span>, <span style="color:var(--red);">🔴 never auto</span>. The hardest line is human-approval <em>even when AI confidence is high</em> — that's how you avoid Air Canada.</div>
+      <div class="row-list" id="autonomy-list"></div>
+      <button type="button" class="row-add" id="autonomy-add">+ Add decision</button>
+    </div>
+  </div>
+
+  <!-- 3. Escalation Triggers -->
+  <div class="card">
+    <div class="card-head">
+      <div class="card-icon" style="background:var(--yellow); color:#000;">🚦</div>
+      <div><div class="card-title">Escalation triggers</div><div class="card-sub">Conditions that route to a human, every time</div></div>
+    </div>
+    <div class="card-body">
+      <div class="tip"><strong>💡 Tip.</strong> Triggers must be measurable. "Customer is unhappy" isn't a trigger. "Customer message contains refund / legal / distressed language" is.</div>
+      <div class="field">
+        <label>List your triggers (numbered or bulleted)</label>
+        <textarea id="escalation-text" style="min-height:96px;" placeholder="(1) Confidence &lt; 70% on response.&#10;(2) Customer message flagged legal, medical, or distressed.&#10;(3) Any reply mentioning refund, credit, or policy exception.&#10;(4) Customer requests human.&#10;(5) ≥3 turns in one conversation."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. Audit Cadence -->
+  <div class="card">
+    <div class="card-head">
+      <div class="card-icon" style="background:var(--green);">🔁</div>
+      <div><div class="card-title">Audit cadence</div><div class="card-sub">Stack cadences — each row gets a named owner</div></div>
+    </div>
+    <div class="card-body">
+      <div class="tip"><strong>💡 Tip.</strong> Continuous catches drift, periodic catches systemic issues. No row without an owner — "the team" is not an owner.</div>
+      <div class="row-list" id="audit-list"></div>
+      <button type="button" class="row-add" id="audit-add">+ Add cadence</button>
+    </div>
+  </div>
+
+  <!-- 5. Regulatory Exposure -->
+  <div class="card">
+    <div class="card-head">
+      <div class="card-icon" style="background:var(--red);">⚖️</div>
+      <div><div class="card-title">Regulatory exposure</div><div class="card-sub">EU AI Act · GDPR · sector regimes</div></div>
+    </div>
+    <div class="card-body">
+      <div class="tip"><strong>💡 Tip.</strong> Name the regimes, then name the controls. Reviewers care more about controls than the risk tier alone.</div>
+      <div class="field">
+        <label>Regimes that apply</label>
+        <textarea id="reg-regimes" placeholder="e.g. EU AI Act, GDPR, SOC 2 (or HIPAA / PCI / sector-specific if applicable)"></textarea>
+      </div>
+      <div class="field">
+        <label>Risk tier (EU AI Act framing)</label>
+        <div class="tier-group" id="tier-group">
+          <button type="button" class="tier" data-tier="minimal">🟢 minimal</button>
+          <button type="button" class="tier" data-tier="limited">🟡 limited</button>
+          <button type="button" class="tier" data-tier="high">🔴 high</button>
+        </div>
+      </div>
+      <div class="field">
+        <label>Controls in place</label>
+        <textarea id="reg-controls" placeholder="e.g. Data minimization in prompts · No training on customer PII · Log retention controls · DPIA on file"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. Agent Topology (optional) -->
+  <div class="card optional">
+    <div class="card-head">
+      <div class="card-icon" style="background:var(--purple);">🤖</div>
+      <div><div class="card-title">Agent topology <span class="opt-pill">Optional</span></div><div class="card-sub">Only if you ship agents — what each can do, what it can't, who approves</div></div>
+    </div>
+    <div class="card-body">
+      <div class="tip"><strong>💡 Tip.</strong> Skip if you're not shipping agents. If you are: one bullet per agent. <em>"Can do X. Can't do Y. Approval owner: Z."</em></div>
+      <div class="field">
+        <label>Agents and their boundaries</label>
+        <textarea id="agent-topology" style="min-height:100px;" placeholder="e.g.&#10;Reply Drafter — can draft replies; cannot send. Approval: routing agent.&#10;Routing Agent — can assign queue + send under $0-risk; cannot send remedy replies. Approval: human reviewer.&#10;Closer Agent — can close after explicit human sign-off only."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button type="button" class="btn" onclick="resetAll()">Reset</button>
+    <button type="button" class="btn primary" onclick="copyPolicy()">Copy Governance Policy</button>
+  </div>
+  <div class="repo-foot">
+    Paste into <code>05-the-guardrails/compounding-system.md</code> → Governance Policy + Agent Topology
+  </div>
+</div>
+
+<div class="saved-toast" id="toast">Saved</div>
+
+<script>
+const KEY = 'aps-m5-governance-policy';
+const $ = id => document.getElementById(id);
+
+const AUTONOMY_LEVELS = ['auto', 'approval', 'never'];
+const AUDIT_CADENCES  = ['real-time', 'daily', 'weekly', 'monthly', 'quarterly'];
+const TIERS           = ['minimal', 'limited', 'high'];
+
+const LEVEL_LABEL = {
+  auto:     'auto',
+  approval: 'human approval required',
+  never:    'never auto'
+};
+
+const EXAMPLE = {
+  product: 'SupportCopilot v1.2',
+  scope: {
+    covers:   'AI features in the SupportCopilot product line — automated reply drafting, routing, and resolution scoring.',
+    excludes: 'Internal-only analytics dashboards (covered by separate data-team policy).'
+  },
+  autonomy: [
+    { decision: 'Drafting automated replies',                                                                  level: 'auto'     },
+    { decision: 'Sending replies under $0 risk (FAQ, account info)',                                            level: 'auto'     },
+    { decision: 'Sending replies with promised remedies (refunds, credits, escalations) — even if confidence > 95%', level: 'approval' },
+    { decision: 'Closing tickets without reply',                                                                level: 'never'    }
+  ],
+  escalation: '(1) Confidence < 70% on response.\n(2) Customer message flagged legal, medical, or distressed.\n(3) Any reply mentioning refund, credit, or policy exception.\n(4) Customer requests human contact.\n(5) Three or more turns in a single conversation.',
+  audit: [
+    { cadence: 'weekly',    what: 'Automated eval against golden dataset', owner: 'PM: Sam' },
+    { cadence: 'monthly',   what: 'Human review of 50 random conversations + all escalation cases', owner: 'Legal: Priya' },
+    { cadence: 'quarterly', what: 'Full policy review with security + legal', owner: 'CTO sign-off' }
+  ],
+  regulatory: {
+    regimes:  'EU AI Act, GDPR, SOC 2',
+    tier:     'limited',
+    controls: 'Data minimization in prompts · No training on customer PII · SOC 2 log retention controls in place · DPIA on file.'
+  },
+  agentTopology: ''
+};
+
+let state = freshState();
+
+function freshState() {
+  return {
+    product: '',
+    scope: { covers: '', excludes: '' },
+    autonomy: [
+      { decision: '', level: '' },
+      { decision: '', level: '' },
+      { decision: '', level: '' }
+    ],
+    escalation: '',
+    audit: [
+      { cadence: '', what: '', owner: '' },
+      { cadence: '', what: '', owner: '' },
+      { cadence: '', what: '', owner: '' }
+    ],
+    regulatory: { regimes: '', tier: '', controls: '' },
+    agentTopology: ''
+  };
+}
+
+const isFilled = s => !!(s && s.trim());
+const scopeFilled       = () => isFilled(state.scope.covers) || isFilled(state.scope.excludes);
+const autonomyFilled    = () => state.autonomy.some(r => isFilled(r.decision) && r.level);
+const escalationFilled  = () => isFilled(state.escalation);
+const auditFilled       = () => state.audit.some(r => r.cadence && (isFilled(r.what) || isFilled(r.owner)));
+const regulatoryFilled  = () => isFilled(state.regulatory.regimes) || isFilled(state.regulatory.controls) || !!state.regulatory.tier;
+
+function fieldsCount() {
+  let n = 0;
+  if (scopeFilled())      n++;
+  if (autonomyFilled())   n++;
+  if (escalationFilled()) n++;
+  if (auditFilled())      n++;
+  if (regulatoryFilled()) n++;
+  return n;
+}
+
+function stageBand(n) {
+  if (n === 0) return { cls: 'empty',  label: 'Empty',         pct: 0,                color: 'var(--red)'    };
+  if (n <= 2)  return { cls: 'draft',  label: 'Drafting',      pct: (n / 5) * 100,    color: 'var(--yellow)' };
+  if (n <= 4)  return { cls: 'shaped', label: 'Shaping',       pct: (n / 5) * 100,    color: 'var(--blue)'   };
+  return       { cls: 'ready',  label: 'Policy ready',   pct: 100,              color: 'var(--green)'  };
+}
+
+function refreshUI() {
+  const n = fieldsCount();
+  $('countDisplay').innerHTML = `${n}<span> / 5 sections</span>`;
+  const b = stageBand(n);
+  const tag = $('stageTag');
+  tag.className = 'stage-tag ' + b.cls;
+  tag.textContent = b.label;
+  const fill = $('progressFill');
+  fill.style.width = b.pct + '%';
+  fill.style.background = b.color;
+
+  document.querySelectorAll('#tier-group .tier').forEach(el => {
+    el.classList.toggle('on', el.dataset.tier === state.regulatory.tier);
+    TIERS.forEach(t => el.classList.toggle(t, el.dataset.tier === t));
+  });
+}
+
+function save() {
+  localStorage.setItem(KEY, JSON.stringify(state));
+  showToast('Auto-saved');
+}
+
+function load() {
+  try {
+    const d = JSON.parse(localStorage.getItem(KEY));
+    if (d && typeof d === 'object') {
+      state.product = typeof d.product === 'string' ? d.product : '';
+      if (d.scope) {
+        state.scope.covers   = typeof d.scope.covers   === 'string' ? d.scope.covers   : '';
+        state.scope.excludes = typeof d.scope.excludes === 'string' ? d.scope.excludes : '';
+      }
+      if (Array.isArray(d.autonomy)) {
+        state.autonomy = d.autonomy.map(r => ({
+          decision: typeof r.decision === 'string' ? r.decision : '',
+          level:    AUTONOMY_LEVELS.includes(r.level) ? r.level : ''
+        }));
+        while (state.autonomy.length < 3) state.autonomy.push({ decision: '', level: '' });
+      }
+      if (typeof d.escalation === 'string') state.escalation = d.escalation;
+      if (Array.isArray(d.audit)) {
+        state.audit = d.audit.map(r => ({
+          cadence: AUDIT_CADENCES.includes(r.cadence) ? r.cadence : '',
+          what:    typeof r.what  === 'string' ? r.what  : '',
+          owner:   typeof r.owner === 'string' ? r.owner : ''
+        }));
+        while (state.audit.length < 3) state.audit.push({ cadence: '', what: '', owner: '' });
+      }
+      if (d.regulatory) {
+        state.regulatory.regimes  = typeof d.regulatory.regimes  === 'string' ? d.regulatory.regimes  : '';
+        state.regulatory.tier     = TIERS.includes(d.regulatory.tier) ? d.regulatory.tier : '';
+        state.regulatory.controls = typeof d.regulatory.controls === 'string' ? d.regulatory.controls : '';
+      }
+      if (typeof d.agentTopology === 'string') state.agentTopology = d.agentTopology;
+    }
+  } catch (e) {}
+  renderAll();
+  refreshUI();
+}
+
+function renderAll() {
+  $('product').value          = state.product;
+  $('scope-covers').value     = state.scope.covers;
+  $('scope-excludes').value   = state.scope.excludes;
+  $('escalation-text').value  = state.escalation;
+  $('reg-regimes').value      = state.regulatory.regimes;
+  $('reg-controls').value     = state.regulatory.controls;
+  $('agent-topology').value   = state.agentTopology;
+  renderAutonomyRows();
+  renderAuditRows();
+}
+
+function renderAutonomyRows() {
+  const list = $('autonomy-list');
+  list.innerHTML = '';
+  state.autonomy.forEach((r, idx) => {
+    const row = document.createElement('div');
+    row.className = 'row autonomy-row';
+    row.innerHTML = `
+      <input type="text" class="autonomy-decision" data-idx="${idx}" placeholder="Decision — e.g. Drafting automated replies" value="${escAttr(r.decision)}">
+      <div class="level-group" data-idx="${idx}">
+        <button type="button" class="level auto ${r.level==='auto'?'on':''}" data-level="auto">🟢 auto</button>
+        <button type="button" class="level approval ${r.level==='approval'?'on':''}" data-level="approval">🟡 human approval</button>
+        <button type="button" class="level never ${r.level==='never'?'on':''}" data-level="never">🔴 never auto</button>
+      </div>
+      <button type="button" class="row-remove" data-remove-autonomy="${idx}" title="Remove">×</button>
+    `;
+    list.appendChild(row);
+  });
+}
+
+function renderAuditRows() {
+  const list = $('audit-list');
+  list.innerHTML = '';
+  state.audit.forEach((r, idx) => {
+    const row = document.createElement('div');
+    row.className = 'row audit-row';
+    const options = ['<option value="">cadence…</option>']
+      .concat(AUDIT_CADENCES.map(c => `<option value="${c}" ${r.cadence===c?'selected':''}>${c}</option>`))
+      .join('');
+    row.innerHTML = `
+      <select class="audit-cadence" data-idx="${idx}">${options}</select>
+      <input type="text" class="audit-what"  data-idx="${idx}" placeholder="What we review (e.g. eval vs. golden dataset)" value="${escAttr(r.what)}">
+      <input type="text" class="audit-owner" data-idx="${idx}" placeholder="Owner (e.g. PM: Sam)" value="${escAttr(r.owner)}">
+      <button type="button" class="row-remove" data-remove-audit="${idx}" title="Remove">×</button>
+    `;
+    list.appendChild(row);
+  });
+}
+
+function escAttr(s) { return (s || '').replace(/"/g, '&quot;'); }
+
+/* Wire top-level inputs */
+$('product').addEventListener('input', e => { state.product = e.target.value; save(); });
+$('scope-covers').addEventListener('input', e => { state.scope.covers = e.target.value; refreshUI(); save(); });
+$('scope-excludes').addEventListener('input', e => { state.scope.excludes = e.target.value; refreshUI(); save(); });
+$('escalation-text').addEventListener('input', e => { state.escalation = e.target.value; refreshUI(); save(); });
+$('reg-regimes').addEventListener('input', e => { state.regulatory.regimes = e.target.value; refreshUI(); save(); });
+$('reg-controls').addEventListener('input', e => { state.regulatory.controls = e.target.value; refreshUI(); save(); });
+$('agent-topology').addEventListener('input', e => { state.agentTopology = e.target.value; save(); });
+
+/* Tier buttons */
+document.querySelectorAll('#tier-group .tier').forEach(btn => {
+  btn.addEventListener('click', () => {
+    state.regulatory.tier = (state.regulatory.tier === btn.dataset.tier) ? '' : btn.dataset.tier;
+    refreshUI(); save();
+  });
+});
+
+/* Autonomy list: delegated event handling */
+$('autonomy-list').addEventListener('input', e => {
+  if (e.target.matches('.autonomy-decision')) {
+    state.autonomy[+e.target.dataset.idx].decision = e.target.value;
+    refreshUI(); save();
+  }
+});
+$('autonomy-list').addEventListener('click', e => {
+  const level = e.target.closest('.level');
+  if (level) {
+    const idx = +level.parentElement.dataset.idx;
+    const val = level.dataset.level;
+    state.autonomy[idx].level = (state.autonomy[idx].level === val) ? '' : val;
+    renderAutonomyRows(); refreshUI(); save();
+    return;
+  }
+  const rm = e.target.closest('[data-remove-autonomy]');
+  if (rm) {
+    state.autonomy.splice(+rm.dataset.removeAutonomy, 1);
+    if (state.autonomy.length === 0) state.autonomy.push({ decision: '', level: '' });
+    renderAutonomyRows(); refreshUI(); save();
+  }
+});
+$('autonomy-add').addEventListener('click', () => {
+  state.autonomy.push({ decision: '', level: '' });
+  renderAutonomyRows(); refreshUI(); save();
+});
+
+/* Audit list: delegated event handling */
+$('audit-list').addEventListener('input', e => {
+  const idx = +e.target.dataset.idx;
+  if (isNaN(idx)) return;
+  if (e.target.matches('.audit-what'))  state.audit[idx].what  = e.target.value;
+  if (e.target.matches('.audit-owner')) state.audit[idx].owner = e.target.value;
+  refreshUI(); save();
+});
+$('audit-list').addEventListener('change', e => {
+  if (e.target.matches('.audit-cadence')) {
+    state.audit[+e.target.dataset.idx].cadence = e.target.value;
+    refreshUI(); save();
+  }
+});
+$('audit-list').addEventListener('click', e => {
+  const rm = e.target.closest('[data-remove-audit]');
+  if (rm) {
+    state.audit.splice(+rm.dataset.removeAudit, 1);
+    if (state.audit.length === 0) state.audit.push({ cadence: '', what: '', owner: '' });
+    renderAuditRows(); refreshUI(); save();
+  }
+});
+$('audit-add').addEventListener('click', () => {
+  state.audit.push({ cadence: '', what: '', owner: '' });
+  renderAuditRows(); refreshUI(); save();
+});
+
+function resetAll() {
+  state = freshState();
+  renderAll();
+  localStorage.removeItem(KEY);
+  refreshUI();
+  showToast('Reset');
+}
+
+function loadExample() {
+  state = {
+    product: EXAMPLE.product,
+    scope: { ...EXAMPLE.scope },
+    autonomy: EXAMPLE.autonomy.map(r => ({ ...r })),
+    escalation: EXAMPLE.escalation,
+    audit: EXAMPLE.audit.map(r => ({ ...r })),
+    regulatory: { ...EXAMPLE.regulatory },
+    agentTopology: EXAMPLE.agentTopology
+  };
+  renderAll();
+  refreshUI();
+  save();
+  showToast('Worked example loaded — edit to your product');
+}
+
+function buildPolicy() {
+  const lines = [];
+  const product = state.product.trim();
+  if (product) lines.push(`<!-- Governance Policy — ${product} -->`, '');
+  lines.push('## Governance Policy', '');
+
+  /* Scope */
+  let scope = state.scope.covers.trim() || '_(not set)_';
+  if (state.scope.excludes.trim()) {
+    scope += ` Excludes: ${state.scope.excludes.trim()}`;
+  }
+  lines.push(`**Scope:** ${scope}`, '');
+
+  /* Autonomy */
+  const autoRows = state.autonomy.filter(r => isFilled(r.decision) && r.level);
+  if (autoRows.length) {
+    const parts = autoRows.map(r => `${r.decision.trim()} — ${LEVEL_LABEL[r.level]}`);
+    lines.push(`**Autonomy boundaries:** ${parts.join('. ')}.`);
+  } else {
+    lines.push('**Autonomy boundaries:** _(not set)_');
+  }
+  lines.push('');
+
+  /* Escalation */
+  const esc = state.escalation.trim();
+  if (esc) {
+    const oneLine = esc.replace(/\s*\n+\s*/g, ' ').trim();
+    lines.push(`**Escalation triggers:** ${oneLine}`);
+  } else {
+    lines.push('**Escalation triggers:** _(not set)_');
+  }
+  lines.push('');
+
+  /* Audit cadence */
+  const auditRows = state.audit.filter(r => r.cadence && (isFilled(r.what) || isFilled(r.owner)));
+  if (auditRows.length) {
+    const parts = auditRows.map(r => {
+      const cadence = r.cadence.charAt(0).toUpperCase() + r.cadence.slice(1);
+      const what = r.what.trim();
+      const owner = r.owner.trim();
+      let s = `${cadence}`;
+      if (what)  s += ` — ${what}`;
+      if (owner) s += ` (${owner})`;
+      return s;
+    });
+    lines.push(`**Audit cadence:** ${parts.join('. ')}.`);
+  } else {
+    lines.push('**Audit cadence:** _(not set)_');
+  }
+  lines.push('');
+
+  /* Regulatory exposure */
+  const regParts = [];
+  if (isFilled(state.regulatory.regimes))  regParts.push(state.regulatory.regimes.trim());
+  if (state.regulatory.tier)               regParts.push(`Risk tier: ${state.regulatory.tier}`);
+  if (isFilled(state.regulatory.controls)) regParts.push(`Controls: ${state.regulatory.controls.trim()}`);
+  lines.push(`**Regulatory exposure (EU AI Act / other):** ${regParts.length ? regParts.join('. ') + '.' : '_(not set)_'}`);
+  lines.push('');
+
+  /* Agent Topology */
+  lines.push('## Agent Topology', '');
+  const at = state.agentTopology.trim();
+  lines.push(at ? at : '_Not shipping agents this version._');
+  lines.push('');
+
+  return lines.join('\n');
+}
+
+function copyPolicy() {
+  navigator.clipboard.writeText(buildPolicy()).then(() => showToast('Policy copied — paste into your repo'));
+}
+
+function showToast(msg) {
+  const t = $('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 1800);
+}
+
+load();
+</script>
+</body>
+</html>
