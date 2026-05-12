@@ -262,7 +262,7 @@
 
       <div class="freeze-test">
         <div class="ft-label">🧪 The Freeze Test</div>
-        <div class="ft-q" id="freezeQ">Freeze your model for 12 months. Do you still win?</div>
+        <div class="ft-q" id="freezeQ">Freeze your model for 3 months — about one frontier cycle. Do you still win?</div>
         <div class="ft-a" id="freezeA">If yes, you're not compounding — your moat is something else (distribution, brand, integrations). That's fine, but call it what it is.</div>
       </div>
     </div>
@@ -517,27 +517,28 @@ function diagnosticOneLiner(d) {
 }
 
 function freezeTestText(d) {
+  const q = 'Freeze your model for 3 months — about one frontier cycle. Do you still win?';
   if (d.compounds === 0) {
     return {
-      q: 'Freeze your model for 12 months. Do you still win?',
-      a: '<strong>Probably yes — and that\'s the problem.</strong> Zero loops compounding means your product would survive a year-long model freeze. Whatever advantage you have isn\'t coming from intelligence that improves with use. Name your real moat (distribution, brand, integrations) or build at least one real learning loop.'
+      q,
+      a: '<strong>Probably yes — and that\'s the problem.</strong> Zero loops compounding means your product would survive an entire frontier cycle without getting smarter. Whatever advantage you have isn\'t coming from intelligence that improves with use — and the next frontier release will quietly close the gap. Name your real moat (distribution, brand, integrations) or build at least one real learning loop.'
     };
   }
   if (d.broken > 0) {
     return {
-      q: 'Freeze your model for 12 months. Do you still win?',
-      a: `<strong>Maybe.</strong> ${d.compounds} loop${d.compounds === 1 ? '' : 's'} compound${d.compounds === 1 ? 's' : ''} but ${d.broken} ${d.broken === 1 ? 'is' : 'are'} broken. The broken loop is leaking the advantage faster than the working ones can build it. Fix the broken loop first.`
+      q,
+      a: `<strong>Maybe.</strong> ${d.compounds} loop${d.compounds === 1 ? '' : 's'} compound${d.compounds === 1 ? 's' : ''} but ${d.broken} ${d.broken === 1 ? 'is' : 'are'} broken. The broken loop is leaking advantage faster than the working ones can build it — and 3 months is enough for a competitor on the new frontier to overtake you. Fix the broken loop first.`
     };
   }
   if (d.compounds >= 2) {
     return {
-      q: 'Freeze your model for 12 months. Do you still win?',
-      a: `<strong>No — and that's the goal.</strong> ${d.compounds} loops compounding means a 12-month freeze visibly hurts. Each user makes the next one smarter. Document these in your repo — this is what a defensible AI strategy looks like.`
+      q,
+      a: `<strong>No — and that's the goal.</strong> ${d.compounds} loops compounding means a frontier-cycle freeze visibly hurts. Each user makes the next one smarter, in ways the frontier can't replicate. Document these in your repo — this is what a defensible AI strategy looks like.`
     };
   }
   return {
-    q: 'Freeze your model for 12 months. Do you still win?',
-    a: `<strong>Maybe.</strong> ${d.compounds} loop is compounding, but the rest just scale. Single-loop compounding is fragile — one channel break kills the moat. Aim for two or three.`
+    q,
+    a: `<strong>Maybe.</strong> ${d.compounds} loop is compounding, but the rest just scale. Single-loop compounding is fragile — one channel break or one frontier shift kills the moat. Aim for two or three.`
   };
 }
 
