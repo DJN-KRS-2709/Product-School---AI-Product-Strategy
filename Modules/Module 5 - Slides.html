@@ -889,31 +889,41 @@ section.skipped { display: none; }
   <div class="inner">
     <div class="demo-tag tag-exercise">Applied Work</div>
     <h2>Draft Your Governance Policy</h2>
-    <div class="subtitle">One page your CISO wouldn't redline on sight.</div>
+    <div class="subtitle">One page your CISO wouldn't redline on sight. <span style="color:#6ee7b7; font-size:13px;">Click any tile for a worked example — SupportCopilot v1.2.</span></div>
     <div style="text-align:center; margin:10px 0 4px;">
       <a href="M5 - AI Maturity Scorer.html" target="_blank" style="display:inline-block; background:#1241B0; color:#fff; text-decoration:none; font-size:14px; font-weight:800; padding:10px 18px; border-radius:999px; box-shadow:0 8px 24px rgba(18,65,176,0.35);">Open AI Maturity Scorer ↗</a>
       <div style="font-size:12px; color:#8899bb; margin-top:6px;">Scores you on five responsible-AI dimensions and shows your trust ladder position</div>
     </div>
     <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:18px 0 10px;">
-      <div style="background:rgba(96,165,250,0.06); border:1px solid rgba(96,165,250,0.18); border-radius:10px; padding:14px 16px;">
+      <div class="gov-tile" onclick="toggleGov(this)" style="background:rgba(96,165,250,0.06); border:1px solid rgba(96,165,250,0.18); border-radius:10px; padding:14px 16px; cursor:pointer; position:relative; transition:background 0.2s, border-color 0.2s;" onmouseover="this.style.background='rgba(96,165,250,0.10)';" onmouseout="this.style.background='rgba(96,165,250,0.06)';">
+        <div class="gov-badge" style="position:absolute; top:8px; right:10px; font-size:10px; color:#60a5fa; opacity:0.7; font-family:'IBM Plex Mono',monospace;">💡 example</div>
         <div style="font-size:12px; font-weight:800; color:#60a5fa; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:6px;">Scope</div>
-        <div style="font-size:12px; color:#8899bb; line-height:1.85;">What this policy covers: <span style="color:#555; font-family:'IBM Plex Mono',monospace;">_____</span></div>
+        <div data-role="hint" style="font-size:12px; color:#8899bb; line-height:1.85;">What this policy covers: <span style="color:#555; font-family:'IBM Plex Mono',monospace;">_____</span></div>
+        <div data-role="example" style="display:none; font-size:12px; color:#d8def0; line-height:1.6;">AI features in the <strong>SupportCopilot</strong> product line — automated reply drafting, routing, and resolution scoring. <span style="color:#8899bb;">Excludes internal-only analytics dashboards (covered by separate data-team policy).</span></div>
       </div>
-      <div style="background:rgba(167,139,250,0.06); border:1px solid rgba(167,139,250,0.18); border-radius:10px; padding:14px 16px;">
+      <div class="gov-tile" onclick="toggleGov(this)" style="background:rgba(167,139,250,0.06); border:1px solid rgba(167,139,250,0.18); border-radius:10px; padding:14px 16px; cursor:pointer; position:relative; transition:background 0.2s, border-color 0.2s;" onmouseover="this.style.background='rgba(167,139,250,0.10)';" onmouseout="this.style.background='rgba(167,139,250,0.06)';">
+        <div class="gov-badge" style="position:absolute; top:8px; right:10px; font-size:10px; color:#a78bfa; opacity:0.7; font-family:'IBM Plex Mono',monospace;">💡 example</div>
         <div style="font-size:12px; font-weight:800; color:#a78bfa; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:6px;">Autonomy boundaries</div>
-        <div style="font-size:12px; color:#8899bb; line-height:1.85;">OK solo: <span style="color:#555; font-family:'IBM Plex Mono',monospace;">_____</span> · Needs human: <span style="color:#555; font-family:'IBM Plex Mono',monospace;">_____</span></div>
+        <div data-role="hint" style="font-size:12px; color:#8899bb; line-height:1.85;">OK solo: <span style="color:#555; font-family:'IBM Plex Mono',monospace;">_____</span> · Needs human: <span style="color:#555; font-family:'IBM Plex Mono',monospace;">_____</span></div>
+        <div data-role="example" style="display:none; font-size:12px; color:#d8def0; line-height:1.6;">Drafting replies — <strong style="color:#34d399;">auto</strong>. Sending replies under $0 risk (FAQ, account info) — <strong style="color:#34d399;">auto</strong>. Sending replies with promised remedies (refunds, credits, escalations) — <strong style="color:#fbbf24;">human approval required</strong>, even if AI confidence &gt; 95%. Closing tickets without reply — <strong style="color:#f87171;">never auto</strong>.</div>
       </div>
-      <div style="background:rgba(251,191,36,0.06); border:1px solid rgba(251,191,36,0.18); border-radius:10px; padding:14px 16px;">
+      <div class="gov-tile" onclick="toggleGov(this)" style="background:rgba(251,191,36,0.06); border:1px solid rgba(251,191,36,0.18); border-radius:10px; padding:14px 16px; cursor:pointer; position:relative; transition:background 0.2s, border-color 0.2s;" onmouseover="this.style.background='rgba(251,191,36,0.10)';" onmouseout="this.style.background='rgba(251,191,36,0.06)';">
+        <div class="gov-badge" style="position:absolute; top:8px; right:10px; font-size:10px; color:#fbbf24; opacity:0.7; font-family:'IBM Plex Mono',monospace;">💡 example</div>
         <div style="font-size:12px; font-weight:800; color:#fbbf24; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:6px;">Escalation triggers</div>
-        <div style="font-size:12px; color:#8899bb; line-height:1.85;">When humans must enter: <span style="color:#555; font-family:'IBM Plex Mono',monospace;">_____</span></div>
+        <div data-role="hint" style="font-size:12px; color:#8899bb; line-height:1.85;">When humans must enter: <span style="color:#555; font-family:'IBM Plex Mono',monospace;">_____</span></div>
+        <div data-role="example" style="display:none; font-size:12px; color:#d8def0; line-height:1.6;"><strong>(1)</strong> Confidence &lt; 70%. <strong>(2)</strong> Customer message flagged legal, medical, or distressed. <strong>(3)</strong> Any reply mentioning refund, credit, or policy exception. <strong>(4)</strong> Customer requests human. <strong>(5)</strong> ≥3 turns in one conversation.</div>
       </div>
-      <div style="background:rgba(52,211,153,0.06); border:1px solid rgba(52,211,153,0.18); border-radius:10px; padding:14px 16px;">
+      <div class="gov-tile" onclick="toggleGov(this)" style="background:rgba(52,211,153,0.06); border:1px solid rgba(52,211,153,0.18); border-radius:10px; padding:14px 16px; cursor:pointer; position:relative; transition:background 0.2s, border-color 0.2s;" onmouseover="this.style.background='rgba(52,211,153,0.10)';" onmouseout="this.style.background='rgba(52,211,153,0.06)';">
+        <div class="gov-badge" style="position:absolute; top:8px; right:10px; font-size:10px; color:#34d399; opacity:0.7; font-family:'IBM Plex Mono',monospace;">💡 example</div>
         <div style="font-size:12px; font-weight:800; color:#34d399; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:6px;">Audit cadence</div>
-        <div style="font-size:12px; color:#8899bb; line-height:1.85;">How often we review: <span style="color:#555; font-family:'IBM Plex Mono',monospace;">weekly / monthly / quarterly</span></div>
+        <div data-role="hint" style="font-size:12px; color:#8899bb; line-height:1.85;">How often we review: <span style="color:#555; font-family:'IBM Plex Mono',monospace;">real-time / daily / weekly / monthly / quarterly</span></div>
+        <div data-role="example" style="display:none; font-size:12px; color:#d8def0; line-height:1.6;"><strong>Weekly</strong> — automated eval vs. golden dataset (PM: Sam). <strong>Monthly</strong> — human review of 50 random conversations + all escalations (Legal: Priya). <strong>Quarterly</strong> — full policy review with security + legal (CTO sign-off).</div>
       </div>
-      <div style="grid-column:1 / span 2; background:rgba(248,113,113,0.06); border:1px solid rgba(248,113,113,0.18); border-radius:10px; padding:14px 16px;">
+      <div class="gov-tile" onclick="toggleGov(this)" style="grid-column:1 / span 2; background:rgba(248,113,113,0.06); border:1px solid rgba(248,113,113,0.18); border-radius:10px; padding:14px 16px; cursor:pointer; position:relative; transition:background 0.2s, border-color 0.2s;" onmouseover="this.style.background='rgba(248,113,113,0.10)';" onmouseout="this.style.background='rgba(248,113,113,0.06)';">
+        <div class="gov-badge" style="position:absolute; top:8px; right:10px; font-size:10px; color:#f87171; opacity:0.7; font-family:'IBM Plex Mono',monospace;">💡 example</div>
         <div style="font-size:12px; font-weight:800; color:#f87171; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:6px;">Regulatory exposure (EU AI Act / GDPR / sector)</div>
-        <div style="font-size:12px; color:#8899bb; line-height:1.85;">Regimes that apply: <span style="color:#555; font-family:'IBM Plex Mono',monospace;">_____</span> · Risk tier: <span style="color:#555; font-family:'IBM Plex Mono',monospace;">minimal / limited / high</span></div>
+        <div data-role="hint" style="font-size:12px; color:#8899bb; line-height:1.85;">Regimes that apply: <span style="color:#555; font-family:'IBM Plex Mono',monospace;">_____</span> · Risk tier: <span style="color:#555; font-family:'IBM Plex Mono',monospace;">minimal / limited / high</span></div>
+        <div data-role="example" style="display:none; font-size:12px; color:#d8def0; line-height:1.6;"><strong>EU AI Act</strong> — limited risk (customer service is non-prohibited). <strong>GDPR</strong> — applies; data minimization in prompts, no training on customer PII. <strong>SOC 2</strong> controls in place for log retention.</div>
       </div>
     </div>
     <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:10px; padding:10px 14px;">
@@ -921,6 +931,26 @@ section.skipped { display: none; }
     </div>
     <p style="font-size:13px; text-align:center; margin-top:8px;"><span style="color:#34d399;">📂</span> <strong style="color:#6ee7b7;">Go to your repo →</strong> <code style="color:#6ee7b7; font-size:12px;">05-the-guardrails/compounding-system.md</code> <span style="color:#8899bb;">→ Governance Policy + Agent Topology sections</span></p>
   </div>
+  <script>
+    function toggleGov(tile) {
+      var hint = tile.querySelector('[data-role="hint"]');
+      var ex = tile.querySelector('[data-role="example"]');
+      var badge = tile.querySelector('.gov-badge');
+      if (!hint || !ex) return;
+      var open = tile.getAttribute('data-state') === 'open';
+      if (open) {
+        ex.style.display = 'none';
+        hint.style.display = '';
+        tile.setAttribute('data-state', 'closed');
+        if (badge) badge.textContent = '💡 example';
+      } else {
+        ex.style.display = '';
+        hint.style.display = 'none';
+        tile.setAttribute('data-state', 'open');
+        if (badge) badge.textContent = '✕ hide';
+      }
+    }
+  </script>
 </section>
 
 <!-- 18: Peer Challenge -->
