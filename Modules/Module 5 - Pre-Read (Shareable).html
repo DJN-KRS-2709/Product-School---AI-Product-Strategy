@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 5 — The Guardrails · Pre-Read</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Lato', -apple-system, sans-serif;
+  background: #07162C;
+  color: #b0b4c8;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ═══ READING PROGRESS BAR ═══ */
+.progress-bar {
+  position: fixed; top: 0; left: 0; height: 3px; z-index: 100;
+  background: linear-gradient(90deg, #1241B0, #bc8cff);
+  width: 0%; transition: width 0.1s ease;
+}
+
+/* ═══ HERO ═══ */
+.hero {
+  min-height: 70vh;
+  padding: 120px 32px 80px;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center; position: relative;
+  background: radial-gradient(ellipse at 30% 30%, rgba(188,140,255,0.20) 0%, #07162C 60%);
+  border-bottom: 1px solid rgba(188,140,255,0.10);
+}
+.hero .module-tag {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px; font-weight: 600; letter-spacing: 0.16em;
+  text-transform: uppercase; color: #d2a8ff;
+  padding: 8px 18px; border-radius: 6px;
+  background: rgba(188,140,255,0.10);
+  border: 1px solid rgba(188,140,255,0.20);
+  margin-bottom: 24px;
+}
+.hero h1 {
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(40px, 6vw, 68px); font-weight: 900;
+  color: #fff; line-height: 1.05;
+  max-width: 880px; margin-bottom: 20px;
+}
+.hero h1 span { color: #d2a8ff; }
+.hero .lede {
+  font-family: 'Lato', sans-serif;
+  font-size: 19px; line-height: 1.65; max-width: 720px;
+  color: #8899bb; font-style: italic;
+}
+.hero .meta {
+  display: flex; gap: 24px; flex-wrap: wrap; justify-content: center;
+  margin-top: 40px; font-size: 13px;
+  font-family: 'IBM Plex Mono', monospace;
+  color: #60a5fa; opacity: 0.8;
+}
+.hero .meta span::before { content: '·'; margin-right: 8px; color: #333; }
+.hero .meta span:first-child::before { content: ''; margin-right: 0; }
+
+/* ═══ MAIN CONTAINER ═══ */
+.container {
+  max-width: 760px; margin: 0 auto;
+  padding: 80px 32px 120px;
+}
+
+/* ═══ SECTIONS ═══ */
+section.chapter {
+  margin-bottom: 72px;
+  scroll-margin-top: 40px;
+}
+.section-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px; font-weight: 600; letter-spacing: 0.18em;
+  text-transform: uppercase; color: #60a5fa;
+  margin-bottom: 14px;
+}
+h2 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 34px; font-weight: 800;
+  color: #fff; line-height: 1.15;
+  margin-bottom: 28px;
+}
+h3 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 18px; font-weight: 700;
+  color: #e0e0f0; line-height: 1.3;
+  margin-top: 32px; margin-bottom: 12px;
+}
+p {
+  font-size: 17px; line-height: 1.75;
+  color: #b0b4c8; margin-bottom: 18px;
+}
+strong { color: #fff; font-weight: 700; }
+em { color: #d2a8ff; font-style: italic; font-weight: 600; }
+a {
+  color: #60a5fa; text-decoration: none;
+  border-bottom: 1px dashed rgba(96,165,250,0.4);
+  transition: all 0.2s;
+}
+a:hover { color: #93c5fd; border-bottom-style: solid; }
+
+code {
+  font-family: 'IBM Plex Mono', monospace;
+  background: rgba(188,140,255,0.10);
+  color: #d2a8ff;
+  padding: 2px 8px; border-radius: 4px;
+  font-size: 14px; font-weight: 500;
+}
+
+/* ═══ SECTION DIVIDER ═══ */
+.divider {
+  width: 60px; height: 2px;
+  background: linear-gradient(90deg, #bc8cff, transparent);
+  margin: 0 auto 80px;
+  border: none;
+}
+
+/* ═══ PULL QUOTE ═══ */
+.pull-quote {
+  margin: 32px 0;
+  padding: 32px 36px;
+  background: rgba(188,140,255,0.06);
+  border-left: 3px solid #bc8cff;
+  border-radius: 0 12px 12px 0;
+  position: relative;
+}
+.pull-quote::before {
+  content: '"';
+  position: absolute; top: 8px; left: 16px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 64px; font-weight: 900;
+  color: rgba(188,140,255,0.20);
+  line-height: 1;
+}
+.pull-quote p {
+  font-family: 'Poppins', sans-serif;
+  font-size: 22px; line-height: 1.4;
+  color: #fff; font-weight: 600;
+  margin: 0; padding-left: 32px;
+}
+
+/* ═══ COMPARISON CARDS ═══ */
+.compare {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 16px; margin: 28px 0;
+}
+.compare-card {
+  border-radius: 12px; padding: 24px;
+  transition: transform 0.2s ease;
+}
+.compare-card:hover { transform: translateY(-2px); }
+.compare-card .label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.10em;
+  text-transform: uppercase; margin-bottom: 10px;
+}
+.compare-card .big-num {
+  font-family: 'Poppins', sans-serif;
+  font-size: 26px; font-weight: 800;
+  margin-bottom: 10px; line-height: 1.15;
+}
+.compare-card .desc {
+  font-size: 14px; line-height: 1.55; color: #8899bb;
+}
+.compare-card.bad {
+  background: rgba(248,113,113,0.05);
+  border: 1px solid rgba(248,113,113,0.18);
+}
+.compare-card.bad .label, .compare-card.bad .big-num { color: #f87171; }
+.compare-card.good {
+  background: rgba(52,211,153,0.06);
+  border: 1px solid rgba(52,211,153,0.20);
+}
+.compare-card.good .label, .compare-card.good .big-num { color: #34d399; }
+
+/* ═══ SIDEBAR CALL-OUT (Freeze Test) ═══ */
+.sidebar {
+  background: linear-gradient(135deg, rgba(96,165,250,0.06), rgba(188,140,255,0.06));
+  border: 1px solid rgba(96,165,250,0.20);
+  border-radius: 14px;
+  padding: 26px 32px;
+  margin: 28px 0;
+}
+.sidebar .sidebar-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: #60a5fa; margin-bottom: 10px;
+}
+.sidebar p {
+  font-family: 'Lato', sans-serif;
+  font-size: 16px; line-height: 1.65;
+  color: #d0d6e3; margin-bottom: 0;
+}
+.sidebar p strong { color: #fff; }
+
+/* ═══ NOTICING TABLE ═══ */
+.notice-table {
+  width: 100%; border-collapse: collapse;
+  margin: 24px 0;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px; overflow: hidden;
+}
+.notice-table th {
+  text-align: left; padding: 16px 20px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.10em; text-transform: uppercase;
+  color: #d2a8ff;
+  background: rgba(188,140,255,0.06);
+  border-bottom: 1px solid rgba(188,140,255,0.15);
+}
+.notice-table td {
+  padding: 18px 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  font-size: 14px; line-height: 1.55;
+  color: #b0b4c8; vertical-align: top;
+}
+.notice-table tr:last-child td { border-bottom: none; }
+.notice-table td:first-child {
+  font-weight: 700; color: #fff;
+  white-space: nowrap; width: 220px;
+}
+.notice-table tr:hover td { background: rgba(188,140,255,0.03); }
+
+/* ═══ VOCAB LIST ═══ */
+.vocab {
+  display: flex; flex-direction: column; gap: 14px;
+  margin: 24px 0;
+}
+.vocab-item {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-left: 3px solid #1241B0;
+  border-radius: 0 10px 10px 0;
+  padding: 16px 20px;
+  transition: all 0.2s;
+}
+.vocab-item:hover {
+  border-left-color: #bc8cff;
+  background: rgba(188,140,255,0.04);
+}
+.vocab-term {
+  font-family: 'Poppins', sans-serif;
+  font-size: 15px; font-weight: 700;
+  color: #fff; margin-bottom: 4px;
+}
+.vocab-def {
+  font-size: 14px; line-height: 1.55;
+  color: #8899bb;
+}
+
+/* ═══ DOMAIN EXAMPLES ═══ */
+.domains {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px; margin: 24px 0;
+}
+.domain-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 10px;
+  padding: 16px 18px;
+  transition: all 0.2s;
+}
+.domain-card:hover {
+  border-color: rgba(188,140,255,0.30);
+  transform: translateY(-2px);
+}
+.domain-card .domain-name {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: #d2a8ff; margin-bottom: 6px;
+}
+.domain-card .domain-bad {
+  font-size: 14px; line-height: 1.5;
+  color: #e0e0f0;
+}
+
+/* ═══ QUESTION CARDS ═══ */
+.q-card {
+  background: linear-gradient(135deg, rgba(188,140,255,0.08), rgba(59,130,246,0.05));
+  border: 1px solid rgba(188,140,255,0.20);
+  border-radius: 14px;
+  padding: 28px 32px;
+  margin: 20px 0;
+}
+.q-card .q-num {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: #d2a8ff; margin-bottom: 8px;
+}
+.q-card .q-text {
+  font-family: 'Poppins', sans-serif;
+  font-size: 19px; font-weight: 700;
+  color: #fff; line-height: 1.4;
+  margin-bottom: 12px;
+}
+.q-card .q-body {
+  font-size: 15px; line-height: 1.65;
+  color: #a0a8b4;
+}
+
+/* ═══ BRING LIST ═══ */
+.bring-list {
+  list-style: none; padding: 0;
+  display: flex; flex-direction: column; gap: 10px;
+  margin: 20px 0;
+}
+.bring-list li {
+  display: flex; align-items: flex-start; gap: 14px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 10px;
+  padding: 14px 18px;
+  font-size: 15px; line-height: 1.55;
+  color: #b0b4c8;
+}
+.bring-list li::before {
+  content: '→'; color: #d2a8ff;
+  font-weight: 700; flex-shrink: 0;
+  font-size: 16px; padding-top: 1px;
+}
+
+/* ═══ TEASER BLOCK ═══ */
+.teaser {
+  background: rgba(210,153,34,0.06);
+  border: 1px solid rgba(210,153,34,0.20);
+  border-radius: 12px;
+  padding: 28px 32px;
+  margin: 24px 0;
+}
+.teaser .teaser-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: #e3b341; margin-bottom: 10px;
+}
+.teaser p { color: #d4c4a0; }
+.teaser p:last-child { margin-bottom: 0; }
+
+/* ═══ FOOTER ═══ */
+footer {
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 60px 32px;
+  text-align: center;
+  background: #050f1f;
+}
+footer .footer-tag {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px; letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #4a5670; margin-bottom: 12px;
+}
+footer .footer-msg {
+  font-family: 'Poppins', sans-serif;
+  font-size: 22px; font-weight: 700;
+  color: #fff; margin-bottom: 8px;
+}
+footer .footer-sub {
+  font-size: 14px; color: #6b7589;
+  font-style: italic;
+}
+
+/* ═══ RESPONSIVE ═══ */
+@media (max-width: 720px) {
+  .hero { padding: 80px 24px 60px; }
+  .container { padding: 60px 24px 80px; }
+  h2 { font-size: 28px; }
+  .compare { grid-template-columns: 1fr; }
+  .pull-quote p { font-size: 18px; }
+  .notice-table td:first-child { width: auto; }
+}
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<header class="hero">
+  <div class="module-tag">Module 5 · Pre-Read · ~20 min</div>
+  <h1>The <span>Guardrails</span></h1>
+  <p class="lede">Twenty minutes of reading and one short noticing exercise. Done before the session, this is the difference between hearing the M5 ideas for the first time in the room and walking in already chewing on them. Especially worth doing if <em>compounding</em>, <em>shadow AI</em>, or <em>agent governance</em> still feel like buzzwords.</p>
+  <div class="meta">
+    <span>AI Product Strategy</span>
+    <span>Pre-Session Reading</span>
+    <span>Bring honest answers</span>
+  </div>
+</header>
+
+<main class="container">
+
+<section class="chapter">
+  <div class="section-label">01 · Why this session matters</div>
+  <h2>From a story you tell to a <em>system that survives</em>.</h2>
+  <p>Modules 1 to 4 gave you a bet, a moat, the economics, and a contract. Module 5 is where the strategy stops being a story you tell and becomes a system that survives contact with reality — frontier model releases, internal misuse, regulators, and three years from now.</p>
+  <p>The session has two halves that are joined at the hip:</p>
+  <ul class="bring-list">
+    <li><strong>Compounding</strong> — does your AI get smarter the more it's used, or does it just scale? Most products only scale. The ones that compound are the ones still standing after the next frontier release closes the model gap.</li>
+    <li><strong>Governance</strong> — when something goes wrong (and something will), did you have a written line about what your AI is and isn't allowed to do — or are you arguing in real time with a CISO, a regulator, or a journalist?</li>
+  </ul>
+  <p>By the end of the session you'll leave with one updated repo file — <code>05-the-guardrails/compounding-system.md</code> — covering five sections: <strong>Feedback Loops</strong> (with a broken loop and fix plan), <strong>Context Connectivity</strong>, <strong>Governance Policy</strong>, <strong>Agent Topology</strong>, and a <strong>Shadow AI Audit</strong>.</p>
+  <p>This is also the session where students who think "we'll handle governance later" realize what <em>later</em> actually costs.</p>
+</section>
+
+<hr class="divider">
+
+<section class="chapter">
+  <div class="section-label">02 · The one idea to walk in already chewing on</div>
+  <h2>Governance is a sales asset, not a compliance burden.</h2>
+
+  <div class="pull-quote">
+    <p>Your governance framework is a sales asset, not a compliance burden.</p>
+  </div>
+
+  <p>This is the central reframe of Module 5, and it cuts against the default PM instinct. The instinct says governance is a cost — slow, lawyer-driven, deserves a one-pager in a quarterly review. The reframe says governance is a <em>line item in your sales motion</em> — proof that the AI you're selling won't get the customer fired.</p>
+
+  <div class="compare">
+    <div class="compare-card bad">
+      <div class="label">Compliance Burden</div>
+      <div class="big-num">CISO's Problem</div>
+      <div class="desc">Lives in a Notion doc nobody reads. Reviewed when something breaks. Slows the team on purpose. Quarterly audit. No customer ever asks about it — until they do, and then it's too late.</div>
+    </div>
+    <div class="compare-card good">
+      <div class="label">Sales Asset</div>
+      <div class="big-num">On the Product Page</div>
+      <div class="desc">Salesforce sells <em>Einstein Trust Layer</em> as product. EU AI Act is live. Model cards, bias posture, audit cadence answer procurement questions you'd otherwise lose.</div>
+    </div>
+  </div>
+
+  <p>Pair this with the <strong>freeze test</strong>, the other big provocation of M5:</p>
+
+  <div class="sidebar">
+    <div class="sidebar-label">The Freeze Test</div>
+    <p>If you froze your model for <strong>three months</strong> — roughly one frontier cycle — would you still win? <strong>If yes</strong>, you have something compounding. <strong>If no</strong>, you've rented advantage from the latest release, and the next one will quietly close your gap.</p>
+  </div>
+
+  <p>Sit with both ideas for a minute. The whole module hinges on them.</p>
+</section>
+
+<hr class="divider">
+
+<section class="chapter">
+  <div class="section-label">03 · A 20-minute "noticing" exercise</div>
+  <h2>Pick three. Ask: <em>what's compounding?</em></h2>
+  <p>Pick <strong>three</strong> AI products you actually use this week. For each one, ask the same question: <em>what's compounding here?</em> What gets smarter the more I use it — and how would I know? You're not building, you're just paying attention.</p>
+
+  <table class="notice-table">
+    <thead>
+      <tr><th>Product</th><th>What to look for</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Cursor / GitHub Copilot</td>
+        <td>Does it feel smarter this week than last? What signal would tell you — fewer rejected suggestions, better code style match, faster acceptance?</td>
+      </tr>
+      <tr>
+        <td>Perplexity</td>
+        <td>When you correct a citation or follow up, does the <em>next</em> answer change shape? Or does every session start from zero?</td>
+      </tr>
+      <tr>
+        <td>Notion AI / Granola</td>
+        <td>Does it learn your writing voice or stay generic? Notice whether tone and structure adapt over weeks.</td>
+      </tr>
+      <tr>
+        <td>Klarna AI / Intercom Fin</td>
+        <td>Deflection rate is the loop. Are escalations going down or staying flat? You can sometimes see this in their public posts.</td>
+      </tr>
+      <tr>
+        <td>Tesla Autopilot / ADAS</td>
+        <td>Fleet learning shows up in release notes — try to spot the week a new capability shipped. That's network intelligence in the wild.</td>
+      </tr>
+      <tr>
+        <td>Spotify DJ / Discover Weekly</td>
+        <td>Does the recommendation quality drift as you skip more, or stay generic? The skip-signal is the loop.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>Twenty minutes total. No notes required. The goal is to walk into Module 5 with <strong>felt examples</strong> of compounding vs. just-scaling. When the slide goes up that says "design your three loops," you'll have a library to draw from.</p>
+  <p>If you have ten extra minutes, do one more thing: notice <strong>one piece of shadow AI</strong> inside your own org. The Slack message someone drafted in ChatGPT. The spreadsheet auto-filled by an unauthorized plugin. The colleague using a personal Claude account for customer comms. You don't have to confront anyone — just notice. That observation is going to matter in section 6.</p>
+</section>
+
+<hr class="divider">
+
+<section class="chapter">
+  <div class="section-label">04 · Vocabulary you'll keep hearing</div>
+  <h2>One-liners so the words don't trip you up.</h2>
+  <p>Full definitions go in the cumulative <code>Glossary.md</code> after the session. One-liner each here so the words don't trip you up in the room.</p>
+
+  <div class="vocab">
+    <div class="vocab-item">
+      <div class="vocab-term">Feedback loop</div>
+      <div class="vocab-def">Any system where the output of a process becomes input to the next iteration. In M5: the engine of compounding.</div>
+    </div>
+    <div class="vocab-item">
+      <div class="vocab-term">Compounding system</div>
+      <div class="vocab-def">A product where each use makes the next use better. Different from a scaling system, where more use just means more volume at the same quality.</div>
+    </div>
+    <div class="vocab-item">
+      <div class="vocab-term">Recursive learning</div>
+      <div class="vocab-def">Outputs (and corrections) feed back into the model. The clearest form of compounding.</div>
+    </div>
+    <div class="vocab-item">
+      <div class="vocab-term">Cross-domain transfer</div>
+      <div class="vocab-def">Winning in one area lifts an adjacent area for free. Duolingo's lessons getting better across languages. ServiceTitan's data lifting 32 products on one stack.</div>
+    </div>
+    <div class="vocab-item">
+      <div class="vocab-term">Network intelligence</div>
+      <div class="vocab-def">Fleet-level patterns improve each individual node. Tesla's fleet, Waze, fraud detection. Privacy-gated, but powerful.</div>
+    </div>
+    <div class="vocab-item">
+      <div class="vocab-term">Freeze test</div>
+      <div class="vocab-def">If you froze your model for three months (~one frontier cycle), would you still win? Diagnoses compounding moat vs. rented model advantage.</div>
+    </div>
+    <div class="vocab-item">
+      <div class="vocab-term">Shadow AI</div>
+      <div class="vocab-def">Any AI tool being used inside your company that you didn't sanction, can't see, and don't govern. Samsung found out the hard way.</div>
+    </div>
+    <div class="vocab-item">
+      <div class="vocab-term">Agent</div>
+      <div class="vocab-def">Software that <em>picks actions and chains tools</em>, not just steps. Agents make agentic ROI economics fuzzier than RPA — and the governance harder.</div>
+    </div>
+    <div class="vocab-item">
+      <div class="vocab-term">Autonomy boundary</div>
+      <div class="vocab-def">The explicit line between what AI does alone, what needs human approval, and what's never allowed at all. The hardest line is "human approval <em>even when confidence is high.</em>"</div>
+    </div>
+    <div class="vocab-item">
+      <div class="vocab-term">Tool calls</div>
+      <div class="vocab-def">The API calls an agent makes on your behalf. Each one is an exfiltration risk if you don't whitelist, rate-limit, and log.</div>
+    </div>
+    <div class="vocab-item">
+      <div class="vocab-term">Agent topology</div>
+      <div class="vocab-def">The map of what each agent can do, can't do, and who approves what. Mandatory if you ship agents.</div>
+    </div>
+    <div class="vocab-item">
+      <div class="vocab-term">Trust ladder</div>
+      <div class="vocab-def">The three-tier maturity model: <strong>Compliance</strong> (floor) → <strong>Trust Architecture</strong> (M4's confidence UX, evals, reliability contracts) → <strong>Governance = GTM</strong> (model cards, trust layer in the pitch).</div>
+    </div>
+    <div class="vocab-item">
+      <div class="vocab-term">Risk tier</div>
+      <div class="vocab-def">The EU AI Act's three buckets: <strong>minimal</strong>, <strong>limited</strong>, <strong>high</strong>. Customer service is usually limited. Hiring tools, credit decisions, medical advice — high.</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section class="chapter">
+  <div class="section-label">05 · There's a real story coming</div>
+  <h2>The leak that wasn't a model problem.</h2>
+
+  <div class="teaser">
+    <div class="teaser-label">Teaser · No spoilers</div>
+    <p>A global electronics company let employees use a public AI chatbot freely. Engineers pasted source code into it to "debug." Someone else uploaded sensitive meeting notes. Within roughly a month, <em>three separate confidential leaks</em> were sitting in a vendor's training pipeline.</p>
+    <p>There was no policy. No logging. No way to claw the data back. The first response was a blanket ban. That didn't work either.</p>
+  </div>
+
+  <p>We'll walk through what actually happened, what they should have done, and what the lesson is for your team. Come ready to think about which of your colleagues might be unintentionally re-running this story right now.</p>
+  <p>Also: the <strong>Air Canada chatbot</strong> lesson from M4 comes back. M4 was about the <em>contract</em> the AI made. M5 is about the <em>policy</em> the company should have had so the chatbot couldn't make that contract in the first place.</p>
+</section>
+
+<hr class="divider">
+
+<section class="chapter">
+  <div class="section-label">06 · Two questions to come ready to answer</div>
+  <h2>Show up with honest answers.</h2>
+  <p>These will become warmups in the session. Showing up with honest answers pays off in the room.</p>
+
+  <div class="q-card">
+    <div class="q-num">Question 1</div>
+    <div class="q-text">Freeze your model for three months. Do you still win?</div>
+    <div class="q-body">About one frontier cycle. Not a literal freeze — a thought experiment. If GPT / Claude / Gemini paused at today's capability for the next quarter, what would happen to your moat?</div>
+  </div>
+
+  <div class="domains">
+    <div class="domain-card">
+      <div class="domain-name">If your win is</div>
+      <div class="domain-bad">"We have the latest model" — the next release closes your gap. Name your real moat or build one real learning loop.</div>
+    </div>
+    <div class="domain-card">
+      <div class="domain-name">If your win is</div>
+      <div class="domain-bad">"We have proprietary data that gets better with every use" — you have a compounding loop. Be honest about whether that's <em>one</em> loop or several, and whether any are broken.</div>
+    </div>
+  </div>
+
+  <p>Write down your one-sentence honest answer.</p>
+
+  <div class="q-card">
+    <div class="q-num">Question 2</div>
+    <div class="q-text">Who in your company is using AI tools you didn't sanction?</div>
+    <div class="q-body">And what data are they pasting in? Honest answer beats clean answer. The most common honest answer is <em>"I have no idea, and that's part of the problem."</em> That's fine — write it down.</div>
+  </div>
+
+  <p>If you do know: which tools, which teams, which data, what risk tier? Even a rough list is a head-start on the Shadow AI Audit you'll do in the room.</p>
+</section>
+
+<hr class="divider">
+
+<section class="chapter">
+  <div class="section-label">07 · What to bring</div>
+  <h2>The essentials for the room.</h2>
+  <ul class="bring-list">
+    <li>All four prior artifacts: <code>01-the-bet/</code>, <code>02-the-moat/</code>, <code>03-the-margin/</code>, <code>04-the-contract/</code>.</li>
+    <li>A rough list (informal is fine) of: every AI tool / feature your product team ships, <strong>and</strong> every AI tool your colleagues use internally. The Notion AI, the Granola, the personal ChatGPT, the IDE assistant. All of it.</li>
+    <li>Honest answers to the two questions above.</li>
+    <li>The willingness to be pressure-tested by a partner on what your governance policy doesn't cover.</li>
+  </ul>
+</section>
+
+</main>
+
+<footer>
+  <div class="footer-tag">Module 5 · The Guardrails</div>
+  <div class="footer-msg">See you in the room.</div>
+  <div class="footer-sub">AI Product Strategy · Pre-session reading</div>
+</footer>
+
+<script>
+const progressBar = document.getElementById('progressBar');
+window.addEventListener('scroll', () => {
+  const scrollTop = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const progress = (scrollTop / docHeight) * 100;
+  progressBar.style.width = progress + '%';
+});
+</script>
+
+</body>
+</html>
