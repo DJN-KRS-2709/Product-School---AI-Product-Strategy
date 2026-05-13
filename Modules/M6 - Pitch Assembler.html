@@ -319,6 +319,40 @@
   .repo-meta a { color: var(--blue); text-decoration: none; font-weight: 600; }
   .repo-meta a:hover { text-decoration: underline; }
 
+  .readme-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+  .readme-preview-wrap { display: none; }
+  .readme-preview-wrap.show { display: block; }
+  pre.readme-preview {
+    white-space: pre-wrap;
+    word-break: break-word;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    line-height: 1.55;
+    color: #e8e8f5;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 16px;
+    max-height: 480px;
+    overflow: auto;
+    margin: 0;
+  }
+  .gen-empty {
+    font-size: 13px;
+    color: var(--text-dim);
+    background: var(--surface2);
+    border: 1px dashed var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    text-align: center;
+    line-height: 1.55;
+  }
+
   @media (max-width: 540px) {
     .repo-row { flex-direction: column; }
     .repo-files { grid-template-columns: 1fr; }
@@ -361,6 +395,27 @@
       <div class="card-sub" id="glanceSub">Pulled from your repo when you sync above. Otherwise, falls back to data from the in-class tools saved in this browser.</div>
     </div>
     <div class="card-body" id="glanceBody"></div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-title">Generated README Draft</div>
+      <div class="card-sub">The assembler reads your eight component files, extracts the bullet fields, and writes a board-ready README. You don't have to edit the README by hand — generate it, copy it, commit it.</div>
+    </div>
+    <div class="card-body">
+      <div class="readme-actions">
+        <button type="button" class="btn primary" id="genReadmeBtn" onclick="generateReadmeDraft()" disabled>Generate README from your repo</button>
+        <button type="button" class="btn" id="copyReadmeBtn" onclick="copyReadme()" disabled>Copy markdown</button>
+        <button type="button" class="btn" id="downloadReadmeBtn" onclick="downloadReadme()" disabled>Download README.md</button>
+      </div>
+      <div class="readme-preview-wrap" id="readmePreviewWrap">
+        <pre class="readme-preview" id="readmePreview"></pre>
+        <div class="tip" style="margin-top:12px;">
+          <strong>Next:</strong> copy this markdown into your repo's <code>README.md</code>, commit, then re-fetch above to confirm <em>Strategy at a Glance</em> reads green across all six components.
+        </div>
+      </div>
+      <div class="gen-empty" id="genEmpty">Sync your strategy repo above to enable README generation.</div>
+    </div>
   </div>
 
   <div class="card">
@@ -439,15 +494,6 @@ const COMPONENT_FILES = [
   { path: '04-the-contract/golden-dataset.md', label: 'M4 · Golden Dataset' },
   { path: '05-the-guardrails/compounding-system.md', label: 'M5 · Compounding System' },
   { path: '06-the-pitch/roadmap.md',           label: 'M6 · Roadmap' }
-];
-
-const SECTION_HEADINGS = [
-  { key: 'bet',        re: /^##\s+The\s+Bet\b/im,        target: 'pitchBet' },
-  { key: 'moat',       re: /^##\s+The\s+Moat\b/im,       target: 'pitchMoat' },
-  { key: 'margin',     re: /^##\s+The\s+Margin\b/im,     target: 'pitchMargin' },
-  { key: 'contract',   re: /^##\s+The\s+Contract\b/im,   target: 'pitchContract' },
-  { key: 'guardrails', re: /^##\s+The\s+Guardrails\b/im, target: 'pitchGuardrails' },
-  { key: 'pitch',      re: /^##\s+The\s+Pitch\b/im,      target: null }
 ];
 
 let repoState = null;
@@ -605,7 +651,7 @@ function escapeHtml(s) {
 }
 
 function renderGlance() {
-  if (repoState && repoState.ok) { renderRepoGlance(repoState.readme); return; }
+  if (repoState && repoState.ok) { renderRepoGlance(); return; }
   $('glanceSub').textContent = 'Pulled from your repo when you sync above. Otherwise, falls back to data from the in-class tools saved in this browser.';
   const el = $('glanceBody');
   const m1 = parseM1();
@@ -835,43 +881,409 @@ async function fetchRepoBundle(parsed) {
       if (fallback.ok) { readme = fallback; branch = 'master'; }
     }
   }
-  if (!readme || !readme.ok) {
-    return { ok: false, status: readme && readme.status, error: readme && readme.error };
+  if (!branch) {
+    branch = 'main';
+    if (!readme) readme = { ok: false };
   }
+  const readmeContent = readme && readme.ok ? readme.content : null;
+
   const fileResults = await Promise.all(
     COMPONENT_FILES.map(f =>
-      fetchRaw(user, repo, branch, f.path).then(r => ({ ...f, ok: r.ok }))
+      fetchRaw(user, repo, branch, f.path).then(r => ({
+        ...f,
+        ok: r.ok,
+        content: r.ok ? r.content : null
+      }))
     )
   );
-  return { ok: true, user, repo, branch, readme: readme.content, files: fileResults };
-}
 
-function parseReadmeSections(readme) {
-  const offsets = SECTION_HEADINGS
-    .map(h => {
-      const m = readme.match(h.re);
-      return { ...h, idx: m ? m.index : -1 };
-    })
-    .filter(o => o.idx >= 0)
-    .sort((a, b) => a.idx - b.idx);
-
-  const out = {};
-  for (let i = 0; i < offsets.length; i++) {
-    const start = offsets[i].idx;
-    const end = i + 1 < offsets.length ? offsets[i + 1].idx : readme.length;
-    let body = readme.slice(start, end);
-    body = body.replace(/^##\s+.*\n/, '');
-    body = body.replace(/\n→\s+Details:[^\n]*\n?/g, '\n');
-    body = body.replace(/\n---\s*\n?/g, '\n');
-    body = body.trim();
-    out[offsets[i].key] = body;
+  const anyComponentFound = fileResults.some(f => f.ok);
+  if (!anyComponentFound && !readmeContent) {
+    return { ok: false, status: readme && readme.status, error: readme && readme.error };
   }
-  return out;
+
+  return { ok: true, user, repo, branch, readme: readmeContent, files: fileResults };
 }
 
-function extractGlanceTable(readme) {
-  const m = readme.match(/##\s+Strategy\s+at\s+a\s+Glance\s*\n([\s\S]*?)(?=\n##\s|\n---|\Z)/i);
-  return m ? m[1].trim() : '';
+function getFile(files, path) {
+  const f = files && files.find(x => x.path === path);
+  return f && f.content ? f.content : null;
+}
+
+function matchOne(text, pattern) {
+  if (!text) return null;
+  const m = text.match(pattern);
+  return m ? (m[1] || '').trim() : null;
+}
+
+function extractSectionBody(text, h2Title) {
+  if (!text) return null;
+  const esc = h2Title.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const re = new RegExp(`^##\\s+${esc}\\s*$\\n+([\\s\\S]*?)(?=^##\\s+|^---\\s*$|$(?![\\s\\S]))`, 'mi');
+  const m = text.match(re);
+  if (!m) return null;
+  return m[1].replace(/<!--[\s\S]*?-->/g, '').trim();
+}
+
+function firstNonEmptyLine(body) {
+  if (!body) return null;
+  for (const line of body.split('\n')) {
+    const t = line.replace(/^[*_>\s-]+/, '').trim();
+    if (t && !/^\|/.test(t)) return t;
+  }
+  return null;
+}
+
+function firstParagraph(body) {
+  if (!body) return null;
+  const cleaned = body.replace(/<!--[\s\S]*?-->/g, '').trim();
+  const paras = cleaned.split(/\n\s*\n/).map(p => p.trim()).filter(Boolean);
+  return paras[0] || null;
+}
+
+function trimToSentence(text, maxChars) {
+  if (!text) return text;
+  const flat = text.replace(/\s+/g, ' ').trim();
+  if (flat.length <= maxChars) return flat;
+  const sliced = flat.slice(0, maxChars);
+  const lastStop = Math.max(sliced.lastIndexOf('. '), sliced.lastIndexOf('? '), sliced.lastIndexOf('! '));
+  return (lastStop > maxChars * 0.5 ? sliced.slice(0, lastStop + 1) : sliced) + '…';
+}
+
+function extractBet(files) {
+  const d = getFile(files, '01-the-bet/diagnostic.md');
+  const p = getFile(files, '01-the-bet/prototype.md');
+
+  const product = matchOne(d, /^\*\*Product:\*\*\s*(.+)$/m) || matchOne(p, /^\*\*Product:\*\*\s*(.+)$/m);
+
+  const archetypeBody = extractSectionBody(p, 'AI Value Archetype');
+  const archetype = archetypeBody ? firstNonEmptyLine(archetypeBody).replace(/\*\*/g, '') : null;
+
+  const moat = matchOne(d, /###\s+Contextual Moat\s*[—-]\s*(\d+)\/5/i);
+  const data = matchOne(d, /###\s+Data Advantage\s*[—-]\s*(\d+)\/5/i);
+  const platform = matchOne(d, /###\s+Platform Exposure\s*[—-]\s*(\d+)\/5/i);
+  const vulnerability = (moat || data || platform)
+    ? `Moat ${moat || '__'}/5 · Data ${data || '__'}/5 · Platform ${platform || '__'}/5`
+    : null;
+
+  const topRisk = trimToSentence(firstParagraph(extractSectionBody(d, 'Top Vulnerability')), 280);
+
+  const confBody = extractSectionBody(d, 'Confidence Level');
+  const confidence = confBody ? (confBody.match(/\b([HML])\b/) || [])[1] || null : null;
+
+  const protoBody = extractSectionBody(p, 'Prototype Link');
+  const prototype = protoBody ? firstNonEmptyLine(protoBody).replace(/`/g, '') : null;
+
+  const killCriteria = trimToSentence(firstParagraph(extractSectionBody(p, 'Kill Criteria')), 280);
+
+  const betSentence = trimToSentence(firstParagraph(extractSectionBody(p, 'The Bet in One Sentence')), 280);
+
+  return { product, archetype, vulnerability, topRisk, confidence, prototype, killCriteria, betSentence };
+}
+
+function extractMoat(files) {
+  const f = getFile(files, '02-the-moat/data-flywheel.md');
+  const k = getFile(files, '02-the-moat/kill-switch.md');
+
+  const flywheelScore = matchOne(f, /\*\*Total Flywheel Score:\*\*\s*(\d+\/20)/i);
+  const weakestLoop = matchOne(f, /\*\*Weakest Loop:\*\*\s*(.+)$/im);
+  const weakestFix = trimToSentence(matchOne(f, /\*\*Fix for weakest loop:\*\*\s*(.+)$/im), 200);
+
+  let topAttacker = null;
+  const enc = extractSectionBody(f, 'Encroachment Threat Assessment');
+  if (enc) {
+    const a = enc.match(/\*\*Attacker:\*\*\s*(.+)/);
+    if (a) topAttacker = a[1].trim();
+  }
+
+  const portBody = extractSectionBody(k, 'Portability Score');
+  const portability = portBody ? (portBody.match(/\*\*\s*(Ready|Partial|Locked)\s*\*\*/i) || [])[1] || firstNonEmptyLine(portBody).replace(/\*\*/g, '') : null;
+
+  return { flywheelScore, weakestLoop, weakestFix, topAttacker, portability };
+}
+
+function extractMargin(files) {
+  const c = getFile(files, '03-the-margin/cost-curve.md');
+
+  const totalCogs = matchOne(c, /\|\s*\*\*Total AI COGS\*\*\s*\|\s*\*\*\$?([\d.,]+)\*\*/i);
+
+  const pricingModel = matchOne(c, /^\*\*Model:\*\*\s*(.+)$/im);
+  const currentPricing = matchOne(c, /^\*\*Current pricing:\*\*\s*(.+)$/im);
+  const proposedPricing = matchOne(c, /^\*\*Proposed AI pricing:\*\*\s*(.+)$/im);
+
+  const cascadeRatio = matchOne(c, /^\*\*Expected cascade ratio:\*\*\s*(.+)$/im);
+  const triageModel = matchOne(c, /^\*\*Triage model:\*\*\s*(.+)$/im);
+  const frontierModel = matchOne(c, /^\*\*Frontier model:\*\*\s*(.+)$/im);
+
+  const before = matchOne(c, /^\*\*Before \(traditional SaaS\):\*\*\s*(.+)$/im);
+  const after = matchOne(c, /^\*\*After \(AI-enabled\):\*\*\s*(.+)$/im);
+  const netShift = trimToSentence(matchOne(c, /^\*\*Net margin shift:\*\*\s*(.+)$/im), 200);
+
+  const grossCurrent = before && before.match(/(\d{1,3}\s*%)/) ? before.match(/(\d{1,3}\s*%)/)[1] : null;
+  const grossAi = after && after.match(/(\d{1,3}\s*%)/) ? after.match(/(\d{1,3}\s*%)/)[1] : null;
+
+  let breakEven = null;
+  const beHeader = extractSectionBody(c, 'Break-Even Math');
+  if (beHeader) {
+    const m = beHeader.match(/^[-*]\s*Break-?even:\s*(.+)$/im);
+    breakEven = m ? m[1].trim() : null;
+  }
+
+  let cascading = null;
+  if (triageModel || frontierModel || cascadeRatio) {
+    const parts = [];
+    if (triageModel) parts.push(`Triage: ${triageModel}`);
+    if (frontierModel) parts.push(`frontier: ${frontierModel}`);
+    if (cascadeRatio) parts.push(`ratio ${cascadeRatio}`);
+    cascading = parts.join('; ');
+  }
+
+  return { totalCogs, pricingModel, currentPricing, proposedPricing, cascading, grossCurrent, grossAi, netShift, breakEven };
+}
+
+function extractContract(files) {
+  const g = getFile(files, '04-the-contract/golden-dataset.md');
+
+  const adversarial = matchOne(g, /\*\*Adversarial rows included:\*\*\s*(\d+)/i);
+  // count golden dataset rows from the spec table (rows that have a number in the first column)
+  let datasetRows = null;
+  const specBody = extractSectionBody(g, 'Golden Dataset Spec');
+  if (specBody) {
+    const rows = specBody.split('\n').filter(l => /^\|\s*\d+\s*\|/.test(l));
+    datasetRows = rows.length || null;
+  }
+
+  const confBody = extractSectionBody(g, 'Confidence UX Design');
+  let confidenceUx = null;
+  if (confBody) {
+    const m = confBody.match(/\*\*Approach:\*\*\s*(.+)/);
+    confidenceUx = m ? trimToSentence(m[1].trim(), 220) : trimToSentence(firstParagraph(confBody), 220);
+  }
+
+  let reliabilityTarget = null;
+  const relBody = extractSectionBody(g, 'Reliability Contract');
+  if (relBody) {
+    const accLine = relBody.split('\n').find(l => /\|\s*Accuracy\s*\|/i.test(l));
+    if (accLine) {
+      const cols = accLine.split('|').map(s => s.trim());
+      const target = cols[2];
+      if (target) reliabilityTarget = target;
+    }
+  }
+
+  const hitl = trimToSentence(firstParagraph(extractSectionBody(g, 'HITL Architecture')), 240);
+  const failureModes = trimToSentence(firstParagraph(extractSectionBody(g, 'Red-Team Findings')), 240);
+  const coverageGap = trimToSentence(matchOne(g, /\*\*Coverage gaps identified by partner:\*\*\s*(.+)/i), 240);
+
+  return { datasetRows, adversarial, confidenceUx, reliabilityTarget, hitl, failureModes, coverageGap };
+}
+
+function extractGuardrails(files) {
+  const c = getFile(files, '05-the-guardrails/compounding-system.md');
+
+  const govBody = extractSectionBody(c, 'Governance Policy');
+  const scope = trimToSentence(matchOne(govBody, /\*\*Scope:\*\*\s*(.+)/i), 220);
+  const autonomy = trimToSentence(matchOne(govBody, /\*\*Autonomy boundaries:\*\*\s*(.+)/i), 240);
+  const escalation = trimToSentence(matchOne(govBody, /\*\*Escalation triggers:\*\*\s*(.+)/i), 220);
+  const audit = trimToSentence(matchOne(govBody, /\*\*Audit cadence:\*\*\s*(.+)/i), 200);
+  const regulatory = trimToSentence(matchOne(govBody, /\*\*Regulatory exposure[^:]*:\*\*\s*(.+)/i), 220);
+
+  const compounding = trimToSentence(firstParagraph(extractSectionBody(c, 'Feedback Loops')), 220);
+  const brokenLoop = trimToSentence(matchOne(c, /\*\*Broken loop identified by partner:\*\*\s*(.+)/i), 220);
+
+  const shadowsFound = matchOne(c, /\*\*Total tools found:\*\*\s*(\d+)/i);
+  const shadowsTriaged = matchOne(c, /\*\*Tools after triage:\*\*\s*(.+)/i);
+  const shadowSpend = matchOne(c, /\*\*Estimated hidden spend:\*\*\s*(.+)/i);
+
+  const agentsBody = extractSectionBody(c, 'Agent Topology');
+  const agentBoundaries = trimToSentence(firstParagraph(agentsBody), 240);
+
+  return { scope, autonomy, escalation, audit, regulatory, compounding, brokenLoop, shadowsFound, shadowsTriaged, shadowSpend, agentBoundaries };
+}
+
+function extractPitch(files) {
+  const r = getFile(files, '06-the-pitch/roadmap.md');
+
+  const horizon = (titleRe) => {
+    if (!r) return null;
+    const re = new RegExp(`^###\\s+${titleRe}[^\\n]*\\n+([\\s\\S]*?)(?=^###\\s+|^##\\s+|^---\\s*$|$(?![\\s\\S]))`, 'mi');
+    const m = r.match(re);
+    if (!m) return null;
+    const body = m[1].replace(/<!--[\s\S]*?-->/g, '').trim();
+    const rows = body.split('\n').filter(l => /^\|\s*[^|\s]/.test(l) && !/^\|\s*-+/.test(l));
+    const dataRows = rows.slice(1).map(l => l.split('|').map(s => s.trim()).filter(Boolean));
+    const initiatives = dataRows.map(cols => cols[0]).filter(Boolean);
+    return initiatives.length ? initiatives.join(' · ') : null;
+  };
+
+  const h1 = horizon('Horizon\\s+1');
+  const h2 = horizon('Horizon\\s+2');
+  const h3 = horizon('Horizon\\s+3');
+
+  const thesis = trimToSentence(matchOne(r, /\*\*Thesis[^:]*:\*\*\s*(.+)/i), 280);
+  const ask = trimToSentence(matchOne(r, /\*\*The ask:\*\*\s*(.+)/i), 240);
+
+  let keyMetric = null;
+  const aiEval = extractSectionBody(r, 'AI Evaluation');
+  if (aiEval) {
+    const m = aiEval.match(/\*\*What you changed[^:]*:\*\*\s*(.+)/i);
+    if (m) keyMetric = trimToSentence(m[1].trim(), 200);
+  }
+
+  return { h1, h2, h3, thesis, ask, keyMetric };
+}
+
+function extractAll(files) {
+  return {
+    bet: extractBet(files),
+    moat: extractMoat(files),
+    margin: extractMargin(files),
+    contract: extractContract(files),
+    guardrails: extractGuardrails(files),
+    pitch: extractPitch(files)
+  };
+}
+
+function bullet(label, value, hint) {
+  if (value) return `- **${label}:** ${value}`;
+  return hint ? `- **${label}:** _(add: ${hint})_` : `- **${label}:**`;
+}
+
+function statusCell(filled) { return filled ? '[x]' : '[ ]'; }
+
+function nonEmpty(obj) {
+  return obj && Object.values(obj).some(v => v != null && String(v).trim() !== '');
+}
+
+function generateReadme(extracted, repoName) {
+  const b = extracted.bet || {};
+  const m = extracted.moat || {};
+  const mg = extracted.margin || {};
+  const c = extracted.contract || {};
+  const g = extracted.guardrails || {};
+  const p = extracted.pitch || {};
+
+  const productName = b.product || (repoName ? repoName.replace(/[-_]/g, ' ').replace(/\b\w/g, ch => ch.toUpperCase()) : 'My AI Product Strategy');
+  const lede = b.betSentence || 'A living strategy built across 6 sessions. Each module adds one component. By Module 6, this repo IS your strategy — version-controlled, board-ready, portable.';
+
+  const goldenLine = (c.datasetRows || c.adversarial)
+    ? `${c.datasetRows || '__'} rows, ${c.adversarial || '__'} adversarial`
+    : null;
+
+  const shadowsLine = (g.shadowsFound || g.shadowsTriaged)
+    ? `${g.shadowsFound ? g.shadowsFound + ' tools found' : '__ tools found'}${g.shadowsTriaged ? ' · ' + g.shadowsTriaged : ''}${g.shadowSpend ? ' · est. spend ' + g.shadowSpend : ''}`
+    : null;
+
+  return `# ${productName}
+
+> ${lede}
+
+---
+
+## Strategy at a Glance
+
+| Component | Module | Status | Key Artifact |
+|-----------|--------|--------|-------------|
+| **The Bet** | M1 | ${statusCell(nonEmpty(b))} | \`01-the-bet/\` |
+| **The Moat** | M2 | ${statusCell(nonEmpty(m))} | \`02-the-moat/\` |
+| **The Margin** | M3 | ${statusCell(nonEmpty(mg))} | \`03-the-margin/\` |
+| **The Contract** | M4 | ${statusCell(nonEmpty(c))} | \`04-the-contract/\` |
+| **The Guardrails** | M5 | ${statusCell(nonEmpty(g))} | \`05-the-guardrails/\` |
+| **The Pitch** | M6 | ${statusCell(nonEmpty(p))} | \`06-the-pitch/\` |
+
+---
+
+## The Bet (M1)
+
+**What we're building, for whom, why now.**
+
+${bullet('Product', b.product)}
+${bullet('AI Value Archetype', b.archetype, 'Automator / Copilot / Oracle / Creator / Orchestrator')}
+${bullet('Vulnerability Scores', b.vulnerability, 'Moat _/5 · Data _/5 · Platform _/5')}
+${bullet('Top Risk', b.topRisk)}
+${bullet('Confidence', b.confidence, 'H / M / L')}
+${bullet('Prototype', b.prototype)}
+${bullet('Kill Criteria', b.killCriteria)}
+
+→ Details: [\`01-the-bet/\`](01-the-bet/)
+
+---
+
+## The Moat (M2)
+
+**Why this won't get copied in 6 months.**
+
+${bullet('Data Flywheel Score', m.flywheelScore)}
+${bullet('Weakest Loop', m.weakestLoop)}
+${bullet('Top Encroachment Threat', m.topAttacker)}
+${bullet('Encroachment Defense', m.weakestFix)}
+${bullet('Vendor Portability', m.portability, 'Ready / Partial / Locked')}
+
+→ Details: [\`02-the-moat/\`](02-the-moat/)
+
+---
+
+## The Margin (M3)
+
+**Will this make money or bleed it?**
+
+${bullet('Gross Margin (current)', mg.grossCurrent)}
+${bullet('Gross Margin (AI-adjusted)', mg.grossAi)}
+${bullet('Pricing Model', mg.pricingModel)}
+${bullet('Pricing Today → Tomorrow', mg.currentPricing && mg.proposedPricing ? `${mg.currentPricing} → ${mg.proposedPricing}` : (mg.proposedPricing || mg.currentPricing))}
+${bullet('Total AI COGS / unit', mg.totalCogs ? '$' + mg.totalCogs : null)}
+${bullet('Cascading Strategy', mg.cascading)}
+${bullet('Net Margin Shift', mg.netShift)}
+${bullet('Break-even at', mg.breakEven)}
+
+→ Details: [\`03-the-margin/\`](03-the-margin/)
+
+---
+
+## The Contract (M4)
+
+**Why users will trust a probabilistic system.**
+
+${bullet('Reliability Target', c.reliabilityTarget)}
+${bullet('Golden Dataset', goldenLine)}
+${bullet('Confidence UX', c.confidenceUx)}
+${bullet('HITL Architecture', c.hitl)}
+${bullet('Failure Mode Coverage', c.failureModes || c.coverageGap)}
+
+→ Details: [\`04-the-contract/\`](04-the-contract/)
+
+---
+
+## The Guardrails (M5)
+
+**What breaks when this scales — and what compounds.**
+
+${bullet('Compounding System', m.weakestFix || g.compounding)}
+${bullet('Governance Posture', g.scope || g.autonomy)}
+${bullet('Autonomy Boundaries', g.autonomy)}
+${bullet('Escalation Triggers', g.escalation)}
+${bullet('Audit Cadence', g.audit)}
+${bullet('Shadow AI Status', shadowsLine)}
+${bullet('Agent Boundaries', g.agentBoundaries)}
+${bullet('Regulatory Exposure', g.regulatory)}
+
+→ Details: [\`05-the-guardrails/\`](05-the-guardrails/)
+
+---
+
+## The Pitch (M6)
+
+**How you get this funded, shipped, and adopted.**
+
+${bullet('Horizon 1 (Now)', p.h1)}
+${bullet('Horizon 2 (Next)', p.h2)}
+${bullet('Horizon 3 (Bet)', p.h3)}
+${bullet('Board Narrative', p.thesis)}
+${bullet('Ask', p.ask)}
+${bullet('Key Strategic Change', p.keyMetric)}
+
+→ Details: [\`06-the-pitch/\`](06-the-pitch/)
+`;
 }
 
 function renderRepoFiles(files, user, repo, branch) {
@@ -906,56 +1318,98 @@ function clearRepoStatus() {
   $('repoFiles').innerHTML = '';
 }
 
-function mdTableToText(md) {
-  return md
-    .split('\n')
-    .filter(line => !/^\s*\|[\s|:-]+\|\s*$/.test(line))
-    .map(line => line.replace(/^\s*\|\s?/, '').replace(/\s?\|\s*$/, '').replace(/\s*\|\s*/g, ' · '))
-    .join('\n')
-    .trim();
+function summaryLine(label, value) {
+  if (!value) return `<span style="color:var(--text-muted);">${escapeHtml(label)} pending</span>`;
+  const v = String(value).length > 80 ? String(value).slice(0, 78) + '…' : String(value);
+  return `<span class="summary-mono">${escapeHtml(label)}: ${escapeHtml(v)}</span>`;
 }
 
-function renderRepoGlance(readmeText) {
-  const tableMd = extractGlanceTable(readmeText);
-  if (!tableMd) {
-    $('glanceBody').innerHTML = `<div class="summary-row"><span class="summary-miss">Could not find a “Strategy at a Glance” section in this README.</span></div>`;
-    return;
-  }
-  const lines = mdTableToText(tableMd).split('\n').filter(Boolean);
-  const rows = lines.slice(1).map(line => {
-    const parts = line.split(' · ').map(s => s.trim());
-    const comp = parts[0] || '';
-    const mod = parts[1] || '';
-    const status = parts[2] || '';
-    const artifact = parts[3] || '';
-    const done = /\[x\]/i.test(status);
+function renderRepoGlance() {
+  const ex = (repoState && repoState.extracted) || {};
+  const items = [
+    { mod: 'M1', name: 'Bet',        ext: ex.bet,        primary: ex.bet && ex.bet.product,         summary: ex.bet && (ex.bet.archetype || ex.bet.vulnerability) },
+    { mod: 'M2', name: 'Moat',       ext: ex.moat,       primary: ex.moat && ex.moat.flywheelScore, summary: ex.moat && ex.moat.weakestLoop },
+    { mod: 'M3', name: 'Margin',     ext: ex.margin,     primary: ex.margin && (ex.margin.grossAi || ex.margin.pricingModel), summary: ex.margin && (ex.margin.pricingModel || ex.margin.totalCogs) },
+    { mod: 'M4', name: 'Contract',   ext: ex.contract,   primary: ex.contract && (ex.contract.reliabilityTarget || ex.contract.confidenceUx), summary: ex.contract && ex.contract.reliabilityTarget },
+    { mod: 'M5', name: 'Guardrails', ext: ex.guardrails, primary: ex.guardrails && (ex.guardrails.autonomy || ex.guardrails.shadowsFound), summary: ex.guardrails && ex.guardrails.shadowsFound ? `${ex.guardrails.shadowsFound} shadow tools` : (ex.guardrails && ex.guardrails.regulatory) },
+    { mod: 'M6', name: 'Pitch',      ext: ex.pitch,      primary: ex.pitch && (ex.pitch.thesis || ex.pitch.h1), summary: ex.pitch && ex.pitch.h1 }
+  ];
+
+  const rows = items.map(it => {
+    const filled = it.primary ? '<span style="color:var(--green);">✓ found</span>' : '<span style="color:var(--text-muted);">pending</span>';
     return `<div class="summary-row">
-      <span class="summary-label">${escapeHtml(mod)}</span>
-      <span class="summary-mono">${escapeHtml(comp.replace(/\*\*/g, ''))}</span>
-      <span>| ${done ? '<span style="color:var(--green);">✓ committed</span>' : '<span style="color:var(--text-muted);">pending</span>'} · <code style="font-size:11px; color:var(--text-dim);">${escapeHtml(artifact.replace(/`/g, ''))}</code></span>
+      <span class="summary-label">${it.mod}</span>
+      <span style="font-weight:700; color:var(--text);">${escapeHtml(it.name)}</span>
+      <span>| ${filled} · ${summaryLine('signal', it.summary)}</span>
     </div>`;
   });
-  $('glanceBody').innerHTML = rows.join('') || `<div class="summary-row"><span class="summary-miss">Strategy-at-a-Glance table is empty.</span></div>`;
-  $('glanceSub').textContent = 'Pulled from your repo’s README — Strategy at a Glance.';
+
+  $('glanceBody').innerHTML = rows.join('');
+  $('glanceSub').textContent = 'Parsed from the bullet fields and section headers in your eight component files.';
 }
 
-function seedFromReadme(sections) {
+function seedFromExtracted(ex) {
   const map = {
-    pitchBet: sections.bet,
-    pitchMoat: sections.moat,
-    pitchMargin: sections.margin,
-    pitchContract: sections.contract,
-    pitchGuardrails: sections.guardrails
+    pitchBet:        ex.bet && (ex.bet.betSentence || ex.bet.product),
+    pitchMoat:       ex.moat && (ex.moat.weakestFix || ex.moat.weakestLoop),
+    pitchMargin:     ex.margin && (ex.margin.netShift || ex.margin.pricingModel),
+    pitchContract:   ex.contract && (ex.contract.confidenceUx || ex.contract.hitl),
+    pitchGuardrails: ex.guardrails && (ex.guardrails.scope || ex.guardrails.autonomy)
   };
-  let replaced = 0;
-  Object.entries(map).forEach(([id, body]) => {
-    if (!body) return;
+  let n = 0;
+  Object.entries(map).forEach(([id, v]) => {
+    if (!v) return;
     if ($(id).value.trim()) return;
-    $(id).value = body;
-    replaced++;
+    $(id).value = v;
+    n++;
   });
-  if (replaced) scheduleSave();
-  return replaced;
+  if (n) scheduleSave();
+  return n;
+}
+
+let lastReadme = '';
+
+function generateReadmeDraft() {
+  if (!repoState || !repoState.extracted) return;
+  const md = generateReadme(repoState.extracted, repoState.repo);
+  lastReadme = md;
+  $('readmePreview').textContent = md;
+  $('readmePreviewWrap').classList.add('show');
+  $('genEmpty').style.display = 'none';
+  $('copyReadmeBtn').disabled = false;
+  $('downloadReadmeBtn').disabled = false;
+  showToast('README draft generated');
+}
+
+function copyReadme() {
+  if (!lastReadme) return;
+  navigator.clipboard.writeText(lastReadme).then(() => showToast('Markdown copied — paste into your repo’s README.md'));
+}
+
+function downloadReadme() {
+  if (!lastReadme) return;
+  const blob = new Blob([lastReadme], { type: 'text/markdown' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'README.md';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+function setReadmeGeneratorAvailability(canGenerate) {
+  $('genReadmeBtn').disabled = !canGenerate;
+  if (!canGenerate) {
+    $('readmePreviewWrap').classList.remove('show');
+    $('genEmpty').style.display = '';
+    $('copyReadmeBtn').disabled = true;
+    $('downloadReadmeBtn').disabled = true;
+    lastReadme = '';
+  } else {
+    $('genEmpty').style.display = 'none';
+  }
 }
 
 async function syncFromRepo() {
@@ -982,19 +1436,20 @@ async function syncFromRepo() {
     return;
   }
 
+  bundle.extracted = extractAll(bundle.files);
   repoState = bundle;
   localStorage.setItem(REPO_KEY, JSON.stringify({ url: input.trim(), user: bundle.user, repo: bundle.repo, branch: bundle.branch }));
 
   renderRepoMeta(bundle.user, bundle.repo, bundle.branch);
   renderRepoFiles(bundle.files, bundle.user, bundle.repo, bundle.branch);
-  renderRepoGlance(bundle.readme);
+  renderRepoGlance();
   renderReadiness();
+  setReadmeGeneratorAvailability(true);
 
-  const sections = parseReadmeSections(bundle.readme);
-  const seeded = seedFromReadme(sections);
+  const seeded = seedFromExtracted(bundle.extracted);
   const okFiles = bundle.files.filter(f => f.ok).length;
-  const seededLine = seeded ? `Seeded ${seeded} pitch section${seeded === 1 ? '' : 's'} from your README. ` : '';
-  setRepoStatus('ok', `${seededLine}Found ${okFiles}/${bundle.files.length} component files. You can edit anything below — your edits stay local.`);
+  const seededLine = seeded ? `Seeded ${seeded} pitch section${seeded === 1 ? '' : 's'} from your component files. ` : '';
+  setRepoStatus('ok', `${seededLine}Found ${okFiles}/${bundle.files.length} component files. Click <strong>Generate README</strong> below to assemble a board-ready draft.`);
 }
 
 function disconnectRepo() {
@@ -1003,6 +1458,7 @@ function disconnectRepo() {
   $('repoUrl').value = '';
   clearRepoStatus();
   $('glanceSub').textContent = 'Pulled from your repo when you sync above. Otherwise, falls back to data from the in-class tools saved in this browser.';
+  setReadmeGeneratorAvailability(false);
   renderGlance();
   renderReadiness();
 }
@@ -1019,13 +1475,15 @@ async function tryRestoreRepo() {
     setRepoStatus('err', `Could not reconnect to your saved repo. <button type="button" class="btn" style="padding:4px 10px; font-size:11px; margin-left:8px;" onclick="disconnectRepo()">Forget</button>`);
     return;
   }
+  bundle.extracted = extractAll(bundle.files);
   repoState = bundle;
   renderRepoMeta(bundle.user, bundle.repo, bundle.branch);
   renderRepoFiles(bundle.files, bundle.user, bundle.repo, bundle.branch);
-  renderRepoGlance(bundle.readme);
+  renderRepoGlance();
   renderReadiness();
+  setReadmeGeneratorAvailability(true);
   const okFiles = bundle.files.filter(f => f.ok).length;
-  setRepoStatus('ok', `Reconnected. Found ${okFiles}/${bundle.files.length} component files.`);
+  setRepoStatus('ok', `Reconnected. Found ${okFiles}/${bundle.files.length} component files. Click <strong>Generate README</strong> below.`);
 }
 
 function load() {
