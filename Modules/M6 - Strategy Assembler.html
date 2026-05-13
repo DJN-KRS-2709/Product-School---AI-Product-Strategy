@@ -87,6 +87,89 @@
   .card-sub { font-size: 12px; color: var(--text-dim); margin-top: 4px; line-height: 1.5; }
   .card-body { padding: 20px 24px 24px; }
 
+  .source-tabs {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0;
+  }
+  .source-tab {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 10px 14px;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: color 0.2s, border-color 0.2s;
+    margin-bottom: -1px;
+  }
+  .source-tab:hover { color: var(--text-dim); }
+  .source-tab.active {
+    color: var(--blue);
+    border-bottom-color: var(--blue);
+  }
+
+  .source-pane { display: none; }
+  .source-pane.active { display: block; }
+
+  .upload-row {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .upload-drop {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 22px 18px;
+    background: var(--surface2);
+    border: 1.5px dashed var(--border-hi);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+    text-align: center;
+  }
+  .upload-drop:hover, .upload-drop.dragover {
+    border-color: var(--blue);
+    background: rgba(91,141,239,0.04);
+  }
+  .upload-drop input[type="file"] {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+  }
+  .upload-drop-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text);
+  }
+  .upload-drop-sub {
+    font-size: 12px;
+    color: var(--text-dim);
+    line-height: 1.5;
+    max-width: 460px;
+  }
+  .upload-drop-sub code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    background: rgba(91,141,239,0.08);
+    color: #cfd9ff;
+    padding: 1px 5px;
+    border-radius: 3px;
+  }
+
   .repo-row {
     display: flex;
     gap: 10px;
@@ -297,19 +380,37 @@
 
   <div class="card">
     <div class="card-head">
-      <div class="card-title">1. Sync your strategy repo</div>
-      <div class="card-sub">Public GitHub fork of the strategy template. We pull from <code>raw.githubusercontent.com</code> — no auth, read-only, no writes back to your repo.</div>
+      <div class="card-title">1. Load your component files</div>
+      <div class="card-sub">Public GitHub repo: we pull from <code>raw.githubusercontent.com</code> — no auth, read-only. Private repo: upload the eight markdown files from your computer instead. Both paths feed the same parser.</div>
     </div>
     <div class="card-body">
-      <div class="repo-row">
-        <input type="url" id="repoUrl" placeholder="https://github.com/your-username/your-strategy-repo" autocomplete="off" spellcheck="false">
-        <button type="button" class="btn primary" id="repoFetchBtn" onclick="syncFromRepo()">Fetch &amp; assemble</button>
+      <div class="source-tabs" role="tablist">
+        <button type="button" class="source-tab active" data-mode="repo" onclick="setSourceMode('repo')">Sync from GitHub</button>
+        <button type="button" class="source-tab" data-mode="upload" onclick="setSourceMode('upload')">Upload files</button>
       </div>
+
+      <div class="source-pane active" id="paneRepo">
+        <div class="repo-row">
+          <input type="url" id="repoUrl" placeholder="https://github.com/your-username/your-strategy-repo" autocomplete="off" spellcheck="false">
+          <button type="button" class="btn primary" id="repoFetchBtn" onclick="syncFromRepo()">Fetch &amp; assemble</button>
+        </div>
+      </div>
+
+      <div class="source-pane" id="paneUpload">
+        <div class="upload-row">
+          <label class="upload-drop" id="uploadDrop">
+            <input type="file" id="fileInput" multiple accept=".md,text/markdown,text/plain" onchange="handleFileInput(event)">
+            <div class="upload-drop-title">Drop your 8 markdown files here, or click to browse</div>
+            <div class="upload-drop-sub">Filenames are matched automatically: <code>diagnostic.md</code>, <code>prototype.md</code>, <code>data-flywheel.md</code>, <code>kill-switch.md</code>, <code>cost-curve.md</code>, <code>golden-dataset.md</code>, <code>compounding-system.md</code>, <code>roadmap.md</code>. Folder structure is ignored — just drop the files.</div>
+          </label>
+        </div>
+      </div>
+
       <div class="repo-status" id="repoStatus"></div>
       <div class="repo-meta" id="repoMeta">
         <span id="repoMetaLabel"></span>
-        <a id="repoMetaLink" href="#" target="_blank" rel="noopener">Open repo on GitHub ↗</a>
-        <button type="button" class="btn" style="padding:6px 12px; font-size:12px;" onclick="disconnectRepo()">Disconnect</button>
+        <a id="repoMetaLink" href="#" target="_blank" rel="noopener" style="display:none;">Open repo on GitHub ↗</a>
+        <button type="button" class="btn" style="padding:6px 12px; font-size:12px;" onclick="disconnectSource()">Disconnect</button>
       </div>
       <div class="repo-files" id="repoFiles"></div>
     </div>
@@ -344,6 +445,7 @@
 
 <script>
 const REPO_KEY = 'aps-m6-strategy-repo';
+const UPLOAD_KEY = 'aps-m6-strategy-upload';
 const $ = id => document.getElementById(id);
 
 const COMPONENT_FILES = [
@@ -357,8 +459,14 @@ const COMPONENT_FILES = [
   { path: '06-the-pitch/roadmap.md',                 label: 'M6 · Roadmap' }
 ];
 
+const BASENAME_TO_PATH = COMPONENT_FILES.reduce((acc, f) => {
+  acc[f.path.split('/').pop().toLowerCase()] = f.path;
+  return acc;
+}, {});
+
 let repoState = null;
 let lastReadme = '';
+let sourceMode = 'repo';
 
 function safeJSON(key) {
   try {
@@ -850,19 +958,32 @@ function clearRepoStatus() {
   $('repoFiles').innerHTML = '';
 }
 
-function renderRepoMeta(user, repo, branch) {
-  $('repoMetaLabel').innerHTML = `Synced from <code>${escapeHtml(user)}/${escapeHtml(repo)}</code> @ <code>${escapeHtml(branch)}</code>`;
-  $('repoMetaLink').href = `https://github.com/${user}/${repo}`;
+function renderSourceMeta(state) {
+  const link = $('repoMetaLink');
+  if (state.source === 'upload') {
+    $('repoMetaLabel').innerHTML = `Loaded <code>${state.files.filter(f => f.ok).length}/${state.files.length}</code> files from your computer · <em style="color:var(--text-muted);">never leaves the browser</em>`;
+    link.style.display = 'none';
+  } else {
+    $('repoMetaLabel').innerHTML = `Synced from <code>${escapeHtml(state.user)}/${escapeHtml(state.repo)}</code> @ <code>${escapeHtml(state.branch)}</code>`;
+    link.href = `https://github.com/${state.user}/${state.repo}`;
+    link.style.display = '';
+  }
   $('repoMeta').classList.add('show');
 }
 
-function renderRepoFiles(files, user, repo, branch) {
+function renderRepoFiles(state) {
   const el = $('repoFiles');
-  el.innerHTML = files.map(f => {
-    const url = `https://github.com/${user}/${repo}/blob/${branch}/${f.path}`;
+  el.innerHTML = state.files.map(f => {
+    let inner;
+    if (state.source === 'upload') {
+      inner = `<span title="${escapeHtml(f.path)}">${escapeHtml(f.label)}</span>`;
+    } else {
+      const url = `https://github.com/${state.user}/${state.repo}/blob/${state.branch}/${f.path}`;
+      inner = `<a href="${escapeHtml(url)}" target="_blank" rel="noopener" title="${escapeHtml(f.path)}">${escapeHtml(f.label)}</a>`;
+    }
     return `<div class="repo-file">
       <span class="repo-file-icon ${f.ok ? 'ok' : 'no'}">${f.ok ? '✓' : '✗'}</span>
-      <a href="${escapeHtml(url)}" target="_blank" rel="noopener" title="${escapeHtml(f.path)}">${escapeHtml(f.label)}</a>
+      ${inner}
     </div>`;
   }).join('');
   el.classList.add('show');
@@ -943,6 +1064,7 @@ async function syncFromRepo() {
     return;
   }
 
+  bundle.source = 'github';
   bundle.extracted = extractAll(bundle.files);
   repoState = bundle;
   localStorage.setItem(REPO_KEY, JSON.stringify({
@@ -951,9 +1073,10 @@ async function syncFromRepo() {
     repo: bundle.repo,
     branch: bundle.branch
   }));
+  localStorage.removeItem(UPLOAD_KEY);
 
-  renderRepoMeta(bundle.user, bundle.repo, bundle.branch);
-  renderRepoFiles(bundle.files, bundle.user, bundle.repo, bundle.branch);
+  renderSourceMeta(bundle);
+  renderRepoFiles(bundle);
   renderReadme(bundle.extracted, bundle.repo, bundle.files);
 
   const okFiles = bundle.files.filter(f => f.ok).length;
@@ -965,9 +1088,130 @@ async function syncFromRepo() {
   }
 }
 
-function disconnectRepo() {
+function setSourceMode(mode) {
+  sourceMode = mode;
+  document.querySelectorAll('.source-tab').forEach(t => {
+    t.classList.toggle('active', t.dataset.mode === mode);
+  });
+  document.querySelectorAll('.source-pane').forEach(p => p.classList.remove('active'));
+  $(mode === 'upload' ? 'paneUpload' : 'paneRepo').classList.add('active');
+}
+
+function readFileAsText(file) {
+  return new Promise((resolve, reject) => {
+    const r = new FileReader();
+    r.onload = () => resolve(r.result);
+    r.onerror = () => reject(r.error || new Error('read error'));
+    r.readAsText(file);
+  });
+}
+
+async function buildBundleFromFiles(fileList) {
+  // Map by basename → content, taking the most recent for any collisions
+  const byPath = {};
+  const matched = [];
+  const unmatched = [];
+
+  await Promise.all(Array.from(fileList).map(async (file) => {
+    const base = (file.name || '').toLowerCase();
+    const path = BASENAME_TO_PATH[base];
+    if (!path) {
+      unmatched.push(file.name);
+      return;
+    }
+    try {
+      const content = await readFileAsText(file);
+      byPath[path] = { name: file.name, content };
+      matched.push(file.name);
+    } catch (e) {
+      unmatched.push(file.name + ' (read error)');
+    }
+  }));
+
+  const files = COMPONENT_FILES.map(f => ({
+    ...f,
+    ok: !!byPath[f.path],
+    content: byPath[f.path] ? byPath[f.path].content : null
+  }));
+
+  return {
+    ok: files.some(f => f.ok),
+    source: 'upload',
+    files,
+    matched,
+    unmatched
+  };
+}
+
+async function loadBundleFromUpload(fileList) {
+  if (!fileList || fileList.length === 0) return;
+
+  setRepoStatus('busy', `Reading ${fileList.length} file${fileList.length === 1 ? '' : 's'}…`);
+
+  const bundle = await buildBundleFromFiles(fileList);
+
+  if (!bundle.ok) {
+    setRepoStatus('err', `None of the files matched the expected component filenames. Make sure you're uploading <code>diagnostic.md</code>, <code>prototype.md</code>, etc.`);
+    return;
+  }
+
+  bundle.extracted = extractAll(bundle.files);
+  repoState = bundle;
+
+  // Persist matched files so a refresh keeps them in place
+  const persistFiles = bundle.files
+    .filter(f => f.ok)
+    .map(f => ({ path: f.path, content: f.content }));
+  try {
+    localStorage.setItem(UPLOAD_KEY, JSON.stringify({ ts: Date.now(), files: persistFiles }));
+    localStorage.removeItem(REPO_KEY);
+  } catch (e) {
+    // localStorage quota exceeded — uploads still work, just no persistence
+  }
+
+  renderSourceMeta(bundle);
+  renderRepoFiles(bundle);
+  renderReadme(bundle.extracted, 'My Strategy', bundle.files);
+
+  const okFiles = bundle.files.filter(f => f.ok).length;
+  const fields = countExtractedFields(bundle.extracted);
+  const skippedNote = bundle.unmatched.length
+    ? ` Skipped ${bundle.unmatched.length} unmatched file${bundle.unmatched.length === 1 ? '' : 's'}.`
+    : '';
+  if (okFiles === bundle.files.length) {
+    setRepoStatus('ok', `Loaded ${okFiles}/${bundle.files.length} component files from your computer. Extracted ${fields} fields.${skippedNote}`);
+  } else {
+    setRepoStatus('busy', `Loaded ${okFiles}/${bundle.files.length} component files (${fields} fields). Drop the missing files to fill the gaps.${skippedNote}`);
+  }
+}
+
+function handleFileInput(event) {
+  loadBundleFromUpload(event.target.files);
+  event.target.value = '';
+}
+
+// Drag-and-drop support on the upload zone
+function initUploadDropZone() {
+  const zone = $('uploadDrop');
+  if (!zone) return;
+  ['dragenter', 'dragover'].forEach(ev => zone.addEventListener(ev, e => {
+    e.preventDefault(); e.stopPropagation();
+    zone.classList.add('dragover');
+  }));
+  ['dragleave', 'drop'].forEach(ev => zone.addEventListener(ev, e => {
+    e.preventDefault(); e.stopPropagation();
+    zone.classList.remove('dragover');
+  }));
+  zone.addEventListener('drop', e => {
+    const files = e.dataTransfer && e.dataTransfer.files;
+    if (files && files.length) loadBundleFromUpload(files);
+  });
+}
+
+function disconnectSource() {
   repoState = null;
   localStorage.removeItem(REPO_KEY);
+  localStorage.removeItem(UPLOAD_KEY);
   $('repoUrl').value = '';
   clearRepoStatus();
   clearReadme();
@@ -975,37 +1219,77 @@ function disconnectRepo() {
 
 async function tryRestoreRepo() {
   const stored = safeJSON(REPO_KEY);
-  if (!stored || !stored.url) return;
+  if (!stored || !stored.url) return false;
   $('repoUrl').value = stored.url;
   const parsed = parseRepoUrl(stored.url);
-  if (!parsed) return;
+  if (!parsed) return false;
   setRepoStatus('busy', `Reconnecting to <code>${escapeHtml(parsed.user)}/${escapeHtml(parsed.repo)}</code>…`);
   const bundle = await fetchRepoBundle(parsed);
   if (!bundle.ok) {
-    setRepoStatus('err', `Could not reconnect to your saved repo. <button type="button" class="btn" style="padding:4px 10px; font-size:11px; margin-left:8px;" onclick="disconnectRepo()">Forget</button>`);
-    return;
+    setRepoStatus('err', `Could not reconnect to your saved repo. <button type="button" class="btn" style="padding:4px 10px; font-size:11px; margin-left:8px;" onclick="disconnectSource()">Forget</button>`);
+    return true;
   }
+  bundle.source = 'github';
   bundle.extracted = extractAll(bundle.files);
   repoState = bundle;
-  renderRepoMeta(bundle.user, bundle.repo, bundle.branch);
-  renderRepoFiles(bundle.files, bundle.user, bundle.repo, bundle.branch);
+  renderSourceMeta(bundle);
+  renderRepoFiles(bundle);
   renderReadme(bundle.extracted, bundle.repo, bundle.files);
   const okFiles = bundle.files.filter(f => f.ok).length;
   const fields = countExtractedFields(bundle.extracted);
   setRepoStatus('ok', `Reconnected. Synced ${okFiles}/${bundle.files.length} component files. Extracted ${fields} fields.`);
+  return true;
 }
 
-function init() {
-  // Migrate old repo key if present (was named for the previous tool name)
+function tryRestoreUpload() {
+  const stored = safeJSON(UPLOAD_KEY);
+  if (!stored || !Array.isArray(stored.files) || stored.files.length === 0) return false;
+
+  const byPath = {};
+  stored.files.forEach(f => { if (f && f.path && f.content) byPath[f.path] = f.content; });
+
+  const files = COMPONENT_FILES.map(f => ({
+    ...f,
+    ok: !!byPath[f.path],
+    content: byPath[f.path] || null
+  }));
+
+  if (!files.some(f => f.ok)) return false;
+
+  const bundle = {
+    ok: true,
+    source: 'upload',
+    files,
+    extracted: null
+  };
+  bundle.extracted = extractAll(bundle.files);
+  repoState = bundle;
+
+  setSourceMode('upload');
+  renderSourceMeta(bundle);
+  renderRepoFiles(bundle);
+  renderReadme(bundle.extracted, 'My Strategy', bundle.files);
+
+  const okFiles = bundle.files.filter(f => f.ok).length;
+  const fields = countExtractedFields(bundle.extracted);
+  setRepoStatus('ok', `Restored ${okFiles}/${bundle.files.length} uploaded files from your last session. Extracted ${fields} fields.`);
+  return true;
+}
+
+async function init() {
+  // Migrate old repo key from the previous tool name
   const legacy = safeJSON('aps-m6-pitch-repo');
   if (legacy && !safeJSON(REPO_KEY)) {
     localStorage.setItem(REPO_KEY, JSON.stringify(legacy));
     localStorage.removeItem('aps-m6-pitch-repo');
   }
-  // Drop legacy textarea state from the previous tool — no longer relevant
   localStorage.removeItem('aps-m6-pitch');
 
-  tryRestoreRepo();
+  initUploadDropZone();
+
+  // Prefer GitHub restore when both keys exist (it's authoritative); fall back to upload
+  const restoredRepo = await tryRestoreRepo();
+  if (!restoredRepo) tryRestoreUpload();
 }
 
 init();
