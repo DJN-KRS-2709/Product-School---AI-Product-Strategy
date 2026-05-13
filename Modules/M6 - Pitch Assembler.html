@@ -240,6 +240,90 @@
   }
   .saved-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
+  .repo-row {
+    display: flex;
+    gap: 10px;
+    align-items: stretch;
+  }
+  .repo-row input {
+    flex: 1;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: #fff;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 14px;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    min-width: 0;
+  }
+  .repo-row input:focus {
+    border-color: var(--blue);
+    box-shadow: 0 0 0 3px rgba(91,141,239,0.12);
+  }
+  .repo-row input::placeholder { color: var(--text-muted); }
+  .repo-row .btn { white-space: nowrap; }
+  .btn[disabled] { opacity: 0.55; cursor: progress; }
+
+  .repo-status {
+    margin-top: 14px;
+    padding: 12px 14px;
+    border-radius: var(--radius);
+    font-size: 12px;
+    line-height: 1.55;
+    display: none;
+  }
+  .repo-status.show { display: block; }
+  .repo-status.ok    { background: var(--green-bg); border: 1px solid rgba(61,214,140,0.2); color: var(--green); }
+  .repo-status.err   { background: rgba(239,91,91,0.08); border: 1px solid rgba(239,91,91,0.2); color: var(--red); }
+  .repo-status.busy  { background: rgba(240,192,64,0.08); border: 1px solid rgba(240,192,64,0.15); color: var(--yellow); }
+  .repo-status code  { font-family: 'JetBrains Mono', monospace; color: inherit; opacity: 0.85; }
+
+  .repo-files {
+    margin-top: 14px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+    display: none;
+  }
+  .repo-files.show { display: grid; }
+  .repo-file {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+  }
+  .repo-file-icon { font-weight: 700; }
+  .repo-file-icon.ok { color: var(--green); }
+  .repo-file-icon.no { color: var(--red); }
+  .repo-file a { color: var(--text-dim); text-decoration: none; }
+  .repo-file a:hover { color: var(--blue); }
+
+  .repo-meta {
+    margin-top: 14px;
+    display: none;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    font-size: 12px;
+    color: var(--text-dim);
+  }
+  .repo-meta.show { display: flex; }
+  .repo-meta a { color: var(--blue); text-decoration: none; font-weight: 600; }
+  .repo-meta a:hover { text-decoration: underline; }
+
+  @media (max-width: 540px) {
+    .repo-row { flex-direction: column; }
+    .repo-files { grid-template-columns: 1fr; }
+  }
+
 </style>
 </head>
 <body>
@@ -253,8 +337,28 @@
 
   <div class="card">
     <div class="card-head">
+      <div class="card-title">Sync from your strategy repo</div>
+      <div class="card-sub">Paste your forked GitHub repo URL. The assembler fetches your <code>README.md</code>, parses the five component sections, and seeds your pitch draft.</div>
+    </div>
+    <div class="card-body">
+      <div class="repo-row">
+        <input type="url" id="repoUrl" placeholder="https://github.com/your-username/your-strategy-repo" autocomplete="off" spellcheck="false">
+        <button type="button" class="btn primary" id="repoFetchBtn" onclick="syncFromRepo()">Fetch</button>
+      </div>
+      <div class="repo-status" id="repoStatus"></div>
+      <div class="repo-meta" id="repoMeta">
+        <span id="repoMetaLabel"></span>
+        <a id="repoMetaLink" href="#" target="_blank" rel="noopener">Open README on GitHub ↗</a>
+        <button type="button" class="btn" style="padding:6px 12px; font-size:12px;" onclick="disconnectRepo()">Disconnect</button>
+      </div>
+      <div class="repo-files" id="repoFiles"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
       <div class="card-title">Your Strategy at a Glance</div>
-      <div class="card-sub">Synced from module tools saved in this browser (localStorage).</div>
+      <div class="card-sub" id="glanceSub">Pulled from your repo when you sync above. Otherwise, falls back to data from the in-class tools saved in this browser.</div>
     </div>
     <div class="card-body" id="glanceBody"></div>
   </div>
@@ -305,7 +409,7 @@
   <div class="card">
     <div class="card-head">
       <div class="card-title">Readiness Check</div>
-      <div class="card-sub">Module data detected in localStorage — use this as a prep checklist.</div>
+      <div class="card-sub" id="readinessSub">Module data detected in localStorage — use this as a prep checklist.</div>
     </div>
     <div class="card-body">
       <div class="readiness-grid" id="readinessGrid"></div>
@@ -323,7 +427,30 @@
 
 <script>
 const KEY = 'aps-m6-pitch';
+const REPO_KEY = 'aps-m6-pitch-repo';
 const $ = id => document.getElementById(id);
+
+const COMPONENT_FILES = [
+  { path: '01-the-bet/diagnostic.md',          label: 'M1 · Diagnostic' },
+  { path: '01-the-bet/prototype.md',           label: 'M1 · Prototype' },
+  { path: '02-the-moat/data-flywheel.md',      label: 'M2 · Flywheel' },
+  { path: '02-the-moat/kill-switch.md',        label: 'M2 · Kill Switch' },
+  { path: '03-the-margin/cost-curve.md',       label: 'M3 · Cost Curve' },
+  { path: '04-the-contract/golden-dataset.md', label: 'M4 · Golden Dataset' },
+  { path: '05-the-guardrails/compounding-system.md', label: 'M5 · Compounding System' },
+  { path: '06-the-pitch/roadmap.md',           label: 'M6 · Roadmap' }
+];
+
+const SECTION_HEADINGS = [
+  { key: 'bet',        re: /^##\s+The\s+Bet\b/im,        target: 'pitchBet' },
+  { key: 'moat',       re: /^##\s+The\s+Moat\b/im,       target: 'pitchMoat' },
+  { key: 'margin',     re: /^##\s+The\s+Margin\b/im,     target: 'pitchMargin' },
+  { key: 'contract',   re: /^##\s+The\s+Contract\b/im,   target: 'pitchContract' },
+  { key: 'guardrails', re: /^##\s+The\s+Guardrails\b/im, target: 'pitchGuardrails' },
+  { key: 'pitch',      re: /^##\s+The\s+Pitch\b/im,      target: null }
+];
+
+let repoState = null;
 
 const M1_AXES = [
   { k: 'contextualMoat', label: 'Contextual Moat' },
@@ -478,6 +605,8 @@ function escapeHtml(s) {
 }
 
 function renderGlance() {
+  if (repoState && repoState.ok) { renderRepoGlance(repoState.readme); return; }
+  $('glanceSub').textContent = 'Pulled from your repo when you sync above. Otherwise, falls back to data from the in-class tools saved in this browser.';
   const el = $('glanceBody');
   const m1 = parseM1();
   const m2f = parseM2Fly();
@@ -531,6 +660,29 @@ function renderGlance() {
 }
 
 function renderReadiness() {
+  const sub = $('readinessSub');
+  if (repoState && repoState.ok) {
+    if (sub) sub.textContent = 'Eight component files in your repo. Anything missing is a gap to close before the board pitch.';
+    const items = repoState.files.map(f => ({ label: `${f.label} — ${f.path}`, ok: f.ok }));
+    let n = 0;
+    $('readinessGrid').innerHTML = items
+      .map(it => {
+        if (it.ok) n++;
+        return `<div class="readiness-item"><span class="readiness-icon ${it.ok ? 'ok' : 'no'}">${it.ok ? '✓' : '✗'}</span><span>${escapeHtml(it.label)}</span></div>`;
+      })
+      .join('');
+    const overall = $('readinessOverall');
+    const total = items.length;
+    if (n === total) {
+      overall.className = 'readiness-overall done';
+      overall.textContent = `Overall readiness: ${n}/${total} component files committed. Your strategy is complete. Present with confidence.`;
+    } else {
+      overall.className = 'readiness-overall pending';
+      overall.textContent = `Overall readiness: ${n}/${total} component files committed. Push the missing files before you pitch.`;
+    }
+    return;
+  }
+  if (sub) sub.textContent = 'Module data detected in localStorage — use this as a prep checklist.';
   const a = moduleAvailability();
   const m2ok = a.m2a || a.m2b;
   const m3ok = a.m3a || a.m3b;
@@ -646,6 +798,236 @@ function glancePlainText() {
   return tmp.textContent.replace(/\s+/g, ' ').trim();
 }
 
+function parseRepoUrl(input) {
+  if (!input) return null;
+  const raw = input.trim().replace(/\.git$/, '').replace(/\/$/, '');
+  let m = raw.match(/^https?:\/\/github\.com\/([^/\s]+)\/([^/\s]+)(?:\/tree\/([^/\s]+))?(?:\/.*)?$/i);
+  if (m) return { user: m[1], repo: m[2], branch: m[3] || null };
+  m = raw.match(/^git@github\.com:([^/\s]+)\/([^/\s]+)$/i);
+  if (m) return { user: m[1], repo: m[2], branch: null };
+  m = raw.match(/^([^/\s]+)\/([^/\s]+)$/);
+  if (m) return { user: m[1], repo: m[2], branch: null };
+  return null;
+}
+
+async function fetchRaw(user, repo, branch, path) {
+  const url = `https://raw.githubusercontent.com/${user}/${repo}/${branch}/${path}`;
+  try {
+    const res = await fetch(url, { cache: 'no-store' });
+    if (!res.ok) return { ok: false, status: res.status };
+    return { ok: true, content: await res.text() };
+  } catch (e) {
+    return { ok: false, error: e.message || 'network error' };
+  }
+}
+
+async function fetchRepoBundle(parsed) {
+  const { user, repo } = parsed;
+  let branch = parsed.branch;
+  let readme = null;
+  if (branch) {
+    readme = await fetchRaw(user, repo, branch, 'README.md');
+  } else {
+    readme = await fetchRaw(user, repo, 'main', 'README.md');
+    if (readme.ok) { branch = 'main'; }
+    else {
+      const fallback = await fetchRaw(user, repo, 'master', 'README.md');
+      if (fallback.ok) { readme = fallback; branch = 'master'; }
+    }
+  }
+  if (!readme || !readme.ok) {
+    return { ok: false, status: readme && readme.status, error: readme && readme.error };
+  }
+  const fileResults = await Promise.all(
+    COMPONENT_FILES.map(f =>
+      fetchRaw(user, repo, branch, f.path).then(r => ({ ...f, ok: r.ok }))
+    )
+  );
+  return { ok: true, user, repo, branch, readme: readme.content, files: fileResults };
+}
+
+function parseReadmeSections(readme) {
+  const offsets = SECTION_HEADINGS
+    .map(h => {
+      const m = readme.match(h.re);
+      return { ...h, idx: m ? m.index : -1 };
+    })
+    .filter(o => o.idx >= 0)
+    .sort((a, b) => a.idx - b.idx);
+
+  const out = {};
+  for (let i = 0; i < offsets.length; i++) {
+    const start = offsets[i].idx;
+    const end = i + 1 < offsets.length ? offsets[i + 1].idx : readme.length;
+    let body = readme.slice(start, end);
+    body = body.replace(/^##\s+.*\n/, '');
+    body = body.replace(/\n→\s+Details:[^\n]*\n?/g, '\n');
+    body = body.replace(/\n---\s*\n?/g, '\n');
+    body = body.trim();
+    out[offsets[i].key] = body;
+  }
+  return out;
+}
+
+function extractGlanceTable(readme) {
+  const m = readme.match(/##\s+Strategy\s+at\s+a\s+Glance\s*\n([\s\S]*?)(?=\n##\s|\n---|\Z)/i);
+  return m ? m[1].trim() : '';
+}
+
+function renderRepoFiles(files, user, repo, branch) {
+  const el = $('repoFiles');
+  el.innerHTML = files.map(f => {
+    const url = `https://github.com/${user}/${repo}/blob/${branch}/${f.path}`;
+    return `<div class="repo-file">
+      <span class="repo-file-icon ${f.ok ? 'ok' : 'no'}">${f.ok ? '✓' : '✗'}</span>
+      <a href="${escapeHtml(url)}" target="_blank" rel="noopener" title="${escapeHtml(f.path)}">${escapeHtml(f.label)}</a>
+    </div>`;
+  }).join('');
+  el.classList.add('show');
+}
+
+function renderRepoMeta(user, repo, branch) {
+  $('repoMetaLabel').innerHTML = `Synced from <code>${escapeHtml(user)}/${escapeHtml(repo)}</code> @ <code>${escapeHtml(branch)}</code>`;
+  $('repoMetaLink').href = `https://github.com/${user}/${repo}/blob/${branch}/README.md`;
+  $('repoMeta').classList.add('show');
+}
+
+function setRepoStatus(kind, html) {
+  const el = $('repoStatus');
+  el.className = 'repo-status show ' + kind;
+  el.innerHTML = html;
+}
+
+function clearRepoStatus() {
+  $('repoStatus').className = 'repo-status';
+  $('repoStatus').innerHTML = '';
+  $('repoMeta').classList.remove('show');
+  $('repoFiles').classList.remove('show');
+  $('repoFiles').innerHTML = '';
+}
+
+function mdTableToText(md) {
+  return md
+    .split('\n')
+    .filter(line => !/^\s*\|[\s|:-]+\|\s*$/.test(line))
+    .map(line => line.replace(/^\s*\|\s?/, '').replace(/\s?\|\s*$/, '').replace(/\s*\|\s*/g, ' · '))
+    .join('\n')
+    .trim();
+}
+
+function renderRepoGlance(readmeText) {
+  const tableMd = extractGlanceTable(readmeText);
+  if (!tableMd) {
+    $('glanceBody').innerHTML = `<div class="summary-row"><span class="summary-miss">Could not find a “Strategy at a Glance” section in this README.</span></div>`;
+    return;
+  }
+  const lines = mdTableToText(tableMd).split('\n').filter(Boolean);
+  const rows = lines.slice(1).map(line => {
+    const parts = line.split(' · ').map(s => s.trim());
+    const comp = parts[0] || '';
+    const mod = parts[1] || '';
+    const status = parts[2] || '';
+    const artifact = parts[3] || '';
+    const done = /\[x\]/i.test(status);
+    return `<div class="summary-row">
+      <span class="summary-label">${escapeHtml(mod)}</span>
+      <span class="summary-mono">${escapeHtml(comp.replace(/\*\*/g, ''))}</span>
+      <span>| ${done ? '<span style="color:var(--green);">✓ committed</span>' : '<span style="color:var(--text-muted);">pending</span>'} · <code style="font-size:11px; color:var(--text-dim);">${escapeHtml(artifact.replace(/`/g, ''))}</code></span>
+    </div>`;
+  });
+  $('glanceBody').innerHTML = rows.join('') || `<div class="summary-row"><span class="summary-miss">Strategy-at-a-Glance table is empty.</span></div>`;
+  $('glanceSub').textContent = 'Pulled from your repo’s README — Strategy at a Glance.';
+}
+
+function seedFromReadme(sections) {
+  const map = {
+    pitchBet: sections.bet,
+    pitchMoat: sections.moat,
+    pitchMargin: sections.margin,
+    pitchContract: sections.contract,
+    pitchGuardrails: sections.guardrails
+  };
+  let replaced = 0;
+  Object.entries(map).forEach(([id, body]) => {
+    if (!body) return;
+    if ($(id).value.trim()) return;
+    $(id).value = body;
+    replaced++;
+  });
+  if (replaced) scheduleSave();
+  return replaced;
+}
+
+async function syncFromRepo() {
+  const input = $('repoUrl').value;
+  const parsed = parseRepoUrl(input);
+  if (!parsed) {
+    setRepoStatus('err', 'That doesn’t look like a GitHub URL. Use <code>https://github.com/your-username/your-repo</code>.');
+    return;
+  }
+  const btn = $('repoFetchBtn');
+  btn.disabled = true;
+  btn.textContent = 'Fetching…';
+  setRepoStatus('busy', `Fetching <code>${escapeHtml(parsed.user)}/${escapeHtml(parsed.repo)}</code>…`);
+
+  const bundle = await fetchRepoBundle(parsed);
+  btn.disabled = false;
+  btn.textContent = 'Fetch';
+
+  if (!bundle.ok) {
+    const detail = bundle.status === 404
+      ? 'README.md not found on <code>main</code> or <code>master</code>. Is the repo public and forked from the strategy template?'
+      : (bundle.error ? `Network error: ${escapeHtml(bundle.error)}.` : `HTTP ${bundle.status}.`);
+    setRepoStatus('err', `Couldn’t load repo. ${detail}`);
+    return;
+  }
+
+  repoState = bundle;
+  localStorage.setItem(REPO_KEY, JSON.stringify({ url: input.trim(), user: bundle.user, repo: bundle.repo, branch: bundle.branch }));
+
+  renderRepoMeta(bundle.user, bundle.repo, bundle.branch);
+  renderRepoFiles(bundle.files, bundle.user, bundle.repo, bundle.branch);
+  renderRepoGlance(bundle.readme);
+  renderReadiness();
+
+  const sections = parseReadmeSections(bundle.readme);
+  const seeded = seedFromReadme(sections);
+  const okFiles = bundle.files.filter(f => f.ok).length;
+  const seededLine = seeded ? `Seeded ${seeded} pitch section${seeded === 1 ? '' : 's'} from your README. ` : '';
+  setRepoStatus('ok', `${seededLine}Found ${okFiles}/${bundle.files.length} component files. You can edit anything below — your edits stay local.`);
+}
+
+function disconnectRepo() {
+  repoState = null;
+  localStorage.removeItem(REPO_KEY);
+  $('repoUrl').value = '';
+  clearRepoStatus();
+  $('glanceSub').textContent = 'Pulled from your repo when you sync above. Otherwise, falls back to data from the in-class tools saved in this browser.';
+  renderGlance();
+  renderReadiness();
+}
+
+async function tryRestoreRepo() {
+  const stored = safeJSON(REPO_KEY);
+  if (!stored || !stored.url) return;
+  $('repoUrl').value = stored.url;
+  const parsed = parseRepoUrl(stored.url);
+  if (!parsed) return;
+  setRepoStatus('busy', `Reconnecting to <code>${escapeHtml(parsed.user)}/${escapeHtml(parsed.repo)}</code>…`);
+  const bundle = await fetchRepoBundle(parsed);
+  if (!bundle.ok) {
+    setRepoStatus('err', `Could not reconnect to your saved repo. <button type="button" class="btn" style="padding:4px 10px; font-size:11px; margin-left:8px;" onclick="disconnectRepo()">Forget</button>`);
+    return;
+  }
+  repoState = bundle;
+  renderRepoMeta(bundle.user, bundle.repo, bundle.branch);
+  renderRepoFiles(bundle.files, bundle.user, bundle.repo, bundle.branch);
+  renderRepoGlance(bundle.readme);
+  renderReadiness();
+  const okFiles = bundle.files.filter(f => f.ok).length;
+  setRepoStatus('ok', `Reconnected. Found ${okFiles}/${bundle.files.length} component files.`);
+}
+
 function load() {
   try {
     const raw = localStorage.getItem(KEY);
@@ -663,6 +1045,7 @@ function load() {
   renderGlance();
   renderReadiness();
   updateWordCount();
+  tryRestoreRepo();
 }
 
 function resetAll() {
