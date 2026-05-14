@@ -1577,10 +1577,20 @@ function downloadDeck() {
     showToast('Paste your AI response first');
     return;
   }
+  const strategyMd = $('strategySummary').value || '';
+  const roadmapMd = $('roadmapSummary').value || '';
   const sections = parsePitchSections(lastResult);
-  const productName = extractProductName($('strategySummary').value) || 'Your AI Bet';
+  const productName = extractProductName(strategyMd) || 'Your AI Bet';
   const audience = audienceLabel();
-  const html = buildDeckHtml({ sections, productName, audience });
+  const askForm = {
+    funding:   ($('askFunding').value   || '').trim(),
+    headcount: ($('askHeadcount').value || '').trim(),
+    months:    ($('askMonths').value    || '').trim(),
+    context:   ($('askContext').value   || '').trim(),
+  };
+  const strategyStats = parseStrategyStats(strategyMd);
+  const roadmapInits  = parseRoadmapInitiatives(roadmapMd);
+  const html = buildDeckHtml({ sections, productName, audience, askForm, strategyStats, roadmapInits });
   const blob = new Blob([html], { type: 'text/html' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
@@ -1602,6 +1612,88 @@ function extractProductName(strategyMd) {
   return '';
 }
 
+/* Pull a single labeled field out of a README built by the Strategy Assembler.
+   Format is "- **Label:** value" or "**Label:** value" — colon inside the bold. */
+function extractField(md, label) {
+  if (!md) return '';
+  const escaped = label.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const re = new RegExp(`\\*\\*${escaped}:\\*\\*\\s*([^\\n]+)`, 'i');
+  const m = md.match(re);
+  if (!m) return '';
+  return m[1].trim().replace(/\.\s*$/, '').replace(/^\s*[-—]\s*/, '');
+}
+
+function parseStrategyStats(strategyMd) {
+  return {
+    confidence:           extractField(strategyMd, 'Confidence'),
+    topRisk:              extractField(strategyMd, 'Top Risk'),
+    encroachmentThreat:   extractField(strategyMd, 'Top Encroachment Threat'),
+    grossMarginCurrent:   extractField(strategyMd, 'Gross Margin (current)'),
+    grossMarginAI:        extractField(strategyMd, 'Gross Margin (AI-adjusted)'),
+    cogs:                 extractField(strategyMd, 'Total AI COGS / unit'),
+    breakEven:            extractField(strategyMd, 'Break-even at'),
+    reliabilityTarget:    extractField(strategyMd, 'Reliability Target'),
+    pricingModel:         extractField(strategyMd, 'Pricing Model'),
+  };
+}
+
+/* Pull initiative names from each Horizon table in the roadmap markdown.
+   Tables look like:
+     | Initiative | Strategy Component | ... |
+     |---|---|...|
+     | Add Word export | Contract | ... |
+   We just want the first cell of each data row. */
+function parseRoadmapInitiatives(roadmapMd) {
+  const grabHorizon = (n) => {
+    const re = new RegExp(`##\\s*Horizon\\s+${n}[^\\n]*\\n+([\\s\\S]*?)(?=\\n##\\s|\\n---|$)`, 'i');
+    const m = roadmapMd.match(re);
+    if (!m) return [];
+    const block = m[1];
+    const rows = block.split('\n').filter(line => {
+      const t = line.trim();
+      if (!t.startsWith('|')) return false;
+      if (/^\|\s*-+/.test(t)) return false;
+      return true;
+    });
+    if (rows.length < 2) return [];
+    const dataRows = rows.slice(1);
+    return dataRows.map(row => {
+      const cells = row.split('|').map(c => c.trim());
+      const first = cells.find(c => c.length > 0);
+      return first || '';
+    }).filter(Boolean).filter(s => !/^Initiative$/i.test(s));
+  };
+  return {
+    h1: grabHorizon(1),
+    h2: grabHorizon(2),
+    h3: grabHorizon(3),
+  };
+}
+
+/* Stat values from a README are sometimes long sentences ("18 customers,
+   or about 11,000 monitored accounts"). Split into a headline number + a
+   smaller detail clause so the stat tile reads cleanly. */
+function splitStatValue(text) {
+  if (!text) return { value: '', detail: '' };
+  const trimmed = text.trim();
+  let m = trimmed.match(/^([^,]+),\s*(or\s+.+)$/i);
+  if (m) return { value: m[1].trim(), detail: m[2].trim() };
+  m = trimmed.match(/^([^(]+)\s*\((.+)\)\s*$/);
+  if (m) return { value: m[1].trim(), detail: m[2].trim() };
+  return { value: trimmed, detail: '' };
+}
+
+/* Split a chunk of body text into a "lead" sentence + the rest, so each
+   narrative slide gets a punchier visual rhythm instead of one wall of text. */
+function splitLeadAndBody(text) {
+  if (!text) return { lead: '', rest: '' };
+  const trimmed = text.trim();
+  const m = trimmed.match(/^([^\n]+?[.!?])(\s+)([\s\S]+)$/);
+  if (m && m[1].length <= 200) return { lead: m[1].trim(), rest: m[3].trim() };
+  if (trimmed.length <= 200) return { lead: trimmed, rest: '' };
+  return { lead: '', rest: trimmed };
+}
+
 function parsePitchSections(md) {
   const grab = (re) => {
     const m = md.match(re);
@@ -1621,7 +1713,13 @@ function parsePitchSections(md) {
   const scale       = grab(/(?:^|\n)\s*(?:2\.\s*)?\*?\*?Scale\s*\/\s*governance\*?\*?\s*[:\-—]\s*([\s\S]*?)(?=\n\s*(?:3\.|\*\*Competitive|Competitive))/i);
   const competitive = grab(/(?:^|\n)\s*(?:3\.\s*)?\*?\*?Competitive\*?\*?\s*[:\-—]\s*([\s\S]*?)(?=\n\s*\*\*The ask|\n\s*The ask)/i);
 
-  const ask = grab(/\*\*The ask:\*\*\s*([\s\S]*?)(?=\n\s*(?:###|\*\*Opening line|Opening line|If you only get 60|The one question|---|$))/i);
+  // Try the bolded inline label first, then a heading-style "## The Ask",
+  // then a bare "**The Ask**" with no colon. Stop at the next obvious section,
+  // a closing code fence, or a horizontal rule.
+  const askStop = `(?=\\n\\s*(?:\`\`\`|###|##\\s+|\\*\\*Opening line|Opening line|If you only get 60|The one question|---|$))`;
+  let ask = grab(new RegExp(`\\*\\*The ask:?\\*\\*\\s*([\\s\\S]*?)${askStop}`, 'i'));
+  if (!ask) ask = grab(new RegExp(`##+\\s*The Ask\\s*\\n+([\\s\\S]*?)${askStop}`, 'i'));
+  if (!ask) ask = grab(new RegExp(`\\*\\*Ask:?\\*\\*\\s*([\\s\\S]*?)${askStop}`, 'i'));
 
   const opening    = grab(/(?:^|\n)\s*(?:-\s*)?\*?\*?Opening line[^:]*:\*?\*?\s*([\s\S]*?)(?=\n\s*(?:-\s*)?\*?\*?(?:If you only get 60|The one question)|$)/i);
   const sixtySec   = grab(/(?:^|\n)\s*(?:-\s*)?\*?\*?If you only get 60[^:]*:\*?\*?\s*([\s\S]*?)(?=\n\s*(?:-\s*)?\*?\*?The one question|$)/i);
@@ -1652,54 +1750,113 @@ function deckInline(md) {
   return s.replace(/\n/g, '<br>');
 }
 
-function buildDeckHtml({ sections, productName, audience }) {
+function buildDeckHtml({ sections, productName, audience, askForm, strategyStats, roadmapInits }) {
+  askForm = askForm || {};
+  strategyStats = strategyStats || {};
+  roadmapInits = roadmapInits || { h1: [], h2: [], h3: [] };
+
   const safe = s => String(s == null ? '' : s)
     .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
+  // Build a "lead + body" pair of HTML chunks for narrative slides.
+  // If the lead can't be split out, the lead is empty and the whole text
+  // renders as body — so we never lose content.
+  const leadAndBody = (text, fallback) => {
+    if (!text) return { leadHtml: '', bodyHtml: `<div class="body"><em>${fallback}</em></div>` };
+    const { lead, rest } = splitLeadAndBody(text);
+    return {
+      leadHtml: lead ? `<div class="lead">${deckInline(lead)}</div>` : '',
+      bodyHtml: rest ? `<div class="body">${deckInline(rest)}</div>` : (lead ? '' : `<div class="body">${deckInline(text)}</div>`),
+    };
+  };
+
   const slides = [];
 
-  // 1. Cover
+  // ── 1. Cover ──────────────────────────────────────────────────────────
+  const coverPills = [];
+  if (strategyStats.confidence)
+    coverPills.push(`<div class="cover-pill"><span class="cp-label">Confidence</span>${safe(strategyStats.confidence)}</div>`);
+  if (strategyStats.encroachmentThreat)
+    coverPills.push(`<div class="cover-pill"><span class="cp-label">Threat</span>${safe(strategyStats.encroachmentThreat)}</div>`);
+  if (strategyStats.reliabilityTarget)
+    coverPills.push(`<div class="cover-pill"><span class="cp-label">Target</span>${safe(strategyStats.reliabilityTarget)}</div>`);
+
   slides.push(`
     <section class="hero" data-title="Cover">
       <div class="hero-inner">
         <div class="hero-eyebrow">Pitching to: ${safe(audience)}</div>
         <h1>${safe(productName)}</h1>
         <p class="hero-thesis">${deckInline(sections.thesis) || '<em>Thesis not detected — re-run the Pitch Builder.</em>'}</p>
+        ${coverPills.length ? `<div class="cover-strip">${coverPills.join('')}</div>` : ''}
         <div class="scroll-hint">Scroll <span>&#8595;</span></div>
       </div>
     </section>`);
 
-  // 2. Why now
-  slides.push(`
+  // ── 2. Why now ────────────────────────────────────────────────────────
+  {
+    const { leadHtml, bodyHtml } = leadAndBody(sections.whyNow, 'Why-now not detected.');
+    slides.push(`
     <section data-title="Why Now">
       <div class="inner">
         <div class="section-label">The Case · 1 of 3</div>
         <h2>Why now</h2>
-        <div class="body">${deckInline(sections.whyNow) || '<em>Why-now not detected.</em>'}</div>
+        ${leadHtml}
+        ${bodyHtml}
       </div>
     </section>`);
+  }
 
-  // 3. What's defensible
-  slides.push(`
+  // ── 3. What's defensible ──────────────────────────────────────────────
+  {
+    const { leadHtml, bodyHtml } = leadAndBody(sections.defensible, 'Defensibility not detected.');
+    const moatPill = strategyStats.encroachmentThreat
+      ? `<div class="inline-tag"><span class="it-label">Top threat</span>${safe(strategyStats.encroachmentThreat)}</div>`
+      : '';
+    slides.push(`
     <section data-title="What's Defensible">
       <div class="inner">
         <div class="section-label">The Case · 2 of 3</div>
         <h2>What's defensible</h2>
-        <div class="body">${deckInline(sections.defensible) || '<em>Defensibility not detected.</em>'}</div>
+        ${leadHtml}
+        ${bodyHtml}
+        ${moatPill}
       </div>
     </section>`);
+  }
 
-  // 4. The economics
-  slides.push(`
+  // ── 4. The economics — narrative + stat tiles from M3 fields ─────────
+  {
+    const { leadHtml, bodyHtml } = leadAndBody(sections.economics, 'Economics not detected.');
+    const econTiles = [];
+    if (strategyStats.grossMarginAI || strategyStats.grossMarginCurrent) {
+      const value = strategyStats.grossMarginAI || strategyStats.grossMarginCurrent;
+      const detail = (strategyStats.grossMarginAI && strategyStats.grossMarginCurrent)
+        ? `vs ${safe(strategyStats.grossMarginCurrent)} pre-AI`
+        : '';
+      econTiles.push(`<div class="stat-tile"><div class="stat-label">Gross margin</div><div class="stat-value">${safe(value)}</div>${detail ? `<div class="stat-detail">${detail}</div>` : ''}</div>`);
+    }
+    if (strategyStats.cogs) {
+      const c = splitStatValue(strategyStats.cogs);
+      econTiles.push(`<div class="stat-tile"><div class="stat-label">AI COGS / unit</div><div class="stat-value">${safe(c.value)}</div>${c.detail ? `<div class="stat-detail">${safe(c.detail)}</div>` : ''}</div>`);
+    }
+    if (strategyStats.breakEven) {
+      const b = splitStatValue(strategyStats.breakEven);
+      econTiles.push(`<div class="stat-tile"><div class="stat-label">Break-even</div><div class="stat-value">${safe(b.value)}</div>${b.detail ? `<div class="stat-detail">${safe(b.detail)}</div>` : ''}</div>`);
+    }
+
+    slides.push(`
     <section data-title="The Economics">
       <div class="inner">
         <div class="section-label">The Case · 3 of 3</div>
         <h2>The economics</h2>
-        <div class="body">${deckInline(sections.economics) || '<em>Economics not detected.</em>'}</div>
+        ${leadHtml}
+        ${bodyHtml}
+        ${econTiles.length ? `<div class="stat-strip">${econTiles.join('')}</div>` : ''}
       </div>
     </section>`);
+  }
 
-  // 5. Risks — three cards side by side
+  // ── 5. Risks — three cards side by side ───────────────────────────────
   slides.push(`
     <section data-title="The Risks">
       <div class="inner">
@@ -1722,17 +1879,57 @@ function buildDeckHtml({ sections, productName, audience }) {
       </div>
     </section>`);
 
-  // 6. The ask
+  // ── 6. Roadmap glance — only if at least one horizon has initiatives ──
+  const totalInits = roadmapInits.h1.length + roadmapInits.h2.length + roadmapInits.h3.length;
+  if (totalInits > 0) {
+    const horizonCol = (n, title, items) => `
+      <div class="horizon-card">
+        <div class="horizon-label">Horizon ${n}</div>
+        <div class="horizon-title">${title}</div>
+        ${items.length
+          ? `<ul class="horizon-list">${items.slice(0, 6).map(i => `<li>${safe(i)}</li>`).join('')}${items.length > 6 ? `<li class="horizon-more">+${items.length - 6} more</li>` : ''}</ul>`
+          : `<div class="horizon-empty">No initiatives in this horizon.</div>`}
+      </div>`;
+    slides.push(`
+    <section data-title="Roadmap">
+      <div class="inner">
+        <div class="section-label">The Roadmap</div>
+        <h2>How this moves through time</h2>
+        <div class="roadmap-grid">
+          ${horizonCol(1, 'Ship · 0–4 weeks', roadmapInits.h1)}
+          ${horizonCol(2, 'Validate · 1–3 months', roadmapInits.h2)}
+          ${horizonCol(3, 'Explore · 3–6 months', roadmapInits.h3)}
+        </div>
+      </div>
+    </section>`);
+  }
+
+  // ── 7. The Ask — form data as headline tiles, LLM prose as supporting ─
+  const askTiles = [];
+  if (askForm.funding)
+    askTiles.push(`<div class="ask-tile"><div class="ask-tile-label">Funding</div><div class="ask-tile-value">${safe(askForm.funding)}</div></div>`);
+  if (askForm.headcount)
+    askTiles.push(`<div class="ask-tile"><div class="ask-tile-label">Headcount</div><div class="ask-tile-value">${safe(askForm.headcount)}</div></div>`);
+  if (askForm.months)
+    askTiles.push(`<div class="ask-tile"><div class="ask-tile-label">Time horizon</div><div class="ask-tile-value">${safe(askForm.months)}</div></div>`);
+
+  const hasFormAsk = askTiles.length > 0;
+  const askProseHtml = sections.ask ? deckInline(sections.ask) : '';
+
   slides.push(`
     <section class="centered" data-title="The Ask">
       <div class="inner">
         <div class="section-label">The Ask</div>
         <h2>What we're asking for</h2>
-        <div class="ask-body">${deckInline(sections.ask) || '<em>Ask not detected.</em>'}</div>
+        ${hasFormAsk ? `<div class="ask-stats">${askTiles.join('')}</div>` : ''}
+        ${askForm.context ? `<div class="ask-context">${safe(askForm.context)}</div>` : ''}
+        ${askProseHtml
+          ? `<div class="ask-supporting">${askProseHtml}</div>`
+          : (hasFormAsk ? '' : `<div class="ask-body"><em>Ask not detected — fill in the Ask fields in the Pitch Builder and re-download.</em></div>`)}
       </div>
     </section>`);
 
-  // 7. Opening line (presenter aid, only if present)
+  // ── 8. Presenter notes (only if AI returned them) ─────────────────────
   if (sections.opening || sections.sixtySec || sections.firstQ) {
     slides.push(`
       <section class="centered" data-title="Presenter Notes">
@@ -1928,6 +2125,175 @@ h2 { font-size: 40px; font-weight: 800; color: #fff; margin-bottom: 24px; line-h
 .note-body strong { color: #fff; }
 .note-body em { color: #5fe6d4; font-style: normal; }
 
+/* Lead pull-quote on narrative slides */
+.lead {
+  font-family: 'Poppins', sans-serif;
+  font-size: 28px; font-weight: 600;
+  color: #fff; line-height: 1.35;
+  margin: 0 0 22px; max-width: 860px;
+  letter-spacing: -0.01em;
+}
+.lead em { color: #5fe6d4; font-style: normal; font-weight: 700; }
+.lead strong { color: #fff; font-weight: 800; }
+
+/* Cover credentials strip */
+.cover-strip {
+  display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;
+  margin-top: 32px;
+}
+.cover-pill {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 999px;
+  padding: 8px 16px;
+  font-size: 12px; color: #cfd4e0;
+  font-family: 'IBM Plex Mono', monospace;
+}
+.cover-pill .cp-label {
+  color: #39d2c0; text-transform: uppercase;
+  font-weight: 700; margin-right: 8px;
+  letter-spacing: 1px;
+}
+
+/* Inline tag (e.g. "top threat" badge under a body slide) */
+.inline-tag {
+  display: inline-flex; align-items: baseline; gap: 10px;
+  background: rgba(248,113,113,0.08);
+  border: 1px solid rgba(248,113,113,0.22);
+  border-radius: 8px;
+  padding: 10px 16px;
+  margin-top: 22px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px; color: #fff;
+}
+.inline-tag .it-label {
+  color: #f87171; text-transform: uppercase; font-weight: 700;
+  font-size: 11px; letter-spacing: 1.5px;
+}
+
+/* Stat tiles — used in Economics + as building block */
+.stat-strip {
+  display: flex; gap: 14px; flex-wrap: wrap;
+  margin-top: 26px; max-width: 820px;
+}
+.stat-tile {
+  flex: 1 1 180px;
+  background: rgba(57,210,192,0.06);
+  border: 1px solid rgba(57,210,192,0.20);
+  border-radius: 12px;
+  padding: 18px 20px;
+}
+.stat-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1.5px;
+  color: #5fe6d4; margin-bottom: 8px;
+}
+.stat-value {
+  font-family: 'Poppins', sans-serif;
+  font-size: 28px; font-weight: 800;
+  color: #fff; line-height: 1.15;
+  word-break: break-word;
+}
+.stat-detail {
+  font-size: 12px; color: #b0b4c8;
+  margin-top: 6px; line-height: 1.4;
+}
+
+/* Roadmap glance — three horizon columns */
+.roadmap-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 16px; margin-top: 8px;
+}
+.horizon-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-top: 3px solid #39d2c0;
+  border-radius: 10px;
+  padding: 22px 22px;
+}
+.horizon-card:nth-child(2) { border-top-color: #f0c040; }
+.horizon-card:nth-child(3) { border-top-color: #60a5fa; }
+.horizon-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1.5px;
+  color: #39d2c0; margin-bottom: 4px;
+}
+.horizon-card:nth-child(2) .horizon-label { color: #f0c040; }
+.horizon-card:nth-child(3) .horizon-label { color: #60a5fa; }
+.horizon-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px; font-weight: 700;
+  color: #fff; margin-bottom: 14px;
+}
+.horizon-list { list-style: none; padding: 0; margin: 0; }
+.horizon-list li {
+  font-size: 14px; color: #cfd4e0; line-height: 1.5;
+  padding: 8px 0 8px 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  position: relative;
+}
+.horizon-list li:before {
+  content: '·'; position: absolute;
+  left: 4px; top: 6px;
+  color: #39d2c0; font-weight: 900; font-size: 16px;
+}
+.horizon-card:nth-child(2) .horizon-list li:before { color: #f0c040; }
+.horizon-card:nth-child(3) .horizon-list li:before { color: #60a5fa; }
+.horizon-list li:last-child { border-bottom: none; }
+.horizon-list .horizon-more {
+  color: #5a6680; font-style: italic;
+  font-size: 13px;
+}
+.horizon-list .horizon-more:before { content: ''; }
+.horizon-empty { font-size: 13px; color: #5a6680; font-style: italic; }
+
+/* Ask slide — three big stat tiles + supporting prose */
+.ask-stats {
+  display: flex; gap: 18px; flex-wrap: wrap;
+  justify-content: center;
+  margin: 12px auto 28px;
+  max-width: 920px;
+}
+.ask-tile {
+  flex: 1 1 220px;
+  background: linear-gradient(135deg, rgba(57,210,192,0.12) 0%, rgba(18,65,176,0.10) 100%);
+  border: 1px solid rgba(57,210,192,0.30);
+  border-radius: 14px;
+  padding: 28px 24px;
+  text-align: center;
+}
+.ask-tile-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1.5px;
+  color: #5fe6d4; margin-bottom: 12px;
+}
+.ask-tile-value {
+  font-family: 'Poppins', sans-serif;
+  font-size: 38px; font-weight: 800;
+  color: #fff; line-height: 1.1;
+  word-break: break-word;
+}
+.ask-context {
+  font-size: 16px; color: #b0b4c8;
+  font-style: italic;
+  max-width: 680px; margin: 0 auto 24px;
+}
+.ask-supporting {
+  font-size: 16px; color: #cfd4e0;
+  line-height: 1.65;
+  max-width: 760px; margin: 0 auto;
+  text-align: left;
+  padding: 18px 22px;
+  background: rgba(255,255,255,0.03);
+  border-left: 3px solid #5fe6d4;
+  border-radius: 0 8px 8px 0;
+}
+.ask-supporting strong { color: #fff; }
+.ask-supporting em { color: #5fe6d4; font-style: normal; font-weight: 600; }
+
 /* Q&A */
 .qa-inner h1 { font-size: 96px; color: #39d2c0; }
 .qa-inner .subtitle { font-size: 22px; color: #8899bb; margin-top: 8px; }
@@ -1970,7 +2336,11 @@ h2 { font-size: 40px; font-weight: 800; color: #fff; margin-bottom: 24px; line-h
   .hero h1 { font-size: 44px; }
   .hero-thesis { font-size: 20px; }
   h2 { font-size: 30px; }
-  .risk-grid { grid-template-columns: 1fr; }
+  .lead { font-size: 22px; }
+  .risk-grid, .roadmap-grid { grid-template-columns: 1fr; }
+  .ask-stats { flex-direction: column; }
+  .ask-tile-value { font-size: 32px; }
+  .stat-value { font-size: 24px; }
   .nav-dots { display: none; }
 }
 </style>
