@@ -605,16 +605,87 @@ Voice-driven contract redlining" style="min-height:160px;"></textarea>
     </div>
   </div>
 
+  <div class="card">
+    <div class="card-head">
+      <div class="card-title">5. Run the prompt</div>
+      <div class="card-sub">Two paths. Pick one.</div>
+    </div>
+    <div class="card-body">
+      <div class="load-tabs" role="tablist">
+        <button type="button" class="load-tab active" data-mode="copy" onclick="setRunMode('copy')">① Copy the prompt</button>
+        <button type="button" class="load-tab" data-mode="api" onclick="setRunMode('api')">② Add API key &amp; run</button>
+      </div>
+
+      <div class="load-pane active" id="runPaneCopy">
+        <div class="run-mode-sub">Free path · works with any AI tool you already use.</div>
+        <div class="open-row">
+          <a class="chip" href="#" onclick="openInChat('chatgpt'); return false;"><span class="chip-dot" style="background:#10a37f"></span> Open ChatGPT</a>
+          <a class="chip" href="#" onclick="openInChat('claude'); return false;"><span class="chip-dot" style="background:#d97757"></span> Open Claude</a>
+          <a class="chip" href="#" onclick="openInChat('gemini'); return false;"><span class="chip-dot" style="background:#4285f4"></span> Open Gemini</a>
+          <button type="button" class="chip" onclick="copyPrompt()">Copy prompt</button>
+          <button type="button" class="chip" onclick="togglePromptVisible()" id="togglePromptBtn">Show prompt</button>
+        </div>
+        <div class="key-help" style="margin-top:10px;">
+          Each <strong>Open</strong> link copies the prompt to your clipboard and opens the chat in a new tab — paste and send.
+        </div>
+      </div>
+
+      <div class="load-pane" id="runPaneApi">
+        <div class="run-mode-sub">Runs the prompt directly against your chosen provider. Your key stays in your browser; only sent to the provider when you click Run. ~$0.01–0.05 per run.</div>
+
+        <div class="provider-row" id="providerRow">
+          <button type="button" class="provider-chip active" data-provider="openai" onclick="setProvider('openai')">OpenAI</button>
+          <button type="button" class="provider-chip" data-provider="anthropic" onclick="setProvider('anthropic')">Anthropic</button>
+          <button type="button" class="provider-chip" data-provider="google" onclick="setProvider('google')">Google</button>
+        </div>
+
+        <div class="field-row">
+          <label for="modelSelect">Model</label>
+          <select id="modelSelect" onchange="onModelChange()"></select>
+        </div>
+
+        <div class="field-row">
+          <label for="apiKey">API key</label>
+          <div class="key-row">
+            <input type="password" id="apiKey" placeholder="sk-…" autocomplete="off" spellcheck="false" oninput="onKeyInput()">
+            <button type="button" class="btn" style="padding:8px 12px; font-size:12px;" onclick="forgetKey()">Forget</button>
+          </div>
+        </div>
+
+        <div class="key-help" id="keyHelp"></div>
+
+        <div class="run-action" id="runAction" style="margin-top:14px;">
+          <button type="button" class="btn primary" id="runBtn" onclick="runRoadmap()">Run roadmap</button>
+          <span class="spinner"></span>
+          <span style="font-size:11px; color:var(--text-muted);" id="runHint">Nothing is sent until you click Run.</span>
+        </div>
+
+        <div class="run-status" id="runStatus"></div>
+      </div>
+    </div>
+  </div>
+
   <div class="actions">
-    <button class="btn primary" onclick="generatePrompt()">Generate Roadmap Prompt</button>
-    <button class="btn" onclick="copyPrompt()">Copy to Clipboard</button>
     <button class="btn ghost danger" onclick="resetAll()">Reset</button>
   </div>
 
   <div class="prompt-output" id="promptOutput"></div>
 
+  <div class="result-card" id="resultCard">
+    <div class="result-head">
+      <div class="result-title">Roadmap result</div>
+      <div class="result-meta" id="resultMeta"></div>
+    </div>
+    <div class="result-body" id="resultBody"></div>
+    <div class="result-actions">
+      <button type="button" class="btn" onclick="copyResult()">Copy result</button>
+      <button type="button" class="btn" onclick="downloadResult()">Download .md</button>
+      <button type="button" class="btn" onclick="clearResult()">Clear</button>
+    </div>
+  </div>
+
   <div class="tip" style="margin-top:20px;">
-    <strong>After ChatGPT / Claude responds:</strong> paste the H1 / H2 / H3 tables directly into the Roadmap section of <code>06-the-pitch/roadmap.md</code>. Move anything that feels miscategorized. Items that came back <em>unmapped</em> are either noise (cut them) or they're exposing a gap in your strategy (rethink it). Both are valuable findings.
+    <strong>After the roadmap comes back:</strong> paste the H1 / H2 / H3 tables directly into the Roadmap section of <code>06-the-pitch/roadmap.md</code>. Move anything that feels miscategorized. Items that came back <em>unmapped</em> are either noise (cut them) or they're exposing a gap in your strategy (rethink it). Both are valuable findings.
   </div>
 </div>
 
@@ -1259,19 +1330,413 @@ After the tables, add 3 short sentences:
 
   const out = $('promptOutput');
   out.textContent = prompt;
-  out.classList.add('visible');
-  out.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  // Keep the raw prompt collapsed by default — surfaced via "Show prompt" toggle
+  // in the Run-the-prompt card.
 }
 
 function copyPrompt() {
-  const out = $('promptOutput');
-  if (!out.textContent) {
-    showToast('Generate a prompt first');
-    return;
-  }
-  navigator.clipboard.writeText(out.textContent).then(() => {
+  const txt = ensurePromptText();
+  if (!txt) return;
+  navigator.clipboard.writeText(txt).then(() => {
     showToast('Prompt copied — paste into Claude or ChatGPT');
   });
+}
+
+/* ─── PROVIDER / API KEY state ──────────────── */
+const PROVIDERS = {
+  openai: {
+    label: 'OpenAI',
+    keyHelpHtml: 'Get a key at <a href="https://platform.openai.com/api-keys" target="_blank" rel="noopener">platform.openai.com/api-keys</a>. Stays in your browser; sent only to OpenAI when you Run.',
+    models: [
+      { id: 'gpt-4o',         label: 'gpt-4o (recommended)' },
+      { id: 'gpt-4o-mini',    label: 'gpt-4o-mini (faster, cheaper)' },
+      { id: 'gpt-4.1',        label: 'gpt-4.1' },
+      { id: 'gpt-4.1-mini',   label: 'gpt-4.1-mini' }
+    ]
+  },
+  anthropic: {
+    label: 'Anthropic',
+    keyHelpHtml: 'Get a key at <a href="https://console.anthropic.com/settings/keys" target="_blank" rel="noopener">console.anthropic.com/settings/keys</a>. Stays in your browser; sent only to Anthropic when you Run.',
+    models: [
+      { id: 'claude-sonnet-4-5',  label: 'Claude Sonnet 4.5 (recommended)' },
+      { id: 'claude-opus-4-5',    label: 'Claude Opus 4.5 (highest reasoning)' },
+      { id: 'claude-haiku-4-5',   label: 'Claude Haiku 4.5 (faster, cheaper)' }
+    ]
+  },
+  google: {
+    label: 'Google',
+    keyHelpHtml: 'Get a key at <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">aistudio.google.com/apikey</a>. Stays in your browser; sent only to Google when you Run.',
+    models: [
+      { id: 'gemini-2.5-pro',   label: 'Gemini 2.5 Pro (recommended)' },
+      { id: 'gemini-2.5-flash', label: 'Gemini 2.5 Flash (faster, cheaper)' }
+    ]
+  }
+};
+
+const PROVIDER_KEY_PREF = 'aps-m6-roadmap-builder-provider';
+const MODEL_KEY_PREF    = 'aps-m6-roadmap-builder-model';
+const RUN_MODE_KEY      = 'aps-m6-roadmap-builder-run-mode';
+const KEY_PREF = (provider) => `aps-m6-roadmap-builder-key-${provider}`;
+
+let currentProvider = 'openai';
+let runMode = 'copy';
+let lastResult = null;
+
+function setProvider(provider) {
+  if (!PROVIDERS[provider]) return;
+  currentProvider = provider;
+  localStorage.setItem(PROVIDER_KEY_PREF, provider);
+
+  document.querySelectorAll('.provider-chip').forEach(c => {
+    c.classList.toggle('active', c.dataset.provider === provider);
+  });
+
+  const sel = $('modelSelect');
+  sel.innerHTML = '';
+  PROVIDERS[provider].models.forEach(m => {
+    const opt = document.createElement('option');
+    opt.value = m.id;
+    opt.textContent = m.label;
+    sel.appendChild(opt);
+  });
+  const savedModel = localStorage.getItem(`${MODEL_KEY_PREF}-${provider}`);
+  if (savedModel && PROVIDERS[provider].models.some(m => m.id === savedModel)) {
+    sel.value = savedModel;
+  }
+
+  $('apiKey').value = localStorage.getItem(KEY_PREF(provider)) || '';
+  $('keyHelp').innerHTML = PROVIDERS[provider].keyHelpHtml;
+  $('runBtn').textContent = `Run with ${PROVIDERS[provider].label}`;
+}
+
+function onModelChange() {
+  localStorage.setItem(`${MODEL_KEY_PREF}-${currentProvider}`, $('modelSelect').value);
+}
+
+function onKeyInput() {
+  const key = $('apiKey').value;
+  if (key) localStorage.setItem(KEY_PREF(currentProvider), key);
+  else localStorage.removeItem(KEY_PREF(currentProvider));
+}
+
+function forgetKey() {
+  $('apiKey').value = '';
+  localStorage.removeItem(KEY_PREF(currentProvider));
+  showToast(`Forgot ${PROVIDERS[currentProvider].label} API key`);
+}
+
+function setRunMode(mode) {
+  runMode = mode === 'api' ? 'api' : 'copy';
+  localStorage.setItem(RUN_MODE_KEY, runMode);
+
+  document.querySelectorAll('#runPaneCopy, #runPaneApi').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('[data-mode]').forEach(t => {
+    if (['copy', 'api'].includes(t.dataset.mode)) {
+      t.classList.toggle('active', t.dataset.mode === runMode);
+    }
+  });
+  $(runMode === 'api' ? 'runPaneApi' : 'runPaneCopy').classList.add('active');
+}
+
+function setRunStatus(kind, html) {
+  const el = $('runStatus');
+  el.className = 'run-status show ' + kind;
+  el.innerHTML = html;
+}
+function clearRunStatus() {
+  const el = $('runStatus');
+  el.className = 'run-status';
+  el.innerHTML = '';
+}
+function setRunBusy(busy) {
+  $('runAction').classList.toggle('busy', busy);
+  $('runBtn').disabled = busy;
+}
+
+/* ─── Build prompt on demand (no UI surface) ─ */
+function ensurePromptText() {
+  let prompt = ($('promptOutput').textContent || '').trim();
+  if (prompt) return prompt;
+
+  // Validate prerequisites before building
+  const strategy = $('strategySummary').value.trim();
+  if (!strategy) { showToast('Load your strategy README first'); return ''; }
+  if (initiatives.length === 0) { showToast('Add at least one initiative'); return ''; }
+
+  generatePrompt();
+  return ($('promptOutput').textContent || '').trim();
+}
+
+function togglePromptVisible() {
+  const out = $('promptOutput');
+  if (!out.textContent.trim()) {
+    if (!ensurePromptText()) return;
+  }
+  out.classList.toggle('visible');
+  $('togglePromptBtn').textContent =
+    out.classList.contains('visible') ? 'Hide prompt' : 'Show prompt';
+}
+
+/* ─── Copy/Open in chat helpers ─────────────── */
+const CHAT_URLS = {
+  chatgpt: 'https://chat.openai.com/',
+  claude:  'https://claude.ai/new',
+  gemini:  'https://gemini.google.com/app'
+};
+
+function openInChat(which) {
+  const prompt = ensurePromptText();
+  if (!prompt) return;
+  const url = CHAT_URLS[which];
+  const tab = window.open(url, '_blank', 'noopener');
+  navigator.clipboard.writeText(prompt).then(
+    () => showToast(`Prompt copied — paste into ${which.charAt(0).toUpperCase() + which.slice(1)}`),
+    () => showToast(`Could not copy automatically — use the Copy prompt button`)
+  );
+  if (!tab) {
+    setRunStatus('err', 'Pop-up blocked. Use the Copy prompt button and open the chat manually.');
+  }
+}
+
+/* ─── API CALLS ─────────────────────────────── */
+async function callOpenAI({ model, key, prompt }) {
+  const res = await fetch('https://api.openai.com/v1/chat/completions', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${key}`
+    },
+    body: JSON.stringify({
+      model,
+      temperature: 0.3,
+      messages: [{ role: 'user', content: prompt }]
+    })
+  });
+  if (!res.ok) throw new Error(`OpenAI ${res.status}: ${shortErr(await res.text().catch(()=> '')) || res.statusText}`);
+  const data = await res.json();
+  return data.choices?.[0]?.message?.content || '';
+}
+
+async function callAnthropic({ model, key, prompt }) {
+  const res = await fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-api-key': key,
+      'anthropic-version': '2023-06-01',
+      'anthropic-dangerous-direct-browser-access': 'true'
+    },
+    body: JSON.stringify({
+      model,
+      max_tokens: 4096,
+      messages: [{ role: 'user', content: prompt }]
+    })
+  });
+  if (!res.ok) throw new Error(`Anthropic ${res.status}: ${shortErr(await res.text().catch(()=> '')) || res.statusText}`);
+  const data = await res.json();
+  return (data.content || []).map(c => c.text || '').join('').trim();
+}
+
+async function callGoogle({ model, key, prompt }) {
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent?key=${encodeURIComponent(key)}`;
+  const res = await fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      contents: [{ role: 'user', parts: [{ text: prompt }] }],
+      generationConfig: { temperature: 0.3, maxOutputTokens: 4096 }
+    })
+  });
+  if (!res.ok) throw new Error(`Google ${res.status}: ${shortErr(await res.text().catch(()=> '')) || res.statusText}`);
+  const data = await res.json();
+  const parts = data.candidates?.[0]?.content?.parts || [];
+  return parts.map(p => p.text || '').join('').trim();
+}
+
+function shortErr(text) {
+  if (!text) return '';
+  try {
+    const j = JSON.parse(text);
+    return j.error?.message || j.message || text.slice(0, 240);
+  } catch (e) {
+    return text.slice(0, 240);
+  }
+}
+
+async function runRoadmap() {
+  const prompt = ensurePromptText();
+  if (!prompt) return;
+
+  const key = ($('apiKey').value || '').trim();
+  if (!key) {
+    setRunStatus('err', `Paste your ${PROVIDERS[currentProvider].label} API key first.`);
+    return;
+  }
+  const model = $('modelSelect').value;
+  const provider = currentProvider;
+  const startedAt = Date.now();
+
+  clearRunStatus();
+  setRunBusy(true);
+  setRunStatus('busy', `Sending roadmap prompt to <code>${escapeHtml(model)}</code>… typically 15–45 seconds for the full roadmap.`);
+
+  try {
+    let text;
+    if (provider === 'openai')        text = await callOpenAI({ model, key, prompt });
+    else if (provider === 'anthropic') text = await callAnthropic({ model, key, prompt });
+    else                              text = await callGoogle({ model, key, prompt });
+
+    if (!text) throw new Error('Empty response from model.');
+
+    const elapsed = ((Date.now() - startedAt) / 1000).toFixed(1);
+    renderResult(text, { provider, model, elapsed });
+    setRunStatus('ok', `Roadmap returned in ${elapsed}s.`);
+  } catch (e) {
+    setRunStatus('err', `Run failed: ${escapeHtml(e.message || 'unknown error')}.`);
+  } finally {
+    setRunBusy(false);
+  }
+}
+
+function renderResult(markdown, meta) {
+  lastResult = markdown;
+  $('resultBody').innerHTML = renderMarkdown(markdown);
+  $('resultMeta').textContent =
+    `${PROVIDERS[meta.provider].label} · ${meta.model} · ${meta.elapsed}s`;
+  $('resultCard').classList.add('show');
+  $('resultCard').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function clearResult() {
+  lastResult = null;
+  $('resultBody').innerHTML = '';
+  $('resultMeta').textContent = '';
+  $('resultCard').classList.remove('show');
+}
+
+function copyResult() {
+  if (!lastResult) return;
+  navigator.clipboard.writeText(lastResult).then(() => showToast('Roadmap copied as markdown'));
+}
+
+function downloadResult() {
+  if (!lastResult) return;
+  const blob = new Blob([lastResult], { type: 'text/markdown' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'roadmap.md';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+/* ─── Minimal markdown → HTML ─────────────── */
+function renderMarkdown(md) {
+  const escape = s => s
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+
+  const inline = s => s
+    .replace(/`([^`]+)`/g, (_, c) => `<code>${escape(c)}</code>`)
+    .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+    .replace(/(^|[^*])\*([^*\n]+)\*/g, '$1<em>$2</em>')
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, (_, label, url) =>
+      `<a href="${escape(url)}" target="_blank" rel="noopener">${escape(label)}</a>`);
+
+  const lines = md.split('\n');
+  const out = [];
+  let i = 0;
+
+  const flushPara = (buf) => {
+    if (buf.length) out.push(`<p>${inline(escape(buf.join(' ')))}</p>`);
+  };
+
+  while (i < lines.length) {
+    const line = lines[i];
+
+    if (/^\s*---+\s*$/.test(line)) { out.push('<hr>'); i++; continue; }
+
+    const h = line.match(/^(#{1,6})\s+(.*)$/);
+    if (h) {
+      const level = h[1].length;
+      out.push(`<h${level}>${inline(escape(h[2]))}</h${level}>`);
+      i++; continue;
+    }
+
+    if (/^\s*\|.+\|\s*$/.test(line) && i + 1 < lines.length && /^\s*\|[\s:|-]+\|\s*$/.test(lines[i + 1])) {
+      const headerCells = line.trim().slice(1, -1).split('|').map(s => inline(escape(s.trim())));
+      i += 2;
+      const rows = [];
+      while (i < lines.length && /^\s*\|.+\|\s*$/.test(lines[i])) {
+        rows.push(lines[i].trim().slice(1, -1).split('|').map(s => inline(escape(s.trim()))));
+        i++;
+      }
+      out.push('<table><thead><tr>' + headerCells.map(c => `<th>${c}</th>`).join('') + '</tr></thead><tbody>' +
+        rows.map(r => '<tr>' + r.map(c => `<td>${c}</td>`).join('') + '</tr>').join('') +
+        '</tbody></table>');
+      continue;
+    }
+
+    if (/^\s*[-*+]\s+/.test(line)) {
+      const items = [];
+      while (i < lines.length && /^\s*[-*+]\s+/.test(lines[i])) {
+        items.push(lines[i].replace(/^\s*[-*+]\s+/, ''));
+        i++;
+      }
+      out.push('<ul>' + items.map(it => `<li>${inline(escape(it))}</li>`).join('') + '</ul>');
+      continue;
+    }
+
+    if (/^\s*\d+\.\s+/.test(line)) {
+      const items = [];
+      while (i < lines.length && /^\s*\d+\.\s+/.test(lines[i])) {
+        items.push(lines[i].replace(/^\s*\d+\.\s+/, ''));
+        i++;
+      }
+      out.push('<ol>' + items.map(it => `<li>${inline(escape(it))}</li>`).join('') + '</ol>');
+      continue;
+    }
+
+    if (/^\s*>\s?/.test(line)) {
+      const items = [];
+      while (i < lines.length && /^\s*>\s?/.test(lines[i])) {
+        items.push(lines[i].replace(/^\s*>\s?/, ''));
+        i++;
+      }
+      out.push(`<blockquote>${inline(escape(items.join(' ')))}</blockquote>`);
+      continue;
+    }
+
+    if (!line.trim()) { i++; continue; }
+
+    const buf = [];
+    while (i < lines.length && lines[i].trim() &&
+           !/^(#{1,6})\s+/.test(lines[i]) &&
+           !/^\s*[-*+]\s+/.test(lines[i]) &&
+           !/^\s*\d+\.\s+/.test(lines[i]) &&
+           !/^\s*>\s?/.test(lines[i]) &&
+           !/^\s*---+\s*$/.test(lines[i]) &&
+           !/^\s*\|.+\|\s*$/.test(lines[i])) {
+      buf.push(lines[i]);
+      i++;
+    }
+    flushPara(buf);
+  }
+
+  return out.join('\n');
+}
+
+function initProvider() {
+  const saved = localStorage.getItem(PROVIDER_KEY_PREF);
+  setProvider(PROVIDERS[saved] ? saved : 'openai');
+}
+
+function initRunMode() {
+  const saved = localStorage.getItem(RUN_MODE_KEY);
+  setRunMode(saved === 'api' ? 'api' : 'copy');
 }
 
 /* ─── Persist + restore ─────────────────────── */
@@ -1304,7 +1769,7 @@ function loadState() {
 }
 
 function resetAll() {
-  if (!confirm('Reset everything — strategy summary, initiatives, and saved state?')) return;
+  if (!confirm('Reset everything — strategy summary, initiatives, and saved state? (Your saved API key stays.)')) return;
   initiatives = [];
   $('strategySummary').value = '';
   $('readmePaste').value = '';
@@ -1315,8 +1780,11 @@ function resetAll() {
   $('readmeStatus').innerHTML = '';
   $('backlogStatus').className = 'load-status';
   $('backlogStatus').innerHTML = '';
+  $('togglePromptBtn').textContent = 'Show prompt';
   renderStrategyPills({});
   renderInitiatives();
+  clearResult();
+  clearRunStatus();
   try { localStorage.removeItem(STORAGE_KEY); } catch(e) {}
   showToast('Reset');
 }
@@ -1329,6 +1797,8 @@ $('strategySummary').addEventListener('input', () => {
 
 initReadmeDropZone();
 initBacklogDropZone();
+initProvider();
+initRunMode();
 loadState();
 renderInitiatives();
 </script>
