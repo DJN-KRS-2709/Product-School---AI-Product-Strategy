@@ -674,8 +674,8 @@ footer .footer-sub {
   <p>Ten minutes. The slide shows the Shadow AI Audit table — three rows by four columns: <strong>Workaround / Signal / Frequency / Decision</strong>. That maps onto the repo template's four columns: <em>Tool</em> = workaround, <em>Owner</em> = signal source (support, interview, Zapier directory, etc.), <em>Risk H/M/L</em> = frequency, <em>Decision</em> = <strong>build / partner / ignore</strong> (the repo placeholder still says keep/govern/kill — overwrite it). Three rows is the floor; aim for five if you've got time.</p>
   <p>Where does the signal come from if you don't already have a list in your head? Your support team has it. Your CS team has it. Your developer-relations folks have it. Search your support tool for "ChatGPT," "Claude," "Zapier," and your top competitor's name. Five mentions and you've got a pattern.</p>
   <p>Below the table, three summary stats: <strong>Workarounds found · Build candidates · Adjacent spend</strong>. Adjacent spend is the one that turns heads in a roadmap review — if your users are collectively paying $X per month for external AI to do things adjacent to your product, that's the budget that becomes available the moment you ship the native version. In one recent cohort, a PM calculated her users were paying ~$14/month each on top of her product just to use ChatGPT for report summarization. The native feature shipped six weeks later.</p>
-  <p>Be ruthless with the Risk tiers. "Medium" is the lazy answer — push to High or Low. The Decision column has three real options: <strong>keep</strong> (safe and useful), <strong>govern</strong> (useful but needs guardrails), or <strong>kill</strong> (the data path is unsafe and there's no fix). Pick one villain tool right now — the one that made your stomach drop during the Samsung story.</p>
-  <p>The <strong>Shadow AI Audit</strong> tool from the slide walks you through discovery, risk-scoring, and triage with exportable results. Export the results when you're done — this is the artifact you're handing to someone on Monday, and being able to send <em>"here's our shadow AI inventory, scored, with decisions"</em> in a single message is the whole point of the exercise.</p>
+  <p>Be honest about signal classification. The four types — <strong>workflow gap</strong>, <strong>trust gap</strong>, <strong>capability gap</strong>, <strong>pricing gap</strong> — each point to a different roadmap move (workflow → Partner, trust → re-open M4 reliability work, capability → Build, pricing → re-examine packaging first). Don't write "all of the above" on a row; pick the dominant one. Then pick one workaround right now — the one your support team mentions over and over and you've quietly been dismissing as "edge case." It's not an edge case. It's a build candidate.</p>
+  <p>The <strong>Shadow AI Audit</strong> tool from the slide walks you through Discover → Signal → Prioritize → Decide with exportable results, plus a worked-example loader if you want to see a finished version first. Export when you're done. What you're walking out with is a five-row table, three summary stats, and an auto-generated brief that takes ten seconds to skim — and changes the next roadmap-review conversation entirely.</p>
 </section>
 
 <hr class="divider">
@@ -685,7 +685,7 @@ footer .footer-sub {
   <h2>Five components committed. One module left.</h2>
 
   <h3><span class="slide-num">Slide 20</span>Your Repo After Today</h3>
-  <p>Five out of six folders done. Your living strategy repo now has compounding loops, governance, and a shadow AI inventory all sitting alongside the previous four components.</p>
+  <p>Five out of six folders done. Your living strategy repo now has compounding loops, governance, and a user-side shadow AI audit all sitting alongside the previous four components.</p>
 
   <div class="repo-tree"><span class="folder">01-the-bet/</span>
   <span class="file">diagnostic.md</span>
@@ -707,7 +707,7 @@ footer .footer-sub {
 <span class="folder">06-the-pitch/</span>          <span class="comment"># → M6 Capstone</span>
   <span class="file">roadmap.md</span>            <span class="comment"># the finale</span></div>
 
-  <p>Three things to be able to point to inside <code>05-the-guardrails/compounding-system.md</code>: a <strong>compounding sketch</strong> with three loops that actually learn (or honestly say they don't), a <strong>governance one-pager</strong> with autonomy, data, regs, and named owners, and a <strong>shadow AI audit</strong> with inventory, risk scoring, and keep/kill calls. If one of them feels light, that's homework before Module 6.</p>
+  <p>Three things to be able to point to inside <code>05-the-guardrails/compounding-system.md</code>: a <strong>compounding sketch</strong> with three loops that actually learn (or honestly say they don't), a <strong>governance one-pager</strong> with autonomy, data, regs, and named owners, and a <strong>user-side shadow AI audit</strong> with five workarounds, each classified by signal, with build/partner/ignore calls. If one of them feels light, that's homework before Module 6.</p>
 
   <h3><span class="slide-num">Slide 21</span>Bridge to Module 6</h3>
   <p>M5 closes the building phase. Everything from M1 through M5 — vulnerability, moat, economics, trust, guardrails — comes together next time. Module 6 is the board simulation: room = board, metrics + roadmap + story under pressure from your peers playing board members. The most fun module in the course, and the one that surfaces what's actually defensible in your strategy.</p>
@@ -738,7 +738,7 @@ footer .footer-sub {
   <h3><span class="slide-num">Slide 23</span>Optional · Go Deeper</h3>
   <p>Two optional exercises between now and Module 6. Both go directly into the repo.</p>
   <ul class="bring-list">
-    <li><strong>Expand your shadow AI audit to ten tools.</strong> Run a real survey with your team. Five responses will surface tools you didn't know existed. Commit to <code>05-the-guardrails/compounding-system.md</code>.</li>
+    <li><strong>Expand your user-side shadow AI audit to ten workarounds.</strong> Search your support inbox for "ChatGPT," "Claude," "Zapier," and your top competitor's name. Five mentions surface a pattern; ten gives you a roadmap conversation. Commit to <code>05-the-guardrails/compounding-system.md</code>.</li>
     <li><strong>Apply agent governance to one real workflow.</strong> Pick one agent or AI workflow in your org, define all four governance knobs (autonomy, tool calls, memory, chain ownership), and add the topology to your repo.</li>
   </ul>
   <p>Next session: <strong>Module 6 — The Pitch.</strong> Everything you've built becomes one story, told under pressure.</p>
