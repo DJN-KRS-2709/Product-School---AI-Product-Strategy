@@ -238,19 +238,10 @@
   .load-status.busy  { background: rgba(240,192,64,0.08); border: 1px solid rgba(240,192,64,0.15); color: var(--yellow); }
   .load-status code { font-family: 'JetBrains Mono', monospace; opacity: 0.85; }
 
-  .run-section { display: grid; grid-template-columns: 1fr; gap: 14px; }
-  .run-block {
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 16px 18px;
+  .run-mode-sub {
+    font-size: 12px; color: var(--text-dim); line-height: 1.55;
+    margin-bottom: 14px;
   }
-  .run-block-head {
-    display: flex; align-items: baseline; justify-content: space-between;
-    gap: 14px; margin-bottom: 10px;
-  }
-  .run-block-title { font-size: 13px; font-weight: 700; color: var(--text); }
-  .run-block-sub   { font-size: 11px; color: var(--text-muted); }
 
   .open-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
   .chip {
@@ -560,64 +551,59 @@
   <div class="card">
     <div class="card-head">
       <div class="card-title">Run the evaluation</div>
-      <div class="card-sub">Two ways to get the critique: copy-paste the prompt into your favourite AI, or paste an API key and run it right here.</div>
+      <div class="card-sub">Two paths. Pick one.</div>
     </div>
     <div class="card-body">
-      <div class="run-section">
+      <div class="load-tabs" role="tablist">
+        <button type="button" class="load-tab active" data-mode="copy" onclick="setRunMode('copy')">① Copy the prompt</button>
+        <button type="button" class="load-tab" data-mode="api" onclick="setRunMode('api')">② Add API key &amp; run</button>
+      </div>
 
-        <div class="run-block">
-          <div class="run-block-head">
-            <div class="run-block-title">① Copy &amp; paste into your AI</div>
-            <div class="run-block-sub">Free path · works with any AI tool</div>
-          </div>
-          <div class="open-row">
-            <a class="chip" href="#" onclick="openInChat('chatgpt'); return false;"><span class="chip-dot" style="background:#10a37f"></span> Open ChatGPT</a>
-            <a class="chip" href="#" onclick="openInChat('claude'); return false;"><span class="chip-dot" style="background:#d97757"></span> Open Claude</a>
-            <a class="chip" href="#" onclick="openInChat('gemini'); return false;"><span class="chip-dot" style="background:#4285f4"></span> Open Gemini</a>
-            <button type="button" class="chip" onclick="copyPrompt()">Copy prompt</button>
-            <button type="button" class="chip" onclick="togglePromptVisible()" id="togglePromptBtn">Show prompt</button>
-          </div>
-          <div class="key-help" style="margin-top:8px;">
-            Each link copies the prompt to your clipboard, then opens the chat in a new tab — paste and send.
+      <div class="load-pane active" id="runPaneCopy">
+        <div class="run-mode-sub">Free path · works with any AI tool you already use.</div>
+        <div class="open-row">
+          <a class="chip" href="#" onclick="openInChat('chatgpt'); return false;"><span class="chip-dot" style="background:#10a37f"></span> Open ChatGPT</a>
+          <a class="chip" href="#" onclick="openInChat('claude'); return false;"><span class="chip-dot" style="background:#d97757"></span> Open Claude</a>
+          <a class="chip" href="#" onclick="openInChat('gemini'); return false;"><span class="chip-dot" style="background:#4285f4"></span> Open Gemini</a>
+          <button type="button" class="chip" onclick="copyPrompt()">Copy prompt</button>
+          <button type="button" class="chip" onclick="togglePromptVisible()" id="togglePromptBtn">Show prompt</button>
+        </div>
+        <div class="key-help" style="margin-top:10px;">
+          Each <strong>Open</strong> link copies the prompt to your clipboard and opens the chat in a new tab — paste and send.
+        </div>
+      </div>
+
+      <div class="load-pane" id="runPaneApi">
+        <div class="run-mode-sub">Runs the prompt directly against your chosen provider. Your key stays in your browser; only sent to the provider when you click Run. ~$0.01–0.05 per run.</div>
+
+        <div class="provider-row" id="providerRow">
+          <button type="button" class="provider-chip active" data-provider="openai" onclick="setProvider('openai')">OpenAI</button>
+          <button type="button" class="provider-chip" data-provider="anthropic" onclick="setProvider('anthropic')">Anthropic</button>
+          <button type="button" class="provider-chip" data-provider="google" onclick="setProvider('google')">Google</button>
+        </div>
+
+        <div class="field-row">
+          <label for="modelSelect">Model</label>
+          <select id="modelSelect" onchange="onModelChange()"></select>
+        </div>
+
+        <div class="field-row">
+          <label for="apiKey">API key</label>
+          <div class="key-row">
+            <input type="password" id="apiKey" placeholder="sk-…" autocomplete="off" spellcheck="false" oninput="onKeyInput()">
+            <button type="button" class="btn" style="padding:8px 12px; font-size:12px;" onclick="forgetKey()">Forget</button>
           </div>
         </div>
 
-        <div class="run-block">
-          <div class="run-block-head">
-            <div class="run-block-title">② Run live with your API key</div>
-            <div class="run-block-sub">~$0.01–0.05 per run · key stays in your browser</div>
-          </div>
+        <div class="key-help" id="keyHelp"></div>
 
-          <div class="provider-row" id="providerRow">
-            <button type="button" class="provider-chip active" data-provider="openai" onclick="setProvider('openai')">OpenAI</button>
-            <button type="button" class="provider-chip" data-provider="anthropic" onclick="setProvider('anthropic')">Anthropic</button>
-            <button type="button" class="provider-chip" data-provider="google" onclick="setProvider('google')">Google</button>
-          </div>
-
-          <div class="field-row">
-            <label for="modelSelect">Model</label>
-            <select id="modelSelect" onchange="onModelChange()"></select>
-          </div>
-
-          <div class="field-row">
-            <label for="apiKey">API key</label>
-            <div class="key-row">
-              <input type="password" id="apiKey" placeholder="sk-…" autocomplete="off" spellcheck="false" oninput="onKeyInput()">
-              <button type="button" class="btn" style="padding:8px 12px; font-size:12px;" onclick="forgetKey()">Forget</button>
-            </div>
-          </div>
-
-          <div class="key-help" id="keyHelp"></div>
-
-          <div class="run-action" id="runAction">
-            <button type="button" class="btn primary" id="runBtn" onclick="runEvaluation()">Run evaluation</button>
-            <span class="spinner"></span>
-            <span style="font-size:11px; color:var(--text-muted);" id="runHint">No data is sent until you click Run.</span>
-          </div>
-
-          <div class="run-status" id="runStatus"></div>
+        <div class="run-action" id="runAction" style="margin-top:14px;">
+          <button type="button" class="btn primary" id="runBtn" onclick="runEvaluation()">Run evaluation</button>
+          <span class="spinner"></span>
+          <span style="font-size:11px; color:var(--text-muted);" id="runHint">Nothing is sent until you click Run.</span>
         </div>
 
+        <div class="run-status" id="runStatus"></div>
       </div>
     </div>
   </div>
@@ -652,12 +638,32 @@ let loadMode = 'url';
 
 function setLoadMode(mode) {
   loadMode = mode;
-  document.querySelectorAll('.load-tab').forEach(t => {
-    t.classList.toggle('active', t.dataset.mode === mode);
+  document.querySelectorAll('#loadPaneUrl, #loadPaneUpload, #loadPanePaste').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('[data-mode]').forEach(t => {
+    if (['url', 'upload', 'paste'].includes(t.dataset.mode)) {
+      t.classList.toggle('active', t.dataset.mode === mode);
+    }
   });
-  document.querySelectorAll('.load-pane').forEach(p => p.classList.remove('active'));
   const id = mode === 'upload' ? 'loadPaneUpload' : (mode === 'paste' ? 'loadPanePaste' : 'loadPaneUrl');
   document.getElementById(id).classList.add('active');
+}
+
+const RUN_MODE_KEY = 'ai-bet-evaluator-run-mode';
+let runMode = 'copy';
+
+function setRunMode(mode) {
+  runMode = mode === 'api' ? 'api' : 'copy';
+  localStorage.setItem(RUN_MODE_KEY, runMode);
+
+  document.querySelectorAll('#runPaneCopy, #runPaneApi').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('[data-mode]').forEach(t => {
+    if (['copy', 'api'].includes(t.dataset.mode)) {
+      t.classList.toggle('active', t.dataset.mode === runMode);
+    }
+  });
+  document.getElementById(runMode === 'api' ? 'runPaneApi' : 'runPaneCopy').classList.add('active');
+
+  if (runMode === 'api') ensurePromptText();
 }
 
 function setLoadStatus(kind, html) {
@@ -1479,9 +1485,15 @@ function initProvider() {
   setProvider(PROVIDERS[saved] ? saved : 'openai');
 }
 
+function initRunMode() {
+  const saved = localStorage.getItem(RUN_MODE_KEY);
+  setRunMode(saved === 'api' ? 'api' : 'copy');
+}
+
 loadInputs();
 initReadmeDropZone();
 initProvider();
+initRunMode();
 </script>
 
 </body>
