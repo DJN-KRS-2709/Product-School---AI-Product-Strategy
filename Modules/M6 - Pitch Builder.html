@@ -702,10 +702,9 @@
     </div>
     <div class="paste-in-panel">
       <div class="paste-in-label">Paste your AI response here</div>
-      <textarea id="pitchPaste" placeholder="Paste the markdown your AI returned (Claude / ChatGPT / Gemini), then click Use this pitch — it'll render below and unlock the Download HTML deck button."></textarea>
+      <textarea id="pitchPaste" placeholder="Paste the markdown your AI returned (Claude / ChatGPT / Gemini). It renders below the moment you paste — Download HTML deck unlocks automatically."></textarea>
       <div class="paste-in-actions">
-        <button type="button" class="btn primary" onclick="usePastedResult()">Use this pitch</button>
-        <span class="paste-in-hint">If you used the API-key path above, your pitch already rendered — skip this.</span>
+        <span class="paste-in-hint">Renders automatically as you paste or edit. If you used the API-key path above, your pitch is already loaded.</span>
       </div>
     </div>
     <div class="result-body" id="resultBody"></div>
@@ -1497,7 +1496,9 @@ async function runPitch() {
   }
 }
 
-function renderResult(markdown, meta) {
+function renderResult(markdown, meta, opts) {
+  opts = opts || {};
+  const wasEmpty = !lastResult;
   lastResult = markdown;
   $('resultBody').innerHTML = renderMarkdown(markdown);
   if (meta.provider === 'pasted') {
@@ -1506,19 +1507,37 @@ function renderResult(markdown, meta) {
     $('resultMeta').textContent =
       `${PROVIDERS[meta.provider].label} · ${meta.model} · ${meta.elapsed}s · ${audienceLabel()}`;
   }
-  $('pitchPaste').value = markdown;
+  if (opts.fillTextarea !== false) $('pitchPaste').value = markdown;
   $('resultCard').classList.add('has-result');
-  $('resultCard').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  if (opts.scroll !== false && wasEmpty) {
+    $('resultCard').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
 }
 
-function usePastedResult() {
+/* Called whenever pitchPaste changes (debounced). Renders the pasted
+   markdown into the preview without overwriting the textarea, so the
+   user's cursor and edits aren't disrupted. */
+function autoRenderFromPaste() {
   const text = $('pitchPaste').value.trim();
   if (!text) {
-    showToast('Paste your AI response first');
+    if (lastResult !== null) {
+      lastResult = null;
+      $('resultBody').innerHTML = '';
+      $('resultMeta').textContent = 'Paste your AI response below, or run the API-key path above.';
+      $('resultCard').classList.remove('has-result');
+    }
     return;
   }
-  renderResult(text, { provider: 'pasted' });
-  showToast('Pitch loaded — export buttons unlocked');
+  renderResult(text, { provider: 'pasted' }, { fillTextarea: false });
+}
+
+function debounce(fn, ms) {
+  let t;
+  return function() {
+    const args = arguments;
+    clearTimeout(t);
+    t = setTimeout(() => fn.apply(null, args), ms);
+  };
 }
 
 function clearResult() {
@@ -2226,6 +2245,13 @@ $('roadmapSummary').addEventListener('input', () => {
   const sections = parseRoadmapSections($('roadmapSummary').value || '');
   renderRoadmapPills(sections);
 });
+
+const pitchPasteEl = $('pitchPaste');
+if (pitchPasteEl) {
+  const debouncedRender = debounce(autoRenderFromPaste, 250);
+  pitchPasteEl.addEventListener('input', debouncedRender);
+  pitchPasteEl.addEventListener('paste', () => setTimeout(autoRenderFromPaste, 0));
+}
 
 initDropZone();
 initProvider();
