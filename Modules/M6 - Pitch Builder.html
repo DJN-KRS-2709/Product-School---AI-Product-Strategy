@@ -1,0 +1,1683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pitch Builder — Turn Your Strategy Into a Board Pitch</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+  :root {
+    --bg: #0b0b10;
+    --surface: #13131a;
+    --surface2: #1a1a24;
+    --border: #252535;
+    --border-hi: #35354a;
+    --text: #e0e0f0;
+    --text-dim: #7a7a9a;
+    --text-muted: #55556a;
+    --blue: #5b8def;
+    --green: #3dd68c;
+    --yellow: #f0c040;
+    --amber: #f0c040;
+    --red: #ef5b5b;
+    --purple: #a07be8;
+    --teal: #39d2c0;
+    --blue-bg: rgba(91,141,239,0.08);
+    --green-bg: rgba(61,214,140,0.08);
+    --amber-bg: rgba(240,192,64,0.08);
+    --radius: 10px;
+    --radius-lg: 14px;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 40px 20px 100px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page { max-width: 820px; margin: 0 auto; }
+
+  .header { text-align: center; margin-bottom: 36px; }
+  .badge {
+    display: inline-block; font-size: 10px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.12em;
+    color: var(--amber); background: var(--amber-bg);
+    border: 1px solid rgba(240,192,64,0.2);
+    padding: 5px 14px; border-radius: 20px; margin-bottom: 14px;
+  }
+  .header h1 {
+    font-size: 30px; font-weight: 800; color: #fff;
+    margin-bottom: 8px; letter-spacing: -0.02em;
+  }
+  .header p {
+    font-size: 14px; color: var(--text-dim);
+    line-height: 1.6; max-width: 600px; margin: 0 auto;
+  }
+
+  .card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-lg); margin-bottom: 20px;
+    overflow: hidden; transition: border-color 0.2s;
+  }
+  .card:hover { border-color: var(--border-hi); }
+  .card-head {
+    padding: 18px 24px; border-bottom: 1px solid var(--border);
+  }
+  .card-title { font-size: 16px; font-weight: 700; color: #fff; }
+  .card-sub { font-size: 12px; color: var(--text-dim); margin-top: 4px; line-height: 1.5; }
+  .card-body { padding: 20px 24px 24px; }
+
+  .field { margin-bottom: 18px; }
+  .field:last-child { margin-bottom: 0; }
+  .field label {
+    display: block; font-size: 12px; font-weight: 600;
+    color: var(--text-dim); margin-bottom: 8px;
+  }
+  .field label span { color: var(--text-muted); font-weight: 500; }
+  textarea, input[type="text"], input[type="url"], input[type="number"], select {
+    width: 100%;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px; font-weight: 500; color: #fff;
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 8px; padding: 12px 14px; resize: vertical;
+    outline: none; line-height: 1.5; transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  textarea { min-height: 80px; }
+  textarea:focus, input:focus, select:focus {
+    border-color: var(--amber);
+    box-shadow: 0 0 0 3px rgba(240,192,64,0.12);
+  }
+  textarea::placeholder, input::placeholder { color: var(--text-muted); }
+
+  .prompt-output {
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 20px; margin-top: 16px;
+    font-family: 'JetBrains Mono', monospace; font-size: 12px;
+    color: var(--text-dim); line-height: 1.7; white-space: pre-wrap;
+    max-height: 500px; overflow-y: auto; display: none;
+  }
+  .prompt-output.visible { display: block; }
+
+  .actions {
+    display: flex; flex-wrap: wrap; gap: 10px;
+    margin-top: 20px; justify-content: center;
+  }
+  .btn {
+    font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600;
+    padding: 10px 20px; border-radius: 8px;
+    border: 1px solid var(--border); background: var(--surface2);
+    color: var(--text); cursor: pointer; transition: all 0.2s;
+  }
+  .btn:hover { border-color: var(--amber); color: #fff; }
+  .btn.primary { background: var(--amber); border-color: var(--amber); color: #2a1f04; }
+  .btn.primary:hover { background: #f5cc55; }
+  .btn.ghost { background: transparent; }
+  .btn.danger:hover { border-color: var(--red); color: var(--red); }
+  .btn.tiny { padding: 5px 10px; font-size: 11px; }
+
+  .tip {
+    margin-top: 14px; padding: 12px 16px;
+    background: var(--amber-bg); border: 1px solid rgba(240,192,64,0.15);
+    border-radius: var(--radius); font-size: 12px;
+    color: var(--text-dim); line-height: 1.55;
+  }
+  .tip strong { color: var(--amber); }
+  .tip code { font-family: 'JetBrains Mono', monospace; background: rgba(240,192,64,0.12); padding: 1px 6px; border-radius: 4px; color: #f5d97a; }
+
+  .how-section { margin-top: 4px; }
+  .how-step {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 14px 0; border-bottom: 1px solid var(--border);
+  }
+  .how-step:last-child { border-bottom: none; }
+  .how-num {
+    width: 28px; height: 28px; border-radius: 6px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 800; color: #2a1f04;
+    background: var(--amber);
+  }
+  .how-text { font-size: 13px; color: var(--text-dim); line-height: 1.5; }
+  .how-text strong { color: var(--text); }
+  .how-text code { font-family: 'JetBrains Mono', monospace; font-size: 11px; background: rgba(240,192,64,0.10); padding: 1px 6px; border-radius: 4px; color: #f5d97a; }
+
+  .saved-toast {
+    position: fixed; bottom: 24px; left: 50%;
+    transform: translateX(-50%) translateY(60px);
+    background: var(--green); color: #052e1d;
+    font-size: 13px; font-weight: 700;
+    padding: 10px 24px; border-radius: 8px;
+    opacity: 0; transition: all 0.3s; pointer-events: none; z-index: 100;
+  }
+  .saved-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  /* Tabbed loaders ─────────────────────────── */
+  .load-tabs {
+    display: flex; gap: 6px; margin-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+    flex-wrap: wrap;
+  }
+  .load-tab {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.06em;
+    padding: 10px 14px;
+    background: transparent; border: none;
+    border-bottom: 2px solid transparent;
+    color: var(--text-muted); cursor: pointer;
+    transition: color 0.2s, border-color 0.2s;
+    margin-bottom: -1px;
+  }
+  .load-tab:hover { color: var(--text-dim); }
+  .load-tab.active { color: var(--amber); border-bottom-color: var(--amber); }
+  .load-pane { display: none; }
+  .load-pane.active { display: block; }
+
+  .repo-row { display: flex; gap: 10px; align-items: stretch; flex-wrap: wrap; }
+  .repo-row input { flex: 1; min-width: 0; }
+
+  .upload-drop {
+    position: relative;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 6px; padding: 22px 18px;
+    background: var(--surface2);
+    border: 1.5px dashed var(--border-hi); border-radius: 10px;
+    cursor: pointer; transition: border-color 0.2s, background 0.2s;
+    text-align: center;
+  }
+  .upload-drop:hover, .upload-drop.dragover {
+    border-color: var(--amber);
+    background: rgba(240,192,64,0.04);
+  }
+  .upload-drop input[type="file"] {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    opacity: 0; cursor: pointer;
+  }
+  .upload-drop-title { font-size: 14px; font-weight: 700; color: var(--text); }
+  .upload-drop-sub {
+    font-size: 12px; color: var(--text-dim); line-height: 1.5; max-width: 520px;
+  }
+  .upload-drop-sub code { font-family: 'JetBrains Mono', monospace; font-size: 11px; background: rgba(240,192,64,0.10); color: #f5d97a; padding: 1px 5px; border-radius: 3px; }
+
+  .load-status {
+    margin-top: 14px; padding: 12px 14px;
+    border-radius: var(--radius);
+    font-size: 12px; line-height: 1.55;
+    display: none;
+  }
+  .load-status.show { display: block; }
+  .load-status.ok    { background: var(--green-bg); border: 1px solid rgba(61,214,140,0.2); color: var(--green); }
+  .load-status.err   { background: rgba(239,91,91,0.08); border: 1px solid rgba(239,91,91,0.2); color: var(--red); }
+  .load-status.busy  { background: rgba(240,192,64,0.08); border: 1px solid rgba(240,192,64,0.15); color: var(--yellow); }
+  .load-status code { font-family: 'JetBrains Mono', monospace; opacity: 0.85; }
+
+  /* Source pills (strategy + roadmap loaded indicators) */
+  .strategy-summary-wrap, .roadmap-summary-wrap {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 16px;
+  }
+  .strategy-loaded {
+    display: flex; flex-wrap: wrap; gap: 6px;
+    margin-bottom: 10px;
+  }
+  .strategy-pill {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; padding: 3px 8px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+  }
+  .strategy-pill.has {
+    background: var(--amber-bg);
+    border-color: rgba(240,192,64,0.25);
+    color: var(--amber);
+  }
+
+  /* Audience picker ─────────────────────────── */
+  .audience-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+  .audience-card {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: left;
+  }
+  .audience-card:hover {
+    border-color: var(--border-hi);
+  }
+  .audience-card.active {
+    border-color: var(--amber);
+    background: var(--amber-bg);
+  }
+  .audience-card-label {
+    font-size: 13px; font-weight: 700; color: var(--text);
+    margin-bottom: 4px;
+  }
+  .audience-card-sub {
+    font-size: 11px; color: var(--text-dim); line-height: 1.45;
+  }
+  .audience-card.active .audience-card-label { color: var(--amber); }
+
+  .audience-custom {
+    margin-top: 4px; display: none;
+  }
+  .audience-custom.show { display: block; }
+
+  .ask-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 10px;
+  }
+  .ask-row .field { margin: 0; }
+
+  /* Run-the-prompt card ────────────────────── */
+  .run-mode-sub {
+    font-size: 12px; color: var(--text-dim); line-height: 1.55;
+    margin-bottom: 14px;
+  }
+
+  .open-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
+  .chip {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px; font-weight: 600;
+    padding: 8px 14px; border-radius: 999px;
+    background: var(--surface2); color: var(--text-dim);
+    border: 1px solid var(--border);
+    cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;
+    transition: all 0.2s;
+  }
+  .chip:hover { color: #fff; border-color: var(--amber); }
+  .chip-dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; opacity: 0.6; }
+
+  .provider-row { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
+  .provider-chip {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px; font-weight: 700;
+    padding: 7px 14px; border-radius: 999px;
+    background: var(--surface2); color: var(--text-muted);
+    border: 1px solid var(--border);
+    cursor: pointer; transition: all 0.2s;
+  }
+  .provider-chip:hover { color: var(--text); border-color: var(--border-hi); }
+  .provider-chip.active { background: var(--amber); border-color: var(--amber); color: #2a1f04; }
+
+  .field-row {
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    gap: 10px 12px;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  .field-row label {
+    font-size: 11px; font-weight: 700; color: var(--text-muted);
+    text-transform: uppercase; letter-spacing: 0.06em;
+    margin: 0;
+  }
+  .field-row select, .field-row input {
+    width: 100%;
+    font-family: 'JetBrains Mono', monospace; font-size: 12px;
+    color: #fff; background: var(--surface);
+    border: 1px solid var(--border); border-radius: 6px;
+    padding: 8px 12px; outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .field-row input:focus, .field-row select:focus {
+    border-color: var(--amber);
+    box-shadow: 0 0 0 3px rgba(240,192,64,0.12);
+  }
+  .key-row { display: flex; gap: 8px; align-items: center; }
+  .key-row input { flex: 1; }
+  .key-help {
+    font-size: 11px; color: var(--text-muted); margin-top: 6px;
+    line-height: 1.5;
+  }
+  .key-help a { color: var(--amber); text-decoration: none; }
+  .key-help a:hover { text-decoration: underline; }
+
+  .run-action {
+    display: flex; gap: 10px; align-items: center; flex-wrap: wrap;
+    margin-top: 6px;
+  }
+  .run-action .spinner {
+    width: 14px; height: 14px; border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.2);
+    border-top-color: var(--amber);
+    animation: spin 0.8s linear infinite;
+    display: none;
+  }
+  .run-action.busy .spinner { display: inline-block; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .run-status {
+    margin-top: 12px; padding: 10px 12px;
+    border-radius: var(--radius);
+    font-size: 12px; line-height: 1.55;
+    display: none;
+  }
+  .run-status.show { display: block; }
+  .run-status.err  { background: rgba(239,91,91,0.08); border: 1px solid rgba(239,91,91,0.2); color: var(--red); }
+  .run-status.busy { background: rgba(240,192,64,0.08); border: 1px solid rgba(240,192,64,0.15); color: var(--yellow); }
+  .run-status.ok   { background: var(--green-bg); border: 1px solid rgba(61,214,140,0.2); color: var(--green); }
+  .run-status code { font-family: 'JetBrains Mono', monospace; opacity: 0.85; }
+
+  /* Result card ────────────────────────────── */
+  .result-card {
+    margin-top: 18px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 22px 24px;
+    display: none;
+  }
+  .result-card.show { display: block; }
+  .result-head {
+    display: flex; align-items: baseline; justify-content: space-between;
+    gap: 14px; margin-bottom: 14px; padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .result-title { font-size: 14px; font-weight: 700; color: #fff; }
+  .result-meta { font-size: 11px; color: var(--text-muted); font-family: 'JetBrains Mono', monospace; }
+  .result-body { font-size: 13px; line-height: 1.6; color: var(--text); }
+  .result-body h1, .result-body h2, .result-body h3 { color: #fff; margin: 18px 0 8px; }
+  .result-body h1 { font-size: 18px; }
+  .result-body h2 { font-size: 16px; }
+  .result-body h3 { font-size: 14px; }
+  .result-body strong { color: #fff; }
+  .result-body em { color: var(--text-dim); font-style: italic; }
+  .result-body p { margin: 8px 0; }
+  .result-body ul, .result-body ol { margin: 8px 0 8px 22px; }
+  .result-body li { margin: 4px 0; }
+  .result-body blockquote {
+    border-left: 3px solid var(--amber);
+    margin: 12px 0; padding: 4px 14px;
+    color: var(--text-dim); font-style: italic;
+    background: var(--amber-bg);
+  }
+  .result-body code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; background: var(--surface2);
+    padding: 1px 6px; border-radius: 4px; color: #f5d97a;
+  }
+  .result-body hr { border: none; border-top: 1px solid var(--border); margin: 16px 0; }
+  .result-body table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 12px; }
+  .result-body th, .result-body td { border: 1px solid var(--border); padding: 6px 10px; text-align: left; vertical-align: top; }
+  .result-body th { background: var(--surface2); color: #fff; font-weight: 700; }
+  .result-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--border); }
+
+  @media (max-width: 540px) {
+    .repo-row { flex-direction: column; }
+    .field-row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+  <div class="header">
+    <div class="badge">Module 6 — Build Your Pitch</div>
+    <h1>Pitch Builder</h1>
+    <p>Pull your strategy README + roadmap, name who you're pitching to, and generate the board-ready pitch — thesis, why now, defensibility, economics, risks, ask. Ready to paste into your repo.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-title">How It Works</div>
+    </div>
+    <div class="card-body">
+      <div class="how-section">
+        <div class="how-step">
+          <div class="how-num">1</div>
+          <div class="how-text"><strong>Load your strategy.</strong> The tool pulls your <code>README.md</code> (strategy summary) and <code>06-the-pitch/roadmap.md</code> (roadmap + AI evaluation) from your repo. Public repo URL works; private repo? Drop the files in directly.</div>
+        </div>
+        <div class="how-step">
+          <div class="how-num">2</div>
+          <div class="how-text"><strong>Name the audience.</strong> Pick who you're actually pitching to. The prompt re-weights for each — a board cares about defensibility and economics; a CTO cares about reliability and cost; founders care about why-now and unfair advantage.</div>
+        </div>
+        <div class="how-step">
+          <div class="how-num">3</div>
+          <div class="how-text"><strong>State the ask.</strong> Dollars, headcount, months. Be specific — vague asks get vague answers.</div>
+        </div>
+        <div class="how-step">
+          <div class="how-num">4</div>
+          <div class="how-text"><strong>Generate the pitch</strong> — copy into Claude/ChatGPT or run with an API key. Paste the output into the <code>Board Pitch</code> section of <code>06-the-pitch/roadmap.md</code>. Rehearse out loud once. That's the prep.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-title">1. Load your strategy</div>
+      <div class="card-sub">Two files: <code>README.md</code> (built by the Strategy Assembler) and <code>06-the-pitch/roadmap.md</code> (built by the Roadmap Builder + AI Bet Evaluator). One feeds the strategic spine, the other gives the pitch credibility (here's the plan, here's how I stress-tested it).</div>
+    </div>
+    <div class="card-body">
+      <div class="load-tabs" role="tablist">
+        <button type="button" class="load-tab active" data-mode="url" onclick="setSourceMode('url')">Repo URL</button>
+        <button type="button" class="load-tab" data-mode="upload" onclick="setSourceMode('upload')">Upload files</button>
+        <button type="button" class="load-tab" data-mode="paste" onclick="setSourceMode('paste')">Paste markdown</button>
+      </div>
+
+      <div class="load-pane active" id="paneUrl">
+        <div class="repo-row">
+          <input type="url" id="repoUrl" placeholder="https://github.com/your-username/your-strategy-repo" autocomplete="off" spellcheck="false">
+          <button type="button" class="btn primary" id="fetchBtn" onclick="loadFromRepo()">Fetch &amp; parse</button>
+        </div>
+        <div class="key-help" style="margin-top:8px;">Pulls both files in parallel from <code>raw.githubusercontent.com</code> — no auth, public repos only. For private repos use the <strong>Upload files</strong> tab.</div>
+      </div>
+
+      <div class="load-pane" id="paneUpload">
+        <label class="upload-drop" id="uploadDrop">
+          <input type="file" id="fileInput" accept=".md,text/markdown,text/plain" multiple onchange="handleUpload(event)">
+          <div class="upload-drop-title">Drop <code>README.md</code> and <code>roadmap.md</code> here, or click to browse</div>
+          <div class="upload-drop-sub">Filenames are matched automatically. You can drop both at once. Files stay in your browser — nothing is uploaded to a server.</div>
+        </label>
+      </div>
+
+      <div class="load-pane" id="panePaste">
+        <div class="field">
+          <label>README.md <span>(paste the full file)</span></label>
+          <textarea id="readmePaste" placeholder="Paste your README.md here — the one with ## The Bet, ## The Moat, ## The Margin, ## The Contract, ## The Guardrails sections…" style="min-height:140px;"></textarea>
+        </div>
+        <div class="field">
+          <label>06-the-pitch/roadmap.md <span>(optional but recommended)</span></label>
+          <textarea id="roadmapPaste" placeholder="Paste your roadmap.md here — Horizon 1/2/3 tables, AI Evaluation, Board Pitch (if started)…" style="min-height:140px;"></textarea>
+        </div>
+        <div style="margin-top:10px; display:flex; justify-content:flex-end;">
+          <button type="button" class="btn primary" onclick="loadFromPaste()">Parse pasted markdown</button>
+        </div>
+      </div>
+
+      <div class="load-status" id="loadStatus"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-title">2. Strategy summary</div>
+      <div class="card-sub">Auto-fills from your <code>README.md</code>. Edit if anything reads thin — this is the strategic spine of the pitch.</div>
+    </div>
+    <div class="card-body">
+      <div class="strategy-loaded" id="strategyLoaded">
+        <span class="strategy-pill" data-key="bet">The Bet</span>
+        <span class="strategy-pill" data-key="moat">The Moat</span>
+        <span class="strategy-pill" data-key="margin">The Margin</span>
+        <span class="strategy-pill" data-key="contract">The Contract</span>
+        <span class="strategy-pill" data-key="guardrails">The Guardrails</span>
+      </div>
+      <div class="strategy-summary-wrap">
+        <textarea id="strategySummary" placeholder="Loaded README sections appear here. You can also paste a strategy summary directly — bet, moat, margin, contract, guardrails." style="min-height:160px; background:transparent; border:none; padding:0;"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-title">3. Roadmap &amp; evaluation context</div>
+      <div class="card-sub">Auto-fills from <code>roadmap.md</code>. The pitch needs to reference the roadmap (proves the strategy moves through time) and your AI evaluation findings (shows you've stress-tested the bet).</div>
+    </div>
+    <div class="card-body">
+      <div class="strategy-loaded" id="roadmapLoaded">
+        <span class="strategy-pill" data-key="h1">Horizon 1</span>
+        <span class="strategy-pill" data-key="h2">Horizon 2</span>
+        <span class="strategy-pill" data-key="h3">Horizon 3</span>
+        <span class="strategy-pill" data-key="evaluation">AI Evaluation</span>
+      </div>
+      <div class="roadmap-summary-wrap">
+        <textarea id="roadmapSummary" placeholder="Loaded roadmap.md sections appear here. Or paste a rough roadmap + AI evaluation summary directly." style="min-height:160px; background:transparent; border:none; padding:0;"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-title">4. Who are you pitching to?</div>
+      <div class="card-sub">Pick the audience. The prompt re-weights for each: different opener, different objections, different risk framing.</div>
+    </div>
+    <div class="card-body">
+      <div class="audience-grid" id="audienceGrid">
+        <div class="audience-card active" data-audience="leadership" onclick="setAudience('leadership')">
+          <div class="audience-card-label">CEO + Leadership Team</div>
+          <div class="audience-card-sub">Internal funding review. Cares about strategic fit, portfolio trade-offs, near-term wins.</div>
+        </div>
+        <div class="audience-card" data-audience="founders" onclick="setAudience('founders')">
+          <div class="audience-card-label">Founders / Funding Committee</div>
+          <div class="audience-card-sub">Early-stage company. Cares about why-now, why-us, unfair advantage, stage-appropriate burn.</div>
+        </div>
+        <div class="audience-card" data-audience="board" onclick="setAudience('board')">
+          <div class="audience-card-label">External Board / Investors</div>
+          <div class="audience-card-sub">Cares about defensibility, economics under stress, competitive moat, path to scale.</div>
+        </div>
+        <div class="audience-card" data-audience="techleads" onclick="setAudience('techleads')">
+          <div class="audience-card-label">CTO + Head of Product</div>
+          <div class="audience-card-sub">Cares about reliability contract, capability gaps, inference economics, build-vs-buy, governance.</div>
+        </div>
+        <div class="audience-card" data-audience="custom" onclick="setAudience('custom')">
+          <div class="audience-card-label">Custom</div>
+          <div class="audience-card-sub">Describe the exact person, role, and what they care about.</div>
+        </div>
+      </div>
+
+      <div class="audience-custom" id="audienceCustom">
+        <div class="field">
+          <label>Describe your audience <span>(role, seniority, what they care about, what they're skeptical of)</span></label>
+          <textarea id="audienceCustomText" placeholder="Example: VP of Product at a Series C fintech. Skeptical of LLM hype, has been burned by a previous AI bet that missed reliability targets. Cares about path to profitability + measurable trust signals." style="min-height:80px;"></textarea>
+        </div>
+      </div>
+
+      <div style="margin-top:18px;">
+        <div style="font-size:11px; font-weight:700; color: var(--text-muted); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:10px;">The Ask</div>
+        <div class="ask-row">
+          <div class="field">
+            <label>Funding</label>
+            <input type="text" id="askFunding" placeholder="$ amount or budget shift" autocomplete="off">
+          </div>
+          <div class="field">
+            <label>Headcount</label>
+            <input type="text" id="askHeadcount" placeholder="e.g. 2 eng + 1 PM" autocomplete="off">
+          </div>
+          <div class="field">
+            <label>Time horizon</label>
+            <input type="text" id="askMonths" placeholder="e.g. 6 months to next check-in" autocomplete="off">
+          </div>
+        </div>
+        <div class="field" style="margin-top:14px;">
+          <label>Context for the ask <span>(optional — decision deadline, what triggered the pitch, prior asks)</span></label>
+          <input type="text" id="askContext" placeholder="e.g. Quarterly funding review · CEO has been asking about AI strategy for 3 weeks" autocomplete="off">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-title">5. Run the prompt</div>
+      <div class="card-sub">Two paths. Pick one.</div>
+    </div>
+    <div class="card-body">
+      <div class="load-tabs" role="tablist">
+        <button type="button" class="load-tab active" data-runmode="copy" onclick="setRunMode('copy')">① Copy the prompt</button>
+        <button type="button" class="load-tab" data-runmode="api" onclick="setRunMode('api')">② Add API key &amp; run</button>
+      </div>
+
+      <div class="load-pane active" id="runPaneCopy">
+        <div class="run-mode-sub">Free path · works with any AI tool you already use.</div>
+        <div class="open-row">
+          <a class="chip" href="#" onclick="openInChat('chatgpt'); return false;"><span class="chip-dot" style="background:#10a37f"></span> Open ChatGPT</a>
+          <a class="chip" href="#" onclick="openInChat('claude'); return false;"><span class="chip-dot" style="background:#d97757"></span> Open Claude</a>
+          <a class="chip" href="#" onclick="openInChat('gemini'); return false;"><span class="chip-dot" style="background:#4285f4"></span> Open Gemini</a>
+          <button type="button" class="chip" onclick="copyPrompt()">Copy prompt</button>
+          <button type="button" class="chip" onclick="togglePromptVisible()" id="togglePromptBtn">Show prompt</button>
+        </div>
+        <div class="key-help" style="margin-top:10px;">
+          Each <strong>Open</strong> link copies the prompt to your clipboard and opens the chat in a new tab — paste and send.
+        </div>
+      </div>
+
+      <div class="load-pane" id="runPaneApi">
+        <div class="run-mode-sub">Runs the prompt directly against your chosen provider. Your key stays in your browser; only sent to the provider when you click Run. ~$0.01–0.05 per run.</div>
+
+        <div class="provider-row" id="providerRow">
+          <button type="button" class="provider-chip active" data-provider="openai" onclick="setProvider('openai')">OpenAI</button>
+          <button type="button" class="provider-chip" data-provider="anthropic" onclick="setProvider('anthropic')">Anthropic</button>
+          <button type="button" class="provider-chip" data-provider="google" onclick="setProvider('google')">Google</button>
+        </div>
+
+        <div class="field-row">
+          <label for="modelSelect">Model</label>
+          <select id="modelSelect" onchange="onModelChange()"></select>
+        </div>
+
+        <div class="field-row">
+          <label for="apiKey">API key</label>
+          <div class="key-row">
+            <input type="password" id="apiKey" placeholder="sk-…" autocomplete="off" spellcheck="false" oninput="onKeyInput()">
+            <button type="button" class="btn" style="padding:8px 12px; font-size:12px;" onclick="forgetKey()">Forget</button>
+          </div>
+        </div>
+
+        <div class="key-help" id="keyHelp"></div>
+
+        <div class="run-action" id="runAction" style="margin-top:14px;">
+          <button type="button" class="btn primary" id="runBtn" onclick="runPitch()">Run pitch</button>
+          <span class="spinner"></span>
+          <span style="font-size:11px; color:var(--text-muted);" id="runHint">Nothing is sent until you click Run.</span>
+        </div>
+
+        <div class="run-status" id="runStatus"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button class="btn ghost danger" onclick="resetAll()">Reset</button>
+  </div>
+
+  <div class="prompt-output" id="promptOutput"></div>
+
+  <div class="result-card" id="resultCard">
+    <div class="result-head">
+      <div class="result-title">Your Board Pitch</div>
+      <div class="result-meta" id="resultMeta"></div>
+    </div>
+    <div class="result-body" id="resultBody"></div>
+    <div class="result-actions">
+      <button type="button" class="btn" onclick="copyResult()">Copy as markdown</button>
+      <button type="button" class="btn" onclick="downloadResult()">Download .md</button>
+      <button type="button" class="btn" onclick="clearResult()">Clear</button>
+    </div>
+  </div>
+
+  <div class="tip" style="margin-top:20px;">
+    <strong>After the pitch comes back:</strong> the markdown follows the <code>Board Pitch</code> section in <code>06-the-pitch/roadmap.md</code> exactly — Thesis, The case (Why now / What's defensible / The economics), The risks (Trust / Scale / Competitive), and The ask. Paste it under the existing <code>## Board Pitch</code> heading and commit. <em>Then rehearse out loud once. Twice if you're nervous.</em>
+  </div>
+</div>
+
+<div class="saved-toast" id="toast">Saved</div>
+
+<script>
+const STORAGE_KEY = 'aps-m6-pitch-builder';
+const REPO_URL_KEY = 'aps-m6-pitch-builder-repo-url';
+const $ = id => document.getElementById(id);
+
+let sourceMode = 'url';
+let currentAudience = 'leadership';
+
+function escapeHtml(s) {
+  return String(s)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+function showToast(msg) {
+  const t = $('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 1800);
+}
+
+/* ─── Tab switchers ──────────────────────────── */
+function setSourceMode(mode) {
+  sourceMode = mode;
+  document.querySelectorAll('#paneUrl, #paneUpload, #panePaste').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.card:nth-of-type(2) .load-tab').forEach(t => t.classList.toggle('active', t.dataset.mode === mode));
+  const id = mode === 'upload' ? 'paneUpload' : (mode === 'paste' ? 'panePaste' : 'paneUrl');
+  $(id).classList.add('active');
+}
+
+function setLoadStatus(kind, html) {
+  const el = $('loadStatus');
+  el.className = 'load-status show ' + kind;
+  el.innerHTML = html;
+}
+
+/* ─── README + roadmap.md parsing ──────────── */
+function parseRepoUrl(input) {
+  if (!input) return null;
+  const raw = input.trim().replace(/\.git$/, '').replace(/\/$/, '');
+  let m = raw.match(/^https?:\/\/github\.com\/([^/\s]+)\/([^/\s]+)(?:\/tree\/([^/\s]+))?(?:\/.*)?$/i);
+  if (m) return { user: m[1], repo: m[2], branch: m[3] || null };
+  m = raw.match(/^git@github\.com:([^/\s]+)\/([^/\s]+)$/i);
+  if (m) return { user: m[1], repo: m[2], branch: null };
+  m = raw.match(/^([^/\s]+)\/([^/\s]+)$/);
+  if (m) return { user: m[1], repo: m[2], branch: null };
+  return null;
+}
+
+async function fetchRaw(user, repo, branch, path) {
+  const url = `https://raw.githubusercontent.com/${user}/${repo}/${branch}/${path}`;
+  try {
+    const res = await fetch(url, { cache: 'no-store' });
+    if (!res.ok) return { ok: false, status: res.status };
+    return { ok: true, content: await res.text() };
+  } catch (e) {
+    return { ok: false, error: e.message || 'network error' };
+  }
+}
+
+async function fetchRepoFiles(parsed) {
+  const { user, repo } = parsed;
+  let branch = parsed.branch;
+
+  if (!branch) {
+    let probe = await fetchRaw(user, repo, 'main', 'README.md');
+    if (probe.ok) { branch = 'main'; }
+    else {
+      probe = await fetchRaw(user, repo, 'master', 'README.md');
+      if (probe.ok) { branch = 'master'; }
+    }
+  }
+  if (!branch) return { ok: false, status: 404 };
+
+  const [readmeRes, roadmapRes] = await Promise.all([
+    fetchRaw(user, repo, branch, 'README.md'),
+    fetchRaw(user, repo, branch, '06-the-pitch/roadmap.md')
+  ]);
+
+  return { ok: true, branch, readme: readmeRes, roadmap: roadmapRes };
+}
+
+function parseReadmeSections(md) {
+  const labels = [
+    { key: 'bet',        heading: 'The Bet' },
+    { key: 'moat',       heading: 'The Moat' },
+    { key: 'margin',     heading: 'The Margin' },
+    { key: 'contract',   heading: 'The Contract' },
+    { key: 'guardrails', heading: 'The Guardrails' }
+  ];
+  const out = {};
+  for (const { key, heading } of labels) {
+    const esc = heading.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const re = new RegExp(`^##\\s+${esc}\\b[^\\n]*\\n+([\\s\\S]*?)(?=^##\\s+|^---\\s*$|$(?![\\s\\S]))`, 'mi');
+    const m = md.match(re);
+    if (!m) { out[key] = ''; continue; }
+    let body = m[1] || '';
+    body = body.replace(/^→\s*Details:.*$/im, '').trim();
+    out[key] = body;
+  }
+  return out;
+}
+
+function parseRoadmapSections(md) {
+  const sections = { h1: '', h2: '', h3: '', evaluation: '' };
+  if (!md) return sections;
+
+  const horizon = (titleRe, key) => {
+    const re = new RegExp(`^###\\s+${titleRe}[^\\n]*\\n+([\\s\\S]*?)(?=^###\\s+|^##\\s+|^---\\s*$|$(?![\\s\\S]))`, 'mi');
+    const m = md.match(re);
+    if (!m) return '';
+    return m[1].replace(/<!--[\s\S]*?-->/g, '').trim();
+  };
+  sections.h1 = horizon('Horizon\\s+1', 'h1');
+  sections.h2 = horizon('Horizon\\s+2', 'h2');
+  sections.h3 = horizon('Horizon\\s+3', 'h3');
+
+  const evalRe = /^##\s+AI\s+Evaluation\b[^\n]*\n+([\s\S]*?)(?=^##\s+|^---\s*$|$(?![\s\S]))/mi;
+  const em = md.match(evalRe);
+  if (em) sections.evaluation = em[1].trim();
+
+  return sections;
+}
+
+function renderStrategyPills(sections) {
+  document.querySelectorAll('#strategyLoaded .strategy-pill').forEach(p => {
+    const key = p.dataset.key;
+    p.classList.toggle('has', !!(sections[key] && sections[key].trim()));
+  });
+}
+
+function renderRoadmapPills(sections) {
+  document.querySelectorAll('#roadmapLoaded .strategy-pill').forEach(p => {
+    const key = p.dataset.key;
+    p.classList.toggle('has', !!(sections[key] && sections[key].trim()));
+  });
+}
+
+function fillStrategyFromSections(sections) {
+  let filled = 0;
+  const order = ['bet', 'moat', 'margin', 'contract', 'guardrails'];
+  const labels = {
+    bet: 'The Bet (M1)',
+    moat: 'The Moat (M2)',
+    margin: 'The Margin (M3)',
+    contract: 'The Contract (M4)',
+    guardrails: 'The Guardrails (M5)'
+  };
+  const parts = [];
+  for (const k of order) {
+    const v = (sections[k] || '').trim();
+    if (v) {
+      filled++;
+      parts.push(`## ${labels[k]}\n\n${v}`);
+    }
+  }
+  if (parts.length) {
+    $('strategySummary').value = parts.join('\n\n');
+  }
+  renderStrategyPills(sections);
+  saveState(true);
+  return filled;
+}
+
+function fillRoadmapFromSections(sections) {
+  let filled = 0;
+  const order = ['h1', 'h2', 'h3', 'evaluation'];
+  const labels = {
+    h1: 'Horizon 1 — Ship (0–4 weeks)',
+    h2: 'Horizon 2 — Validate (1–3 months)',
+    h3: 'Horizon 3 — Explore (3–6 months)',
+    evaluation: 'AI Evaluation'
+  };
+  const parts = [];
+  for (const k of order) {
+    const v = (sections[k] || '').trim();
+    if (v) {
+      filled++;
+      parts.push(`## ${labels[k]}\n\n${v}`);
+    }
+  }
+  if (parts.length) {
+    $('roadmapSummary').value = parts.join('\n\n');
+  }
+  renderRoadmapPills(sections);
+  saveState(true);
+  return filled;
+}
+
+async function loadFromRepo() {
+  const input = $('repoUrl').value;
+  const parsed = parseRepoUrl(input);
+  if (!parsed) {
+    setLoadStatus('err', 'That doesn\'t look like a GitHub URL. Use <code>https://github.com/your-username/your-repo</code>.');
+    return;
+  }
+  const btn = $('fetchBtn');
+  btn.disabled = true;
+  const orig = btn.textContent;
+  btn.textContent = 'Fetching…';
+  setLoadStatus('busy', `Fetching <code>${escapeHtml(parsed.user)}/${escapeHtml(parsed.repo)}</code> — README + roadmap…`);
+
+  try {
+    const result = await fetchRepoFiles(parsed);
+    if (!result.ok) {
+      setLoadStatus('err', `Couldn't find the repo. ${result.status === 404 ? 'Not found on <code>main</code> or <code>master</code> — make sure the repo is <strong>public</strong>.' : 'HTTP ' + result.status + '.'} For private repos, use the <strong>Upload files</strong> tab.`);
+      return;
+    }
+
+    let readmeFilled = 0;
+    let roadmapFilled = 0;
+    const notes = [];
+
+    if (result.readme.ok) {
+      const sections = parseReadmeSections(result.readme.content);
+      readmeFilled = fillStrategyFromSections(sections);
+      if (readmeFilled === 0) {
+        notes.push('Fetched <code>README.md</code> but couldn\'t find the five component sections. Is this a README built by the Strategy Assembler?');
+      }
+    } else {
+      notes.push(`Couldn't load <code>README.md</code> (HTTP ${result.readme.status || '?'}).`);
+    }
+
+    if (result.roadmap.ok) {
+      const sections = parseRoadmapSections(result.roadmap.content);
+      roadmapFilled = fillRoadmapFromSections(sections);
+      if (roadmapFilled === 0) {
+        notes.push('Fetched <code>06-the-pitch/roadmap.md</code> but couldn\'t find the Horizon / AI Evaluation sections.');
+      }
+    } else {
+      notes.push(`Couldn't load <code>06-the-pitch/roadmap.md</code> (HTTP ${result.roadmap.status || '?'}). Skipping roadmap context — the pitch will still build from the README.`);
+    }
+
+    if (readmeFilled === 0 && roadmapFilled === 0) {
+      setLoadStatus('err', notes.join('<br>'));
+      return;
+    }
+
+    localStorage.setItem(REPO_URL_KEY, input.trim());
+    const msg = `Loaded from <code>${escapeHtml(parsed.user)}/${escapeHtml(parsed.repo)}</code> @ <code>${escapeHtml(result.branch)}</code>. ` +
+      `README: ${readmeFilled}/5 component sections · Roadmap: ${roadmapFilled}/4 sections.`;
+    setLoadStatus('ok', notes.length ? `${msg}<br>${notes.join('<br>')}` : msg);
+  } catch (e) {
+    setLoadStatus('err', `Network error: ${escapeHtml(e.message || 'unknown')}.`);
+  } finally {
+    btn.disabled = false;
+    btn.textContent = orig;
+  }
+}
+
+function handleUpload(event) {
+  const files = event.target.files;
+  event.target.value = '';
+  if (!files || files.length === 0) return;
+  loadFromFiles(Array.from(files));
+}
+
+function loadFromFiles(files) {
+  setLoadStatus('busy', `Reading ${files.length} file${files.length === 1 ? '' : 's'}…`);
+
+  let readmeText = '';
+  let roadmapText = '';
+  let pending = files.length;
+  const errors = [];
+
+  files.forEach(file => {
+    const r = new FileReader();
+    r.onload = () => {
+      const lower = file.name.toLowerCase();
+      const content = r.result || '';
+      if (lower === 'readme.md' || lower.endsWith('/readme.md')) {
+        readmeText = content;
+      } else if (lower === 'roadmap.md' || lower.endsWith('/roadmap.md')) {
+        roadmapText = content;
+      } else if (/^##\s+The\s+Bet/im.test(content) || /Strategy at a Glance/i.test(content)) {
+        readmeText = content;
+      } else if (/^##\s+Roadmap/im.test(content) || /^###\s+Horizon\s+\d/im.test(content)) {
+        roadmapText = content;
+      } else {
+        errors.push(`Couldn't tell what <code>${escapeHtml(file.name)}</code> is — not recognized as README or roadmap.`);
+      }
+      pending--;
+      if (pending === 0) finalizeFileLoad(readmeText, roadmapText, errors);
+    };
+    r.onerror = () => {
+      errors.push(`Couldn't read <code>${escapeHtml(file.name)}</code>.`);
+      pending--;
+      if (pending === 0) finalizeFileLoad(readmeText, roadmapText, errors);
+    };
+    r.readAsText(file);
+  });
+}
+
+function finalizeFileLoad(readmeText, roadmapText, errors) {
+  let readmeFilled = 0;
+  let roadmapFilled = 0;
+
+  if (readmeText) {
+    const sections = parseReadmeSections(readmeText);
+    readmeFilled = fillStrategyFromSections(sections);
+  }
+  if (roadmapText) {
+    const sections = parseRoadmapSections(roadmapText);
+    roadmapFilled = fillRoadmapFromSections(sections);
+  }
+
+  if (readmeFilled === 0 && roadmapFilled === 0) {
+    setLoadStatus('err', errors.length ? errors.join('<br>') : 'No usable strategy sections found in the uploaded files.');
+    return;
+  }
+
+  const msg = `Loaded. README: ${readmeFilled}/5 component sections · Roadmap: ${roadmapFilled}/4 sections.`;
+  setLoadStatus('ok', errors.length ? `${msg}<br>${errors.join('<br>')}` : msg);
+}
+
+function loadFromPaste() {
+  const readme = $('readmePaste').value.trim();
+  const roadmap = $('roadmapPaste').value.trim();
+  if (!readme && !roadmap) {
+    setLoadStatus('err', 'Paste your README markdown into at least one of the boxes above.');
+    return;
+  }
+
+  let readmeFilled = 0;
+  let roadmapFilled = 0;
+
+  if (readme) {
+    const sections = parseReadmeSections(readme);
+    readmeFilled = fillStrategyFromSections(sections);
+  }
+  if (roadmap) {
+    const sections = parseRoadmapSections(roadmap);
+    roadmapFilled = fillRoadmapFromSections(sections);
+  }
+
+  if (readmeFilled === 0 && roadmapFilled === 0) {
+    setLoadStatus('err', 'Couldn\'t find recognizable sections in the pasted text. README needs <code>## The Bet</code> etc.; roadmap needs <code>### Horizon 1</code> etc.');
+    return;
+  }
+  setLoadStatus('ok', `Parsed pasted markdown. README: ${readmeFilled}/5 component sections · Roadmap: ${roadmapFilled}/4 sections.`);
+}
+
+function initDropZone() {
+  const zone = $('uploadDrop');
+  if (!zone) return;
+  ['dragenter', 'dragover'].forEach(ev => zone.addEventListener(ev, e => {
+    e.preventDefault(); e.stopPropagation();
+    zone.classList.add('dragover');
+  }));
+  ['dragleave', 'drop'].forEach(ev => zone.addEventListener(ev, e => {
+    e.preventDefault(); e.stopPropagation();
+    zone.classList.remove('dragover');
+  }));
+  zone.addEventListener('drop', e => {
+    const files = e.dataTransfer && e.dataTransfer.files;
+    if (files && files.length) loadFromFiles(Array.from(files));
+  });
+}
+
+/* ─── Audience picker ───────────────────────── */
+function setAudience(audience) {
+  currentAudience = audience;
+  document.querySelectorAll('.audience-card').forEach(c => {
+    c.classList.toggle('active', c.dataset.audience === audience);
+  });
+  $('audienceCustom').classList.toggle('show', audience === 'custom');
+  saveState(true);
+}
+
+const AUDIENCE_BRIEFS = {
+  leadership: {
+    label: 'CEO + Leadership Team',
+    brief: `Audience: internal leadership team — CEO, peer-level VPs, your direct manager. They've seen many internal pitches and they're allocating limited investment across the company portfolio. They care most about: (a) strategic fit — does this advance the company thesis or wander off it? (b) what you'd trade off if you got this — what other bet must wait? (c) near-term wins that earn permission for the bigger H2/H3 bets. They're suspicious of "we should do AI" with no theory of advantage. Open with strategic fit, not technology.`
+  },
+  founders: {
+    label: 'Founders / Funding Committee',
+    brief: `Audience: founders or a small early-stage funding committee at a startup. They live with uncertainty and time pressure. They care most about: (a) why now — what timing window are you taking advantage of? (b) why this team specifically — what's the unfair advantage? (c) the cheapest experiment that would falsify the bet — they hate big bets without small validating bets first. Stage-appropriate burn matters. They're allergic to fake polish. Be direct. Show the kill criteria.`
+  },
+  board: {
+    label: 'External Board / Investors',
+    brief: `Audience: external board of directors or investors. They've heard hundreds of pitches and benchmark you against their portfolio. They care most about: (a) defensibility — could a platform copy this in 6 months? (b) economics under stress — does the model break if inference costs 3x or the heaviest segment doubles? (c) competitive moat that compounds — what gets harder for competitors as you scale? They want quantified risk + comparable benchmarks. They will ask the hardest version of every question. Open with thesis, not architecture.`
+  },
+  techleads: {
+    label: 'CTO + Head of Product',
+    brief: `Audience: senior engineering + product leadership. They're allergic to over-promising on what AI can deliver reliably. They care most about: (a) the reliability contract — is it explicit and measurable, or vibes? (b) capability gaps — what assumes capability the team doesn't have? (c) inference economics + build-vs-buy trade-offs (d) governance gaps that bite at scale. They want eval coverage, drift handling, HITL plans. Don't oversell the demo; show the failure-mode work.`
+  },
+  custom: {
+    label: 'Custom audience',
+    brief: '' // filled at runtime from the textarea
+  }
+};
+
+/* ─── Provider / API key state ──────────────── */
+const PROVIDERS = {
+  openai: {
+    label: 'OpenAI',
+    keyHelpHtml: 'Get a key at <a href="https://platform.openai.com/api-keys" target="_blank" rel="noopener">platform.openai.com/api-keys</a>. Stays in your browser; sent only to OpenAI when you Run.',
+    models: [
+      { id: 'gpt-4o',         label: 'gpt-4o (recommended)' },
+      { id: 'gpt-4o-mini',    label: 'gpt-4o-mini (faster, cheaper)' },
+      { id: 'gpt-4.1',        label: 'gpt-4.1' },
+      { id: 'gpt-4.1-mini',   label: 'gpt-4.1-mini' }
+    ]
+  },
+  anthropic: {
+    label: 'Anthropic',
+    keyHelpHtml: 'Get a key at <a href="https://console.anthropic.com/settings/keys" target="_blank" rel="noopener">console.anthropic.com/settings/keys</a>. Stays in your browser; sent only to Anthropic when you Run.',
+    models: [
+      { id: 'claude-sonnet-4-5',  label: 'Claude Sonnet 4.5 (recommended)' },
+      { id: 'claude-opus-4-5',    label: 'Claude Opus 4.5 (highest reasoning)' },
+      { id: 'claude-haiku-4-5',   label: 'Claude Haiku 4.5 (faster, cheaper)' }
+    ]
+  },
+  google: {
+    label: 'Google',
+    keyHelpHtml: 'Get a key at <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">aistudio.google.com/apikey</a>. Stays in your browser; sent only to Google when you Run.',
+    models: [
+      { id: 'gemini-2.5-pro',   label: 'Gemini 2.5 Pro (recommended)' },
+      { id: 'gemini-2.5-flash', label: 'Gemini 2.5 Flash (faster, cheaper)' }
+    ]
+  }
+};
+
+const PROVIDER_KEY_PREF = 'aps-m6-pitch-builder-provider';
+const MODEL_KEY_PREF    = 'aps-m6-pitch-builder-model';
+const RUN_MODE_KEY      = 'aps-m6-pitch-builder-run-mode';
+const KEY_PREF = (provider) => `aps-m6-pitch-builder-key-${provider}`;
+
+let currentProvider = 'openai';
+let runMode = 'copy';
+let lastResult = null;
+
+function setProvider(provider) {
+  if (!PROVIDERS[provider]) return;
+  currentProvider = provider;
+  localStorage.setItem(PROVIDER_KEY_PREF, provider);
+
+  document.querySelectorAll('.provider-chip').forEach(c => {
+    c.classList.toggle('active', c.dataset.provider === provider);
+  });
+
+  const sel = $('modelSelect');
+  sel.innerHTML = '';
+  PROVIDERS[provider].models.forEach(m => {
+    const opt = document.createElement('option');
+    opt.value = m.id;
+    opt.textContent = m.label;
+    sel.appendChild(opt);
+  });
+  const savedModel = localStorage.getItem(`${MODEL_KEY_PREF}-${provider}`);
+  if (savedModel && PROVIDERS[provider].models.some(m => m.id === savedModel)) {
+    sel.value = savedModel;
+  }
+
+  $('apiKey').value = localStorage.getItem(KEY_PREF(provider)) || '';
+  $('keyHelp').innerHTML = PROVIDERS[provider].keyHelpHtml;
+  $('runBtn').textContent = `Run with ${PROVIDERS[provider].label}`;
+}
+
+function onModelChange() {
+  localStorage.setItem(`${MODEL_KEY_PREF}-${currentProvider}`, $('modelSelect').value);
+}
+
+function onKeyInput() {
+  const key = $('apiKey').value;
+  if (key) localStorage.setItem(KEY_PREF(currentProvider), key);
+  else localStorage.removeItem(KEY_PREF(currentProvider));
+}
+
+function forgetKey() {
+  $('apiKey').value = '';
+  localStorage.removeItem(KEY_PREF(currentProvider));
+  showToast(`Forgot ${PROVIDERS[currentProvider].label} API key`);
+}
+
+function setRunMode(mode) {
+  runMode = mode === 'api' ? 'api' : 'copy';
+  localStorage.setItem(RUN_MODE_KEY, runMode);
+
+  document.querySelectorAll('#runPaneCopy, #runPaneApi').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('[data-runmode]').forEach(t => {
+    t.classList.toggle('active', t.dataset.runmode === runMode);
+  });
+  $(runMode === 'api' ? 'runPaneApi' : 'runPaneCopy').classList.add('active');
+}
+
+function setRunStatus(kind, html) {
+  const el = $('runStatus');
+  el.className = 'run-status show ' + kind;
+  el.innerHTML = html;
+}
+function clearRunStatus() {
+  const el = $('runStatus');
+  el.className = 'run-status';
+  el.innerHTML = '';
+}
+function setRunBusy(busy) {
+  $('runAction').classList.toggle('busy', busy);
+  $('runBtn').disabled = busy;
+}
+
+/* ─── Prompt generation ─────────────────────── */
+function audienceBrief() {
+  if (currentAudience === 'custom') {
+    const txt = ($('audienceCustomText').value || '').trim();
+    if (!txt) return `Audience: specific decision-maker the presenter chose — the person whose "yes" they need to fund this bet on Monday morning. Treat them as senior, skeptical, time-poor. Open with the thesis.`;
+    return `Audience: ${txt}`;
+  }
+  return AUDIENCE_BRIEFS[currentAudience].brief;
+}
+
+function audienceLabel() {
+  if (currentAudience === 'custom') {
+    const txt = ($('audienceCustomText').value || '').trim();
+    return txt ? `Custom — ${txt.slice(0, 80)}${txt.length > 80 ? '…' : ''}` : 'Custom audience';
+  }
+  return AUDIENCE_BRIEFS[currentAudience].label;
+}
+
+function generatePrompt() {
+  const strategy = $('strategySummary').value.trim();
+  if (!strategy) {
+    showToast('Load your strategy README first');
+    return '';
+  }
+  const roadmap = $('roadmapSummary').value.trim();
+  const funding = ($('askFunding').value || '').trim();
+  const headcount = ($('askHeadcount').value || '').trim();
+  const months = ($('askMonths').value || '').trim();
+  const askContext = ($('askContext').value || '').trim();
+
+  const askParts = [];
+  if (funding) askParts.push(`Funding: ${funding}`);
+  if (headcount) askParts.push(`Headcount: ${headcount}`);
+  if (months) askParts.push(`Time horizon: ${months}`);
+  const askLine = askParts.length ? askParts.join(' · ') : '_(presenter hasn\'t specified — flag this as a gap in the output)_';
+
+  const prompt = `You are a senior product strategist who has watched hundreds of pitches succeed and fail in front of boards, founders, and executive teams. Help me turn my strategy into a board-ready pitch for a specific audience. Be direct, no hedging, no AI hype.
+
+---
+
+## THE AUDIENCE
+
+${audienceBrief()}
+
+---
+
+## MY STRATEGY (built across 5 prior modules)
+
+${strategy}
+
+${roadmap ? `---\n\n## MY ROADMAP & SELF-EVALUATION\n\n${roadmap}\n` : ''}---
+
+## THE ASK
+
+${askLine}${askContext ? `\n\nContext: ${askContext}` : ''}
+
+---
+
+## YOUR TASK
+
+Write a board pitch for the audience above. Match their concerns, their vocabulary, and the level of detail they actually care about. Open with the thesis (one sentence). Do NOT open with technology, model architecture, or framework names — the audience doesn't speak that language.
+
+Pull tightly from my strategy and roadmap above. If a section can't be filled credibly because the strategy is thin there, say so — don't invent. Where the AI evaluation flagged a weakness, address it head-on; don't bury it.
+
+## OUTPUT FORMAT
+
+A markdown block that drops directly into the \`## Board Pitch\` section of \`06-the-pitch/roadmap.md\`. Use exactly this structure — same headings, same order:
+
+\`\`\`markdown
+**Thesis (1 sentence):**
+[One declarative sentence. The bet, the user, the outcome. No jargon.]
+
+**The case:**
+1. Why now: [The market timing window — what's changed in the last 6–12 months that makes this the moment. Be specific.]
+2. What's defensible: [The moat, named. Reference the M2 component. Why this won't get copied in 6 months.]
+3. The economics: [Inference cost trajectory · pricing fit · margin under stress. Tie back to M3. Lead with a number, not a vibe.]
+
+**The risks:**
+1. Trust / failure modes: [The reliability contract from M4. What's the failure mode that would put us on the front page of the Wall Street Journal — and how the system catches it.]
+2. Scale / governance: [What breaks at 10x usage — costs, governance, autonomy. Tie back to M5.]
+3. Competitive: [The single competitive scenario that would force a kill — the kill criteria from M2 or the roadmap H2 bets.]
+
+**The ask:**
+[Concrete dollars + headcount + time horizon. What we get for it. What gets paused if this is funded.]
+\`\`\`
+
+After the markdown block, add three short coaching notes for the presenter:
+
+- **Opening line (literally say this first):** A single sentence — the one to lead with out loud. Match the audience's vocabulary.
+- **If you only get 60 seconds:** The three sentences that survive if the meeting derails. Thesis · key risk · ask.
+- **The one question they'll ask first:** The single hardest question this audience opens with, given the strategy as written. Then a one-sentence answer that holds up under scrutiny.`;
+
+  const out = $('promptOutput');
+  out.textContent = prompt;
+  return prompt;
+}
+
+function ensurePromptText() {
+  let prompt = ($('promptOutput').textContent || '').trim();
+  if (prompt) return prompt;
+  const strategy = $('strategySummary').value.trim();
+  if (!strategy) { showToast('Load your strategy README first'); return ''; }
+  return generatePrompt();
+}
+
+function togglePromptVisible() {
+  const out = $('promptOutput');
+  if (!out.textContent.trim()) {
+    if (!ensurePromptText()) return;
+  } else {
+    generatePrompt();
+  }
+  out.classList.toggle('visible');
+  $('togglePromptBtn').textContent =
+    out.classList.contains('visible') ? 'Hide prompt' : 'Show prompt';
+}
+
+function copyPrompt() {
+  const txt = ensurePromptText();
+  if (!txt) return;
+  navigator.clipboard.writeText(txt).then(() => {
+    showToast('Prompt copied — paste into Claude or ChatGPT');
+  });
+}
+
+const CHAT_URLS = {
+  chatgpt: 'https://chat.openai.com/',
+  claude:  'https://claude.ai/new',
+  gemini:  'https://gemini.google.com/app'
+};
+
+function openInChat(which) {
+  // Force regeneration in case audience/ask changed
+  generatePrompt();
+  const prompt = ($('promptOutput').textContent || '').trim();
+  if (!prompt) return;
+  const url = CHAT_URLS[which];
+  const tab = window.open(url, '_blank', 'noopener');
+  navigator.clipboard.writeText(prompt).then(
+    () => showToast(`Prompt copied — paste into ${which.charAt(0).toUpperCase() + which.slice(1)}`),
+    () => showToast(`Could not copy automatically — use the Copy prompt button`)
+  );
+  if (!tab) {
+    setRunStatus('err', 'Pop-up blocked. Use the Copy prompt button and open the chat manually.');
+  }
+}
+
+/* ─── API CALLS ─────────────────────────────── */
+async function callOpenAI({ model, key, prompt }) {
+  const res = await fetch('https://api.openai.com/v1/chat/completions', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${key}`
+    },
+    body: JSON.stringify({
+      model,
+      temperature: 0.4,
+      messages: [{ role: 'user', content: prompt }]
+    })
+  });
+  if (!res.ok) throw new Error(`OpenAI ${res.status}: ${shortErr(await res.text().catch(()=> '')) || res.statusText}`);
+  const data = await res.json();
+  return data.choices?.[0]?.message?.content || '';
+}
+
+async function callAnthropic({ model, key, prompt }) {
+  const res = await fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-api-key': key,
+      'anthropic-version': '2023-06-01',
+      'anthropic-dangerous-direct-browser-access': 'true'
+    },
+    body: JSON.stringify({
+      model,
+      max_tokens: 4096,
+      messages: [{ role: 'user', content: prompt }]
+    })
+  });
+  if (!res.ok) throw new Error(`Anthropic ${res.status}: ${shortErr(await res.text().catch(()=> '')) || res.statusText}`);
+  const data = await res.json();
+  return (data.content || []).map(c => c.text || '').join('').trim();
+}
+
+async function callGoogle({ model, key, prompt }) {
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent?key=${encodeURIComponent(key)}`;
+  const res = await fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      contents: [{ role: 'user', parts: [{ text: prompt }] }],
+      generationConfig: { temperature: 0.4, maxOutputTokens: 4096 }
+    })
+  });
+  if (!res.ok) throw new Error(`Google ${res.status}: ${shortErr(await res.text().catch(()=> '')) || res.statusText}`);
+  const data = await res.json();
+  const parts = data.candidates?.[0]?.content?.parts || [];
+  return parts.map(p => p.text || '').join('').trim();
+}
+
+function shortErr(text) {
+  if (!text) return '';
+  try {
+    const j = JSON.parse(text);
+    return j.error?.message || j.message || text.slice(0, 240);
+  } catch (e) {
+    return text.slice(0, 240);
+  }
+}
+
+async function runPitch() {
+  const prompt = ensurePromptText();
+  if (!prompt) return;
+
+  const key = ($('apiKey').value || '').trim();
+  if (!key) {
+    setRunStatus('err', `Paste your ${PROVIDERS[currentProvider].label} API key first.`);
+    return;
+  }
+  const model = $('modelSelect').value;
+  const provider = currentProvider;
+  const startedAt = Date.now();
+
+  clearRunStatus();
+  setRunBusy(true);
+  setRunStatus('busy', `Sending pitch prompt to <code>${escapeHtml(model)}</code>… typically 15–45 seconds.`);
+
+  try {
+    let text;
+    if (provider === 'openai')        text = await callOpenAI({ model, key, prompt });
+    else if (provider === 'anthropic') text = await callAnthropic({ model, key, prompt });
+    else                              text = await callGoogle({ model, key, prompt });
+
+    if (!text) throw new Error('Empty response from model.');
+
+    const elapsed = ((Date.now() - startedAt) / 1000).toFixed(1);
+    renderResult(text, { provider, model, elapsed });
+    setRunStatus('ok', `Pitch returned in ${elapsed}s.`);
+  } catch (e) {
+    setRunStatus('err', `Run failed: ${escapeHtml(e.message || 'unknown error')}.`);
+  } finally {
+    setRunBusy(false);
+  }
+}
+
+function renderResult(markdown, meta) {
+  lastResult = markdown;
+  $('resultBody').innerHTML = renderMarkdown(markdown);
+  $('resultMeta').textContent =
+    `${PROVIDERS[meta.provider].label} · ${meta.model} · ${meta.elapsed}s · ${audienceLabel()}`;
+  $('resultCard').classList.add('show');
+  $('resultCard').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function clearResult() {
+  lastResult = null;
+  $('resultBody').innerHTML = '';
+  $('resultMeta').textContent = '';
+  $('resultCard').classList.remove('show');
+}
+
+function copyResult() {
+  if (!lastResult) return;
+  navigator.clipboard.writeText(lastResult).then(() => showToast('Pitch copied as markdown'));
+}
+
+function downloadResult() {
+  if (!lastResult) return;
+  const blob = new Blob([lastResult], { type: 'text/markdown' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'board-pitch.md';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+/* ─── Minimal markdown → HTML ─────────────── */
+function renderMarkdown(md) {
+  const escape = s => s
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+
+  const inline = s => s
+    .replace(/`([^`]+)`/g, (_, c) => `<code>${escape(c)}</code>`)
+    .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+    .replace(/(^|[^*])\*([^*\n]+)\*/g, '$1<em>$2</em>')
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, (_, label, url) =>
+      `<a href="${escape(url)}" target="_blank" rel="noopener">${escape(label)}</a>`);
+
+  const lines = md.split('\n');
+  const out = [];
+  let i = 0;
+
+  const flushPara = (buf) => {
+    if (buf.length) out.push(`<p>${inline(escape(buf.join(' ')))}</p>`);
+  };
+
+  while (i < lines.length) {
+    const line = lines[i];
+
+    // Fenced code block (just pass through as <pre><code>)
+    if (/^```/.test(line)) {
+      const lang = line.replace(/^```/, '').trim();
+      i++;
+      const buf = [];
+      while (i < lines.length && !/^```/.test(lines[i])) {
+        buf.push(lines[i]);
+        i++;
+      }
+      if (i < lines.length) i++; // skip closing fence
+      out.push(`<pre style="background:var(--surface2); border:1px solid var(--border); border-radius:8px; padding:12px 14px; overflow-x:auto;"><code>${escape(buf.join('\n'))}</code></pre>`);
+      continue;
+    }
+
+    if (/^\s*---+\s*$/.test(line)) { out.push('<hr>'); i++; continue; }
+
+    const h = line.match(/^(#{1,6})\s+(.*)$/);
+    if (h) {
+      const level = h[1].length;
+      out.push(`<h${level}>${inline(escape(h[2]))}</h${level}>`);
+      i++; continue;
+    }
+
+    if (/^\s*\|.+\|\s*$/.test(line) && i + 1 < lines.length && /^\s*\|[\s:|-]+\|\s*$/.test(lines[i + 1])) {
+      const headerCells = line.trim().slice(1, -1).split('|').map(s => inline(escape(s.trim())));
+      i += 2;
+      const rows = [];
+      while (i < lines.length && /^\s*\|.+\|\s*$/.test(lines[i])) {
+        rows.push(lines[i].trim().slice(1, -1).split('|').map(s => inline(escape(s.trim()))));
+        i++;
+      }
+      out.push('<table><thead><tr>' + headerCells.map(c => `<th>${c}</th>`).join('') + '</tr></thead><tbody>' +
+        rows.map(r => '<tr>' + r.map(c => `<td>${c}</td>`).join('') + '</tr>').join('') +
+        '</tbody></table>');
+      continue;
+    }
+
+    if (/^\s*[-*+]\s+/.test(line)) {
+      const items = [];
+      while (i < lines.length && /^\s*[-*+]\s+/.test(lines[i])) {
+        items.push(lines[i].replace(/^\s*[-*+]\s+/, ''));
+        i++;
+      }
+      out.push('<ul>' + items.map(it => `<li>${inline(escape(it))}</li>`).join('') + '</ul>');
+      continue;
+    }
+
+    if (/^\s*\d+\.\s+/.test(line)) {
+      const items = [];
+      while (i < lines.length && /^\s*\d+\.\s+/.test(lines[i])) {
+        items.push(lines[i].replace(/^\s*\d+\.\s+/, ''));
+        i++;
+      }
+      out.push('<ol>' + items.map(it => `<li>${inline(escape(it))}</li>`).join('') + '</ol>');
+      continue;
+    }
+
+    if (/^\s*>\s?/.test(line)) {
+      const items = [];
+      while (i < lines.length && /^\s*>\s?/.test(lines[i])) {
+        items.push(lines[i].replace(/^\s*>\s?/, ''));
+        i++;
+      }
+      out.push(`<blockquote>${inline(escape(items.join(' ')))}</blockquote>`);
+      continue;
+    }
+
+    if (!line.trim()) { i++; continue; }
+
+    const buf = [];
+    while (i < lines.length && lines[i].trim() &&
+           !/^(#{1,6})\s+/.test(lines[i]) &&
+           !/^\s*[-*+]\s+/.test(lines[i]) &&
+           !/^\s*\d+\.\s+/.test(lines[i]) &&
+           !/^\s*>\s?/.test(lines[i]) &&
+           !/^\s*---+\s*$/.test(lines[i]) &&
+           !/^```/.test(lines[i]) &&
+           !/^\s*\|.+\|\s*$/.test(lines[i])) {
+      buf.push(lines[i]);
+      i++;
+    }
+    flushPara(buf);
+  }
+
+  return out.join('\n');
+}
+
+/* ─── Persist + restore ─────────────────────── */
+function saveState(quiet) {
+  const data = {
+    strategy: $('strategySummary').value,
+    roadmap: $('roadmapSummary').value,
+    audience: currentAudience,
+    audienceCustom: $('audienceCustomText').value,
+    askFunding: $('askFunding').value,
+    askHeadcount: $('askHeadcount').value,
+    askMonths: $('askMonths').value,
+    askContext: $('askContext').value
+  };
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); } catch(e) {}
+  if (!quiet) showToast('Progress saved');
+}
+
+function loadState() {
+  try {
+    const data = JSON.parse(localStorage.getItem(STORAGE_KEY));
+    if (!data) return;
+    if (data.strategy) {
+      $('strategySummary').value = data.strategy;
+      const sections = parseReadmeSections(data.strategy);
+      renderStrategyPills(sections);
+    }
+    if (data.roadmap) {
+      $('roadmapSummary').value = data.roadmap;
+      const sections = parseRoadmapSections(data.roadmap);
+      renderRoadmapPills(sections);
+    }
+    if (data.audience) setAudience(data.audience);
+    if (data.audienceCustom) $('audienceCustomText').value = data.audienceCustom;
+    if (data.askFunding) $('askFunding').value = data.askFunding;
+    if (data.askHeadcount) $('askHeadcount').value = data.askHeadcount;
+    if (data.askMonths) $('askMonths').value = data.askMonths;
+    if (data.askContext) $('askContext').value = data.askContext;
+  } catch(e) {}
+  const url = localStorage.getItem(REPO_URL_KEY);
+  if (url) $('repoUrl').value = url;
+}
+
+function resetAll() {
+  if (!confirm('Reset everything — strategy summary, roadmap, audience, ask, and saved state?')) return;
+  $('strategySummary').value = '';
+  $('roadmapSummary').value = '';
+  $('readmePaste').value = '';
+  $('roadmapPaste').value = '';
+  $('audienceCustomText').value = '';
+  $('askFunding').value = '';
+  $('askHeadcount').value = '';
+  $('askMonths').value = '';
+  $('askContext').value = '';
+  $('promptOutput').classList.remove('visible');
+  $('promptOutput').textContent = '';
+  $('loadStatus').className = 'load-status';
+  $('loadStatus').innerHTML = '';
+  renderStrategyPills({});
+  renderRoadmapPills({});
+  setAudience('leadership');
+  try { localStorage.removeItem(STORAGE_KEY); } catch(e) {}
+  showToast('Reset');
+}
+
+function initProvider() {
+  const saved = localStorage.getItem(PROVIDER_KEY_PREF);
+  setProvider(PROVIDERS[saved] ? saved : 'openai');
+}
+
+function initRunMode() {
+  const saved = localStorage.getItem(RUN_MODE_KEY);
+  setRunMode(saved === 'api' ? 'api' : 'copy');
+}
+
+/* ─── Wire up live save on inputs ───────────── */
+['strategySummary', 'roadmapSummary', 'audienceCustomText', 'askFunding', 'askHeadcount', 'askMonths', 'askContext'].forEach(id => {
+  const el = $(id);
+  if (el) el.addEventListener('input', () => saveState(true));
+});
+
+$('strategySummary').addEventListener('input', () => {
+  const sections = parseReadmeSections($('strategySummary').value || '');
+  renderStrategyPills(sections);
+});
+$('roadmapSummary').addEventListener('input', () => {
+  const sections = parseRoadmapSections($('roadmapSummary').value || '');
+  renderRoadmapPills(sections);
+});
+
+initDropZone();
+initProvider();
+initRunMode();
+loadState();
+</script>
+
+</body>
+</html>
