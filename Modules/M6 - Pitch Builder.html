@@ -382,9 +382,35 @@
     border: 1px solid var(--border);
     border-radius: var(--radius-lg);
     padding: 22px 24px;
-    display: none;
   }
-  .result-card.show { display: block; }
+  .paste-in-panel {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 14px 16px;
+    margin-bottom: 16px;
+  }
+  .paste-in-label {
+    font-size: 11px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.6px; color: var(--text-dim); margin-bottom: 8px;
+  }
+  .paste-in-panel textarea {
+    width: 100%; min-height: 100px; resize: vertical;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-sm); padding: 10px 12px;
+    font-family: 'JetBrains Mono', monospace; font-size: 12px;
+    color: var(--text); line-height: 1.55;
+  }
+  .paste-in-panel textarea:focus { outline: none; border-color: var(--amber); }
+  .paste-in-actions {
+    display: flex; gap: 10px; align-items: center; flex-wrap: wrap;
+    margin-top: 10px;
+  }
+  .paste-in-hint { font-size: 11px; color: var(--text-muted); flex: 1; min-width: 200px; }
+  .result-card.has-result .paste-in-panel { background: rgba(61,214,140,0.05); border-color: rgba(61,214,140,0.25); }
+  .result-card:not(.has-result) .result-body { display: none; }
+  .result-card:not(.has-result) .result-actions .needs-result { opacity: 0.4; cursor: not-allowed; }
+  .result-card:not(.has-result) .result-actions .needs-result:hover { background: var(--surface2); }
   .result-head {
     display: flex; align-items: baseline; justify-content: space-between;
     gap: 14px; margin-bottom: 14px; padding-bottom: 12px;
@@ -672,13 +698,21 @@
   <div class="result-card" id="resultCard">
     <div class="result-head">
       <div class="result-title">Your Board Pitch</div>
-      <div class="result-meta" id="resultMeta"></div>
+      <div class="result-meta" id="resultMeta">Paste your AI response below, or run the API-key path above.</div>
+    </div>
+    <div class="paste-in-panel">
+      <div class="paste-in-label">Paste your AI response here</div>
+      <textarea id="pitchPaste" placeholder="Paste the markdown your AI returned (Claude / ChatGPT / Gemini), then click Use this pitch — it'll render below and unlock the Download HTML deck button."></textarea>
+      <div class="paste-in-actions">
+        <button type="button" class="btn primary" onclick="usePastedResult()">Use this pitch</button>
+        <span class="paste-in-hint">If you used the API-key path above, your pitch already rendered — skip this.</span>
+      </div>
     </div>
     <div class="result-body" id="resultBody"></div>
     <div class="result-actions">
-      <button type="button" class="btn" onclick="copyResult()">Copy as markdown</button>
-      <button type="button" class="btn" onclick="downloadResult()">Download .md</button>
-      <button type="button" class="btn primary" onclick="downloadDeck()">Download HTML deck ↗</button>
+      <button type="button" class="btn needs-result" onclick="copyResult()">Copy as markdown</button>
+      <button type="button" class="btn needs-result" onclick="downloadResult()">Download .md</button>
+      <button type="button" class="btn primary needs-result" onclick="downloadDeck()">Download HTML deck ↗</button>
       <button type="button" class="btn" onclick="clearResult()">Clear</button>
     </div>
     <div style="font-size: 11px; color: var(--text-muted); margin-top: 10px; line-height: 1.55;">
@@ -1466,26 +1500,42 @@ async function runPitch() {
 function renderResult(markdown, meta) {
   lastResult = markdown;
   $('resultBody').innerHTML = renderMarkdown(markdown);
-  $('resultMeta').textContent =
-    `${PROVIDERS[meta.provider].label} · ${meta.model} · ${meta.elapsed}s · ${audienceLabel()}`;
-  $('resultCard').classList.add('show');
+  if (meta.provider === 'pasted') {
+    $('resultMeta').textContent = `Pasted · ${audienceLabel()}`;
+  } else {
+    $('resultMeta').textContent =
+      `${PROVIDERS[meta.provider].label} · ${meta.model} · ${meta.elapsed}s · ${audienceLabel()}`;
+  }
+  $('pitchPaste').value = markdown;
+  $('resultCard').classList.add('has-result');
   $('resultCard').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function usePastedResult() {
+  const text = $('pitchPaste').value.trim();
+  if (!text) {
+    showToast('Paste your AI response first');
+    return;
+  }
+  renderResult(text, { provider: 'pasted' });
+  showToast('Pitch loaded — export buttons unlocked');
 }
 
 function clearResult() {
   lastResult = null;
   $('resultBody').innerHTML = '';
-  $('resultMeta').textContent = '';
-  $('resultCard').classList.remove('show');
+  $('resultMeta').textContent = 'Paste your AI response below, or run the API-key path above.';
+  $('pitchPaste').value = '';
+  $('resultCard').classList.remove('has-result');
 }
 
 function copyResult() {
-  if (!lastResult) return;
+  if (!lastResult) { showToast('Paste your AI response first'); return; }
   navigator.clipboard.writeText(lastResult).then(() => showToast('Pitch copied as markdown'));
 }
 
 function downloadResult() {
-  if (!lastResult) return;
+  if (!lastResult) { showToast('Paste your AI response first'); return; }
   const blob = new Blob([lastResult], { type: 'text/markdown' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
@@ -1505,7 +1555,7 @@ function downloadResult() {
 
 function downloadDeck() {
   if (!lastResult) {
-    showToast('Generate the pitch first');
+    showToast('Paste your AI response first');
     return;
   }
   const sections = parsePitchSections(lastResult);
