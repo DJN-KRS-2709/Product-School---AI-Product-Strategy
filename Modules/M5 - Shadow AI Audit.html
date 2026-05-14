@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shadow AI Audit — Module 5</title>
+<title>Shadow AI Audit (user-side) — Module 5</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
 
@@ -26,9 +26,9 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  .page { max-width: 720px; margin: 0 auto; }
+  .page { max-width: 760px; margin: 0 auto; }
 
-  .header { text-align: center; margin-bottom: 36px; }
+  .header { text-align: center; margin-bottom: 28px; }
   .badge {
     display: inline-block; font-size: 10px; font-weight: 700;
     text-transform: uppercase; letter-spacing: 0.12em;
@@ -37,7 +37,21 @@
     padding: 5px 14px; border-radius: 20px; margin-bottom: 14px;
   }
   .header h1 { font-size: 30px; font-weight: 800; color: #fff; margin-bottom: 8px; letter-spacing: -0.02em; }
-  .header p { font-size: 14px; color: var(--text-dim); line-height: 1.6; max-width: 560px; margin: 0 auto; }
+  .header h1 .sub { font-size: 18px; font-weight: 600; color: var(--text-dim); }
+  .header p { font-size: 14px; color: var(--text-dim); line-height: 1.6; max-width: 620px; margin: 0 auto; }
+
+  .reframe-banner {
+    background: rgba(96,141,239,0.06);
+    border: 1px solid rgba(96,141,239,0.2);
+    border-radius: var(--radius);
+    padding: 14px 18px;
+    margin: 18px 0 26px;
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.55;
+  }
+  .reframe-banner strong { color: #fff; }
+  .reframe-banner .lead { color: var(--blue); font-weight: 700; }
 
   .card {
     background: var(--surface); border: 1px solid var(--border);
@@ -80,7 +94,7 @@
   .plan-section:last-child { margin-bottom: 0; }
 
   .table-wrap { overflow-x: auto; margin: 0 -4px; }
-  table { width: 100%; border-collapse: collapse; font-size: 11px; min-width: 720px; }
+  table { width: 100%; border-collapse: collapse; font-size: 11px; min-width: 820px; }
   th {
     text-align: left; font-size: 9px; font-weight: 700; text-transform: uppercase;
     letter-spacing: 0.05em; color: var(--text-muted); padding: 8px 6px; border-bottom: 1px solid var(--border);
@@ -108,23 +122,34 @@
   }
   .btn:hover { border-color: var(--purple); color: #fff; }
   .btn.primary { background: var(--purple); border-color: var(--purple); color: #fff; }
+  .btn.ghost-load {
+    background: transparent;
+    border-color: rgba(96,141,239,0.4);
+    color: var(--blue);
+    font-size: 12px;
+    padding: 8px 14px;
+  }
+  .btn.ghost-load:hover { background: var(--blue-bg); color: #fff; }
 
+  .stat-row { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
   .stat {
     background: var(--surface2); border: 1px solid var(--border);
-    border-radius: var(--radius); padding: 14px 16px; margin-bottom: 10px;
+    border-radius: var(--radius); padding: 14px 16px;
   }
-  .stat:last-child { margin-bottom: 0; }
   .stat .k { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); }
   .stat .v { font-family: 'JetBrains Mono', monospace; font-size: 18px; font-weight: 700; color: #fff; margin-top: 4px; }
-  .stat .v.danger { color: var(--red); }
+  .stat .v.accent { color: var(--green); }
+  .stat .v.warn { color: var(--yellow); }
 
-  .risk-pill {
+  .signal-pill {
     display: inline-block; margin-top: 8px; font-size: 12px; font-weight: 700;
     padding: 6px 12px; border-radius: 20px; border: 1px solid var(--border);
   }
-  .risk-pill.low { color: var(--green); background: var(--green-bg); border-color: rgba(61,214,140,0.25); }
-  .risk-pill.med { color: var(--yellow); background: var(--yellow-bg); border-color: rgba(240,192,64,0.25); }
-  .risk-pill.high { color: var(--red); background: var(--red-bg); border-color: rgba(239,91,91,0.25); }
+  .signal-pill.workflow { color: var(--blue); background: var(--blue-bg); border-color: rgba(91,141,239,0.25); }
+  .signal-pill.trust { color: var(--red); background: var(--red-bg); border-color: rgba(239,91,91,0.25); }
+  .signal-pill.capability { color: var(--green); background: var(--green-bg); border-color: rgba(61,214,140,0.25); }
+  .signal-pill.pricing { color: var(--yellow); background: var(--yellow-bg); border-color: rgba(240,192,64,0.25); }
+  .signal-pill.none { color: var(--text-dim); }
 
   .policy-auto {
     font-size: 13px; line-height: 1.55; color: var(--text-dim);
@@ -146,6 +171,14 @@
   }
   .saved-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
+  .helper-strip {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 10px;
+    line-height: 1.5;
+    font-style: italic;
+  }
+
 </style>
 </head>
 <body>
@@ -153,86 +186,104 @@
 <div class="page">
   <div class="header">
     <div class="badge">Module 5 — The Guardrails</div>
-    <h1>Shadow AI Audit</h1>
-    <p>Discover, assess, and consolidate unsanctioned AI tools in your organization.</p>
+    <h1>Shadow AI Audit <span class="sub">(for PMs)</span></h1>
+    <p>Discover what AI capabilities your <em>users</em> are building around your product. Classify the signal. Decide whether to build, partner, or ignore.</p>
+  </div>
+
+  <div class="reframe-banner">
+    <span class="lead">The reframe →</span> Samsung-style shadow AI (employees using ChatGPT internally) is your <strong>CISO's</strong> problem. The version <strong>you</strong> can act on as a PM is what your <em>users</em> are quietly building with AI on top of, alongside, or to replace pieces of your product. That's where your next roadmap lives. This tool is for the second kind.
+  </div>
+
+  <div style="text-align:center; margin-bottom:22px;">
+    <button type="button" class="btn ghost-load" id="loadExample">Load worked example (B2B SaaS report export)</button>
   </div>
 
   <div class="card">
     <div class="card-head">
       <div class="card-icon" style="background:var(--purple);">1</div>
-      <div><div class="card-title">Discover</div><div class="card-sub">Inventory tools in the wild</div></div>
+      <div><div class="card-title">Discover</div><div class="card-sub">Where users reach for AI you didn't ship</div></div>
     </div>
     <div class="card-body">
       <div class="table-wrap">
         <table>
           <thead>
             <tr>
-              <th>Tool Name</th>
-              <th>Department</th>
-              <th style="min-width:72px;">Users (est.)</th>
-              <th>Data Access Level</th>
-              <th>Approved?</th>
+              <th style="min-width:200px;">Workaround</th>
+              <th style="min-width:130px;">Signal Source</th>
+              <th style="min-width:140px;">Signal Type</th>
+              <th style="min-width:64px;">Freq</th>
+              <th style="min-width:78px;">$/mo</th>
+              <th style="min-width:110px;">Decision</th>
               <th style="width:44px;"></th>
             </tr>
           </thead>
           <tbody id="toolRows"></tbody>
         </table>
       </div>
+      <div class="helper-strip">
+        Signal sources to search: support tickets · user interviews · public forums/Reddit · Zapier/Make recipe directories · API usage patterns · social media · sales calls.
+      </div>
       <div class="btn-row">
-        <button type="button" class="btn primary" id="addTool">Add Tool</button>
+        <button type="button" class="btn primary" id="addTool">Add Workaround</button>
       </div>
     </div>
   </div>
 
   <div class="card">
     <div class="card-head">
-      <div class="card-icon" style="background:var(--red);">2</div>
-      <div><div class="card-title">Risk Assessment</div><div class="card-sub">Derived from your inventory</div></div>
+      <div class="card-icon" style="background:var(--blue);">2</div>
+      <div><div class="card-title">Pattern Assessment</div><div class="card-sub">Derived from your audit rows</div></div>
     </div>
     <div class="card-body">
-      <div class="stat"><div class="k">Total shadow tools</div><div class="v" id="stTotal">0</div></div>
-      <div class="stat"><div class="k">Unapproved tools with Write/Admin access</div><div class="v" id="stBad">0</div></div>
-      <div class="stat">
-        <div class="k">Risk level</div>
-        <div class="v" id="stRisk" style="font-size:16px;">Low</div>
-        <span class="risk-pill low" id="riskPill">Low — all approved</span>
+      <div class="stat-row" style="margin-bottom:10px;">
+        <div class="stat"><div class="k">Workarounds found</div><div class="v" id="stTotal">0</div></div>
+        <div class="stat"><div class="k">Build candidates</div><div class="v accent" id="stBuild">0</div></div>
+      </div>
+      <div class="stat-row">
+        <div class="stat"><div class="k">Partner candidates</div><div class="v" id="stPartner">0</div></div>
+        <div class="stat"><div class="k">Adjacent spend ($/mo)</div><div class="v warn" id="stSpend">$0</div></div>
+      </div>
+      <div class="stat" style="margin-top:10px;">
+        <div class="k">Dominant signal</div>
+        <div class="v" id="stSignal" style="font-size:16px;">—</div>
+        <span class="signal-pill none" id="signalPill">Add rows to see your dominant signal</span>
       </div>
     </div>
   </div>
 
   <div class="card">
     <div class="card-head">
-      <div class="card-icon" style="background:var(--blue);">3</div>
-      <div><div class="card-title">Action Plan</div><div class="card-sub">Decide consolidate, approve, or block</div></div>
+      <div class="card-icon" style="background:var(--green);">3</div>
+      <div><div class="card-title">Action Plan</div><div class="card-sub">Group your decisions: build, partner, ignore</div></div>
     </div>
     <div class="card-body">
       <div class="plan-section field">
-        <label>Consolidate — Which tools can be replaced by approved alternatives?</label>
-        <textarea id="taConsolidate" placeholder="List tools and the approved substitute…"></textarea>
+        <label>Build — Which workarounds will you absorb natively into your product?</label>
+        <textarea id="taBuild" placeholder="List the workarounds you'll bring native + a rough sequencing thought…"></textarea>
       </div>
       <div class="plan-section field">
-        <label>Approve — Which tools should be formally approved with guardrails?</label>
-        <textarea id="taApprove" placeholder="Tool, owner, data rules, monitoring…"></textarea>
+        <label>Partner — Which workarounds will you integrate with the external tool officially?</label>
+        <textarea id="taPartner" placeholder="External tool + integration shape (auth, data flow, UX entrypoint)…"></textarea>
       </div>
       <div class="plan-section field">
-        <label>Block — Which tools must be removed immediately?</label>
-        <textarea id="taBlock" placeholder="Tool + rationale + deadline…"></textarea>
+        <label>Ignore + monitor — Which workarounds will you accept users continue doing externally?</label>
+        <textarea id="taIgnore" placeholder="Tool + rationale for not absorbing or partnering + signal to re-evaluate…"></textarea>
       </div>
     </div>
   </div>
 
   <div class="card">
     <div class="card-head">
-      <div class="card-icon" style="background:var(--green);">4</div>
-      <div><div class="card-title">Policy Draft</div><div class="card-sub">Living outline you can edit</div></div>
+      <div class="card-icon" style="background:var(--yellow);">4</div>
+      <div><div class="card-title">Roadmap Brief</div><div class="card-sub">Auto-summary you can paste into a doc</div></div>
     </div>
     <div class="card-body">
       <div class="policy-auto" id="policyAuto"></div>
       <div class="field">
-        <label>Policy statement (editable)</label>
-        <textarea class="policy-area" id="policyStatement" placeholder="Your policy draft…"></textarea>
+        <label>Brief (editable — refine before sharing)</label>
+        <textarea class="policy-area" id="policyStatement" placeholder="Your roadmap brief draft…"></textarea>
       </div>
-      <button type="button" class="btn btn-ghost" onclick="syncPolicyFromAudit()">Regenerate policy from audit</button>
+      <button type="button" class="btn btn-ghost" onclick="syncPolicyFromAudit()">Regenerate brief from audit</button>
     </div>
   </div>
 
@@ -245,13 +296,28 @@
 <div class="saved-toast" id="toast">Saved</div>
 
 <script>
-const KEY = 'aps-m5-shadow-audit';
+const KEY = 'aps-m5-shadow-audit-v2';
 const $ = id => document.getElementById(id);
 
+const SIGNAL_SOURCES = [
+  'Support ticket','User interview','Forum/Reddit','Zapier/Make','API pattern','Social media','Sales call','Other'
+];
+const SIGNAL_TYPES = ['Workflow gap','Trust gap','Capability gap','Pricing gap'];
+const DECISIONS = ['TBD','Build','Partner','Ignore'];
+
 const defaultTools = () => [
-  { name: '', dept: '', users: '', access: 'None', approved: 'Unknown' },
-  { name: '', dept: '', users: '', access: 'None', approved: 'Unknown' },
-  { name: '', dept: '', users: '', access: 'None', approved: 'Unknown' }
+  { workaround: '', source: 'Support ticket', signal: 'Workflow gap', freq: 'M', spend: '', decision: 'TBD' },
+  { workaround: '', source: 'Support ticket', signal: 'Workflow gap', freq: 'M', spend: '', decision: 'TBD' },
+  { workaround: '', source: 'Support ticket', signal: 'Workflow gap', freq: 'M', spend: '', decision: 'TBD' }
+];
+
+const workedExample = () => [
+  { workaround: 'Export weekly report CSV → ChatGPT for exec summary', source: 'Support ticket', signal: 'Workflow gap', freq: 'H', spend: '20', decision: 'Build' },
+  { workaround: 'Pipe API output through Claude to clean tone before client send', source: 'User interview', signal: 'Trust gap', freq: 'M', spend: '20', decision: 'Build' },
+  { workaround: 'Zapier recipe: our webhook → OpenAI → Slack alert summarizer', source: 'Zapier/Make', signal: 'Capability gap', freq: 'M', spend: '15', decision: 'Partner' },
+  { workaround: 'Users running our exports through ChatGPT to translate to non-English markets', source: 'Forum/Reddit', signal: 'Capability gap', freq: 'L', spend: '20', decision: 'Partner' },
+  { workaround: 'CS team manually runs Perplexity on customer domain to enrich onboarding', source: 'Sales call', signal: 'Workflow gap', freq: 'H', spend: '20', decision: 'Build' },
+  { workaround: 'Users asking ChatGPT to interpret our pricing page before buying', source: 'Social media', signal: 'Trust gap', freq: 'L', spend: '0', decision: 'Ignore' }
 ];
 
 let tools = defaultTools();
@@ -262,78 +328,93 @@ function escAttr(s) {
 }
 
 function toolRowHtml(t, idx) {
-  const accesses = ['None', 'Read', 'Write', 'Admin'];
-  const approves = ['Yes', 'No', 'Unknown'];
-  const accOpts = accesses.map(a => `<option${t.access === a ? ' selected' : ''}>${a}</option>`).join('');
-  const appOpts = approves.map(a => `<option${t.approved === a ? ' selected' : ''}>${a}</option>`).join('');
+  const sourceOpts = SIGNAL_SOURCES.map(a => `<option${t.source === a ? ' selected' : ''}>${a}</option>`).join('');
+  const signalOpts = SIGNAL_TYPES.map(a => `<option${t.signal === a ? ' selected' : ''}>${a}</option>`).join('');
+  const freqOpts = ['H','M','L'].map(a => `<option${t.freq === a ? ' selected' : ''}>${a}</option>`).join('');
+  const decOpts = DECISIONS.map(a => `<option${t.decision === a ? ' selected' : ''}>${a}</option>`).join('');
   return `<tr data-idx="${idx}">
-    <td><input type="text" class="t-inp" data-f="name" value="${escAttr(t.name)}" placeholder="Tool"></td>
-    <td><input type="text" class="t-inp" data-f="dept" value="${escAttr(t.dept)}" placeholder="Team"></td>
-    <td><input type="text" class="t-inp" data-f="users" value="${escAttr(t.users)}" placeholder="e.g. 50"></td>
-    <td><select class="t-sel" data-f="access">${accOpts}</select></td>
-    <td><select class="t-sel" data-f="approved">${appOpts}</select></td>
+    <td><input type="text" class="t-inp" data-f="workaround" value="${escAttr(t.workaround)}" placeholder="e.g. users paste CSV into ChatGPT"></td>
+    <td><select class="t-sel" data-f="source">${sourceOpts}</select></td>
+    <td><select class="t-sel" data-f="signal">${signalOpts}</select></td>
+    <td><select class="t-sel" data-f="freq">${freqOpts}</select></td>
+    <td><input type="text" class="t-inp" data-f="spend" value="${escAttr(t.spend)}" placeholder="$"></td>
+    <td><select class="t-sel" data-f="decision">${decOpts}</select></td>
     <td><button type="button" class="btn-icon" title="Remove" onclick="removeTool(${idx})">×</button></td>
   </tr>`;
 }
 
 function namedTools() {
-  return tools.filter(t => String(t.name).trim().length > 0);
+  return tools.filter(t => String(t.workaround).trim().length > 0);
 }
 
 function computeMetrics() {
   const named = namedTools();
   const total = named.length;
-  const bad = named.filter(t =>
-    t.approved === 'No' && (t.access === 'Write' || t.access === 'Admin')
-  ).length;
-  const unknownCount = named.filter(t => t.approved === 'Unknown').length;
-  const anyNo = named.some(t => t.approved === 'No');
-  const allYes = total > 0 && named.every(t => t.approved === 'Yes');
+  const build = named.filter(t => t.decision === 'Build').length;
+  const partner = named.filter(t => t.decision === 'Partner').length;
+  const ignore = named.filter(t => t.decision === 'Ignore').length;
+  const tbd = named.filter(t => t.decision === 'TBD').length;
 
-  let risk = 'Low';
-  let riskDesc = 'Low — all approved';
-  let pillCls = 'low';
+  let spend = 0;
+  named.forEach(t => {
+    const n = Number(String(t.spend).replace(/[^\d.]/g, ''));
+    if (!Number.isNaN(n)) spend += n;
+  });
 
-  if (bad > 0) {
-    risk = 'High';
-    riskDesc = 'High — unapproved tools with data write access';
-    pillCls = 'high';
-  } else if (unknownCount > 0 || (anyNo && bad === 0)) {
-    risk = 'Medium';
-    riskDesc = unknownCount > 0 ? 'Medium — some unknown approvals' : 'Medium — unapproved tools present';
-    pillCls = 'med';
-  } else if (total === 0) {
-    risk = 'Low';
-    riskDesc = 'Low — add tools to assess';
-    pillCls = 'low';
-  } else if (allYes) {
-    risk = 'Low';
-    riskDesc = 'Low — all approved';
-    pillCls = 'low';
-  }
+  const counts = {};
+  named.forEach(t => { counts[t.signal] = (counts[t.signal] || 0) + 1; });
+  let dominant = '—';
+  let dominantCount = 0;
+  Object.entries(counts).forEach(([k, v]) => {
+    if (v > dominantCount) { dominant = k; dominantCount = v; }
+  });
 
-  const needsAction = named.filter(t => t.approved !== 'Yes').length;
-
-  return { total, bad, risk, riskDesc, pillCls, needsAction, unknownCount };
+  return { total, build, partner, ignore, tbd, spend, dominant, dominantCount, counts };
 }
 
-function policyRecommendation(m) {
-  if (m.risk === 'High') {
-    return 'Block unapproved tools with write/admin access immediately, run a DLP review, and require executive sign-off before any new AI tool handles customer or employee data.';
+function signalPillClass(name) {
+  if (name === 'Workflow gap') return 'workflow';
+  if (name === 'Trust gap') return 'trust';
+  if (name === 'Capability gap') return 'capability';
+  if (name === 'Pricing gap') return 'pricing';
+  return 'none';
+}
+
+function recommendationFor(m) {
+  if (m.total === 0) {
+    return 'Add at least three workarounds to start surfacing a pattern.';
   }
-  if (m.risk === 'Medium') {
-    return 'Freeze net-new shadow tools, resolve all Unknown approvals within 30 days, and publish an allowlist with minimum security requirements.';
+  if (m.dominant === 'Workflow gap') {
+    return 'Workflow gaps dominate — your users are stitching your product into multi-step pipelines. Strongest near-term move is partner integrations with the AI tools they already chain in.';
   }
-  return 'Maintain an approved-tool catalog, lightweight quarterly audits, and clear channels for teams to request new tools before adoption.';
+  if (m.dominant === 'Trust gap') {
+    return 'Trust gaps dominate — users are double-checking your output with another model. Loop back to M4: confidence UX, reliability contract, eval transparency. This is a credibility problem masquerading as a feature request.';
+  }
+  if (m.dominant === 'Capability gap') {
+    return 'Capability gaps dominate — users want something your product does not do. Strongest near-term move is building one or two of these natively before a competitor does.';
+  }
+  if (m.dominant === 'Pricing gap') {
+    return 'Pricing gaps dominate — users are getting value externally because it is cheaper or metered differently. Re-examine your packaging before assuming you need to build more.';
+  }
+  return 'Mixed signal — review your audit and look for the highest-frequency pattern first.';
 }
 
 function buildPolicyText(m) {
-  return `Based on your audit: ${m.total} tools discovered, ${m.needsAction} require action.\n\nRecommended policy: ${policyRecommendation(m)}\n\nConsolidate redundant tools, document owners and data classes, and align procurement with security review.`;
+  const lines = [];
+  lines.push(`Based on your audit: ${m.total} user-side workarounds discovered.`);
+  lines.push(`Decisions: ${m.build} build · ${m.partner} partner · ${m.ignore} ignore · ${m.tbd} TBD.`);
+  lines.push(`Estimated adjacent spend: $${m.spend}/mo across surveyed users.`);
+  lines.push(`Dominant signal: ${m.dominant}.`);
+  lines.push('');
+  lines.push(`Recommended next step: ${recommendationFor(m)}`);
+  lines.push('');
+  lines.push('Sequence the Build column by frequency × strategic relevance. Confirm Partner candidates with the external tools\' partnership teams. Re-run this audit each quarter — workarounds shift fast.');
+  return lines.join('\n');
 }
 
 function refreshPolicyAuto() {
   const m = computeMetrics();
-  const oneLiner = `Based on your audit: <strong>${m.total}</strong> tools discovered, <strong>${m.needsAction}</strong> require action. Recommended policy: <strong>${policyRecommendation(m)}</strong>`;
+  const oneLiner = `Audit: <strong>${m.total}</strong> workarounds · <strong>${m.build}</strong> build · <strong>${m.partner}</strong> partner · <strong>${m.ignore}</strong> ignore · adjacent spend <strong>$${m.spend}/mo</strong> · dominant signal <strong>${m.dominant}</strong>.`;
   $('policyAuto').innerHTML = oneLiner;
   if (!policyDirty) {
     $('policyStatement').value = buildPolicyText(m);
@@ -344,20 +425,25 @@ function syncPolicyFromAudit() {
   policyDirty = false;
   $('policyStatement').value = buildPolicyText(computeMetrics());
   save();
-  showToast('Policy regenerated');
+  showToast('Brief regenerated');
 }
 
-function refreshRiskUI() {
+function refreshPatternUI() {
   const m = computeMetrics();
   $('stTotal').textContent = String(m.total);
-  const badEl = $('stBad');
-  badEl.textContent = String(m.bad);
-  badEl.className = 'v' + (m.bad > 0 ? ' danger' : '');
+  $('stBuild').textContent = String(m.build);
+  $('stPartner').textContent = String(m.partner);
+  $('stSpend').textContent = `$${m.spend}`;
 
-  $('stRisk').textContent = m.risk;
-  const pill = $('riskPill');
-  pill.textContent = m.riskDesc;
-  pill.className = 'risk-pill ' + m.pillCls;
+  $('stSignal').textContent = m.dominant;
+  const pill = $('signalPill');
+  if (m.total === 0) {
+    pill.textContent = 'Add rows to see your dominant signal';
+    pill.className = 'signal-pill none';
+  } else {
+    pill.textContent = `${m.dominant} — ${m.dominantCount} of ${m.total} workarounds`;
+    pill.className = 'signal-pill ' + signalPillClass(m.dominant);
+  }
 
   refreshPolicyAuto();
 }
@@ -369,7 +455,7 @@ function renderTools() {
       const tr = el.closest('tr');
       const i = +tr.dataset.idx;
       tools[i][el.dataset.f] = el.value;
-      save(); refreshRiskUI();
+      save(); refreshPatternUI();
     });
   });
   $('toolRows').querySelectorAll('.t-sel').forEach(el => {
@@ -377,7 +463,7 @@ function renderTools() {
       const tr = el.closest('tr');
       const i = +tr.dataset.idx;
       tools[i][el.dataset.f] = el.value;
-      save(); refreshRiskUI();
+      save(); refreshPatternUI();
     });
   });
 }
@@ -387,24 +473,36 @@ function removeTool(i) {
   tools.splice(i, 1);
   renderTools();
   save();
-  refreshRiskUI();
+  refreshPatternUI();
 }
 
 function addTool() {
-  tools.push({ name: '', dept: '', users: '', access: 'None', approved: 'Unknown' });
+  tools.push({ workaround: '', source: 'Support ticket', signal: 'Workflow gap', freq: 'M', spend: '', decision: 'TBD' });
   renderTools();
   save();
-  refreshRiskUI();
+  refreshPatternUI();
 }
 
 $('addTool').addEventListener('click', addTool);
 
+$('loadExample').addEventListener('click', () => {
+  tools = workedExample();
+  policyDirty = false;
+  $('taBuild').value = 'CSV export → exec summary (high freq, clear capability gap)\nCS onboarding domain enrichment (high freq, internal workflow)\nTone-cleanup for client-facing API output (M4 trust gap — pair with reliability contract refresh)';
+  $('taPartner').value = 'Zapier webhook → OpenAI summarizer recipe → ship an official Zapier integration with templated recipes\nTranslation workflow → partner with one localization-AI provider with a deep link from the export screen';
+  $('taIgnore').value = 'Users running ChatGPT on our pricing page → not strategic to absorb; monitor sentiment and improve pricing page clarity instead.';
+  renderTools();
+  refreshPatternUI();
+  save();
+  showToast('Worked example loaded');
+});
+
 function collectState() {
   return {
     tools: tools.map(t => ({ ...t })),
-    consolidate: $('taConsolidate').value,
-    approve: $('taApprove').value,
-    block: $('taBlock').value,
+    build: $('taBuild').value,
+    partner: $('taPartner').value,
+    ignore: $('taIgnore').value,
     policyStatement: $('policyStatement').value,
     policyDirty
   };
@@ -420,26 +518,27 @@ function load() {
     const d = JSON.parse(localStorage.getItem(KEY));
     if (d && Array.isArray(d.tools) && d.tools.length) {
       tools = d.tools.map(t => ({
-        name: t.name || '',
-        dept: t.dept || '',
-        users: t.users || '',
-        access: t.access || 'None',
-        approved: t.approved || 'Unknown'
+        workaround: t.workaround || '',
+        source: t.source || 'Support ticket',
+        signal: t.signal || 'Workflow gap',
+        freq: t.freq || 'M',
+        spend: t.spend || '',
+        decision: t.decision || 'TBD'
       }));
     }
     if (d) {
-      if (d.consolidate !== undefined) $('taConsolidate').value = d.consolidate;
-      if (d.approve !== undefined) $('taApprove').value = d.approve;
-      if (d.block !== undefined) $('taBlock').value = d.block;
+      if (d.build !== undefined) $('taBuild').value = d.build;
+      if (d.partner !== undefined) $('taPartner').value = d.partner;
+      if (d.ignore !== undefined) $('taIgnore').value = d.ignore;
       if (d.policyStatement !== undefined) $('policyStatement').value = d.policyStatement;
       policyDirty = !!d.policyDirty;
     }
   } catch (e) {}
   renderTools();
-  refreshRiskUI();
+  refreshPatternUI();
 }
 
-['taConsolidate','taApprove','taBlock'].forEach(id => {
+['taBuild','taPartner','taIgnore'].forEach(id => {
   $(id).addEventListener('input', () => { save(); });
 });
 
@@ -451,29 +550,33 @@ $('policyStatement').addEventListener('input', () => {
 function resetAll() {
   tools = defaultTools();
   policyDirty = false;
-  $('taConsolidate').value = '';
-  $('taApprove').value = '';
-  $('taBlock').value = '';
+  $('taBuild').value = '';
+  $('taPartner').value = '';
+  $('taIgnore').value = '';
   $('policyStatement').value = '';
   localStorage.removeItem(KEY);
   renderTools();
-  refreshRiskUI();
+  refreshPatternUI();
   showToast('Reset');
 }
 
 function buildExportText(md) {
   const m = computeMetrics();
   const s = collectState();
-  const h = md ? '# Shadow AI Audit — Module 5\n\n' : 'Shadow AI Audit — Module 5\n\n';
-  let out = h + '## Discover\n';
-  out += namedTools().map(t =>
-    `- ${t.name || '—'} | ${t.dept || '—'} | users: ${t.users || '—'} | access: ${t.access} | approved: ${t.approved}`
-  ).join('\n') || '(No tools named yet)';
-  out += `\n\n## Risk\n- Total shadow tools: ${m.total}\n`;
-  out += `- Unapproved + Write/Admin: ${m.bad}\n`;
-  out += `- Risk level: ${m.risk}\n\n`;
-  out += '## Action Plan\n### Consolidate\n' + (s.consolidate || '—') + '\n\n### Approve\n' + (s.approve || '—') + '\n\n### Block\n' + (s.block || '—') + '\n\n';
-  out += '## Policy Draft\n' + (s.policyStatement || buildPolicyText(m)) + '\n';
+  const h = md ? '# Shadow AI Audit (user-side) — Module 5\n\n' : 'Shadow AI Audit (user-side) — Module 5\n\n';
+  let out = h + '## Discover — User-Side Workarounds\n';
+  out += (namedTools().map(t =>
+    `- ${t.workaround} | source: ${t.source} | signal: ${t.signal} | freq: ${t.freq} | spend: $${t.spend || '0'}/mo | decision: ${t.decision}`
+  ).join('\n')) || '(No workarounds named yet)';
+  out += `\n\n## Pattern Assessment\n`;
+  out += `- Workarounds found: ${m.total}\n`;
+  out += `- Build candidates: ${m.build}\n`;
+  out += `- Partner candidates: ${m.partner}\n`;
+  out += `- Ignore decisions: ${m.ignore}\n`;
+  out += `- Adjacent spend: $${m.spend}/mo\n`;
+  out += `- Dominant signal: ${m.dominant}\n\n`;
+  out += '## Action Plan\n### Build\n' + (s.build || '—') + '\n\n### Partner\n' + (s.partner || '—') + '\n\n### Ignore + Monitor\n' + (s.ignore || '—') + '\n\n';
+  out += '## Roadmap Brief\n' + (s.policyStatement || buildPolicyText(m)) + '\n';
   return out;
 }
 

@@ -71,21 +71,22 @@ Each framework gets: what it answers, the structure, and one anchor example.
 
 ---
 
-## The Shadow AI Audit Framework
+## The Shadow AI Audit Framework (user-side)
 
-**What it answers:** What AI tools are already in use inside your org without sanctioned governance, and what do you do about them?
-**How to use it:** Run the four steps once with whatever scope is realistic (one team, one department, the whole company). Diagnostic, not exhaustive.
+**What it answers:** What AI capabilities are your *users* building around your product that you didn't ship, and what should you do about each one?
+**How to use it:** Read it as roadmap discovery research, not as a compliance audit. The CISO-flavored version of shadow AI (Samsung-style employee tool sprawl) is real but it's not a PM's job. The PM-facing version is the user-side one — every workaround your users have hacked together is either a feature request you weren't reading as one or a capability someone else will ship before you do. Run the four steps once with realistic scope (your top user segment, your top feature, one quarter of support tickets).
 
 | Step | What you do | Where to look |
 |---|---|---|
-| **1. Discovery** | Find tools in use without official approval | Surveys, expense reports, browser extensions, API key audits |
-| **2. Risk** | For each tool, map the data path + check legal posture | DPAs signed? Regulatory exposure (EU AI Act, GDPR, HIPAA, sector)? Score Low / Medium / High / Critical |
-| **3. Consolidate** | Cut down to a governed stack | Spotify's reduction from ~1,000 tools → 15. Goal = governed AI, not zero AI |
-| **4. Policy** | Publish the rules | Allow-list, data classes, review cadence, enforcement. Air Canada lesson: customer-facing bots need explicit hard bounds |
+| **1. Discover** | Find evidence of user-side AI use | Support tickets (search "ChatGPT," "Claude," "Zapier"); user interviews; public forums and Reddit; Zapier/Make recipe directories; API usage patterns (big exports without writes-back = enrichment elsewhere); social media |
+| **2. Signal** | Classify what each workaround tells you | **Workflow gap** (chained into another step you don't support) · **Trust gap** (double-checking your output) · **Capability gap** (you don't do it at all) · **Pricing gap** (cheaper or metered differently externally) |
+| **3. Prioritize** | Frequency × strategic relevance | A workaround mentioned once is a curiosity. One you see in fifteen tickets, six interviews, and four Zapier recipes is a feature you should already be building |
+| **4. Decide** | Build · Partner · Ignore | **Build**: absorb the capability natively. **Partner**: official integration with the external tool. **Ignore**: not strategic, users keep doing it externally. *Ignore* is a legitimate answer; the trap is calling everything "Build" |
 
-**Decision column (Keep / Govern / Kill):** "Medium" is the lazy Risk answer; "we'll think about it" is the lazy Decision answer. Force yourself into one of three: **keep** (safe and useful), **govern** (useful but needs guardrails), **kill** (data path is unsafe, no fix exists).
-**Anchor case:** Samsung - three data leaks in roughly one month, no policy, no audit trail, ended with a total external-AI ban that cost more than the leaks.
-**Lives in:** Shadow AI Audit table + 3 summary stats (Tools found · After triage · Hidden spend) in `compounding-system.md`. Backed by the **Shadow AI Audit** tool.
+**Signal → decision mapping (rough):** Workflow gap → usually Partner. Trust gap → re-open M4 (reliability contract + confidence UX) before adding more features. Capability gap → cleanest Build candidate. Pricing gap → look at packaging before assuming you need to build more.
+**Decision column note (Build / Partner / Ignore vs. Keep / Govern / Kill):** The repo template's column placeholder still shows the older `keep / govern / kill` verbs because the template is frozen. Use the user-side labels in your audit and overwrite the placeholder text — it's a 1:1 mapping (keep ≈ ignore, govern ≈ partner, kill ≈ build).
+**Anchor case:** Samsung lives one slide earlier as the cautionary CISO-side case. The user-side anchor is messier — every B2B SaaS PM has at least one example of users routing their product's output through ChatGPT to do something the product doesn't do natively. Pick one from your own product right now.
+**Lives in:** Shadow AI Audit table + 3 summary stats (Workarounds found · Build candidates · Adjacent spend) in `compounding-system.md`. Backed by the **Shadow AI Audit** tool.
 
 ---
 

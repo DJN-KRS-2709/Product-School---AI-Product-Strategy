@@ -391,7 +391,7 @@ footer .footer-sub {
   <p>Module 4 was about <em>product-level</em> trust — golden datasets, confidence UX, reliability contracts, the promises one product makes to its users. Module 5 zooms out. We ask a harder pair of questions: <strong>does this product get smarter the more it's used, and what already broke that nobody told you about?</strong></p>
   <p>The shift is from <em>craft</em> to <em>exposure</em>. M4 was: can you build something trustworthy? M5 is: what's already happening that you don't know about? Agents picking actions on their own. Employees pasting confidential data into tools nobody approved. Feedback loops that exist on paper and trash every signal in practice. Most experienced PMs are surprised by how much of this is already running inside their own org.</p>
   <p>The assumption to break early: <strong>"Compliance is a one-time checklist."</strong> In AI, systems either compound or degrade silently. There's no steady state. Traditional products don't get worse when you're not looking. AI products do.</p>
-  <p>You leave with one artifact, <code>05-the-guardrails/compounding-system.md</code>, holding three blocks of work: a <strong>Compounding Sketch</strong> (Feedback Loops + Context Connectivity sections — three loops that either learn, scale, or fail), a <strong>Governance One-Pager</strong> (Governance Policy + Agent Topology sections — autonomy boundaries, escalation triggers, audit cadence, regulatory exposure), and a <strong>Shadow AI Audit Starter</strong> (the Shadow AI Audit section — tools already in your org, risk-scored, triaged). Backed by three interactive tools — the <strong>Compounding System Designer</strong>, the <strong>Governance Policy Drafter</strong>, and the <strong>Shadow AI Audit</strong> — that do the structural lift.</p>
+  <p>You leave with one artifact, <code>05-the-guardrails/compounding-system.md</code>, holding three blocks of work: a <strong>Compounding Sketch</strong> (Feedback Loops + Context Connectivity sections — three loops that either learn, scale, or fail), a <strong>Governance One-Pager</strong> (Governance Policy + Agent Topology sections — autonomy boundaries, escalation triggers, audit cadence, regulatory exposure), and a <strong>Shadow AI Audit Starter</strong> (the Shadow AI Audit section — five workarounds your <em>users</em> have built around your product with AI, classified by signal, with a build / partner / ignore decision on each). Backed by three interactive tools — the <strong>Compounding System Designer</strong>, the <strong>Governance Policy Drafter</strong>, and the <strong>Shadow AI Audit</strong> — that do the structural lift.</p>
 </section>
 
 <hr class="divider">
@@ -576,17 +576,18 @@ footer .footer-sub {
     <p>The lesson isn't "don't use AI tools." It's that the absence of governance isn't a compliance gap — it's a strategy failure. The ban cost Samsung more than the leaks did.</p>
   </div>
 
-  <p>The reflex reaction most students have is "this couldn't happen at my company." In every cohort that bet has been wrong. It's already happening. You just don't have the audit trail to prove it yet — which is the entire purpose of the shadow AI audit you'll build later in the session.</p>
+  <p>The reflex reaction most students have is "this couldn't happen at my company." In every cohort that bet has been wrong. It's already happening. Most of it is your CISO's problem to manage — employees pasting work into vendor models is real but it's not, structurally, a PM decision. The version of shadow AI <em>you</em> can act on is different, and it's the next chapter.</p>
 
-  <h3><span class="slide-num">Slide 13</span>The Shadow AI Audit (framework)</h3>
-  <p>A four-step framework that turns the Samsung fear into a repeatable diagnostic. <strong>Discovery → Risk → Consolidate → Policy.</strong></p>
+  <h3><span class="slide-num">Slide 13</span>The Shadow AI Audit (framework) — for PMs</h3>
+  <p>This is the reframe. Samsung-style shadow AI is your CISO's problem. The version you can act on as a product manager is what your <em>users</em> are building with AI on top of, alongside, or to replace pieces of your product. Same name, different problem, very different opportunity — because every user-side workaround is either a feature request you weren't reading as one, or a capability someone else is going to ship before you do.</p>
+  <p>The four-step framework — same shape, redirected at the user-side: <strong>Discover → Signal → Prioritize → Decide.</strong></p>
   <ol>
-    <li><strong>Discovery</strong> — surveys, expense reports, browser extensions, API keys. You'd be amazed what shows up in expenses: a $20/month AI tool someone's been quietly using for six months is shadow AI; multiply it by the team.</li>
-    <li><strong>Risk</strong> — map the data path for each tool, check for Data Processing Agreements (DPAs), regulatory exposure, score Low / Medium / High / Critical.</li>
-    <li><strong>Consolidate</strong> — remember Spotify's 1,000 → 15. The goal is <em>governed</em> AI, not zero AI. You're not trying to ban everything Samsung-style; you're trying to bring it into the light.</li>
-    <li><strong>Policy</strong> — allow-list, data classes, review cadence, enforcement. Air Canada's lesson: customer-facing bots need explicit, hard bounds or you're liable for whatever they make up.</li>
+    <li><strong>Discover</strong> — where users reach for AI you didn't ship. Six places to look, none of them surveys: support tickets (search for "ChatGPT," "Claude," "Zapier"), user interviews ("walk me through your workflow"), public forums and Reddit, Zapier/Make integration directories, API usage patterns (big exports without writes-back = enrichment elsewhere), and social media (power users tweet their workflows).</li>
+    <li><strong>Signal</strong> — what does each workaround tell you? Four signal types, and you'll use them to prioritize: <em>workflow gap</em> (they're chaining your output into another step), <em>trust gap</em> (they're double-checking your output with another model — that one stings), <em>capability gap</em> (they want something you don't do), <em>pricing gap</em> (they're getting it externally because it's cheaper or metered differently).</li>
+    <li><strong>Prioritize</strong> — frequency × strategic relevance. A workaround mentioned once is a curiosity. One you see in fifteen tickets, six interviews, and four Zapier recipes is a feature you should already be building.</li>
+    <li><strong>Decide</strong> — three options. <strong>Build</strong> (absorb the capability natively), <strong>Partner</strong> (strike an official integration with the external tool), or <strong>Ignore</strong> (accept some users will keep doing it externally — it's not strategic for you to own). <em>Ignore</em> is a legitimate answer. The trap is calling everything "build" because building feels like ambition.</li>
   </ol>
-  <p>This is a <em>diagnostic</em> lens, not an exhaustive survey. A 50-person startup and a 50,000-person enterprise will run it very differently — the categories and depth shift with org size, industry, and what's already in your stack. Start with what scares you most.</p>
+  <p>This is the best discovery research nobody runs. Your users are already telling you what's missing — they just don't open a ticket called "feature request." They paste your output into ChatGPT and post about it. Read what they post.</p>
 </section>
 
 <hr class="divider">
@@ -650,7 +651,7 @@ footer .footer-sub {
   <p>Five-minute break. You just did most of the module's intellectual lift in one stretch — compounding loops, the responsible AI ladder, four agent governance knobs, the Samsung three-act tragedy, the audit framework, and a one-page governance policy. Coming back to the peer pressure-test, the shadow AI audit build, and synthesis.</p>
 
   <h3><span class="slide-num">Slide 16</span>Cameras On</h3>
-  <p>Welcome back. Cameras on for the peer challenge — six minutes per direction, then a shadow AI audit you'll be able to hand to IT or Finance on Monday.</p>
+  <p>Welcome back. Cameras on for the peer challenge — six minutes per direction, then the user-side shadow AI audit that doubles as roadmap discovery.</p>
 
   <h3><span class="slide-num">Slide 17</span>Peer Challenge: "What Feedback Loop Is Broken?"</h3>
   <p>Twelve minutes total, six per direction. Each partner audits the other's <code>compounding-system.md</code> entry through two lenses:</p>
@@ -667,11 +668,12 @@ footer .footer-sub {
   <p>The slide title is about loops, but the on-screen boxes show both Loops and Governance for a reason: your partner is auditing the whole guardrails entry. The formal repo capture is the loop-finding (it's the only "partner found" field the repo exposes), but if a partner surfaces a great governance gap, fold it back into your own <em>Autonomy</em> or <em>Escalation</em> fields on the spot. Don't let governance findings die just because there's no dedicated field.</p>
 
   <h3><span class="slide-num">Slide 18</span>Shadow AI Audit (Lab Intro)</h3>
-  <p>Section break introducing the highest-immediate-ROI exercise in the entire course. The other modules build long-term strategy. This one might save your company from a front-page incident.</p>
+  <p>Section break introducing the best discovery research nobody runs. This isn't an IT audit; it's a roadmap audit. You're about to surface what your users are doing with AI around your product — the workarounds, the integrations, the "I had to use ChatGPT to do X" patterns — and decide whether to build, partner, or ignore each one.</p>
 
-  <h3><span class="slide-num">Slide 19</span>Build — Shadow AI Audit</h3>
-  <p>Ten minutes. The slide shows the Shadow AI Audit table from <code>compounding-system.md</code> — three rows by four columns: <strong>Tool / Owner / Risk H-M-L / Decision (keep / govern / kill)</strong>. Three rows is the floor; aim for five if you have time. The <em>Owner</em> column is the one most teams skip — if a tool doesn't have a named human responsible, it's already shadow AI.</p>
-  <p>Below the table, three summary stats matter more than the rows themselves: <strong>Tools found · After triage · Hidden spend</strong>. Hidden spend is the number that lights up CFO eyes. In one recent cohort, a student realized their org was burning roughly $8k/month across personal AI subscriptions that never showed up on any expense line. That number is the budget for the governed alternative.</p>
+  <h3><span class="slide-num">Slide 19</span>Build — Shadow AI Audit (user-side)</h3>
+  <p>Ten minutes. The slide shows the Shadow AI Audit table — three rows by four columns: <strong>Workaround / Signal / Frequency / Decision</strong>. That maps onto the repo template's four columns: <em>Tool</em> = workaround, <em>Owner</em> = signal source (support, interview, Zapier directory, etc.), <em>Risk H/M/L</em> = frequency, <em>Decision</em> = <strong>build / partner / ignore</strong> (the repo placeholder still says keep/govern/kill — overwrite it). Three rows is the floor; aim for five if you've got time.</p>
+  <p>Where does the signal come from if you don't already have a list in your head? Your support team has it. Your CS team has it. Your developer-relations folks have it. Search your support tool for "ChatGPT," "Claude," "Zapier," and your top competitor's name. Five mentions and you've got a pattern.</p>
+  <p>Below the table, three summary stats: <strong>Workarounds found · Build candidates · Adjacent spend</strong>. Adjacent spend is the one that turns heads in a roadmap review — if your users are collectively paying $X per month for external AI to do things adjacent to your product, that's the budget that becomes available the moment you ship the native version. In one recent cohort, a PM calculated her users were paying ~$14/month each on top of her product just to use ChatGPT for report summarization. The native feature shipped six weeks later.</p>
   <p>Be ruthless with the Risk tiers. "Medium" is the lazy answer — push to High or Low. The Decision column has three real options: <strong>keep</strong> (safe and useful), <strong>govern</strong> (useful but needs guardrails), or <strong>kill</strong> (the data path is unsafe and there's no fix). Pick one villain tool right now — the one that made your stomach drop during the Samsung story.</p>
   <p>The <strong>Shadow AI Audit</strong> tool from the slide walks you through discovery, risk-scoring, and triage with exportable results. Export the results when you're done — this is the artifact you're handing to someone on Monday, and being able to send <em>"here's our shadow AI inventory, scored, with decisions"</em> in a single message is the whole point of the exercise.</p>
 </section>
@@ -726,8 +728,8 @@ footer .footer-sub {
     </div>
     <div class="takeaway">
       <div class="takeaway-num">Takeaway 3</div>
-      <div class="takeaway-head">Shadow AI is a strategy failure, not a compliance gap.</div>
-      <p>Samsung's three-act tragedy — bet, crack, correction — cost more in the ban than in the leaks. The absence of governance isn't neutral; it actively degrades your AI strategy. The audit isn't about catching people. It's about finding where the official product, policy, or workflow isn't good enough yet, and bringing what's already happening into the light.</p>
+      <div class="takeaway-head">Shadow AI is a strategy signal, not a compliance gap.</div>
+      <p>Samsung's three-act tragedy is what shadow AI looks like inside the org — and that's your CISO's job to manage, not yours. The version <em>you</em> can act on is what users are building with AI around your product. Every workaround is either a feature request you weren't reading as one, or a capability someone else will ship before you do. The audit isn't about catching anyone. It's about finding where your product is not good enough yet and what your users are already paying someone else to fill.</p>
     </div>
   </div>
 

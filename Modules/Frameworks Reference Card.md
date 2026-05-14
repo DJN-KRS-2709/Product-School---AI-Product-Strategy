@@ -341,21 +341,22 @@ For full term definitions, see [`Glossary.md`](./Glossary.md). For the narrative
 
 ---
 
-### The Shadow AI Audit Framework
+### The Shadow AI Audit Framework (user-side)
 
-**What it answers:** What AI tools are already in use inside your org without sanctioned governance, and what do you do about them?
-**How to use it:** Run the four steps with whatever scope is realistic (one team, one department, the whole company). Diagnostic, not exhaustive.
+**What it answers:** What AI capabilities are your *users* building around your product that you didn't ship, and what should you do about each one?
+**How to use it:** Read this as roadmap discovery research, not as a compliance audit. The CISO-flavored shadow AI (Samsung-style internal tool sprawl) is real but it's not a PM's job. The PM-facing version is the user-side one — every workaround your users have hacked together is either a feature request you weren't reading as one or a capability someone else will ship before you do.
 
 | Step | What you do | Where to look |
 |---|---|---|
-| **1. Discovery** | Find tools in use without official approval | Surveys, expense reports, browser extensions, API key audits |
-| **2. Risk** | Map the data path; check legal posture | DPAs signed? Regulatory exposure? Score L / M / H / Critical |
-| **3. Consolidate** | Cut down to a governed stack | Spotify: ~1,000 tools → 15. Goal = governed AI, not zero AI |
-| **4. Policy** | Publish the rules | Allow-list, data classes, review cadence, enforcement |
+| **1. Discover** | Find evidence of user-side AI use | Support tickets (search "ChatGPT," "Claude," "Zapier"); user interviews; forums and Reddit; Zapier/Make recipe directories; API usage patterns; social media |
+| **2. Signal** | Classify what each workaround tells you | Workflow gap · Trust gap · Capability gap · Pricing gap |
+| **3. Prioritize** | Frequency × strategic relevance | Mentioned once = curiosity. Seen in fifteen tickets and four Zapier recipes = build candidate |
+| **4. Decide** | Build · Partner · Ignore | *Build* = absorb natively. *Partner* = official integration. *Ignore* = legitimate when not strategic. The trap is defaulting to Build |
 
-**Decision column (Keep / Govern / Kill):** "Medium" is the lazy Risk; "we'll think about it" is the lazy Decision. Force yourself into one of three real options.
-**Anchor case:** Samsung - three data leaks in roughly one month, no policy, no trail, ended with a total external-AI ban that cost more than the leaks.
-**Lives in:** Shadow AI Audit table + 3 summary stats in `05-the-guardrails/compounding-system.md`.
+**Signal → decision mapping (rough):** Workflow gap → usually Partner. Trust gap → re-open M4 (reliability contract / confidence UX). Capability gap → cleanest Build candidate. Pricing gap → look at packaging first.
+**Repo column note (Build / Partner / Ignore vs. Keep / Govern / Kill):** The frozen repo template still shows `keep / govern / kill` in the placeholder. Overwrite it with build/partner/ignore — 1:1 mapping (keep ≈ ignore, govern ≈ partner, kill ≈ build).
+**Anchor case:** Samsung lives in the slide before this framework as the cautionary CISO-side case. The user-side anchor is your own product: every PM has one example of users routing their output through ChatGPT.
+**Lives in:** Shadow AI Audit table + 3 summary stats (Workarounds found · Build candidates · Adjacent spend) in `05-the-guardrails/compounding-system.md`.
 
 ---
 

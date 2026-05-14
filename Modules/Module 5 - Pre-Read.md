@@ -50,7 +50,7 @@ Pick **three** AI products you actually use this week. For each one, ask the sam
 
 Twenty minutes total. No notes required. The goal is to walk into Module 5 with **felt examples** of compounding vs. just-scaling. When the slide goes up that says "design your three loops," you'll have a library to draw from.
 
-If you have ten extra minutes, do one more thing: notice **one piece of shadow AI** inside your own org. The Slack message someone drafted in ChatGPT, the spreadsheet auto-filled by an unauthorized plugin, the colleague using a personal Claude account for customer comms. You don't have to confront anyone — just notice. That observation is going to matter in section 6.
+If you have ten extra minutes, do one more thing: notice **one piece of shadow AI around your product** — and yes, the framing matters. We're not asking what your colleagues are pasting into ChatGPT (that's your CISO's problem, not yours). We're asking what your *users* are doing with AI around the product you ship. A Zapier recipe in the public directory that combines your tool with OpenAI. A Reddit thread where someone explains how they paste your export into Claude. A support ticket that says "I had to use ChatGPT to do X." That observation is going to matter in section 6, and it's likely the most strategically relevant thing you'll spot all week.
 
 ---
 
@@ -64,7 +64,8 @@ Full definitions go in the cumulative [`Glossary.md`](./Glossary.md) after the s
 - **Cross-domain transfer** - winning in one area lifts an adjacent area for free. Duolingo's lessons getting better across languages. ServiceTitan's data lifting 32 products on one stack.
 - **Network intelligence** - fleet-level patterns improve each individual node. Tesla's fleet, Waze, fraud detection. Privacy-gated, but powerful.
 - **Freeze test** - if you froze your model for three months (~one frontier cycle), would you still win? Diagnoses compounding moat vs. rented model advantage.
-- **Shadow AI** - any AI tool being used inside your company that you didn't sanction, can't see, and don't govern. Samsung found out the hard way.
+- **Shadow AI** - two lenses, only one of which is a PM's job. *Internal/CISO lens:* AI tools your employees use without sanctioned governance (Samsung-style). *User-side/PM lens:* AI capabilities your **users** are building around your product that you didn't ship — Zapier recipes, ChatGPT workflows on your exports, integrations on your API. The M5 audit pivots toward the second lens because it's the one you can act on.
+- **Signal types** - four labels for classifying each user-side workaround in the audit: **workflow gap** (chained into another step), **trust gap** (double-checked with another model), **capability gap** (you don't do it at all), **pricing gap** (cheaper externally).
 - **Agent** - software that *picks actions and chains tools*, not just steps. Agents make agentic ROI economics fuzzier than RPA — and the governance harder.
 - **Autonomy boundary** - the explicit line between what AI does alone, what needs human approval, and what's never allowed at all. The hardest line is "human approval *even when confidence is high.*"
 - **Tool calls** - the API calls an agent makes on your behalf. Each one is an exfiltration risk if you don't whitelist, rate-limit, and log.
@@ -80,7 +81,7 @@ Full definitions go in the cumulative [`Glossary.md`](./Glossary.md) after the s
 >
 > There was no policy. No logging. No way to claw the data back. The first response was a blanket ban. That didn't work either.
 
-We'll walk through what actually happened, what they should have done, and what the lesson is for your team. Come ready to think about which of your colleagues might be unintentionally re-running this story right now.
+We'll walk through what actually happened and what the lesson is. **But** — and this is the M5 twist — we use Samsung as a cautionary anchor, not as the exercise model. As a product person you don't run the corporate AI stack; your security team does. What we'll spend the actual lab time on is the *other* version of shadow AI: what your **users** are quietly building with AI around the product you ship. Same word, different problem, very different opportunity.
 
 Also: the **Air Canada chatbot** lesson from M4 comes back. M4 was about the *contract* the AI made. M5 is about the *policy* the company should have had so the chatbot couldn't make that contract in the first place.
 
@@ -99,18 +100,18 @@ About one frontier cycle. Not a literal freeze — a thought experiment. If GPT/
 
 Write down your one-sentence honest answer.
 
-### Question 2 - Who in your company is using AI tools you didn't sanction?
+### Question 2 - What are your **users** doing with AI around your product?
 
-And what data are they pasting in? Honest answer beats clean answer. The most common honest answer is *"I have no idea, and that's part of the problem."* That's fine — write it down.
+Not your colleagues — your *users*. What workarounds, integrations, prompts, or external AI tools are they layering on top of, alongside, or to replace pieces of what you ship? The most common honest answer is *"I don't really know, but my support team mentions ChatGPT a lot."* That's fine — write it down and bring the rough hypothesis to the session.
 
-If you do know: which tools, which teams, which data, what risk tier? Even a rough list is a head-start on the Shadow AI Audit you'll do in the room.
+If you do have visibility: which workarounds, what kind of users, how often, and what does each one tell you (workflow gap? trust gap? capability gap? pricing gap?). Even three rough rows is a head-start on the user-side Shadow AI Audit you'll do in the room — and that audit is the closest thing to free roadmap research you'll get this quarter.
 
 ---
 
 ## 7. What to bring
 
 - All four prior artifacts: `01-the-bet/`, `02-the-moat/`, `03-the-margin/`, `04-the-contract/`.
-- A rough list (informal is fine) of: every AI tool / feature your product team ships, **and** every AI tool your colleagues use internally. The Notion AI, the Granola, the personal ChatGPT, the IDE assistant. All of it.
+- A rough list (informal is fine) of: every AI tool / feature your product team ships, **and** every AI workaround your *users* have built around your product. The Zapier recipes, the "I had to use ChatGPT to do X" support tickets, the public forum posts, the integration listings. Three to five rough observations is enough — we'll formalize them in the session.
 - Honest answers to the two questions above.
 - The willingness to be pressure-tested by a partner on what your governance policy doesn't cover.
 

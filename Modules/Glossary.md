@@ -8,7 +8,7 @@ The glossary has five sections:
 2. **Strategy Concepts** - the frameworks and ideas that show up across the modules.
 3. **Economics & Pricing** - everything from Module 3 about how AI products make and lose money.
 4. **Trust & Reliability** - the Module 4 vocabulary for evals, confidence UX, and reliability contracts.
-5. **Governance & Compounding** - the Module 5 vocabulary for agents, governance, shadow AI, and feedback loops that actually learn.
+5. **Governance & Compounding** - the Module 5 vocabulary for agents, governance, the user-side reframe of shadow AI, and feedback loops that actually learn.
 
 Each entry is one or two sentences, plus a `Seen in:` pointer back to the module and slide where the term first lands.
 
@@ -367,6 +367,11 @@ The headline reframe of Module 4. Trust comes from perceived control - confidenc
 
 ## 5. Governance & Compounding
 
+### Adjacent spend
+
+The total monthly amount your *users* are paying for external AI tools to do things adjacent to your product (ChatGPT Plus to summarize your exports, Zapier+OpenAI to enrich your output, etc.). The third summary stat in the M5 Shadow AI Audit, and the one that turns roadmap-review heads - it's the budget that becomes available the moment you ship the native version. Renamed from "hidden spend" in the reframed user-side audit (see *Shadow AI* for the two lenses).
+*Seen in: M5, Slide 19; M5 - Shadow AI Audit tool.*
+
 ### Active / Broken / Missing
 
 The three honest status labels for a feedback loop. **Active** = shipping and learning today. **Broken** = exists on paper but doesn't actually feed back (corrections logged but never reviewed). **Missing** = the loop just isn't there. Most rows on most products come back `missing` and that *is* the finding.
@@ -391,6 +396,11 @@ How often you review the AI system's outputs and decisions against your golden d
 
 What an agent can do solo vs. what needs a human. Two key splits: *draft ≠ send* (it can write the email; sending requires approval) and *read ≠ write* (it can pull data; modifying or sending it is gated). One of the four agent governance knobs.
 *Seen in: M5, Slides 10 and 14.*
+
+### Build / Partner / Ignore
+
+The three decisions in the user-side Shadow AI Audit. **Build** = absorb the capability natively into your product (you kill the workaround by making it unnecessary). **Partner** = strike an official integration with the external tool users are already chaining. **Ignore** = accept that some users will keep doing it externally - it's not strategic for you to own. *Ignore* is a legitimate decision; the trap is calling everything "Build" because building feels like ambition. Replaces the older *keep / govern / kill* triage from the CISO-flavored audit (see that entry for the mapping).
+*Seen in: M5, Slide 19; M5 - Shadow AI Audit tool.*
 
 ### Bias posture
 
@@ -457,11 +467,6 @@ EU privacy regulation governing personal data of EU residents, regardless of whe
 Level 3 of the Responsible AI Maturity ladder. The reframe that governance done well is a *sales asset*, not a compliance burden. Salesforce's Einstein Trust Layer is the textbook case - they sell governance as part of the product pitch.
 *Seen in: M5, Slide 9.*
 
-### Hidden spend
-
-The total monthly AI tool cost that doesn't show up on a sanctioned expense line. The summary stat in the Shadow AI Audit that lights up CFO eyes - it's the budget for the governed alternative once you consolidate.
-*Seen in: M5, Slide 19.*
-
 ### HIPAA (Health Insurance Portability and Accountability Act)
 
 US healthcare-data privacy law. Relevant for any product that handles patient data; impacts memory class choices (you almost never want long-term or shared memory for PHI), audit cadence, and Business Associate Agreements with vendors.
@@ -469,8 +474,8 @@ US healthcare-data privacy law. Relevant for any product that handles patient da
 
 ### Keep / Govern / Kill
 
-The three triage decisions for each tool surfaced in a shadow AI audit. **Keep**: safe and useful as-is. **Govern**: useful but needs guardrails (DPA, allow-list, monitoring). **Kill**: the data path is unsafe and there's no realistic fix. "Medium" is the lazy answer in the Risk column; the Decision column should be one of three real options.
-*Seen in: M5, Slide 19.*
+The original triage labels for the internal/CISO-flavored shadow AI audit: **Keep** (safe, in use), **Govern** (useful but needs guardrails), **Kill** (data path unsafe, no realistic fix). M5 uses the user-side reframe, where the equivalent decisions are **Build / Partner / Ignore** — same three slots, different question (what does this workaround tell us to do with our roadmap?). The repo template's placeholder still shows `keep / govern / kill` because the template is frozen — overwrite it with build/partner/ignore when you fill in your audit.
+*Seen in: M5, Slide 19 (mapped onto Build/Partner/Ignore).*
 
 ### Memory (short / long / shared)
 
@@ -514,8 +519,22 @@ The central reframe of the first half of M5. *Scales*: ↑ volume, flat quality,
 
 ### Shadow AI
 
-Any AI tool in use inside your org without sanctioned governance, allow-listing, or oversight. Includes both unauthorized external SaaS (ChatGPT, Claude, niche copilots) and employee-paid personal subscriptions used for work. The Samsung case is the canonical "what happens when shadow AI meets real data" story.
-*Seen in: M5, Slides 12-13 and 19.*
+Two related lenses, only one of which is a PM's job:
+
+- **Internal / CISO lens (Samsung-style):** AI tools in use inside your org without sanctioned governance, allow-listing, or oversight. Includes unauthorized external SaaS (ChatGPT, Claude, niche copilots) and employee-paid personal subscriptions used for work. Real problem, but structurally it's a security/IT/CISO responsibility, not product. The Samsung case is the canonical "what happens when shadow AI meets real data" story for this lens.
+- **User-side / PM lens (the M5 framing):** What your *users* are building with AI on top of, alongside, or to replace pieces of your product. Pasting your exports into ChatGPT to summarize them, wiring Zapier into your API for LLM enrichment, asking ChatGPT to interpret your pricing page. This is what M5 redirects the Shadow AI Audit toward, because it's the lens PMs can actually act on — every workaround is either a feature request you weren't reading as one, or a capability someone else will ship before you do.
+
+*Seen in: M5, Slide 12 (Samsung / CISO lens), Slides 13, 18-19 (user-side / PM lens).*
+
+### Shadow AI Audit (user-side)
+
+The M5 reframed audit: a four-step diagnostic - **Discover → Signal → Prioritize → Decide** - that surfaces the AI workarounds your users have built around your product, classifies the signal each one carries, and decides whether to build, partner, or ignore. Output is a five-row table plus three summary stats (Workarounds found · Build candidates · Adjacent spend). Read as roadmap discovery research, not as a compliance audit.
+*Seen in: M5, Slides 13, 18-19; M5 - Shadow AI Audit tool.*
+
+### Signal types (workflow / trust / capability / pricing)
+
+The four labels used to classify each user-side AI workaround in the Shadow AI Audit. **Workflow gap** - users are chaining your output into another step you don't support natively. **Trust gap** - users are double-checking your output with another model because they don't trust yours. **Capability gap** - users want something your product doesn't do at all. **Pricing gap** - users are getting the value externally because it's cheaper or metered differently. Each signal type points to a different roadmap move: workflow → Partner, trust → re-open M4 (reliability contract / confidence UX), capability → Build, pricing → re-examine packaging before assuming you need to build more.
+*Seen in: M5, Slides 13, 19; M5 - Shadow AI Audit tool.*
 
 ### SOC 2
 
