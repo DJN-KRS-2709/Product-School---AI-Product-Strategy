@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roadmap Builder — Map Your Backlog to Strategy</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+  :root {
+    --bg: #0b0b10;
+    --surface: #13131a;
+    --surface2: #1a1a24;
+    --border: #252535;
+    --border-hi: #35354a;
+    --text: #e0e0f0;
+    --text-dim: #7a7a9a;
+    --text-muted: #55556a;
+    --blue: #5b8def;
+    --green: #3dd68c;
+    --yellow: #f0c040;
+    --red: #ef5b5b;
+    --purple: #a07be8;
+    --teal: #39d2c0;
+    --blue-bg: rgba(91,141,239,0.08);
+    --green-bg: rgba(61,214,140,0.08);
+    --teal-bg: rgba(57,210,192,0.08);
+    --radius: 10px;
+    --radius-lg: 14px;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 40px 20px 100px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page { max-width: 820px; margin: 0 auto; }
+
+  .header { text-align: center; margin-bottom: 36px; }
+  .badge {
+    display: inline-block; font-size: 10px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.12em;
+    color: var(--teal); background: var(--teal-bg);
+    border: 1px solid rgba(57,210,192,0.2);
+    padding: 5px 14px; border-radius: 20px; margin-bottom: 14px;
+  }
+  .header h1 {
+    font-size: 30px; font-weight: 800; color: #fff;
+    margin-bottom: 8px; letter-spacing: -0.02em;
+  }
+  .header p {
+    font-size: 14px; color: var(--text-dim);
+    line-height: 1.6; max-width: 600px; margin: 0 auto;
+  }
+
+  .card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-lg); margin-bottom: 20px;
+    overflow: hidden; transition: border-color 0.2s;
+  }
+  .card:hover { border-color: var(--border-hi); }
+  .card-head {
+    padding: 18px 24px; border-bottom: 1px solid var(--border);
+  }
+  .card-title { font-size: 16px; font-weight: 700; color: #fff; }
+  .card-sub { font-size: 12px; color: var(--text-dim); margin-top: 4px; line-height: 1.5; }
+  .card-body { padding: 20px 24px 24px; }
+
+  .field { margin-bottom: 18px; }
+  .field:last-child { margin-bottom: 0; }
+  .field label {
+    display: block; font-size: 12px; font-weight: 600;
+    color: var(--text-dim); margin-bottom: 8px;
+  }
+  .field label span { color: var(--text-muted); font-weight: 500; }
+  textarea, input[type="text"], input[type="url"] {
+    width: 100%;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px; font-weight: 500; color: #fff;
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 8px; padding: 12px 14px; resize: vertical;
+    outline: none; line-height: 1.5; transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  textarea { min-height: 80px; }
+  textarea:focus, input[type="text"]:focus, input[type="url"]:focus {
+    border-color: var(--teal);
+    box-shadow: 0 0 0 3px rgba(57,210,192,0.12);
+  }
+  textarea::placeholder, input::placeholder { color: var(--text-muted); }
+
+  .prompt-output {
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 20px; margin-top: 16px;
+    font-family: 'JetBrains Mono', monospace; font-size: 12px;
+    color: var(--text-dim); line-height: 1.7; white-space: pre-wrap;
+    max-height: 500px; overflow-y: auto; display: none;
+  }
+  .prompt-output.visible { display: block; }
+
+  .actions {
+    display: flex; flex-wrap: wrap; gap: 10px;
+    margin-top: 20px; justify-content: center;
+  }
+  .btn {
+    font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600;
+    padding: 10px 20px; border-radius: 8px;
+    border: 1px solid var(--border); background: var(--surface2);
+    color: var(--text); cursor: pointer; transition: all 0.2s;
+  }
+  .btn:hover { border-color: var(--teal); color: #fff; }
+  .btn.primary { background: var(--teal); border-color: var(--teal); color: #062924; }
+  .btn.primary:hover { background: #4ee0cf; }
+  .btn.ghost { background: transparent; }
+  .btn.danger:hover { border-color: var(--red); color: var(--red); }
+  .btn.tiny { padding: 5px 10px; font-size: 11px; }
+
+  .tip {
+    margin-top: 14px; padding: 12px 16px;
+    background: var(--teal-bg); border: 1px solid rgba(57,210,192,0.15);
+    border-radius: var(--radius); font-size: 12px;
+    color: var(--text-dim); line-height: 1.55;
+  }
+  .tip strong { color: var(--teal); }
+  .tip code { font-family: 'JetBrains Mono', monospace; background: rgba(57,210,192,0.12); padding: 1px 6px; border-radius: 4px; color: #b8f0e6; }
+
+  .how-section { margin-top: 4px; }
+  .how-step {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 14px 0; border-bottom: 1px solid var(--border);
+  }
+  .how-step:last-child { border-bottom: none; }
+  .how-num {
+    width: 28px; height: 28px; border-radius: 6px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 800; color: #062924;
+    background: var(--teal);
+  }
+  .how-text { font-size: 13px; color: var(--text-dim); line-height: 1.5; }
+  .how-text strong { color: var(--text); }
+  .how-text code { font-family: 'JetBrains Mono', monospace; font-size: 11px; background: rgba(57,210,192,0.10); padding: 1px 6px; border-radius: 4px; color: #b8f0e6; }
+
+  .saved-toast {
+    position: fixed; bottom: 24px; left: 50%;
+    transform: translateX(-50%) translateY(60px);
+    background: var(--green); color: #052e1d;
+    font-size: 13px; font-weight: 700;
+    padding: 10px 24px; border-radius: 8px;
+    opacity: 0; transition: all 0.3s; pointer-events: none; z-index: 100;
+  }
+  .saved-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  /* Tabbed loaders ─────────────────────────── */
+  .load-tabs {
+    display: flex; gap: 6px; margin-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .load-tab {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.06em;
+    padding: 10px 14px;
+    background: transparent; border: none;
+    border-bottom: 2px solid transparent;
+    color: var(--text-muted); cursor: pointer;
+    transition: color 0.2s, border-color 0.2s;
+    margin-bottom: -1px;
+  }
+  .load-tab:hover { color: var(--text-dim); }
+  .load-tab.active { color: var(--teal); border-bottom-color: var(--teal); }
+  .load-pane { display: none; }
+  .load-pane.active { display: block; }
+
+  .repo-row { display: flex; gap: 10px; align-items: stretch; flex-wrap: wrap; }
+  .repo-row input { flex: 1; min-width: 0; }
+
+  .upload-drop {
+    position: relative;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 6px; padding: 22px 18px;
+    background: var(--surface2);
+    border: 1.5px dashed var(--border-hi); border-radius: 10px;
+    cursor: pointer; transition: border-color 0.2s, background 0.2s;
+    text-align: center;
+  }
+  .upload-drop:hover, .upload-drop.dragover {
+    border-color: var(--teal);
+    background: rgba(57,210,192,0.04);
+  }
+  .upload-drop input[type="file"] {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    opacity: 0; cursor: pointer;
+  }
+  .upload-drop-title { font-size: 14px; font-weight: 700; color: var(--text); }
+  .upload-drop-sub {
+    font-size: 12px; color: var(--text-dim); line-height: 1.5; max-width: 520px;
+  }
+  .upload-drop-sub code { font-family: 'JetBrains Mono', monospace; font-size: 11px; background: rgba(57,210,192,0.10); color: #b8f0e6; padding: 1px 5px; border-radius: 3px; }
+
+  .load-status {
+    margin-top: 14px; padding: 12px 14px;
+    border-radius: var(--radius);
+    font-size: 12px; line-height: 1.55;
+    display: none;
+  }
+  .load-status.show { display: block; }
+  .load-status.ok    { background: var(--green-bg); border: 1px solid rgba(61,214,140,0.2); color: var(--green); }
+  .load-status.err   { background: rgba(239,91,91,0.08); border: 1px solid rgba(239,91,91,0.2); color: var(--red); }
+  .load-status.busy  { background: rgba(240,192,64,0.08); border: 1px solid rgba(240,192,64,0.15); color: var(--yellow); }
+  .load-status code { font-family: 'JetBrains Mono', monospace; opacity: 0.85; }
+
+  /* Initiatives list ───────────────────────── */
+  .init-stats {
+    display: none; align-items: center; flex-wrap: wrap; gap: 8px 14px;
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    color: var(--text-dim); margin-bottom: 14px;
+    padding: 10px 14px; background: var(--surface2);
+    border: 1px solid var(--border); border-radius: 8px;
+  }
+  .init-stats.show { display: flex; }
+  .init-stats strong { color: var(--text); }
+  .init-stats .gs-pill {
+    padding: 3px 10px; border-radius: 999px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.08em; font-size: 10px;
+    background: var(--teal-bg); color: var(--teal);
+    border: 1px solid rgba(57,210,192,0.25);
+  }
+
+  .init-list { display: flex; flex-direction: column; gap: 8px; }
+  .init-item {
+    display: grid; grid-template-columns: auto 1fr auto; gap: 10px;
+    align-items: flex-start;
+    padding: 12px 14px;
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 8px;
+  }
+  .init-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; font-weight: 700;
+    color: var(--text-muted);
+    min-width: 24px; padding-top: 6px;
+  }
+  .init-body { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+  .init-title-input {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px; font-weight: 600; color: #fff;
+    background: transparent; border: none; outline: none;
+    width: 100%; padding: 4px 0;
+  }
+  .init-title-input:focus { color: var(--teal); }
+  .init-meta {
+    display: flex; flex-wrap: wrap; gap: 6px;
+    font-family: 'JetBrains Mono', monospace; font-size: 10px;
+  }
+  .init-meta-pill {
+    padding: 2px 8px; border-radius: 4px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+  }
+  .init-meta-pill.guess {
+    background: var(--teal-bg);
+    border-color: rgba(57,210,192,0.25);
+    color: var(--teal);
+  }
+  .init-meta-pill.guess.bet { background: rgba(91,141,239,0.10); border-color: rgba(91,141,239,0.25); color: var(--blue); }
+  .init-meta-pill.guess.moat { background: rgba(61,214,140,0.10); border-color: rgba(61,214,140,0.25); color: var(--green); }
+  .init-meta-pill.guess.margin { background: rgba(240,192,64,0.10); border-color: rgba(240,192,64,0.25); color: var(--yellow); }
+  .init-meta-pill.guess.contract { background: rgba(160,123,232,0.10); border-color: rgba(160,123,232,0.25); color: var(--purple); }
+  .init-meta-pill.guess.guardrails { background: rgba(239,91,91,0.10); border-color: rgba(239,91,91,0.25); color: var(--red); }
+  .init-meta-pill.guess.unmapped { background: rgba(255,255,255,0.04); border-color: var(--border); color: var(--text-muted); }
+  .init-remove {
+    background: transparent; border: 1px solid var(--border);
+    color: var(--text-muted); border-radius: 6px;
+    width: 28px; height: 28px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; transition: all 0.15s; font-size: 14px;
+    flex-shrink: 0;
+  }
+  .init-remove:hover { color: var(--red); border-color: var(--red); }
+
+  .init-empty {
+    font-size: 13px; color: var(--text-dim);
+    background: var(--surface2);
+    border: 1px dashed var(--border);
+    border-radius: 8px;
+    padding: 18px; text-align: center; line-height: 1.6;
+  }
+  .init-empty strong { color: var(--text); font-weight: 700; }
+  .init-empty code { font-family: 'JetBrains Mono', monospace; font-size: 11px; background: rgba(57,210,192,0.10); color: #b8f0e6; padding: 1px 5px; border-radius: 3px; }
+
+  .add-row { display: flex; gap: 8px; margin-top: 12px; }
+  .add-row input {
+    flex: 1; min-width: 0;
+  }
+
+  /* Strategy summary ───────────────────────── */
+  .strategy-summary-wrap {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 16px;
+  }
+  .strategy-loaded {
+    display: flex; flex-wrap: wrap; gap: 6px;
+    margin-bottom: 10px;
+  }
+  .strategy-pill {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; padding: 3px 8px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+  }
+  .strategy-pill.has {
+    background: var(--teal-bg);
+    border-color: rgba(57,210,192,0.25);
+    color: var(--teal);
+  }
+
+  @media (max-width: 540px) {
+    .repo-row { flex-direction: column; }
+    .init-item { grid-template-columns: 1fr; }
+    .init-num { padding-top: 0; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+  <div class="header">
+    <div class="badge">Module 6 — Build Your Roadmap</div>
+    <h1>Roadmap Builder</h1>
+    <p>Pull your strategy README, drop a Jira / spreadsheet export of your backlog, and generate the AI prompt that maps every initiative to a strategy component and a horizon — ready to paste into ChatGPT or Claude.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-title">How It Works</div>
+    </div>
+    <div class="card-body">
+      <div class="how-section">
+        <div class="how-step">
+          <div class="how-num">1</div>
+          <div class="how-text"><strong>Load your strategy README</strong> — the one the Strategy Assembler built. Repo URL, file upload, or paste — whichever works.</div>
+        </div>
+        <div class="how-step">
+          <div class="how-num">2</div>
+          <div class="how-text"><strong>Drop your backlog</strong> — a Jira CSV export, a Linear/Asana/Notion export, or any spreadsheet of initiatives. The parser figures out the columns automatically.</div>
+        </div>
+        <div class="how-step">
+          <div class="how-num">3</div>
+          <div class="how-text"><strong>Review &amp; edit</strong> — confirm the parsed initiatives, remove noise, add anything Jira doesn't capture (stakeholder asks, half-formed ideas).</div>
+        </div>
+        <div class="how-step">
+          <div class="how-num">4</div>
+          <div class="how-text"><strong>Generate the prompt</strong> — copy into Claude or ChatGPT. The output is a 3-horizon roadmap with each initiative mapped to a strategy component, plus an unmapped pile to cut. Paste the result into <code>06-the-pitch/roadmap.md</code>.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-title">1. Load your strategy README</div>
+      <div class="card-sub">Same loader as the AI Bet Evaluator — pulls the five component sections (Bet, Moat, Margin, Contract, Guardrails) from your README.</div>
+    </div>
+    <div class="card-body">
+      <div class="load-tabs" role="tablist">
+        <button type="button" class="load-tab active" data-mode="url" onclick="setReadmeMode('url')">Repo URL</button>
+        <button type="button" class="load-tab" data-mode="upload" onclick="setReadmeMode('upload')">Upload README.md</button>
+        <button type="button" class="load-tab" data-mode="paste" onclick="setReadmeMode('paste')">Paste markdown</button>
+      </div>
+
+      <div class="load-pane active" id="readmePaneUrl">
+        <div class="repo-row">
+          <input type="url" id="readmeRepoUrl" placeholder="https://github.com/your-username/your-strategy-repo" autocomplete="off" spellcheck="false">
+          <button type="button" class="btn primary" id="readmeFetchBtn" onclick="loadReadmeFromRepo()">Fetch README</button>
+        </div>
+      </div>
+
+      <div class="load-pane" id="readmePaneUpload">
+        <label class="upload-drop" id="readmeDrop">
+          <input type="file" id="readmeFileInput" accept=".md,text/markdown,text/plain" onchange="handleReadmeUpload(event)">
+          <div class="upload-drop-title">Drop your <code>README.md</code> here, or click to browse</div>
+          <div class="upload-drop-sub">Stays in your browser — no upload to any server.</div>
+        </label>
+      </div>
+
+      <div class="load-pane" id="readmePanePaste">
+        <textarea id="readmePaste" placeholder="Paste the full contents of your README.md here…" style="min-height:160px;"></textarea>
+        <div style="margin-top:10px; display:flex; justify-content:flex-end;">
+          <button type="button" class="btn primary" onclick="loadReadmeFromPaste()">Parse pasted README</button>
+        </div>
+      </div>
+
+      <div class="load-status" id="readmeStatus"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-title">2. Strategy summary</div>
+      <div class="card-sub">Auto-fills when you load a README above. Edit if anything reads thin — this is what the AI uses to map each initiative.</div>
+    </div>
+    <div class="card-body">
+      <div class="strategy-loaded" id="strategyLoaded">
+        <span class="strategy-pill" data-key="bet">The Bet</span>
+        <span class="strategy-pill" data-key="moat">The Moat</span>
+        <span class="strategy-pill" data-key="margin">The Margin</span>
+        <span class="strategy-pill" data-key="contract">The Contract</span>
+        <span class="strategy-pill" data-key="guardrails">The Guardrails</span>
+      </div>
+      <div class="strategy-summary-wrap">
+        <textarea id="strategySummary" placeholder="Loaded README sections appear here. You can also paste a strategy summary directly — bet, moat, margin, contract, guardrails." style="min-height:160px; background:transparent; border:none; padding:0;"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-title">3. Drop your backlog</div>
+      <div class="card-sub">CSV, TSV, or plain text. Jira exports work as-is — the parser sniffs the delimiter and finds your <code>Summary</code> / <code>Description</code> columns. Or skip the upload and paste rough one-liners in the <strong>Paste</strong> tab.</div>
+    </div>
+    <div class="card-body">
+      <div class="load-tabs" role="tablist">
+        <button type="button" class="load-tab active" data-mode="upload" onclick="setBacklogMode('upload')">Upload sheet</button>
+        <button type="button" class="load-tab" data-mode="paste" onclick="setBacklogMode('paste')">Paste rows</button>
+      </div>
+
+      <div class="load-pane active" id="backlogPaneUpload">
+        <label class="upload-drop" id="backlogDrop">
+          <input type="file" id="backlogFileInput" accept=".csv,.tsv,.txt,text/csv,text/plain,text/tab-separated-values" onchange="handleBacklogUpload(event)">
+          <div class="upload-drop-title">Drop your Jira / Linear / spreadsheet export here</div>
+          <div class="upload-drop-sub">Accepts <code>.csv</code>, <code>.tsv</code>, <code>.txt</code>. Stays in your browser. The parser auto-detects columns named <em>Summary</em>, <em>Title</em>, <em>Description</em>, <em>Issue Type</em>, <em>Priority</em>, <em>Status</em>, <em>Components</em>, <em>Labels</em>.</div>
+        </label>
+      </div>
+
+      <div class="load-pane" id="backlogPanePaste">
+        <textarea id="backlogPaste" placeholder="One initiative per line — title and short description.
+Example:
+Add Word export to clause review
+Cascade GPT-4o-mini → GPT-4o for flagged clauses
+Quarterly model governance review
+Voice-driven contract redlining" style="min-height:160px;"></textarea>
+        <div style="margin-top:10px; display:flex; justify-content:flex-end;">
+          <button type="button" class="btn primary" onclick="loadBacklogFromPaste()">Parse pasted rows</button>
+        </div>
+      </div>
+
+      <div class="load-status" id="backlogStatus"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-title">4. Initiatives <span id="initCountBadge" style="font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--text-muted); font-weight:500;"></span></div>
+      <div class="card-sub">Each row is going into the prompt. The colored chip is a quick keyword guess — the AI does the real mapping. Edit titles, remove noise, or add something Jira doesn't track.</div>
+    </div>
+    <div class="card-body">
+      <div class="init-stats" id="initStats"></div>
+      <div class="init-list" id="initList"></div>
+      <div class="init-empty" id="initEmpty">
+        <strong>No initiatives loaded yet.</strong><br>
+        <span style="color:var(--text-muted); font-size:12px;">Upload a backlog above, paste rows, or add them one at a time below.</span>
+      </div>
+      <div class="add-row">
+        <input type="text" id="addInitiativeInput" placeholder="Add an initiative — title and short context, e.g. 'Cache embeddings to cut inference cost 30%'" onkeydown="if(event.key==='Enter'){addInitiativeFromInput();}">
+        <button type="button" class="btn" onclick="addInitiativeFromInput()">Add</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button class="btn primary" onclick="generatePrompt()">Generate Roadmap Prompt</button>
+    <button class="btn" onclick="copyPrompt()">Copy to Clipboard</button>
+    <button class="btn ghost danger" onclick="resetAll()">Reset</button>
+  </div>
+
+  <div class="prompt-output" id="promptOutput"></div>
+
+  <div class="tip" style="margin-top:20px;">
+    <strong>After ChatGPT / Claude responds:</strong> paste the H1 / H2 / H3 tables directly into the Roadmap section of <code>06-the-pitch/roadmap.md</code>. Move anything that feels miscategorized. Items that came back <em>unmapped</em> are either noise (cut them) or they're exposing a gap in your strategy (rethink it). Both are valuable findings.
+  </div>
+</div>
+
+<div class="saved-toast" id="toast">Saved</div>
+
+<script>
+const STORAGE_KEY = 'aps-m6-roadmap-builder';
+const README_URL_KEY = 'aps-m6-roadmap-builder-readme-url';
+const $ = id => document.getElementById(id);
+
+let readmeMode = 'url';
+let backlogMode = 'upload';
+let initiatives = [];
+
+function escapeHtml(s) {
+  return String(s)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+function showToast(msg) {
+  const t = $('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 1800);
+}
+
+/* ─── Tab switchers ──────────────────────────── */
+function setReadmeMode(mode) {
+  readmeMode = mode;
+  document.querySelectorAll('#readmePaneUrl, #readmePaneUpload, #readmePanePaste').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.card:nth-of-type(2) .load-tab').forEach(t => t.classList.toggle('active', t.dataset.mode === mode));
+  const id = mode === 'upload' ? 'readmePaneUpload' : (mode === 'paste' ? 'readmePanePaste' : 'readmePaneUrl');
+  $(id).classList.add('active');
+}
+
+function setBacklogMode(mode) {
+  backlogMode = mode;
+  document.querySelectorAll('#backlogPaneUpload, #backlogPanePaste').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.card:nth-of-type(4) .load-tab').forEach(t => t.classList.toggle('active', t.dataset.mode === mode));
+  const id = mode === 'paste' ? 'backlogPanePaste' : 'backlogPaneUpload';
+  $(id).classList.add('active');
+}
+
+function setReadmeStatus(kind, html) {
+  const el = $('readmeStatus');
+  el.className = 'load-status show ' + kind;
+  el.innerHTML = html;
+}
+function setBacklogStatus(kind, html) {
+  const el = $('backlogStatus');
+  el.className = 'load-status show ' + kind;
+  el.innerHTML = html;
+}
+
+/* ─── README parsing (mirrors AI Bet Evaluator) ── */
+function parseRepoUrl(input) {
+  if (!input) return null;
+  const raw = input.trim().replace(/\.git$/, '').replace(/\/$/, '');
+  let m = raw.match(/^https?:\/\/github\.com\/([^/\s]+)\/([^/\s]+)(?:\/tree\/([^/\s]+))?(?:\/.*)?$/i);
+  if (m) return { user: m[1], repo: m[2], branch: m[3] || null };
+  m = raw.match(/^git@github\.com:([^/\s]+)\/([^/\s]+)$/i);
+  if (m) return { user: m[1], repo: m[2], branch: null };
+  m = raw.match(/^([^/\s]+)\/([^/\s]+)$/);
+  if (m) return { user: m[1], repo: m[2], branch: null };
+  return null;
+}
+
+async function fetchReadme(parsed) {
+  const tryFetch = async (branch) => {
+    const url = `https://raw.githubusercontent.com/${parsed.user}/${parsed.repo}/${branch}/README.md`;
+    const res = await fetch(url, { cache: 'no-store' });
+    if (!res.ok) return { ok: false, status: res.status };
+    return { ok: true, content: await res.text(), branch };
+  };
+  if (parsed.branch) return tryFetch(parsed.branch);
+  let r = await tryFetch('main');
+  if (r.ok) return r;
+  return tryFetch('master');
+}
+
+function parseReadmeSections(md) {
+  const labels = [
+    { key: 'bet',        heading: 'The Bet' },
+    { key: 'moat',       heading: 'The Moat' },
+    { key: 'margin',     heading: 'The Margin' },
+    { key: 'contract',   heading: 'The Contract' },
+    { key: 'guardrails', heading: 'The Guardrails' }
+  ];
+  const out = {};
+  for (const { key, heading } of labels) {
+    const esc = heading.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const re = new RegExp(`^##\\s+${esc}\\b[^\\n]*\\n+([\\s\\S]*?)(?=^##\\s+|^---\\s*$|$(?![\\s\\S]))`, 'mi');
+    const m = md.match(re);
+    if (!m) { out[key] = ''; continue; }
+    let body = m[1] || '';
+    body = body.replace(/^→\s*Details:.*$/im, '').trim();
+    out[key] = body;
+  }
+  return out;
+}
+
+function renderStrategyPills(sections) {
+  document.querySelectorAll('#strategyLoaded .strategy-pill').forEach(p => {
+    const key = p.dataset.key;
+    p.classList.toggle('has', !!(sections[key] && sections[key].trim()));
+  });
+}
+
+function fillStrategyFromSections(sections) {
+  let filled = 0;
+  const order = ['bet', 'moat', 'margin', 'contract', 'guardrails'];
+  const labels = {
+    bet: 'The Bet (M1)',
+    moat: 'The Moat (M2)',
+    margin: 'The Margin (M3)',
+    contract: 'The Contract (M4)',
+    guardrails: 'The Guardrails (M5)'
+  };
+  const parts = [];
+  for (const k of order) {
+    const v = (sections[k] || '').trim();
+    if (v) {
+      filled++;
+      parts.push(`## ${labels[k]}\n\n${v}`);
+    }
+  }
+  if (parts.length) {
+    $('strategySummary').value = parts.join('\n\n');
+  }
+  renderStrategyPills(sections);
+  saveState(true);
+  return filled;
+}
+
+async function loadReadmeFromRepo() {
+  const input = $('readmeRepoUrl').value;
+  const parsed = parseRepoUrl(input);
+  if (!parsed) {
+    setReadmeStatus('err', 'That doesn\'t look like a GitHub URL. Use <code>https://github.com/your-username/your-repo</code>.');
+    return;
+  }
+  const btn = $('readmeFetchBtn');
+  btn.disabled = true;
+  const orig = btn.textContent;
+  btn.textContent = 'Fetching…';
+  setReadmeStatus('busy', `Fetching <code>${escapeHtml(parsed.user)}/${escapeHtml(parsed.repo)}</code>'s README…`);
+
+  try {
+    const res = await fetchReadme(parsed);
+    if (!res.ok) {
+      setReadmeStatus('err', `Couldn't load README. ${res.status === 404 ? 'Not found on <code>main</code> or <code>master</code> — make sure the repo is <strong>public</strong>.' : 'HTTP ' + res.status + '.'} For private repos, use the <strong>Upload README.md</strong> tab.`);
+      return;
+    }
+    const sections = parseReadmeSections(res.content);
+    const filled = fillStrategyFromSections(sections);
+    if (filled === 0) {
+      setReadmeStatus('err', `Fetched the README but couldn't find any of the five component sections (<code>## The Bet</code>, <code>## The Moat</code>…). Is this a README built by the Strategy Assembler?`);
+      return;
+    }
+    localStorage.setItem(README_URL_KEY, input.trim());
+    setReadmeStatus('ok', `Loaded README from <code>${escapeHtml(parsed.user)}/${escapeHtml(parsed.repo)}</code> @ <code>${escapeHtml(res.branch)}</code>. Filled ${filled}/5 component sections.`);
+  } catch (e) {
+    setReadmeStatus('err', `Network error: ${escapeHtml(e.message || 'unknown')}.`);
+  } finally {
+    btn.disabled = false;
+    btn.textContent = orig;
+  }
+}
+
+function handleReadmeUpload(event) {
+  const file = event.target.files && event.target.files[0];
+  event.target.value = '';
+  if (!file) return;
+  loadReadmeFromFile(file);
+}
+
+function loadReadmeFromFile(file) {
+  setReadmeStatus('busy', `Reading <code>${escapeHtml(file.name)}</code>…`);
+  const r = new FileReader();
+  r.onload = () => {
+    const sections = parseReadmeSections(r.result || '');
+    const filled = fillStrategyFromSections(sections);
+    if (filled === 0) {
+      setReadmeStatus('err', `Couldn't find the five component sections in <code>${escapeHtml(file.name)}</code>. Is this a README built by the Strategy Assembler?`);
+      return;
+    }
+    setReadmeStatus('ok', `Loaded <code>${escapeHtml(file.name)}</code>. Filled ${filled}/5 component sections.`);
+  };
+  r.onerror = () => setReadmeStatus('err', `Couldn't read the file.`);
+  r.readAsText(file);
+}
+
+function loadReadmeFromPaste() {
+  const md = $('readmePaste').value;
+  if (!md.trim()) {
+    setReadmeStatus('err', 'Paste your README markdown into the box first.');
+    return;
+  }
+  const sections = parseReadmeSections(md);
+  const filled = fillStrategyFromSections(sections);
+  if (filled === 0) {
+    setReadmeStatus('err', `Couldn't find the five component sections in the pasted text.`);
+    return;
+  }
+  setReadmeStatus('ok', `Parsed pasted README. Filled ${filled}/5 component sections.`);
+}
+
+function initReadmeDropZone() {
+  const zone = $('readmeDrop');
+  if (!zone) return;
+  ['dragenter', 'dragover'].forEach(ev => zone.addEventListener(ev, e => {
+    e.preventDefault(); e.stopPropagation();
+    zone.classList.add('dragover');
+  }));
+  ['dragleave', 'drop'].forEach(ev => zone.addEventListener(ev, e => {
+    e.preventDefault(); e.stopPropagation();
+    zone.classList.remove('dragover');
+  }));
+  zone.addEventListener('drop', e => {
+    const file = e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0];
+    if (file) loadReadmeFromFile(file);
+  });
+}
+
+/* ─── Backlog parsing (CSV / TSV / TXT) ────── */
+function detectDelimiter(sample) {
+  // Score each candidate by consistency of column count across the first ~10 lines.
+  const candidates = [',', '\t', ';', '|'];
+  const lines = sample.split(/\r?\n/).filter(l => l.length > 0).slice(0, 10);
+  if (lines.length === 0) return ',';
+  let best = ',';
+  let bestScore = -1;
+  for (const d of candidates) {
+    const counts = lines.map(l => splitCsvLine(l, d).length);
+    const max = Math.max(...counts);
+    if (max < 2) continue;
+    const consistency = counts.filter(c => c === max).length;
+    const score = consistency * 10 + max;
+    if (score > bestScore) {
+      bestScore = score;
+      best = d;
+    }
+  }
+  return best;
+}
+
+function splitCsvLine(line, delim) {
+  // RFC 4180-ish: handle quoted fields with embedded delimiters and "" escapes.
+  const out = [];
+  let cur = '';
+  let inQ = false;
+  for (let i = 0; i < line.length; i++) {
+    const ch = line[i];
+    if (inQ) {
+      if (ch === '"') {
+        if (line[i + 1] === '"') { cur += '"'; i++; }
+        else { inQ = false; }
+      } else {
+        cur += ch;
+      }
+    } else {
+      if (ch === '"') inQ = true;
+      else if (ch === delim) { out.push(cur); cur = ''; }
+      else cur += ch;
+    }
+  }
+  out.push(cur);
+  return out;
+}
+
+function parseCsvText(text) {
+  // Multi-line aware: collapse rows that are mid-quote.
+  const delim = detectDelimiter(text);
+  const rows = [];
+  let cur = '';
+  let inQ = false;
+  for (let i = 0; i < text.length; i++) {
+    const ch = text[i];
+    if (ch === '"') { inQ = !inQ; cur += ch; continue; }
+    if (!inQ && (ch === '\n' || ch === '\r')) {
+      if (ch === '\r' && text[i + 1] === '\n') i++;
+      if (cur.length) rows.push(cur);
+      cur = '';
+      continue;
+    }
+    cur += ch;
+  }
+  if (cur.length) rows.push(cur);
+  if (rows.length === 0) return { headers: [], records: [], delim };
+  const headers = splitCsvLine(rows[0], delim).map(h => h.trim());
+  const records = rows.slice(1).map(r => {
+    const cells = splitCsvLine(r, delim);
+    const obj = {};
+    headers.forEach((h, idx) => { obj[h] = (cells[idx] || '').trim(); });
+    return obj;
+  }).filter(r => Object.values(r).some(v => v && v.length));
+  return { headers, records, delim };
+}
+
+const COL_ALIASES = {
+  title:       ['summary', 'title', 'name', 'issue', 'subject', 'item'],
+  description: ['description', 'body', 'details', 'notes'],
+  type:        ['issue type', 'type', 'work type', 'item type'],
+  priority:    ['priority', 'severity'],
+  status:      ['status', 'state', 'workflow status'],
+  key:         ['issue key', 'key', 'id', 'issue id', 'issue-id'],
+  components:  ['components', 'component', 'team', 'epic'],
+  labels:      ['labels', 'label', 'tags', 'tag']
+};
+
+function pickColumn(headers, aliases) {
+  const lower = headers.map(h => h.toLowerCase());
+  for (const a of aliases) {
+    const i = lower.indexOf(a);
+    if (i >= 0) return headers[i];
+  }
+  // partial-contains fallback
+  for (const a of aliases) {
+    const i = lower.findIndex(h => h.includes(a));
+    if (i >= 0) return headers[i];
+  }
+  return null;
+}
+
+function recordsToInitiatives(headers, records) {
+  // Headerless input: treat each row's first cell as title.
+  const looksLikeHeader = headers.some(h => /summary|title|description|issue|priority|status|type/i.test(h));
+  if (!looksLikeHeader) {
+    return records.map(r => {
+      const first = Object.values(r).find(v => v && v.trim());
+      return first ? { title: first.trim(), description: '', type: '', priority: '', status: '', key: '', components: '', labels: '' } : null;
+    }).filter(Boolean);
+  }
+
+  const cols = {
+    title:       pickColumn(headers, COL_ALIASES.title),
+    description: pickColumn(headers, COL_ALIASES.description),
+    type:        pickColumn(headers, COL_ALIASES.type),
+    priority:    pickColumn(headers, COL_ALIASES.priority),
+    status:      pickColumn(headers, COL_ALIASES.status),
+    key:         pickColumn(headers, COL_ALIASES.key),
+    components:  pickColumn(headers, COL_ALIASES.components),
+    labels:      pickColumn(headers, COL_ALIASES.labels)
+  };
+
+  return records.map(r => {
+    const title = cols.title ? r[cols.title] : Object.values(r).find(v => v && v.trim()) || '';
+    if (!title || !title.trim()) return null;
+    return {
+      title: title.trim(),
+      description: cols.description ? (r[cols.description] || '').trim() : '',
+      type:        cols.type        ? (r[cols.type]        || '').trim() : '',
+      priority:    cols.priority    ? (r[cols.priority]    || '').trim() : '',
+      status:      cols.status      ? (r[cols.status]      || '').trim() : '',
+      key:         cols.key         ? (r[cols.key]         || '').trim() : '',
+      components:  cols.components  ? (r[cols.components]  || '').trim() : '',
+      labels:      cols.labels      ? (r[cols.labels]      || '').trim() : ''
+    };
+  }).filter(Boolean);
+}
+
+function handleBacklogUpload(event) {
+  const file = event.target.files && event.target.files[0];
+  event.target.value = '';
+  if (!file) return;
+  loadBacklogFromFile(file);
+}
+
+function loadBacklogFromFile(file) {
+  setBacklogStatus('busy', `Reading <code>${escapeHtml(file.name)}</code>…`);
+  const r = new FileReader();
+  r.onload = () => {
+    const text = r.result || '';
+    const parsed = parseCsvText(text);
+    const items = recordsToInitiatives(parsed.headers, parsed.records);
+    if (items.length === 0) {
+      setBacklogStatus('err', `Couldn't pull any rows from <code>${escapeHtml(file.name)}</code>. Try the <strong>Paste rows</strong> tab.`);
+      return;
+    }
+    initiatives = items;
+    renderInitiatives();
+    saveState(true);
+    const delim = parsed.delim === '\t' ? 'tab' : `<code>${escapeHtml(parsed.delim)}</code>`;
+    setBacklogStatus('ok', `Parsed <strong>${items.length}</strong> initiative${items.length === 1 ? '' : 's'} from <code>${escapeHtml(file.name)}</code> (delimiter: ${delim}). Review them below — edit titles, drop noise, add anything missing.`);
+  };
+  r.onerror = () => setBacklogStatus('err', `Couldn't read the file.`);
+  r.readAsText(file);
+}
+
+function loadBacklogFromPaste() {
+  const text = $('backlogPaste').value;
+  if (!text.trim()) {
+    setBacklogStatus('err', 'Paste at least one row first.');
+    return;
+  }
+  // If it looks like CSV (commas/tabs and a header row), use the CSV parser. Otherwise treat each line as one initiative.
+  const looksTabular = /[,;\t|]/.test(text.split('\n')[0]) && text.split('\n').length > 1;
+  let items;
+  if (looksTabular) {
+    const parsed = parseCsvText(text);
+    items = recordsToInitiatives(parsed.headers, parsed.records);
+  } else {
+    items = text.split('\n').map(l => l.trim()).filter(Boolean).map(l => ({
+      title: l, description: '', type: '', priority: '', status: '', key: '', components: '', labels: ''
+    }));
+  }
+  if (items.length === 0) {
+    setBacklogStatus('err', `Couldn't pull any rows from the pasted text.`);
+    return;
+  }
+  initiatives = items;
+  renderInitiatives();
+  saveState(true);
+  setBacklogStatus('ok', `Parsed <strong>${items.length}</strong> initiative${items.length === 1 ? '' : 's'}.`);
+}
+
+function initBacklogDropZone() {
+  const zone = $('backlogDrop');
+  if (!zone) return;
+  ['dragenter', 'dragover'].forEach(ev => zone.addEventListener(ev, e => {
+    e.preventDefault(); e.stopPropagation();
+    zone.classList.add('dragover');
+  }));
+  ['dragleave', 'drop'].forEach(ev => zone.addEventListener(ev, e => {
+    e.preventDefault(); e.stopPropagation();
+    zone.classList.remove('dragover');
+  }));
+  zone.addEventListener('drop', e => {
+    const file = e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0];
+    if (file) loadBacklogFromFile(file);
+  });
+}
+
+/* ─── Heuristic component guess (preview only) ─ */
+const COMPONENT_KEYWORDS = {
+  bet:        ['mvp', 'poc', 'prototype', 'discovery', 'experiment', 'hypothesis', 'validate', 'pilot', 'wedge', 'beta'],
+  moat:       ['data', 'flywheel', 'feedback', 'training', 'fine-tune', 'fine tune', 'embedding', 'retrieval', 'rag', 'corpus', 'transfer', 'network effect', 'integration', 'platform', 'workflow', 'context', 'memory'],
+  margin:     ['cost', 'pricing', 'price', 'tier', 'billing', 'cache', 'cascading', 'cascade', 'optimi', 'inference', 'gpu', 'token', 'quota', 'usage', 'throttle', 'compress', 'distill', 'cheaper', 'margin'],
+  contract:   ['eval', 'evaluation', 'golden', 'confidence', 'hitl', 'human-in', 'human in', 'review', 'qa', 'quality', 'accuracy', 'hallucinat', 'guard', 'grounding', 'citation', 'trust', 'transparency', 'explain', 'reliab'],
+  guardrails: ['governance', 'policy', 'compliance', 'audit', 'risk', 'security', 'pii', 'gdpr', 'hipaa', 'soc2', 'rbac', 'permission', 'access control', 'shadow ai', 'agent', 'autonomy', 'kill switch', 'residency', 'redact', 'safety']
+};
+
+function guessComponent(item) {
+  const text = `${item.title} ${item.description} ${item.components} ${item.labels}`.toLowerCase();
+  const scores = {};
+  let topKey = null, topScore = 0;
+  for (const [key, kws] of Object.entries(COMPONENT_KEYWORDS)) {
+    let s = 0;
+    for (const kw of kws) {
+      if (text.includes(kw)) s++;
+    }
+    scores[key] = s;
+    if (s > topScore) { topScore = s; topKey = key; }
+  }
+  return topScore === 0 ? null : topKey;
+}
+
+const COMPONENT_LABEL = {
+  bet: '🎯 Bet?',
+  moat: '🛡 Moat?',
+  margin: '💰 Margin?',
+  contract: '🤝 Contract?',
+  guardrails: '⚙️ Guardrails?'
+};
+
+/* ─── Initiatives rendering ──────────────────── */
+function renderInitiatives() {
+  const list = $('initList');
+  const empty = $('initEmpty');
+  const stats = $('initStats');
+  const badge = $('initCountBadge');
+
+  badge.textContent = initiatives.length ? `· ${initiatives.length}` : '';
+
+  if (initiatives.length === 0) {
+    list.innerHTML = '';
+    empty.style.display = '';
+    stats.classList.remove('show');
+    stats.innerHTML = '';
+    return;
+  }
+  empty.style.display = 'none';
+
+  list.innerHTML = initiatives.map((it, idx) => {
+    const guess = guessComponent(it);
+    const guessLabel = guess ? COMPONENT_LABEL[guess] : '◌ Unmapped?';
+    const guessClass = guess || 'unmapped';
+    const metaPills = [];
+    if (it.key) metaPills.push(`<span class="init-meta-pill">${escapeHtml(it.key)}</span>`);
+    if (it.type) metaPills.push(`<span class="init-meta-pill">${escapeHtml(it.type)}</span>`);
+    if (it.priority) metaPills.push(`<span class="init-meta-pill">${escapeHtml(it.priority)}</span>`);
+    if (it.status) metaPills.push(`<span class="init-meta-pill">${escapeHtml(it.status)}</span>`);
+    if (it.components) metaPills.push(`<span class="init-meta-pill">${escapeHtml(it.components)}</span>`);
+    if (it.labels) metaPills.push(`<span class="init-meta-pill">${escapeHtml(it.labels)}</span>`);
+    metaPills.push(`<span class="init-meta-pill guess ${guessClass}">${guessLabel}</span>`);
+
+    return `
+      <div class="init-item" data-idx="${idx}">
+        <div class="init-num">${String(idx + 1).padStart(2, '0')}</div>
+        <div class="init-body">
+          <input type="text" class="init-title-input" value="${escapeHtml(it.title)}" oninput="updateInitiativeTitle(${idx}, this.value)">
+          <div class="init-meta">${metaPills.join('')}</div>
+        </div>
+        <button class="init-remove" onclick="removeInitiative(${idx})" title="Remove">×</button>
+      </div>
+    `;
+  }).join('');
+
+  // Stats
+  const counts = { bet: 0, moat: 0, margin: 0, contract: 0, guardrails: 0, unmapped: 0 };
+  initiatives.forEach(it => {
+    const g = guessComponent(it);
+    counts[g || 'unmapped']++;
+  });
+  stats.innerHTML = `
+    <span class="gs-pill">${initiatives.length} loaded</span>
+    <span><strong>${counts.bet}</strong> Bet</span>
+    <span><strong>${counts.moat}</strong> Moat</span>
+    <span><strong>${counts.margin}</strong> Margin</span>
+    <span><strong>${counts.contract}</strong> Contract</span>
+    <span><strong>${counts.guardrails}</strong> Guardrails</span>
+    <span><strong>${counts.unmapped}</strong> unmapped</span>
+    <span style="color:var(--text-muted);">— keyword guesses, not the AI's mapping</span>
+  `;
+  stats.classList.add('show');
+}
+
+function updateInitiativeTitle(idx, val) {
+  if (initiatives[idx]) {
+    initiatives[idx].title = val;
+    saveState(true);
+  }
+}
+
+function removeInitiative(idx) {
+  initiatives.splice(idx, 1);
+  renderInitiatives();
+  saveState(true);
+}
+
+function addInitiativeFromInput() {
+  const input = $('addInitiativeInput');
+  const v = input.value.trim();
+  if (!v) return;
+  initiatives.push({ title: v, description: '', type: '', priority: '', status: '', key: '', components: '', labels: '' });
+  input.value = '';
+  renderInitiatives();
+  saveState(true);
+}
+
+/* ─── Prompt generation ─────────────────────── */
+function formatInitiativeForPrompt(it, idx) {
+  const parts = [`${idx + 1}. ${it.title}`];
+  const meta = [];
+  if (it.key) meta.push(it.key);
+  if (it.type) meta.push(`type: ${it.type}`);
+  if (it.priority) meta.push(`priority: ${it.priority}`);
+  if (it.status) meta.push(`status: ${it.status}`);
+  if (it.components) meta.push(`component: ${it.components}`);
+  if (it.labels) meta.push(`labels: ${it.labels}`);
+  if (meta.length) parts.push(`   [${meta.join(' · ')}]`);
+  if (it.description) {
+    const d = it.description.replace(/\s+/g, ' ').trim();
+    const trimmed = d.length > 240 ? d.slice(0, 240) + '…' : d;
+    parts.push(`   ${trimmed}`);
+  }
+  return parts.join('\n');
+}
+
+function generatePrompt() {
+  const strategy = $('strategySummary').value.trim();
+  if (!strategy) {
+    showToast('Load your strategy README first');
+    return;
+  }
+  if (initiatives.length === 0) {
+    showToast('Add at least one initiative');
+    return;
+  }
+
+  const backlogText = initiatives.map(formatInitiativeForPrompt).join('\n\n');
+
+  const prompt = `You are an AI Product Strategy advisor. I will give you two things: (1) my strategy summary and (2) a list of initiatives from my backlog.
+
+Map each initiative to the strategy component it most directly supports, classify it into a horizon, and flag noise.
+
+---
+
+## MY STRATEGY SUMMARY
+
+${strategy}
+
+---
+
+## MY BACKLOG / INITIATIVES
+
+${backlogText}
+
+---
+
+## YOUR TASK
+
+1. Map each initiative to the strategy component it most directly supports: **Bet · Moat · Margin · Contract · Guardrails**.
+2. Classify each initiative into a horizon (AI-compressed cadence):
+   - **H1 — Ship (0–4 weeks)** · high confidence · ship with existing capabilities
+   - **H2 — Validate (1–3 months)** · medium confidence · strategic bet with named hypothesis + kill criteria
+   - **H3 — Explore (3–6 months)** · low confidence · small-investment experiment
+3. For each H2 initiative, write a one-line **kill criteria** (Stripe-style: "If we don't see X by week 6, we stop").
+4. Flag any initiative that doesn't connect to any strategy component as **Unmapped** — these are candidates to cut or to expose a gap in the strategy.
+
+## OUTPUT FORMAT
+
+Three markdown tables grouped by horizon, then an Unmapped section.
+
+### Horizon 1 — Ship (0–4 weeks)
+| Initiative | Strategy Component | Why it ships now | Confidence |
+|---|---|---|---|
+| ... | Bet / Moat / Margin / Contract / Guardrails | ... | H / M / L |
+
+### Horizon 2 — Validate (1–3 months)
+| Initiative | Strategy Component | Hypothesis | Kill Criteria | Confidence |
+|---|---|---|---|---|
+| ... | ... | ... | If we don't see X by week 6, we stop | H / M / L |
+
+### Horizon 3 — Explore (3–6 months)
+| Initiative | Strategy Component | What must be true first | Confidence |
+|---|---|---|---|
+| ... | ... | ... | H / M / L |
+
+### Unmapped (cut or rethink)
+| Initiative | Why it's unmapped | Recommendation |
+|---|---|---|
+| ... | Doesn't connect to any of the five components | Cut / Rethink as ___ |
+
+After the tables, add 3 short sentences:
+- (a) the most over-indexed horizon (and what's missing on the others),
+- (b) the single H3 bet you'd protect if budget got cut,
+- (c) the one initiative I should kill today.`;
+
+  const out = $('promptOutput');
+  out.textContent = prompt;
+  out.classList.add('visible');
+  out.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function copyPrompt() {
+  const out = $('promptOutput');
+  if (!out.textContent) {
+    showToast('Generate a prompt first');
+    return;
+  }
+  navigator.clipboard.writeText(out.textContent).then(() => {
+    showToast('Prompt copied — paste into Claude or ChatGPT');
+  });
+}
+
+/* ─── Persist + restore ─────────────────────── */
+function saveState(quiet) {
+  const data = {
+    strategy: $('strategySummary').value,
+    initiatives
+  };
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); } catch(e) {}
+  if (!quiet) showToast('Progress saved');
+}
+
+function loadState() {
+  try {
+    const data = JSON.parse(localStorage.getItem(STORAGE_KEY));
+    if (!data) return;
+    if (data.strategy) {
+      $('strategySummary').value = data.strategy;
+      // re-mark which pills are present
+      const sections = parseReadmeSections(data.strategy);
+      renderStrategyPills(sections);
+    }
+    if (Array.isArray(data.initiatives)) {
+      initiatives = data.initiatives;
+      renderInitiatives();
+    }
+  } catch(e) {}
+  const url = localStorage.getItem(README_URL_KEY);
+  if (url) $('readmeRepoUrl').value = url;
+}
+
+function resetAll() {
+  if (!confirm('Reset everything — strategy summary, initiatives, and saved state?')) return;
+  initiatives = [];
+  $('strategySummary').value = '';
+  $('readmePaste').value = '';
+  $('backlogPaste').value = '';
+  $('promptOutput').classList.remove('visible');
+  $('promptOutput').textContent = '';
+  $('readmeStatus').className = 'load-status';
+  $('readmeStatus').innerHTML = '';
+  $('backlogStatus').className = 'load-status';
+  $('backlogStatus').innerHTML = '';
+  renderStrategyPills({});
+  renderInitiatives();
+  try { localStorage.removeItem(STORAGE_KEY); } catch(e) {}
+  showToast('Reset');
+}
+
+$('strategySummary').addEventListener('input', () => {
+  const sections = parseReadmeSections($('strategySummary').value || '');
+  renderStrategyPills(sections);
+  saveState(true);
+});
+
+initReadmeDropZone();
+initBacklogDropZone();
+loadState();
+renderInitiatives();
+</script>
+
+</body>
+</html>
