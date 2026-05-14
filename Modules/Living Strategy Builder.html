@@ -493,36 +493,37 @@
       <div class="card-head">
         <div class="card-head-left">
           <div class="card-title">The Guardrails · M5</div>
-          <div class="card-sub">AI maturity radar and governance posture</div>
+          <div class="card-sub">Compounding loops, governance policy, user-side shadow AI signals</div>
         </div>
         <button type="button" class="btn-sm" onclick="importM5()">Pull from M5</button>
       </div>
       <div class="card-viz">
-        <div class="viz-row" style="width:100%">
-          <div class="viz-col" style="display:flex;flex-direction:column;align-items:center">
-            <canvas id="radarCanvas" class="chart" width="240" height="240"></canvas>
-          </div>
-          <div class="viz-col">
-            <div class="stat-row" style="flex-direction:column;gap:10px">
-              <div class="stat-box"><div class="stat-val" id="vizMaturity">—</div><div class="stat-label">Maturity Score</div></div>
-              <div class="stat-box"><div class="stat-val" id="vizShadow">—</div><div class="stat-label">Shadow Tools</div></div>
-              <div class="stat-box" id="vizMatBand"><div class="stat-val" id="vizBandLabel">—</div><div class="stat-label">Band</div></div>
-            </div>
-          </div>
+        <div class="stat-row" style="width:100%">
+          <div class="stat-box"><div class="stat-val" id="vizCompounds">—</div><div class="stat-label">Loops Compound</div></div>
+          <div class="stat-box"><div class="stat-val" id="vizGov">—</div><div class="stat-label">Policy Sections</div></div>
+          <div class="stat-box"><div class="stat-val" id="vizShadow">—</div><div class="stat-label">Workarounds</div></div>
+        </div>
+        <div style="text-align:center;width:100%;margin-top:4px">
+          <div style="font-size:10px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:6px">Guardrail Posture</div>
+          <div id="guardrailBand" style="font-size:13px;color:var(--text-dim)">Pull from M5 to surface posture</div>
         </div>
       </div>
       <div class="card-body edit-only">
         <div class="field">
-          <label>AI maturity score</label>
-          <div class="auto-box" id="c5_maturity">—</div>
+          <label>Compounding system — broken loop + fix</label>
+          <div class="auto-box" id="c5_compounds">—</div>
         </div>
         <div class="field">
-          <label>Shadow tools found</label>
+          <label>Governance policy summary</label>
+          <div class="auto-box" id="c5_policy">—</div>
+        </div>
+        <div class="field">
+          <label>User-side shadow AI signal</label>
           <div class="auto-box" id="c5_shadow">—</div>
         </div>
         <div class="field">
-          <label>Top governance priority</label>
-          <textarea id="c5_gov" placeholder="Policy, access, logging, review — what comes first?"></textarea>
+          <label>Top guardrail priority</label>
+          <textarea id="c5_gov" placeholder="What's the single thing to fix or hold the line on? (broken loop · governance gap · user-side signal)"></textarea>
         </div>
       </div>
     </section>
@@ -566,7 +567,6 @@ const KILL_INTEGRATION_LABEL = {
 };
 const STRATEGY_LABEL = { skim: 'Skim', penetrate: 'Penetrate', maximize: 'Maximize' };
 const MODEL_LABEL = { seat: 'Seat / Access', hybrid: 'Hybrid', outcome: 'Outcome' };
-const M5_DIMS = ['Compliance','Transparency','Fairness','Privacy','Accountability'];
 
 const INPUT_IDS = ['c1_product','c1_archetype','c1_bet','c2_moat','c2_threat','c3_risk','c4_commit','c5_gov'];
 
@@ -768,67 +768,8 @@ function drawMarginChart() {
   $('vizMargin').style.color = curMargin >= 40 ? 'var(--green)' : curMargin >= 0 ? 'var(--yellow)' : 'var(--red)';
 }
 
-/* ── Radar chart (M5) ── */
-let m5Scores = [0, 0, 0, 0, 0];
-function drawRadar() {
-  const cv = $('radarCanvas');
-  const ctx = cv.getContext('2d');
-  const W = cv.width, H = cv.height;
-  ctx.clearRect(0, 0, W, H);
-  const cx = W / 2, cy = H / 2, R = 85;
-  const n = 5;
-  const angles = M5_DIMS.map((_, i) => -Math.PI / 2 + (2 * Math.PI * i) / n);
-
-  for (let ring = 1; ring <= 5; ring++) {
-    ctx.strokeStyle = 'rgba(255,255,255,0.06)';
-    ctx.lineWidth = 1;
-    ctx.beginPath();
-    angles.forEach((a, i) => {
-      const x = cx + R * (ring / 5) * Math.cos(a);
-      const y = cy + R * (ring / 5) * Math.sin(a);
-      i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
-    });
-    ctx.closePath();
-    ctx.stroke();
-  }
-
-  angles.forEach(a => {
-    ctx.strokeStyle = 'rgba(255,255,255,0.04)';
-    ctx.beginPath();
-    ctx.moveTo(cx, cy);
-    ctx.lineTo(cx + R * Math.cos(a), cy + R * Math.sin(a));
-    ctx.stroke();
-  });
-
-  const pts = m5Scores.map((s, i) => {
-    const d = R * (s / 5);
-    return [cx + d * Math.cos(angles[i]), cy + d * Math.sin(angles[i])];
-  });
-  ctx.fillStyle = 'rgba(91,141,239,0.15)';
-  ctx.strokeStyle = 'rgba(91,141,239,0.7)';
-  ctx.lineWidth = 2;
-  ctx.beginPath();
-  pts.forEach((p, i) => i === 0 ? ctx.moveTo(p[0], p[1]) : ctx.lineTo(p[0], p[1]));
-  ctx.closePath();
-  ctx.fill();
-  ctx.stroke();
-
-  pts.forEach((p, i) => {
-    ctx.beginPath();
-    ctx.arc(p[0], p[1], 3.5, 0, Math.PI * 2);
-    ctx.fillStyle = m5Scores[i] >= 4 ? '#3dd68c' : m5Scores[i] >= 2 ? '#5b8def' : '#ef5b5b';
-    ctx.fill();
-  });
-
-  ctx.font = '600 9px DM Sans';
-  ctx.textAlign = 'center';
-  ctx.fillStyle = '#7a7a9a';
-  M5_DIMS.forEach((l, i) => {
-    const lx = cx + (R + 18) * Math.cos(angles[i]);
-    const ly = cy + (R + 18) * Math.sin(angles[i]);
-    ctx.fillText(l, lx, ly + 3);
-  });
-}
+/* ── M5 posture (compounding · governance · shadow signals) ── */
+let m5Posture = { compoundsHealth: null, policySections: null, shadowDominant: null };
 
 /* ── Trust meter (M4) ── */
 function drawTrustMeter() {
@@ -945,24 +886,85 @@ function importM4() {
 }
 
 function importM5() {
-  const mat = safeJSON('aps-m5-ai-maturity');
-  const sh = safeJSON('aps-m5-shadow-audit');
-  if (!mat && !sh) { showToast('No M5 data found'); return; }
-  if (mat) {
-    if (Array.isArray(mat.scores) && mat.scores.length === 5) {
-      m5Scores = mat.scores.map(v => clamp(parseInt(v) || 0, 0, 5));
-    }
-    let score = num(mat.totalScore, num(mat.total, num(mat.score, num(mat.maturityScore, null))));
-    if (score == null && mat.scores) score = mat.scores.reduce((s, v) => s + (parseInt(v) || 0), 0);
-    setAuto($('c5_maturity'), score != null ? score + '/25' : '—', score != null);
-  } else { setAuto($('c5_maturity'), '—', false); }
+  const comp = safeJSON('aps-m5-compounding');
+  const gov  = safeJSON('aps-m5-governance-policy');
+  // Prefer v2 (current Shadow AI Audit tool); fall back to legacy key.
+  const sh   = safeJSON('aps-m5-shadow-audit-v2') || safeJSON('aps-m5-shadow-audit');
+  if (!comp && !gov && !sh) { showToast('No M5 data found'); return; }
+
+  // 1. Compounding System Designer → broken loop + fix + loops compound count.
+  if (comp) {
+    const loops = Array.isArray(comp.loops) ? comp.loops : [];
+    const total = loops.filter(l => isFilled(l && l.loop || l && l.name)).length || loops.length;
+    const compounds = loops.filter(l => (l && l.compounds) === 'Y').length;
+    const broken = (comp.brokenLoop || '').trim();
+    const fix    = (comp.fixPlan    || '').trim();
+    const summary = broken
+      ? `Broken loop: ${broken}${fix ? ' · Fix: ' + fix : ''}`
+      : (total > 0 ? `${compounds}/${total} loops compound — name the broken one in M5` : '—');
+    setAuto($('c5_compounds'), summary, total > 0 || !!broken);
+    m5Posture.compoundsHealth = total > 0 ? `${compounds}/${total}` : null;
+  } else {
+    setAuto($('c5_compounds'), '—', false);
+    m5Posture.compoundsHealth = null;
+  }
+
+  // 2. Governance Policy Drafter → sections drafted + headline summary.
+  if (gov) {
+    const sections = [
+      gov.scope && (isFilled(gov.scope.covers) || isFilled(gov.scope.excludes)),
+      Array.isArray(gov.autonomy) && gov.autonomy.some(r => r && isFilled(r.decision) && r.level),
+      isFilled(gov.escalation),
+      Array.isArray(gov.audit) && gov.audit.some(r => r && isFilled(r.cadence) && isFilled(r.what)),
+      gov.regulatory && (isFilled(gov.regulatory.regimes) || isFilled(gov.regulatory.controls) || isFilled(gov.regulatory.tier))
+    ].filter(Boolean).length;
+    const cadences = (Array.isArray(gov.audit) ? gov.audit : []).map(r => r && r.cadence).filter(isFilled);
+    const headline = [
+      gov.scope && isFilled(gov.scope.covers) ? `Scope: ${truncate(gov.scope.covers, 60)}` : null,
+      Array.isArray(gov.autonomy) ? `${gov.autonomy.filter(r => r && isFilled(r.decision)).length} autonomy decisions` : null,
+      cadences.length ? `Audit cadence: ${cadences.join(' · ')}` : null,
+      gov.regulatory && isFilled(gov.regulatory.tier) ? `Reg tier: ${gov.regulatory.tier}` : null
+    ].filter(Boolean).join(' · ') || '—';
+    setAuto($('c5_policy'), headline, sections > 0);
+    m5Posture.policySections = sections > 0 ? `${sections}/5` : null;
+  } else {
+    setAuto($('c5_policy'), '—', false);
+    m5Posture.policySections = null;
+  }
+
+  // 3. Shadow AI Audit (user-side) → workarounds + dominant signal + adjacent spend.
   if (sh) {
-    const n = num(sh.shadowTools, num(sh.count, num(sh.toolsFound, Array.isArray(sh.tools) ? sh.tools.length : null)));
-    setAuto($('c5_shadow'), n != null ? String(n) : (sh.summary ? String(sh.summary) : '—'), n != null || !!sh.summary);
-  } else { setAuto($('c5_shadow'), '—', false); }
+    const tools = Array.isArray(sh.tools) ? sh.tools : [];
+    const named = tools.filter(t => isFilled(t && t.workaround));
+    const total = named.length || num(sh.shadowTools, num(sh.count, num(sh.toolsFound, tools.length)));
+    const build   = named.filter(t => t.decision === 'Build').length;
+    const partner = named.filter(t => t.decision === 'Partner').length;
+    const ignore  = named.filter(t => t.decision === 'Ignore').length;
+    let spend = 0;
+    named.forEach(t => {
+      const n = Number(String(t.spend || '').replace(/[^\d.]/g, ''));
+      if (!Number.isNaN(n)) spend += n;
+    });
+    const counts = {};
+    named.forEach(t => { if (t.signal) counts[t.signal] = (counts[t.signal] || 0) + 1; });
+    let dominant = '—', dominantCount = 0;
+    Object.entries(counts).forEach(([k, v]) => { if (v > dominantCount) { dominant = k; dominantCount = v; } });
+    const summary = total > 0
+      ? `${total} workaround${total === 1 ? '' : 's'} · ${build} build / ${partner} partner / ${ignore} ignore · top signal: ${dominant}${spend ? ' · adjacent spend $' + spend + '/mo' : ''}`
+      : (sh.summary ? String(sh.summary) : '—');
+    setAuto($('c5_shadow'), summary, total > 0 || !!sh.summary);
+    m5Posture.shadowDominant = total > 0 ? dominant : null;
+  } else {
+    setAuto($('c5_shadow'), '—', false);
+    m5Posture.shadowDominant = null;
+  }
+
   showToast('Imported from M5');
   save(); refreshAll();
 }
+
+function truncate(s, n) { s = String(s || '').trim(); return s.length > n ? s.slice(0, n - 1) + '…' : s; }
+function isFilled(s) { return typeof s === 'string' && s.trim().length > 0; }
 
 function computeMarginPctFromMarginKey() {
   const d = safeJSON('aps-m3-margin');
@@ -1010,8 +1012,12 @@ function computeHealthScore() {
   if (vulnAll) score += (vulnScores.reduce((s, v) => s + v, 0) / 15) * 6;
   const fwAll = fwScores.every(v => v > 0);
   if (fwAll) score += (fwScores.reduce((s, v) => s + v, 0) / 20) * 6;
-  const matTotal = m5Scores.reduce((s, v) => s + v, 0);
-  if (matTotal > 0) score += (matTotal / 25) * 6;
+  const m5Filled = [
+    $('c5_compounds').textContent.trim(),
+    $('c5_policy').textContent.trim(),
+    $('c5_shadow').textContent.trim()
+  ].filter(t => t && t !== '—').length;
+  score += (m5Filled / 3) * 6;
   const md = marginBase || getMarginData();
   if (md) score += 4;
   const trustLevel = [
@@ -1062,17 +1068,23 @@ function refreshAll() {
   $('vizConf').textContent = $('c4_conf').textContent;
   $('vizConf').style.fontSize = ($('c4_conf').textContent.length > 10 ? '13px' : '18px');
 
-  const matTotal = m5Scores.reduce((s, v) => s + v, 0);
-  $('vizMaturity').textContent = matTotal > 0 ? matTotal + '/25' : ($('c5_maturity').textContent || '—');
-  $('vizShadow').textContent = $('c5_shadow').textContent;
-  const matBand = matTotal <= 10 ? {t:'Reactive',c:'var(--red)'} : matTotal <= 15 ? {t:'Developing',c:'var(--yellow)'} : matTotal <= 20 ? {t:'Proactive',c:'var(--blue)'} : {t:'Leading',c:'var(--green)'};
-  $('vizBandLabel').textContent = matTotal > 0 ? matBand.t : '—';
-  $('vizBandLabel').style.color = matTotal > 0 ? matBand.c : '';
+  $('vizCompounds').textContent = m5Posture.compoundsHealth || '—';
+  $('vizGov').textContent       = m5Posture.policySections   || '—';
+  const shadowText = $('c5_shadow').textContent;
+  const shadowMatch = shadowText.match(/^(\d+)\s+workaround/);
+  $('vizShadow').textContent    = shadowMatch ? shadowMatch[1] : (shadowText && shadowText !== '—' ? '·' : '—');
+
+  const filled = [m5Posture.compoundsHealth, m5Posture.policySections, m5Posture.shadowDominant].filter(Boolean).length;
+  const band = filled === 0 ? {t:'Pull from M5 to surface posture', c:'var(--text-dim)'}
+              : filled === 1 ? {t:'Starting · 1 of 3 guardrails in place', c:'var(--red)'}
+              : filled === 2 ? {t:'Developing · 2 of 3 guardrails in place', c:'var(--yellow)'}
+              :                 {t:'Board-ready · all 3 guardrails in place', c:'var(--green)'};
+  $('guardrailBand').textContent = band.t;
+  $('guardrailBand').style.color = band.c;
 
   drawVulnBars();
   drawFlywheel();
   drawMarginChart();
-  drawRadar();
   drawTrustMeter();
 }
 
@@ -1086,11 +1098,11 @@ function getState() {
     c3_strategy: $('c3_strategy').textContent, c3_model: $('c3_model').textContent,
     c3_margin: $('c3_margin').textContent, c3_rev: $('c3_rev').textContent,
     c4_eval: $('c4_eval').textContent, c4_golden: $('c4_golden').textContent, c4_conf: $('c4_conf').textContent,
-    c5_maturity: $('c5_maturity').textContent, c5_shadow: $('c5_shadow').textContent
+    c5_compounds: $('c5_compounds').textContent, c5_policy: $('c5_policy').textContent, c5_shadow: $('c5_shadow').textContent
   };
   o.vulnScores = vulnScores;
   o.fwScores = fwScores;
-  o.m5Scores = m5Scores;
+  o.m5Posture = m5Posture;
   o.costSlider = $('costSlider').value;
   o.volSlider = $('volSlider').value;
   return o;
@@ -1106,7 +1118,7 @@ function setState(data) {
   }
   if (Array.isArray(data.vulnScores)) vulnScores = data.vulnScores;
   if (Array.isArray(data.fwScores)) fwScores = data.fwScores;
-  if (Array.isArray(data.m5Scores)) m5Scores = data.m5Scores;
+  if (data.m5Posture && typeof data.m5Posture === 'object') m5Posture = Object.assign(m5Posture, data.m5Posture);
   if (data.costSlider) $('costSlider').value = data.costSlider;
   if (data.volSlider) $('volSlider').value = data.volSlider;
 }
@@ -1123,10 +1135,10 @@ function load() {
 function resetAll() {
   localStorage.removeItem(KEY);
   INPUT_IDS.forEach(id => { $(id).value = ''; });
-  ['c1_vuln','c2_fly','c2_kill','c3_strategy','c3_model','c3_margin','c3_rev','c4_eval','c4_golden','c4_conf','c5_maturity','c5_shadow'].forEach(id => {
+  ['c1_vuln','c2_fly','c2_kill','c3_strategy','c3_model','c3_margin','c3_rev','c4_eval','c4_golden','c4_conf','c5_compounds','c5_policy','c5_shadow'].forEach(id => {
     $(id).textContent = '—'; $(id).classList.remove('has-data');
   });
-  vulnScores = [null, null, null]; fwScores = [0,0,0,0]; m5Scores = [0,0,0,0,0]; marginBase = null;
+  vulnScores = [null, null, null]; fwScores = [0,0,0,0]; m5Posture = { compoundsHealth: null, policySections: null, shadowDominant: null }; marginBase = null;
   $('costSlider').value = 100; $('volSlider').value = 100;
   refreshAll();
   showToast('Reset');
@@ -1165,9 +1177,10 @@ function buildMarkdownFull() {
     '- **Confidence UX maturity:** ' + T('c4_conf') + '\n' +
     '- **Quality commitment:** ' + ($('c4_commit').value.trim() || '—') + '\n\n' +
     '## 5. The Guardrails (M5)\n' +
-    '- **AI maturity score:** ' + T('c5_maturity') + '\n' +
-    '- **Shadow tools found:** ' + T('c5_shadow') + '\n' +
-    '- **Top governance priority:** ' + ($('c5_gov').value.trim() || '—') + '\n\n' +
+    '- **Compounding system:** ' + T('c5_compounds') + '\n' +
+    '- **Governance policy:** ' + T('c5_policy') + '\n' +
+    '- **User-side shadow AI:** ' + T('c5_shadow') + '\n' +
+    '- **Top guardrail priority:** ' + ($('c5_gov').value.trim() || '—') + '\n\n' +
     '---\n*Completeness: ' + $('completeFrac').textContent + ' components ready*\n';
 }
 
@@ -1178,17 +1191,19 @@ function buildBoardSummary() {
   const moat = $('c2_moat').value || '—';
   const margin = $('c3_margin').textContent;
   const rev = $('c3_rev').textContent;
-  const maturity = $('c5_maturity').textContent;
-  const health = $('healthNum').textContent;
+  const compounds = $('c5_compounds').textContent;
+  const policy    = $('c5_policy').textContent;
+  const shadow    = $('c5_shadow').textContent;
+  const health    = $('healthNum').textContent;
   return p.toUpperCase() + ' — AI PRODUCT STRATEGY\n' +
     'Strategy Health: ' + health + '/100\n\n' +
     'THE BET: ' + bet + ' (' + a + ')\n' +
     'THE MOAT: ' + moat + ' · Flywheel ' + $('c2_fly').textContent + '\n' +
     'THE MARGIN: ' + margin + ' margin · ' + rev + ' rev/user · ' + $('c3_strategy').textContent + '\n' +
     'THE CONTRACT: ' + $('c4_eval').textContent + ' · ' + $('c4_golden').textContent + '\n' +
-    'THE GUARDRAILS: Maturity ' + maturity + ' · Shadow tools ' + $('c5_shadow').textContent + '\n\n' +
+    'THE GUARDRAILS: ' + compounds + ' | ' + policy + ' | ' + shadow + '\n\n' +
     'KEY RISK: ' + ($('c3_risk').value.trim() || '—') + '\n' +
-    'GOVERNANCE PRIORITY: ' + ($('c5_gov').value.trim() || '—');
+    'GUARDRAIL PRIORITY: ' + ($('c5_gov').value.trim() || '—');
 }
 
 function exportFullMarkdown() {

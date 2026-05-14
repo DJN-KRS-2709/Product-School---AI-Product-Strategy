@@ -76,7 +76,7 @@ Participants fork a template repo in M1 and build into it across all 6 sessions.
 | M2 | **The Moat** | Data flywheel map, defensibility analysis, competitive positioning, vendor portability plan, encroachment defense | Flywheel radar chart, competitive positioning map |
 | M3 | **The Margin** | Cost model with cascading, pricing strategy, P&L projection, stress tests, scenario modeling | Live cost curve with what-if sliders |
 | M4 | **The Contract** | Eval spec, reliability targets, confidence UX design, HITL plan, golden dataset strategy | Trust maturity meter |
-| M5 | **The Guardrails** | Compounding system design, governance framework, agent topology, feedback loops | AI maturity radar/spider chart, risk badge |
+| M5 | **The Guardrails** | Compounding system design, governance framework, agent topology, feedback loops, user-side shadow AI audit | Compounding-loop diagram, governance policy card, shadow AI signal map |
 
 **M6 = Integration.** Finalize `README.md` with complete summaries, build `06-the-pitch/roadmap.md`, and present the repo to the room as a board simulation.
 
@@ -301,15 +301,15 @@ This creates a reusable tool: after the course, they can evaluate any future bet
 - Responsible AI as competitive differentiator + board risk translation (EU AI Act, explainability requirements)
 - Multi-agent orchestration governance: autonomy boundaries, tool-calling safety, memory management
 - ROI evaluation for agentic systems vs. traditional automation
-- Shadow AI audit: identifying unsanctioned AI spend/tools across the org (Spotify example: 1,000 tools → 15 after audit, massive cost savings)
+- Shadow AI audit (user-side / PM lens): surfacing AI workarounds users and clients build *around* the product. Discover → Signal (workflow / trust / capability / pricing gap) → Prioritize → Decide (build / partner / ignore). Samsung is the CISO-side cautionary anchor; the PM lens is opportunity discovery, not risk control.
 
-**Case study:** Samsung data leak — how an internal AI failure became an external governance story
+**Case study:** Samsung data leak — how an internal AI failure became an external governance story (used as the CISO-side anchor before pivoting to the PM-side workaround audit).
 
-**Build moment:** Design a compounding system architecture for their product + draft governance policy + shadow AI audit of their org
+**Build moment:** Design a compounding system architecture for their product + draft governance policy + run a user-side shadow AI audit (AI workarounds users/clients are building around the product)
 
 **Peer challenge:** Partner audits the system — "what feedback loop is broken? What agent boundary is too loose? What's your exposure if a regulator calls tomorrow?"
 
-**Artifact component:** The Guardrails — compounding system design, governance framework, agent topology, feedback loops, shadow AI audit
+**Artifact component:** The Guardrails — compounding system design, governance framework, agent topology, feedback loops, user-side shadow AI audit
 
 **Bridge to M6:** "You have the full strategy: bet, moat, margin, trust, guardrails. M6 is about making it sing — the narrative that gets this funded and shipped."
 

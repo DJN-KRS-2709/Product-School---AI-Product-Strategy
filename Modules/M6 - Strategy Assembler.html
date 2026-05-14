@@ -829,7 +829,7 @@ function generateReadme(extracted, repoName) {
     : null;
 
   const shadowsLine = (g.shadowsFound || g.shadowsTriaged)
-    ? `${g.shadowsFound ? g.shadowsFound + ' tools found' : '__ tools found'}${g.shadowsTriaged ? ' · ' + g.shadowsTriaged : ''}${g.shadowSpend ? ' · est. spend ' + g.shadowSpend : ''}`
+    ? `${g.shadowsFound ? g.shadowsFound + ' workarounds found' : '__ workarounds found'}${g.shadowsTriaged ? ' · ' + g.shadowsTriaged + ' build candidates' : ''}${g.shadowSpend ? ' · adjacent spend ' + g.shadowSpend : ''}`
     : null;
 
   return `# ${productName}
@@ -921,7 +921,7 @@ ${bullet('Governance Posture', g.scope || g.autonomy)}
 ${bullet('Autonomy Boundaries', g.autonomy)}
 ${bullet('Escalation Triggers', g.escalation)}
 ${bullet('Audit Cadence', g.audit)}
-${bullet('Shadow AI Status', shadowsLine)}
+${bullet('Shadow AI Audit (user-side)', shadowsLine)}
 ${bullet('Agent Boundaries', g.agentBoundaries)}
 ${bullet('Regulatory Exposure', g.regulatory)}
 
