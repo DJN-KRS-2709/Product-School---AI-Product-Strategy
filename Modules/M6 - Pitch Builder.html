@@ -834,6 +834,18 @@ function renderRoadmapPills(sections) {
   });
 }
 
+function clearLoadedStrategy() {
+  $('strategySummary').value = '';
+  renderStrategyPills({});
+  saveState(true);
+}
+
+function clearLoadedRoadmap() {
+  $('roadmapSummary').value = '';
+  renderRoadmapPills({});
+  saveState(true);
+}
+
 function fillStrategyFromSections(sections) {
   let filled = 0;
   const order = ['bet', 'moat', 'margin', 'contract', 'guardrails'];
@@ -852,9 +864,7 @@ function fillStrategyFromSections(sections) {
       parts.push(`## ${labels[k]}\n\n${v}`);
     }
   }
-  if (parts.length) {
-    $('strategySummary').value = parts.join('\n\n');
-  }
+  $('strategySummary').value = parts.length ? parts.join('\n\n') : '';
   renderStrategyPills(sections);
   saveState(true);
   return filled;
@@ -877,9 +887,7 @@ function fillRoadmapFromSections(sections) {
       parts.push(`## ${labels[k]}\n\n${v}`);
     }
   }
-  if (parts.length) {
-    $('roadmapSummary').value = parts.join('\n\n');
-  }
+  $('roadmapSummary').value = parts.length ? parts.join('\n\n') : '';
   renderRoadmapPills(sections);
   saveState(true);
   return filled;
@@ -898,6 +906,9 @@ async function loadFromRepo() {
   btn.textContent = 'Fetching…';
   setLoadStatus('busy', `Fetching <code>${escapeHtml(parsed.user)}/${escapeHtml(parsed.repo)}</code> — README + roadmap…`);
 
+  clearLoadedStrategy();
+  clearLoadedRoadmap();
+
   try {
     const result = await fetchRepoFiles(parsed);
     if (!result.ok) {
@@ -913,20 +924,20 @@ async function loadFromRepo() {
       const sections = parseReadmeSections(result.readme.content);
       readmeFilled = fillStrategyFromSections(sections);
       if (readmeFilled === 0) {
-        notes.push('Fetched <code>README.md</code> but couldn\'t find the five component sections. Is this a README built by the Strategy Assembler?');
+        notes.push('Fetched <code>README.md</code> but couldn\'t find the five component sections. Is this a README built by the Strategy Assembler? Strategy summary cleared.');
       }
     } else {
-      notes.push(`Couldn't load <code>README.md</code> (HTTP ${result.readme.status || '?'}).`);
+      notes.push(`Couldn't load <code>README.md</code> (HTTP ${result.readme.status || '?'}). Strategy summary cleared.`);
     }
 
     if (result.roadmap.ok) {
       const sections = parseRoadmapSections(result.roadmap.content);
       roadmapFilled = fillRoadmapFromSections(sections);
       if (roadmapFilled === 0) {
-        notes.push('Fetched <code>06-the-pitch/roadmap.md</code> but couldn\'t find the Horizon / AI Evaluation sections.');
+        notes.push('Fetched <code>06-the-pitch/roadmap.md</code> but couldn\'t find the Horizon / AI Evaluation sections. Roadmap context cleared.');
       }
     } else {
-      notes.push(`Couldn't load <code>06-the-pitch/roadmap.md</code> (HTTP ${result.roadmap.status || '?'}). Skipping roadmap context — the pitch will still build from the README.`);
+      notes.push(`No <code>06-the-pitch/roadmap.md</code> in this repo (HTTP ${result.roadmap.status || '?'}). Roadmap context cleared — the pitch will build from the README only.`);
     }
 
     if (readmeFilled === 0 && roadmapFilled === 0) {
@@ -990,6 +1001,9 @@ function loadFromFiles(files) {
 }
 
 function finalizeFileLoad(readmeText, roadmapText, errors) {
+  clearLoadedStrategy();
+  clearLoadedRoadmap();
+
   let readmeFilled = 0;
   let roadmapFilled = 0;
 
@@ -1007,8 +1021,13 @@ function finalizeFileLoad(readmeText, roadmapText, errors) {
     return;
   }
 
+  const notes = [];
+  if (!readmeText) notes.push('No <code>README.md</code> in upload — strategy summary cleared.');
+  if (!roadmapText) notes.push('No <code>roadmap.md</code> in upload — roadmap context cleared.');
+
   const msg = `Loaded. README: ${readmeFilled}/5 component sections · Roadmap: ${roadmapFilled}/4 sections.`;
-  setLoadStatus('ok', errors.length ? `${msg}<br>${errors.join('<br>')}` : msg);
+  const tail = [...notes, ...errors];
+  setLoadStatus('ok', tail.length ? `${msg}<br>${tail.join('<br>')}` : msg);
 }
 
 function loadFromPaste() {
