@@ -960,7 +960,7 @@ section.skipped { display: none; }
         <div style="font-size:11px; color:#8899bb;">What impact? What breaks at 10x?</div>
       </div>
     </div>
-    <p style="font-size:14px; color:#a78bfa; font-weight:600; text-align:center;">Load README → generate prompt → run in ChatGPT or Claude → know exactly where you're weakest before you pitch.</p>
+    <p style="font-size:14px; color:#a78bfa; font-weight:600; text-align:center;">Load README → one-click open in ChatGPT, Claude, or Gemini · or paste an API key and run live in the tool.</p>
     <p style="font-size:13px; text-align:center; margin-top:8px;"><span style="color:#34d399;">📂</span> <strong style="color:#6ee7b7;">Go to your repo →</strong> <code style="color:#6ee7b7; font-size:12px;">06-the-pitch/roadmap.md</code> <span style="color:#8899bb;">→ AI Evaluation + Roadmap draft</span></p>
   </div>
 </section>
@@ -976,19 +976,25 @@ section.skipped { display: none; }
       <div class="lab-goal-text">Feed your real backlog to the AI. It maps each initiative to your strategy components and sorts them into horizons. You review, adjust, and commit.</div>
     </div>
     <div class="lab-tip">
-      <div class="lab-tip-text"><strong>No blank templates.</strong> Your initiatives already exist — in Jira, in docs, in your head. The AI connects them to the strategy you just built.</div>
+      <div class="lab-tip-text"><strong>No blank templates.</strong> Your initiatives already exist — in Jira, in docs, in your head. The Roadmap Builder pulls your README + a Jira CSV and generates the prompt for you.</div>
     </div>
   </div>
   <div class="split-right">
     <div class="lab-badge-row"><span class="lab-badge">AI-Powered Exercise</span></div>
-    <div class="steps-heading">Steps to follow:</div>
+    <div class="steps-heading">Four steps:</div>
     <div class="lab-steps">
-      <div class="lab-step"><div class="lab-step-num">1</div><div class="lab-step-text"><strong>Dump your backlog.</strong> List 8–15 initiatives, features, or requests — from Jira, your roadmap, stakeholder asks. Rough is fine.</div></div>
-      <div class="lab-step"><div class="lab-step-num">2</div><div class="lab-step-text"><strong>Paste the prompt</strong> (see speaker notes) with your strategy summary + backlog into Claude or ChatGPT.</div></div>
-      <div class="lab-step"><div class="lab-step-num">3</div><div class="lab-step-text"><strong>Review the mapping.</strong> Does the AI's classification match your instinct? Move items that feel wrong. Flag items that don't connect to any component — those might be noise.</div></div>
+      <div class="lab-step"><div class="lab-step-num">1</div><div class="lab-step-text"><strong>Load your strategy README</strong> in the Roadmap Builder — same loader as the AI Bet Evaluator (URL, upload, or paste).</div></div>
+      <div class="lab-step"><div class="lab-step-num">2</div><div class="lab-step-text"><strong>Drop a Jira / sheet export</strong> of 8–15 initiatives. The parser auto-detects the columns — no template required.</div></div>
+      <div class="lab-step"><div class="lab-step-num">3</div><div class="lab-step-text"><strong>Generate &amp; copy the prompt</strong>, paste into Claude or ChatGPT. You get an H1 / H2 / H3 roadmap with each initiative mapped to a strategy component, plus an unmapped pile.</div></div>
       <div class="lab-step"><div class="lab-step-num">4</div><div class="lab-step-text"><strong>Commit</strong> the result to <code style="color:#6ee7b7;">06-the-pitch/roadmap.md</code> in your repo.</div></div>
     </div>
     <p style="font-size:13px; text-align:center; margin-top:8px;"><span style="color:#34d399;">📂</span> <strong style="color:#6ee7b7;">Go to your repo →</strong> <code style="color:#6ee7b7; font-size:12px;">06-the-pitch/roadmap.md</code> <span style="color:#8899bb;">→ Roadmap (H1 / H2 / H3 tables) + Unmapped items</span></p>
+  </div>
+  <div class="bottom-cta">
+    <div style="text-align:center; margin:0 0 8px;">
+      <a href="M6 - Roadmap Builder.html" target="_blank" style="display:inline-block; background:#1241B0; color:#fff; text-decoration:none; font-size:14px; font-weight:800; padding:10px 18px; border-radius:999px; box-shadow:0 8px 24px rgba(18,65,176,0.35);">Open Roadmap Builder ↗</a>
+      <div style="font-size:12px; color:#8899bb; margin-top:6px;">Load your <code style="color:#6ee7b7; font-size:11px;">README.md</code> + a Jira CSV → builder generates the AI prompt that maps each initiative to a strategy component and a horizon</div>
+    </div>
   </div>
 </section>
 
