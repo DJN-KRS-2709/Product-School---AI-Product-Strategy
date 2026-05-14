@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 6 — The Pitch · Pre-Read</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Lato', -apple-system, sans-serif;
+  background: #07162C;
+  color: #b0b4c8;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ═══ READING PROGRESS BAR ═══ */
+.progress-bar {
+  position: fixed; top: 0; left: 0; height: 3px; z-index: 100;
+  background: linear-gradient(90deg, #1241B0, #39d2c0);
+  width: 0%; transition: width 0.1s ease;
+}
+
+/* ═══ HERO ═══ */
+.hero {
+  min-height: 70vh;
+  padding: 120px 32px 80px;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center; position: relative;
+  background: radial-gradient(ellipse at 30% 30%, rgba(57,210,192,0.22) 0%, #07162C 60%);
+  border-bottom: 1px solid rgba(57,210,192,0.10);
+}
+.hero .module-tag {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px; font-weight: 600; letter-spacing: 0.16em;
+  text-transform: uppercase; color: #5eead4;
+  padding: 8px 18px; border-radius: 6px;
+  background: rgba(57,210,192,0.10);
+  border: 1px solid rgba(57,210,192,0.22);
+  margin-bottom: 24px;
+}
+.hero h1 {
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(40px, 6vw, 68px); font-weight: 900;
+  color: #fff; line-height: 1.05;
+  max-width: 880px; margin-bottom: 20px;
+}
+.hero h1 span { color: #5eead4; }
+.hero .lede {
+  font-family: 'Lato', sans-serif;
+  font-size: 19px; line-height: 1.65; max-width: 720px;
+  color: #8899bb; font-style: italic;
+}
+.hero .meta {
+  display: flex; gap: 24px; flex-wrap: wrap; justify-content: center;
+  margin-top: 40px; font-size: 13px;
+  font-family: 'IBM Plex Mono', monospace;
+  color: #60a5fa; opacity: 0.8;
+}
+.hero .meta span::before { content: '·'; margin-right: 8px; color: #333; }
+.hero .meta span:first-child::before { content: ''; margin-right: 0; }
+
+/* ═══ MAIN CONTAINER ═══ */
+.container {
+  max-width: 760px; margin: 0 auto;
+  padding: 80px 32px 120px;
+}
+
+/* ═══ SECTIONS ═══ */
+section.chapter {
+  margin-bottom: 72px;
+  scroll-margin-top: 40px;
+}
+.section-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px; font-weight: 600; letter-spacing: 0.18em;
+  text-transform: uppercase; color: #60a5fa;
+  margin-bottom: 14px;
+}
+h2 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 34px; font-weight: 800;
+  color: #fff; line-height: 1.15;
+  margin-bottom: 28px;
+}
+h3 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 18px; font-weight: 700;
+  color: #e0e0f0; line-height: 1.3;
+  margin-top: 32px; margin-bottom: 12px;
+}
+p {
+  font-size: 17px; line-height: 1.75;
+  color: #b0b4c8; margin-bottom: 18px;
+}
+strong { color: #fff; font-weight: 700; }
+em { color: #5eead4; font-style: italic; font-weight: 600; }
+a {
+  color: #60a5fa; text-decoration: none;
+  border-bottom: 1px dashed rgba(96,165,250,0.4);
+  transition: all 0.2s;
+}
+a:hover { color: #93c5fd; border-bottom-style: solid; }
+
+code {
+  font-family: 'IBM Plex Mono', monospace;
+  background: rgba(57,210,192,0.10);
+  color: #5eead4;
+  padding: 2px 8px; border-radius: 4px;
+  font-size: 14px; font-weight: 500;
+}
+
+/* ═══ SECTION DIVIDER ═══ */
+.divider {
+  width: 60px; height: 2px;
+  background: linear-gradient(90deg, #39d2c0, transparent);
+  margin: 0 auto 80px;
+  border: none;
+}
+
+/* ═══ PULL QUOTE ═══ */
+.pull-quote {
+  margin: 32px 0;
+  padding: 32px 36px;
+  background: rgba(57,210,192,0.06);
+  border-left: 3px solid #39d2c0;
+  border-radius: 0 12px 12px 0;
+  position: relative;
+}
+.pull-quote::before {
+  content: '"';
+  position: absolute; top: 8px; left: 16px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 64px; font-weight: 900;
+  color: rgba(57,210,192,0.22);
+  line-height: 1;
+}
+.pull-quote p {
+  font-family: 'Poppins', sans-serif;
+  font-size: 22px; line-height: 1.4;
+  color: #fff; font-weight: 600;
+  margin: 0; padding-left: 32px;
+}
+
+/* ═══ HORIZON STACK (M6 signature) ═══ */
+.horizons {
+  display: grid; grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px; margin: 28px 0;
+}
+.horizon-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 12px;
+  padding: 20px 22px;
+  transition: all 0.2s;
+}
+.horizon-card:hover { transform: translateY(-2px); }
+.horizon-card.h1 { border-top: 3px solid #34d399; }
+.horizon-card.h2 { border-top: 3px solid #5eead4; }
+.horizon-card.h3 { border-top: 3px solid #60a5fa; }
+.horizon-card .h-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.10em;
+  text-transform: uppercase; margin-bottom: 6px;
+}
+.horizon-card.h1 .h-label { color: #34d399; }
+.horizon-card.h2 .h-label { color: #5eead4; }
+.horizon-card.h3 .h-label { color: #60a5fa; }
+.horizon-card .h-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px; font-weight: 800;
+  color: #fff; margin-bottom: 4px;
+}
+.horizon-card .h-meta {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px; color: #8899bb;
+  margin-bottom: 10px;
+}
+.horizon-card .h-desc {
+  font-size: 13px; line-height: 1.55; color: #a0a8b4;
+}
+
+/* ═══ SIDEBAR CALL-OUT ═══ */
+.sidebar {
+  background: linear-gradient(135deg, rgba(96,165,250,0.06), rgba(57,210,192,0.08));
+  border: 1px solid rgba(57,210,192,0.22);
+  border-radius: 14px;
+  padding: 26px 32px;
+  margin: 28px 0;
+}
+.sidebar .sidebar-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: #5eead4; margin-bottom: 10px;
+}
+.sidebar p {
+  font-family: 'Lato', sans-serif;
+  font-size: 16px; line-height: 1.65;
+  color: #d0d6e3; margin-bottom: 0;
+}
+.sidebar p strong { color: #fff; }
+
+/* ═══ NOTICING TABLE ═══ */
+.notice-table {
+  width: 100%; border-collapse: collapse;
+  margin: 24px 0;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px; overflow: hidden;
+}
+.notice-table th {
+  text-align: left; padding: 16px 20px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.10em; text-transform: uppercase;
+  color: #5eead4;
+  background: rgba(57,210,192,0.06);
+  border-bottom: 1px solid rgba(57,210,192,0.18);
+}
+.notice-table td {
+  padding: 18px 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  font-size: 14px; line-height: 1.55;
+  color: #b0b4c8; vertical-align: top;
+}
+.notice-table tr:last-child td { border-bottom: none; }
+.notice-table td:first-child {
+  font-weight: 700; color: #fff;
+  white-space: nowrap; width: 220px;
+}
+.notice-table tr:hover td { background: rgba(57,210,192,0.04); }
+
+/* ═══ VOCAB LIST ═══ */
+.vocab {
+  display: flex; flex-direction: column; gap: 14px;
+  margin: 24px 0;
+}
+.vocab-item {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-left: 3px solid #1241B0;
+  border-radius: 0 10px 10px 0;
+  padding: 16px 20px;
+  transition: all 0.2s;
+}
+.vocab-item:hover {
+  border-left-color: #39d2c0;
+  background: rgba(57,210,192,0.04);
+}
+.vocab-term {
+  font-family: 'Poppins', sans-serif;
+  font-size: 15px; font-weight: 700;
+  color: #fff; margin-bottom: 4px;
+}
+.vocab-def {
+  font-size: 14px; line-height: 1.55;
+  color: #8899bb;
+}
+
+/* ═══ METRICS GRID (M6 signature) ═══ */
+.metrics {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px; margin: 24px 0;
+}
+.metric-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 10px;
+  padding: 16px 18px;
+  transition: all 0.2s;
+}
+.metric-card:hover {
+  border-color: rgba(57,210,192,0.30);
+  transform: translateY(-2px);
+}
+.metric-card .metric-name {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: #5eead4; margin-bottom: 6px;
+}
+.metric-card .metric-desc {
+  font-size: 14px; line-height: 1.5;
+  color: #e0e0f0;
+}
+.metric-card .metric-thr {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px; color: #8899bb;
+  margin-top: 6px;
+}
+.metric-card .metric-thr .good { color: #34d399; }
+.metric-card .metric-thr .bad { color: #ef5b5b; }
+
+/* ═══ QUESTION CARDS ═══ */
+.q-card {
+  background: linear-gradient(135deg, rgba(57,210,192,0.08), rgba(59,130,246,0.05));
+  border: 1px solid rgba(57,210,192,0.22);
+  border-radius: 14px;
+  padding: 28px 32px;
+  margin: 20px 0;
+}
+.q-card .q-num {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: #5eead4; margin-bottom: 8px;
+}
+.q-card .q-text {
+  font-family: 'Poppins', sans-serif;
+  font-size: 19px; font-weight: 700;
+  color: #fff; line-height: 1.4;
+  margin-bottom: 12px;
+}
+.q-card .q-body {
+  font-size: 15px; line-height: 1.65;
+  color: #a0a8b4;
+}
+
+/* ═══ BRING LIST ═══ */
+.bring-list {
+  list-style: none; padding: 0;
+  display: flex; flex-direction: column; gap: 10px;
+  margin: 20px 0;
+}
+.bring-list li {
+  display: flex; align-items: flex-start; gap: 14px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 10px;
+  padding: 14px 18px;
+  font-size: 15px; line-height: 1.55;
+  color: #b0b4c8;
+}
+.bring-list li::before {
+  content: '→'; color: #5eead4;
+  font-weight: 700; flex-shrink: 0;
+  font-size: 16px; padding-top: 1px;
+}
+
+/* ═══ TEASER BLOCK ═══ */
+.teaser {
+  background: rgba(210,153,34,0.06);
+  border: 1px solid rgba(210,153,34,0.20);
+  border-radius: 12px;
+  padding: 28px 32px;
+  margin: 24px 0;
+}
+.teaser .teaser-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: #e3b341; margin-bottom: 10px;
+}
+.teaser p { color: #d4c4a0; }
+.teaser p:last-child { margin-bottom: 0; }
+
+/* ═══ DELIVERABLES LIST (M6 signature) ═══ */
+.deliverables {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 12px; margin: 24px 0;
+}
+.deliv-card {
+  background: rgba(57,210,192,0.04);
+  border: 1px solid rgba(57,210,192,0.18);
+  border-radius: 10px;
+  padding: 16px 18px;
+}
+.deliv-card .deliv-num {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.10em;
+  text-transform: uppercase; color: #5eead4;
+  margin-bottom: 6px;
+}
+.deliv-card .deliv-name {
+  font-family: 'Poppins', sans-serif;
+  font-size: 15px; font-weight: 700;
+  color: #fff; margin-bottom: 4px;
+}
+.deliv-card .deliv-desc {
+  font-size: 13px; line-height: 1.5; color: #a0a8b4;
+}
+
+/* ═══ FOOTER ═══ */
+footer {
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 60px 32px;
+  text-align: center;
+  background: #050f1f;
+}
+footer .footer-tag {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px; letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #4a5670; margin-bottom: 12px;
+}
+footer .footer-msg {
+  font-family: 'Poppins', sans-serif;
+  font-size: 22px; font-weight: 700;
+  color: #fff; margin-bottom: 8px;
+}
+footer .footer-sub {
+  font-size: 14px; color: #6b7589;
+  font-style: italic;
+}
+
+/* ═══ RESPONSIVE ═══ */
+@media (max-width: 720px) {
+  .hero { padding: 80px 24px 60px; }
+  .container { padding: 60px 24px 80px; }
+  h2 { font-size: 28px; }
+  .horizons, .deliverables { grid-template-columns: 1fr; }
+  .pull-quote p { font-size: 18px; }
+  .notice-table td:first-child { width: auto; }
+}
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<header class="hero">
+  <div class="module-tag">Module 6 · Pre-Read · ~20 min</div>
+  <h1>The <span>Pitch</span></h1>
+  <p class="lede">Twenty minutes of reading, one short noticing exercise, and a baseline you'll re-read out loud at the end of class. Done before the session, this is the difference between standing up to <em>present</em> and standing up to <em>deliver</em>. Especially worth doing if you're already a little nervous about the board simulation — most of that nervous energy is fuel once the frameworks are pre-loaded.</p>
+  <div class="meta">
+    <span>AI Product Strategy</span>
+    <span>Capstone Pre-Read</span>
+    <span>Bring honest answers</span>
+  </div>
+</header>
+
+<main class="container">
+
+<section class="chapter">
+  <div class="section-label">01 · Why this session matters</div>
+  <h2>Five sessions of building. One session of <em>saying it out loud</em>.</h2>
+  <p>M6 is the capstone — the part where the bet, the moat, the margin, the contract, and the guardrails stop being separate worksheets and become one <em>story you say out loud</em>. To a room. With Q&A. From your repo, with no slide deck.</p>
+  <p>If that sentence made you flinch a little, good. That flinch is half of what we're working with today.</p>
+  <p>The emotional arc of the session is performance anxiety turning into confidence. Most of you are walking in thinking the simulation is the scary part. By the time we get there, you'll have your README polished by the Strategy Assembler, your strategy stress-tested by the AI Evaluator, your roadmap committed via the Roadmap Builder, and your pitch drafted in the Pitch Builder. The nerves turn into confidence the moment you realize you've already done the hard work — for five sessions.</p>
+
+  <p>You'll leave with <strong>four artifacts</strong>:</p>
+
+  <div class="deliverables">
+    <div class="deliv-card">
+      <div class="deliv-num">Artifact 1</div>
+      <div class="deliv-name">Finalized living strategy repo</div>
+      <div class="deliv-desc">All five component folders plus a board-ready README, assembled, polished, version-controlled.</div>
+    </div>
+    <div class="deliv-card">
+      <div class="deliv-num">Artifact 2</div>
+      <div class="deliv-name">Multi-horizon roadmap</div>
+      <div class="deliv-desc">H1 Ship · H2 Validate · H3 Explore, with kill criteria for the H2 bets. Committed to <code>06-the-pitch/roadmap.md</code>.</div>
+    </div>
+    <div class="deliv-card">
+      <div class="deliv-num">Artifact 3</div>
+      <div class="deliv-name">Board-ready pitch</div>
+      <div class="deliv-desc">Drafted to a specific audience, saved to the same file. Audience-specific opener, ask, and Q&A prep included.</div>
+    </div>
+    <div class="deliv-card">
+      <div class="deliv-num">Artifact 4</div>
+      <div class="deliv-name">M1 → Now reflection</div>
+      <div class="deliv-desc">Your before/after baseline. Three sentences then. Three sentences now. The delta is the course working — genuinely the part most students remember.</div>
+    </div>
+  </div>
+
+  <p>One ground rule for the simulation: <strong>the repo is the artifact</strong>. No Google Slides. No deck. You present from the repo. The whole arc of this course was "stop putting strategy in slides" — M6 is where we live that.</p>
+</section>
+
+<hr class="divider">
+
+<section class="chapter">
+  <div class="section-label">02 · The one idea to walk in already chewing on</div>
+  <h2>A roadmap is not a strategy.</h2>
+
+  <div class="pull-quote">
+    <p>A roadmap is not a strategy.</p>
+  </div>
+
+  <p>This is the central reframe of the whole module, and it's the one most PMs have never quite said out loud. Look at what you actually present in your quarterly reviews. Features. Timelines. Resources. That's a <em>delivery plan</em>. A strategy explains why those decisions and not others. <em>Why this bet. Why now. Why us.</em></p>
+
+  <p>A roadmap without a thesis is a to-do list with deadlines on it.</p>
+
+  <p>The model to copy is <strong>Stripe</strong>. Stripe doesn't start with epics. They write the strategy document first — public memos, principles, named bets — then derive the roadmap from it. Epics follow strategy, not the other way around. Once you separate the two cleanly, you can't unsee it. And the next time someone asks "what's the strategy?" and hands you a Gantt chart, you'll know what's missing.</p>
+
+  <p>Pair this with the <strong>compressed horizons</strong> — the other big M6 provocation:</p>
+
+  <div class="horizons">
+    <div class="horizon-card h1">
+      <div class="h-label">H1 · Ship</div>
+      <div class="h-title">Execute</div>
+      <div class="h-meta">0–4 weeks · high confidence</div>
+      <div class="h-desc">You know what to build. Ship it and earn trust. H1 is where you fund the credibility for H2.</div>
+    </div>
+    <div class="horizon-card h2">
+      <div class="h-label">H2 · Validate</div>
+      <div class="h-title">Strategic bets</div>
+      <div class="h-meta">1–3 months · medium confidence</div>
+      <div class="h-desc">Hypothesis-driven with a named kill criteria. "If we don't see X by week 6, we stop." This is where the living strategy lives.</div>
+    </div>
+    <div class="horizon-card h3">
+      <div class="h-label">H3 · Explore</div>
+      <div class="h-title">Optionality</div>
+      <div class="h-meta">3–6 months · low confidence</div>
+      <div class="h-desc">Small investment, experiments, the next curve. If your roadmap has no H3, it's not a strategy — it's a delivery plan.</div>
+    </div>
+  </div>
+
+  <p>Traditional roadmaps ran on quarterly or annual cadence — H1 was 0–3 months, H3 was 12-plus months. In an AI-native world those timeframes compress dramatically. <em>Amplitude</em> went from four-month roadmaps to four-week roadmaps. Nobody can credibly predict what happens twelve months from now in AI. If your H3 still says "twelve-plus months," you're planning in a world that no longer exists.</p>
+
+  <p>Sit with that for a minute. The whole module hinges on it.</p>
+</section>
+
+<hr class="divider">
+
+<section class="chapter">
+  <div class="section-label">03 · A 20-minute "noticing" exercise</div>
+  <h2>Pick three pitches. Ask: <em>thesis-first or tech-first?</em></h2>
+  <p>Pick <strong>three companies</strong> that have publicly pitched an AI product in the last 18 months. For each one, find one piece of their actual external communication — a launch blog, an investor letter, a keynote clip, a product page, a podcast — and read or watch it with one question in mind: <em>did they lead with the thesis or with the tech?</em></p>
+
+  <p>The pattern you're looking for is binary. Either the opening sentence is about <strong>what changes for the user / market / business</strong> (thesis-first), or it's about <strong>which model is in the loop</strong> (tech-first). Both pitches can use GPT-4. Only one of them survives the board.</p>
+
+  <table class="notice-table">
+    <thead>
+      <tr><th>Pitch</th><th>What to watch for</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Stripe (annual letter, Sessions keynote)</td>
+        <td>The thesis-first canonical. "More economic activity moves online" → developers are the wedge → products follow. Watch the opening 90 seconds of any Sessions keynote — it's the move you're stealing on Monday.</td>
+      </tr>
+      <tr>
+        <td>Notion AI (product page + early launch posts)</td>
+        <td>A wedge bet positioned as workflow, not as a model. "AI inside the workspace you already trust" — distribution as moat, not capability as moat.</td>
+      </tr>
+      <tr>
+        <td>Duolingo + GPT-4 (2023 vs. 2024 retro)</td>
+        <td>A <em>tech-first</em> opening that the market punished, followed by a reframe toward learning outcomes. Both versions of the pitch exist publicly — read them in order. The delta is the lesson.</td>
+      </tr>
+      <tr>
+        <td>Klarna AI assistant (post-launch comms)</td>
+        <td>Mixed. The deflection metric ("equivalent to 700 FTEs") was the right thesis but they led with it as a cost story. Investors heard "margin"; some users heard "layoffs." A <em>true</em> metric can still misframe the bet.</td>
+      </tr>
+      <tr>
+        <td>Shopify Sidekick (launch + Tobi's commentary)</td>
+        <td>A clean three-horizon narrative if you read it that way. H1 commerce stack, H2 Sidekick, H3 platform ambition. One company, three time horizons, three different vocabularies.</td>
+      </tr>
+      <tr>
+        <td>Anthropic (Claude system cards + launches)</td>
+        <td>Notice how the <em>governance pack</em> (constitutional AI, safety levels) is sold as product surface, not back-office. M5 idea, M6 execution.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>Twenty minutes total. No notes required. The goal is to walk into M6 with <strong>felt examples</strong> of thesis-first pitches and <strong>felt counter-examples</strong> of tech-first pitches. When the slide goes up that says "lead with the thesis, not the model," you'll have a library to draw from.</p>
+  <p>If you have ten extra minutes, do one more thing: pick <strong>one tech-first opening</strong> from the list above (Duolingo's first 2023 pitch is the easiest) and <strong>rewrite the first sentence user-first</strong> in your own words. That tiny exercise is most of what we'll be drilling in the simulation.</p>
+</section>
+
+<hr class="divider">
+
+<section class="chapter">
+  <div class="section-label">04 · Vocabulary you'll keep hearing</div>
+  <h2>One-liners so the words don't trip you up.</h2>
+  <p>Full definitions go in the cumulative <code>Glossary.md</code> after the session. One-liner each here so the words don't trip you up in the room.</p>
+
+  <div class="vocab">
+    <div class="vocab-item">
+      <div class="vocab-term">Living strategy</div>
+      <div class="vocab-def">Strategy as a version-controlled artifact instead of a slide deck. Lives in your repo, updates monthly, gets sharper with every commit.</div>
+    </div>
+    <div class="vocab-item">
+      <div class="vocab-term">Three Horizons (AI-compressed)</div>
+      <div class="vocab-def">McKinsey's classic, but on AI-native timeframes. <strong>H1 Ship</strong> (0–4 weeks, execute). <strong>H2 Validate</strong> (1–3 months, kill criteria). <strong>H3 Explore</strong> (3–6 months, optionality). Traditional roadmaps run quarterly; AI roadmaps run monthly.</div>
+    </div>
+    <div class="vocab-item">
+      <div class="vocab-term">Kill criteria</div>
+      <div class="vocab-def">Stripe-style <em>"if we don't see X by week 6, we stop."</em> Every H2 bet needs one. Kills are what separates a strategy from a hope.</div>
+    </div>
+    <div class="vocab-item">
+      <div class="vocab-term">Thesis-first pitch</div>
+      <div class="vocab-def">Opens with the world change, the user problem, or the bet — <em>not</em> the model in the loop. The opposite is the tech-first pitch (the one the board doesn't fund).</div>
+    </div>
+    <div class="vocab-item">
+      <div class="vocab-term">The Case / The Model / The Risks</div>
+      <div class="vocab-def">The three buckets a board mentally sorts your pitch into. <strong>The Case</strong> = Bet + Moat (why invest, why can't this be copied). <strong>The Model</strong> = Margin (does the math hold). <strong>The Risks</strong> = Contract + Guardrails (trust, failure modes, scale). Don't open with the model — open with the case.</div>
+    </div>
+    <div class="vocab-item">
+      <div class="vocab-term">Audience archetype</div>
+      <div class="vocab-def">The persona the Pitch Builder reweights for: CEO + leadership, founders / funding committee, external board / investors, CTO + Head of Product. Plus <em>custom</em> — the actual specific person whose "yes" you need on Monday.</div>
+    </div>
+    <div class="vocab-item">
+      <div class="vocab-term">Mapping disagreements</div>
+      <div class="vocab-def">When the Roadmap Builder pushes back on your initiative-to-component mapping. "You said this is a Margin initiative; I'd have called it Contract — here's why in one sentence." A fast credibility check on your own categorization.</div>
+    </div>
+    <div class="vocab-item">
+      <div class="vocab-term">The repo is the artifact</div>
+      <div class="vocab-def">The operating principle for the simulation and the rest of your career. If your strategy only lives in a deck, it's theater. If it lives in a repo, it's a system.</div>
+    </div>
+  </div>
+
+  <h3>Six AI metrics boards actually care about</h3>
+  <p>Standard product metrics (MAU, retention) are necessary but insufficient for AI products. These six are the ones that tell the board your AI is healthy — and the ones most teams forget to put on the slide.</p>
+
+  <div class="metrics">
+    <div class="metric-card">
+      <div class="metric-name">Hallucination rate</div>
+      <div class="metric-desc">% of outputs containing fabricated facts. Liability signal.</div>
+      <div class="metric-thr">Good <span class="good">&lt;1%</span> · Bad <span class="bad">&gt;5%</span></div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-name">Drift velocity</div>
+      <div class="metric-desc">Rate of accuracy decay per week without intervention. Silent failure.</div>
+      <div class="metric-thr">Good <span class="good">&lt;0.5%/wk</span> · Bad <span class="bad">&gt;2%/wk</span></div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-name">Confidence distribution</div>
+      <div class="metric-desc">Histogram of model confidence in production. Healthy = bimodal (confident or punting).</div>
+      <div class="metric-thr">Good <span class="good">75%+ &gt;0.9</span> · Bad <span class="bad">Fat middle</span></div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-name">HITL rate</div>
+      <div class="metric-desc">% of outputs requiring human review. Scalability ceiling.</div>
+      <div class="metric-thr">Good <span class="good">Trending down</span> · Bad <span class="bad">Flat at scale</span></div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-name">Inference ROI</div>
+      <div class="metric-desc">Revenue per dollar of inference. Margin health.</div>
+      <div class="metric-thr">Good <span class="good">&gt;10x</span> · Bad <span class="bad">&lt;3x</span></div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-name">Eval regression</div>
+      <div class="metric-desc">% of model updates that hold quality on the golden set pre-deploy.</div>
+      <div class="metric-thr">Good <span class="good">100% caught</span> · Bad <span class="bad">In production</span></div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section class="chapter">
+  <div class="section-label">05 · There's a real story coming</div>
+  <h2>The launch that worked. The pitch that didn't.</h2>
+
+  <div class="teaser">
+    <div class="teaser-label">Teaser · No spoilers</div>
+    <p>A 500M-user learning company partnered with a frontier model lab for an in-product capability that genuinely worked. The launch was loud. Within a quarter, the market shifted the question from <em>"is the feature cool?"</em> to <em>"does the AI actually improve learning outcomes?"</em> Investor reactions were, charitably, <em>mixed</em>. The stock took a hit.</p>
+    <p>The fix wasn't a model change. It was a <em>narrative</em> change.</p>
+  </div>
+
+  <p>We'll walk through what happened, what they changed in their investor decks the next quarter, and the exact reframe that landed. The lesson is the same one most PMs need to internalize before they pitch any AI feature: <em>the technology becomes invisible, the user impact becomes the headline</em>. Lead with the outcome. The model is plumbing.</p>
+  <p>This is also the same muscle as board Q&A under scrutiny. Narrative repair is a skill, not a talent — and the room is where you practice it.</p>
+</section>
+
+<hr class="divider">
+
+<section class="chapter">
+  <div class="section-label">06 · Two questions to come ready to answer</div>
+  <h2>Show up with honest answers.</h2>
+  <p>These become warmups in the session. Showing up with honest answers — even imperfect ones — pays off massively in the room.</p>
+
+  <div class="q-card">
+    <div class="q-num">Question 1</div>
+    <div class="q-text">Who specifically do you need a "yes" from on Monday?</div>
+    <div class="q-body">Not <em>the board</em>. <em>The board</em> is not a person. Be specific. A specific person whose decision changes whether your bet ships. Your CEO. Your CFO who's been worried about AI cost. The VP of Product who keeps pushing back on your roadmap. The investor whose follow-on you need next quarter. Whoever it is — <strong>name them</strong>.</div>
+  </div>
+
+  <div class="sidebar">
+    <div class="sidebar-label">Why this matters</div>
+    <p>The Pitch Builder tool we'll use in class <strong>reweights the prompt by audience</strong>. A board pitch leads with TAM. A CTO pitch leads with the reliability contract. Founders care about why-now. CFOs care about the unit economics under stress. The frameworks are the same — the <em>opening sentence</em> is not. If you walk in with "the board" as your answer, the AI gives you a generic pitch. If you walk in with <em>"Priya, our CFO, who has flagged inference cost as a 2026 budget risk,"</em> the AI gives you a pitch she will actually fund.</p>
+  </div>
+
+  <p>Write one name. One sentence on what they care about most. One sentence on what they're skeptical of. Three sentences total.</p>
+
+  <div class="q-card">
+    <div class="q-num">Question 2</div>
+    <div class="q-text">Re-read your M1 three-sentence answer right now.</div>
+    <div class="q-body">Open <code>01-the-bet/diagnostic.md</code>. Find the place you wrote your original three-sentence answer to <em>"What's our AI strategy?"</em> — the one you wrote in three minutes, before you had any frameworks. Read it out loud. Don't edit it. Don't cringe (or do, but don't act on it). Just notice the gap between what's there and what you'd say now.</div>
+  </div>
+
+  <p>You'll re-do this exercise at the end of M6, with everything you've learned. The <em>delta</em> between the two answers is the entire course. We use the M1 baseline as the receipt. You'll be glad you re-read it cold before the session — the surprise lands harder that way.</p>
+</section>
+
+<hr class="divider">
+
+<section class="chapter">
+  <div class="section-label">07 · What to bring</div>
+  <h2>The essentials for the room.</h2>
+  <ul class="bring-list">
+    <li>All five prior artifacts committed and pushed: <code>01-the-bet/</code>, <code>02-the-moat/</code>, <code>03-the-margin/</code>, <code>04-the-contract/</code>, <code>05-the-guardrails/</code>. <strong>Pushed to GitHub</strong> is best — the AI tools we use today read directly from your repo URL. If your repo is private (or you haven't pushed yet), the same tools accept file uploads, so bring the markdown files on your laptop as a backup.</li>
+    <li>A real <strong>backlog export</strong> you can use after class. A CSV from Jira / Linear / Notion / a spreadsheet — anything 8–15 rows of your actual work, last 6 months. The class demo uses a sample sheet, but the value of the Roadmap Builder is when you point it at <em>your own</em> work. Bring the export and you'll leave with a roadmap you can commit Monday morning.</li>
+    <li>A <strong>specific person</strong> whose "yes" you need on Monday (from Question 1), with one sentence on what they care about most.</li>
+    <li>The <strong>M1 baseline</strong> open in another tab. We'll need it for the M1-vs-Now reflection at the end.</li>
+    <li>The willingness to <strong>stand up and pitch out loud.</strong> Two or three of you will present to the room as a board simulation. No slides. Five minutes plus three of Q&A. The format is hard, and that is the point — if your pitch survives the room, it survives the actual board.</li>
+  </ul>
+</section>
+
+</main>
+
+<footer>
+  <div class="footer-tag">Module 6 · The Pitch</div>
+  <div class="footer-msg">See you in the room.</div>
+  <div class="footer-sub">AI Product Strategy · Capstone pre-session reading</div>
+</footer>
+
+<script>
+const progressBar = document.getElementById('progressBar');
+window.addEventListener('scroll', () => {
+  const scrollTop = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const progress = (scrollTop / docHeight) * 100;
+  progressBar.style.width = progress + '%';
+});
+</script>
+
+</body>
+</html>
