@@ -442,7 +442,7 @@
       <div class="how-section">
         <div class="how-step">
           <div class="how-num">1</div>
-          <div class="how-text"><strong>Load your strategy.</strong> The tool pulls your <code>README.md</code> (strategy summary) and <code>06-the-pitch/roadmap.md</code> (roadmap + AI evaluation) from your repo. Public repo URL works; private repo? Drop the files in directly.</div>
+          <div class="how-text"><strong>Load your strategy.</strong> Paste your repo root URL <em>once</em> — the tool auto-detects the branch and pulls both <code>README.md</code> (strategy summary) and <code>06-the-pitch/roadmap.md</code> (roadmap + AI evaluation) in parallel. Private repo? Drop the files in directly.</div>
         </div>
         <div class="how-step">
           <div class="how-num">2</div>
@@ -463,7 +463,7 @@
   <div class="card">
     <div class="card-head">
       <div class="card-title">1. Load your strategy</div>
-      <div class="card-sub">Two files: <code>README.md</code> (built by the Strategy Assembler) and <code>06-the-pitch/roadmap.md</code> (built by the Roadmap Builder + AI Bet Evaluator). One feeds the strategic spine, the other gives the pitch credibility (here's the plan, here's how I stress-tested it).</div>
+      <div class="card-sub">Paste the <strong>root URL of your strategy repo</strong> — the tool auto-detects the branch and pulls both <code>README.md</code> (built by the Strategy Assembler) and <code>06-the-pitch/roadmap.md</code> (built by the Roadmap Builder + AI Bet Evaluator) in one shot. One feeds the strategic spine; the other gives the pitch credibility (here's the plan, here's how I stress-tested it).</div>
     </div>
     <div class="card-body">
       <div class="load-tabs" role="tablist">
@@ -477,7 +477,7 @@
           <input type="url" id="repoUrl" placeholder="https://github.com/your-username/your-strategy-repo" autocomplete="off" spellcheck="false">
           <button type="button" class="btn primary" id="fetchBtn" onclick="loadFromRepo()">Fetch &amp; parse</button>
         </div>
-        <div class="key-help" style="margin-top:8px;">Pulls both files in parallel from <code>raw.githubusercontent.com</code> — no auth, public repos only. For private repos use the <strong>Upload files</strong> tab.</div>
+        <div class="key-help" style="margin-top:8px;"><strong style="color:var(--text);">One URL pulls both files automatically.</strong> Just the repo root — no need to point at <code>README.md</code> or <code>06-the-pitch/roadmap.md</code> individually. Branch detection (<code>main</code> / <code>master</code>) is automatic. Public repos only — for private repos use the <strong>Upload files</strong> tab.</div>
       </div>
 
       <div class="load-pane" id="paneUpload">
