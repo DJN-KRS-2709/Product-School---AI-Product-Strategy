@@ -1,8 +1,8 @@
 # Frameworks Reference Card
 
-*A compact, print-friendly consolidation of every framework introduced through Module 3. Keep it open while you do the labs. Each framework gets: what it answers, the structure, and one anchor example.*
+*A compact, print-friendly consolidation of every framework introduced through Module 5. Keep it open while you do the labs. Each framework gets: what it answers, the structure, and one anchor example.*
 
-For full term definitions, see [`Glossary.md`](./Glossary.md). For the narrative behind any of these, see the corresponding `Module N - Notes (Shareable).md`.
+For full term definitions, see [`Glossary.md`](./Glossary.md). For the narrative behind any of these, see the corresponding `Module N - Notes (Shareable).md` (Modules 1-3 in Markdown, Modules 4-5 in HTML).
 
 ---
 
@@ -192,6 +192,206 @@ For full term definitions, see [`Glossary.md`](./Glossary.md). For the narrative
 
 ---
 
+## Module 4 - The Contract
+
+### Trust ≠ Accuracy (the reframe)
+
+**What it answers:** Why do users trust some AI products and not others, even when the higher-accuracy one is the one they distrust?
+**How to use it:** Stop optimizing for the last accuracy points. Invest in legibility surface area instead.
+
+| System | Accuracy | What users see | Outcome |
+|---|---|---|---|
+| **Black Box** | 95% | No scores. No sources. No override. Surprises in production. | Confidently wrong → trust evaporates |
+| **Legible System** | 85% | Confidence scores. Citations. "I'm not sure." User can correct. | Lower benchmark, higher trust, higher retention |
+
+**Headline:** *Understandable and controllable beats accurate-but-opaque, every time.*
+**Anchors:** Tesla / ADAS-style forced handoffs (the car *makes you* take the wheel when it's not sure); Perplexity and AI Overviews leading every answer with clickable sources.
+
+---
+
+### Golden Dataset Structure
+
+**What it answers:** How do you prove your AI is good - in regression tests, drift detection, and procurement calls?
+**How to use it:** Build a labeled-truth fixture in your repo. Version it like code.
+
+| Field | What it captures |
+|---|---|
+| **Input** | The prompt or scenario the AI faces |
+| **Expected output** | The "good" answer, written by a human who knows the domain |
+| **Edge-case flag** | Y / N - is this an edge case, boundary, or adversarial input? |
+| **Judge type** | Rule-based (string match, regex) or LLM-as-Judge with a rubric |
+
+**Rule of thumb:** 100-500 rows, adversarial cases included. Ten on day one; ~150 at v1 ship.
+**Sales test:** *"Here's how we test our AI."* The teams that can screen-share this close. The teams that can't, don't.
+**Lives in:** `04-the-contract/golden-dataset.md`.
+
+---
+
+### Confidence UX (Three Tiers)
+
+**What it answers:** What does the UI do when the AI isn't sure?
+**How to use it:** Design three modes, not one. Each tier gets its own copy, surface treatment, and user control.
+
+| Tier | Confidence | UX treatment |
+|---|---|---|
+| **Confident** | &gt;90% | Direct answer. No hedge. Often auto-applied. |
+| **Uncertain** | 50-90% | Hedging language. Confidence bar. "Double-check this." Surfaced citations / alternatives. |
+| **Not confident** | &lt;50% | Block, escalate, route to human. User sees *why*, not just *what*. |
+
+**Anchors:** Grammarly varies the rewrite depth based on confidence; Copilot adds citations or softens tone when less sure.
+**Lives in:** Confidence UX Design section of `04-the-contract/golden-dataset.md`.
+
+---
+
+### Reliability Contract (4-Row Table)
+
+**What it answers:** What does your product promise users about quality, drift, latency, and escalation - in numbers you'd defend to a board?
+**How to use it:** Specific targets only. Aspirational numbers fail audits.
+
+| Metric | Target | Measurement | Alert |
+|---|---|---|---|
+| **Accuracy** | 92% | Weekly · 300 golden rows · LLM-as-Judge | &lt;88% → pages on-call PM |
+| **Hallucination rate** | &lt;1% | Same run · safety rubric | &gt;2% → pause prod traffic, rollback |
+| **Latency p95** | &lt;800ms | Continuous production monitoring | &gt;1200ms for 5 min → PagerDuty |
+| **Drift velocity** | &lt;0.5%/wk | 4-week rolling accuracy trend | &gt;1% decay/wk → gold-set audit |
+
+**Paired with HITL row:** confidence &lt;60% or safety flag → human reviewer (rotating on-call PM); corrections feed back into the weekly gold-set audit. Closes the loop.
+**Lives in:** Reliability Contract + HITL Architecture sections of `04-the-contract/golden-dataset.md`.
+
+---
+
+### HITL as a Shrinking Queue
+
+**What it answers:** When do humans step in, and why isn't this just permanent babysitting?
+**How to use it:** Define triggers, capture corrections, escalate visibly. Watch the HITL percentage drop as the gold set grows.
+
+| Element | What it does | Design target |
+|---|---|---|
+| **Thresholded review** | Confidence below threshold → human; above → auto | Triggers are explicit and tunable |
+| **Corrections to gold** | Every human edit feeds back into the golden dataset | Every edit = training fuel |
+| **Escalation UX** | Users opt into the handoff rather than being surprised | The handoff is part of the product, not an apology |
+
+**Anchor:** Medical imaging tools and ambient clinical scribes - AI handles routine cases; clinicians sign off only on high-risk outputs. The HITL share *drops over time* as the model improves.
+**Lives in:** HITL Architecture section of `04-the-contract/golden-dataset.md`.
+
+---
+
+## Module 5 - The Guardrails
+
+### The Three Compounding Mechanisms
+
+**What it answers:** Does your product actually get smarter the more it's used, or does it just scale?
+**How to use it:** Sketch each loop in `compounding-system.md`. Name the input, the output, whether it compounds, and its status.
+
+| Mechanism | What feeds it | Anchor company |
+|---|---|---|
+| **Recursive Learning** | Your product's own outputs and the corrections users make to them | Duolingo |
+| **Cross-Domain Transfer** | Wins in product A lifting product B next door (shared context, shared data) | ServiceTitan |
+| **Network Intelligence** | Patterns across the whole fleet / user base, privacy-gated | Fleet-learning products |
+
+**Most rows on most products come back `missing` or `broken`, not `active`.** That's the finding, not a failure of the exercise.
+**Lives in:** Feedback Loops table + Context Connectivity field of `05-the-guardrails/compounding-system.md`.
+
+---
+
+### The Freeze Test
+
+**What it answers:** Is your product compounding, or just scaling on top of model upgrades?
+**How to use it:** Mentally pause the product for one frontier cycle. If it's still winning, you don't have a compounding system - you have a beneficiary of someone else's improvement.
+
+| Setup | Question | Verdict |
+|---|---|---|
+| Freeze for **3 months** (≈ one frontier-model cycle) | After 3 months: still ahead? | **Yes** → scaling, not compounding. **No** → name what would degrade. That's the loop that's working. |
+
+**Why 3 months and not 12:** AI cycles too fast. Twelve months of frozen AI feels like ten years of frozen anything else.
+**Lives in:** the diagnostic at the bottom of Slide 8 and inside the **Compounding System Designer** tool.
+
+---
+
+### Responsible AI Maturity Ladder
+
+**What it answers:** Where does your org sit on the responsibility-to-revenue spectrum, and what's the upside of climbing a level?
+**How to use it:** Locate yourself honestly. Most teams plateau at Level 1 or 2. Level 3 converts trust infrastructure into closed enterprise deals.
+
+| Level | Posture | What it looks like | Anchor |
+|---|---|---|---|
+| **1. Compliance** | Minimum bar | EU AI Act, GDPR, CCPA. Defensive, not differentiating. | Most orgs today |
+| **2. Trust Architecture** | Internal craft | Evals, confidence UX, reliability contracts (M4). Trust as infrastructure. | Most "AI-serious" teams |
+| **3. Governance = GTM** | External story | Model cards, bias posture, governance in the sales pitch. | **Salesforce** Einstein Trust Layer |
+
+**Counter-anchor:** Google Gemini's image-generation incident - the product paused publicly for remediation, on stage, in front of the whole market.
+
+---
+
+### The Four Agent Governance Knobs
+
+**What it answers:** How do you govern a system that picks its own actions, in a way that survives the next model swap?
+**How to use it:** Walk one of your agents through all four knobs. Anything you can't answer concretely is a policy gap.
+
+| Knob | What it controls | Concrete move |
+|---|---|---|
+| **Autonomy** | Draft ≠ send. Read ≠ write. | Draft anything, send nothing without human approval until eval data proves >99%. Money / customer contact stays HITL. |
+| **Tool Calls** | Every call is a risk surface. | **Allow-list** which tools. **Rate-limit** each one. **Log** every call with reasoning + result. |
+| **Memory** | What persists, who reads it. | Three explicit classes: short-term (session), long-term (per-user), shared (usually a hard no for customer-facing). |
+| **Chain** | Who owns the B-fails-on-A handoff? | Named ownership per handoff. "Stop the chain" trigger if any agent fails its eval. No silent chains. |
+
+**Principle that survives model churn:** *Design around principles, not model names.*
+**Anchor:** Microsoft Copilot + Graph/plugins - log + allow-list; tier autonomy explicitly (read calendar auto; draft email auto; send email one-click approval).
+**Lives in:** Agent Topology section of `05-the-guardrails/compounding-system.md`.
+
+---
+
+### The Shadow AI Audit Framework
+
+**What it answers:** What AI tools are already in use inside your org without sanctioned governance, and what do you do about them?
+**How to use it:** Run the four steps with whatever scope is realistic (one team, one department, the whole company). Diagnostic, not exhaustive.
+
+| Step | What you do | Where to look |
+|---|---|---|
+| **1. Discovery** | Find tools in use without official approval | Surveys, expense reports, browser extensions, API key audits |
+| **2. Risk** | Map the data path; check legal posture | DPAs signed? Regulatory exposure? Score L / M / H / Critical |
+| **3. Consolidate** | Cut down to a governed stack | Spotify: ~1,000 tools → 15. Goal = governed AI, not zero AI |
+| **4. Policy** | Publish the rules | Allow-list, data classes, review cadence, enforcement |
+
+**Decision column (Keep / Govern / Kill):** "Medium" is the lazy Risk; "we'll think about it" is the lazy Decision. Force yourself into one of three real options.
+**Anchor case:** Samsung - three data leaks in roughly one month, no policy, no trail, ended with a total external-AI ban that cost more than the leaks.
+**Lives in:** Shadow AI Audit table + 3 summary stats in `05-the-guardrails/compounding-system.md`.
+
+---
+
+### The Governance Policy Template
+
+**What it answers:** What does a one-page AI governance policy that your CISO wouldn't redline on sight actually contain?
+**How to use it:** Fill in all five fields, plus Agent Topology if relevant. Be specific - "AI in our company" is mush; "all customer-facing AI features in our SMB product line" is a policy.
+
+| Field | Worked example (SupportCopilot v1.2) |
+|---|---|
+| **Scope** | Automated reply drafting, routing, and resolution scoring in the SupportCopilot product line. Excludes internal-only analytics. |
+| **Autonomy** | Drafting — auto. Sending under $0 risk — auto. Sending with promised remedies — human approval. Closing tickets without reply — never auto. |
+| **Escalation** | Confidence <70%; legal/medical/distressed flag; refund/credit/exception mentioned; customer asks for human; ≥3 turns. |
+| **Audit cadence** | Weekly automated eval (PM: Sam); monthly human review (Legal: Priya); quarterly full review (CTO sign-off). |
+| **Regulatory** | EU AI Act = limited risk; GDPR applies (data minimization, no PII training); SOC 2 controls for log retention. |
+
+**Test of a good policy:** Could you hand it to legal, ops, or an enterprise buyer and have them actually evaluate it?
+**Lives in:** Governance Policy + Agent Topology sections of `05-the-guardrails/compounding-system.md`.
+
+---
+
+### Samsung Three-Act Structure (case study framing)
+
+**What it answers:** What's the predictable failure mode when AI tools enter an org without governance?
+**How to use it:** Use as a teaching frame. The arc compresses every time - the only variable is how much you lose between Act Two and Act Three.
+
+| Act | What happens | The lesson |
+|---|---|---|
+| **The Bet** | AI tools adopted broadly. Fast wins, broad enthusiasm, no guardrails. | Adoption without governance feels like velocity. |
+| **The Crack** | Data leaks or incidents. No policy, no audit trail, panic. | The cost shows up in the audit trail you don't have. |
+| **The Correction** | Ban and rebuild from scratch. Massive productivity hit. | The ban costs more than the leaks. |
+
+**Punchline:** *The absence of governance isn't a compliance gap - it's a strategy failure.*
+
+---
+
 ## Cross-module map
 
 | Module | Framework | Repo location |
@@ -207,5 +407,17 @@ For full term definitions, see [`Glossary.md`](./Glossary.md). For the narrative
 | M3 | Leader / Filler / Killer + 70% Rule | `03-the-margin/cost-curve.md` |
 | M3 | Three Pricing Strategies | `03-the-margin/cost-curve.md` |
 | M3 | Model Cascading 80/20 | `03-the-margin/cost-curve.md` |
+| M4 | Trust ≠ Accuracy (reframe) | (used in framing) |
+| M4 | Golden Dataset Structure | `04-the-contract/golden-dataset.md` |
+| M4 | Confidence UX (Three Tiers) | `04-the-contract/golden-dataset.md` |
+| M4 | Reliability Contract (4-Row Table) | `04-the-contract/golden-dataset.md` |
+| M4 | HITL as a Shrinking Queue | `04-the-contract/golden-dataset.md` |
+| M5 | Three Compounding Mechanisms | `05-the-guardrails/compounding-system.md` |
+| M5 | The Freeze Test | `05-the-guardrails/compounding-system.md` (diagnostic) |
+| M5 | Responsible AI Maturity Ladder | (used in framing) |
+| M5 | Four Agent Governance Knobs | `05-the-guardrails/compounding-system.md` |
+| M5 | Shadow AI Audit Framework | `05-the-guardrails/compounding-system.md` |
+| M5 | Governance Policy Template | `05-the-guardrails/compounding-system.md` |
+| M5 | Samsung Three-Act Structure | (used in framing) |
 
 For every term that appears here, the full definition lives in [`Glossary.md`](./Glossary.md).
